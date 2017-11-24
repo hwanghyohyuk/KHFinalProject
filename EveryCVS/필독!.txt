@@ -1,2 +1,19 @@
 EveryCVS_projectFolder는 Workspace가 아닙니다.
 기본적인 project setting은 되어있으니 이점 양해 바랍니다.
+
+git repository 생성위치는 
+C:\GIT\
+입니다.
+
+/* 개인별 setting 내용*/
+
+워크스페이스 속성변경
+Server Runtime Environments 추가 - C:\GIT\KHFinalProject\EveryCVS\EveryCVS_dev\apache-tomcat-8.0.46
+
+Server Runtime Environments Name 은 EveryCVS_Server 로 설정.
+
+Java Installed JREs 변경 또는 추가 - C:\GIT\KHFinalProject\EveryCVS\EveryCVS_dev\jre1.8.0_131
+
+Maven User Setting Open file : 
+C:\GIT\KHFinalProject\EveryCVS\EveryCVS_dev\apache-maven-3.5.0\conf\settings.xml
+
