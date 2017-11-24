@@ -1,0 +1,2 @@
+EveryCVS_projectFolder는 Workspace가 아닙니다.
+기본적인 project setting은 되어있으니 이점 양해 바랍니다.
