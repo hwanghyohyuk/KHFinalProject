@@ -1,4 +1,4 @@
-package com.kh.everycvs.common.dao;
+package com.kh.everycvs.common.model.dao;
 
 import java.util.List;
 
