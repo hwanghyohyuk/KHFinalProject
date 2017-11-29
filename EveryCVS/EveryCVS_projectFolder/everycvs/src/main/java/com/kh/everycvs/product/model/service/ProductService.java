@@ -1,5 +1,5 @@
 package com.kh.everycvs.product.model.service;
 
-public class ProductService {
+public interface ProductService {
 
 }

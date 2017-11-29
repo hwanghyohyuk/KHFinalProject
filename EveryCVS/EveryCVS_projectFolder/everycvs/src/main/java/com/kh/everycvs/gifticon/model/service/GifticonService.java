@@ -1,5 +1,5 @@
 package com.kh.everycvs.gifticon.model.service;
 
-public class GifticonService {
+public interface GifticonService {
 
 }

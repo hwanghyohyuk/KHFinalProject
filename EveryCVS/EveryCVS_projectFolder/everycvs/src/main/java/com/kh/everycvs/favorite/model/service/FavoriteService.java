@@ -1,5 +1,5 @@
 package com.kh.everycvs.favorite.model.service;
 
-public class FavoriteService {
+public interface FavoriteService {
 
 }
