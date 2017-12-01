@@ -1,5 +1,22 @@
 package com.kh.everycvs.common.model.vo;
 
-public class ServiceCenter {
+import java.io.Serializable;
+
+public class ServiceCenter implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1300L;
+
+	/* Field */
+	
+	
+	
+	/* Getter & Setter */
+	
+	
+	
+	/* ToString */
 
 }
