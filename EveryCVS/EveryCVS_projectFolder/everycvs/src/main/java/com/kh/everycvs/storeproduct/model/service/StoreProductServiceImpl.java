@@ -2,12 +2,18 @@ package com.kh.everycvs.storeproduct.model.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.kh.everycvs.storeproduct.model.dao.StoreProductDao;
 
 @Service("StoreProductService")
 public class StoreProductServiceImpl implements StoreProductService{
 
+	@Autowired
+	private StoreProductDao storeProductDao;
+	
 	@Override
 	public ModelAndView selectStoreProductList(HttpServletRequest request) {
 		// 지점 상품 조회
