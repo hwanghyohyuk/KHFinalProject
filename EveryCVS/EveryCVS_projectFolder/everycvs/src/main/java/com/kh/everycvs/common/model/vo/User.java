@@ -35,6 +35,12 @@ public class User implements Serializable {
 	public User() {
 		super();
 	}
+	
+	public User(String email, String user_pwd){
+		super();
+		this.email = email;
+		this.user_pwd = user_pwd;
+	}
 
 	public User(int user_no, String email, String user_pwd, String user_name, Date birth_date, String gender,
 			String phone, String address, Date enroll_date, String original_file_name, String stored_file_name,
