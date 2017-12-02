@@ -1,54 +1,54 @@
 package com.kh.everycvs.storeproduct.model.service;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.storeproduct.model.dao.StoreProductDao;
+import com.kh.everycvs.common.model.vo.StoreProduct;
 
-@Service("StoreProductService")
-public class StoreProductServiceImpl implements StoreProductService{
-
+@Service("sproductService")
+public class StoreProductServiceImpl implements StoreProductService {
+	
 	@Autowired
-	private StoreProductDao storeProductDao;
-	
+	private StoreProductDao sproductDao;
+
 	@Override
-	public ModelAndView selectStoreProductList(HttpServletRequest request) {
-		// 지점 상품 조회
-		return null;
+	public int getListCount() {
+		return sproductDao.getListCount();
 	}
 
 	@Override
-	public ModelAndView selectStoreProductOne(HttpServletRequest request) {
-		// 지점 상품 조회 : 선택한 상품을 상세조회
-		return null;
+	public ArrayList<StoreProduct> selectList(int currentPage, int limit) {
+		int startRow = (currentPage -1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		return sproductDao.selectList(startRow,endRow);  
 	}
 
 	@Override
-	public ModelAndView searchStoreProductList(HttpServletRequest request) {
-		// 지점 상품 검색 : 입력한 키워드와 필터링으로 지점상품을 검색
-		// 필터링 : 상품명/상품코드
-		return null;
+	public ArrayList<StoreProduct> rankList() {
+		return sproductDao.rankList();
 	}
 
 	@Override
-	public String updateStoreProduct(HttpServletRequest request) {
-		// 지점 상품 수정 : 변경사항(제조일/수량/이벤트)
-		return null;
+	public StoreProduct detailSproduct(int spnum) {
+		return sproductDao.detailSproduct();
 	}
 
 	@Override
-	public String deleteStoreProduct(HttpServletRequest request) {
-		// 지점 상품 삭제
-		return null;
+	public int insertSproduct(StoreProduct sp) {
+		return sproductDao.insertSproduct();
 	}
-	
+
 	@Override
-	public String insertStoreProduct(HttpServletRequest request) {
-		// 지점 상품 추가 : 해당 상호 편의점의 전체 상품 목록에서 수량이 1이상인 상품들을 지점상품에 추가
-		return null;
+	public int deleteSproduct(int spnum) {
+		return sproductDao.deleteSproduct();
+	}
+
+	@Override
+	public int updateSproduct(StoreProduct sp) {
+		return sproductDao.updateSproduct();
 	}
 
 }
