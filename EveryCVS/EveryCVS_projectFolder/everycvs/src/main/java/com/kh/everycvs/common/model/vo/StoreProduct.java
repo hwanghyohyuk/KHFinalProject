@@ -31,8 +31,8 @@ public class StoreProduct implements Serializable {
 	private String stored_file_name; // 첨부파일변경명
 	private String del_check; // 삭제구분
 	private int purchase_count; // 구매횟수
-	private int discount_no;
-	private String discount_info;
+	private int discount_no; //할인번호
+	private String discount_info; //할인정보
 
 	public StoreProduct() {
 		super();
