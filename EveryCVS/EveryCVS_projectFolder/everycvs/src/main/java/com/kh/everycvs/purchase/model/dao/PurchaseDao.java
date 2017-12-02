@@ -28,4 +28,24 @@ public class PurchaseDao {
 	public int decreaseMoney(){
 		return 0;
 	}
+	
+	//사용자 잔고 충전
+	public int userIncreMoney() {
+		return 0;
+	}
+	
+	//사용자 잔고 감소
+	public int userDecreMoney() {
+		return 0;
+	}
+	
+	//사용자 포인트 감소
+	public int userDecrePoint() {
+		return 0;
+	}
+	
+	//사용자 구매내역 조회
+	public List purchaseList() {
+		return null;
+	}
 }
