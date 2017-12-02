@@ -1,5 +1,5 @@
 package com.kh.everycvs.discount.model.service;
 
-public interface DcProductService {
+public class DiscountServiceImpl {
 
 }

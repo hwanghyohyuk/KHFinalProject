@@ -1,5 +1,5 @@
 package com.kh.everycvs.discount.model.dao;
 
-public class DcInfoDao {
+public class DiscountDao {
 
 }
