@@ -22,7 +22,7 @@ public class Favorite implements Serializable {
 	private String product_name; //상품명
 	private String stored_file_name; //첨부파일변경명
 	private int store_product_no; //지점상품번호
-	private int min_expiration_day; //최소유통기한
+	private int min_expiration_hour; //최소유통기한
 	
 	public Favorite() {
 		super();
@@ -40,10 +40,11 @@ public class Favorite implements Serializable {
 		this.product_name = product_name;
 		this.stored_file_name = stored_file_name;
 		this.store_product_no = store_product_no;
-		this.min_expiration_day = min_expiration_day;
+		this.min_expiration_hour = min_expiration_day;
 	}
 	
 	/* Getter & Setter */
+	
 	public int getUser_no() {
 		return user_no;
 	}
@@ -116,23 +117,23 @@ public class Favorite implements Serializable {
 		this.store_product_no = store_product_no;
 	}
 
-	public int getMin_expiration_day() {
-		return min_expiration_day;
+	public int getMin_expiration_hour() {
+		return min_expiration_hour;
 	}
 
-	public void setMin_expiration_day(int min_expiration_day) {
-		this.min_expiration_day = min_expiration_day;
+	public void setMin_expiration_hour(int min_expiration_hour) {
+		this.min_expiration_hour = min_expiration_hour;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 	/* ToString */
 	@Override
 	public String toString() {
 		return user_no + ", " + brand_no + ", " + brand_name + ", " + store_no + ", " + store_name + ", " + product_no + ", " + product_name + ", " + 
-			   stored_file_name + ", " + store_product_no + ", " + min_expiration_day;
+			   stored_file_name + ", " + store_product_no + ", " + min_expiration_hour;
 	}
 
 }
