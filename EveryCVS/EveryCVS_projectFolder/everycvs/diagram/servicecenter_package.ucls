@@ -71,7 +71,7 @@
   </class>  
   <class id="9" language="java" name="com.kh.everycvs.common.model.vo.Gifticon" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/Gifticon.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="196" y="357"/>    
+    <position height="-1" width="-1" x="91" y="358"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -80,7 +80,7 @@
   </class>  
   <class id="10" language="java" name="com.kh.everycvs.common.model.vo.Product" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/Product.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="304" y="357"/>    
+    <position height="-1" width="-1" x="199" y="358"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -89,7 +89,7 @@
   </class>  
   <class id="11" language="java" name="com.kh.everycvs.common.model.vo.ProductKind" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/ProductKind.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="415" y="357"/>    
+    <position height="-1" width="-1" x="310" y="358"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -98,7 +98,7 @@
   </class>  
   <class id="12" language="java" name="com.kh.everycvs.common.model.vo.Purchase" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/Purchase.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="120" y="411"/>    
+    <position height="-1" width="-1" x="422" y="358"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -107,7 +107,7 @@
   </class>  
   <class id="13" language="java" name="com.kh.everycvs.common.model.vo.Sale" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/Sale.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="390" y="411"/>    
+    <position height="-1" width="-1" x="276" y="413"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -117,7 +117,7 @@
   <class id="14" language="java" name="com.kh.everycvs.common.model.vo.SaleProductKind" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/SaleProductKind.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="255" y="411"/>    
+    <position height="-1" width="-1" x="144" y="413"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -127,7 +127,7 @@
   <class id="15" language="java" name="com.kh.everycvs.common.model.vo.ServiceCenter" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/ServiceCenter.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="151" y="466"/>    
+    <position height="-1" width="-1" x="154" y="466"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -137,7 +137,7 @@
   <class id="16" language="java" name="com.kh.everycvs.common.model.vo.ServiceCenterComment" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/ServiceCenterComment.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="326" y="466"/>    
+    <position height="-1" width="-1" x="329" y="466"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -146,7 +146,7 @@
   </class>  
   <class id="17" language="java" name="com.kh.everycvs.common.model.vo.Store" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/Store.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="130" y="520"/>    
+    <position height="-1" width="-1" x="107" y="521"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -155,7 +155,7 @@
   </class>  
   <class id="18" language="java" name="com.kh.everycvs.common.model.vo.User" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/User.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="380" y="520"/>    
+    <position height="-1" width="-1" x="390" y="413"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -165,7 +165,17 @@
   <class id="19" language="java" name="com.kh.everycvs.common.model.vo.StoreProduct" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/StoreProduct.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="255" y="520"/>    
+    <position height="-1" width="-1" x="232" y="521"/>    
+    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="com.kh.everycvs.common.model.vo.EmailCertification" project="everycvs" 
+    file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/EmailCertification.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="381" y="521"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
