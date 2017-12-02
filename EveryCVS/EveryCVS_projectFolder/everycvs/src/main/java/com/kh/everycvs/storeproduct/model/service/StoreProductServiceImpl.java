@@ -25,6 +25,11 @@ public class StoreProductServiceImpl implements StoreProductService {
 		int endRow = startRow + limit - 1;
 		return sproductDao.selectList(startRow,endRow);  
 	}
+	
+	@Override
+	public ArrayList<StoreProduct> searchList() {
+		return sproductDao.searchList();
+	}
 
 	@Override
 	public ArrayList<StoreProduct> rankList() {

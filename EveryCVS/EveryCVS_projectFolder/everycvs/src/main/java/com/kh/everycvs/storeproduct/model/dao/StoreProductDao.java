@@ -16,6 +16,10 @@ public class StoreProductDao {
 	public ArrayList<StoreProduct> selectList(int startRow, int endRow) {
 		return null;
 	}
+	
+	public ArrayList<StoreProduct> searchList() {
+		return null;
+	}
 
 	public ArrayList<StoreProduct> rankList() {
 		return null;

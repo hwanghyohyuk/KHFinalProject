@@ -10,6 +10,8 @@ public interface StoreProductService {
 
 	public ArrayList<StoreProduct> selectList(int currentPage, int limit);
 
+	public ArrayList<StoreProduct> searchList();
+
 	public ArrayList<StoreProduct> rankList();
 
 	public StoreProduct detailSproduct(int spnum);
