@@ -2,8 +2,11 @@ package com.kh.everycvs.event.model.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.kh.everycvs.event.model.dao.EventDao;
 
 @Service("EventService")
 public class EventServiceImpl implements EventService{

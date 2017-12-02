@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <package id="1" language="java" name="com.kh.everycvs.common" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="215" x="485" y="170"/>    
+    <position height="86" width="215" x="485" y="182"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="2" language="java" name="com.kh.everycvs.board" project="everycvs" 
@@ -66,15 +66,6 @@
     <position height="68" width="223" x="486" y="464"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="14" language="java" name="com.kh.everycvs.HomeController" project="everycvs" 
-    file="/everycvs/src/main/java/com/kh/everycvs/HomeController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="60" width="190" x="497" y="233"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

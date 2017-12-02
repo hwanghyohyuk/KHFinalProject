@@ -1,225 +1,249 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <package id="1" language="java" name="com.kh.everycvs.common" project="everycvs" 
-    file="/everycvs/src/main/java/com/kh/everycvs/common" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="563" width="827" x="55" y="22"/>    
-    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
-  </package>  
-  <package id="2" language="java" name="com.kh.everycvs.common.common" project="everycvs" 
-    file="/everycvs/src/main/java/com/kh/everycvs/common/common" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="148" width="283" x="66" y="89"/>    
-    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
-  </package>  
-  <package id="3" language="java" name="com.kh.everycvs.common.logger" project="everycvs" 
-    file="/everycvs/src/main/java/com/kh/everycvs/common/logger" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="142" width="284" x="66" y="252"/>    
-    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
-  </package>  
-  <package id="4" language="java" name="com.kh.everycvs.common.model" project="everycvs" 
-    file="/everycvs/src/main/java/com/kh/everycvs/common/model" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="480" width="503" x="364" y="89"/>    
-    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
-  </package>  
-  <package id="5" language="java" name="com.kh.everycvs.common.model.vo" project="everycvs" 
+  <package id="1" language="java" name="com.kh.everycvs.common.model.vo" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="405" width="485" x="373" y="153"/>    
+    <position height="405" width="464" x="23" y="154"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="6" language="java" name="com.kh.everycvs.common.model.vo.Board" project="everycvs" 
+  <class id="2" language="java" name="com.kh.everycvs.common.model.vo.Board" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/Board.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="453" y="251"/>    
+    <position height="-1" width="-1" x="90" y="252"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="com.kh.everycvs.common.model.vo.Brand" project="everycvs" 
+  <class id="3" language="java" name="com.kh.everycvs.common.model.vo.Brand" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/Brand.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="562" y="251"/>    
+    <position height="-1" width="-1" x="199" y="252"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="false" 
       sort-features="false" accessors="true" visibility="false">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="com.kh.everycvs.common.common.CommandMap" project="everycvs" 
-    file="/everycvs/src/main/java/com/kh/everycvs/common/common/CommandMap.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="61" width="256" x="80" y="160"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="9" language="java" name="com.kh.everycvs.common.logger.LoggerInterceptor" project="everycvs" 
-    file="/everycvs/src/main/java/com/kh/everycvs/common/logger/LoggerInterceptor.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="60" width="256" x="80" y="319"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="10" language="java" name="com.kh.everycvs.common.model.vo.DcInfo" project="everycvs" 
+  <class id="4" language="java" name="com.kh.everycvs.common.model.vo.DcInfo" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/DcInfo.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="671" y="251"/>    
+    <position height="-1" width="-1" x="308" y="252"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="com.kh.everycvs.common.model.vo.DcProduct" project="everycvs" 
+  <class id="5" language="java" name="com.kh.everycvs.common.model.vo.DcProduct" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/DcProduct.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="780" y="251"/>    
+    <position height="-1" width="-1" x="417" y="252"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="com.kh.everycvs.common.model.vo.Event" project="everycvs" 
+  <class id="6" language="java" name="com.kh.everycvs.common.model.vo.Event" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/Event.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="500" y="303"/>    
+    <position height="-1" width="-1" x="137" y="304"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="com.kh.everycvs.common.model.vo.EventJoin" project="everycvs" 
+  <class id="7" language="java" name="com.kh.everycvs.common.model.vo.EventJoin" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/EventJoin.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="731" y="303"/>    
+    <position height="-1" width="-1" x="368" y="304"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="com.kh.everycvs.common.model.vo.EventResult" project="everycvs" 
+  <class id="8" language="java" name="com.kh.everycvs.common.model.vo.EventResult" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/EventResult.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="615" y="303"/>    
+    <position height="-1" width="-1" x="252" y="304"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="com.kh.everycvs.common.model.vo.Favorite" project="everycvs" 
-    file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/Favorite.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="451" y="356"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="16" language="java" name="com.kh.everycvs.common.model.vo.Gifticon" project="everycvs" 
+  <class id="9" language="java" name="com.kh.everycvs.common.model.vo.Gifticon" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/Gifticon.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="559" y="356"/>    
+    <position height="-1" width="-1" x="196" y="357"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="com.kh.everycvs.common.model.vo.Product" project="everycvs" 
+  <class id="10" language="java" name="com.kh.everycvs.common.model.vo.Product" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/Product.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="667" y="356"/>    
+    <position height="-1" width="-1" x="304" y="357"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="com.kh.everycvs.common.model.vo.ProductKind" project="everycvs" 
+  <class id="11" language="java" name="com.kh.everycvs.common.model.vo.ProductKind" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/ProductKind.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="778" y="356"/>    
+    <position height="-1" width="-1" x="415" y="357"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="19" language="java" name="com.kh.everycvs.common.model.vo.Purchase" project="everycvs" 
+  <class id="12" language="java" name="com.kh.everycvs.common.model.vo.Purchase" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/Purchase.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="483" y="410"/>    
+    <position height="-1" width="-1" x="120" y="411"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="20" language="java" name="com.kh.everycvs.common.model.vo.Sale" project="everycvs" 
+  <class id="13" language="java" name="com.kh.everycvs.common.model.vo.Sale" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/Sale.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="753" y="410"/>    
+    <position height="-1" width="-1" x="390" y="411"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="21" language="java" name="com.kh.everycvs.common.model.vo.SaleProductKind" project="everycvs" 
+  <class id="14" language="java" name="com.kh.everycvs.common.model.vo.SaleProductKind" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/SaleProductKind.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="618" y="410"/>    
+    <position height="-1" width="-1" x="255" y="411"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="22" language="java" name="com.kh.everycvs.common.model.vo.ServiceCenter" project="everycvs" 
+  <class id="15" language="java" name="com.kh.everycvs.common.model.vo.ServiceCenter" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/ServiceCenter.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="514" y="465"/>    
+    <position height="-1" width="-1" x="151" y="466"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="23" language="java" name="com.kh.everycvs.common.model.vo.ServiceCenterComment" project="everycvs" 
+  <class id="16" language="java" name="com.kh.everycvs.common.model.vo.ServiceCenterComment" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/ServiceCenterComment.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="689" y="465"/>    
+    <position height="-1" width="-1" x="326" y="466"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="24" language="java" name="com.kh.everycvs.common.model.vo.Store" project="everycvs" 
+  <class id="17" language="java" name="com.kh.everycvs.common.model.vo.Store" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/Store.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="493" y="519"/>    
+    <position height="-1" width="-1" x="130" y="520"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="25" language="java" name="com.kh.everycvs.common.model.vo.User" project="everycvs" 
+  <class id="18" language="java" name="com.kh.everycvs.common.model.vo.User" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/User.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="743" y="519"/>    
+    <position height="-1" width="-1" x="380" y="520"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="26" language="java" name="com.kh.everycvs.common.model.vo.StoreProduct" project="everycvs" 
+  <class id="19" language="java" name="com.kh.everycvs.common.model.vo.StoreProduct" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common/model/vo/StoreProduct.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="618" y="519"/>    
+    <position height="-1" width="-1" x="255" y="520"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
+  <package id="20" language="java" name="com.kh.everycvs.product.model.dao" project="everycvs" 
+    file="/everycvs/src/main/java/com/kh/everycvs/product/model/dao" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="267" width="279" x="578" y="223"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="21" language="java" name="com.kh.everycvs.product.model.service" project="everycvs" 
+    file="/everycvs/src/main/java/com/kh/everycvs/product/model/service" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="371" width="309" x="956" y="416"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="22" language="java" name="com.kh.everycvs.product.controller" project="everycvs" 
+    file="/everycvs/src/main/java/com/kh/everycvs/product/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="292" width="306" x="957" y="73"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="23" language="java" name="com.kh.everycvs.product.model.dao.ProductDao" project="everycvs" 
+    file="/everycvs/src/main/java/com/kh/everycvs/product/model/dao/ProductDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="196" width="260" x="588" y="284"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="com.kh.everycvs.product.controller.ProductController" project="everycvs" 
+    file="/everycvs/src/main/java/com/kh/everycvs/product/controller/ProductController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="214" width="280" x="971" y="138"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="25" language="java" name="com.kh.everycvs.product.model.service.ProductService" project="everycvs" 
+    file="/everycvs/src/main/java/com/kh/everycvs/product/model/service/ProductService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="60" width="288" x="965" y="477"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="26" language="java" name="com.kh.everycvs.product.model.service.ProductServiceImpl" project="everycvs" 
+    file="/everycvs/src/main/java/com/kh/everycvs/product/model/service/ProductServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="196" width="288" x="965" y="580"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <dependency id="27">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="28">    
+    <bendpoint x="717" y="607"/>    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <dependency id="29">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <realization id="30">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="25"/>  
+  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
