@@ -2,7 +2,12 @@ package com.kh.everycvs.discount.model.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.servlet.ModelAndView;
+
 public interface DiscountService {
+	
+	// 할인상품 조회
+	public ModelAndView dcProductList(HttpServletRequest request);
 	
 	// 할인상품 등록
 	public String dcProductInsert(HttpServletRequest request);

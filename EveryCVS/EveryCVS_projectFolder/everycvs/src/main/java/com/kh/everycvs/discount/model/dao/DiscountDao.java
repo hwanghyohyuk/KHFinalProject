@@ -1,13 +1,20 @@
 package com.kh.everycvs.discount.model.dao;
 
-import javax.servlet.http.HttpServletRequest;
+
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
+
 
 @Repository("DiscountDao")
 public class DiscountDao {
 	
 	public DiscountDao() {}
+	
+	// 할인상품 조회
+	public List dcProductList() {
+		return null;
+	}
 	
 	// 할인상품 등록
 	public int dcProductInsert() {
