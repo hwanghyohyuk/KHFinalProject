@@ -198,13 +198,13 @@
   </class>  
   <package id="23" language="java" name="com.kh.everycvs.user.controller" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/user/controller" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="438" width="283" x="1314" y="211"/>    
+    <position height="467" width="329" x="1311" y="193"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <class id="24" language="java" name="com.kh.everycvs.user.controller.UserController" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/user/controller/UserController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1455" y="454"/>    
+    <position height="-1" width="-1" x="1473" y="454"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -236,21 +236,21 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <dependency id="28">    
-    <end type="SOURCE" refId="25"/>    
-    <end type="TARGET" refId="21"/>  
-  </dependency>  
-  <realization id="29">    
+  <realization id="28">    
     <end type="SOURCE" refId="27"/>    
     <end type="TARGET" refId="26"/>  
   </realization>  
-  <dependency id="30">    
-    <end type="SOURCE" refId="23"/>    
-    <end type="TARGET" refId="25"/>  
+  <dependency id="29">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="21"/>  
   </dependency>  
-  <dependency id="31">    
+  <dependency id="30">    
     <end type="SOURCE" refId="21"/>    
     <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="31">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="25"/>  
   </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
