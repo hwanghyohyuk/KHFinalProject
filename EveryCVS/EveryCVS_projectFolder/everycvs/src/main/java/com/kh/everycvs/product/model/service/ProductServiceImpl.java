@@ -1,5 +1,7 @@
 package com.kh.everycvs.product.model.service;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ public class ProductServiceImpl implements ProductService{
 	@Autowired
 	private ProductDao productDao;
 
+	@Autowired
+	private ProductDao productDao;
+	
 	@Override
 	public ModelAndView selectProductList(HttpServletRequest request) {
 		// 상품 조회 : 모든 상품을 조회
@@ -51,4 +56,26 @@ public class ProductServiceImpl implements ProductService{
 		return null;
 	}
 
+	/*사용자*/
+	/**실시간 인기상품(전체) top 5**/
+	@Override
+	public Map popularProductTop5() {
+		return productDao.popularProductTop5();
+	}
+
+	/*지점관리자*/
+	/**주간 인기상품 top 5**/
+	@Override
+	public Map popularStoreProductTop5(String store_no) {
+		return productDao.popularStoreProductTop5(store_no);
+	}
+
+	
+	/*편의점관리자*/
+	/**주간 인기상품 top 5**/
+	@Override
+	public Map popularCvsProductTop5(int brand_no) {
+		return productDao.popularCvsProductTop5(brand_no);
+	}
+	
 }

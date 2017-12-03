@@ -60,5 +60,11 @@ public class PurchaseController {
 		return null;
 	}
 	
+	/*사이트관리자*/
+	/**월간 구매 이용 횟수**/
+	public ModelAndView monthlyPurchaseCount(ModelAndView modelAndView){
+		int purchaseCount = purchaseService.monthlyPurchaseCount();
+		return modelAndView;
+	}
 
 }

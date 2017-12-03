@@ -18,6 +18,11 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	/*로그인 페이지 이동*/
+	public String moveToSignIn(){
+		return null;
+	}
+	
 	/** 로그인 **/
 	public String signIn(@RequestParam("email") String email,@RequestParam("password") String password, HttpSession session) {
 		User user = userService.checkUser(new User(email,password));
@@ -124,6 +129,13 @@ public class UserController {
 	public ModelAndView userList(@RequestParam(value = "p", required = true, defaultValue = "1") String page,
 			@RequestParam(value = "kwd", required = false, defaultValue = "") String keyword) {
 		return null;
+	}
+	
+	/*AJAX*/
+	/** 사용자 등록 수 **/
+	public ModelAndView userEnrollCount(ModelAndView modelAndView){
+		
+		return modelAndView;		
 	}
 
 }

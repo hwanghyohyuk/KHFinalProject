@@ -1,5 +1,7 @@
 package com.kh.everycvs.product.model.service;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.servlet.ModelAndView;
@@ -24,5 +26,17 @@ public interface ProductService {
 	
 	// 상품 삭제 : 편의점 상품 삭제할 때 지점 상품도 연쇄 삭제
 	public String deleteProduct(HttpServletRequest request);
+	
+	/*사용자*/
+	/**실시간 인기상품(전체) top 5**/
+	public Map popularProductTop5();
+	
+	/*지점관리자*/
+	/**주간 인기상품 top 5**/	
+	public Map popularStoreProductTop5(String store_no);
+	
+	/*편의점관리자*/
+	/**주간 인기상품 top 5**/
+	public Map popularCvsProductTop5(int brand_no);
 	
 }
