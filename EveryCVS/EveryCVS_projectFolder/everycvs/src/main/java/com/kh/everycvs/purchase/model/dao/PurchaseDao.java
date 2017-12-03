@@ -48,4 +48,10 @@ public class PurchaseDao {
 	public List purchaseList() {
 		return null;
 	}
+	
+	/*사이트관리자*/
+	/**월간 구매 이용 횟수**/
+	public int monthlyPurchaseCount() {
+		return 0;
+	}
 }

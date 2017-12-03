@@ -31,8 +31,13 @@ public class User implements Serializable {
 	private int point; // 포인트
 	private String store_no; // 지점번호
 	private int brand_no; // 상호번호
+	private boolean useCookie; // 쿠키사용여부
 	private String session_key; // 세션id
 	private Date session_limit; // 유효시간
+
+	{
+		useCookie = false;
+	}
 
 	public User() {
 		super();
@@ -69,8 +74,8 @@ public class User implements Serializable {
 
 	public User(int user_no, String email, String user_pwd, String user_name, Date birth_date, String gender,
 			String phone, String address, Date enroll_date, String original_file_name, String stored_file_name,
-			int user_state, String job, int cash, int point, String store_no, int brand_no, String session_key,
-			Date session_limit) {
+			int user_state, String job, int cash, int point, String store_no, int brand_no, boolean useCookie,
+			String session_key, Date session_limit) {
 		super();
 		this.user_no = user_no;
 		this.email = email;
@@ -89,6 +94,7 @@ public class User implements Serializable {
 		this.point = point;
 		this.store_no = store_no;
 		this.brand_no = brand_no;
+		this.useCookie = useCookie;
 		this.session_key = session_key;
 		this.session_limit = session_limit;
 	}
@@ -230,8 +236,12 @@ public class User implements Serializable {
 		this.brand_no = brand_no;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public boolean isUseCookie() {
+		return useCookie;
+	}
+
+	public void setUseCookie(boolean useCookie) {
+		this.useCookie = useCookie;
 	}
 
 	public String getSession_key() {
@@ -249,6 +259,11 @@ public class User implements Serializable {
 	public void setSession_limit(Date session_limit) {
 		this.session_limit = session_limit;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	/* ToString */
 
 	@Override
