@@ -1,10 +1,10 @@
 package com.kh.everycvs.discount.model.dao;
 
-
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.kh.everycvs.common.model.vo.DcProduct;
 
 @Repository("DiscountDao")
 public class DiscountDao {
