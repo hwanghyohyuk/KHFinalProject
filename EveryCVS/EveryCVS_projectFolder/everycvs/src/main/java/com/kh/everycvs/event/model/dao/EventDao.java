@@ -2,7 +2,10 @@ package com.kh.everycvs.event.model.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Repository;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Event;
 
@@ -40,4 +43,15 @@ public class EventDao {
 		// 이벤트 삭제
 		return 0;
 	}
+	
+	public int participateEvent() {
+		//이벤트 참여 여부
+		return 0;
+	}
+	
+	public List winEvent() {
+		// 이벤트 당첨자 리스트 출력
+		return null;
+	}
+	
 }

@@ -182,6 +182,77 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
+  <package id="21" language="java" name="com.kh.everycvs.store.model.dao" project="everycvs" 
+    file="/everycvs/src/main/java/com/kh/everycvs/store/model/dao" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="293" width="261" x="583" y="208"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="22" language="java" name="com.kh.everycvs.store.model.dao.StoreDao" project="everycvs" 
+    file="/everycvs/src/main/java/com/kh/everycvs/store/model/dao/StoreDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="214" width="239" x="594" y="275"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="23" language="java" name="com.kh.everycvs.store.model.service" project="everycvs" 
+    file="/everycvs/src/main/java/com/kh/everycvs/store/model/service" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="413" width="309" x="943" y="390"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <interface id="24" language="java" name="com.kh.everycvs.store.model.service.StoreService" project="everycvs" 
+    file="/everycvs/src/main/java/com/kh/everycvs/store/model/service/StoreService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="60" width="284" x="955" y="460"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="25" language="java" name="com.kh.everycvs.store.model.service.StoreServiceImpl" project="everycvs" 
+    file="/everycvs/src/main/java/com/kh/everycvs/store/model/service/StoreServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="232" width="282" x="956" y="557"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="26" language="java" name="com.kh.everycvs.store.controller" project="everycvs" 
+    file="/everycvs/src/main/java/com/kh/everycvs/store/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="329" width="313" x="941" y="22"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="27" language="java" name="com.kh.everycvs.store.controller.StoreController" project="everycvs" 
+    file="/everycvs/src/main/java/com/kh/everycvs/store/controller/StoreController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="250" width="290" x="952" y="90"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <dependency id="28">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="29">    
+    <bendpoint x="713" y="602"/>    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="30">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="23"/>  
+  </dependency>  
+  <realization id="31">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

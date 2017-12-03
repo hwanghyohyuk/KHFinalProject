@@ -47,4 +47,16 @@ public class EventServiceImpl implements EventService{
 		return null;
 	}
 
+	@Override
+	public String participateEvent(HttpServletRequest request) {
+		//이벤트 참여 여부
+		return null;
+	}
+
+	@Override
+	public ModelAndView winEvent(HttpServletRequest request) {
+		// 이벤트 당첨자 리스트 출력
+		return null;
+	}
+
 }
