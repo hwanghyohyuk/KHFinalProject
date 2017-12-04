@@ -6,6 +6,7 @@ import org.apache.maven.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,11 +31,14 @@ public class UserController {
 	}
 
 	/** 마이 페이지 **/
+	@RequestMapping("mypage.do")
 	public ModelAndView myPage(HttpSession session) {
-		User temp = (User)(session.getAttribute("user"));
+		ModelAndView mv = new ModelAndView("user/mypage/main");
+		
+		/*User temp = (User)(session.getAttribute("user"));
 		int user_no = temp.getUser_no();
-		User user = userService.getUser(user_no);
-		return null;
+		User user = userService.getUser(user_no);*/
+		return mv;
 	}
 
 	/** 로그아웃 **/
