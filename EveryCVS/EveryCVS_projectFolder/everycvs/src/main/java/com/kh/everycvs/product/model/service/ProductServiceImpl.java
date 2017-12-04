@@ -15,9 +15,6 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Autowired
 	private ProductDao productDao;
-
-	@Autowired
-	private ProductDao productDao;
 	
 	@Override
 	public ModelAndView selectProductList(HttpServletRequest request) {
