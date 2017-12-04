@@ -30,4 +30,7 @@ public interface PurchaseService {
 	//거래내역 조회 : 3개월, 1개월, 1주일 단위로 조회(해당 리스트 목록조회)
 	public ModelAndView purchaseList(HttpServletRequest request);
 	
+	/*사이트관리자*/
+	/**월간 구매 이용 횟수**/
+	int monthlyPurchaseCount();
 }

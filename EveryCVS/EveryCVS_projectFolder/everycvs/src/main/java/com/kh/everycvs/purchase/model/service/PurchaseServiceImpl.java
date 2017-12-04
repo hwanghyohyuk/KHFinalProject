@@ -62,4 +62,11 @@ public class PurchaseServiceImpl implements PurchaseService{
 		return null;
 	}
 
+	/*사이트관리자*/
+	/**월간 구매 이용 횟수**/
+	@Override
+	public int monthlyPurchaseCount() {
+		return purchaseDao.monthlyPurchaseCount();
+	}
+
 }
