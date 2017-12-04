@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.kh.everycvs.common.model.vo.Purchase;
-
 @Repository("PurchaseDao")
 public class PurchaseDao {
 	

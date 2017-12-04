@@ -23,7 +23,6 @@ public class StoreProductController {
 	@Autowired
 	private StoreProductService sproductService;
 	
-	// 지점 상품 조회
 	@RequestMapping(value="/splist.do")
 	public ModelAndView selectList(String page, HttpServletRequest request){
 		ModelAndView mv = new ModelAndView();
@@ -37,12 +36,6 @@ public class StoreProductController {
 		return mv;
 	}
 	
-	// 지점 상품 검색 : 입력한 키워드와 필터링으로 지점상품을 검색
-	// 필터링 : 상품명/상품코드
-	public ModelAndView searchList(HttpServletRequest request) {
-		return null;
-	}
-	
 	@RequestMapping(value="/sprank.do",method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView rankList(){
@@ -53,7 +46,6 @@ public class StoreProductController {
 		return mv;
 	}
 
-	// 지점 상품 조회 : 선택한 상품을 상세조회
 	@RequestMapping(value="/spdetail.do")
 	public ModelAndView detailSproduct(int spnum, int page){
 		ModelAndView mv = new ModelAndView();
@@ -72,7 +64,6 @@ public class StoreProductController {
 		return mv;
 	}
 	
-	// 지점 상품 추가 : 해당 상호 편의점의 전체 상품 목록에서 수량이 1이상인 상품들을 지점상품에 추가
 	@RequestMapping(value="/spinsert.do", method=RequestMethod.POST)
 	public ModelAndView insertSproduct(MultipartHttpServletRequest request) throws IOException{
 		ModelAndView mv = new ModelAndView();
@@ -91,7 +82,6 @@ public class StoreProductController {
 		return mv;
 	}
 	
-	// 지점 상품 삭제
 	@RequestMapping(value="spdelete.do")
 	public ModelAndView deleteSproduct(int spnum){
 		ModelAndView mv = new ModelAndView();
@@ -101,7 +91,6 @@ public class StoreProductController {
 		return mv;
 	}
 	
-	// 지점 상품 수정 : 변경사항(제조일/수량/이벤트)
 	@RequestMapping(value="spupdate.do", method=RequestMethod.POST)
 	public ModelAndView updateSproduct(MultipartHttpServletRequest request) throws IOException{
 		ModelAndView mv = new ModelAndView();

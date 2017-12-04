@@ -24,10 +24,4 @@ public interface EventService {
 	// 이벤트 삭제
 	public String deleteEvent(HttpServletRequest request);
 	
-	//이벤트 참여 여부
-	public String participateEvent(HttpServletRequest request);
-
-	// 이벤트 당첨자 리스트 출력
-	public ModelAndView winEvent(HttpServletRequest request);
-	
 }
