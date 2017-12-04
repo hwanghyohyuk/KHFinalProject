@@ -59,7 +59,7 @@ public class PurchaseServiceImpl implements PurchaseService{
 	@Override
 	public ModelAndView purchaseList(HttpServletRequest request) {
 		//구매내역 조회
-		return null;
+		return (ModelAndView) purchaseDao.purchaseList();
 	}
 
 	/*사이트관리자*/

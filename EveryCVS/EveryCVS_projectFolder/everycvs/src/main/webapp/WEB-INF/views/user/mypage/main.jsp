@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
- <!-- === BEGIN HEADER === -->
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+
+<!-- === BEGIN HEADER === -->
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -20,23 +21,31 @@
 <!-- Favicon -->
 <link href="favicon.ico" rel="shortcut icon">
 <!-- Bootstrap Core CSS -->
-<link rel="stylesheet" href="./resource/user/css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="./resource/user/css/bootstrap.css"
+	rel="stylesheet">
 <!-- Template CSS -->
-<link rel="stylesheet" href="./resource/user/css/animate.css" rel="stylesheet">
+<link rel="stylesheet" href="./resource/user/css/animate.css"
+	rel="stylesheet">
 <link rel="stylesheet" href="./resource/user/css/font-awesome.css"
 	rel="stylesheet">
-<link rel="stylesheet" href="./resource/user/css/nexus.css" rel="stylesheet">
-<link rel="stylesheet" href="./resource/user/css/responsive.css" rel="stylesheet">
-<link rel="stylesheet" href="./resource/user/css/custom.css" rel="stylesheet">
+<link rel="stylesheet" href="./resource/user/css/nexus.css"
+	rel="stylesheet">
+<link rel="stylesheet" href="./resource/user/css/responsive.css"
+	rel="stylesheet">
+<link rel="stylesheet" href="./resource/user/css/custom.css"
+	rel="stylesheet">
 <!-- Google Fonts-->
 <link
 	href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300"
 	rel="stylesheet" type="text/css">
 
-<!-- modal -->	
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- modal -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -61,8 +70,8 @@
 				<div class="row">
 					<!-- Logo -->
 					<div class="logo">
-						<a href="index.html" title=""> <img src="./resource/user/img/logo.png"
-							alt="Logo" />
+						<a href="index.html" title=""> <img
+							src="./resource/user/img/logo.png" alt="Logo" />
 						</a>
 					</div>
 					<!-- End Logo -->
@@ -163,7 +172,7 @@
 		</div>
 		<!-- End Top Menu -->
 		<!-- === END HEADER === -->
-		
+
 		<!-- === 본문내용 === -->
 		<div id="content">
 			<div class="container background-white">
@@ -174,20 +183,17 @@
 							<!-- 기프티콘 보관함 -->
 							<li class="list-group-item list-toggle"><a
 								data-toggle="collapse" data-parent="#sidebar-nav"
-								href="#collapse-typography">기프티콘 보관함</a>
-								</li>
-							
+								href="#collapse-typography">기프티콘 보관함</a></li>
+
 							<!-- 관심목록 -->
 							<li class="list-group-item list-toggle"><a
 								class="accordion-toggle" href="#collapse-components"
-								data-toggle="collapse">관심목록</a>
-								</li>
-								
+								data-toggle="collapse">관심목록</a></li>
+
 							<!-- 회원탈퇴 -->
 							<li class="list-group-item list-toggle"><a
 								data-toggle="collapse" data-parent="#sidebar-nav"
-								href="#collapse-icons">회원탈퇴</a>
-								</li>
+								href="#collapse-icons">회원탈퇴</a></li>
 						</ul>
 					</div>
 					<!-- End Sidebar Menu -->
@@ -205,7 +211,7 @@
 									<div class="panel-body" align="right">
 										<b style="font-size: 20pt;">125,000</b>
 										<button class="btn btn-primary" id="myBtn">충전하기</button>
-										
+
 										<!-- Modal -->
 										<div class="modal fade" id="myModal" role="dialog">
 											<div class="modal-dialog">
@@ -214,33 +220,56 @@
 												<div class="modal-content" align="left">
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h4 class="modal-title">결제하기</h4>
+														<h4 class="modal-title">충전하기</h4>
 													</div>
+													
 													<div class="modal-body">
-														<p>결제할 금액 : [값]</p>
-														<br>
-														<b>잔고 결제</b>
+														<p style="font-size: 15pt; font-weight: bold;">충전할 금액 : [값]</p>
+														<p>- 1000원이하의 금액은 충전 할 수 없습니다.</p>
+														<p>- 이미 충전한 금액에 대해서는 환불이 불가능합니다.</p><br>
 														<input type="text">
-														
-														<b style="margin-left: 40px;">포인트 결제</b>
-														<input type="text">
+														<button class="btn btn-primary">충 전</button>
 													</div>
+													
 													<div class="modal-footer">
 														<button type="button" class="btn btn-default"
-															data-dismiss="modal">다음</button>
+															data-dismiss="modal">완료</button>
 													</div>
 												</div>
 
 											</div>
 										</div>
 
-										<br>
-										<br>
-										<button class="btn btn-primary">거래내역</button>
+										<br> <br>
+										<button class="btn btn-primary" id="purchaseDetailsBtn">거래내역</button>
+										
+										<!-- Modal -->
+										<div class="modal fade" id="myModal2" role="dialog">
+											<div class="modal-dialog">
+
+												<!-- Modal content-->
+												<div class="modal-content" align="left">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<h4 class="modal-title">거래내역</h4>
+													</div>
+													
+													<div class="modal-body">	
+															거래내역
+													</div>
+													
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default"
+															data-dismiss="modal">완료</button>
+													</div>
+												</div>
+
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-							
+
 
 							<div class="col-md-6">
 								<!-- 내가 쓴글 보기 영역 -->
@@ -273,144 +302,150 @@
 						<hr>
 
 						<div class="row">
-						<!-- 자주구매 목록 -->
-						<div class="col-md-6">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">자주 구매한 목록</h3>
+							<!-- 자주구매 목록 -->
+							<div class="col-md-6">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title">자주 구매한 목록</h3>
+									</div>
+									<div class="panel-body" align="right" style="font-size: 15pt;">
+										상품 리스트 영역</div>
 								</div>
-								<div class="panel-body" align="right" style="font-size: 15pt;">
-									상품 리스트 영역</div>
 							</div>
-						</div>
-					
-					
-					<!-- 관심목록 -->
-						<div class="col-md-6">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">관심 목록</h3>
+
+
+							<!-- 관심목록 -->
+							<div class="col-md-6">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title">관심 목록</h3>
+									</div>
+									<div class="panel-body" align="right" style="font-size: 15pt;">
+										관심상품 리스트 영역</div>
 								</div>
-								<div class="panel-body" align="right" style="font-size: 15pt;">
-									관심상품 리스트 영역</div>
 							</div>
+
 						</div>
-					
-				 </div>
-				</div>
-			</div> 
-	</div>
-	
-		<!-- === END CONTENT === -->
-		<!-- === BEGIN FOOTER === -->
-		<div id="base">
-			<div class="container bottom-border padding-vert-30">
-				<div class="row">
-					<!-- Disclaimer -->
-					<div class="col-md-4">
-						<h3 class="class margin-bottom-10">Disclaimer</h3>
-						<p>All stock images on this template demo are for presentation
-							purposes only, intended to represent a live site and are not
-							included with the template or in any of the Joomla51 club
-							membership plans.</p>
-						<p>
-							Most of the images used here are available from <a
-								href="http://www.shutterstock.com/" target="_blank">shutterstock.com</a>.
-							Links are provided if you wish to purchase them from their
-							copyright owners.
-						</p>
 					</div>
-					<!-- End Disclaimer -->
-					<!-- Contact Details -->
-					<div class="col-md-4 margin-bottom-20">
-						<h3 class="margin-bottom-10">Contact Details</h3>
-						<p>
-							<span class="fa-phone">Telephone:</span>1-800-123-4567 <br>
-							<span class="fa-envelope">Email:</span> <a
-								href="mailto:info@example.com">info@example.com</a> <br> <span
-								class="fa-link">Website:</span> <a href="http://www.example.com">www.example.com</a>
-						</p>
-						<p>
-							The Dunes, Top Road, <br>Strandhill, <br>Co. Sligo, <br>Ireland
-						</p>
-					</div>
-					<!-- End Contact Details -->
-					<!-- Sample Menu -->
-					<div class="col-md-4 margin-bottom-20">
-						<h3 class="margin-bottom-10">Sample Menu</h3>
-						<ul class="menu">
-							<li><a class="fa-tasks" href="#">Placerat facer possim</a></li>
-							<li><a class="fa-users" href="#">Quam nunc putamus</a></li>
-							<li><a class="fa-signal" href="#">Velit esse molestie</a></li>
-							<li><a class="fa-coffee" href="#">Nam liber tempor</a></li>
-						</ul>
-						<div class="clearfix"></div>
-					</div>
-					<!-- End Sample Menu -->
 				</div>
 			</div>
-		</div>
-		<!-- Footer -->
-		<div id="footer" class="background-grey">
-			<div class="container">
-				<div class="row">
-					<!-- Footer Menu -->
-					<div id="footermenu" class="col-md-8">
-						<ul class="list-unstyled list-inline">
-							<li><a href="#" target="_blank">Sample Link</a></li>
-							<li><a href="#" target="_blank">Sample Link</a></li>
-							<li><a href="#" target="_blank">Sample Link</a></li>
-							<li><a href="#" target="_blank">Sample Link</a></li>
-						</ul>
+
+			<!-- === END CONTENT === -->
+			<!-- === BEGIN FOOTER === -->
+			<div id="base">
+				<div class="container bottom-border padding-vert-30">
+					<div class="row">
+						<!-- Disclaimer -->
+						<div class="col-md-4">
+							<h3 class="class margin-bottom-10">Disclaimer</h3>
+							<p>All stock images on this template demo are for
+								presentation purposes only, intended to represent a live site
+								and are not included with the template or in any of the Joomla51
+								club membership plans.</p>
+							<p>
+								Most of the images used here are available from <a
+									href="http://www.shutterstock.com/" target="_blank">shutterstock.com</a>.
+								Links are provided if you wish to purchase them from their
+								copyright owners.
+							</p>
+						</div>
+						<!-- End Disclaimer -->
+						<!-- Contact Details -->
+						<div class="col-md-4 margin-bottom-20">
+							<h3 class="margin-bottom-10">Contact Details</h3>
+							<p>
+								<span class="fa-phone">Telephone:</span>1-800-123-4567 <br>
+								<span class="fa-envelope">Email:</span> <a
+									href="mailto:info@example.com">info@example.com</a> <br> <span
+									class="fa-link">Website:</span> <a
+									href="http://www.example.com">www.example.com</a>
+							</p>
+							<p>
+								The Dunes, Top Road, <br>Strandhill, <br>Co. Sligo, <br>Ireland
+							</p>
+						</div>
+						<!-- End Contact Details -->
+						<!-- Sample Menu -->
+						<div class="col-md-4 margin-bottom-20">
+							<h3 class="margin-bottom-10">Sample Menu</h3>
+							<ul class="menu">
+								<li><a class="fa-tasks" href="#">Placerat facer possim</a></li>
+								<li><a class="fa-users" href="#">Quam nunc putamus</a></li>
+								<li><a class="fa-signal" href="#">Velit esse molestie</a></li>
+								<li><a class="fa-coffee" href="#">Nam liber tempor</a></li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+						<!-- End Sample Menu -->
 					</div>
-					<!-- End Footer Menu -->
-					<!-- Copyright -->
-					<div id="copyright" class="col-md-4">
-						<p class="pull-right">(c) 2014 Your Copyright Info</p>
-					</div>
-					<!-- End Copyright -->
 				</div>
 			</div>
-		</div>
-		<!-- End Footer -->
-		<!-- JS -->
+			<!-- Footer -->
+			<div id="footer" class="background-grey">
+				<div class="container">
+					<div class="row">
+						<!-- Footer Menu -->
+						<div id="footermenu" class="col-md-8">
+							<ul class="list-unstyled list-inline">
+								<li><a href="#" target="_blank">Sample Link</a></li>
+								<li><a href="#" target="_blank">Sample Link</a></li>
+								<li><a href="#" target="_blank">Sample Link</a></li>
+								<li><a href="#" target="_blank">Sample Link</a></li>
+							</ul>
+						</div>
+						<!-- End Footer Menu -->
+						<!-- Copyright -->
+						<div id="copyright" class="col-md-4">
+							<p class="pull-right">(c) 2014 Your Copyright Info</p>
+						</div>
+						<!-- End Copyright -->
+					</div>
+				</div>
+			</div>
+			<!-- End Footer -->
+			<!-- JS -->
 
 	<script>
+			//충전하기 모달
 		$(document).ready(function() {
 			$("#myBtn").click(function() {
 				$("#myModal").modal();
 			});
 		});
+		
+			//거래내역 모달
+		$(document).ready(function() {
+			$("#purchaseDetailsBtn").click(function() {
+				$("#myModal2").modal();
+			});
+		});
+		
+		
 	</script>
-
-
-
-
-
-
-	<script type="text/javascript" src="./resource/user/js/jquery.min.js"
-			type="text/javascript"></script>
-		<script type="text/javascript" src="./resource/user/js/bootstrap.min.js"
-			type="text/javascript"></script>
-		<script type="text/javascript" src="./resource/user/js/scripts.js"></script>
-		<!-- Isotope - Portfolio Sorting -->
-		<script type="text/javascript" src="./resource/user/js/jquery.isotope.js"
-			type="text/javascript"></script>
-		<!-- Mobile Menu - Slicknav -->
-		<script type="text/javascript" src="./resource/user/js/jquery.slicknav.js"
-			type="text/javascript"></script>
-		<!-- Animate on Scroll-->
-		<script type="text/javascript" src="./resource/user/js/jquery.visible.js"
-			charset="utf-8"></script>
-		<!-- Sticky Div -->
-		<script type="text/javascript" src="./resource/user/js/jquery.sticky.js"
-			charset="utf-8"></script>
-		<!-- Slimbox2-->
-		<script type="text/javascript" src="./resource/user/js/slimbox2.js"
-			charset="utf-8"></script>
-		<!-- Modernizr -->
-		<script src="./resource/user/js/modernizr.custom.js" type="text/javascript"></script>
-		<!-- End JS -->
+			<script type="text/javascript" src="./resource/user/js/jquery.min.js"
+				type="text/javascript"></script>
+			<script type="text/javascript"
+				src="./resource/user/js/bootstrap.min.js" type="text/javascript"></script>
+			<script type="text/javascript" src="./resource/user/js/scripts.js"></script>
+			<!-- Isotope - Portfolio Sorting -->
+			<script type="text/javascript"
+				src="./resource/user/js/jquery.isotope.js" type="text/javascript"></script>
+			<!-- Mobile Menu - Slicknav -->
+			<script type="text/javascript"
+				src="./resource/user/js/jquery.slicknav.js" type="text/javascript"></script>
+			<!-- Animate on Scroll-->
+			<script type="text/javascript"
+				src="./resource/user/js/jquery.visible.js" charset="utf-8"></script>
+			<!-- Sticky Div -->
+			<script type="text/javascript"
+				src="./resource/user/js/jquery.sticky.js" charset="utf-8"></script>
+			<!-- Slimbox2-->
+			<script type="text/javascript" src="./resource/user/js/slimbox2.js"
+				charset="utf-8"></script>
+			<!-- Modernizr -->
+			<script src="./resource/user/js/modernizr.custom.js"
+				type="text/javascript"></script>
+			<!-- End JS -->
 </body>
 </html>
 <!-- === END FOOTER === -->

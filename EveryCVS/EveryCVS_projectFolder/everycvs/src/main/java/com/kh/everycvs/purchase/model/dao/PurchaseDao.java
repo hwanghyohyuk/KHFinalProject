@@ -2,6 +2,7 @@ package com.kh.everycvs.purchase.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 @Repository("PurchaseDao")
@@ -46,7 +47,7 @@ public class PurchaseDao {
 	
 	//사용자 구매내역 조회
 	public List purchaseList() {
-		return null;
+		return sqlSession.selectList;
 	}
 	
 	/*사이트관리자*/
