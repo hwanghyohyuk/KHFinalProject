@@ -14,7 +14,7 @@ public class SignSessionInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("SignSessionInterceptor 실행...");
+
 		// session 객체를 가져옴
 		HttpSession session = request.getSession();
 		
