@@ -1,6 +1,7 @@
 package com.kh.everycvs.common.model.vo;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
@@ -24,16 +25,29 @@ public class Purchase implements Serializable {
 	private int calculated_price; // 계산가격
 	private int using_point; // 사용포인트
 	private int accumulate_point; // 적립포인트
-	private int purchase_date; // 구매날짜
-
+	private Date purchase_date; // 구매날짜
+	
 	/* Constructer */
+	
 	public Purchase() {
 		super();
+	}
+	
+	/*이 생성자는 상품 구매할 때 쓸 생성자*/
+	public Purchase(int purchase_no, int store_product_no, int purchase_quantity, int calculated_price, int using_point,
+			int accumulate_point) {
+		super();
+		this.purchase_no = purchase_no;
+		this.store_product_no = store_product_no;
+		this.purchase_quantity = purchase_quantity;
+		this.calculated_price = calculated_price;
+		this.using_point = using_point;
+		this.accumulate_point = accumulate_point;
 	}
 
 	public Purchase(int purchase_no, int user_no, int store_product_no, String store_no, String store_name,
 			int product_no, String product_name, int purchase_quantity, int calculated_price, int using_point,
-			int accumulate_point, int purchase_date) {
+			int accumulate_point, Date purchase_date) {
 		super();
 		this.purchase_no = purchase_no;
 		this.user_no = user_no;
@@ -47,8 +61,8 @@ public class Purchase implements Serializable {
 		this.using_point = using_point;
 		this.accumulate_point = accumulate_point;
 		this.purchase_date = purchase_date;
-	}
-
+	}	
+	
 	/* Getter & Setter */
 
 	public int getPurchase_no() {
@@ -139,18 +153,18 @@ public class Purchase implements Serializable {
 		this.accumulate_point = accumulate_point;
 	}
 
-	public int getPurchase_date() {
+	public Date getPurchase_date() {
 		return purchase_date;
 	}
 
-	public void setPurchase_date(int purchase_date) {
+	public void setPurchase_date(Date purchase_date) {
 		this.purchase_date = purchase_date;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
+	}	
+	
 	/* ToString */
 
 	@Override
@@ -161,5 +175,6 @@ public class Purchase implements Serializable {
 				+ ", calculated_price=" + calculated_price + ", using_point=" + using_point + ", accumulate_point="
 				+ accumulate_point + ", purchase_date=" + purchase_date + "]";
 	}
+
 
 }

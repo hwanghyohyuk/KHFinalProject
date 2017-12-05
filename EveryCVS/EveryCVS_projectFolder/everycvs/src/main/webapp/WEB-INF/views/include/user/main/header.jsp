@@ -64,7 +64,7 @@
 								</ul></li>
 							<li><span class="fa-copy ">Pages</span>
 								<ul>
-									<li><a href="pages-about-us.html">About Us</a></li>
+									<li><a href="/everycvs/purchaseList.do">purchaselist</a></li>
 									<li><a href="pages-services.html">Services</a></li>
 									<li><a href="pages-faq.html">F.A.Q.</a></li>
 									<li><a href="pages-about-me.html">About Me</a></li>

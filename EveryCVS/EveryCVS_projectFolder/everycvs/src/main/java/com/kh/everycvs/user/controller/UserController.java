@@ -12,10 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-<<<<<<< HEAD
-=======
+
 import org.springframework.web.bind.annotation.RequestMethod;
->>>>>>> master
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
@@ -34,6 +32,7 @@ public class UserController {
 	public String intercepterSignin() {
 		return "user/sign/signin";
 	}
+
 	@RequestMapping(value = "signin.do", method = RequestMethod.GET)
 	public String signin() {
 		return "user/sign/signin";
@@ -41,27 +40,28 @@ public class UserController {
 
 	/** 로그인 **/
 	@RequestMapping(value = "signinpost.do", method = RequestMethod.POST)
-	public String signIn(@RequestParam("email") String email, @RequestParam("pwd") String pwd, @RequestParam(value="usercookie", defaultValue = "false", required=false ) boolean useCookie,HttpSession session, HttpServletResponse response) {
+	public String signIn(@RequestParam("email") String email, @RequestParam("pwd") String pwd,
+			@RequestParam(value = "usercookie", defaultValue = "false", required = false) boolean useCookie,
+			HttpSession session, HttpServletResponse response) {
 		String returnURL = "";
 		if (session.getAttribute("user") != null) {
 			// 기존에 user이란 세션 값이 존재한다면
 			session.removeAttribute("user"); // 기존값을 제거해 준다.
 		}
 		User signin = new User(email, pwd, useCookie);
-		
+
 		// 로그인이 성공하면 UserVO 객체를 반환함.
 		User user = userService.signIn(signin);
 
 		if (user != null) { // 로그인 성공
 			session.setAttribute("user", user); // 세션에 login인이란 이름으로 User 객체를
-													// 저장해 놈.
-			//switch(사용자 직책으로)
-			//customer
-			//storemanager
-			//cvsmanager
-			//sitemanager
-			
-			
+												// 저장해 놈.
+			// switch(사용자 직책으로)
+			// customer
+			// storemanager
+			// cvsmanager
+			// sitemanager
+
 			returnURL = "main/main"; // 로그인 성공시 일반 메인페이지 이동
 			/*
 			 * [ 세션 추가되는 부분 ]
@@ -88,7 +88,6 @@ public class UserController {
 	/** 마이 페이지 **/
 	@RequestMapping("mypage.do")
 	public ModelAndView myPage(HttpSession session) {
-<<<<<<< HEAD
 		ModelAndView mv = new ModelAndView("user/mypage/main");
 		
 		/*User temp = (User)(session.getAttribute("user"));
@@ -129,9 +128,8 @@ public class UserController {
 				}
 			}
 		}
-		return "redirect:/main/main.do"; 
+		return "redirect:/main/main.do";
 	}
-
 
 	/* 회원가입 페이지 이동 */
 	public String moveToSignup() {

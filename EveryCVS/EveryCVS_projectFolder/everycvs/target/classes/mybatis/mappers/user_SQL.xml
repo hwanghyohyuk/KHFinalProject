@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="user">
-=======
-<!DOCTYPE mapper PUBLIC
-"-//mybatis.org//DTD Mapper 3.0//EN"
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
 
-	<select id="signIn" resultType="user">
-	<![CDATA[select * from tb_user where email=#{email} and user_pwd=#{pwd}]]>
+	<!-- resultMap 은 MyBatis의 핵심 기능! - 각 컬럼을 셋해주는 역할을 함 - 필드명과 데이터베이스의 컬럼명을 
+		정확하게 기재할 것 -->
+	<resultMap id="resultUser" type="user">
+		<id property="email" column="EMAIL"  />
+		<result property="user_no" column="USER_NO"/>
+		<result property="user_pwd" column="USER_PWD" />
+		<result property="user_name" column="USER_NAME" />
+		<result property="birthday" column="BIRTHDAY" />
+		<result property="gender" column="GENDER" />
+		<result property="phone" column="PHONE" />
+		<result property="address" column="ADDRESS" />
+		<result property="enroll_date" column="ENROLL_DATE" />
+		<result property="original_file_name" column="ORIGINAL_FILE_NAME" />
+		<result property="stored_file_name" column="STORED_FILE_NAME" />
+		<result property="user_state" column="USER_STATE" />
+		<result property="job" column="JOB" />
+		<result property="cash" column="CASH" />
+		<result property="point" column="POINT" />
+		<result property="store_no" column="STORE_NO" />
+		<result property="brand_no" column="BRAND_NO" />
+		<result property="session_key" column="SESSION_KEY" />
+		<result property="session_limit" column="SESSION_LIMIT" />
+	</resultMap>
+	
+	<select id="signIn" parameterType="user" resultMap="resultUser">
+	<![CDATA[select * from tb_user where email=#{email} and user_pwd=#{user_pwd}]]>
 	</select>
 
 	<update id="keepSignIn">
@@ -21,7 +38,6 @@
 
 	<select id="checkUserWithSessionKey" resultType="user">
         <![CDATA[select * from tb_user where session_key = #{value} and session_limit > now()]]>
+
     </select>
-    
->>>>>>> master
 </mapper>
