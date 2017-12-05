@@ -2,12 +2,10 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-<<<<<<< HEAD
 		 <typeAlias type="com.kh.everycvs.common.model.vo.User"
 			alias="user" /> 
 		 <typeAlias type="com.kh.everycvs.common.model.vo.Purchase"
 		    alias="purchase"/>
-=======
 		<typeAlias type="com.kh.everycvs.common.model.vo.Board" alias="board" />
 		<typeAlias type="com.kh.everycvs.common.model.vo.Brand" alias="brand" />
 		<typeAlias type="com.kh.everycvs.common.model.vo.DcInfo" alias="dcinfo" />
@@ -28,7 +26,6 @@
 		<typeAlias type="com.kh.everycvs.common.model.vo.Store" alias="store" />
 		<typeAlias type="com.kh.everycvs.common.model.vo.StoreProduct" alias="storeproduct" />
 		<typeAlias type="com.kh.everycvs.common.model.vo.User" alias="user" />
->>>>>>> master
 	</typeAliases>
 	
 </configuration>

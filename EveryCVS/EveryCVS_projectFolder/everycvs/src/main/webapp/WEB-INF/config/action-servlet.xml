@@ -49,13 +49,13 @@
 			</beans:bean>
 		</interceptor>
 		<interceptor>
-			<mapping path="sign/*.do" />
+			<mapping path="page/*.do" />
 			<beans:bean id="pagesessioninterceptor"
 				class="com.kh.everycvs.common.interceptor.PageSessionInterceptor">
 			</beans:bean>
 		</interceptor>
 		<interceptor>
-			<mapping path="page/*.do" />
+			<mapping path="sign/*.do" />
 			<beans:bean id="signsessioninterceptor"
 				class="com.kh.everycvs.common.interceptor.SignSessionInterceptor">
 			</beans:bean>

@@ -1,13 +1,7 @@
-<<<<<<< HEAD
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <!-- === BEGIN HEADER === -->
-=======
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
->>>>>>> master
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -25,13 +19,13 @@
         <!-- Favicon -->
         <link href="favicon.ico" rel="shortcut icon">
         <!-- Bootstrap Core CSS -->
-        <link rel="stylesheet" href="./resource/user/css/bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" href="./resources/user/css/bootstrap.css" rel="stylesheet">
         <!-- Template CSS -->
-        <link rel="stylesheet" href="./resource/user/css/animate.css" rel="stylesheet">
-        <link rel="stylesheet" href="./resource/user/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" href="./resource/user/css/nexus.css" rel="stylesheet">
-        <link rel="stylesheet" href="./resource/user/css/responsive.css" rel="stylesheet">
-        <link rel="stylesheet" href="./resource/user/css/custom.css" rel="stylesheet">
+        <link rel="stylesheet" href="./resources/user/css/animate.css" rel="stylesheet">
+        <link rel="stylesheet" href="./resources/user/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="./resources/user/css/nexus.css" rel="stylesheet">
+        <link rel="stylesheet" href="./resources/user/css/responsive.css" rel="stylesheet">
+        <link rel="stylesheet" href="./resources/user/css/custom.css" rel="stylesheet">
         <!-- Google Fonts-->
         <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" rel="stylesheet" type="text/css">
     </head>
@@ -59,7 +53,7 @@
                         <!-- Logo -->
                         <div class="logo">
                             <a href="index.html" title="">
-                                <img src="./resource/user/img/logo.png" alt="Logo" />
+                                <img src="./resources/user/img/logo.png" alt="Logo" />
                             </a>
                         </div>
                         <!-- End Logo -->
@@ -252,16 +246,16 @@
                             <!-- Carousel Images -->
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img src="./resource/user/img/slideshow/slide1.jpg">
+                                    <img src="./resources/user/img/slideshow/slide1.jpg">
                                 </div>
                                 <div class="item">
-                                    <img src="./resource/user/img/slideshow/slide2.jpg">
+                                    <img src="./resources/user/img/slideshow/slide2.jpg">
                                 </div>
                                 <div class="item">
-                                    <img src="./resource/user/img/slideshow/slide3.jpg">
+                                    <img src="./resources/user/img/slideshow/slide3.jpg">
                                 </div>
                                 <div class="item">
-                                    <img src="./resource/user/img/slideshow/slide4.jpg">
+                                    <img src="./resources/user/img/slideshow/slide4.jpg">
                                 </div>
                             </div>
                             <!-- End Carousel Images -->
@@ -338,7 +332,7 @@
                             <li class="portfolio-item col-sm-4 col-xs-6 margin-bottom-40">
                                 <a href="#">
                                     <figure class="animate fadeInLeft">
-                                        <img alt="image1" src="assets/img/frontpage/image1.jpg">
+                                        <img alt="image1" src="./resources/user/img/frontpage/image1.jpg">
                                         <figcaption>
                                             <h3>Velit esse molestie</h3>
                                             <span>Vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui et everti tamquam suavitate mea.</span>
@@ -351,7 +345,7 @@
                             <li class="portfolio-item col-sm-4 col-xs-6 margin-bottom-40">
                                 <a href="#">
                                     <figure class="animate fadeIn">
-                                        <img alt="image2" src="assets/img/frontpage/image2.jpg">
+                                        <img alt="image2" src="./resources/user/img/frontpage/image2.jpg">
                                         <figcaption>
                                             <h3>Quam nunc putamus</h3>
                                             <span>Vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui et everti tamquam suavitate mea.</span>
@@ -364,7 +358,7 @@
                             <li class="portfolio-item col-sm-4 col-xs-6 margin-bottom-40">
                                 <a href="#">
                                     <figure class="animate fadeInRight">
-                                        <img alt="image3" src="assets/img/frontpage/image3.jpg">
+                                        <img alt="image3" src="./resources/user/img/frontpage/image3.jpg">
                                         <figcaption>
                                             <h3>Placerat facer possim</h3>
                                             <span>Vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui et everti tamquam suavitate mea.</span>
@@ -377,7 +371,7 @@
                             <li class="portfolio-item col-sm-4 col-xs-6 margin-bottom-40">
                                 <a href="#">
                                     <figure class="animate fadeInLeft">
-                                        <img alt="image4" src="assets/img/frontpage/image4.jpg">
+                                        <img alt="image4" src="./resources/user/img/frontpage/image4.jpg">
                                         <figcaption>
                                             <h3>Nam liber tempor</h3>
                                             <span>Vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui et everti tamquam suavitate mea.</span>
@@ -390,7 +384,7 @@
                             <li class="portfolio-item col-sm-4 col-xs-6 margin-bottom-40">
                                 <a href="#">
                                     <figure class="animate fadeIn">
-                                        <img alt="image5" src="./resource/user/img/frontpage/image5.jpg">
+                                        <img alt="image5" src="./resources/user/img/frontpage/image5.jpg">
                                         <figcaption>
                                             <h3>Donec non urna</h3>
                                             <span>Vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui et everti tamquam suavitate mea.</span>
@@ -403,7 +397,7 @@
                             <li class="portfolio-item col-sm-4 col-xs-6 margin-bottom-40">
                                 <a href="#">
                                     <figure class="animate fadeInRight">
-                                        <img alt="image6" src="./resource/user/img/frontpage/image6.jpg">
+                                        <img alt="image6" src="./resources/user/img/frontpage/image6.jpg">
                                         <figcaption>
                                             <h3>Nullam consectetur</h3>
                                             <span>Vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui et everti tamquam suavitate mea.</span>
@@ -503,21 +497,21 @@
             </div>
             <!-- End Footer -->
             <!-- JS -->
-            <script type="text/javascript" src="./resource/user/js/jquery.min.js" type="text/javascript"></script>
-            <script type="text/javascript" src="./resource/user/js/bootstrap.min.js" type="text/javascript"></script>
-            <script type="text/javascript" src="./resource/user/js/scripts.js"></script>
+            <script type="text/javascript" src="./resources/user/js/jquery.min.js" type="text/javascript"></script>
+            <script type="text/javascript" src="./resources/user/js/bootstrap.min.js" type="text/javascript"></script>
+            <script type="text/javascript" src="./resources/user/js/scripts.js"></script>
             <!-- Isotope - Portfolio Sorting -->
-            <script type="text/javascript" src="./resource/user/js/jquery.isotope.js" type="text/javascript"></script>
+            <script type="text/javascript" src="./resources/user/js/jquery.isotope.js" type="text/javascript"></script>
             <!-- Mobile Menu - Slicknav -->
-            <script type="text/javascript" src="./resource/user/js/jquery.slicknav.js" type="text/javascript"></script>
+            <script type="text/javascript" src="./resources/user/js/jquery.slicknav.js" type="text/javascript"></script>
             <!-- Animate on Scroll-->
-            <script type="text/javascript" src="./resource/user/js/jquery.visible.js" charset="utf-8"></script>
+            <script type="text/javascript" src="./resources/user/js/jquery.visible.js" charset="utf-8"></script>
             <!-- Sticky Div -->
-            <script type="text/javascript" src="./resource/user/js/jquery.sticky.js" charset="utf-8"></script>
+            <script type="text/javascript" src="./resources/user/js/jquery.sticky.js" charset="utf-8"></script>
             <!-- Slimbox2-->
-            <script type="text/javascript" src="./resource/user/js/slimbox2.js" charset="utf-8"></script>
+            <script type="text/javascript" src="./resources/user/js/slimbox2.js" charset="utf-8"></script>
             <!-- Modernizr -->
-            <script src="./resource/user/js/modernizr.custom.js" type="text/javascript"></script>
+            <script src="./resources/user/js/modernizr.custom.js" type="text/javascript"></script>
             <!-- End JS -->
     </body>
 </html>

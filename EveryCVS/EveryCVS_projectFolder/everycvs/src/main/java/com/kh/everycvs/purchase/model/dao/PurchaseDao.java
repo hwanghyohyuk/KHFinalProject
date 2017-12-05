@@ -53,9 +53,9 @@ public class PurchaseDao {
 	
 	//사용자 구매내역 조회
 	public List<Purchase> purchaseList() {
-		ArrayList<Purchase> list = new ArrayList<Purchase>();
+		List<Purchase> list = new ArrayList<Purchase>();
 		System.out.println(list);
-		return sqlSession.selectList("purchase.purchaseList");
+		return sqlSession.selectList("purchase.purchaseList", list);
 	}
 	
 	/*사이트관리자*/

@@ -4,9 +4,23 @@
 
 <mapper namespace="purchase">
 
+	<resultMap id="resultPurchase" type="purchase">
+		<result property="purchase_no" column="PURCHASE_NO" />
+		<result property="user_no" column="USER_NO" />
+		<result property="store_product_no" column="STORE_PRODUCT_NO" />
+		<result property="store_no" column="STORE_NO" />
+		<result property="store_name" column="STORE_NAME" />
+		<result property="product_no" column="PRODUCT_NO" />
+		<result property="product_name" column="PRODUCT_NAME" />
+		<result property="purchase_quantity" column="PURCHASE_QUANTITY" />
+		<result property="calculated_price" column="CALCULATED_PRICE" />
+		<result property="using_point" column="USING_POINT" />
+		<result property="accumulate_point" column="ACCUMULATE_POINT" />
+		<result property="purchase_date" column="PURCHASE_DATE" />
 
-<!-- 구매내역 리스트 조회 -->
-<select id="purchaseList" resultType="list">
+	</resultMap>
+	<!-- 구매내역 리스트 조회 -->
+	<select id="purchaseList" resultType="list" resultMap="resultPurchase">
 		<![CDATA[
 			SELECT * FROM PURCHASE_VIEW
 		]]>

@@ -41,13 +41,14 @@ public class UserController {
 
 	/** 로그인 **/
 	@RequestMapping(value = "signinpost.do", method = RequestMethod.POST)
-	public String signIn(User signin, HttpSession session, HttpServletResponse response) {
+	public String signIn(@RequestParam("email") String email, @RequestParam("pwd") String pwd, @RequestParam(value="usercookie", defaultValue = "false", required=false ) boolean useCookie,HttpSession session, HttpServletResponse response) {
 		String returnURL = "";
 		if (session.getAttribute("user") != null) {
 			// 기존에 user이란 세션 값이 존재한다면
 			session.removeAttribute("user"); // 기존값을 제거해 준다.
 		}
-
+		User signin = new User(email, pwd, useCookie);
+		
 		// 로그인이 성공하면 UserVO 객체를 반환함.
 		User user = userService.signIn(signin);
 
@@ -61,7 +62,7 @@ public class UserController {
 			//sitemanager
 			
 			
-			returnURL = "main.do"; // 로그인 성공시 일반 메인페이지 이동
+			returnURL = "main/main"; // 로그인 성공시 일반 메인페이지 이동
 			/*
 			 * [ 세션 추가되는 부분 ]
 			 */
@@ -79,7 +80,7 @@ public class UserController {
 				response.addCookie(cookie);
 			}
 		} else { // 로그인에 실패한 경우
-			returnURL = "signin.do"; // 로그인 폼으로 다시 가도록 함
+			returnURL = "user/sign/signin"; // 로그인 폼으로 다시 가도록 함
 		}
 		return returnURL; // 위에서 설정한 returnURL 을 반환해서 이동시킴
 	}
@@ -100,13 +101,13 @@ public class UserController {
 	}
 
 	/** 로그아웃 **/
-	@RequestMapping(value = "/signout", method = RequestMethod.GET)
+	@RequestMapping(value = "/signout.do", method = RequestMethod.GET)
 	public String signOut(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		Object obj = session.getAttribute("user");
 		if (obj != null) {
 			User user = (User) obj;
 			// null이 아닐 경우 제거
-			session.removeAttribute("signin");
+			session.removeAttribute("user");
 			session.invalidate(); // 세션 전체를 날려버림
 			// 쿠키를 가져와보고
 			Cookie signinCookie = WebUtils.getCookie(request, "userCookie");
@@ -128,7 +129,7 @@ public class UserController {
 				}
 			}
 		}
-		return "redirect:/main/main"; 
+		return "redirect:/main/main.do"; 
 	}
 
 
