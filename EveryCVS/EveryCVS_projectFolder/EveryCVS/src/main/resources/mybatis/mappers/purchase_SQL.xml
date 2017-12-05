@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="purchase">
+
+
+<!-- 구매내역 리스트 조회 -->
+<select id="purchaseList" resultType="list">
+		<![CDATA[
+			SELECT * FROM PURCHASE_VIEW
+		]]>
+	</select>
+
+</mapper>
+

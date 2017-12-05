@@ -4,5 +4,8 @@
 	<typeAliases>
 		 <typeAlias type="com.kh.everycvs.common.model.vo.User"
 			alias="user" /> 
+		 <typeAlias type="com.kh.everycvs.common.model.vo.Purchase"
+		    alias="purchase"/>
 	</typeAliases>
+	
 </configuration>

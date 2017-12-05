@@ -1,14 +1,20 @@
 package com.kh.everycvs.purchase.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.kh.everycvs.common.model.vo.Purchase;
 
 @Repository("PurchaseDao")
 public class PurchaseDao {
 	
 	public PurchaseDao(){}
+	@Autowired
+	private SqlSession sqlSession;
 
 	// 판매내역 조회 : 해당 지점의 사용자의 구매내역을 전체 조회
 	public List selectPurchaseList(){
@@ -46,8 +52,10 @@ public class PurchaseDao {
 	}
 	
 	//사용자 구매내역 조회
-	public List purchaseList() {
-		return sqlSession.selectList;
+	public List<Purchase> purchaseList() {
+		ArrayList<Purchase> list = new ArrayList<Purchase>();
+		System.out.println(list);
+		return sqlSession.selectList("purchase.purchaseList");
 	}
 	
 	/*사이트관리자*/
