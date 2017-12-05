@@ -25,7 +25,7 @@ public class LogAdvice {
 	
 	@Before("allPointcut()")
 	public void printLog(JoinPoint jp){
-		logger.info("Execute Method : "+jp.getSignature().getName());
+		System.out.println("Execute Method : "+jp.getSignature().getName());
 	}
 	
 }
