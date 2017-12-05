@@ -1,5 +1,7 @@
 package com.kh.everycvs.product.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,4 +46,28 @@ public class ProductController {
 	public String deleteProduct(HttpServletRequest request) {
 		return null;
 	}
+
+	/*사용자*/
+	/**실시간 인기상품(전체) top 5**/
+	public ModelAndView popularProductTop5(ModelAndView modelAndView){
+		Map map = productService.popularProductTop5();
+		return modelAndView;
+	}
+	
+	/*지점관리자*/
+	/**주간 인기상품 top 5**/
+	public ModelAndView popularStoreProductTop5(ModelAndView modelAndView){
+		String store_no="";
+		Map map = productService.popularStoreProductTop5(store_no);
+		return modelAndView;
+	}
+	
+	/*편의점관리자*/
+	/**주간 인기상품 top 5**/
+	public ModelAndView popularCvsProductTop5(ModelAndView modelAndView){
+		int brand_no = 0;
+		Map map = productService.popularCvsProductTop5(brand_no);
+		return modelAndView;
+	}
+	
 }
