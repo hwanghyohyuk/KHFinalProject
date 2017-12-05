@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div id="body-bg">
 	<!-- Header -->
 	<div id="header">
@@ -7,7 +8,7 @@
 			<div class="row">
 				<!-- Logo -->
 				<div class="logo">
-					<a href="index.html" title=""> <img
+					<a href="/everycvs/main/main.do" title=""> <img
 						src="/everycvs/resources/user/img/logo.png" alt="Logo" />
 					</a>
 				</div>
@@ -23,7 +24,7 @@
 				<div class="col-md-8 no-padding">
 					<div class="visible-lg">
 						<ul id="hornavmenu" class="nav navbar-nav">
-							<li><a href="index.html" class="fa-home active">Home</a></li>
+							<li><a href="/everycvs/main/main.do" class="fa-home active">Home</a></li>
 							<li><span class="fa-gears ">Features</span>
 								<ul>
 									<li class="parent"><span>Typography</span>
@@ -70,7 +71,13 @@
 									<li><a href="pages-full-width.html">Full Width</a></li>
 									<li><a href="pages-left-sidebar.html">Left Sidebar</a></li>
 									<li><a href="pages-right-sidebar.html">Right Sidebar</a></li>
-									<li><a href="pages-login.html">Login</a></li>
+									<c:if test="${ sessionScope.user == null }"> 
+									<li><a href="/everycvs/sign/signin.do">Login</a></li>
+									</c:if>
+									<c:if test="${ sessionScope.user != null }"> 
+									<li><a href="#">${sessionScope.user.user_name}</a></li>
+									</c:if>
+									<li><a href="/everycvs/signout.do">Logout</a></li>
 									<li><a href="pages-sign-up.html">Sign-Up</a></li>
 									<li><a href="pages-404.html">404 Error Page</a></li>
 								</ul></li>
