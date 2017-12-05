@@ -18,13 +18,13 @@
         <!-- Favicon -->
         <link href="favicon.ico" rel="shortcut icon">
         <!-- Bootstrap Core CSS -->
-        <link rel="stylesheet" href="./resource/user/css/bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/bootstrap.css" rel="stylesheet">
         <!-- Template CSS -->
-        <link rel="stylesheet" href="./resource/user/css/animate.css" rel="stylesheet">
-        <link rel="stylesheet" href="./resource/user/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" href="./resource/user/css/nexus.css" rel="stylesheet">
-        <link rel="stylesheet" href="./resource/user/css/responsive.css" rel="stylesheet">
-        <link rel="stylesheet" href="./resource/user/css/custom.css" rel="stylesheet">
+        <link rel="stylesheet" href="./assets/css/animate.css" rel="stylesheet">
+        <link rel="stylesheet" href="./assets/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="./assets/css/nexus.css" rel="stylesheet">
+        <link rel="stylesheet" href="./assets/css/responsive.css" rel="stylesheet">
+        <link rel="stylesheet" href="./assets/css/custom.css" rel="stylesheet">
         <!-- Google Fonts-->
         <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" rel="stylesheet" type="text/css">
     </head>
@@ -51,7 +51,7 @@
                         <!-- Logo -->
                         <div class="logo">
                             <a href="index.html" title="">
-                                <img src="./resource/user/img/logo.png" alt="Logo" />
+                                <img src="assets/img/logo.png" alt="Logo" />
                             </a>
                         </div>
                         <!-- End Logo -->
@@ -240,7 +240,7 @@
                                     </div>
                                     <div class="input-group margin-bottom-20">
                                         <span class="input-group-addon">
-                                            <i class="fa fa-user"></i>
+                                            <i class="fa fa-email"></i>
                                         </span>
                                         <input placeholder="Email" class="form-control" type="text">
                                     </div>
@@ -356,21 +356,21 @@
             </div>
             <!-- End Footer -->
             <!-- JS -->
-            <script type="text/javascript" src="./resource/user/js/jquery.min.js" type="text/javascript"></script>
-            <script type="text/javascript" src="./resource/user/js/bootstrap.min.js" type="text/javascript"></script>
-            <script type="text/javascript" src="./resource/user/js/scripts.js"></script>
+            <script type="text/javascript" src="./assets/js/jquery.min.js" type="text/javascript"></script>
+            <script type="text/javascript" src="./assets/js/bootstrap.min.js" type="text/javascript"></script>
+            <script type="text/javascript" src="./assets/js/scripts.js"></script>
             <!-- Isotope - Portfolio Sorting -->
-            <script type="text/javascript" src="./resource/user/js/jquery.isotope.js" type="text/javascript"></script>
+            <script type="text/javascript" src="./assets/js/jquery.isotope.js" type="text/javascript"></script>
             <!-- Mobile Menu - Slicknav -->
-            <script type="text/javascript" src="./resource/user/js/jquery.slicknav.js" type="text/javascript"></script>
+            <script type="text/javascript" src="./assets/js/jquery.slicknav.js" type="text/javascript"></script>
             <!-- Animate on Scroll-->
-            <script type="text/javascript" src="./resource/user/js/jquery.visible.js" charset="utf-8"></script>
+            <script type="text/javascript" src="./assets/js/jquery.visible.js" charset="utf-8"></script>
             <!-- Sticky Div -->
-            <script type="text/javascript" src="./resource/user/js/jquery.sticky.js" charset="utf-8"></script>
+            <script type="text/javascript" src="./assets/js/jquery.sticky.js" charset="utf-8"></script>
             <!-- Slimbox2-->
-            <script type="text/javascript" src="./resource/user/js/slimbox2.js" charset="utf-8"></script>
+            <script type="text/javascript" src="./assets/js/slimbox2.js" charset="utf-8"></script>
             <!-- Modernizr -->
-            <script src="./resource/user/js/modernizr.custom.js" type="text/javascript"></script>
+            <script src="./assets/js/modernizr.custom.js" type="text/javascript"></script>
             <!-- End JS -->
     </body>
 </html>

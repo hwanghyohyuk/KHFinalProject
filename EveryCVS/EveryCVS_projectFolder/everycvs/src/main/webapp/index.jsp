@@ -1,7 +1,13 @@
+<<<<<<< HEAD
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <!-- === BEGIN HEADER === -->
+=======
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+>>>>>>> master
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -555,8 +561,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-Welcome Page!
-<br>
-<a href="home.do">home</a>
+<% response.sendRedirect("main/main.do"); %>
 </body>
 </html> --%>
