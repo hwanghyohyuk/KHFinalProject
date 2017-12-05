@@ -1,1 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+
+	<select id="signIn" resultType="user">
+	<![CDATA[select * from tb_user where email=#{email} and user_pwd=#{pwd}]]>
+	</select>
+
+	<update id="keepSignIn">
+		 <![CDATA[update tb_user set session_key = #{sessionId}, session_limit = #{next} where
+		email = #{email}]]>
+	</update>
+
+	<select id="checkUserWithSessionKey" resultType="user">
+        <![CDATA[select * from tb_user where session_key = #{value} and session_limit > now()]]>
+    </select>
+    
+</mapper>

@@ -2,7 +2,25 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.kh.everycvs.common.model.vo.User"
-			alias="user" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.Board" alias="board" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.Brand" alias="brand" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.DcInfo" alias="dcinfo" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.DcProduct" alias="dcproduct" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.EmailCertification" alias="emailcertification" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.Event" alias="event" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.EventJoin" alias="eventjoin" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.EventResult" alias="eventresult" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.Favorite" alias="favorite" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.Gifticon" alias="gifticon" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.Product" alias="product" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.ProductKind" alias="productkind" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.Purchase" alias="purchase" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.Sale" alias="sale" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.Sale" alias="saleproductkind" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.ServiceCenter" alias="servicecenter" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.ServiceCenterComment" alias="servicecentercomment" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.Store" alias="store" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.StoreProduct" alias="storeproduct" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.User" alias="user" />
 	</typeAliases>
 </configuration>

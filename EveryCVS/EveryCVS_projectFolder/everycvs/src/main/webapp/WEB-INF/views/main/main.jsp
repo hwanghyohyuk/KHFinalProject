@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<a href="/everycvs/signin.do">로그인페이지 이동</a>
 </body>
 </html>
