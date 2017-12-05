@@ -245,7 +245,7 @@
 										
 										<!-- Modal -->
 										<div class="modal fade" id="myModal2" role="dialog">
-											<div class="modal-dialog">
+											<div class="modal-dialog modal-lg">
 
 												<!-- Modal content-->
 												<div class="modal-content" align="left">
@@ -253,13 +253,34 @@
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
 														<h4 class="modal-title">거래내역</h4>
 														
-														<c:forEach items="${list }" var="list">
-															${list}
-														</c:forEach>
 													</div>
 													
 													<div class="modal-body">	
-															거래내역
+														<table border="1" style="text-align: center;">
+															<tr style="font-size: 10pt;">
+															<th>구매번호</th><th>사용자번호</th><th>지점상품번호</th>
+															<th>지점번호</th><th>지점명</th><th>상품번호</th>
+															<th>상품명</th><th>상품수량</th><th>합 계</th>
+															<th>사용포인트</th><th>적립포인트</th><th>구매날짜</th>
+															</tr>
+															
+														<c:forEach items="${list }" var="list">
+														    <tr><td>${list.purchase_no }</td>
+														    <td>${list.user_no }</td>
+														    <td>${list.store_product_no }</td>
+														    <td>${list.store_no }</td>
+														    <td>${list.store_name }</td>
+														    <td>${list.product_no }</td>
+														    <td>${list.product_name }</td>
+														    <td>${list.purchase_quantity }</td>
+														    <td>${list.calculated_price }</td>
+														    <td>${list.using_point }</td>
+														    <td>${list.accumulate_point }p</td>
+														    <td>${list.purchase_date }</td>
+														    </tr>
+															
+														</c:forEach>
+														</table>
 													</div>
 													
 													<div class="modal-footer">
