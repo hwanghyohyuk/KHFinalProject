@@ -33,11 +33,6 @@ public class UserController {
 		return "user/sign/signin";
 	}
 
-	@RequestMapping(value = "signin.do", method = RequestMethod.GET)
-	public String signin() {
-		return "user/sign/signin";
-	}
-
 	/** 로그인 **/
 	@RequestMapping(value = "signinpost.do", method = RequestMethod.POST)
 	public String signIn(@RequestParam("email") String email, @RequestParam("pwd") String pwd,
@@ -80,7 +75,7 @@ public class UserController {
 				response.addCookie(cookie);
 			}
 		} else { // 로그인에 실패한 경우
-			returnURL = "user/sign/signin"; // 로그인 폼으로 다시 가도록 함
+			returnURL = "sign/signin"; // 로그인 폼으로 다시 가도록 함
 		}
 		return returnURL; // 위에서 설정한 returnURL 을 반환해서 이동시킴
 	}
@@ -100,7 +95,7 @@ public class UserController {
 	}
 
 	/** 로그아웃 **/
-	@RequestMapping(value = "/signout.do", method = RequestMethod.GET)
+	@RequestMapping(value = "signout.do", method = RequestMethod.GET)
 	public String signOut(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		Object obj = session.getAttribute("user");
 		if (obj != null) {
