@@ -117,4 +117,11 @@ public class UserServiceImpl implements UserService {
 		return userDao.userList(page, keyword);
 	}
 
+	@Override
+	public int increMoney(int increMoney) {
+		return userDao.userIncreMoney(increMoney);
+	}
+
+	
+
 }

@@ -212,6 +212,7 @@
 									<div class="panel-body" align="right">
 										<b style="font-size: 20pt;">
 										<fmt:formatNumber value="${sessionScope.user.cash}" pattern="#,###"/>원
+										
 										</b>
 										<button class="btn btn-primary" id="myBtn">충전하기</button>
 
@@ -230,10 +231,12 @@
 														<p>- 1000원이하의 금액은 충전 할 수 없습니다.</p>
 														<p>- 이미 충전한 금액에 대해서는 환불이 불가능합니다.</p><br>
 														
-														<form id="increPointForm" action="/userIncreMoney.do"> 
-														<input type="text" name="increNum">
+														<!-- ajax로 잔고 충전 -->
+														<form action="increMoney.do"> 
+														<input type="text" name="increMoney">
 														<button class="btn btn-primary" type="submit">충 전</button>
 														</form>
+														${increMoney }
 														
 													</div>
 													

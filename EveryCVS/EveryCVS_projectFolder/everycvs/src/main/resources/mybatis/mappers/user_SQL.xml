@@ -47,4 +47,11 @@
         ]]>
 
     </select>
+    
+    <!-- 잔고충전 -->
+    <update id="userIncreMoney" parameterType="int">
+    	<![CDATA[
+    		update tb_user set cash = #{increMoney} + cash where user_no = #{user_no}
+    	]]>
+    </update>
 </mapper>

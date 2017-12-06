@@ -105,6 +105,16 @@ public class UserController {
 		mv.setViewName("user/mypage/main");
 		return mv;
 	}
+	
+	/** 잔고 충전 **/
+	@RequestMapping("increMoney.do")
+	public ModelAndView userIncreMoney(HttpSession session, ModelAndView mv, int increMoney) {
+		//int increMoney = (Integer) session.getAttribute("increNum");
+		userService.increMoney(increMoney);
+		session.setAttribute("increMoney", increMoney);
+	//	mv.addObject("increNum", increMoney);
+		return mv;
+	}
 
 	/** 로그아웃 **/
 	@RequestMapping(value = "/signout.do", method = RequestMethod.GET)

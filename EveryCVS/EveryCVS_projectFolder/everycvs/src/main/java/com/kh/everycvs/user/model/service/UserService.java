@@ -61,11 +61,16 @@ public interface UserService {
 	/** 임시비밀번호를 포함한 이메일 보내기 **/
 	boolean sendTempPwdMail(String tempPwd);
 	
+	int increMoney(int increMoney);
+	
 
 	/* 사이트 관리자 */
 
 	/** 회원 목록 및 검색 **/
 	Map<String, Object> userList(String page, String keyword);
+
+
+	
 
 	
 }

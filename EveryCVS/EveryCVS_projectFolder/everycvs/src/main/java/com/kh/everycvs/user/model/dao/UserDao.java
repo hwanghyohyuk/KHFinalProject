@@ -103,4 +103,8 @@ public class UserDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	public int userIncreMoney(int increMoney) {
+		return sqlSession.update("userIncreMoney", increMoney);
+	}
 }
