@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.EmailCertification;
 import com.kh.everycvs.common.model.vo.User;
@@ -102,5 +103,4 @@ public class UserDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }

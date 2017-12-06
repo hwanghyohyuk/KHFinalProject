@@ -22,7 +22,7 @@
 	<!-- 구매내역 리스트 조회 -->
 	<select id="purchaseList" resultType="list" resultMap="resultPurchase">
 		<![CDATA[
-			SELECT * FROM PURCHASE_VIEW
+			SELECT * FROM PURCHASE_VIEW ORDER BY PURCHASE_DATE DESC
 		]]>
 	</select>
 

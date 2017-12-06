@@ -1,11 +1,15 @@
 package com.kh.everycvs.favorite.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.everycvs.common.model.vo.Favorite;
 import com.kh.everycvs.favorite.model.service.FavoriteService;
 
 @Controller("FavoriteController")
@@ -15,8 +19,12 @@ public class FavoriteController {
 	private FavoriteService favoriteService;
 	
 	//관심상품 목록 조회 : 마이페이지에서 관심상품 목록을 조회함
-	public ModelAndView favoriteList(HttpServletRequest request) {
-		return null;
+	@RequestMapping("favoriteList.do")
+	public ModelAndView favoriteList(ModelAndView mv) {
+		ArrayList<Favorite> list = (ArrayList<Favorite>)favoriteService.favoriteList();
+		mv.addObject("flist", list);
+		System.out.println(list);
+		return mv;
 	}
 	
 	//관심상품 등록 : 해당상품을 클릭하면 관심상품등록이 실행

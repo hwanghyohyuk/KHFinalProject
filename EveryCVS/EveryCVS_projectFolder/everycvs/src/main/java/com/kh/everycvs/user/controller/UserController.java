@@ -1,6 +1,7 @@
 package com.kh.everycvs.user.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -12,13 +13,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
+import com.kh.everycvs.common.model.vo.Favorite;
+import com.kh.everycvs.common.model.vo.Purchase;
 import com.kh.everycvs.common.model.vo.User;
+import com.kh.everycvs.favorite.model.service.FavoriteService;
+import com.kh.everycvs.purchase.model.service.PurchaseService;
 import com.kh.everycvs.user.model.service.UserService;
 
 @Controller
@@ -26,6 +30,11 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private PurchaseService purchaseService;
+	@Autowired
+	private FavoriteService favoriteService;
+	
 
 	/* 로그인 페이지 이동 */
 	@RequestMapping(value = "sign/signin.do", method = RequestMethod.GET)
@@ -87,15 +96,13 @@ public class UserController {
 
 	/** 마이 페이지 **/
 	@RequestMapping("mypage.do")
-	public ModelAndView myPage(HttpSession session) {
-		ModelAndView mv = new ModelAndView("user/mypage/main");
+	public ModelAndView myPage(HttpSession session, ModelAndView mv) {
 		
-		/*User temp = (User)(session.getAttribute("user"));
-=======
-		User temp = (User) (session.getAttribute("user"));
->>>>>>> master
-		int user_no = temp.getUser_no();
-		User user = userService.getUser(user_no);*/
+		ArrayList<Purchase> list = (ArrayList<Purchase>) purchaseService.purchaseList();
+		ArrayList<Favorite> flist = (ArrayList<Favorite>) favoriteService.favoriteList();
+		mv.addObject("list", list);		
+		mv.addObject("flist", flist); 
+		mv.setViewName("user/mypage/main");
 		return mv;
 	}
 

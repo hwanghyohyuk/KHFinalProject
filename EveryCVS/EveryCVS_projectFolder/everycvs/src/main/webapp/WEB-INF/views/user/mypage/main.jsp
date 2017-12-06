@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- === BEGIN HEADER === -->
 <!DOCTYPE html>
@@ -209,7 +210,9 @@
 									</div>
 
 									<div class="panel-body" align="right">
-										<b style="font-size: 20pt;">125,000</b>
+										<b style="font-size: 20pt;">
+										<fmt:formatNumber value="${sessionScope.user.cash}" pattern="#,###"/>원
+										</b>
 										<button class="btn btn-primary" id="myBtn">충전하기</button>
 
 										<!-- Modal -->
@@ -224,11 +227,14 @@
 													</div>
 													
 													<div class="modal-body">
-														<p style="font-size: 15pt; font-weight: bold;">충전할 금액 : [값]</p>
 														<p>- 1000원이하의 금액은 충전 할 수 없습니다.</p>
 														<p>- 이미 충전한 금액에 대해서는 환불이 불가능합니다.</p><br>
-														<input type="text">
-														<button class="btn btn-primary">충 전</button>
+														
+														<form id="increPointForm" action="/userIncreMoney.do"> 
+														<input type="text" name="increNum">
+														<button class="btn btn-primary" type="submit">충 전</button>
+														</form>
+														
 													</div>
 													
 													<div class="modal-footer">
@@ -278,7 +284,7 @@
 														    <td>${list.accumulate_point }p</td>
 														    <td>${list.purchase_date }</td>
 														    </tr>
-															
+
 														</c:forEach>
 														</table>
 													</div>
@@ -304,10 +310,9 @@
 									</div>
 									<div class="panel-body">
 										<a href="#" style="margin-right: 50px; font-size: 15pt;">
-											QnA()</a> <a href="#"
-											style="margin-right: 50px; font-size: 15pt;"> 신고()</a> <a
-											href="#" style="margin-right: 50px; font-size: 15pt;">
-											자유()</a>
+											게시글()</a>  
+											<a href="#" style="margin-right: 50px; font-size: 15pt;">
+											댓글()</a>
 									</div>
 								</div>
 							</div>
@@ -319,7 +324,7 @@
 										<h3 class="panel-title">포인트 현황</h3>
 									</div>
 									<div class="panel-body" align="right" style="font-size: 20pt;">
-										3256point</div>
+										${sessionScope.user.point} point</div>
 								</div>
 							</div>
 						</div>
@@ -346,7 +351,29 @@
 										<h3 class="panel-title">관심 목록</h3>
 									</div>
 									<div class="panel-body" align="right" style="font-size: 15pt;">
-										관심상품 리스트 영역</div>
+										<table border="1" style="text-align: center; font-size:10pt">
+											<tr style="font-size: 10pt;">
+											<th>상호명</th>
+											<th>지점명</th>
+											<th>상품명</th>
+											<th>첨부파일변경명</th>
+											<th>최소유통기한</th>
+											</tr>
+										
+									<c:forEach items="${flist }" var="flist">
+									    <tr>
+										<td>${flist.brand_name }</td>
+										<td>${flist.store_name }</td>
+										<td>${flist.product_name }</td>
+										<td>${flist.stored_file_name }</td>
+										<td>${flist.min_expiration_hour }</td>
+										</tr> 
+									
+									</c:forEach>
+									
+									</table>
+										
+									</div>
 								</div>
 							</div>
 
@@ -435,6 +462,7 @@
 		$(document).ready(function() {
 			$("#myBtn").click(function() {
 				$("#myModal").modal();
+				
 			});
 		});
 		

@@ -40,4 +40,11 @@
         <![CDATA[select * from tb_user where session_key = #{value} and session_limit > now()]]>
 
     </select>
+    
+    <select id="mypage" resultMap="resultUser" parameterType="user">
+        <![CDATA[
+        select * from tb_user where user_no = #{user_no}
+        ]]>
+
+    </select>
 </mapper>
