@@ -30,12 +30,6 @@
 	       $("#myModal").modal();
 	    });
 	 });
-	
-	$(document).ready(function() {
-	    $("#insert").click(function() {
-	       $("#myModal2").modal();
-	    });
-	 });
 </script>
 </head>
 <body>
@@ -46,7 +40,7 @@
 	<div class="col-md-12">
 		<div class="row">
 			<div class="col-sm-6">
-				<h2>GS25대치점<br> 
+				<h2><strong>GS25대치점</strong><br> 
 				<small>서울특별시 강남구 영동대로86길 10 </small></h2>
 			</div>
 			<div class="col-sm-3" style="margin-left: 190px;"> <br>
@@ -62,59 +56,57 @@
 				<figure>
 					<figcaption>
 						<a id="spname"><img src="/everycvs/resource/user/img/theteam/image1.jpg" alt="image1"></a><br>
-							<!-- Modal -->
-							<div id="myModal" class="modal fade" role="dialog">
-								<div class="modal-dialog">
-								<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title" style="color: black;"><strong>제품 상세보기</strong></h4>
-									 </div>
-								<div class="modal-body">
-									<h2 align="center"><strong>GS25대치점</strong></h2> <br>
-									<img src="/everycvs/resource/user/img/theteam/image1.jpg" alt="image1" align="left" style="margin-left:30px;">
-									<h4 align="center" style="font-size: small;">주식회사 올가니카키친</h4>
-									<h4 align="center" style="color: black;"><strong>모심)보성녹돈불고기도시락</strong></h4>
-									<h4 align="center" style="color: black;"><strong>4200원</strong></h4> <br><br><br>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">구매</button> &nbsp;
-									<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">수정</button> &nbsp;
-									<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">삭제</button>
-								</div>
-								</div>
-								</div>
-							</div>
 						<h5 align="center"><strong>보성녹돈불고기</strong></h5>
 						<h6 align="center">4200원</h6>
 					</figcaption>
 				</figure>
+				<!-- Modal -->
+				<div id="myModal" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title" style="color: black;"><strong>제품 상세보기</strong></h4>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-sm-6">
+									<img src="/everycvs/resource/user/img/theteam/image1.jpg" alt="image1" align="left" style="margin-left:5px;">
+								</div>
+								<div class="col-sm-6">
+								<table class="table table-condensed">
+					                <tr>
+					                	<td><strong>상품명</strong></td>
+					                	<td>다논)액티비아업플레인210ml</td>
+								    </tr>
+								    <tr>
+					                	<td><strong>가격</strong></td>
+					                	<td>1,800원</td>
+								    </tr>
+								    <tr>
+					                	<td><strong>제조사</strong></td>
+					                	<td>주식회사 올가니카키친</td>
+								    </tr>
+								    <tr>
+					                	<td><strong>제조일</strong></td>
+					                	<td>2017/11/20</td>
+								    </tr> 
+					            </table>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">관심상품</button> &nbsp;
+							<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">구매하기</button>
+						</div>
+								
+					</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	</div> <br>
-	<div>
-		<button type="button" id="insert" class="btn btn-primary btn-sm" style="margin-left:925px;">상품등록</button>
-		<!-- Modal -->
-		<div id="myModal2" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title" style="color: black;"><strong>제품 등록하기</strong></h4>
-				</div>
-				<div class="modal-body">
-					<h4 style="font-size: small;">주식회사 올가니카키친</h4> &nbsp;
-					<input class="form-control" type="text" placeholder="GS25">
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">등록</button>
-				</div>
-			</div>
-			</div>
-		</div>
 	</div> <br>
 	<div class="text-center">
 		<ul class="pagination">
