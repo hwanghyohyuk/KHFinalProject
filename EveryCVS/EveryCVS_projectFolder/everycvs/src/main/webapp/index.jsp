@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-Welcome Page!
-<br>
-<a href="home.do">home</a>
+<% response.sendRedirect("main/main.do"); %>
 </body>
 </html>

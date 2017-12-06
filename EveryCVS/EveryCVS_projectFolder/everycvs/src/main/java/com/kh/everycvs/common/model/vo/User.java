@@ -18,7 +18,7 @@ public class User implements Serializable {
 	private String email; // 이메일
 	private String user_pwd; // 비밀번호
 	private String user_name; // 이름
-	private Date birth_date; // 생년월일
+	private Date birthday; // 생년월일
 	private String gender; // 성별
 	private String phone; // 연락처
 	private String address; // 주소
@@ -49,7 +49,7 @@ public class User implements Serializable {
 		this.user_pwd = user_pwd;
 	}
 
-	public User(int user_no, String email, String user_pwd, String user_name, Date birth_date, String gender,
+	public User(int user_no, String email, String user_pwd, String user_name, Date birthday, String gender,
 			String phone, String address, Date enroll_date, String original_file_name, String stored_file_name,
 			int user_state, String job, int cash, int point, String store_no, int brand_no) {
 		super();
@@ -57,7 +57,7 @@ public class User implements Serializable {
 		this.email = email;
 		this.user_pwd = user_pwd;
 		this.user_name = user_name;
-		this.birth_date = birth_date;
+		this.birthday = birthday;
 		this.gender = gender;
 		this.phone = phone;
 		this.address = address;
@@ -72,7 +72,7 @@ public class User implements Serializable {
 		this.brand_no = brand_no;
 	}
 
-	public User(int user_no, String email, String user_pwd, String user_name, Date birth_date, String gender,
+	public User(int user_no, String email, String user_pwd, String user_name, Date birthday, String gender,
 			String phone, String address, Date enroll_date, String original_file_name, String stored_file_name,
 			int user_state, String job, int cash, int point, String store_no, int brand_no, boolean useCookie,
 			String session_key, Date session_limit) {
@@ -81,7 +81,7 @@ public class User implements Serializable {
 		this.email = email;
 		this.user_pwd = user_pwd;
 		this.user_name = user_name;
-		this.birth_date = birth_date;
+		this.birthday = birthday;
 		this.gender = gender;
 		this.phone = phone;
 		this.address = address;
@@ -97,6 +97,13 @@ public class User implements Serializable {
 		this.useCookie = useCookie;
 		this.session_key = session_key;
 		this.session_limit = session_limit;
+	}
+
+	public User(String email, String user_pwd, boolean useCookie) {
+		super();
+		this.email = email;
+		this.user_pwd = user_pwd;
+		this.useCookie = useCookie;
 	}
 
 	/* Getter & Setter */
@@ -132,12 +139,12 @@ public class User implements Serializable {
 		this.user_name = user_name;
 	}
 
-	public Date getBirth_date() {
-		return birth_date;
+	public Date getBirthday() {
+		return birthday;
 	}
 
-	public void setBirth_date(Date birth_date) {
-		this.birth_date = birth_date;
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
 	public String getGender() {
@@ -269,7 +276,7 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User [user_no=" + user_no + ", email=" + email + ", user_pwd=" + user_pwd + ", user_name=" + user_name
-				+ ", birth_date=" + birth_date + ", gender=" + gender + ", phone=" + phone + ", address=" + address
+				+ ", birth_date=" + birthday + ", gender=" + gender + ", phone=" + phone + ", address=" + address
 				+ ", enroll_date=" + enroll_date + ", original_file_name=" + original_file_name + ", stored_file_name="
 				+ stored_file_name + ", user_state=" + user_state + ", job=" + job + ", cash=" + cash + ", point="
 				+ point + ", store_no=" + store_no + ", brand_no=" + brand_no + ", session_key=" + session_key
