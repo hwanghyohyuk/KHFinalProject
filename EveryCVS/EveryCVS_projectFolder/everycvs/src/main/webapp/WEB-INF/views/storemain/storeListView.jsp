@@ -14,7 +14,7 @@
 <c:import url="../include/user/common/headend.jsp"></c:import>
 <!-- === END HEAD ===  -->
 <!-- === BEGIN HEADER ===  -->
-<c:import url="../include/user/main/header.jsp"></c:import>
+<c:import url="../include/user/common/header.jsp"></c:import>
 <!-- === END HEADER === -->
 <!-- === BEGIN CONTENT === -->
 <div id="content">
@@ -124,7 +124,7 @@
 
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->
-<c:import url="../include/user/main/footer.jsp"></c:import>
+<c:import url="../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
 <!-- JS -->
 <c:import url="../include/user/common/end.jsp"></c:import>
