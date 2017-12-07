@@ -2,10 +2,6 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		 <typeAlias type="com.kh.everycvs.common.model.vo.User"
-			alias="user" /> 
-		 <typeAlias type="com.kh.everycvs.common.model.vo.Purchase"
-		    alias="purchase"/>
 		<typeAlias type="com.kh.everycvs.common.model.vo.Board" alias="board" />
 		<typeAlias type="com.kh.everycvs.common.model.vo.Brand" alias="brand" />
 		<typeAlias type="com.kh.everycvs.common.model.vo.DcInfo" alias="dcinfo" />
