@@ -64,9 +64,7 @@ public class MainCookieInterceptor extends HandlerInterceptorAdapter {
 					return false;
 				}
 			}
-			// 이제 아래는 로그인도 안되있고 쿠키도 존재하지 않는 경우니까 다시 로그인 폼으로 돌려보내면 된다.
-			// 로그인이 안되어 있는 상태임으로 로그인 폼으로 다시 돌려보냄(redirect)
-			response.sendRedirect("/everycvs/sign/signin.do");
+			response.sendRedirect("/everycvs/main.do");
 			return false; // 더이상 컨트롤러 요청으로 가지 않도록 false로 반환함
 		}
 
