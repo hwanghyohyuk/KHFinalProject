@@ -23,7 +23,7 @@ public class SignSessionInterceptor extends HandlerInterceptorAdapter {
 		if (obj == null) { // 로그인된 세션이 없는 경우...
 			return true;
 		}else{
-			response.sendRedirect("main.do");
+			response.sendRedirect("/everycvs/main/main.do");
 			return false;
 		}
 		

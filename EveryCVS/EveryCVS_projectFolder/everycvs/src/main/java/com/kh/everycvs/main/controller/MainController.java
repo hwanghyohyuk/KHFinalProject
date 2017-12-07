@@ -9,11 +9,6 @@ public class MainController {
 	@RequestMapping("main/main.do")
 	public String intercepterMain(){
 		return "main/main";
-	}
-	
-	@RequestMapping("main.do")
-	public String main(){
-		return "main/main";
-	}
+	}	
 	
 }
