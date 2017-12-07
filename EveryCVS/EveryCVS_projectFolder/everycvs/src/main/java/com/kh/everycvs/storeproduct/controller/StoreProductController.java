@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.storeproduct.model.service.StoreProductService;
@@ -84,7 +85,7 @@ public class StoreProductController {
 	
 	//지점상품 검색하기
 	@RequestMapping(value="/spsearch.do")
-	public ModelAndView searchSproduct(String page, String keyword, HttpServletRequest request){
+	public ModelAndView searchSproduct(String page,@RequestParam("keyword") String keyword, HttpServletRequest request){
 		
 		ModelAndView mv = new ModelAndView();
 		

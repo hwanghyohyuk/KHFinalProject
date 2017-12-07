@@ -29,9 +29,13 @@ public class StoreProductDao {
 	}
 	
 	public List<StoreProduct> searchSproduct(int startRow, int endRow, String keyword) {
-		Map<String,Integer> map = new HashMap<String,Integer>();
-		map.put("startRow", startRow); 
-		map.put("endRow", endRow);
+		Map<String,Object> map = new HashMap<String,Object>();
+		String start =String.valueOf(startRow);
+		String end =String.valueOf(endRow);
+		map.put("start", start); 
+		map.put("end", end);
+		map.put("keyword", "%"+keyword+"%");
+		System.out.println("keyword : "+"%"+keyword+"%");
 		return sqlSession.selectList("storeProduct.searchSproduct", map);
 	}
 

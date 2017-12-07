@@ -40,13 +40,13 @@
             where rnum >= #{startRow} and rnum <= #{endRow}
            ]]>
    </select>
-   <select id="searchSproduct" parameterType="java.util.Map" resultType="list" resultMap="resultStoreProduct">
+   <select id="searchSproduct" parameterType="hashmap" resultType="list" resultMap="resultStoreProduct">
 		   <![CDATA[
 		    select * from (
 		    select rownum rnum, store_product_no, product_name, price
 		    from store_popularity_product_view)
-		    where rnum >= #{startRow} and rnum <= #{endRow}
-		    and where product_name like '%#{product_name, jdbcType=VARCHAR}%'
+		    where rnum >= #{start} and rnum <= #{end}
+		    and product_name like #{keyword}
            ]]>
    </select>
 	
