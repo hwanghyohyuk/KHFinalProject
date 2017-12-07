@@ -232,11 +232,13 @@
 														<p>- 이미 충전한 금액에 대해서는 환불이 불가능합니다.</p><br>
 														
 														<!-- ajax로 잔고 충전 -->
-														<form action="increMoney.do"> 
-														<input type="text" name="increMoney">
-														<button class="btn btn-primary" type="submit">충 전</button>
+														<form action="increMoney.do" id="" method="post"> 
+														<input type="number" name="increMoney">
+														
+														<button class="btn btn-primary" type="submit" id="btn">충 전</button>
 														</form>
-														${increMoney }
+														
+														
 														
 													</div>
 													
@@ -465,18 +467,35 @@
 		$(document).ready(function() {
 			$("#myBtn").click(function() {
 				$("#myModal").modal();
+				var c = ${sessionScope.user.cash}
+				var uno = ${sessionScope.user.user_no}
+				var increM = ${increMoney}
 				
+			$("#btn").on("click", function(){
+				$.ajax({
+					url : "increMoney.do",
+					data : {user_no:uno, cash:c},
+					type: "post",
+					success: function(result){
+							alert(c);
+					},
+					error: function(request, status, errorData){
+						alert("error code: " + request.status + "/n" 
+								+ "message : " + request.reponseText + "/n"
+								+ "error : " + request.errorData);
+					}
+				});
 			});
+		});
 		});
 		
 			//거래내역 모달
 		$(document).ready(function() {
 			$("#purchaseDetailsBtn").click(function() {
 				$("#myModal2").modal();
+					
 			});
 		});
-		
-		
 	</script>
 			<script type="text/javascript" src="./resources/user/js/jquery.min.js"
 				type="text/javascript"></script>

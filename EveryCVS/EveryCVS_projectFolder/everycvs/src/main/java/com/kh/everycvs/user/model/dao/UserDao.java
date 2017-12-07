@@ -104,7 +104,7 @@ public class UserDao {
 		return false;
 	}
 
-	public int userIncreMoney(int increMoney) {
-		return sqlSession.update("userIncreMoney", increMoney);
+	public int userIncreMoney(Map<String, Object> map) {
+		return sqlSession.update("userIncreMoney", map);
 	}
 }

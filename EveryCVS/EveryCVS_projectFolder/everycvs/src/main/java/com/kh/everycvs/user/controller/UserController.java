@@ -1,7 +1,10 @@
 package com.kh.everycvs.user.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
@@ -106,17 +110,40 @@ public class UserController {
 		return mv;
 	}
 	
-	/** 잔고 충전 **/
-	@RequestMapping("increMoney.do")
-	public ModelAndView userIncreMoney(HttpSession session, ModelAndView mv, int increMoney) {
-		//int increMoney = (Integer) session.getAttribute("increNum");
-		userService.increMoney(increMoney);
-		session.setAttribute("increMoney", increMoney);
-	//	mv.addObject("increNum", increMoney);
-		return mv;
+	/** 잔고 충전  **/
+	@RequestMapping(value="increMoney.do", method=RequestMethod.POST)
+	@ResponseBody
+	public void userIncreMoney(@RequestParam Map<String,Object> map, HttpSession session, HttpServletResponse response, HttpServletRequest request, String increMoney) throws IOException {
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+
+		increMoney = request.getParameter(increMoney);
+		int mon = Integer.parseInt(request.getParameter("increMoney"));
+		
+		
+	    User user = (User) session.getAttribute("user");
+	    session.setAttribute("user", user);
+	    request.setAttribute("increMoney", mon);
+	  
+	    userService.increMoney(map);
+	    
+		System.out.println("vo : " + user);
+		System.out.println("increMoney : " + mon);
+	
+		/*
+		System.out.println("충전할 값 : " + increcash);*/
+		/*out.append("ok");
+		out.flush();
+		out.close();*/
+		
+		//userService.increMoney(increMoney);
+		/*session.setAttribute("increMoney", session);
+		mv.addObject("increNum", increMoney);
+		System.out.println(increMoney);*/
 	}
 
-	/** 로그아웃 **/
+
+	/**로 그아웃 **/
 	@RequestMapping(value = "/signout.do", method = RequestMethod.GET)
 	public String signOut(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		Object obj = session.getAttribute("user");

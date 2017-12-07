@@ -1,6 +1,7 @@
 package com.kh.everycvs.user.model.service;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -118,8 +119,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int increMoney(int increMoney) {
-		return userDao.userIncreMoney(increMoney);
+	public int increMoney(Map<String, Object> map) {
+		return userDao.userIncreMoney(map);
 	}
 
 	
