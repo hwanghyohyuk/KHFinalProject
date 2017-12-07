@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,12 +15,49 @@
 <!-- Favicon -->
 <link href="favicon.ico" rel="shortcut icon">
 <!-- Bootstrap Core CSS -->
-<link rel="stylesheet" href="/everycvs/resources/user/css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="/everycvs/resources/user/css/bootstrap.css"
+	rel="stylesheet">
 <!-- Template CSS -->
-<link rel="stylesheet" href="/everycvs/resources/user/css/animate.css" rel="stylesheet">
-<link rel="stylesheet" href="/everycvs/resources/user/css/font-awesome.css" rel="stylesheet">
-<link rel="stylesheet" href="/everycvs/resources/user/css/nexus.css" rel="stylesheet">
-<link rel="stylesheet" href="/everycvs/resources/user/css/responsive.css" rel="stylesheet">
-<link rel="stylesheet" href="/everycvs/resources/user/css/custom.css" rel="stylesheet">
+<link rel="stylesheet" href="/everycvs/resources/user/css/animate.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="/everycvs/resources/user/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="/everycvs/resources/user/css/nexus.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="/everycvs/resources/user/css/responsive.css" rel="stylesheet">
+<link rel="stylesheet" href="/everycvs/resources/user/css/custom.css"
+	rel="stylesheet">
 <!-- Google Fonts-->
-<link	href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300"	rel="stylesheet" type="text/css">
+<link
+	href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300"
+	rel="stylesheet" type="text/css">
+
+<script type="text/javascript"
+	src="/everycvs/resources/user/js/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript"
+	src="/everycvs/resources/user/js/bootstrap.min.js"
+	type="text/javascript"></script>
+<script type="text/javascript"
+	src="/everycvs/resources/user/js/scripts.js"></script>
+<!-- Isotope - Portfolio Sorting -->
+<script type="text/javascript"
+	src="/everycvs/resources/user/js/jquery.isotope.js"
+	type="text/javascript"></script>
+<!-- Mobile Menu - Slicknav -->
+<script type="text/javascript"
+	src="/everycvs/resources/user/js/jquery.slicknav.js"
+	type="text/javascript"></script>
+<!-- Animate on Scroll-->
+<script type="text/javascript"
+	src="/everycvs/resources/user/js/jquery.visible.js" charset="utf-8"></script>
+<!-- Sticky Div -->
+<script type="text/javascript"
+	src="/everycvs/resources/user/js/jquery.sticky.js" charset="utf-8"></script>
+<!-- Slimbox2-->
+<script type="text/javascript"
+	src="/everycvs/resources/user/js/slimbox2.js" charset="utf-8"></script>
+<!-- Modernizr -->
+<script src="/everycvs/resources/user/js/modernizr.custom.js"
+	type="text/javascript"></script>
+<!-- End JS -->

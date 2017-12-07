@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- === BEGIN HEAD ===  -->
@@ -7,7 +8,7 @@
 <c:import url="../include/user/common/headend.jsp"></c:import>
 <!-- === END HEAD ===  -->
 <!-- === BEGIN HEADER ===  -->
-<c:import url="../include/user/main/header.jsp"></c:import>
+<c:import url="../include/user/common/header.jsp"></c:import>
 <!-- === END HEADER === -->
 <!-- === BEGIN CONTENT === -->
 <div id="content">
@@ -26,8 +27,7 @@
 								class="btn btn-primary btn-sm">지점상품 전체보기</button></a>
 					</div>
 				</div>
-				<br>
-				<br>
+				<br> <br>
 				<div class="row">
 					<!-- 인기상품 -->
 					<div class="col-md-6">
@@ -227,7 +227,7 @@
 </div>
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->
-<c:import url="../include/user/main/footer.jsp"></c:import>
+<c:import url="../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
 <!-- JS -->
 <c:import url="../include/user/common/end.jsp"></c:import>
