@@ -18,14 +18,21 @@ public class StoreProductDao {
 	private SqlSessionTemplate sqlSession;
 	
 	public int getListCount() {
-		return sqlSession.selectOne("getListCount");
+		return sqlSession.selectOne("storeProduct.getListCount");
 	}
 
 	public List<StoreProduct> selectList(int startRow, int endRow) {
 		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("startRow", startRow); 
 		map.put("endRow", endRow); 
-		return sqlSession.selectList("selectList", map);
+		return sqlSession.selectList("storeProduct.selectList", map);
+	}
+	
+	public List<StoreProduct> searchSproduct(int startRow, int endRow, String keyword) {
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("startRow", startRow); 
+		map.put("endRow", endRow);
+		return sqlSession.selectList("storeProduct.searchSproduct", map);
 	}
 
 	public ArrayList<StoreProduct> rankList() {

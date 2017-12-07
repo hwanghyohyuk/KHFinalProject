@@ -10,6 +10,8 @@ public interface StoreProductService {
 	public int getListCount();
 
 	public List<StoreProduct> selectList(int currentPage, int limit);
+	
+	public List<StoreProduct> searchSproduct(int currentPage, int limit, String keyword);
 
 	public ArrayList<StoreProduct> rankList();
 
