@@ -2,9 +2,10 @@
 <!DOCTYPE mapper PUBLIC
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="storeProduct"> 
+<mapper namespace="storeProduct">
 
-	<resultMap id="resultStoreProduct" type="StoreProduct">
+
+	<resultMap id="resultStoreProduct" type="storeproduct">
 		<result property="store_product_no" column="STORE_PRODUCT_NO" />
 		<result property="store_no" column="STORE_NO" />
 		<result property="product_no" column="PRODUCT_NO" />
@@ -18,11 +19,12 @@
 		<result property="product_kind_no" column="PRODUCT_KIND_NO" />
 		<result property="product_kind_name" column="PRODUCT_KIND_NAME" />
 		<result property="brand_no" column="BRAND_NO" />
+		<result property="brand_name" column="BRAND_NAME" />
 		<result property="original_file_name" column="ORIGINAL_FILE_NAME" />
 		<result property="stored_file_name" column="STORED_FILE_NAME" />
 		<result property="del_check" column="DEL_CHECK" />
 		<result property="purchase_count" column="PURCHASE_COUNT" />
-		<result property="discount_no" column="" />
-		<result property="discount_info" column="" />
+		<result property="discount_no" column="DISCOUNT_NO" />
+		<result property="discount_info" column="DISCOUNT_INFO" />
 	</resultMap>
-	
+</mapper>
