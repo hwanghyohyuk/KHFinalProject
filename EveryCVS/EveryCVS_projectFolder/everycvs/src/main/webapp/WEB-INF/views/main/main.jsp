@@ -89,20 +89,39 @@
 		<div class="row margin-vert-30">
 			<!-- Main Text -->
 			<div class="col-md-6">
-				<h2>Welcome to Habitat</h2>
-				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-					diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-					erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
-					tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-					consequat.</p>
-				<p>Duis autem vel eum iriure dolor in hendrerit in vulputate
-					velit esse molestie consequat, vel illum dolore eu feugiat nulla
-					facilisis at vero eros et accumsan et iusto odio dignissim qui
-					blandit praesent luptatum zzril delenit augue duis dolore te
-					feugait nulla facilisi. Cras non sem sem, at eleifend mi. Nam liber
-					tempor cum soluta nobis eleifend option congue nihil imperdiet
-					doming id quod mazim placerat facer possim assum. Curabitur eget
-					nisl a risus.</p>
+				 <h2>페이지 여기 모아놨따.</h2>
+                            <a href="pages-about-us.html">About Us</a><br>
+                            <a href="features-typo-basic.html">Basic Typography</a><br>
+                            <a href="features-typo-blockquotes.html">Blockquotes</a><br>
+                            <a href="features-labels.html">Labels</a><br>
+                            <a href="features-progress-bars.html">Progress Bars</a><br>
+                            <a href="features-panels.html">Panels</a><br>
+                            <a href="features-pagination.html">Pagination</a><br>
+                            <a href="features-icons.html">Icons General</a><br>
+                            <a href="features-icons-social.html">Social Icons</a><br>
+                            <a href="features-icons-font-awesome.html">Font Awesome</a><br>
+                            <a href="features-icons-glyphicons.html">Glyphicons</a><br>
+                            <a href="features-testimonials.html">Testimonials</a><br>
+                            <a href="features-accordions-tabs.html">Accordions & Tabs</a><br>
+                            <a href="features-buttons.html">Buttons</a><br>
+                            <a href="features-carousels.html">Carousels</a><br>
+                            <a href="features-grid.html">Grid System</a><br>
+                            <a href="features-animate-on-scroll.html">Animate On Scroll</a><br>
+                            <a href="pages-full-width.html">Full Width</a><br>
+                            <a href="pages-left-sidebar.html">Left Sidebar</a><br>
+                            <a href="pages-right-sidebar.html">Right Sidebar</a><br>
+                            <a href="pages-sign-up.html">Sign-Up</a><br>
+                            <a href="pages-404.html">404 Error Page</a><br>
+                            <a href="portfolio-2-column.html">2 Column</a><br>
+                            <a href="portfolio-3-column.html">3 Column</a><br>
+                            <a href="portfolio-4-column.html">4 Column</a><br>
+                            <a href="portfolio-6-column.html">6 Column</a><br>
+                            <a href="blog-list.html">Blog</a><br>
+                            <a href="blog-single.html">Blog Single Item</a><br>
+                            <a href="pages-about-us.html">About Us</a><br>
+                            <a href="pages-services.html">Services</a><br>
+                            <a href="pages-faq.html">F.A.Q.</a><br>
+                            <a href="pages-about-me.html">About Me</a><br>
 			</div>
 			<!-- End Main Text -->
 			<div class="col-md-6">
