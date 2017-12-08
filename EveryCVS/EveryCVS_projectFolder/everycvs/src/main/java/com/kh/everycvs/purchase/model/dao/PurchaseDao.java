@@ -53,7 +53,7 @@ public class PurchaseDao {
 	
 	//사용자 구매내역 조회
 	public List<Purchase> purchaseList() {
-		List<Purchase> list = new ArrayList<Purchase>();
+		ArrayList<Purchase> list = new ArrayList<Purchase>();
 		System.out.println(list);
 		return sqlSession.selectList("purchase.purchaseList", list);
 	}

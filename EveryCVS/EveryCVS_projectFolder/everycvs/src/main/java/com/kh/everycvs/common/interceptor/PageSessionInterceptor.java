@@ -14,14 +14,14 @@ public class PageSessionInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("PageSessionInterceptor 실행...");
+
 		// session 객체를 가져옴
 		HttpSession session = request.getSession();
 		// login처리를 담당하는 사용자 정보를 담고 있는 객체를 가져옴
 		Object obj = session.getAttribute("user");
 
 		if (obj == null) { // 로그인된 세션이 없는 경우...
-			response.sendRedirect("signin.do");
+			response.sendRedirect("/everycvs/sign/signin.do");
 			return false;
 		} else {			
 			return true;
