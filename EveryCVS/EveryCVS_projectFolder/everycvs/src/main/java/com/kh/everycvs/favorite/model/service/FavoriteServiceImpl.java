@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Favorite;
-import com.kh.everycvs.common.model.vo.Purchase;
 import com.kh.everycvs.favorite.model.dao.FavoriteDao;
 
 @Service("FavoriteServiceImpl")
@@ -21,8 +20,8 @@ public class FavoriteServiceImpl implements FavoriteService{
 	@Override
 	public ArrayList<Favorite> favoriteList() {
 		//관심상품목록 조회
-		ArrayList<Favorite> list = new ArrayList<Favorite>();
-		System.out.println(list);
+		ArrayList<Favorite> flist = new ArrayList<Favorite>();
+		System.out.println(flist);
 		return (ArrayList<Favorite>)favoriteDao.favoriteList();
 	}
 

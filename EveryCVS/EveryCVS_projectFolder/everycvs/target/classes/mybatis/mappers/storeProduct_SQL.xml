@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="storeProduct">
 
+<mapper namespace="storeProduct"> 
 
 	<resultMap id="resultStoreProduct" type="storeproduct">
 		<result property="store_product_no" column="STORE_PRODUCT_NO" />
@@ -27,4 +27,27 @@
 		<result property="discount_no" column="DISCOUNT_NO" />
 		<result property="discount_info" column="DISCOUNT_INFO" />
 	</resultMap>
-</mapper>
+	
+	<select id="getListCount" resultType="int">
+		select count(*) from store_popularity_product_view
+	</select>
+	
+	<select id="selectList" parameterType="java.util.Map" resultType="list" resultMap="resultStoreProduct">
+		   <![CDATA[
+      		select * from (
+            select rownum rnum, store_product_no, product_name, price
+            from store_popularity_product_view)
+            where rnum >= #{startRow} and rnum <= #{endRow}
+           ]]>
+   </select>
+   <select id="searchSproduct" parameterType="hashmap" resultType="list" resultMap="resultStoreProduct">
+		   <![CDATA[
+		    select * from (
+		    select rownum rnum, store_product_no, product_name, price
+		    from store_popularity_product_view)
+		    where rnum >= #{start} and rnum <= #{end}
+		    and product_name like #{keyword}
+           ]]>
+   </select>
+	
+</mapper>	

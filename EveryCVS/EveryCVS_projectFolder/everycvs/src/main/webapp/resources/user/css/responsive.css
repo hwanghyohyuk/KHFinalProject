@@ -5,11 +5,11 @@
 
 .is-sticky #header,
 .is-sticky #hornav {
-	position: relative !important;
-	width: auto !important;
-	top: 0 !important;
-	left: 0;
-	margin-left: 0;
+   position: relative !important;
+   width: auto !important;
+   top: 0 !important;
+   left: 0;
+   margin-left: 0;
 }
 
 .primary-container-background .primary-container {width: 100%;}
@@ -22,13 +22,62 @@
     animation-delay: 0;
 }
 
+#modify1{
+      width: 19%;
+      padding-left: 2%;
+      text-align: center;
+   }
+
+
 }
 
 /* #Tablet (Portrait)
 ================================================== */
     
 @media only screen and (max-width: 959px) {
+   table {
+      font-size: 9pt;
+   }
 
+   #paddingrmv {
+      padding: 0%;
+      width: 98%;
+   }
+
+   #paddingrmv2{
+      padding: 0px;
+      width: 98%;
+   }
+
+   #paddingrmv3{
+   padding-left: 30px;
+   }
+
+   #marginrmv {
+      margin: 1%;
+      width: 99%;
+   }
+
+   #width100{
+      margin-top: 1%;
+      width: 100%;
+   }
+
+   #modify1{
+      font-size: 9pt;
+   }
+
+   #displaynone{
+      display: none;
+   }
+
+   #displayblock{
+      display: inline-block;
+   }
+
+   #modify2{
+      display: none;
+   }
 
 }
 
@@ -51,7 +100,6 @@
 
 @media only screen and (max-width: 440px) {
 
-	
+   
 }
-
 

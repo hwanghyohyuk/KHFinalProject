@@ -1,0 +1,104 @@
+.sy1 {
+	display: block;
+	overflow: hidden;
+	height: 200px;
+	width: 200px;
+	border-width: 4px;
+	border-style: solid;
+	border-color: rgb(215, 223, 224);
+}
+
+.text-center th, .text-center td {
+  text-align: center;
+}
+
+.height20 {
+   height: 19px;
+}
+
+.jun1 {
+   display: inline-block;
+   float: left;
+   position: relative;
+     min-height: 1px;
+     padding-left: 2.5%;
+     padding-right: 0px;
+   width: 19.5%;
+   text-align: center;
+   height: 130px;
+   font-size: 10pt;
+}
+
+.jun2 {
+   font-size: 9pt;
+}
+
+.jun3 {
+   font-size: 11pt;
+   font-weight: bold;
+}
+
+.jun4 {
+   float: right;
+   border-radius: 5px;
+}
+
+.jun5 {
+   padding: 0px 0px 6px 0px;
+   color: #999;
+}
+
+.jun6 {
+   display: none;
+   background: #e4e4e4;
+   border: 1px solid #ccc;
+   border-left-width: 0px;
+   border-top-right-radius: 5px;
+   border-bottom-right-radius: 5px;
+   padding: 4.5px 10px;
+   float: left;
+}
+
+.jun7 {
+   border-radius: 5px;
+   padding: 5px 15px;
+}
+
+.jun8 {
+   padding-left: 6px;
+}
+
+#jun_input1 {
+   margin-bottom: 5px;
+}
+
+#jun_input1 > input {
+   padding: 5px;
+}
+
+.progress-bar-pink {
+   background: #DF9292;
+}
+
+.progress-bar-salgu {
+   background: #F1A671;
+}
+
+#paddingrmv2{
+   padding-left: 4px;
+   font-weight: bold;
+}
+
+#paddingrmv3{
+   padding-left: 4px;
+}
+
+#modify1{
+   text-align: center;
+}
+
+#modify2 {
+   border-left-width: 0px;
+   border-top-right-radius: 5px;
+   border-bottom-right-radius: 5px;
+}

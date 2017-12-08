@@ -26,6 +26,13 @@ public class StoreProductServiceImpl implements StoreProductService {
 		int endRow = startRow + limit - 1;
 		return sproductDao.selectList(startRow,endRow);  
 	}
+	
+	@Override
+	public List<StoreProduct> searchSproduct(int currentPage, int limit, String keyword) {
+		int startRow = (currentPage -1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		return sproductDao.searchSproduct(startRow,endRow,keyword);
+	}
 
 	@Override
 	public ArrayList<StoreProduct> rankList() {
@@ -51,5 +58,6 @@ public class StoreProductServiceImpl implements StoreProductService {
 	public int updateSproduct(StoreProduct sp) {
 		return sproductDao.updateSproduct();
 	}
+
 
 }

@@ -21,9 +21,9 @@ public class FavoriteController {
 	//관심상품 목록 조회 : 마이페이지에서 관심상품 목록을 조회함
 	@RequestMapping("favoriteList.do")
 	public ModelAndView favoriteList(ModelAndView mv) {
-		ArrayList<Favorite> list = (ArrayList<Favorite>)favoriteService.favoriteList();
-		mv.addObject("flist", list);
-		System.out.println(list);
+		ArrayList<Favorite> flist = (ArrayList<Favorite>)favoriteService.favoriteList();
+		mv.addObject("flist", flist);
+		System.out.println(flist);
 		return mv;
 	}
 	
@@ -35,6 +35,13 @@ public class FavoriteController {
 	//관심상품 삭제 : 등록되어있는 관심상품을 해제하면 목록에서 삭제
 	public void favoriteDelete() {
 		
+	}
+	
+	//관심상품 페이지 이동
+	@RequestMapping("favoritePage.do")
+	public ModelAndView favoritePage(){
+		ModelAndView mv = new ModelAndView("user/mypage/favoritePage");
+		return mv;
 	}
 	
 	

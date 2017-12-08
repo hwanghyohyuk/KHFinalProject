@@ -32,12 +32,11 @@
 	</select>
 
 	<update id="keepSignIn">
-		 <![CDATA[update tb_user set session_key = #{sessionId}, session_limit = #{next} where
-		email = #{email}]]>
+		 <![CDATA[update tb_user set session_key = #{sessionId}, session_limit = #{next} where email = #{email}]]>
 	</update>
 
 	<select id="checkUserWithSessionKey" resultType="user">
-        <![CDATA[select * from tb_user where session_key = #{value} and session_limit > now()]]>
+        <![CDATA[select * from tb_user where session_key = #{value} and session_limit > sysdate]]>
 
     </select>
     

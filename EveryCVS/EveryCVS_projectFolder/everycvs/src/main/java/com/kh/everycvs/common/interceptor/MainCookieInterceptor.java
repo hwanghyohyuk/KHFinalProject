@@ -23,7 +23,9 @@ public class MainCookieInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-
+		
+		String returnURL=null;
+		
 		// session 객체를 가져옴
 		HttpSession session = request.getSession();
 		// login처리를 담당하는 사용자 정보를 담고 있는 객체를 가져옴
@@ -44,19 +46,47 @@ public class MainCookieInterceptor extends HandlerInterceptorAdapter {
 				if (user != null) { // 그런 사용자가 있다면
 					// 세션을 생성시켜 준다.
 					session.setAttribute("user", user);
-					return true;
+					switch(user.getJob()){
+					case "customer":
+						returnURL = "main.do"; // 로그인 성공시 사용자 메인페이지 이동
+						break;
+					case "storemanager":
+						returnURL = "storemain.do";
+						break;
+					case "cvsmanager":
+						returnURL = "cvsmain.do";
+						break;
+					case "sitemanager":
+						returnURL = "sitemain.do";
+						break;
+					}		
+					response.sendRedirect("/everycvs/"+returnURL);
+					return false;
 				}
 			}
-
-			// 이제 아래는 로그인도 안되있고 쿠키도 존재하지 않는 경우니까 다시 로그인 폼으로 돌려보내면 된다.
-			// 로그인이 안되어 있는 상태임으로 로그인 폼으로 다시 돌려보냄(redirect)
-			response.sendRedirect("/everycvs/sign/signin.do");
+			response.sendRedirect("/everycvs/main.do");
 			return false; // 더이상 컨트롤러 요청으로 가지 않도록 false로 반환함
 		}
 
 		// preHandle의 return은 컨트롤러 요청 uri로 가도 되냐 안되냐를 허가하는 의미임
 		// 따라서 true로하면 컨트롤러 uri로 가게 됨.
-		return true;
+		User user = (User)obj;
+		switch(user.getJob()){
+		case "customer":
+			returnURL = "main.do"; // 로그인 성공시 사용자 메인페이지 이동
+			break;
+		case "storemanager":
+			returnURL = "storemain.do";
+			break;
+		case "cvsmanager":
+			returnURL = "cvsmain.do";
+			break;
+		case "sitemanager":
+			returnURL = "sitemain.do";
+			break;
+		}		
+		response.sendRedirect("/everycvs/"+returnURL);
+		return false;
 	}
 
 	// 컨트롤러가 수행되고 화면이 보여지기 직전에 수행되는 메서드
