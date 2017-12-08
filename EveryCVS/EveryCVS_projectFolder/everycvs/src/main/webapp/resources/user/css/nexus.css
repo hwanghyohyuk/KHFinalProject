@@ -72,13 +72,13 @@ body {
 }
 #header {
   position: relative;
-  height: 130px;
+  height: 205px;
   top: 0;
   transition: all 0.2s ease 0s;
   width: 100%;
 }
 #header .container {
-  height: 130px;
+  height:205px; 
   position: relative;
 }
 /* Logo */

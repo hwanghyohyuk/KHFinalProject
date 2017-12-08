@@ -53,17 +53,14 @@
 		<div class="row">
 			<!-- Footer Menu -->
 			<div id="footermenu" class="col-md-8">
-				<ul class="list-unstyled list-inline">
-					<li><a href="#" target="_blank">Sample Link</a></li>
-					<li><a href="#" target="_blank">Sample Link</a></li>
-					<li><a href="#" target="_blank">Sample Link</a></li>
-					<li><a href="#" target="_blank">Sample Link</a></li>
-				</ul>
+				황효혁&nbsp;&nbsp;안지윤&nbsp;&nbsp;이시연&nbsp;&nbsp;이선주&nbsp;&nbsp;유신광&nbsp;&nbsp;홍명택
 			</div>
 			<!-- End Footer Menu -->
 			<!-- Copyright -->
 			<div id="copyright" class="col-md-4">
-				<p class="pull-right">(c) 2014 Your Copyright Info</p>
+				<p class="pull-right">
+					<b>모두의 편의점</b>
+				</p>
 			</div>
 			<!-- End Copyright -->
 		</div>
