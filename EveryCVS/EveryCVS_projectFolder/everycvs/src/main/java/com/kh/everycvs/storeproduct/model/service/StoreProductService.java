@@ -12,10 +12,10 @@ public interface StoreProductService {
 	public List<StoreProduct> selectList(int currentPage, int limit);
 	
 	public List<StoreProduct> searchSproduct(int currentPage, int limit, String keyword);
+	
+	public StoreProduct detailSproduct(int spnum);
 
 	public ArrayList<StoreProduct> rankList();
-
-	public StoreProduct detailSproduct(int spnum);
 
 	public int insertSproduct(StoreProduct sp);
 
