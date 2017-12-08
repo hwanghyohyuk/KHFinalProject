@@ -1,5 +1,6 @@
 package com.kh.everycvs.user.model.service;
 
+import java.sql.Date;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,19 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 
 	@Override
-	public User checkUser(User user) {
-		return userDao.checkUser(user);
+	public User signIn(User login) {
+		return userDao.signIn(login);
+	}
+
+	@Override
+	public void keepSignIn(String email, String sessionId, Date next) {
+
+		userDao.keepSignIn(email, sessionId, next);
+	}
+
+	@Override
+	public User checkUserWithSessionKey(String sessionId) {
+		return userDao.checkUserWithSessionKey(sessionId);
 	}
 
 	@Override
@@ -99,7 +111,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Map<String, Object> userList(String page, String keyword) {
-		return userDao.userList(page,keyword);
+		return userDao.userList(page, keyword);
 	}
-
 }

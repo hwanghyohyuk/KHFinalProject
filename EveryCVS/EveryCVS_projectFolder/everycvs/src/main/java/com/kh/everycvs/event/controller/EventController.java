@@ -43,15 +43,5 @@ public class EventController {
 	public String deleteEvent(HttpServletRequest request) {
 		return null;
 	}
-	
-	//이벤트 참여 여부
-	public String participateEvent(HttpServletRequest request) {
-		return null;
-	}
-
-	// 이벤트 당첨자 리스트 출력
-	public ModelAndView winEvent(HttpServletRequest request) {
-		return null;
-	}
 
 }
