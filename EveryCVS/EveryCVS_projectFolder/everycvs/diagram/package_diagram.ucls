@@ -3,17 +3,17 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <package id="1" language="java" name="com.kh.everycvs.common" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/common" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="86" width="215" x="485" y="182"/>    
+    <position height="66" width="215" x="484" y="279"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="2" language="java" name="com.kh.everycvs.board" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/board" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="55" width="248" x="90" y="112"/>    
+    <position height="55" width="248" x="102" y="724"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="3" language="java" name="com.kh.everycvs.discount" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/discount" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="55" width="259" x="830" y="418"/>    
+    <position height="55" width="253" x="829" y="213"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="4" language="java" name="com.kh.everycvs.event" project="everycvs" 
@@ -23,12 +23,12 @@
   </package>  
   <package id="5" language="java" name="com.kh.everycvs.favorite" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/favorite" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="55" width="252" x="832" y="114"/>    
+    <position height="55" width="252" x="829" y="153"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="6" language="java" name="com.kh.everycvs.gifticon" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/gifticon" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="55" width="252" x="832" y="173"/>    
+    <position height="55" width="252" x="829" y="274"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="7" language="java" name="com.kh.everycvs.product" project="everycvs" 
@@ -38,17 +38,17 @@
   </package>  
   <package id="8" language="java" name="com.kh.everycvs.servicecenter" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/servicecenter" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="213" y="200"/>    
+    <position height="-1" width="-1" x="225" y="812"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="9" language="java" name="com.kh.everycvs.purchase" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/purchase" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="55" width="257" x="830" y="359"/>    
+    <position height="55" width="257" x="829" y="407"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="10" language="java" name="com.kh.everycvs.sale" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/sale" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="55" width="259" x="830" y="478"/>    
+    <position height="55" width="259" x="829" y="476"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="11" language="java" name="com.kh.everycvs.store" project="everycvs" 
@@ -63,7 +63,7 @@
   </package>  
   <package id="13" language="java" name="com.kh.everycvs.user" project="everycvs" 
     file="/everycvs/src/main/java/com/kh/everycvs/user" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="68" width="223" x="486" y="464"/>    
+    <position height="58" width="245" x="91" y="153"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
