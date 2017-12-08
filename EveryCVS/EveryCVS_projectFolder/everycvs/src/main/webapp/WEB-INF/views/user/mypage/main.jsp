@@ -20,12 +20,12 @@
 						<ul class="list-group sidebar-nav" id="sidebar-nav">
 							<!-- 기프티콘 보관함 -->
 							<li class="list-group-item list-toggle">
-							<a href="/everycvs/gifticonPage.do">기프티콘 보관함</a>
+							<a href="gifticonPage.do">기프티콘 보관함</a>
 								</li>
 							
 							<!-- 관심목록 -->
 							<li class="list-group-item list-toggle">
-							<a href="/everycvs/favoritePage.do">관심목록</a>
+							<a href="favoritePage.do">관심목록</a>
 								</li>
 								
 							<!-- 회원탈퇴 -->

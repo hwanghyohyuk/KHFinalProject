@@ -121,7 +121,6 @@ public class UserController {
 
 	/** 마이 페이지 **/
 	@RequestMapping("mypage.do")
-<<<<<<< HEAD
 	public ModelAndView myPage(HttpSession session, ModelAndView mv) {
 		
 		ArrayList<Purchase> list = (ArrayList<Purchase>) purchaseService.purchaseList();
@@ -131,16 +130,6 @@ public class UserController {
 		System.out.println(list);
 		System.out.println(flist);
 		mv.setViewName("user/mypage/main");
-=======
-	public ModelAndView myPage(HttpSession session) {
-		ModelAndView mv = new ModelAndView("user/mypage/main");
-
-		/*
-		 * User temp = (User)(session.getAttribute("user")); ======= User temp =
-		 * (User) (session.getAttribute("user")); >>>>>>> master int user_no =
-		 * temp.getUser_no(); User user = userService.getUser(user_no);
-		 */
->>>>>>> master
 		return mv;
 	}
 	
