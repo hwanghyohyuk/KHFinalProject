@@ -101,6 +101,8 @@ public class UserController {
 		ArrayList<Favorite> flist = (ArrayList<Favorite>) favoriteService.favoriteList();
 		mv.addObject("list", list);		
 		mv.addObject("flist", flist); 
+		System.out.println(list);
+		System.out.println(flist);
 		mv.setViewName("user/mypage/main");
 		return mv;
 	}
@@ -138,13 +140,8 @@ public class UserController {
 	}
 
 
-<<<<<<< HEAD
-	/**로 그아웃 **/
-	@RequestMapping(value = "/signout.do", method = RequestMethod.GET)
-=======
 	/** 로그아웃 **/
 	@RequestMapping(value = "signout.do", method = RequestMethod.GET)
->>>>>>> master
 	public String signOut(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		Object obj = session.getAttribute("user");
 		if (obj != null) {

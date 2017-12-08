@@ -34,7 +34,7 @@
 							<li><a href="/everycvs/">${sessionScope.user.user_name}</a>
 								<ul>
 									<li><a href="/everycvs/signout.do">Sign out</a></li>
-									<li><a href="pages-services.html">Services</a></li>
+									<li><a href="/everycvs/mypage.do">MyPage</a></li>
 									<li><a href="pages-faq.html">F.A.Q.</a></li>
 									<li><a href="pages-about-me.html">About Me</a></li>
 									<li><a href="pages-full-width.html">Full Width</a></li>
