@@ -30,7 +30,9 @@ public class User implements Serializable {
 	private int cash; // 잔고
 	private int point; // 포인트
 	private String store_no; // 지점번호
+	private String store_name; //지점이름
 	private int brand_no; // 상호번호
+	private String brand_name; //지점이름
 	private boolean useCookie; // 쿠키사용여부
 	private String session_key; // 세션id
 	private Date session_limit; // 유효시간
@@ -43,62 +45,6 @@ public class User implements Serializable {
 		super();
 	}
 
-	public User(String email, String user_pwd) {
-		super();
-		this.email = email;
-		this.user_pwd = user_pwd;
-	}
-
-	public User(int user_no, String email, String user_pwd, String user_name, Date birthday, String gender,
-			String phone, String address, Date enroll_date, String original_file_name, String stored_file_name,
-			int user_state, String job, int cash, int point, String store_no, int brand_no) {
-		super();
-		this.user_no = user_no;
-		this.email = email;
-		this.user_pwd = user_pwd;
-		this.user_name = user_name;
-		this.birthday = birthday;
-		this.gender = gender;
-		this.phone = phone;
-		this.address = address;
-		this.enroll_date = enroll_date;
-		this.original_file_name = original_file_name;
-		this.stored_file_name = stored_file_name;
-		this.user_state = user_state;
-		this.job = job;
-		this.cash = cash;
-		this.point = point;
-		this.store_no = store_no;
-		this.brand_no = brand_no;
-	}
-
-	public User(int user_no, String email, String user_pwd, String user_name, Date birthday, String gender,
-			String phone, String address, Date enroll_date, String original_file_name, String stored_file_name,
-			int user_state, String job, int cash, int point, String store_no, int brand_no, boolean useCookie,
-			String session_key, Date session_limit) {
-		super();
-		this.user_no = user_no;
-		this.email = email;
-		this.user_pwd = user_pwd;
-		this.user_name = user_name;
-		this.birthday = birthday;
-		this.gender = gender;
-		this.phone = phone;
-		this.address = address;
-		this.enroll_date = enroll_date;
-		this.original_file_name = original_file_name;
-		this.stored_file_name = stored_file_name;
-		this.user_state = user_state;
-		this.job = job;
-		this.cash = cash;
-		this.point = point;
-		this.store_no = store_no;
-		this.brand_no = brand_no;
-		this.useCookie = useCookie;
-		this.session_key = session_key;
-		this.session_limit = session_limit;
-	}
-
 	public User(String email, String user_pwd, boolean useCookie) {
 		super();
 		this.email = email;
@@ -106,7 +52,62 @@ public class User implements Serializable {
 		this.useCookie = useCookie;
 	}
 
-	/* Getter & Setter */
+	public User(int user_no, String email, String user_pwd, String user_name, Date birthday, String gender,
+			String phone, String address, Date enroll_date, String original_file_name, String stored_file_name,
+			int user_state, String job, int cash, int point, String store_no, String store_name, int brand_no,
+			String brand_name, boolean useCookie) {
+		super();
+		this.user_no = user_no;
+		this.email = email;
+		this.user_pwd = user_pwd;
+		this.user_name = user_name;
+		this.birthday = birthday;
+		this.gender = gender;
+		this.phone = phone;
+		this.address = address;
+		this.enroll_date = enroll_date;
+		this.original_file_name = original_file_name;
+		this.stored_file_name = stored_file_name;
+		this.user_state = user_state;
+		this.job = job;
+		this.cash = cash;
+		this.point = point;
+		this.store_no = store_no;
+		this.store_name = store_name;
+		this.brand_no = brand_no;
+		this.brand_name = brand_name;
+		this.useCookie = useCookie;
+	}
+
+	public User(int user_no, String email, String user_pwd, String user_name, Date birthday, String gender,
+			String phone, String address, Date enroll_date, String original_file_name, String stored_file_name,
+			int user_state, String job, int cash, int point, String store_no, String store_name, int brand_no,
+			String brand_name, boolean useCookie, String session_key, Date session_limit) {
+		super();
+		this.user_no = user_no;
+		this.email = email;
+		this.user_pwd = user_pwd;
+		this.user_name = user_name;
+		this.birthday = birthday;
+		this.gender = gender;
+		this.phone = phone;
+		this.address = address;
+		this.enroll_date = enroll_date;
+		this.original_file_name = original_file_name;
+		this.stored_file_name = stored_file_name;
+		this.user_state = user_state;
+		this.job = job;
+		this.cash = cash;
+		this.point = point;
+		this.store_no = store_no;
+		this.store_name = store_name;
+		this.brand_no = brand_no;
+		this.brand_name = brand_name;
+		this.useCookie = useCookie;
+		this.session_key = session_key;
+		this.session_limit = session_limit;
+	}
+
 	public int getUser_no() {
 		return user_no;
 	}
@@ -235,12 +236,28 @@ public class User implements Serializable {
 		this.store_no = store_no;
 	}
 
+	public String getStore_name() {
+		return store_name;
+	}
+
+	public void setStore_name(String store_name) {
+		this.store_name = store_name;
+	}
+
 	public int getBrand_no() {
 		return brand_no;
 	}
 
 	public void setBrand_no(int brand_no) {
 		this.brand_no = brand_no;
+	}
+
+	public String getBrand_name() {
+		return brand_name;
+	}
+
+	public void setBrand_name(String brand_name) {
+		this.brand_name = brand_name;
 	}
 
 	public boolean isUseCookie() {
@@ -271,16 +288,15 @@ public class User implements Serializable {
 		return serialVersionUID;
 	}
 
-	/* ToString */
-
 	@Override
 	public String toString() {
 		return "User [user_no=" + user_no + ", email=" + email + ", user_pwd=" + user_pwd + ", user_name=" + user_name
-				+ ", birth_date=" + birthday + ", gender=" + gender + ", phone=" + phone + ", address=" + address
+				+ ", birthday=" + birthday + ", gender=" + gender + ", phone=" + phone + ", address=" + address
 				+ ", enroll_date=" + enroll_date + ", original_file_name=" + original_file_name + ", stored_file_name="
 				+ stored_file_name + ", user_state=" + user_state + ", job=" + job + ", cash=" + cash + ", point="
-				+ point + ", store_no=" + store_no + ", brand_no=" + brand_no + ", session_key=" + session_key
+				+ point + ", store_no=" + store_no + ", store_name=" + store_name + ", brand_no=" + brand_no
+				+ ", brand_name=" + brand_name + ", useCookie=" + useCookie + ", session_key=" + session_key
 				+ ", session_limit=" + session_limit + "]";
 	}
-
+	
 }

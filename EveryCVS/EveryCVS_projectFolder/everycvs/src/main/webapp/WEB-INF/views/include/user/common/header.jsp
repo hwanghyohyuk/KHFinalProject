@@ -16,10 +16,9 @@
 					<div class="visible-lg">
 						<ul id="hornavmenu" class="nav navbar-nav">
 							<li><a href="/everycvs/main/main.do" class="fa-home active">EVERYCVS</a></li>
-							<li><a href="#"><span class="fa-search">CVS
-										SEARCH</span></a></li>
-							<li><a href="#"><span class="fa-gift">EVENT</span></a></li>
-							<li><a href="#"><span class="fa-question-circle">HELP</span></a></li>
+							<li><a href="#cvssearch"><span class="fa-search">CVS SEARCH</span></a></li>
+							<li><a href="#event"><span class="fa-gift">EVENT</span></a></li>
+							<li><a href="#help"><span class="fa-question-circle">HELP</span></a></li>
 						</ul>
 					</div>
 				</div>
