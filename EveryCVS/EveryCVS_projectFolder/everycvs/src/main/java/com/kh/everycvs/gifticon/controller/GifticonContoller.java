@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.gifticon.model.service.GifticonService;
@@ -29,6 +31,13 @@ public class GifticonContoller {
 	public String deleteGifticon(HttpServletRequest request, HttpServletResponse response) {
 		return null;
 	}
+	
+	//기프티콘 페이지로 이동
+	@RequestMapping(value = "gifticonPage.do")
+	public ModelAndView gifticonPage(ModelAndView mv){
+		mv = new ModelAndView("user/mypage/gifticonPage");
+		return mv;
+		}
 	
 	
 }

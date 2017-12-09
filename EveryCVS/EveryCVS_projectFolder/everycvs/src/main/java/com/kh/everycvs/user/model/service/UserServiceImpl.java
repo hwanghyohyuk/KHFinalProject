@@ -1,10 +1,14 @@
 package com.kh.everycvs.user.model.service;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.EmailCertification;
 import com.kh.everycvs.common.model.vo.User;
@@ -113,4 +117,12 @@ public class UserServiceImpl implements UserService {
 	public Map<String, Object> userList(String page, String keyword) {
 		return userDao.userList(page, keyword);
 	}
+
+	@Override
+	public int increMoney(Map<String, Object> map) {
+		return userDao.userIncreMoney(map);
+	}
+
+	
+
 }

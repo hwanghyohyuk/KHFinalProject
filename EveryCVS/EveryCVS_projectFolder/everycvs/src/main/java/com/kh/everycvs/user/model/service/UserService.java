@@ -1,7 +1,12 @@
 package com.kh.everycvs.user.model.service;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.EmailCertification;
 import com.kh.everycvs.common.model.vo.User;
@@ -56,12 +61,17 @@ public interface UserService {
 
 	/** 임시비밀번호를 포함한 이메일 보내기 **/
 	boolean sendTempPwdMail(String tempPwd);
-
+	
+	int increMoney(Map<String, Object> map);
+	
 
 	/* 사이트 관리자 */
 
 	/** 회원 목록 및 검색 **/
 	Map<String, Object> userList(String page, String keyword);
+
+
+	
 
 	
 }

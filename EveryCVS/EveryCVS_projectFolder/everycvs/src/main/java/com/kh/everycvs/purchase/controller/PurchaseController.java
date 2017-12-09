@@ -44,9 +44,10 @@ public class PurchaseController {
 	
 	//사용자 구매 영역
 	//사용자 잔고 금액 증가: 사용자가 잔고 충전 시 잔고 증가
+	@RequestMapping("userIncreMoney.do")
 	public String userIncreMoney(HttpServletRequest request) {
 		//입력받은 충전금액을 기존 잔고에 더해서 리턴
-		return null;
+		return "user/main/main";
 	}
 	
 	//사용자 잔고 금액 감소 : 사용자가 상품을 잔고로 결제 시 차감, 포인트 자동적립
@@ -65,12 +66,8 @@ public class PurchaseController {
 	@RequestMapping("purchaseList.do")
 	public ModelAndView purchaseList(ModelAndView mv) {
 		//구매내역 조회를 요청하면 가지고 있는 구매내역 리스트를 리턴함
-		
-		//mv = new ModelAndView("user/mypage/main");
 		ArrayList<Purchase> list = (ArrayList<Purchase>) purchaseService.purchaseList();
-		
 		mv.addObject("list", list);
-		mv.setViewName("user/mypage/main");
 		System.out.println(list);
 		return mv;
 	}
