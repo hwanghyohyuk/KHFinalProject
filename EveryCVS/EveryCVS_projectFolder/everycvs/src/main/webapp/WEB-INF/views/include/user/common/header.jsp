@@ -19,13 +19,13 @@
 								<c:when test="${ sessionScope.store eq null }">
 									<li><a href="/everycvs/main/main.do" class="fa-home active">EVERYCVS</a></li>
 									<li><a href="/everycvs/main.do#cvssearch"><span class="fa-search">CVS SEARCH</span></a></li>
-									<li><a href="#event"><span class="fa-gift">EVENT</span></a></li>
-									<li><a href="#help"><span class="fa-question-circle">HELP</span></a></li>
+									<li><a href="/everycvs/main.do#event"><span class="fa-gift">EVENT</span></a></li>
+									<li><a href="/everycvs/main.do#help"><span class="fa-question-circle">HELP</span></a></li>
 								</c:when>
 								<c:when test="${ sessionScope.store ne null}">
 									<li><a href="/everycvs/main/main.do" class="fa-home active">EVERYCVS</a></li>
 									<li><a href="/everycvs/main.do#cvssearch"><span class="fa-search">CVS SEARCH</span></a></li>
-									<li><a href="#event"><span class="fa-cubes">Store Product</span></a></li>
+									<li><a href="/everycvs/main.do#event"><span class="fa-cubes">Store Product</span></a></li>
 								</c:when>
 							</c:choose>
 
@@ -45,7 +45,7 @@
 									<li><a href="pages-services.html">My page</a></li>
 									<li><a href="#">Cash : ${sessionScope.user.cash}</a></li>
 									<li><a href="#">Point : ${sessionScope.user.point}</a></li>
-									<li><a href="/everycvs/signout.do">Sign out</a></li>
+									<li><a href="/everycvs/user/signout.do">Sign out</a></li>
 								</ul></li>
 						</c:if>
 					</ul>

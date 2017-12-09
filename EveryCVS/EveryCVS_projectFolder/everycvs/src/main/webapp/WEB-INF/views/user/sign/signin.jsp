@@ -16,7 +16,7 @@
 			<div class="row margin-vert-30">
 				<!-- Login Box -->
 				<div class="col-md-6 col-md-offset-3 col-sm-offset-3">
-					<form class="login-page" name="form1" method="post" action="/everycvs/signinpost.do">
+					<form class="login-page" name="form1" method="post" action="/everycvs/user/signinpost.do">
 						<div class="login-header margin-bottom-30">
 							<h2>Sign In to your account</h2>
 						</div>
@@ -42,12 +42,12 @@
 						<hr>
 						<h4>Need Account ?</h4>
 						<p>
-							<a href="#">Click here</a>&nbsp;to create your account!
+							<a href="signupintro.do">Click here</a>&nbsp;to create your account!
 						</p>
 						<br>
 						<h4>Forget your Password ?</h4>
 						<p>
-							<a href="#">Click here</a>&nbsp;to reset your password.
+							<a href="findemail.do">Click here</a>&nbsp;to reset your password.
 						</p>
 					</form>
 				</div>

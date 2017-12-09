@@ -62,13 +62,19 @@
 	<div class="container background-white bottom-border">
 		<div class="row margin-vert-30">
 			<br> <br>
-			<div class="col-md-12">
-				<h2 style="line-height: 2em">
-					<span class="fa-gift">Event</span>
-				</h2>
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="col-md-6 col-sm-6 col-xs-6">
+					<h2 >
+						<span class="fa-gift">Event</span>
+					</h2>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-6 text-right">
+					<a href="#">more</a>
+				</div>
 			</div>
 			<!-- Icons -->
-			<div class="col-md-4 col-md-offset-0 col-sm-4 col-sm-offset-0 col-xs-10 col-xs-offset-1 text-center">
+			<div
+				class="col-md-4 col-md-offset-0 col-sm-4 col-sm-offset-0 col-xs-10 col-xs-offset-1 text-center">
 				<div id="carousel-event-1" class="carousel slide"
 					data-ride="carousel">
 					<!-- Indicators -->
@@ -110,7 +116,8 @@
 					</a>
 				</div>
 			</div>
-				<div class="col-md-4 col-md-offset-0 col-sm-4 col-sm-offset-0 col-xs-10 col-xs-offset-1 text-center">
+			<div
+				class="col-md-4 col-md-offset-0 col-sm-4 col-sm-offset-0 col-xs-10 col-xs-offset-1 text-center">
 				<div id="carousel-event-2" class="carousel slide"
 					data-ride="carousel">
 					<!-- Indicators -->
@@ -152,7 +159,8 @@
 					</a>
 				</div>
 			</div>
-				<div class="col-md-4 col-md-offset-0 col-sm-4 col-sm-offset-0 col-xs-10 col-xs-offset-1 text-center">
+			<div
+				class="col-md-4 col-md-offset-0 col-sm-4 col-sm-offset-0 col-xs-10 col-xs-offset-1 text-center">
 				<div id="carousel-event-3" class="carousel slide"
 					data-ride="carousel">
 					<!-- Indicators -->
@@ -207,12 +215,13 @@
 			<div class="row margin-vert-30">
 
 				<div class="col-md-4 col-md-offset-3 hidden-xs hidden-sm">
-					<br> <br>
-					<img src="/everycvs/resources/user/img/main/arrowlr.png">
+					<br> <br> <img
+						src="/everycvs/resources/user/img/main/arrowlr.png">
 				</div>
 				<div class="row margin-vert-30"></div>
 				<div class="row margin-vert-30">
-					<div class="col-md-5 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+					<div
+						class="col-md-5 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
 						<div class="col-md-12 col-xs-12">
 							<h2 style="line-height: 1.5em;">
 								실시간<br>인기 상품 리스트
@@ -224,7 +233,8 @@
 							</h4>
 						</div>
 					</div>
-					<div class="col-md-4 col-md-offset-1 col-sm-5 col-sm-offset-6 col-xs-10 col-xs-offset-1">
+					<div
+						class="col-md-4 col-md-offset-1 col-sm-5 col-sm-offset-6 col-xs-10 col-xs-offset-1">
 						<div id="carousel-popprd-1" class="carousel slide"
 							data-ride="carousel">
 							<!-- Indicators -->
@@ -259,10 +269,10 @@
 								role="button" data-slide="prev"> <span
 								class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 								<span class="sr-only">Previous</span>
-							</a> <a class="right carousel-control"
-								href="#carousel-popprd-1" role="button" data-slide="next">
-								<span class="glyphicon glyphicon-chevron-right"
-								aria-hidden="true"></span> <span class="sr-only">Next</span>
+							</a> <a class="right carousel-control" href="#carousel-popprd-1"
+								role="button" data-slide="next"> <span
+								class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+								<span class="sr-only">Next</span>
 							</a>
 						</div>
 					</div>
@@ -373,110 +383,111 @@
 	<div class="container background-white bottom-border">
 		<div class="row margin-vert-30">
 			<br> <br>
-			<div class="col-md-12">
-				<h2>
-					<span class="fa-question-circle">Help</span>
-				</h2>
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="col-md-6 col-sm-6 col-xs-6">
+					<h2>
+						<span class="fa-question-circle">Help</span>
+					</h2>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-6 text-right">
+					<a href="#">more</a>
+				</div>
 			</div>
-			<div class="col-md-12">
-				<ul class="portfolio-group">
-					<!-- Portfolio Item -->
-					<li class="portfolio-item col-sm-4 col-xs-6 margin-bottom-40">
-						<a href="#">
-							<figure class="animate fadeInLeft">
-								<img alt="image1"
-									src="/everycvs/resources/user/img/frontpage/image1.jpg">
-								<figcaption>
-									<h3>Velit esse molestie</h3>
-									<span>Vel illum dolore eu feugiat nulla facilisis at
-										vero eros et accumsan et iusto odio dignissim qui et everti
-										tamquam suavitate mea.</span>
-								</figcaption>
-							</figure>
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<a href="#">
+						<figure class="animate fadeInLeft">
+							<img alt="image1"
+								src="/everycvs/resources/user/img/frontpage/image1.jpg">
+							<figcaption>
+								<h3>Velit esse molestie</h3>
+								<span>Vel illum dolore eu feugiat nulla facilisis at vero
+									eros et accumsan et iusto odio dignissim qui et everti tamquam
+									suavitate mea.</span>
+							</figcaption>
+						</figure>
 					</a>
-					</li>
-					<!-- //Portfolio Item// -->
-					<!-- Portfolio Item -->
-					<li class="portfolio-item col-sm-4 col-xs-6 margin-bottom-40">
-						<a href="#">
-							<figure class="animate fadeIn">
-								<img alt="image2"
-									src="/everycvs/resources/user/img/frontpage/image2.jpg">
-								<figcaption>
-									<h3>Quam nunc putamus</h3>
-									<span>Vel illum dolore eu feugiat nulla facilisis at
-										vero eros et accumsan et iusto odio dignissim qui et everti
-										tamquam suavitate mea.</span>
-								</figcaption>
-							</figure>
+				</div>
+				<!-- //Portfolio Item// -->
+				<!-- Portfolio Item -->
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<a href="#">
+						<figure class="animate fadeIn">
+							<img alt="image2"
+								src="/everycvs/resources/user/img/frontpage/image2.jpg">
+							<figcaption>
+								<h3>Quam nunc putamus</h3>
+								<span>Vel illum dolore eu feugiat nulla facilisis at vero
+									eros et accumsan et iusto odio dignissim qui et everti tamquam
+									suavitate mea.</span>
+							</figcaption>
+						</figure>
 					</a>
-					</li>
-					<!-- //Portfolio Item// -->
-					<!-- Portfolio Item -->
-					<li class="portfolio-item col-sm-4 col-xs-6 margin-bottom-40">
-						<a href="#">
-							<figure class="animate fadeInRight">
-								<img alt="image3"
-									src="/everycvs/resources/user/img/frontpage/image3.jpg">
-								<figcaption>
-									<h3>Placerat facer possim</h3>
-									<span>Vel illum dolore eu feugiat nulla facilisis at
-										vero eros et accumsan et iusto odio dignissim qui et everti
-										tamquam suavitate mea.</span>
-								</figcaption>
-							</figure>
+				</div>
+				<!-- //Portfolio Item// -->
+				<!-- Portfolio Item -->
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<a href="#">
+						<figure class="animate fadeInRight">
+							<img alt="image3"
+								src="/everycvs/resources/user/img/frontpage/image3.jpg">
+							<figcaption>
+								<h3>Placerat facer possim</h3>
+								<span>Vel illum dolore eu feugiat nulla facilisis at vero
+									eros et accumsan et iusto odio dignissim qui et everti tamquam
+									suavitate mea.</span>
+							</figcaption>
+						</figure>
 					</a>
-					</li>
-					<!-- //Portfolio Item// -->
-					<!-- Portfolio Item -->
-					<li class="portfolio-item col-sm-4 col-xs-6 margin-bottom-40">
-						<a href="#">
-							<figure class="animate fadeInLeft">
-								<img alt="image4"
-									src="/everycvs/resources/user/img/frontpage/image4.jpg">
-								<figcaption>
-									<h3>Nam liber tempor</h3>
-									<span>Vel illum dolore eu feugiat nulla facilisis at
-										vero eros et accumsan et iusto odio dignissim qui et everti
-										tamquam suavitate mea.</span>
-								</figcaption>
-							</figure>
+				</div>
+				<!-- //Portfolio Item// -->
+				<!-- Portfolio Item -->
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<a href="#">
+						<figure class="animate fadeInLeft">
+							<img alt="image4"
+								src="/everycvs/resources/user/img/frontpage/image4.jpg">
+							<figcaption>
+								<h3>Nam liber tempor</h3>
+								<span>Vel illum dolore eu feugiat nulla facilisis at vero
+									eros et accumsan et iusto odio dignissim qui et everti tamquam
+									suavitate mea.</span>
+							</figcaption>
+						</figure>
 					</a>
-					</li>
-					<!-- //Portfolio Item// -->
-					<!-- Portfolio Item -->
-					<li class="portfolio-item col-sm-4 col-xs-6 margin-bottom-40">
-						<a href="#">
-							<figure class="animate fadeIn">
-								<img alt="image5"
-									src="/everycvs/resources/user/img/frontpage/image5.jpg">
-								<figcaption>
-									<h3>Donec non urna</h3>
-									<span>Vel illum dolore eu feugiat nulla facilisis at
-										vero eros et accumsan et iusto odio dignissim qui et everti
-										tamquam suavitate mea.</span>
-								</figcaption>
-							</figure>
+				</div>
+				<!-- //Portfolio Item// -->
+				<!-- Portfolio Item -->
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<a href="#">
+						<figure class="animate fadeIn">
+							<img alt="image5"
+								src="/everycvs/resources/user/img/frontpage/image5.jpg">
+							<figcaption>
+								<h3>Donec non urna</h3>
+								<span>Vel illum dolore eu feugiat nulla facilisis at vero
+									eros et accumsan et iusto odio dignissim qui et everti tamquam
+									suavitate mea.</span>
+							</figcaption>
+						</figure>
 					</a>
-					</li>
-					<!-- //Portfolio Item// -->
-					<!-- Portfolio Item -->
-					<li class="portfolio-item col-sm-4 col-xs-6 margin-bottom-40">
-						<a href="#">
-							<figure class="animate fadeInRight">
-								<img alt="image6"
-									src="/everycvs/resources/user/img/frontpage/image6.jpg">
-								<figcaption>
-									<h3>Nullam consectetur</h3>
-									<span>Vel illum dolore eu feugiat nulla facilisis at
-										vero eros et accumsan et iusto odio dignissim qui et everti
-										tamquam suavitate mea.</span>
-								</figcaption>
-							</figure>
+				</div>
+				<!-- //Portfolio Item// -->
+				<!-- Portfolio Item -->
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<a href="#">
+						<figure class="animate fadeInRight">
+							<img alt="image6"
+								src="/everycvs/resources/user/img/frontpage/image6.jpg">
+							<figcaption>
+								<h3>Nullam consectetur</h3>
+								<span>Vel illum dolore eu feugiat nulla facilisis at vero
+									eros et accumsan et iusto odio dignissim qui et everti tamquam
+									suavitate mea.</span>
+							</figcaption>
+						</figure>
 					</a>
-					</li>
-					<!-- //Portfolio Item// -->
-				</ul>
+				</div>
 				<br> <br>
 			</div>
 		</div>

@@ -18,18 +18,19 @@
 				<div class="col-md-6 col-md-offset-3 col-sm-offset-3">
 					<form class="login-page" name="form1" method="post" action="/everycvs/user/findphonepost.do">
 						<div class="login-header margin-bottom-30">
-							<h2>Check your phone</h2>
-						</div>
-						<div class="input-group margin-bottom-20">
-							<span class="input-group-addon"> <i class="fa fa-user"></i>
-							</span> <input placeholder="Phone" id="phone" name = "phone" class="form-control" type="text">
+							<h2>Succeed find your account</h2>
 						</div>
 						<div class="row">
+							<div class="col-md-12">
+								<h3>Congraturation! </h3>
+								<h4>Now, please <b>check your email</b>.<br>
+								We send to your email for temporary password. </h4>
+							</div>
 							<div class="col-md-12">
 								<button class="btn btn-primary pull-right" type="submit">Submit</button>
 							</div>
 							<div class="col-md-12">
-								<a class="btn btn-primary pull-right" href="/everycvs/user/findphonepost.do">Next</a>
+								<a class="btn btn-primary pull-right" href="/everycvs/sign/signin.do">Next</a>
 							</div>
 						</div>
 					</form>

@@ -34,7 +34,7 @@ public class UserController {
 	}
 
 	/** 로그인 **/
-	@RequestMapping(value = "signinpost.do", method = RequestMethod.POST)
+	@RequestMapping(value = "user/signinpost.do", method = RequestMethod.POST)
 	public ModelAndView signIn(@RequestParam("email") String email, @RequestParam("pwd") String pwd,
 			@RequestParam(value = "usecookie", defaultValue = "false", required = false) boolean useCookie,
 			HttpSession session, HttpServletResponse response) {
@@ -61,16 +61,16 @@ public class UserController {
 			
 			switch(user.getJob()){
 			case "customer":
-				returnURL = "redirect:main/main.do"; // 로그인 성공시 사용자 메인페이지 이동
+				returnURL = "redirect:/main/main.do"; // 로그인 성공시 사용자 메인페이지 이동
 				break;
 			case "storemanager":
-				returnURL = "redirect:main/storemain.do";
+				returnURL = "redirect:/main/storemain.do";
 				break;
 			case "cvsmanager":
-				returnURL = "redirect:main/cvsmain.do";
+				returnURL = "redirect:/main/cvsmain.do";
 				break;
 			case "sitemanager":
-				returnURL = "redirect:main/sitemain.do";
+				returnURL = "redirect:/main/sitemain.do";
 				break;
 			}			
 			/*
@@ -125,7 +125,7 @@ public class UserController {
 	}
 
 	/** 로그아웃 **/
-	@RequestMapping(value = "signout.do", method = RequestMethod.GET)
+	@RequestMapping(value = "user/signout.do", method = RequestMethod.GET)
 	public String signOut(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		Object obj = session.getAttribute("user");
 		if (obj != null) {
@@ -155,13 +155,27 @@ public class UserController {
 		}
 		return "redirect:/main/main.do";
 	}
-
+	
 	/* 회원가입 페이지 이동 */
+	@RequestMapping("sign/signupintro.do")
+	public String moveToSignupIntro() {
+		return "user/signup/signupintro";
+	}
+
+	/* 일반 사용자 회원가입 페이지 이동 */
+	@RequestMapping("sign/signup.do")
 	public String moveToSignup() {
 		return "user/signup/signup";
 	}
+	
+	/* 일반 사용자 회원가입 페이지 이동 */
+	@RequestMapping("sign/signupadmin.do")
+	public String moveToSignupAdmin() {
+		return "user/signup/signupadmin";
+	}
 
 	/** 회원가입 **/
+	@RequestMapping("user/signuppost.do")
 	public String signUp(@ModelAttribute User user) {
 		return null;
 	}
@@ -199,33 +213,37 @@ public class UserController {
 	}
 
 	/* 이메일 찾기 페이지 이동 */
+	@RequestMapping("sign/findemail.do")
 	public String moveToFindEmail() {
-		return "?";
+		return "user/find/findemail";
 	}
 
 	/** 이메일찾기 **/
-	public ModelAndView findEmail(@RequestParam("email") String email) {
-
+	@RequestMapping("user/findemailpost.do")
+	public ModelAndView findEmail(ModelAndView mv/*,@RequestParam("email") String email*/) {
+		mv.setViewName("user/find/findname");
 		/* 성공시 이름 확인 */
 
 		/* 실패시 오류페이지 */
 
-		return null;
+		return mv;
 	}
 
 	/** 이름 확인 **/
-	public ModelAndView findName(@RequestParam("name") String name) {
-
+	@RequestMapping("user/findnamepost.do")
+	public ModelAndView findName(ModelAndView mv/*,@RequestParam("name") String name*/) {
+		mv.setViewName("user/find/findphone");
 		/* 성공시 전화번호 확인 */
 
 		/* 실패시 오류페이지 */
 
-		return null;
+		return mv;
 	}
 
 	/** 전화번호 확인 **/
-	public ModelAndView findPhone(@RequestParam("phone") String phone) {
-
+	@RequestMapping("user/findphonepost.do")
+	public ModelAndView findPhone(ModelAndView mv/*,@RequestParam("phone") String phone*/) {
+		mv.setViewName("user/find/findsuccess");
 		/* 성공시 비밀번호 임시 비밀번호 이메일 보내기 */
 		/** Service : 임시비밀번호 생성 및 DB update **/
 
@@ -233,7 +251,7 @@ public class UserController {
 
 		/* 실패시 오류페이지 */
 
-		return null;
+		return mv;
 	}
 
 	/* 사이트 관리자 */
