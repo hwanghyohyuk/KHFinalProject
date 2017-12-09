@@ -40,6 +40,7 @@
             where rnum >= #{startRow} and rnum <= #{endRow}
            ]]>
    </select>
+   
    <select id="searchSproduct" parameterType="hashmap" resultType="list" resultMap="resultStoreProduct">
 		   <![CDATA[
 		    select * from (
@@ -48,6 +49,10 @@
 		    where rnum >= #{start} and rnum <= #{end}
 		    and product_name like #{keyword}
            ]]>
+   </select>
+   
+   <select id="detailSproduct" parameterType="int" resultType="StoreProduct" resultMap="resultStoreProduct">
+		select * from store_popularity_product_view where store_product_no = #{spnum}
    </select>
 	
 </mapper>	

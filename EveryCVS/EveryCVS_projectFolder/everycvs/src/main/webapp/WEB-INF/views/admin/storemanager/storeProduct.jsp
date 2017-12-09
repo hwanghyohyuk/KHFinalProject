@@ -13,13 +13,13 @@
 <!-- Favicon -->
 <link href="favicon.ico" rel="shortcut icon">
 <!-- Bootstrap Core CSS -->
-<link rel="stylesheet" href="/everycvs/resource/user/css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="/everycvs/resources/user/css/bootstrap.css" rel="stylesheet">
 <!-- Template CSS -->
-<link rel="stylesheet" href="/everycvs/resource/user/css/animate.css" rel="stylesheet">
-<link rel="stylesheet" href="/everycvs/resource/user/css/font-awesome.css" rel="stylesheet">
-<link rel="stylesheet" href="/everycvs/resource/user/css/nexus.css" rel="stylesheet">
-<link rel="stylesheet" href="/everycvs/resource/user/css/responsive.css" rel="stylesheet">
-<link rel="stylesheet" href="/everycvs/resource/user/css/custom.css" rel="stylesheet">
+<link rel="stylesheet" href="/everycvs/resources/user/css/animate.css" rel="stylesheet">
+<link rel="stylesheet" href="/everycvs/resources/user/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="/everycvs/resources/user/css/nexus.css" rel="stylesheet">
+<link rel="stylesheet" href="/everycvs/resources/user/css/responsive.css" rel="stylesheet">
+<link rel="stylesheet" href="/everycvs/resources/user/css/custom.css" rel="stylesheet">
 <!-- Google Fonts-->
 <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -93,7 +93,7 @@
 				<div class="modal-body">
 					<div class="row">
 					<div class="col-sm-6">
-						<img src="/everycvs/resource/user/img/theteam/image1.jpg" alt="image1" align="left" style="margin-left:5px;">
+						<img src="/everycvs/resources/user/img/theteam/image1.jpg" alt="image1" align="left" style="margin-left:5px;">
 					</div>
 					<div class="col-sm-6">
 						<table class="table table-condensed">

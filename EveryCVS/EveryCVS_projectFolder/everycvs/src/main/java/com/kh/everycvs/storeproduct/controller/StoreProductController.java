@@ -44,7 +44,7 @@ public class StoreProductController {
 		return mv;
 	} //테스트중
 	
-	//지점상품 전체보기
+	//지점상품 전체페이지 전체보기
 	@RequestMapping(value="/splist.do")
 	public ModelAndView selectList(String page, HttpServletRequest request){
 		ModelAndView mv = new ModelAndView();
@@ -83,7 +83,7 @@ public class StoreProductController {
 		
 	}
 	
-	//지점상품 검색하기
+	//지점상품 전체페이지 검색하기
 	@RequestMapping(value="/spsearch.do")
 	public ModelAndView searchSproduct(String page,@RequestParam("keyword") String keyword, HttpServletRequest request){
 		
@@ -118,6 +118,25 @@ public class StoreProductController {
 			mv.setViewName("storemain/storeListView");
 		}else{
 			mv.addObject("message", "게시글 검색 실패");
+		}
+		
+		return mv;
+	}
+	
+	//지점상품 전체페이지 상세보기
+	@RequestMapping(value="/spdetail.do")
+	public ModelAndView detailSproduct(int spnum, int page){
+		
+		ModelAndView mv = new ModelAndView();
+		
+		StoreProduct storeproduct = sproductService.detailSproduct(spnum);
+		
+		if(storeproduct != null){
+			mv.addObject("storeproduct", storeproduct);
+			mv.addObject("currentPage",page);
+			mv.setViewName("storemain/storeDetailView");
+		}else{
+			mv.addObject("message", "게시글 상세조회 실패");
 		}
 		
 		return mv;
