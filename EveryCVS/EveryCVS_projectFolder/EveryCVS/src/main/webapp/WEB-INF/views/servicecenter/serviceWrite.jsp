@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- === BEGIN HEAD ===  -->
@@ -10,7 +11,6 @@
 <c:import url="../include/user/common/header.jsp"></c:import>
 <!-- === END HEADER === -->
 <!-- === BEGIN CONTENT === -->
-
             <div id="content">
                 <div class="container background-white">
                     <div class="row margin-vert-30">
@@ -18,51 +18,49 @@
                         <div class="col-md-12">
                             <!-- Main Content -->
                             <div class="headline">
-                                 <h2>고객센터</h2>
+                                 <h2>고객센터 / 글쓰기</h2>
                             </div>
                             <hr>
                             <form>
-                                <div align="right">
-                                    <input type="text" placeholder="제목을 입력해주세요" size="30">
-                                    <input type="button" value="검색">
+
+                                 <label>작성자
+                                    <span class="color-red">*</span>
+                                 </label>
+                                <div class="row margin-bottom-20">
+                                    <div class="col-md-6 col-md-offset-0">
+                                        <input class="form-control" type="text" placeholder="작성자를 입력해주세요" >
+                                    </div>
                                 </div>
-                                <br><br>
-                                <div align="left" style="margin-left: 5%; margin-right: 5%">
-                                    <div class="table-responsive">
-                                    <table class="table table-striped table-bordered">
-                                            <tr>
-                                                    <th width="10%" style="background-color: rgb(51,116,122); text-align: center; color: white;">글번호</th>
-                                                    <th width="60%" style="background-color: rgb(51,116,122); text-align: center; color: white;">제목</th>
-                                                    <th width="10%" style="background-color: rgb(51,116,122); text-align: center; color: white;">작성자</th>
-                                                    <th width="10%" style="background-color: rgb(51,116,122); text-align: center; color: white;">등록일</th>
-                                                    <th width="10%" style="background-color: rgb(51,116,122); text-align: center; color: white;">조회수</th>
-                                            </tr>
-                                            
-                                        <tr>
-                                                <td style="text-align: center;">${service_no}</td>
-                                                <td style="text-align: center;">${title}</td>
-                                                <td style="text-align: center;">${writer}</td>
-                                                <td style="text-align: center;">${write_date}</td>
-                                                <td style="text-align: center;">${readcount}</td>
-                                            </tr>
-                                            
-                                    </table>
-                                <div align="right">
-                                    <button type="submit" class="btn btn-primary">내가쓴글</button>&nbsp&nbsp&nbsp
-                                    <a href="/everycvs/insertService.do">
-                                    <input type="button" class="btn btn-primary" value="글쓰기">
-                                    </a>
+                                
+                                <label>비밀번호
+                                    <span class="color-red">*</span>
+                                </label>
+                                <div class="row margin-bottom-20">
+                                    <div class="col-md-6 col-md-offset-0">
+                                        <input class="form-control" type="password" placeholder="비밀번호를 입력해주세요">
+                                    </div>
                                 </div>
-                                <div class="text-center">
-                                   <ul class="pagination">
-                                      <li><a href="#">&laquo;</a></li>
-                                      <li><a href="#">1</a></li>
-                                      <li><a href="#">2</a></li>
-                                      <li class="active"><a href="#">3</a></li>
-                                      <li><a href="#">4</a></li>
-                                      <li><a href="#">5</a></li>
-                                      <li><a href="#">&raquo;</a></li>
-                                   </ul>
+
+                                <label>제목
+                                    <span class="color-red">*</span>
+                                 </label>
+                                <div class="row margin-bottom-20">
+                                    <div class="col-md-6 col-md-offset-0">
+                                        <input class="form-control" type="text" placeholder="제목을 입력해주세요">
+                                    </div>
+                                </div>
+                                <div>
+                                <label>내용</label>
+                                <div class="row margin-bottom-20">
+                                    <div class="col-md-8 col-md-offset-0">
+                                        <textarea rows="8" class="form-control" placeholder="내용을 입력해주세요"></textarea>
+                                    </div>
+                                </div>
+                                <div align="center">
+                                    <input type="button" class="btn btn-primary" value="등록">
+                                    &nbsp&nbsp&nbsp&nbsp&nbsp
+                                    <input type=button class="btn btn-primary" value="취소">
+                                </div>
                                 </div>
                             </form>
                             <hr>
@@ -73,7 +71,7 @@
                         <!-- Side Column -->
                         <div class="col-md-3">
                             <!-- Recent Posts -->
-                             <!-- <div class="panel panel-default">
+                            <!-- <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Contact Info</h3>
                                 </div>
@@ -96,10 +94,10 @@
                                             <strong class="color-primary">Sunday:</strong>Closed</li>
                                     </ul>
                                 </div>
-                            </div>  -->
+                            </div> -->
                             <!-- End recent Posts -->
                             <!-- About -->
-                             <!-- <div class="panel panel-default">
+                            <!-- <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">About</h3>
                                 </div>
@@ -113,7 +111,6 @@
                     </div>
                 </div>
             </div>
-            <!-- === END CONTENT === -->
            
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->

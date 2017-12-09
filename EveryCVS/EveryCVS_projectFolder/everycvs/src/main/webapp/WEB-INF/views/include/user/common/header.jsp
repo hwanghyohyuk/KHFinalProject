@@ -19,7 +19,7 @@
 							<li><a href="#"><span class="fa-search">CVS
 										SEARCH</span></a></li>
 							<li><a href="#"><span class="fa-gift">EVENT</span></a></li>
-							<li><a href="#"><span class="fa-question-circle">HELP</span></a></li>
+							<li><a href="/everycvs/selectServiceList.do"><span class="fa-question-circle">HELP</span></a></li>
 						</ul>
 					</div>
 				</div>
