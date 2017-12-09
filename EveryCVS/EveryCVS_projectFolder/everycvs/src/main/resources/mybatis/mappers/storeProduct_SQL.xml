@@ -40,7 +40,7 @@
             where rnum >= #{startRow} and rnum <= #{endRow}
            ]]>
    </select>
-   
+
    <select id="searchSproduct" parameterType="hashmap" resultType="list" resultMap="resultStoreProduct">
 		   <![CDATA[
 		    select * from (

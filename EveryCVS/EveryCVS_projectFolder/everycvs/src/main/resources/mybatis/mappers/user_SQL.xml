@@ -39,6 +39,18 @@
 
 	<select id="checkUserWithSessionKey" resultType="user">
         <![CDATA[select * from user_view where session_key = #{value} and session_limit > sysdate]]>
-
     </select>
+    
+    <select id="mypage" resultMap="resultUser" parameterType="user">
+        <![CDATA[
+        select * from tb_user where user_no = #{user_no}
+        ]]>
+    </select>
+    
+    <!-- 잔고충전 -->
+    <update id="userIncreMoney" parameterType="int">
+    	<![CDATA[
+    		update tb_user set cash = #{increMoney} + cash where user_no = #{user_no}
+    	]]>
+    </update>
 </mapper>

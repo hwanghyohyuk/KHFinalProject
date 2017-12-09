@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.kh.everycvs.common.model.vo.StoreProduct, java.util.ArrayList"%>
+<%@ page import="com.kh.everycvs.common.model.vo.StoreProduct, java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- === BEGIN HEAD ===  -->
@@ -33,8 +33,7 @@
 					</div>
 					<form action="spsearch.do" method="post">
 						<div class="col-sm-3" style="margin-left: 190px;">
-							<br> <input class="form-control" type="search"
-								placeholder="상품명을 입력해주세요." name="keyword" value="${keyword}">
+							<br> <input class="form-control" type="search" placeholder="상품명을 입력해주세요." name="keyword" value="${keyword}">
 						</div>
 						<div>
 							<br>
@@ -103,6 +102,7 @@
 					</c:choose>
 				</ul>
 			</div>
+		</div>
 		</div>
 	</div>
 </div>

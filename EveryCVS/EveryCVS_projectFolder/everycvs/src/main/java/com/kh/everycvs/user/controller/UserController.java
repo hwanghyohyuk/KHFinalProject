@@ -1,6 +1,10 @@
 package com.kh.everycvs.user.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -12,13 +16,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
+import com.kh.everycvs.common.model.vo.Favorite;
+import com.kh.everycvs.common.model.vo.Purchase;
 import com.kh.everycvs.common.model.vo.User;
+import com.kh.everycvs.favorite.model.service.FavoriteService;
+import com.kh.everycvs.purchase.model.service.PurchaseService;
 import com.kh.everycvs.user.model.service.UserService;
 
 @Controller
@@ -26,6 +34,11 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private PurchaseService purchaseService;
+	@Autowired
+	private FavoriteService favoriteService;
+	
 
 	/* 로그인 페이지 이동 */
 	@RequestMapping(value = "sign/signin.do", method = RequestMethod.GET)
@@ -113,16 +126,50 @@ public class UserController {
 
 	/** 마이 페이지 **/
 	@RequestMapping("mypage.do")
-	public ModelAndView myPage(HttpSession session) {
-		ModelAndView mv = new ModelAndView("user/mypage/main");
-
-		/*
-		 * User temp = (User)(session.getAttribute("user")); ======= User temp =
-		 * (User) (session.getAttribute("user")); >>>>>>> master int user_no =
-		 * temp.getUser_no(); User user = userService.getUser(user_no);
-		 */
+	public ModelAndView myPage(HttpSession session, ModelAndView mv) {
+		
+		ArrayList<Purchase> list = (ArrayList<Purchase>) purchaseService.purchaseList();
+		ArrayList<Favorite> flist = (ArrayList<Favorite>) favoriteService.favoriteList();
+		mv.addObject("list", list);		
+		mv.addObject("flist", flist); 
+		System.out.println(list);
+		System.out.println(flist);
+		mv.setViewName("user/mypage/main");
 		return mv;
 	}
+	
+	/** 잔고 충전  **/
+	@RequestMapping(value="increMoney.do", method=RequestMethod.POST)
+	@ResponseBody
+	public void userIncreMoney(@RequestParam Map<String,Object> map, HttpSession session, HttpServletResponse response, HttpServletRequest request, String increMoney) throws IOException {
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+
+		increMoney = request.getParameter(increMoney);
+		int mon = Integer.parseInt(request.getParameter("increMoney"));
+		
+		
+	    User user = (User) session.getAttribute("user");
+	    session.setAttribute("user", user);
+	    request.setAttribute("increMoney", mon);
+	  
+	    userService.increMoney(map);
+	    
+		System.out.println("vo : " + user);
+		System.out.println("increMoney : " + mon);
+	
+		/*
+		System.out.println("충전할 값 : " + increcash);*/
+		/*out.append("ok");
+		out.flush();
+		out.close();*/
+		
+		//userService.increMoney(increMoney);
+		/*session.setAttribute("increMoney", session);
+		mv.addObject("increNum", increMoney);
+		System.out.println(increMoney);*/
+	}
+
 
 	/** 로그아웃 **/
 	@RequestMapping(value = "user/signout.do", method = RequestMethod.GET)
