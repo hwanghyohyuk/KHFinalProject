@@ -1,11 +1,14 @@
 package com.kh.everycvs.main.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
 
+	//인터셉터를 거치는 페이지이동 메소드
 	@RequestMapping("main/main.do")
 	public String intercepterMain() {
 		return "main/main";
@@ -26,8 +29,14 @@ public class MainController {
 		return "admin/sitemanager/main";
 	}
 
+	//페이지이동 및 서비스 로드 메소드
 	@RequestMapping("main.do")
-	public String Main() {
+	public String Main(HttpSession session) {
+		Object store = session.getAttribute("store");
+		// 현재 세션에 store정보가 있다면
+		if(store!=null){
+			session.invalidate(); //정보를 삭제한다
+		}
 		return "main/main";
 	}
 

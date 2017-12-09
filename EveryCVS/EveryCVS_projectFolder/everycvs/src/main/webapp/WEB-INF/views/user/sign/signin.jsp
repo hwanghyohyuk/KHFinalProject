@@ -18,7 +18,7 @@
 				<div class="col-md-6 col-md-offset-3 col-sm-offset-3">
 					<form class="login-page" name="form1" method="post" action="/everycvs/signinpost.do">
 						<div class="login-header margin-bottom-30">
-							<h2>Login to your account</h2>
+							<h2>Sign In to your account</h2>
 						</div>
 						<div class="input-group margin-bottom-20">
 							<span class="input-group-addon"> <i class="fa fa-user"></i>
@@ -36,17 +36,22 @@
 								</label>
 							</div>
 							<div class="col-md-6">
-								<button class="btn btn-primary pull-right" type="submit">Login</button>
+								<button class="btn btn-primary pull-right" type="submit">Sign In</button>
 							</div>
 						</div>
 						<hr>
+						<h4>Need Account ?</h4>
+						<p>
+							<a href="#">Click here</a>&nbsp;to create your account!
+						</p>
+						<br>
 						<h4>Forget your Password ?</h4>
 						<p>
-							<a href="#">Click here</a>to reset your password.
+							<a href="#">Click here</a>&nbsp;to reset your password.
 						</p>
 					</form>
 				</div>
-				<!-- End Login Box -->
+				<!-- End Sign In Box -->
 			</div>
 		</div>
 	</div>
@@ -56,5 +61,10 @@
 <c:import url="../../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
 <!-- JS -->
+<c:if test="${result eq false }">
+<script type="text/javascript">
+alert("Sign in fail...\n check your email or password...");
+</script>
+</c:if>
 <c:import url="../../include/user/common/end.jsp"></c:import>
 <!-- === END === -->

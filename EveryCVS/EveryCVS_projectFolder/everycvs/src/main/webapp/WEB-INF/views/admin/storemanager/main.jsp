@@ -18,7 +18,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Dashboard
+			${sessionScope.user.brand_name}&nbsp;${sessionScope.user.store_name}
             <small>Control panel</small>
           </h1>
           <ol class="breadcrumb">
