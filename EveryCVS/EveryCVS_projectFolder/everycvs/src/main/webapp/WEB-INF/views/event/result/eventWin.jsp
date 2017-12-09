@@ -5,7 +5,7 @@
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="ko">
+<html lang="en">
     <!--<![endif]-->
     <head>
         <!-- Title -->
@@ -232,76 +232,48 @@
                 <div class="container background-white">
                     <div class="row margin-vert-30">
                         <!-- Main Column -->
-                        <div class="col-md-14">
-                            <div class="blog-post">
-                                
-                              <!-- 댓글 갯수  <div class="blog-post-details"> -->
-                                    <!-- # of Comments -->
-                                   <!--  <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last">
-                                        <a href="">
-                                            <i class="fa fa-comments color-gray-light"></i>
-                                            3 Comments
-                                        </a>
-                                    </div> -->
-                                    <!-- End # of Comments -->
-                                <!-- </div> -->
-      <div align="left" style="margin-left: 5%; margin-right: 5%;">
-            <div class="blog-item-header">
-                <h2>
-                        이벤트 당첨자 발표
-                </h2>
-                
-            </div><br>
-            <div align="left">
-            <form class="form-group" role="form" action="#" method="get" >
-                <select class="btn btn-primary" name="searchValue" id="findType" style="display: inline-block;">
-                    <option value="findByTitle">제목</option>
-                </select> 
-                <input class="form-nomaltext" name ="searchKeyWord" type="search"
-                    id="searchKeyWord" placeholder="제목으로 검색" class="btn btn-primary" style="display: inline-block;">
-                <button type="submit" id="searchSubmit" value="검색" class="btn btn-primary" style="display: inline-block;">검색</button>
-            &nbsp;&nbsp;&nbsp;&nbsp;    
-            </form>
-        </div>
-    </div>
-    <div align="left" style="margin-left: 5%; margin-right: 5%">
-        <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-            <caption>당첨되신걸 축하 드립니다.</caption>
-                <tr>
-                        <th width="5%" style="background-color: rgb(51,116,122); text-align: center; color: white;">글번호</th>
-                        <th width="65%" style="background-color: rgb(51,116,122); text-align: center; color: white;">제목</th>
-                        <th width="25%" style="background-color: rgb(51,116,122); text-align: center; color: white;">작성일</th>
-                        <th width="5%" style="background-color: rgb(51,116,122); text-align: center; color: white;">조회수</th>
-                </tr>
-
-            <tr>
-                    <td style="text-align: center;">${postingNo}</td>
-                    <td style="text-align: center;">${Id}</td>
-                    <td style="text-align: center;">${Date}</td>
-                    <td style="text-align: center;">${listCount}</td>
-                </tr>
-        </table>
-        <!-- 글작성버튼 -->
-    <br>
-    <div align="right" >
-        <a href="#" class="btn" style="background:rgb(51,116,122); color: white">글작성</a>
-    </div>
-    </div>
-            <!-- 페이지인 척 하는 새끼 -->
-                <div class="text-center">
-                            <ul class="pagination">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li class="active"><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                            </ul>
-                        </div>
-                    </div>
-             <!-- Footer -->
+                        <div class="col-md-12">
+                            <!-- Blog Post -->
+                            <div class="blog-post padding-bottom-20">
+                                <!-- Blog Item Header -->
+                                <div class="blog-item-header">
+                                    <!-- Title -->
+                                    <h2>
+                                        <a href="#">
+                                            1+1 이벤트 당첨을 축하드립니다!</a>
+                                    </h2>
+                                    <div class="clearfix"></div>
+                                    <!-- End Title -->
+                                </div>
+                                <!-- End Blog Item Header -->
+                                <div class="container">
+                                <div align="left" style="margin-left: 10%; margin-right: 10%">  
+                                <div style="float: left;">
+                                <span class="label label-default">${no}</span>
+                                <span class="label label-default">${date}</span>
+                                </div>
+                                <div style="float: right;">
+                                <font color="black">작성자 :  </font><font color="black">관리자</font>
+                                </div>
+                                <br><br>
+                                <div class="well well">${Title}</div>
+                                <div class="panel-body">
+                                <table>
+                                <tr>
+                                <td>${Content}</td>
+                                </tr>
+                                </table>
+                                <br><br><br><br><hr>
+                                </div>
+                                <div align="center">
+                                    <a href="#" class="btn btn-primary">수정</a>&nbsp;
+                                    <a class="btn btn-primary">삭제</a>&nbsp;
+                                    <a href="#" class="btn btn-primary">목 록</a>
+                                </div>
+                                    <br>
+                                </div>
+                        <!-- End Main Column -->                            
+            <!-- Footer -->
             <div id="footer" class="background-grey">
                 <div class="container">
                     <div class="row">
@@ -351,11 +323,11 @@
             <!-- End JS -->
     </body>
 </html>
-<!-- === END FOOTER ===
-<!-- <!DOCTYPE html>
+<!-- === END FOOTER === -->
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
