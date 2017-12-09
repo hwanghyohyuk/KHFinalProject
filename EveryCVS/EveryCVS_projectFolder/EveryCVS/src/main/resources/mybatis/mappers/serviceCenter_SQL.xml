@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="serviceCenter">
+
+<resultMap id="resultService" type="serviceCenter">
+		<id property="service_no" column="SERVICE_NO"  />
+		<result property="title" column="TITLE"/>
+		<result property="writer" column="WRITER" />
+		<result property="contents" column="CONTENTS" />
+		<result property="write_date" column="WRITE_DATE" />
+		<result property="readcount" column="READCOUNT" />
+		<result property="original_file_name" column="ORIGINAL_FILE_NAME" />
+		<result property="stored_file_name" column="STORED_FILE_NAME" />
+		<result property="del_check" column="DEL_CHECK" />
+	</resultMap>
+	
+	<select id="selectList" resultType="serviceCenter" resultMap="resultService">
+	<![CDATA[SELECT A.SERVICE_NO, A.TITLE, A.WRITER, B.USER_NAME, A.CONTENTS, A.WRITE_DATE, A.READCOUNT, A.ORIGINAL_FILE_NAME, 
+			A.STORED_FILE_NAME, A.DEL_CHECK
+			FROM TB_SERVICE_CENTER A
+			JOIN TB_USER B ON(A.WRITER = B.USER_NO)]]>
+	</select>
+	
+	</mapper>

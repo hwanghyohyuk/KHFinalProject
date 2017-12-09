@@ -28,7 +28,6 @@
 									<li><a href="/everycvs/main.do#event"><span class="fa-cubes">Store Product</span></a></li>
 								</c:when>
 							</c:choose>
-
 						</ul>
 					</div>
 				</div>
