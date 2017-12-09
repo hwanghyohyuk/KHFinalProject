@@ -1,7 +1,6 @@
 package com.kh.everycvs.storeproduct.model.service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,17 +20,15 @@ public class StoreProductServiceImpl implements StoreProductService {
 	}
 
 	@Override
-	public List<StoreProduct> selectList(int currentPage, int limit) {
+	public ArrayList<StoreProduct> selectList(int currentPage, int limit) {
 		int startRow = (currentPage -1) * limit + 1;
 		int endRow = startRow + limit - 1;
 		return sproductDao.selectList(startRow,endRow);  
 	}
 	
 	@Override
-	public List<StoreProduct> searchSproduct(int currentPage, int limit, String keyword) {
-		int startRow = (currentPage -1) * limit + 1;
-		int endRow = startRow + limit - 1;
-		return sproductDao.searchSproduct(startRow,endRow,keyword);
+	public ArrayList<StoreProduct> searchList() {
+		return sproductDao.searchList();
 	}
 
 	@Override
@@ -58,6 +55,5 @@ public class StoreProductServiceImpl implements StoreProductService {
 	public int updateSproduct(StoreProduct sp) {
 		return sproductDao.updateSproduct();
 	}
-
 
 }

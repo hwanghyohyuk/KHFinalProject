@@ -2,8 +2,11 @@ package com.kh.everycvs.event.model.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.kh.everycvs.event.model.dao.EventDao;
 
 @Service("EventService")
 public class EventServiceImpl implements EventService{
@@ -41,6 +44,18 @@ public class EventServiceImpl implements EventService{
 	@Override
 	public String deleteEvent(HttpServletRequest request) {
 		// 이벤트 삭제
+		return null;
+	}
+
+	@Override
+	public String participateEvent(HttpServletRequest request) {
+		//이벤트 참여 여부
+		return null;
+	}
+
+	@Override
+	public ModelAndView winEvent(HttpServletRequest request) {
+		// 이벤트 당첨자 리스트 출력
 		return null;
 	}
 

@@ -1,19 +1,12 @@
 package com.kh.everycvs.purchase.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.everycvs.common.model.vo.Purchase;
 import com.kh.everycvs.purchase.model.service.PurchaseService;
-
 
 @Controller
 public class PurchaseController {
@@ -62,17 +55,9 @@ public class PurchaseController {
 	}
 	
 	//거래내역 조회 : 3개월, 1개월, 1주일 단위로 조회(해당 리스트 목록조회)
-	@RequestMapping("purchaseList.do")
-	public ModelAndView purchaseList(ModelAndView mv) {
+	public ModelAndView purchaseList(HttpServletRequest request) {
 		//구매내역 조회를 요청하면 가지고 있는 구매내역 리스트를 리턴함
-		
-		//mv = new ModelAndView("user/mypage/main");
-		ArrayList<Purchase> list = (ArrayList<Purchase>) purchaseService.purchaseList();
-		
-		mv.addObject("list", list);
-		mv.setViewName("user/mypage/main");
-		System.out.println(list);
-		return mv;
+		return null;
 	}
 	
 	/*사이트관리자*/

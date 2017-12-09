@@ -1,16 +1,11 @@
 package com.kh.everycvs.purchase.model.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.everycvs.common.model.vo.Purchase;
 import com.kh.everycvs.purchase.model.dao.PurchaseDao;
 
 @Service("PurchaseService")
@@ -62,11 +57,9 @@ public class PurchaseServiceImpl implements PurchaseService{
 	}
 
 	@Override
-	public ArrayList<Purchase> purchaseList() {
+	public ModelAndView purchaseList(HttpServletRequest request) {
 		//구매내역 조회
-		ArrayList<Purchase> list = new ArrayList<Purchase>();
-		System.out.println(list);
-		return (ArrayList<Purchase>) purchaseDao.purchaseList();
+		return null;
 	}
 
 	/*사이트관리자*/

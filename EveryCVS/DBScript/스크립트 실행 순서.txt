@@ -3,6 +3,6 @@
 
 everycvs 계정으로
 1. EveryCVS_DDL_Script.sql
-2. EveryCVS_VIEW_Script.sql
-3. EveryCVS_SAMPLE_Script.sql
+2. EveryCVS_DDL_Script_add.sql
+3. EveryCVS_DML_Script.sql
 실행
