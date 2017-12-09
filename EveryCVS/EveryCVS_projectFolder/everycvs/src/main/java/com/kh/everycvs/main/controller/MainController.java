@@ -1,5 +1,7 @@
 package com.kh.everycvs.main.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,7 +31,12 @@ public class MainController {
 
 	//페이지이동 및 서비스 로드 메소드
 	@RequestMapping("main.do")
-	public String Main() {
+	public String Main(HttpSession session) {
+		Object store = session.getAttribute("store");
+		// 현재 세션에 store정보가 있다면
+		if(store!=null){
+			session.invalidate(); //정보를 삭제한다
+		}
 		return "main/main";
 	}
 

@@ -35,10 +35,12 @@ public class UserController {
 
 	/** 로그인 **/
 	@RequestMapping(value = "signinpost.do", method = RequestMethod.POST)
-	public String signIn(@RequestParam("email") String email, @RequestParam("pwd") String pwd,
+	public ModelAndView signIn(@RequestParam("email") String email, @RequestParam("pwd") String pwd,
 			@RequestParam(value = "usecookie", defaultValue = "false", required = false) boolean useCookie,
 			HttpSession session, HttpServletResponse response) {
 		String returnURL = "";
+		ModelAndView mv = null;
+		
 		if (session.getAttribute("user") != null) {
 			// 기존에 user이란 세션 값이 존재한다면
 			session.removeAttribute("user"); // 기존값을 제거해 준다.
@@ -100,10 +102,13 @@ public class UserController {
 				}
 
 			}
+			mv = new ModelAndView(returnURL);
 		} else { // 로그인에 실패한 경우
-			returnURL = "sign/signin"; // 로그인 폼으로 다시 가도록 함
-		}
-		return returnURL; // 위에서 설정한 returnURL 을 반환해서 이동시킴
+			returnURL = "user/sign/signin"; // 로그인 폼으로 다시 가도록 함
+			mv = new ModelAndView(returnURL);
+			mv.addObject("result",false);
+		}		
+		return mv; // 위에서 설정한 returnURL 을 반환해서 이동시킴
 	}
 
 	/** 마이 페이지 **/

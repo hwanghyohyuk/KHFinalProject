@@ -1,8 +1,4 @@
-var map = new naver.maps.Map("map", {
-	center : new naver.maps.LatLng(37.3595316, 127.1052133),
-	zoom : 12,
-	mapTypeControl : false
-});
+var map = new naver.maps.Map("map");
 
 var infoWindow = new naver.maps.InfoWindow({
 	anchorSkew : true
@@ -21,7 +17,7 @@ function searchCoordinateToAddress(latlng) {
 		coordType : naver.maps.Service.CoordType.TM128
 	}, function(status, response) {
 		if (status === naver.maps.Service.Status.ERROR) {
-			return alert('Something Wrong!');
+			return alert('검색어가 올바르지 않습니다.');
 		}
 
 		var items = response.result.items, htmlAddresses = [];
@@ -79,6 +75,16 @@ function searchAddressToCoordinate(address) {
 }
 
 function initGeocoder() {
+	map.setOptions({
+		scaleControl : true,
+		logoControl : false,
+		mapDataControl : false,
+		zoomControl : false,
+		minZoom : 11,
+		maxZoom: 12,
+		zoom : 12,
+		mapTypeControl : false
+	});
 	map.addListener('click', function(e) {
 		searchCoordinateToAddress(e.coord);
 	});
@@ -98,7 +104,7 @@ function initGeocoder() {
 	});
 
 	$('#init').on('click', function(e) {
-		onloadGeolocation();
+		onLoadGeolocation();
 	});
 
 }
@@ -129,7 +135,7 @@ function onErrorGeolocation() {
 	infoWindow.open(map, center);
 }
 
-function onloadGeolocation() {
+function onLoadGeolocation() {
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(onSuccessGeolocation,
 				onErrorGeolocation);
@@ -144,9 +150,10 @@ function onloadGeolocation() {
 						+ center.lng() + '</div>');
 		infoWindow.open(map, center);
 	}
+
 }
 
 $(window).on("load", function() {
-	onloadGeolocation();
+	onLoadGeolocation();
 	initGeocoder();
 });

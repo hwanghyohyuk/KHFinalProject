@@ -42,12 +42,12 @@
 						<hr>
 						<h4>Need Account ?</h4>
 						<p>
-							<a href="#">Click here</a>to create your account!
+							<a href="#">Click here</a>&nbsp;to create your account!
 						</p>
 						<br>
 						<h4>Forget your Password ?</h4>
 						<p>
-							<a href="#">Click here</a>to reset your password.
+							<a href="#">Click here</a>&nbsp;to reset your password.
 						</p>
 					</form>
 				</div>
@@ -61,5 +61,10 @@
 <c:import url="../../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
 <!-- JS -->
+<c:if test="${result eq false }">
+<script type="text/javascript">
+alert("Sign in fail...\n check your email or password...");
+</script>
+</c:if>
 <c:import url="../../include/user/common/end.jsp"></c:import>
 <!-- === END === -->

@@ -15,33 +15,37 @@
 				<div class="col-md-8 no-padding">
 					<div class="visible-lg">
 						<ul id="hornavmenu" class="nav navbar-nav">
-							<li><a href="/everycvs/main/main.do" class="fa-home active">EVERYCVS</a></li>
-							<li><a href="#cvssearch"><span class="fa-search">CVS SEARCH</span></a></li>
-							<li><a href="#event"><span class="fa-gift">EVENT</span></a></li>
-							<li><a href="#help"><span class="fa-question-circle">HELP</span></a></li>
+							<c:choose>
+								<c:when test="${ sessionScope.store eq null }">
+									<li><a href="/everycvs/main/main.do" class="fa-home active">EVERYCVS</a></li>
+									<li><a href="/everycvs/main.do#cvssearch"><span class="fa-search">CVS SEARCH</span></a></li>
+									<li><a href="#event"><span class="fa-gift">EVENT</span></a></li>
+									<li><a href="#help"><span class="fa-question-circle">HELP</span></a></li>
+								</c:when>
+								<c:when test="${ sessionScope.store ne null}">
+									<li><a href="/everycvs/main/main.do" class="fa-home active">EVERYCVS</a></li>
+									<li><a href="/everycvs/main.do#cvssearch"><span class="fa-search">CVS SEARCH</span></a></li>
+									<li><a href="#event"><span class="fa-cubes">Store Product</span></a></li>
+								</c:when>
+							</c:choose>
+
 						</ul>
 					</div>
 				</div>
 				<div class="col-md-4 no-padding">
 					<ul id="hornavmenu" class="nav navbar-nav navbar-right">
-						<c:if test="${ sessionScope.user == null }">
+						<c:if test="${ sessionScope.user eq null }">
 							<li><a href="/everycvs/sign/signin.do"><span
 									class="fa-user">LOGIN</span></a></li>
 						</c:if>
-						<c:if test="${ sessionScope.user != null }">
+						<c:if test="${ sessionScope.user ne null }">
 
-							<li><a href="/everycvs/">${sessionScope.user.user_name}</a>
+							<li><a href="#">${sessionScope.user.user_name}</a>
 								<ul>
+									<li><a href="pages-services.html">My page</a></li>
+									<li><a href="#">Cash : ${sessionScope.user.cash}</a></li>
+									<li><a href="#">Point : ${sessionScope.user.point}</a></li>
 									<li><a href="/everycvs/signout.do">Sign out</a></li>
-									<li><a href="pages-services.html">Services</a></li>
-									<li><a href="pages-faq.html">F.A.Q.</a></li>
-									<li><a href="pages-about-me.html">About Me</a></li>
-									<li><a href="pages-full-width.html">Full Width</a></li>
-									<li><a href="pages-left-sidebar.html">Left Sidebar</a></li>
-									<li><a href="pages-right-sidebar.html">Right Sidebar</a></li>
-									<li><a href="pages-login.html">Login</a></li>
-									<li><a href="pages-sign-up.html">Sign-Up</a></li>
-									<li><a href="pages-404.html">404 Error Page</a></li>
 								</ul></li>
 						</c:if>
 					</ul>
