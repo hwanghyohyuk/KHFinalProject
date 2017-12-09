@@ -87,7 +87,7 @@
 					<c:when test="${sessionScope.user.job eq 'storemanager'}">
 						<li><a href="#"><i class="fa fa-home"></i>${sessionScope.user.store_name}</a></li>
 						<li class="treeview"><a href="#"> <i class="fa fa-share"></i>
-								<span>Store Product Management</span> <i class="fa fa-angle-left pull-right"></i></a>
+								<span>지점 상품 관리</span> <i class="fa fa-angle-left pull-right"></i></a>
 							<ul class="treeview-menu">
 								<li><a href="#"><i class="fa fa-circle-o"></i> LevelOne</a></li>
 								<li><a href="#"><i class="fa fa-circle-o"></i> LevelOne	<i class="fa fa-angle-left pull-right"></i></a>
@@ -101,41 +101,43 @@
 									</ul></li>
 							</ul>
 						</li>
-						<li><a href="#"><i class="fa fa-question-circle"></i>	Service Center</a></li>
+						<li><a href="#"><i class="fa fa-question-circle"></i>	고객센터</a></li>
 					</c:when>
 					<c:when test="${sessionScope.user.job eq 'cvsmanager'}">
-						<li><a href="#"><i class="fa fa-dashboard"></i> Dash
-								Board</a></li>
-						<li><a href="#"><i class="fa fa-home"></i> Store
-								Management</a></li>
-						<li class="treeview"><a href="#"> <i class="fa fa-share"></i>
-								<span>CVS Product Management</span> <i class="fa fa-angle-left pull-right"></i></a>
+						<li><a href="#"><i class="fa fa-dashboard"></i> Dash Board</a></li>
+						<li><a href="/everycvs/cvsstorelist.do">
+							<i class="fa fa-home"></i> 지점 관리</a>
+						</li>
+						<li class="treeview">
+							<a href="#">
+								<i class="fa fa-cube"></i>
+								<span> 상품 관리</span>
+							</a>
 							<ul class="treeview-menu">
-								<li><a href="#"><i class="fa fa-circle-o"></i> LevelOne</a></li>
-								<li><a href="#"><i class="fa fa-circle-o"></i> LevelOne	<i class="fa fa-angle-left pull-right"></i></a>
-									<ul class="treeview-menu">
-										<li><a href="#"><i class="fa fa-circle-o"></i>LevelTwo</a></li>
-										<li><a href="#"><i class="fa fa-circle-o"></i>LevelTwo <i class="fa fa-angle-left pull-right"></i></a>
-											<ul class="treeview-menu">
-												<li><a href="#"><i class="fa fa-circle-o"></i>LevelThree</a></li>
-												<li><a href="#"><i class="fa fa-circle-o"></i>LevelThree</a></li>
-											</ul></li>
-									</ul></li>
+								<li><a href="/everycvs/cvsproductlist.do"><i class="fa fa-search"></i> 상품 리스트</a></li>
+								<li><a href="/everycvs/cvsproductwriteview.do"><i class="fa fa-plus"></i> 상품 등록</a></li>
 							</ul>
 						</li>
-						<li><a href="#"><i class="fa fa-gift"></i> Evevnt
-								Management</a></li>
-						<li><a href="#"><i class="fa fa-question-circle"></i>
-								Service Center</a></li>
+						<li class="treeview">
+							<a href="#">
+								<i class="fa fa-gift"></i>
+								<span> 이벤트 관리</span>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="/everycvs/cvseventlist.do?code=1">
+									<i class="fa fa-search"></i> 진행 중인 이벤트 리스트</a></li>
+								<li><a href="/everycvs/cvseventlist.do?code=2">
+									<i class="fa fa-archive"></i> 종료된 이벤트 리스트</a></li>
+								<li><a href="/everycvs/cvseventwriteview.do">
+									<i class="fa fa-plus"></i> 이벤트 등록</a></li>
+							</ul>
+						</li>
 					</c:when>
 					<c:otherwise>
 					<li><a href="#"><i class="fa fa-dashboard"></i> Dash Board</a></li>
-						<li><a href="#"><i class="fa fa-users"></i> User
-								Management</a></li>
-						<li><a href="#"><i class="fa fa-list-alt"></i> Community
-								Management</a></li>
-						<li><a href="#"><i class="fa fa-question-circle"></i>
-								Service Center Management </a></li>
+						<li><a href="#"><i class="fa fa-users"></i>회원 관리</a></li>
+						<li><a href="#"><i class="fa fa-list-alt"></i>커뮤니티 관리</a></li>
+						<li><a href="#"><i class="fa fa-question-circle"></i>고객센터 관리</a></li>
 					</c:otherwise>
 				</c:choose>
 <!-- 			<li class="header">LABELS</li>

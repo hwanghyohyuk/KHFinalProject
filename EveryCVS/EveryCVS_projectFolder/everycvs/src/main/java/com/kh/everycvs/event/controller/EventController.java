@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.event.model.service.EventService;
@@ -42,6 +44,34 @@ public class EventController {
 	// 이벤트 삭제
 	public String deleteEvent(HttpServletRequest request) {
 		return null;
+	}
+	
+	
+	// 편의점 관리자
+	// 이벤트 조회 : 모든 공식이벤트를 조회
+	@RequestMapping(value = "cvseventlist.do", method = RequestMethod.GET)
+	public String cvsEventList(HttpServletRequest request) {
+		int code = Integer.parseInt(request.getParameter("code"));
+		
+		if(code == 1) {
+			// 진행 중인 이벤트 리스트 조회
+		}else if (code == 2) {
+			// 종료된 이벤트 리스트 조회
+		}
+		
+		return "admin/cvsmanager/eventList";
+	}
+	
+	// 이벤트 등록
+	@RequestMapping("cvseventwriteview.do")
+	public String cvsEventWriteView() {
+		return "admin/cvsmanager/eventWriteForm";
+	}
+	
+	// 이벤트 수정
+	@RequestMapping("cvseventmodifyview.do")
+	public String cvsEventModifyView() {
+		return "admin/cvsmanager/eventModifyForm";
 	}
 
 }
