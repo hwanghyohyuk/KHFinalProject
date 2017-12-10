@@ -35,8 +35,8 @@
 	<select id="selectList" parameterType="java.util.Map" resultType="list" resultMap="resultStoreProduct">
 		   <![CDATA[
       		select * from (
-            select rownum rnum, store_product_no, product_name, price
-            from store_popularity_product_view)
+            select rownum rnum, a.*
+            from store_popularity_product_view a)
             where rnum >= #{startRow} and rnum <= #{endRow}
            ]]>
    </select>
