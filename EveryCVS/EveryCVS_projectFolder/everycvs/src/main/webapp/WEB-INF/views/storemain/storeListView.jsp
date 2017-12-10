@@ -42,8 +42,9 @@
 							class="col-md-3 col-sm-3 col-xs-6 person-details margin-bottom-30">
 							<figure>
 								<figcaption>
-									<a href="#" data-toggle="modal" data-target="#spmodall${sp.store_product_no}"> 
-									<img src="/everycvs/resources/user/img/theteam/image1.jpg" alt="image1"></a> <br>
+									<a href="#" data-toggle="modal" data-target="#spmodal${sp.store_product_no}"> 
+										<img src="/everycvs/resources/user/img/theteam/image1.jpg" alt="image1">
+									</a> <br>
 									<h5 align="center">
 										<strong>${sp.product_name}</strong>
 									</h5>
@@ -51,8 +52,8 @@
 								</figcaption>
 							</figure>
 						</div>
-						<!-- 모달 -->
-						<div id="spmodall${sp.store_product_no}" class="modal fade" role="dialog">
+						<!-- Modal -->
+						<div id="spmodal${sp.store_product_no}" class="modal fade" role="dialog">
 							<div class="modal-dialog">
 								<!-- Modal content-->
 								<div class="modal-content">
