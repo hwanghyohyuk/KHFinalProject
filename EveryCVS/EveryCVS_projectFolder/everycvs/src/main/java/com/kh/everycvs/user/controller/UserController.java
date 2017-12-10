@@ -77,7 +77,7 @@ public class UserController {
 				returnURL = "redirect:/main/main.do"; // 로그인 성공시 사용자 메인페이지 이동
 				break;
 			case "storemanager":
-				returnURL = "redirect:/main/storemain.do";
+				returnURL = "redirect:/page/storemain.do";
 				break;
 			case "cvsmanager":
 				returnURL = "redirect:/main/cvsmain.do";

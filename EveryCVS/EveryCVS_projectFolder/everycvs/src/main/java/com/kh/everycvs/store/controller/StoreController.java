@@ -25,13 +25,6 @@ public class StoreController {
 		return null;
 	}
 	
-	/*지점메인으로 이동*/
-	public ModelAndView moveToStoreMain(String store_no){
-		/**지점방문횟수 증가**/
-		storeService.increamentJoinCount(store_no);
-		return null;
-	}
-	
 	/* 지점관리자 */
 
 	// 지점 조회 : 모든 지점을 조회

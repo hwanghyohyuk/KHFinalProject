@@ -15,19 +15,32 @@
 				<div class="col-md-8 no-padding">
 					<div class="visible-lg">
 						<ul id="hornavmenu" class="nav navbar-nav">
-							<c:choose>
-								<c:when test="${ sessionScope.store eq null }">
-									<li><a href="/everycvs/main/main.do" class="fa-home active">EVERYCVS</a></li>
-									<li><a href="/everycvs/main.do#cvssearch"><span class="fa-search">CVS SEARCH</span></a></li>
-									<li><a href="/everycvs/main.do#event"><span class="fa-gift">EVENT</span></a></li>
-									<li><a href="/everycvs/main.do#help"><span class="fa-question-circle">HELP</span></a></li>
-								</c:when>
-								<c:when test="${ sessionScope.store ne null}">
-									<li><a href="/everycvs/main/main.do" class="fa-home active">EVERYCVS</a></li>
-									<li><a href="/everycvs/main.do#cvssearch"><span class="fa-search">CVS SEARCH</span></a></li>
-									<li><a href="/everycvs/main.do#event"><span class="fa-cubes">Store Product</span></a></li>
-								</c:when>
-							</c:choose>
+							<c:if test="${sessionScope.user.job eq 'storemanager'}">
+								<li><a href="/everycvs/main/main.do" class="fa-home active">EVERYCVS</a></li>
+								<li><a href="#"><span class="fa-cubes">지점 상품 관리</span></a></li>
+								<li><a href="#"><span class="fa-question-circle">고객센터</span></a></li>
+							</c:if>
+							<c:if test="${sessionScope.user.job ne 'storemanager'}">
+								<c:if test="${ sessionScope.store eq null}">
+									<li><a href="/everycvs/main/main.do"
+										class="fa-home active">EVERYCVS</a></li>
+									<li><a href="/everycvs/main.do#cvssearch"><span
+											class="fa-search">CVS SEARCH</span></a></li>
+									<li><a href="/everycvs/main.do#event"><span
+											class="fa-gift">EVENT</span></a></li>
+									<li><a href="/everycvs/main.do#help"><span
+											class="fa-question-circle">HELP</span></a></li>
+								</c:if>
+								<c:if test="${ sessionScope.store ne null}">
+									<li><a
+										href="/everycvs/page/storemain.do?sno=${sessionScope.store.store_no}"
+										class="fa-home active">STORE MAIN</a></li>
+									<li><a href="/everycvs/main.do#cvssearch"><span
+											class="fa-search">CVS SEARCH</span></a></li>
+									<li><a href="#"><span class="fa-cubes">STORE
+												PRODUCT</span></a></li>
+								</c:if>
+							</c:if>
 						</ul>
 					</div>
 				</div>
@@ -43,7 +56,9 @@
 								<ul>
 									<li><a href="mypage.do">My page</a></li>
 									<li><a href="#">Cash : ${sessionScope.user.cash}</a></li>
-									<li><a href="#">Point : ${sessionScope.user.point}</a></li>
+									<c:if test="${sessionScope.user.job eq 'customer'}">
+										<li><a href="#">Point : ${sessionScope.user.point}</a></li>
+									</c:if>
 									<li><a href="/everycvs/user/signout.do">Sign out</a></li>
 								</ul></li>
 						</c:if>
