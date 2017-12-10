@@ -9,7 +9,7 @@
 <c:import url="../include/user/common/headend.jsp"></c:import>
 <!-- === END HEAD ===  -->
 <!-- === BEGIN HEADER ===  -->
-<c:import url="../include/user/main/header.jsp"></c:import>
+<c:import url="../include/user/common/header.jsp"></c:import>
 <!-- === END HEADER === -->
 <!-- === BEGIN CONTENT === -->
 <div id="content">
@@ -19,7 +19,7 @@
 				<h2>이벤트 상세보기</h2>
 				<div class="row">
 					<div class="col-md-6 animate fadeIn">
-						<img src="assets/img/fillers/aboutme.jpg" alt="about-me"
+						<img src="/everycvs/resources/user/img/fillers/aboutme.jpg" alt="about-me"
 							class="margin-top-10">
 
 					</div>
@@ -58,7 +58,7 @@
 
 				<!-- === END CONTENT === -->
 				<!-- === BEGIN FOOTER === -->
-				<c:import url="../include/user/main/footer.jsp"></c:import>
+				<c:import url="../include/user/common/footer.jsp"></c:import>
 				<!-- === END FOOTER === -->
 				<!-- JS -->
 				<c:import url="../include/user/common/end.jsp"></c:import>

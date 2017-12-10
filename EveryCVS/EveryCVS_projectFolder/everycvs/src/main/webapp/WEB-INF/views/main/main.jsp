@@ -69,7 +69,7 @@
 					</h2>
 				</div>
 				<div class="col-md-6 col-sm-6 col-xs-6 text-right">
-					<a href="#">more</a>
+					<a href="/everycvs/eventAll.do">more</a>
 				</div>
 			</div>
 			<!-- Icons -->
