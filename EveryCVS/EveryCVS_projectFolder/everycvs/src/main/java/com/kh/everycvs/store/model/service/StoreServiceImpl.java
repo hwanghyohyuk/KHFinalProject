@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.store.model.dao.StoreDao;
 
 @Service("StoreService")
@@ -16,7 +17,11 @@ public class StoreServiceImpl implements StoreService {
 	@Autowired
 	private StoreDao storeDao;
 
-
+	@Override
+	public Store selectStore(String sno) {
+		return storeDao.selectStore(sno);
+	}	
+	
 	@Override
 	public ModelAndView selectStoreList(HttpServletRequest request) {
 		// 지점 조회 : 모든 지점을 조회
@@ -67,6 +72,7 @@ public class StoreServiceImpl implements StoreService {
 		return null;
 	}
 
+	
 	
 
 

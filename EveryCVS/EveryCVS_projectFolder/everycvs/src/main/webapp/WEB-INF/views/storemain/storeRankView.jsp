@@ -17,8 +17,7 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<h2>
-							<strong>GS25대치점</strong><br> <small>서울특별시 강남구
-								영동대로86길 10</small>
+							<strong>${sessionScope.store.brand_name}&nbsp;${sessionScope.store.store_name}</strong><br> <small>${sessionScope.store.road_address}</small>
 						</h2>
 					</div>
 					<div class="col-sm-1" style="margin-left: 350px;">

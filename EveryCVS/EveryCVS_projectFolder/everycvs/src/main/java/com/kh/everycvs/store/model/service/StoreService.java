@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.everycvs.common.model.vo.Store;
+
 public interface StoreService {
 	
 	/*사용자*/
@@ -14,6 +16,9 @@ public interface StoreService {
 	/**지점 방문횟수증가**/
 	public void increamentJoinCount(String store_no);
 
+	/*지점정보 조회*/
+	public Store selectStore(String sno);
+	
 	/*지점관리자*/
 	// 지점 조회 : 모든 지점을 조회
 	public ModelAndView selectStoreList(HttpServletRequest request);
@@ -33,6 +38,8 @@ public interface StoreService {
 	/* 사이트 관리자 */
 	/** 편의점별 방문자 수 통계 **/
 	public Map cvsJoinCount();
+	
+	
 
 	
 }

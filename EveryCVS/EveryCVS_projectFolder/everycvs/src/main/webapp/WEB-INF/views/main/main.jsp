@@ -287,11 +287,7 @@
 			<!-- Main Text -->
 			<div class="col-md-6">
 				<h2>페이지 여기 모아놨따.</h2>
-				<a href="test.do">지점상품1</a><br> 
-				<a href="test2.do">지점상품2</a><br> 
-				<a href="test3.do">지점상품3</a><br> 
-				<a href="test4.do">지점상품4</a><br> 
-				<a href="splist.do">지점상품5</a><br> 
+				<a href="splist.do">지점상품</a><br> 
 				<a href="cvsstorelist.do">지점1</a><br> 
 				<a href="selectServiceList.do">고객센터1</a><br> 
 				<a href="insertService.do">고객센터2</a><br> 
@@ -304,6 +300,7 @@
 				<a href="cvseventlist.do">편의점관리자:이벤트</a><br> 
 				<a href="cvseventwriteview.do">편의점관리자:이벤트</a><br> 
 				<a href="cvseventmodifyview.do">편의점관리자:이벤트</a><br>
+				<a href="/everycvs/page/storemain.do?sno=22497453">지점메인이동하기</a><br>
 			</div>
 			<!-- End Main Text -->
 			<div class="col-md-6">

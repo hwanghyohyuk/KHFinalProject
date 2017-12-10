@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="store"> 
+
+	<resultMap id="resultStore" type="store">
+		<result property="store_no" column="STORE_NO" />
+		<result property="store_name" column="STORE_NAME" />
+		<result property="loc_l_code" column="LOC_L_CODE" />
+		<result property="loc_l_name" column="LOC_L_NAME" />
+		<result property="loc_m_code" column="LOC_M_CODE" />
+		<result property="loc_m_name" column="LOC_M_NAME" />
+		<result property="loc_s_code" column="LOC_S_CODE" />
+		<result property="loc_s_name" column="LOC_S_NAME" />
+		<result property="road_address" column="ROAD_ADDRESS" />
+		<result property="num_address" column="NUM_ADDRESS" />
+		<result property="lat" column="LAT" />
+		<result property="lng" column="LNG" />
+		<result property="brand_no" column="BRAND_NO" />
+		<result property="join_count" column="JOIN_COUNT" />
+		<result property="brand_name" column="BRAND_NAME" />
+	</resultMap>
+		
+	<update id="increamentJoinCount"  parameterType="string" flushCache="true"
+      statementType="PREPARED">
+		<![CDATA[update tb_store set join_count = (select join_count+1 from tb_store where store_no = #{store_no}) where store_no = #{store_no}]]>
+	</update>
+	
+	<select id="selectStore" parameterType="string" resultType="store" resultMap="resultStore">
+		   <![CDATA[
+      		select * from store_view where store_no = #{store_no}
+           ]]>
+   </select>
+
+</mapper>	
