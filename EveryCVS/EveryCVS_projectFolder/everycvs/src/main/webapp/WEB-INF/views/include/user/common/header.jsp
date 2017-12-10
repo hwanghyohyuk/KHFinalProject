@@ -41,7 +41,7 @@
 
 							<li><a href="#">${sessionScope.user.user_name}</a>
 								<ul>
-									<li><a href="pages-services.html">My page</a></li>
+									<li><a href="mypage.do">My page</a></li>
 									<li><a href="#">Cash : ${sessionScope.user.cash}</a></li>
 									<li><a href="#">Point : ${sessionScope.user.point}</a></li>
 									<li><a href="/everycvs/user/signout.do">Sign out</a></li>
