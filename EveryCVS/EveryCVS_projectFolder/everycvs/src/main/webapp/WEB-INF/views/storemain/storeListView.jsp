@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.kh.everycvs.common.model.vo.StoreProduct, java.util.ArrayList" %>
+<%@ page
+	import="com.kh.everycvs.common.model.vo.StoreProduct, java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- === BEGIN HEAD ===  -->
@@ -8,9 +9,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#spname").click(function() {
-			$("#myModal").load("storeDetailView").dialog({
-				modal : true
-			});
+			$("#myModal").modal();
 		});
 	});
 </script>
@@ -33,7 +32,8 @@
 					</div>
 					<form action="spsearch.do" method="post">
 						<div class="col-sm-3" style="margin-left: 190px;">
-							<br> <input class="form-control" type="search" placeholder="상품명을 입력해주세요." name="keyword" value="${keyword}">
+							<br> <input class="form-control" type="search"
+								placeholder="상품명을 입력해주세요." name="keyword" value="${keyword}">
 						</div>
 						<div>
 							<br>
@@ -45,19 +45,14 @@
 				<div class="row margin-bottom-30">
 					<!-- Person Details -->
 					<c:forEach var="sp" items="${requestScope.list}">
-						<div class="col-md-3 col-sm-3 col-xs-6 person-details margin-bottom-30">
+						<div
+							class="col-md-3 col-sm-3 col-xs-6 person-details margin-bottom-30">
 							<figure>
 								<figcaption>
 									<c:url var="spdetail" value="spdetail.do" />
 									<a id="spname" href="${spdetail}?spnum=${sp.store_product_no}&page=${requestScope.currentPage}">
 										<img src="/everycvs/resources/user/img/theteam/image1.jpg" alt="image1">
 									</a><br>
-									<div id="myModal" class="modal fade" role="dialog">
-										<div class="modal-dialog">
-											<!-- Modal content-->
-											<div class="modal-content"></div>
-										</div>
-									</div>
 									<h5 align="center">
 										<strong>${sp.product_name}</strong>
 									</h5>
@@ -102,7 +97,6 @@
 					</c:choose>
 				</ul>
 			</div>
-		</div>
 		</div>
 	</div>
 </div>
