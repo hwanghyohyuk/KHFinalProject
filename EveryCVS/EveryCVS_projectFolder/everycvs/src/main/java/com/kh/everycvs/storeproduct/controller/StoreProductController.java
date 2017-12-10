@@ -97,24 +97,5 @@ public class StoreProductController {
 		
 		return mv;
 	}
-	
-	//지점상품 전체페이지 상세보기
-	@RequestMapping(value="/spdetail.do")
-	public ModelAndView detailSproduct(int spnum, int page){
 		
-		ModelAndView mv = new ModelAndView();
-		
-		StoreProduct storeproduct = sproductService.detailSproduct(spnum);
-		
-		if(storeproduct != null){
-			mv.addObject("storeproduct", storeproduct);
-			mv.addObject("currentPage",page);
-			mv.setViewName("storemain/storeDetailView");
-		}else{
-			mv.addObject("message", "게시글 상세조회 실패");
-		}
-		
-		return mv;
-	}
-	
 }

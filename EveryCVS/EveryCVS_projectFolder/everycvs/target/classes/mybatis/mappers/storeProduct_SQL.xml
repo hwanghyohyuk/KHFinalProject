@@ -51,8 +51,4 @@
            ]]>
    </select>
    
-   <select id="detailSproduct" parameterType="int" resultType="StoreProduct" resultMap="resultStoreProduct">
-		select * from store_popularity_product_view where store_product_no = #{spnum}
-   </select>
-	
 </mapper>	

@@ -6,13 +6,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- === BEGIN HEAD ===  -->
 <c:import url="../include/user/common/head.jsp"></c:import>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#spname").click(function() {
-			$("#myModal").modal();
-		});
-	});
-</script>
 <c:import url="../include/user/common/headend.jsp"></c:import>
 <!-- === END HEAD ===  -->
 <!-- === BEGIN HEADER ===  -->
@@ -49,11 +42,6 @@
 							class="col-md-3 col-sm-3 col-xs-6 person-details margin-bottom-30">
 							<figure>
 								<figcaption>
-									<%-- <c:url var="spdetail" value="spdetail.do" />
-									<a id="spname" href="${spdetail}?spnum=${sp.store_product_no}&page=${requestScope.currentPage}">
-										<img src="/everycvs/resources/user/img/theteam/image1.jpg" alt="image1">
-									</a><br>
-									 --%>
 									<a href="#" data-toggle="modal" data-target="#spmodall${sp.store_product_no}"> 
 									<img src="/everycvs/resources/user/img/theteam/image1.jpg" alt="image1"></a> <br>
 									<h5 align="center">

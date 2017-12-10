@@ -38,10 +38,6 @@ public class StoreProductDao {
 		System.out.println("keyword : "+"%"+keyword+"%");
 		return sqlSession.selectList("storeProduct.searchSproduct", map);
 	}
-	
-	public StoreProduct detailSproduct(int spnum) {
-		return sqlSession.selectOne("detailSproduct", spnum);
-	}
 
 	public ArrayList<StoreProduct> rankList() {
 		return null;
