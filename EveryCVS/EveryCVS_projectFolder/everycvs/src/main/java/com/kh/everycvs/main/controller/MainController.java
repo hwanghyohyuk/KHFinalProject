@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
@@ -28,7 +29,7 @@ public class MainController {
 	public String intercepterSiteMain() {
 		return "admin/sitemanager/main";
 	}
-
+	
 	//페이지이동 및 서비스 로드 메소드
 	@RequestMapping("main.do")
 	public String Main(HttpSession session) {
@@ -40,6 +41,18 @@ public class MainController {
 		return "main/main";
 	}
 
+	@RequestMapping("/page/storemain.do")
+	public String userStoreMain(HttpSession session, @RequestParam("sno") String sno) {
+		Object store = session.getAttribute("store");
+		// 현재 세션에 store정보가 있다면
+		if(store!=null){
+			session.invalidate(); //정보를 삭제한다
+		}
+		session.setAttribute("store", sno);
+		return "main/main";
+	}
+	
+	
 	@RequestMapping("storemain.do")
 	public String StoreMain() {
 		return "admin/storemanager/main";
