@@ -1,7 +1,6 @@
 package com.kh.everycvs.user.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Map;
@@ -125,44 +124,55 @@ public class UserController {
 		
 		ArrayList<Purchase> list = (ArrayList<Purchase>) purchaseService.purchaseList();
 		ArrayList<Favorite> flist = (ArrayList<Favorite>) favoriteService.favoriteList();
+		
 		mv.addObject("list", list);		
 		mv.addObject("flist", flist); 
 		System.out.println(list);
 		System.out.println(flist);
+		
 		mv.setViewName("user/mypage/main");
 		return mv;
 	}
 	
 	/** 잔고 충전  **/
-	@RequestMapping(value="increMoney.do", method=RequestMethod.POST)
+	@RequestMapping(value="increMoney.do", method=RequestMethod.GET)
 	@ResponseBody
-	public void userIncreMoney(@RequestParam Map<String,Object> map, HttpSession session, HttpServletResponse response, HttpServletRequest request, String increMoney) throws IOException {
+	public void userIncreMoney(
+			@RequestParam ("increMoney") String increMoney,
+			@RequestParam("user_no") String user_no, 
+			@RequestParam("cash") String cash, HttpSession session, 
+			HttpServletResponse response, HttpServletRequest request, 
+			ModelAndView mv,
+		    Map<String, Object> map) throws IOException {
 		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter();
-
-		increMoney = request.getParameter(increMoney);
-		int mon = Integer.parseInt(request.getParameter("increMoney"));
-		
-		
-	    User user = (User) session.getAttribute("user");
-	    session.setAttribute("user", user);
-	    request.setAttribute("increMoney", mon);
-	  
-	    userService.increMoney(map);
-	    
-		System.out.println("vo : " + user);
-		System.out.println("increMoney : " + mon);
 	
-		/*
-		System.out.println("충전할 값 : " + increcash);*/
-		/*out.append("ok");
-		out.flush();
-		out.close();*/
+		request.getParameter("increMoney");
+		request.getParameter("user_no");
+		request.getParameter("cash");
 		
-		//userService.increMoney(increMoney);
-		/*session.setAttribute("increMoney", session);
-		mv.addObject("increNum", increMoney);
-		System.out.println(increMoney);*/
+		//form input태그 값 int형으로 parsing 처리
+		int incre = Integer.parseInt(increMoney);
+		int uno = Integer.parseInt(user_no);
+		int c = Integer.parseInt(cash);
+	
+		System.out.println("incre : " + incre);
+		System.out.println("uno : " + uno);
+		System.out.println("c : " + c);
+	
+	    map.put("increMoney", incre);
+	    map.put("user_no", uno);
+	    map.put("cash", c);
+	  
+	    int result = userService.increMoney(map);
+	    
+	    session.setAttribute("increMoney", incre);
+	    session.setAttribute("user_no", uno);
+	    session.setAttribute("cash", c);
+
+	    System.out.println("map : " + map);
+	    
+	    mv.addObject(result);
+		System.out.println("result : " + result);
 	}
 
 

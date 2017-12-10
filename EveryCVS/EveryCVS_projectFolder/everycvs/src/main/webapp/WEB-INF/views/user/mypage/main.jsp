@@ -48,9 +48,11 @@
 							</div>
 
 							<div class="panel-body" align="right">
-								<b style="font-size: 20pt;"> <fmt:formatNumber
-										value="${sessionScope.user.cash}" pattern="#,###" />원
+								<b style="font-size: 20pt;" id="result"> <fmt:formatNumber
+										value="${user.cash}" pattern="#,###" />원
+										
 								</b>
+								<b id="result"></b>
 								<button class="btn btn-primary" id="myBtn">충전하기</button>
 
 								<!-- Modal -->
@@ -67,8 +69,14 @@
 												<p>- 1000원 이하의 금액은 충전 할 수 없습니다.</p>
 												<p>- 충전된 금액은 환불이 불가합니다.</p>
 												<br>
-												<br> <input type="number">
-												<button class="btn btn-primary" type="submit">충 전</button>
+												
+												<form name="frm" id="frm" method="get"> 
+												    <input type="hidden" name="user_no">
+												    <input type="hidden" name="cash">
+													<input type="text" name="increMoney">
+														
+													<button class="btn btn-primary" type="submit" id="btn">충 전</button>
+												</form>
 
 											</div>
 											<div class="modal-footer">
@@ -225,16 +233,34 @@
 		$(document).ready(function() {
 			$("#myBtn").click(function() {
 				$("#myModal").modal();
+				 
+				//모달창의 충전 버튼을 클릭하면 ajax 통신이 시작
+				$("#btn").on("click", function(){
+				$.ajax({
+					url : "increMoney.do",
+					async:false,
+					data : {increMoney:500, user_no:"${sessionScope.user.user_no}", cash:"${sessionScope.user.cash}"},
+					type: "get", 
+					success: function(data){
+							alert(data);
+							$("#result").html(data);
+					},
+					error: function(request, status, errorData){
+						alert("error code: " + request.status + "/n" 
+								+ "message : " + request.reponseText + "/n"
+								+ "error : " + request.errorData);
+					}
+				});
+				});
 			});
-		});
-		
+			});
+	
 		$(document).ready(function() {
 			$("#myBtn2").click(function() {
 				$("#myModal2").modal();
 			});
 		});
 	</script>
-
 
 	<!-- JS -->
 	<c:import url="../../include/user/common/end.jsp"></c:import>
