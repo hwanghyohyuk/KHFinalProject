@@ -26,7 +26,8 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<h2>
-							<strong>${sessionScope.store.brand_name}&nbsp;${sessionScope.store.store_name}</strong><br> <small>${sessionScope.store.road_address}</small>
+							<strong>${sessionScope.store.brand_name}&nbsp;${sessionScope.store.store_name}</strong><br>
+							<small>${sessionScope.store.road_address}</small>
 						</h2>
 					</div>
 					<form action="spsearch.do" method="post">
@@ -48,16 +49,68 @@
 							class="col-md-3 col-sm-3 col-xs-6 person-details margin-bottom-30">
 							<figure>
 								<figcaption>
-									<c:url var="spdetail" value="spdetail.do" />
+									<%-- <c:url var="spdetail" value="spdetail.do" />
 									<a id="spname" href="${spdetail}?spnum=${sp.store_product_no}&page=${requestScope.currentPage}">
 										<img src="/everycvs/resources/user/img/theteam/image1.jpg" alt="image1">
 									</a><br>
+									 --%>
+									<a href="#" data-toggle="modal" data-target="#spmodall${sp.store_product_no}"> 
+									<img src="/everycvs/resources/user/img/theteam/image1.jpg" alt="image1"></a> <br>
 									<h5 align="center">
 										<strong>${sp.product_name}</strong>
 									</h5>
 									<h6 align="center">${sp.price}</h6>
 								</figcaption>
 							</figure>
+						</div>
+						<!-- 모달 -->
+						<div id="spmodall${sp.store_product_no}" class="modal fade" role="dialog">
+							<div class="modal-dialog">
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title" style="color: black;">
+											<strong>제품 상세보기</strong>
+										</h4>
+									</div>
+									<div class="modal-body">
+										<div class="row">
+											<div class="col-sm-6">
+												<img src="/everycvs/resources/user/img/theteam/image1.jpg"
+													alt="image1" align="left" style="margin-left: 5px;">
+											</div>
+											<div class="col-sm-6">
+												<table class="table table-condensed">
+													<tr>
+														<td><strong>상품명</strong></td>
+														<td>${sp.product_name}</td>
+													</tr>
+													<tr>
+														<td><strong>가격</strong></td>
+														<td>${sp.price}</td>
+													</tr>
+													<tr>
+														<td><strong>제조사</strong></td>
+														<td>${sp.manufacturer}</td>
+													</tr>
+													<tr>
+														<td><strong>제조일</strong></td>
+														<td>${sp.manufacture_date}</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-primary btn-sm"
+											data-dismiss="modal">관심상품</button>
+										&nbsp;
+										<button type="button" class="btn btn-primary btn-sm"
+											data-dismiss="modal">구매하기</button>
+									</div>
+								</div>
+							</div>
 						</div>
 					</c:forEach>
 				</div>
@@ -99,6 +152,7 @@
 		</div>
 	</div>
 </div>
+
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->
 <c:import url="../include/user/common/footer.jsp"></c:import>
