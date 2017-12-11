@@ -19,31 +19,6 @@ public class StoreProductController {
 	@Autowired
 	private StoreProductService sproductService;
 	
-	//테스트중
-	@RequestMapping(value="/test.do")
-	public ModelAndView test(String page, HttpServletRequest request){
-		ModelAndView mv = new ModelAndView("storemain/storeListView");
-		return mv;
-	}
-	
-	@RequestMapping(value="/test2.do")
-	public ModelAndView test2(String page, HttpServletRequest request){
-		ModelAndView mv = new ModelAndView("storemain/storeRankView");
-		return mv;
-	}
-	
-	@RequestMapping(value="/test3.do")
-	public ModelAndView test3(String page, HttpServletRequest request){
-		ModelAndView mv = new ModelAndView("admin/storemanager/storeProduct");
-		return mv;
-	}
-	
-	@RequestMapping(value="/test4.do")
-	public ModelAndView test4(String page, HttpServletRequest request){
-		ModelAndView mv = new ModelAndView("admin/storemanager/allProduct");
-		return mv;
-	} //테스트중
-	
 	//지점상품 전체페이지 전체보기
 	@RequestMapping(value="/splist.do")
 	public ModelAndView selectList(String page, HttpServletRequest request){
@@ -122,24 +97,5 @@ public class StoreProductController {
 		
 		return mv;
 	}
-	
-	//지점상품 전체페이지 상세보기
-	@RequestMapping(value="/spdetail.do")
-	public ModelAndView detailSproduct(int spnum, int page){
 		
-		ModelAndView mv = new ModelAndView();
-		
-		StoreProduct storeproduct = sproductService.detailSproduct(spnum);
-		
-		if(storeproduct != null){
-			mv.addObject("storeproduct", storeproduct);
-			mv.addObject("currentPage",page);
-			mv.setViewName("storemain/storeDetailView");
-		}else{
-			mv.addObject("message", "게시글 상세조회 실패");
-		}
-		
-		return mv;
-	}
-	
 }

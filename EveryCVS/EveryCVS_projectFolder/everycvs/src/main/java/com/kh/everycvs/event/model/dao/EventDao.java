@@ -2,14 +2,20 @@ package com.kh.everycvs.event.model.dao;
 
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.everycvs.common.model.vo.Event;
 
 @Repository("EventDao")
 public class EventDao {
+	@Autowired
+	
+	private SqlSessionTemplate sqlSession;
 	
 	public EventDao(){}
+	
 	
 	public List selectEventList() {
 		// 이벤트 조회 : 모든 공식이벤트를 조회
@@ -26,9 +32,9 @@ public class EventDao {
 		return null;
 	}
 	
-	public int insertEvent() {
-		// 이벤트 등록
-		return 0;
+	public int eventInsert(Event eventvo) {
+		  int result = sqlSession.insert("event.eventInsert",eventvo);      
+	      return result;
 	}
 	
 	public int updateEvent() {

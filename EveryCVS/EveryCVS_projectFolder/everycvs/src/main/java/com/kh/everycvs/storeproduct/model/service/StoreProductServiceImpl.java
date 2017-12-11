@@ -35,11 +35,6 @@ public class StoreProductServiceImpl implements StoreProductService {
 	}
 	
 	@Override
-	public StoreProduct detailSproduct(int spnum) {
-		return sproductDao.detailSproduct(spnum);
-	}
-
-	@Override
 	public ArrayList<StoreProduct> rankList() {
 		return sproductDao.rankList();
 	}

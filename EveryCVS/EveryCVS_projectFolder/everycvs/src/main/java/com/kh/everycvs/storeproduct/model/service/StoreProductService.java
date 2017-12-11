@@ -13,8 +13,6 @@ public interface StoreProductService {
 	
 	public List<StoreProduct> searchSproduct(int currentPage, int limit, String keyword);
 	
-	public StoreProduct detailSproduct(int spnum);
-
 	public ArrayList<StoreProduct> rankList();
 
 	public int insertSproduct(StoreProduct sp);
