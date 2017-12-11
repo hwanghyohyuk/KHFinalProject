@@ -47,13 +47,13 @@
 								<h3 class="panel-title">나의 잔고</h3>
 							</div>
 
-							<div class="panel-body" align="right">
-								<b style="font-size: 20pt;" id="result">
+							<div class="panel-body" align="right" id="result">
+								<b style="font-size: 20pt;">
 								 <fmt:formatNumber
-										value="${user.cash}" pattern="#,###" />원
+										value="${user.cash}" pattern="#,###"/>원
 										
 								</b>
-								<b id="result">여기에 바로 나오라고. </b>
+								<b id="result2">cash : </b>
 								<button class="btn btn-primary" id="myBtn">충전하기</button>
 
 								<!-- Modal -->
@@ -237,14 +237,21 @@
 				 
 				//모달창의 충전 버튼을 클릭하면 ajax 통신이 시작
 				$("#btn").on("click", function(){
+					// var result = document.getElementById('result');
 				$.ajax({
 					url : "increMoney.do",
 					data : {increMoney:200, user_no:"${sessionScope.user.user_no}", cash:"${sessionScope.user.cash}"},
-					type: "get", 
+					type: "post", 
 					dataType: "json",
+				    cache: false,
 					success: function(data){
+							$(data.map).each(function(){
+								console.log(this.cash);
+							})
 							alert("data : " + data.cash);
-							$("#result").val(data);
+							//console.log(data.cash);
+							//$("#result").append(val.cash);
+							
 					},	
 					error: function(request, status, errorData){
 						alert("error code: " + request.status + "/n" 

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -132,21 +134,21 @@ public class UserController {
 		
 		mv.addObject("list", list);		
 		mv.addObject("flist", flist); 
-		System.out.println(list);
-		System.out.println(flist);
+		/*System.out.println(list);
+		System.out.println(flist);*/
 		
 		mv.setViewName("user/mypage/main");
 		return mv;
 	}
 	
 	/** 잔고 충전  **/
-	@RequestMapping(value="increMoney.do", method=RequestMethod.GET)
+	@RequestMapping(value="increMoney.do", method=RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView userIncreMoney(
 			@RequestParam ("increMoney") String increMoney,
 			@RequestParam("user_no") String user_no, 
 			@RequestParam("cash") String cash,
-			HttpSession session, 
+			HttpSession session,
 			HttpServletResponse response, HttpServletRequest request, 
 			ModelAndView mv,
 		    Map<String, Object> map) throws IOException {
@@ -171,14 +173,15 @@ public class UserController {
 	    request.setAttribute("increMoney", incre);
 	    request.setAttribute("user_no", uno);
 	    request.setAttribute("cash", c);
-	    
+	   	
+	    mv.setViewName("jsonView");
 	    mv.addObject(result);
 	    
-	    System.out.println("map : " + map);
+	    /*System.out.println("map : " + map);
 	    System.out.println("cash : " + cash);
 		System.out.println("result : " + result);
-		
-		mv.setViewName("jsonView");
+		*/
+	    
 		return mv;
 	}
 
