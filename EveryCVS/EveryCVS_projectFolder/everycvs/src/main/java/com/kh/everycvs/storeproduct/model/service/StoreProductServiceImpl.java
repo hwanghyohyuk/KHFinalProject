@@ -33,15 +33,10 @@ public class StoreProductServiceImpl implements StoreProductService {
 		int endRow = startRow + limit - 1;
 		return sproductDao.searchSproduct(startRow,endRow,keyword);
 	}
-
+	
 	@Override
 	public ArrayList<StoreProduct> rankList() {
 		return sproductDao.rankList();
-	}
-
-	@Override
-	public StoreProduct detailSproduct(int spnum) {
-		return sproductDao.detailSproduct();
 	}
 
 	@Override

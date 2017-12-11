@@ -1,0 +1,170 @@
+/* #Tablet (Landscape)
+================================================== */
+
+@media only screen and (max-width: 1080px) {
+
+.is-sticky #header,
+.is-sticky #hornav {
+	position: relative !important;
+	width: auto !important;
+	top: 0 !important;
+	left: 0;
+	margin-left: 0;
+}
+
+.primary-container-background .primary-container {width: 100%;}
+
+/* Disable CSS animations */
+.animated {
+    -webkit-animation-duration: 0;
+    animation-duration: 0;
+    -webkit-animation-delay: 0;
+    animation-delay: 0;
+}
+
+#modify1{
+		width: 19%;
+		padding-left: 2%;
+		text-align: center;
+	}
+
+
+}
+
+/* #Tablet (Portrait)
+================================================== */
+    
+@media only screen and (max-width: 959px) {
+	table {
+		font-size: 9pt;
+	}
+
+	.jun9 {
+		padding-left: 0px;
+		margin-top: 30px;
+		width: 100%;
+	}
+
+	.jun11 {
+		border-radius: 0px;
+		padding-left: 5px;
+		margin-left: 2px;
+	}
+
+	.jun12 {
+		padding-left: 0px;
+	}
+
+	.jun13 {
+		width: 99%;
+		padding: 0px;
+		margin-left: 4px;
+	}
+	
+	.jun13 > button {
+		border: 1px solid #999;
+	}
+
+	.jun14 {
+		border-radius: 5px;
+		margin-top: 1%;
+		width:100%;
+		border-width: 0px;
+	}
+
+	.jun15 {
+		border-radius: 0px;
+	}
+
+	.jun16 {
+		padding-left: 4px;
+		width: 100.5%;
+	}
+
+	.jun17 {
+		padding: 0px 0px 0px 4px;
+		width: 100%;
+	}
+
+	.jun18 {
+		margin-top: 80px;
+	}
+
+	.jun19 {
+		width: 100%;
+	}
+	
+	.jun20 {
+		margin-left: 0%;
+		float: none;
+	}
+	
+	#paddingrmv {
+		padding: 0%;
+		width: 98%;
+	}
+
+	#paddingrmv2{
+		padding: 0px;
+		width: 98%;
+	}
+
+	#paddingrmv3{
+	padding-left: 30px;
+	}
+
+	#marginrmv {
+		margin: 1%;
+		width: 99%;
+	}
+
+	#width100{
+		margin-top: 1%;
+		width: 100%;
+	}
+
+	#modify1{
+		font-size: 9pt;
+	}
+
+	#displaynone{
+		display: none;
+	}
+
+	#displayblock{
+		display: inline-block;
+	}
+
+	#modify2{
+		display: none;
+	}
+	
+	.jun_imgdiv2{
+		width: 100%;
+	}
+
+}
+
+/* #Mobile (Landscape)
+================================================== */
+
+@media only screen and (max-width: 767px) {
+
+.carousel-control.right span, .carousel-control.icon-next span {
+    right: 20%;
+}
+.carousel-control.left span, .carousel-control.icon-prev span {
+    left: 15%;
+}
+
+}
+
+/*  #Mobile (Portrait)
+================================================== */
+
+@media only screen and (max-width: 440px) {
+
+	
+}
+
+

@@ -22,29 +22,29 @@
 		<result property="cash" column="CASH" />
 		<result property="point" column="POINT" />
 		<result property="store_no" column="STORE_NO" />
+		<result property="store_name" column="STORE_NAME" />
 		<result property="brand_no" column="BRAND_NO" />
+		<result property="brand_name" column="BRAND_NAME" />
 		<result property="session_key" column="SESSION_KEY" />
 		<result property="session_limit" column="SESSION_LIMIT" />
 	</resultMap>
 	
 	<select id="signIn" parameterType="user" resultMap="resultUser">
-	<![CDATA[select * from tb_user where email=#{email} and user_pwd=#{user_pwd}]]>
-	</select>
+	<![CDATA[select * from user_view where email=#{email} and user_pwd=#{user_pwd}]]>
+	</select>	
 
 	<update id="keepSignIn">
 		 <![CDATA[update tb_user set session_key = #{sessionId}, session_limit = #{next} where email = #{email}]]>
 	</update>
 
 	<select id="checkUserWithSessionKey" resultType="user">
-        <![CDATA[select * from tb_user where session_key = #{value} and session_limit > sysdate]]>
-
+        <![CDATA[select * from user_view where session_key = #{value} and session_limit > sysdate]]>
     </select>
     
     <select id="mypage" resultMap="resultUser" parameterType="user">
         <![CDATA[
         select * from tb_user where user_no = #{user_no}
         ]]>
-
     </select>
     
     <!-- 잔고충전 -->

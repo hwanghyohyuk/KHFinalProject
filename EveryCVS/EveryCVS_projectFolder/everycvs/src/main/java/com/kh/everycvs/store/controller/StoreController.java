@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.store.model.service.StoreService;
@@ -21,13 +22,6 @@ public class StoreController {
 	/** 지도에 표시할 데이터**/
 	public ModelAndView cvsMapList(ModelAndView modelAndView) {
 		Map map = storeService.cvsMapList();
-		return null;
-	}
-	
-	/*지점메인으로 이동*/
-	public ModelAndView moveToStoreMain(String store_no){
-		/**지점방문횟수 증가**/
-		storeService.increamentJoinCount(store_no);
 		return null;
 	}
 	
@@ -63,6 +57,13 @@ public class StoreController {
 		Map map = storeService.joinCountTop5(brand_no);
 		return null;
 	}
+	
+	/** 지점 조회 : 모든 지점을 조회 */
+	@RequestMapping("cvsstorelist.do")
+	public String cvsStoreList() {
+		return "admin/cvsmanager/storeList";
+	}
+	
 	/* 사이트 관리자 */
 
 	/** 편의점별 방문자 수 통계 **/

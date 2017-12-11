@@ -43,10 +43,6 @@ public class StoreProductDao {
 		return null;
 	}
 
-	public StoreProduct detailSproduct() {
-		return null;
-	}
-
 	public int insertSproduct() {
 		return 0;
 	}

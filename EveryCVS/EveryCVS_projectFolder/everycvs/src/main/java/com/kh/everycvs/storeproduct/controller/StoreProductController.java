@@ -19,32 +19,7 @@ public class StoreProductController {
 	@Autowired
 	private StoreProductService sproductService;
 	
-	//테스트중
-	@RequestMapping(value="/test.do")
-	public ModelAndView test(String page, HttpServletRequest request){
-		ModelAndView mv = new ModelAndView("storemain/storeListView");
-		return mv;
-	}
-	
-	@RequestMapping(value="/test2.do")
-	public ModelAndView test2(String page, HttpServletRequest request){
-		ModelAndView mv = new ModelAndView("storemain/storeRankView");
-		return mv;
-	}
-	
-	@RequestMapping(value="/test3.do")
-	public ModelAndView test3(String page, HttpServletRequest request){
-		ModelAndView mv = new ModelAndView("admin/storemanager/storeProduct");
-		return mv;
-	}
-	
-	@RequestMapping(value="/test4.do")
-	public ModelAndView test4(String page, HttpServletRequest request){
-		ModelAndView mv = new ModelAndView("admin/storemanager/allProduct");
-		return mv;
-	} //테스트중
-	
-	//지점상품 전체보기
+	//지점상품 전체페이지 전체보기
 	@RequestMapping(value="/splist.do")
 	public ModelAndView selectList(String page, HttpServletRequest request){
 		ModelAndView mv = new ModelAndView();
@@ -83,7 +58,7 @@ public class StoreProductController {
 		
 	}
 	
-	//지점상품 검색하기
+	//지점상품 전체페이지 검색하기
 	@RequestMapping(value="/spsearch.do")
 	public ModelAndView searchSproduct(String page,@RequestParam("keyword") String keyword, HttpServletRequest request){
 		
@@ -122,5 +97,5 @@ public class StoreProductController {
 		
 		return mv;
 	}
-	
+		
 }

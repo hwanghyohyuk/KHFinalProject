@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.product.model.service.ProductService;
@@ -68,6 +69,24 @@ public class ProductController {
 		int brand_no = 0;
 		Map map = productService.popularCvsProductTop5(brand_no);
 		return modelAndView;
+	}
+	
+	/** 상품 조회 : 모든 상품을 조회 */
+	@RequestMapping("cvsproductlist.do")
+	public String cvsProductList() {
+		return "admin/cvsmanager/productList";
+	}
+	
+	/** 상품 등록 */
+	@RequestMapping("cvsproductwriteview.do")
+	public String cvsProductWriteView() {
+		return "admin/cvsmanager/productWriteForm";
+	}
+	
+	/** 상품 수정 */
+	@RequestMapping("cvsproductmodifyview.do")
+	public String cvsProductModifyView() {
+		return "admin/cvsmanager/productModifyForm";
 	}
 	
 }
