@@ -48,7 +48,7 @@
 									<h5 align="center">
 										<strong>${sp.product_name}</strong>
 									</h5>
-									<h6 align="center">${sp.price}</h6>
+									<h6 align="center">${sp.price}원</h6>
 								</figcaption>
 							</figure>
 						</div>
@@ -77,7 +77,7 @@
 													</tr>
 													<tr>
 														<td><strong>가격</strong></td>
-														<td>${sp.price}</td>
+														<td>${sp.price}원</td>
 													</tr>
 													<tr>
 														<td><strong>제조사</strong></td>

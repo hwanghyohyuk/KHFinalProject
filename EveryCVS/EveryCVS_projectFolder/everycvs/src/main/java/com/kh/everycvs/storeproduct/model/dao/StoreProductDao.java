@@ -1,6 +1,5 @@
 package com.kh.everycvs.storeproduct.model.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,24 +34,23 @@ public class StoreProductDao {
 		map.put("start", start); 
 		map.put("end", end);
 		map.put("keyword", "%"+keyword+"%");
-		System.out.println("keyword : "+"%"+keyword+"%");
 		return sqlSession.selectList("storeProduct.searchSproduct", map);
 	}
 
-	public ArrayList<StoreProduct> rankList() {
-		return null;
+	public List<StoreProduct> top3Sproduct() {
+		return sqlSession.selectList("storeProduct.top3Sproduct");
 	}
 
-	public int insertSproduct() {
-		return 0;
+	public List<StoreProduct> new3Sproduct() {
+		return sqlSession.selectList("storeProduct.new3Sproduct");
 	}
 
-	public int deleteSproduct() {
-		return 0;
+	public int getdcCount() {
+		return sqlSession.selectOne("storeProduct.getdcCount");
 	}
 
-	public int updateSproduct() {
-		return 0;
+	public List<StoreProduct> dcSproduct() {
+		return sqlSession.selectList("storeProduct.dcSproduct");
 	}
 	
 }

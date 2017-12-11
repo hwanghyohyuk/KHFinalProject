@@ -51,4 +51,26 @@
            ]]>
    </select>
    
+   <select id="top3Sproduct" resultType="list" resultMap="resultStoreProduct">
+		<![CDATA[
+			select * from (select rownum rnum, store_product_no, product_name, price
+			from (select * from store_popularity_product_view order by purchase_count desc)) 
+			where rnum >= 1 and rnum <= 3
+		]]>	
+	</select>
+	
+	<select id="new3Sproduct" resultType="list" resultMap="resultStoreProduct">
+		<![CDATA[
+			select * from (select rownum rnum, store_product_no, product_name, price
+			from (select * from store_popularity_product_view order by manufacture_date desc)) 
+			where rnum >= 1 and rnum <= 3
+		]]>	
+	</select>
+	
+	<select id="dcSproduct" parameterType="java.util.Map" resultType="list" resultMap="resultStoreProduct">
+		   <![CDATA[
+      		select * from store_popularity_product_view where discount_no is not null
+           ]]>
+   </select>
+   
 </mapper>	
