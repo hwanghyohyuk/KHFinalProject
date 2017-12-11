@@ -141,50 +141,59 @@
 							<div class="col-sm-12"
 								style="padding-left: 8px; padding-right: 8px;">
 								<div class="panel-heading" style="padding: 15px 5px;">
-									<h4 class="panel-title" style="font-size: 17px; color: #777;">지점 리스트</h4>
+									<h4 class="panel-title" style="font-size: 17px; color: #777;">지점
+										리스트</h4>
 								</div>
+								<div style="height: 360px; overflow-y: auto; margin-bottom: 20px;">
 								<table class="table">
-                                                    <tr class="active text-center">
-                                                        <th width="12%">지점번호</th>
-                                                        <th width="20%">지점명</th>
-                                                        <th width="38%">지번주소</th>
-                                                        <th width="12%">방문횟수</th>
-                                                        <th width="12%">판매량</th>
-                                                        <th width="6%">Del</th>
-                                                    </tr>
-                                                    <tr class="text-center">
-                                                        <td>25305326</td>
-                                                        <td>역삼달샘점</td>
-                                                        <td>서울특별시 강남구 테헤란로19길 29</td>
-                                                        <td>52436</td>
-                                                        <td>12442</td>
-                                                        <td><i class="fa fa-trash-o jun21" onclick="del_store();" style="padding: 5px 10px; cursor: pointer;"></i></td>
-                                                    </tr>
-                                                </table>
+									<tr class="active text-center">
+										<th width="12%">지점번호</th>
+										<th width="20%">지점명</th>
+										<th width="38%">지번주소</th>
+										<th width="12%">방문횟수</th>
+										<th width="12%">판매량</th>
+										<th width="6%">Del</th>
+									</tr>
+									<c:forEach var="store" items="${slist}">
+										<tr class="text-center">
+											<td>${store.store_no}</td>
+											<td>${store.brand_name} ${store.store_name}</td>
+											<td>${store.num_address}</td>
+											<td>${store.join_count}</td>
+											<td>${store.salequantity}</td>
+											<td><i class="fa fa-trash-o jun21"
+												onclick="del_store(${store.store_no});"
+												style="padding: 5px 10px; cursor: pointer;"></i></td>
+										</tr>
+									</c:forEach>
+								</table>
+								</div>
 							</div>
 							<!-- Search & Add block -->
 							<div class="col-sm-12"
 								style="padding-left: 5px; padding-right: 8px;">
 								<!--start-->
+								<form name="searchStoreFrm" action="/everycvs/cvsstoreSearch.do" method="post">
 								<div class="col-sm-2 jun16">
-                                                <select class="form-control input jun15">
-                                                    <option>지점번호</option>
-                                                    <option>지점명</option>
-                                                    <option>시도명</option>
-                                                    <option>구군명</option>
-                                                    <option>법정동명</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-4 jun12">
-                                              <input class="form-control jun11" type="text" placeholder="검색 키워드를 입력하세요.">
-                                            </div>
-                                            <form>
-                                            <div class="col-sm-1 jun13">
-                                                <button type="submit" onclick="search_store();" class="btn btn-default btn jun14">
-                                                    <i class="fa fa-search"></i>
-                                                </button>
-                                            </div>
-                                            </form>
+									<select name="category" class="form-control input jun15">
+										<option>지점번호</option>
+										<option>지점명</option>
+										<option>시도명</option>
+										<option>구군명</option>
+										<option>법정동명</option>
+									</select>
+								</div>
+								<div class="col-sm-4 jun12">
+									<input name="keyword" class="form-control jun11" type="text"
+										placeholder="검색 키워드를 입력하세요.">
+								</div>
+									<div class="col-sm-1 jun13">
+										<button type="submit" onclick="search_store();"
+											class="btn btn-default btn jun14">
+											<i class="fa fa-search"></i>
+										</button>
+									</div>
+								</form>
 								<!--end-->
 							</div>
 							<!-- End Search & Add block -->
@@ -207,16 +216,22 @@
 <c:import url="../../include/admin/common/end.jsp"></c:import>
 <!-- JS Custom Function -->
 <script type="text/javascript">
-	function del_store() {
+	function del_store(store_no) {
 		var answer = false;
 		answer = confirm("해당 지점을 삭제하시겠습니까?");
 		if (answer)
-			alert("지점이 삭제되었습니다.");
+			location.href="/everycvs/cvsstoreDelete.do?store_no=" + store_no;
 	}
 
 	function search_store() {
 		// 검색창 null 이면 alert
-		location.href = '/everycvs/cvsstorelist.do';
+		var category = searchStoreFrm.category.value;
+		var keyword = searchStoreFrm.keyword.value;
+		if (keyword == ""){
+			alert("검색 키워드를 입력하세요.");
+			return;
+		}
+		searchStoreFrm.submit();
 	}
 </script>
 <!-- End JS Custom Function -->

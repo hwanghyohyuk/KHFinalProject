@@ -84,12 +84,11 @@
 	<!-- 지점 삭제 -->
 	<delete id="deleteStore" parameterType="store" flushCache="true" statementType="PREPARED">
 		<![CDATA[
-			delete from store
+			delete from tb_store
 			where store_no = #{store_no}
 			and brand_no = #{brand_no}
 		]]>
 	</delete>
-
 	
 </mapper>
 
