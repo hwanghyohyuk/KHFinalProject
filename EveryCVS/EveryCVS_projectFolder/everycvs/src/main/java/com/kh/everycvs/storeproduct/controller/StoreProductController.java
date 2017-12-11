@@ -78,7 +78,7 @@ public class StoreProductController {
 		}else{
 			mv.addObject("message", "게시글 조회 실패");
 		}
-		
+		System.out.println(list);
 		return mv;
 		
 	}
