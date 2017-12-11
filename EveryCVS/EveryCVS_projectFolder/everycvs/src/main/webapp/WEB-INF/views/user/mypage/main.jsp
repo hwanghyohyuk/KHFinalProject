@@ -48,11 +48,12 @@
 							</div>
 
 							<div class="panel-body" align="right">
-								<b style="font-size: 20pt;" id="result"> <fmt:formatNumber
+								<b style="font-size: 20pt;" id="result">
+								 <fmt:formatNumber
 										value="${user.cash}" pattern="#,###" />원
 										
 								</b>
-								<b id="result"></b>
+								<b id="result">여기에 바로 나오라고. </b>
 								<button class="btn btn-primary" id="myBtn">충전하기</button>
 
 								<!-- Modal -->
@@ -238,13 +239,13 @@
 				$("#btn").on("click", function(){
 				$.ajax({
 					url : "increMoney.do",
-					async:false,
-					data : {increMoney:500, user_no:"${sessionScope.user.user_no}", cash:"${sessionScope.user.cash}"},
+					data : {increMoney:200, user_no:"${sessionScope.user.user_no}", cash:"${sessionScope.user.cash}"},
 					type: "get", 
+					dataType: "json",
 					success: function(data){
-							alert(data);
-							$("#result").html(data);
-					},
+							alert("data : " + data.cash);
+							$("#result").val(data);
+					},	
 					error: function(request, status, errorData){
 						alert("error code: " + request.status + "/n" 
 								+ "message : " + request.reponseText + "/n"

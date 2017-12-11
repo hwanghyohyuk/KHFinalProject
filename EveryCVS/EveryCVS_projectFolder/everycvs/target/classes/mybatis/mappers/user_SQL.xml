@@ -48,9 +48,12 @@
     </select>
     
     <!-- 잔고충전 -->
-    <update id="userIncreMoney" parameterType="hashmap">
+    <update id="userIncreMoney" parameterType="map" flushCache="true">
     	<![CDATA[
-    		update tb_user set cash = #{increMoney} + cash where user_no = #{user_no}
-    	]]>
+    		update tb_user set cash = #{increMoney} + cash
+			where user_no in (select user_no from tb_user)
+    	]]> 	 
     </update>
+    
+    
 </mapper>

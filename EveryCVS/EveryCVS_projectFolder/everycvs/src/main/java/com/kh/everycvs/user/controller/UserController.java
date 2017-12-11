@@ -142,42 +142,44 @@ public class UserController {
 	/** 잔고 충전  **/
 	@RequestMapping(value="increMoney.do", method=RequestMethod.GET)
 	@ResponseBody
-	public void userIncreMoney(
+	public ModelAndView userIncreMoney(
 			@RequestParam ("increMoney") String increMoney,
 			@RequestParam("user_no") String user_no, 
-			@RequestParam("cash") String cash, HttpSession session, 
+			@RequestParam("cash") String cash,
+			HttpSession session, 
 			HttpServletResponse response, HttpServletRequest request, 
 			ModelAndView mv,
 		    Map<String, Object> map) throws IOException {
-		response.setContentType("text/html; charset=utf-8");
-	
-		request.getParameter("increMoney");
-		request.getParameter("user_no");
-		request.getParameter("cash");
+		
+		//response.setContentType("text/html; charset=utf-8");
 		
 		//form input태그 값 int형으로 parsing 처리
 		int incre = Integer.parseInt(increMoney);
 		int uno = Integer.parseInt(user_no);
 		int c = Integer.parseInt(cash);
 	
-		System.out.println("incre : " + incre);
+		/*System.out.println("incre : " + incre);
 		System.out.println("uno : " + uno);
-		System.out.println("c : " + c);
+		System.out.println("c : " + c);*/
 	
 	    map.put("increMoney", incre);
 	    map.put("user_no", uno);
 	    map.put("cash", c);
-	  
+	    
 	    int result = userService.increMoney(map);
 	    
-	    session.setAttribute("increMoney", incre);
-	    session.setAttribute("user_no", uno);
-	    session.setAttribute("cash", c);
-
-	    System.out.println("map : " + map);
+	    request.setAttribute("increMoney", incre);
+	    request.setAttribute("user_no", uno);
+	    request.setAttribute("cash", c);
 	    
 	    mv.addObject(result);
+	    
+	    System.out.println("map : " + map);
+	    System.out.println("cash : " + cash);
 		System.out.println("result : " + result);
+		
+		mv.setViewName("jsonView");
+		return mv;
 	}
 
 
