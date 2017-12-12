@@ -172,12 +172,11 @@
 	}
 
 	function search_store() {
-		// 검색창 null 이면 alert
 		var category = searchStoreFrm.category.value;
 		var keyword = searchStoreFrm.keyword.value;
 		if (keyword == ""){
 			alert("검색 키워드를 입력하세요.");
-			return;
+			return false;
 		}
 		searchStoreFrm.submit();
 	}

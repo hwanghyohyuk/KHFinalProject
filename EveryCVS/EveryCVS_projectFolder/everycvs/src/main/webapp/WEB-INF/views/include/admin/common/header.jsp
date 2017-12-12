@@ -114,7 +114,7 @@
 								<span> 상품 관리</span>
 							</a>
 							<ul class="treeview-menu">
-								<li><a href="/everycvs/cvsproductlist.do"><i class="fa fa-search"></i> 상품 리스트</a></li>
+								<li><a href="/everycvs/cvsproductList.do"><i class="fa fa-search"></i> 상품 리스트</a></li>
 								<li><a href="/everycvs/cvsproductwriteview.do"><i class="fa fa-plus"></i> 상품 등록</a></li>
 							</ul>
 						</li>

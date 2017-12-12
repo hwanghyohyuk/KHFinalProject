@@ -179,65 +179,71 @@
 				<!-- Tab v1 -->
 				<div class="tabs">
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#sample-1a" data-toggle="tab">전체</a></li>
-						<li><a href="#sample-1a" data-toggle="tab">과일</a></li>
-						<li><a href="#sample-1b" data-toggle="tab">도시락</a></li>
-						<li><a href="#sample-1c" data-toggle="tab">김밥</a></li>
-						<li><a href="#sample-1d" data-toggle="tab">햄버거</a></li>
-						<li><a href="#sample-1d" data-toggle="tab">햄</a></li>
-						<li><a href="#sample-1d" data-toggle="tab">라면</a></li>
-						<li><a href="#sample-1d" data-toggle="tab">아이스크림</a></li>
-						<li><a href="#sample-1d" data-toggle="tab">샐러드</a></li>
-						<li><a href="#sample-1d" data-toggle="tab">과자</a></li>
-						<li><a href="#sample-1d" data-toggle="tab">음료</a></li>
+						<li class="active"><a href="#sample-1" data-toggle="tab">전체</a></li>
+						<li><a href="#sample-2" data-toggle="tab">과일</a></li>
+						<li><a href="#sample-3" data-toggle="tab">도시락</a></li>
+						<li><a href="#sample-4" data-toggle="tab">김밥</a></li>
+						<li><a href="#sample-5" data-toggle="tab">햄버거</a></li>
+						<li><a href="#sample-6" data-toggle="tab">햄</a></li>
+						<li><a href="#sample-7" data-toggle="tab">라면</a></li>
+						<li><a href="#sample-8" data-toggle="tab">아이스크림</a></li>
+						<li><a href="#sample-9" data-toggle="tab">샐러드</a></li>
+						<li><a href="#sample-10" data-toggle="tab">과자</a></li>
+						<li><a href="#sample-11" data-toggle="tab">음료</a></li>
 					</ul>
 
 					<!-- tab-content -->
 					<div class="tab-content">
-						<div class="tab-pane fade in active" id="sample-1a">
-							<div class="row">
-								<div class="col-md-12">
-									<table class="table">
-										<tr class="active text-center">
-											<th width="10%">번호</th>
-											<th width="28%">상품명</th>
-											<th width="17%">제조사</th>
-											<th width="12%">분류</th>
-											<th width="12%">가격</th>
-											<th width="15%">유통기한</th>
-											<th width="6%">Del</th>
-										</tr>
-										<tr class="text-center">
-											<td>0421</td>
-											<td data-toggle="modal" data-target="#myModal"
-												style="cursor: pointer;">롯데)전주식한상도시락</td>
-											<td>롯데푸드</td>
-											<td>도시락</td>
-											<td>3,000원</td>
-											<td>3일</td>
-											<td><i class="fa fa-trash-o jun21"
-												onclick="del_product();"></i></td>
-										</tr>
-									</table>
+						<c:forEach var="i" begin="1" end="11" step="1">
+							<div class="tab-pane fade in active" id="sample-${i}">
+								<div class="row">
+									<div class="col-md-12">
+									<div style="height: 360px; overflow-y: auto; margin-bottom: 20px;">
+										<table class="table">
+											<tr class="active text-center">
+												<th width="10%">번호</th>
+												<th width="28%">상품명</th>
+												<th width="17%">제조사</th>
+												<th width="12%">분류</th>
+												<th width="12%">가격</th>
+												<th width="15%">유통기한</th>
+												<th width="6%">Del</th>
+											</tr>
+											<c:forEach var="product" items="${plist}">
+												<tr class="text-center">
+													<td>${product.product_no}</td>
+													<td data-toggle="modal" data-target="#myModal"
+														style="cursor: pointer;">${product.product_name}</td>
+													<td>${product.manufacturer}</td>
+													<td>${product.product_kind_name}</td>
+													<td>${product.price}원</td>
+													<td>${product.expiration_date}일</td>
+													<td><i class="fa fa-trash-o jun21"
+														onclick="del_product(${product.product_no});"></i></td>
+												</tr>
+											</c:forEach>
+										</table>
+										</div>
+									</div>
+									<div class="clearfix"></div>
 								</div>
-								<div class="clearfix"></div>
 							</div>
-						</div>
+						</c:forEach>
+						
 						<!-- End tab content -->
 						<!-- Search & Add block -->
 						<div class="row">
 							<div class="col-sm-12" style="padding-left: 16px;">
 								<!--start-->
+								<form name="searchProductFrm" action="/everycvs/cvsproductSearch.do" method="post">
 								<div class="col-sm-2 jun16">
-									<select class="form-control input jun15">
-										<option>번호</option>
+									<select name="category" class="form-control input jun15">
 										<option>상품명</option>
 										<option>제조사</option>
 									</select>
 								</div>
-								<form>
 									<div class="col-sm-4 jun12">
-										<input class="form-control jun11" type="text"
+										<input class="form-control jun11" name="keyword" type="text"
 											placeholder="검색 키워드를 입력하세요.">
 									</div>
 									<div class="col-sm-1 jun13">
@@ -318,16 +324,22 @@
 <c:import url="../../include/admin/common/end.jsp"></c:import>
 <!-- JS Custom Function -->
 <script type="text/javascript">
-	function del_product() {
+	function del_product(product_no) {
 		var answer = false;
+		var currentTab;
 		answer = confirm("해당 상품을 삭제하시겠습니까?");
 		if (answer)
-			alert("상품이 삭제되었습니다.");
+			location.href="/everycvs/cvsproductDelete.do?product_no=" + product_no;
 	}
 
 	function search_product() {
-		// 검색창 null 이면 alert
-		location.href = '/everycvs/cvsproductlist.do';
+		var category = searchProductFrm.category.value;
+		var keyword = searchProductFrm.keyword.value;
+		if(keyword == ""){
+			alert("검색 키워드를 입력하세요.");
+			return false;
+		}
+		searchProductFrm.submit();
 	}
 
 	function modify_product() {
