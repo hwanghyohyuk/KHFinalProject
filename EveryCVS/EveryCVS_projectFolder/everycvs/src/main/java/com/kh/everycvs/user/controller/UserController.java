@@ -127,10 +127,11 @@ public class UserController {
 
 	/** 마이 페이지 **/
 	@RequestMapping("mypage.do")
-	public ModelAndView myPage(HttpSession session, ModelAndView mv) {
+	public ModelAndView myPage(HttpSession session, ModelAndView mv, int month) {
 		
-		ArrayList<Purchase> list = (ArrayList<Purchase>) purchaseService.purchaseList();
+		ArrayList<Purchase> list = (ArrayList<Purchase>) purchaseService.purchaseList(month);
 		ArrayList<Favorite> flist = (ArrayList<Favorite>) favoriteService.favoriteList();
+		User user = (User) session.getAttribute("user");
 		
 		mv.addObject("list", list);		
 		mv.addObject("flist", flist); 
@@ -149,12 +150,10 @@ public class UserController {
 			@RequestParam("user_no") String user_no, 
 			@RequestParam("cash") String cash,
 			HttpSession session,
-			HttpServletResponse response, HttpServletRequest request, 
+			HttpServletRequest request, 
 			ModelAndView mv,
 		    Map<String, Object> map) throws IOException {
-		
-		//response.setContentType("text/html; charset=utf-8");
-		
+				
 		//form input태그 값 int형으로 parsing 처리
 		int incre = Integer.parseInt(increMoney);
 		int uno = Integer.parseInt(user_no);
@@ -170,19 +169,17 @@ public class UserController {
 	    
 	    int result = userService.increMoney(map);
 	    
-	    request.setAttribute("increMoney", incre);
-	    request.setAttribute("user_no", uno);
-	    request.setAttribute("cash", c);
-	   	
+	    User user = (User) session.getAttribute("user");
+	    user.setCash(c + incre);
+	    
+	    session.setAttribute("user", user);
+	    
 	    mv.setViewName("jsonView");
 	    mv.addObject(result);
 	    
-	    /*System.out.println("map : " + map);
-	    System.out.println("cash : " + cash);
-		System.out.println("result : " + result);
-		*/
-	    
-		return mv;
+	    System.out.println(user.getCash());
+
+	    return mv;
 	}
 
 

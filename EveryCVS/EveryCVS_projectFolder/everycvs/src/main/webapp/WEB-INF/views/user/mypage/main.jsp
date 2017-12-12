@@ -48,12 +48,13 @@
 							</div>
 
 							<div class="panel-body" align="right" id="result">
+								
 								<b style="font-size: 20pt;">
 								 <fmt:formatNumber
-										value="${user.cash}" pattern="#,###"/>원
+										value="${user.cash }" pattern="#,###"/>원
 										
 								</b>
-								<b id="result2">cash : </b>
+
 								<button class="btn btn-primary" id="myBtn">충전하기</button>
 
 								<!-- Modal -->
@@ -71,7 +72,7 @@
 												<p>- 충전된 금액은 환불이 불가합니다.</p>
 												<br>
 												
-												<form name="frm" id="frm" method="get"> 
+												<form name="frm" id="frm" method="post"> 
 												    <input type="hidden" name="user_no">
 												    <input type="hidden" name="cash">
 													<input type="text" name="increMoney">
@@ -102,16 +103,20 @@
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h4 class="modal-title">거래내역</h4>
 											</div>
-											<div class="modal-body">
-												<table border="1" style="text-align: center;">
-															<tr style="font-size: 10pt;">
+											<div class="modal-body box-body no-padding" 
+												 style="overflow-x:hidden; width:890px; height:300px;">
+												 
+												<table class="table table-condensed" style="text-align: center;	">
+															<tr style="font-size: 8pt; text-align: center;">
 															<th>구매번호</th><th>사용자번호</th><th>지점상품번호</th>
-															<th>지점번호</th><th>지점명</th><th>상품번호</th>
-															<th>상품명</th><th>상품수량</th><th>합 계</th>
-															<th>사용포인트</th><th>적립포인트</th><th>구매날짜</th>
+															<th style="text-align: center;">지점번호</th><th style="text-align: center;">지점명</th><th>상품번호</th>
+															<th style="text-align: center;">상품명</th><th>상품수량</th><th>합 계</th>
+															<th>사용포인트</th><th>적립포인트</th><th style="text-align: center;">구매날짜</th>
 															</tr>
 														
 														<c:forEach items="${list }" var="list">
+															<c:if test="${list.user_no eq sessionScope.user.user_no }">
+															
 														    <tr><td>${list.purchase_no }</td>
 														    <td>${list.user_no }</td>
 														    <td>${list.store_product_no }</td>
@@ -126,11 +131,24 @@
 														    <td>${list.purchase_date }</td>
 														    </tr>
 															
+															</c:if>
 														</c:forEach>
+													
 														</table>
 												
 											</div>
-											<div class="modal-footer">
+											
+											<!-- 거래내역 버튼 검색 -->
+											<div class="modal-footer" align="left">
+												<button class="btn btn-default" style="float: left;" 
+												id="threeMonth" onclick="location.href='purchaseList.do';">3개월</button>
+												<button class="btn btn-default" style="float: left;" id="oneMonth">1개월</button>
+												<button class="btn btn-default" style="float: left;" id="week">1주일</button>
+											
+												<form>
+												<input type="text" class="form-control" style="float: left; width:100px;">
+												</form>
+												
 												<button type="button" class="btn btn-default"
 													data-dismiss="modal">Close</button>
 											</div>
@@ -194,8 +212,9 @@
 								<div class="panel-heading">
 									<h3 class="panel-title">관심 목록</h3>
 								</div>
-								<div class="panel-body" align="right" style="font-size: 15pt;">
-									<table border="1" style="text-align: center; font-size:10pt">
+								<div class="panel-body box-body no-padding" align="right" 
+									 style="font-size: 15pt;" >
+									<table class="table table-condensed" style="text-align: center; font-size:10pt">
 											<tr style="font-size: 10pt;">
 											<th>상호명</th>
 											<th>지점명</th>
@@ -233,25 +252,24 @@
 	<script>
 		$(document).ready(function() {
 			$("#myBtn").click(function() {
+				var cash;
 				$("#myModal").modal();
-				 
+				
 				//모달창의 충전 버튼을 클릭하면 ajax 통신이 시작
 				$("#btn").on("click", function(){
-					// var result = document.getElementById('result');
+					var incre = frm.increMoney.value;
+					var result;
 				$.ajax({
 					url : "increMoney.do",
-					data : {increMoney:200, user_no:"${sessionScope.user.user_no}", cash:"${sessionScope.user.cash}"},
+					data : {increMoney:incre, user_no:"${sessionScope.user.user_no}", cash:"${sessionScope.user.cash}"},
 					type: "post", 
 					dataType: "json",
-				    cache: false,
+				 	async: false,
+				 	cache: false,
 					success: function(data){
-							$(data.map).each(function(){
-								console.log(this.cash);
-							})
-							alert("data : " + data.cash);
-							//console.log(data.cash);
-							//$("#result").append(val.cash);
-							
+						cash = data.cash;	
+						//var result = confirm("충전금액 : " + incre + "원을 충전하시겠습니까?")
+						
 					},	
 					error: function(request, status, errorData){
 						alert("error code: " + request.status + "/n" 
@@ -259,15 +277,43 @@
 								+ "error : " + request.errorData);
 					}
 				});
+				
+				return cash;
+				
 				});
 			});
+			
 			});
 	
+		//거래내역 모달창
 		$(document).ready(function() {
 			$("#myBtn2").click(function() {
 				$("#myModal2").modal();
 			});
 		});
+		
+		//거래내역 3개월 단위로 검색하는 버튼
+		 $(document).ready(function() {
+			 
+			$("#threeMonth").click(function() {
+				//1이면 3개월 조회
+				location.href="purchaseList.do?month=1"
+				alert("3개월 버튼 작동")
+			});
+			
+			$("#oneMonth").click(function(){
+				//2면 1개월 조회
+				location.href="purchaseList.do?month=2"
+				alert("1개월 버튼 작동")
+			});
+			
+			$("#week").click(function(){
+				//3이면 일주일조회
+				location.href="purchaseList.do?month=3"
+				alert("일주일 버튼 작동")
+			})
+		}); 
+		
 	</script>
 
 	<!-- JS -->
