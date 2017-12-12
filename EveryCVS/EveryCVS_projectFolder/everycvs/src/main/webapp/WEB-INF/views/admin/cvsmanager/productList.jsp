@@ -211,7 +211,9 @@
 											</tr>
 											<!-- start -->
 											<c:forEach var="entry" items="${map}">
-											
+											${entry.key}
+											${entry.value}
+											${entry.key.class}
 											<!-- end -->
 											<c:forEach var="product" items="${plist}">
 												<tr class="text-center">
