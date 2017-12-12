@@ -37,14 +37,15 @@
                                                     <th width="10%" style="background-color: rgb(51,116,122); text-align: center; color: white;">등록일</th>
                                                     <th width="10%" style="background-color: rgb(51,116,122); text-align: center; color: white;">조회수</th>
                                             </tr>
-                                            
+                                         <c:forEach var="sc" items="${requestScope.list }">
                                         <tr>
-                                                <td style="text-align: center;">${service_no}</td>
-                                                <td style="text-align: center;">${title}</td>
-                                                <td style="text-align: center;">${writer}</td>
-                                                <td style="text-align: center;">${write_date}</td>
-                                                <td style="text-align: center;">${readcount}</td>
+                                                <td style="text-align: center;">${sc.service_no}</td>
+                                                <td style="text-align: center;">${sc.title}</td>
+                                                <td style="text-align: center;">${sc.writer}</td>
+                                                <td style="text-align: center;">${sc.write_date}</td>
+                                                <td style="text-align: center;">${sc.readcount}</td>
                                             </tr>
+                                            </c:forEach>
                                             
                                     </table>
                                 <div align="right">
@@ -53,6 +54,7 @@
                                     <input type="button" class="btn btn-primary" value="글쓰기">
                                     </a>
                                 </div>
+                                <!-- 페이지 -->
                                 <div class="text-center">
                                    <ul class="pagination">
                                       <li><a href="#">&laquo;</a></li>
