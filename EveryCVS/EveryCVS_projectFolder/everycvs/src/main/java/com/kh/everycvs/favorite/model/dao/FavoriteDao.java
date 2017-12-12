@@ -11,16 +11,15 @@ import com.kh.everycvs.common.model.vo.Favorite;
 
 @Repository("FavoriteDao")
 public class FavoriteDao {
+	public FavoriteDao() {}
 
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public FavoriteDao() {}
-	
 	//관심상품 목록조회
 	public List<Favorite> favoriteList() {
 		ArrayList<Favorite> flist = new ArrayList<Favorite>();
-		System.out.println(flist);
+		System.out.println("Dao에서 favorite리스트 : " + flist);
 		return sqlSession.selectList("favorite.favoriteList", flist);
 	}
 	

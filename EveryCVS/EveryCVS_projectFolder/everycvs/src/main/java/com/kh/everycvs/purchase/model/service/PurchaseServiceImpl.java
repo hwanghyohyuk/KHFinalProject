@@ -62,11 +62,11 @@ public class PurchaseServiceImpl implements PurchaseService{
 	}
 
 	@Override
-	public ArrayList<Purchase> purchaseList() {
+	public ArrayList<Purchase> purchaseList(int month) {
 		//구매내역 조회
 		ArrayList<Purchase> list = new ArrayList<Purchase>();
 		System.out.println(list);
-		return (ArrayList<Purchase>) purchaseDao.purchaseList();
+		return (ArrayList<Purchase>) purchaseDao.purchaseList(month);
 	}
 
 	/*사이트관리자*/
