@@ -20,10 +20,21 @@
 
 	</resultMap>
 	<!-- 구매내역 리스트 조회 -->
-	<select id="purchaseList" parameterType="int" resultType="list" resultMap="resultPurchase">
-		<![CDATA[
-			SELECT * FROM PURCHASE_VIEW ORDER BY PURCHASE_DATE DESC
-		]]>
+	<select id="purchaseList" parameterType="String" resultType="map" resultMap="resultPurchase">
+			SELECT * FROM PURCHASE_VIEW 
+		 <where>
+		<if test = 'month != null and month.equals("1")'>
+			purchase_date >= SYSDATE - 60
+		</if>
+		<if test = 'month != null and month.equals("2")'>
+   			and purchase_date >= SYSDATE - 30
+  		</if>
+  		<if test = 'month != null and month.equals("3")'>
+   			and purchase_date >= SYSDATE - 7
+  		</if>
+  		</where>
+  		ORDER BY PURCHASE_DATE DESC
+		
 	</select>
 	
 	

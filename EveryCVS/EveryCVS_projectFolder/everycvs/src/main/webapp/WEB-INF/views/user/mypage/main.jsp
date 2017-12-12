@@ -3,6 +3,7 @@
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <!-- === BEGIN HEAD ===  -->
 <c:import url="../../include/user/common/head.jsp"></c:import>
 <c:import url="../../include/user/common/headend.jsp"></c:import>
@@ -113,11 +114,15 @@
 															<th style="text-align: center;">상품명</th><th>상품수량</th><th>합 계</th>
 															<th>사용포인트</th><th>적립포인트</th><th style="text-align: center;">구매날짜</th>
 															</tr>
+
 														
-														<c:forEach items="${list }" var="list">
-															<c:if test="${list.user_no eq sessionScope.user.user_no }">
-															
-														    <tr><td>${list.purchase_no }</td>
+													<c:choose>
+													
+														<c:when test="${fn:length(list) > 0}">
+															<c:forEach items="${list }" var="list">
+															<%-- <c:if test="${list.user_no eq sessionScope.user.user_no }"> --%>
+															 <tr>
+															<td>${list.purchase_no }</td>
 														    <td>${list.user_no }</td>
 														    <td>${list.store_product_no }</td>
 														    <td>${list.store_no }</td>
@@ -129,25 +134,37 @@
 														    <td>${list.using_point }</td>
 														    <td>${list.accumulate_point }p</td>
 														    <td>${list.purchase_date }</td>
-														    </tr>
+														    </tr> 
+														   <%--  </c:if> --%>
+																		</c:forEach>
+																					</c:when>
+																					
+																					</c:choose>
+																				
+														
+									
+											
+														<%-- <c:forEach items="${list }" var="list">
+
+
+														    
 															
-															</c:if>
-														</c:forEach>
+															
+															</c:forEach> --%>
 													
-														</table>
+											
+													
+														
+															</table>
 												
 											</div>
 											
 											<!-- 거래내역 버튼 검색 -->
 											<div class="modal-footer" align="left">
 												<button class="btn btn-default" style="float: left;" 
-												id="threeMonth" onclick="location.href='purchaseList.do';">3개월</button>
+												id="threeMonth">3개월</button>
 												<button class="btn btn-default" style="float: left;" id="oneMonth">1개월</button>
 												<button class="btn btn-default" style="float: left;" id="week">1주일</button>
-											
-												<form>
-												<input type="text" class="form-control" style="float: left; width:100px;">
-												</form>
 												
 												<button type="button" class="btn btn-default"
 													data-dismiss="modal">Close</button>
@@ -296,21 +313,36 @@
 		 $(document).ready(function() {
 			 
 			$("#threeMonth").click(function() {
+				$('#myModal2').modal('show') 
+					
 				//1이면 3개월 조회
-				location.href="purchaseList.do?month=1"
-				alert("3개월 버튼 작동")
+					 	
+				 	 $.ajax({
+						url:"mypage.do",
+						data:{month:1},
+						dataType:"html",
+						type:"get",
+						success:function(data){
+							alert("통신완료" + data);
+							$("#myModal").html(data);
+						},
+						error:function(request, status, errorData){
+							alert("error code: " + request.status + "/n" 
+									+ "message : " + request.reponseText + "/n"
+									+ "error : " + request.errorData);
+						}
+					});   
 			});
 			
 			$("#oneMonth").click(function(){
 				//2면 1개월 조회
-				location.href="purchaseList.do?month=2"
-				alert("1개월 버튼 작동")
+				$('#myModal2').modal('show') 
 			});
 			
 			$("#week").click(function(){
 				//3이면 일주일조회
-				location.href="purchaseList.do?month=3"
-				alert("일주일 버튼 작동")
+				$('#myModal2').modal('show') 
+			
 			})
 		}); 
 		

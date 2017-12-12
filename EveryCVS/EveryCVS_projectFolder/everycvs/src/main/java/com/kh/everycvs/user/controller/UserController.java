@@ -3,6 +3,7 @@ package com.kh.everycvs.user.controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -10,8 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -126,17 +126,24 @@ public class UserController {
 	}
 
 	/** 마이 페이지 **/
-	@RequestMapping("mypage.do")
-	public ModelAndView myPage(HttpSession session, ModelAndView mv, int month) {
+	@RequestMapping(value="mypage.do", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView myPage(HttpSession session, ModelAndView mv, 
+			@Param (value="month") String month,
+			Map<String, Object> map, Purchase purchase) {
 		
-		ArrayList<Purchase> list = (ArrayList<Purchase>) purchaseService.purchaseList(month);
+		map.put("month", month);
+		map.put("purchase", purchase);
+		
+		List<Map<String, Object>> list = purchaseService.purchaseList(map);
 		ArrayList<Favorite> flist = (ArrayList<Favorite>) favoriteService.favoriteList();
 		User user = (User) session.getAttribute("user");
 		
 		mv.addObject("list", list);		
 		mv.addObject("flist", flist); 
-		/*System.out.println(list);
-		System.out.println(flist);*/
+		System.out.println(list);
+		System.out.println(flist);
+		System.out.println(month);
 		
 		mv.setViewName("user/mypage/main");
 		return mv;

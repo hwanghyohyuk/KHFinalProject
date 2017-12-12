@@ -1,13 +1,16 @@
 package com.kh.everycvs.purchase.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Purchase;
@@ -55,12 +58,18 @@ public class PurchaseController {
 	}
 	
 	//전체거래내역 조회 : 3개월, 1개월, 1주일 단위로 조회(해당 리스트 목록조회)
-	@RequestMapping("purchaseList.do")
+	@RequestMapping(value="purchaseList.do", method=RequestMethod.GET)
+	@ResponseBody
 	public ModelAndView purchaseList(ModelAndView mv, HttpServletRequest request,
-			ArrayList<Map<String, Object>> map, Purchase purchase) {
+			Map<String, Object> map, Purchase purchase, 
+			@Param (value="month") String month) {
+		
+		map.put("month", month);
+		map.put("purchase", purchase);
+		
 		//구매내역 조회를 요청하면 가지고 있는 구매내역 리스트를 리턴함
-		int month = Integer.parseInt(request.getParameter("month"));
-		ArrayList<Purchase> list = (ArrayList<Purchase>) purchaseService.purchaseList(month);
+		List<Map<String, Object>> list =purchaseService.purchaseList(map);
+		
 		mv.addObject("list", list);
 		System.out.println(list);
 		return mv;
