@@ -25,10 +25,15 @@ public class StoreDao {
 	
 	/* 편의점 관리자 */
 	/** 방문자 수 top5 지점 
-	 * @param brand_no **/
-	public Map joinCountTop5(int brand_no) {
-		// TODO Auto-generated method stub
-		return null;
+	 * @param brand_no */
+	public List joinCountTop5(int brand_no) {
+		return sqlSession.selectList("store.joinCountTop5", brand_no);
+	}
+	
+	/** 판매량 top5 지점
+	 * @param brand_no */
+	public List saleQuantityTop5(int brand_no) {
+		return sqlSession.selectList("store.saleQuantityTop5", brand_no);
 	}
 	
 	/** 지점 조회 : 모든 지점을 조회
@@ -74,5 +79,6 @@ public class StoreDao {
 	public void increamentJoinCount(String store_no) {
 				
 	}
+	
 
 }

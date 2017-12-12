@@ -38,41 +38,15 @@
 					<div id="collapse-One" class="accordion-body collapse in">
 						<div class="panel-body" style="padding-top: 0px;">
 							<div class="row jun22">
-								<div class="col-sm-12">
-									<span class="label label-success">1위</span> <a
-										data-toggle="modal" data-target="#myModal"
-										style="cursor: pointer; color: #666"> <span class="jun8">역삼쌍마점</span>
-										<span class="jun8"><b>782253</b> EA 판매</span>
-									</a>
-								</div>
-								<div class="col-sm-12">
-									<span class="label label-success">2위</span> <a
-										data-toggle="modal" data-target="#myModal"
-										style="cursor: pointer; color: #666"> <span class="jun8">역삼상록점</span>
-										<span class="jun8"><b>624823</b> EA 판매</span>
-									</a>
-								</div>
-								<div class="col-sm-12">
-									<span class="label label-success">3위</span> <a
-										data-toggle="modal" data-target="#myModal"
-										style="cursor: pointer; color: #666"> <span class="jun8">강남본점</span>
-										<span class="jun8"><b>602422</b> EA 판매</span>
-									</a>
-								</div>
-								<div class="col-sm-12">
-									<span class="label label-success">4위</span> <a
-										data-toggle="modal" data-target="#myModal"
-										style="cursor: pointer; color: #666"> <span class="jun8">이천관고점</span>
-										<span class="jun8"><b>521438</b> EA 판매</span>
-									</a>
-								</div>
-								<div class="col-sm-12">
-									<span class="label label-success">5위</span> <a
-										data-toggle="modal" data-target="#myModal"
-										style="cursor: pointer; color: #666"> <span class="jun8">이천중리본점</span>
-										<span class="jun8"><b>461211</b> EA 판매</span>
-									</a>
-								</div>
+								<c:forEach var="store" items="${tlist1}" varStatus="status">
+									<div class="col-sm-12">
+										<span class="label label-success">${status.count}위</span> <a
+											data-toggle="modal" data-target="#myModal"
+											style="cursor: pointer; color: #666"> <span class="jun8">${store.store_name}</span>
+											<span class="jun8"><b>${store.salequantity}</b> EA 판매</span>
+										</a>
+									</div>
+								</c:forEach>
 							</div>
 						</div>
 					</div>
@@ -89,41 +63,15 @@
 					<div id="collapse-Two" class="accordion-body collapse">
 						<div class="panel-body" style="padding-top: 0px;">
 							<div class="row jun22">
-								<div class="col-sm-12">
-									<span class="label label-danger">1위</span> <a
-										data-toggle="modal" data-target="#myModal"
-										style="cursor: pointer; color: #666"> <span class="jun8">역삼쌍마점</span>
-										<span class="jun8"><b>782253</b> 번 방문</span>
-									</a>
-								</div>
-								<div class="col-sm-12">
-									<span class="label label-danger">2위</span> <a
-										data-toggle="modal" data-target="#myModal"
-										style="cursor: pointer; color: #666"> <span class="jun8">역삼상록점</span>
-										<span class="jun8"><b>624823</b> 번 방문</span>
-									</a>
-								</div>
-								<div class="col-sm-12">
-									<span class="label label-danger">3위</span> <a
-										data-toggle="modal" data-target="#myModal"
-										style="cursor: pointer; color: #666"> <span class="jun8">강남본점</span>
-										<span class="jun8"><b>602422</b> 번 방문</span>
-									</a>
-								</div>
-								<div class="col-sm-12">
-									<span class="label label-danger">4위</span> <a
-										data-toggle="modal" data-target="#myModal"
-										style="cursor: pointer; color: #666"> <span class="jun8">이천관고점</span>
-										<span class="jun8"><b>521438</b> 번 방문</span>
-									</a>
-								</div>
-								<div class="col-sm-12">
-									<span class="label label-danger">5위</span> <a
-										data-toggle="modal" data-target="#myModal"
-										style="cursor: pointer; color: #666;"> <span class="jun8">이천중리본점</span>
-										<span class="jun8"><b>461211</b> 번 방문</span>
-									</a>
-								</div>
+								<c:forEach var="store" items="${tlist2}" varStatus="status">
+									<div class="col-sm-12">
+										<span class="label label-danger">${status.count}위</span>
+										<a data-toggle="modal" data-target="#myModal" style="cursor: pointer; color: #666">
+											<span class="jun8">${store.store_name}</span>
+											<span class="jun8"><b>${store.join_count}</b> 번 방문</span>
+										</a>
+									</div>
+								</c:forEach>
 							</div>
 						</div>
 					</div>

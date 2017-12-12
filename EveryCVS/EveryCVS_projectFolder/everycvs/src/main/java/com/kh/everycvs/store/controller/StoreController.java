@@ -50,18 +50,25 @@ public class StoreController {
 	/* 편의점 관리자 */
 
 	/** 방문자 수 top5 지점 **/
-	public ModelAndView joinCountTop5(ModelAndView modelAndView) {
-		int brand_no=0;
-		Map map = storeService.joinCountTop5(brand_no);
-		return null;
+	public ModelAndView joinCountTop5(HttpSession session, ModelAndView mv) {
+		User user = (User) session.getAttribute("user");
+		ArrayList<Store> list = (ArrayList<Store>) storeService.joinCountTop5(user.getBrand_no());
+		mv.addObject("slist", list);
+		mv.setViewName("admin/cvsmanager/main");
+		return mv;
 	}
 	
 	/** 지점 조회 : 모든 지점을 조회 */
 	@RequestMapping("cvsstorelist.do")
 	public ModelAndView selectStoreList(HttpSession session, ModelAndView mv) {
-		User user = (User) session.getAttribute("user");
-		ArrayList<Store> list = (ArrayList<Store>) storeService.selectStoreList(user.getBrand_no());
+		int brand_no = ((User)session.getAttribute("user")).getBrand_no();
+		ArrayList<Store> tlist1 = (ArrayList<Store>) storeService.saleQuantityTop5(brand_no);
+		ArrayList<Store> tlist2 = (ArrayList<Store>) storeService.joinCountTop5(brand_no);
+		ArrayList<Store> list = (ArrayList<Store>) storeService.selectStoreList(brand_no);
+		
 		mv.addObject("slist", list);
+		mv.addObject("tlist1", tlist1);
+		mv.addObject("tlist2", tlist2);
 		mv.setViewName("admin/cvsmanager/storeList");
 		return mv;
 	}

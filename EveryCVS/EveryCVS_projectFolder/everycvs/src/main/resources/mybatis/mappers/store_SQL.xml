@@ -31,6 +31,28 @@
 		]]>
 	</select>
 	
+	<!-- 방문자 수 top5 지점 조회 -->
+	<select id="joinCountTop5" parameterType="_int" resultType="list" resultMap="resultStore">
+		<![CDATA[
+			select * from
+			(select * from store_view
+			where brand_no = #{brand_no}
+			order by join_count desc, store_no asc)
+			where rownum <= 5
+		]]>
+	</select>
+	
+	<!-- 판매량 top5 지점 조회 -->
+	<select id="saleQuantityTop5" parameterType="_int" resultType="list" resultMap="resultStore">
+		<![CDATA[
+			select * from
+			(select * from store_view
+			where brand_no = #{brand_no}
+			order by salequantity desc, store_no asc)
+			where rownum <= 5
+		]]>
+	</select>
+	
 	<!-- 지점 검색 : 지점번호 -->
 	<select id="storeSearch1" parameterType="store" resultType="list" resultMap="resultStore">
 		<![CDATA[

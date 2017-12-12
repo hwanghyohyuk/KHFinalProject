@@ -36,25 +36,29 @@ public class StoreServiceImpl implements StoreService {
 	/** 방문자 수 top5 지점 
 	 * @param brand_no **/
 	@Override
-	public Map joinCountTop5(int brand_no) {
-		Map map = storeDao.joinCountTop5(brand_no);
-		return null;
+	public List joinCountTop5(int brand_no) {
+		return storeDao.joinCountTop5(brand_no);
+	}
+	
+	/** 판매량 top5 지점
+	 * @param brand_no */
+	@Override
+	public List saleQuantityTop5(int brand_no) {
+		return storeDao.saleQuantityTop5(brand_no);
 	}
 	
 	/** 지점 조회 : 모든 지점을 조회
 	 * 	@param brand_no */
 	@Override
 	public List selectStoreList(int brand_no) {
-		List list = storeDao.selectStoreList(brand_no);
-		return list;
+		return storeDao.selectStoreList(brand_no);
 	}
 
 	/** 지점 검색 : 입력한 키워드와 필터링으로 지점을 검색
 	 * @param store */
 	@Override
 	public List searchStoreList(Store store) {
-		List list = storeDao.searchStoreList(store);
-		return list;
+		return storeDao.searchStoreList(store);
 	}
 
 	/** 지점 삭제
@@ -72,8 +76,7 @@ public class StoreServiceImpl implements StoreService {
 		Map map = storeDao.cvsJoinCount();
 		return null;
 	}
-
 	
-
+	
 
 }
