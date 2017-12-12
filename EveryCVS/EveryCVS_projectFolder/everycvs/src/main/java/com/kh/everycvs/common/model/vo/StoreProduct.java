@@ -34,6 +34,7 @@ public class StoreProduct implements Serializable {
 	private int purchase_count; // 구매횟수
 	private int discount_no; // 할인번호
 	private String discount_info; // 할인정보
+	private String discount_name; // 할인이름
 
 	public StoreProduct() {
 		super();
@@ -67,7 +68,8 @@ public class StoreProduct implements Serializable {
 	public StoreProduct(int store_product_no, String store_no, int product_no, String product_name, String manufacturer,
 			int price, Date manufacture_date, int expiration_date, int expiration_hour, int quantity,
 			int product_kind_no, String product_kind_name, int brand_no, String brand_name, String original_file_name,
-			String stored_file_name, String del_check, int purchase_count, int discount_no, String discount_info) {
+			String stored_file_name, String del_check, int purchase_count, int discount_no, String discount_info,
+			String discount_name) {
 		super();
 		this.store_product_no = store_product_no;
 		this.store_no = store_no;
@@ -89,8 +91,9 @@ public class StoreProduct implements Serializable {
 		this.purchase_count = purchase_count;
 		this.discount_no = discount_no;
 		this.discount_info = discount_info;
+		this.discount_name = discount_name;
 	}
-
+	
 	/* Getter & Setter */
 	public int getStore_product_no() {
 		return store_product_no;
@@ -252,10 +255,19 @@ public class StoreProduct implements Serializable {
 		this.discount_info = discount_info;
 	}
 
+	public String getDiscount_name() {
+		return discount_name;
+	}
+
+	public void setDiscount_name(String discount_name) {
+		this.discount_name = discount_name;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
+	
+	/* ToString */
 	@Override
 	public String toString() {
 		return "StoreProduct [store_product_no=" + store_product_no + ", store_no=" + store_no + ", product_no="
@@ -265,10 +277,8 @@ public class StoreProduct implements Serializable {
 				+ product_kind_no + ", product_kind_name=" + product_kind_name + ", brand_no=" + brand_no
 				+ ", brand_name=" + brand_name + ", original_file_name=" + original_file_name + ", stored_file_name="
 				+ stored_file_name + ", del_check=" + del_check + ", purchase_count=" + purchase_count
-				+ ", discount_no=" + discount_no + ", discount_info=" + discount_info + "]";
+				+ ", discount_no=" + discount_no + ", discount_info=" + discount_info + ", discount_name="
+				+ discount_name + "]";
 	}
-
-	/* ToString */
-	
 
 }
