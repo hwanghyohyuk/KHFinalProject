@@ -44,13 +44,46 @@ public class StoreProductServiceImpl implements StoreProductService {
 	}
 
 	@Override
-	public int getdcCount() {
-		return sproductDao.getdcCount();
+	public List<StoreProduct> dcSproduct() {
+		return sproductDao.dcSproduct();
 	}
 
 	@Override
-	public List<StoreProduct> dcSproduct() {
-		return sproductDao.dcSproduct();
+	public List<StoreProduct> expSproduct() {
+		return sproductDao.expSproduct();
+	}
+
+	@Override
+	public List<StoreProduct> listSpmanager(int currentPage, int limit) {
+		int startRow = (currentPage -1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		return sproductDao.listSpmanager(startRow,endRow);  
+	}
+
+	@Override
+	public List<StoreProduct> searchSpmanager(int currentPage, int limit, String keyword) {
+		int startRow = (currentPage -1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		return sproductDao.searchSpmanager(startRow,endRow,keyword);
+	}
+
+	@Override
+	public void deleteSpmanager(int spnum) {
+		sproductDao.deleteSpmanager(spnum);
+	}
+
+	@Override
+	public List<StoreProduct> listApmanager(int currentPage, int limit) {
+		int startRow = (currentPage -1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		return sproductDao.listApmanager(startRow,endRow);
+	}
+
+	@Override
+	public List<StoreProduct> searchApmanager(int currentPage, int limit, String keyword) {
+		int startRow = (currentPage -1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		return sproductDao.searchApmanager(startRow,endRow,keyword);
 	}
 	
 }

@@ -16,8 +16,18 @@ public interface StoreProductService {
 
 	public List<StoreProduct> new3Sproduct();
 
-	public int getdcCount();
-
 	public List<StoreProduct> dcSproduct();
+
+	public List<StoreProduct> expSproduct();
+
+	public List<StoreProduct> listSpmanager(int currentPage, int limit);
+
+	public List<StoreProduct> searchSpmanager(int currentPage, int limit, String keyword);
+
+	public void deleteSpmanager(int spnum);
+
+	public List<StoreProduct> listApmanager(int currentPage, int limit);
+
+	public List<StoreProduct> searchApmanager(int currentPage, int limit, String keyword);
 
 }

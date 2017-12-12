@@ -4,8 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- === BEGIN HEAD ===  -->
 <c:import url="../include/user/common/head.jsp"></c:import>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <c:url var="sptop3" value="sptop3.do" />
 <script type="text/javascript">
 	$(function() {
@@ -30,7 +29,6 @@
 		});
 	});
 </script>
-
 <c:import url="../include/user/common/headend.jsp"></c:import>
 <!-- === END HEAD ===  -->
 <!-- === BEGIN HEADER ===  -->
@@ -132,8 +130,16 @@
 													<h5 align="center">
 														<strong>${sp.product_name}</strong>
 													</h5>
-													<h6 align="center">${sp.price}원</h6>
-													<h6 align="center" style="color: red;">행사이름</h6>
+													<c:choose>
+														<c:when test="${sp.discount_no==4}">
+															<h6 align="center">${sp.price}원 -> ${sp.discount_info}원</h6>
+															<h6 align="center" style="color: red;">${sp.discount_name}</h6>
+														</c:when>
+														<c:otherwise>
+															<h6 align="center">${sp.price}원 </h6>
+															<h6 align="center" style="color: red;">${sp.discount_name}</h6>
+														</c:otherwise>
+													</c:choose>
 												</div>
 											</c:forEach>
 										</div>
@@ -151,49 +157,24 @@
 									<strong>유통기한 임박상품</strong>
 								</h5>
 							</div>
-							<div id="collapse-One" class="accordion-body collapse in">
-								<div class="panel-body">
-									<div class="row">
-										<div class="col-md-4">
-											<img src="/everycvs/resources/user/img/fillers/filler1.jpg"
-												alt="filler image">
-											<h5 align="center">
-												<strong>보성녹돈불고기</strong>
-											</h5>
-											<h6 align="center">4200원</h6>
-											<h6 align="center" style="color: red;">3일 남았습니다.</h6>
-										</div>
-										<div class="col-md-4">
-											<img src="/everycvs/resources/user/img/fillers/filler1.jpg"
-												alt="filler image">
-											<h5 align="center">
-												<strong>보성녹돈불고기</strong>
-											</h5>
-											<h6 align="center">4200원</h6>
-											<h6 align="center" style="color: red;">2일 남았습니다.</h6>
-										</div>
-										<div class="col-md-4">
-											<img src="/everycvs/resources/user/img/fillers/filler1.jpg"
-												alt="filler image">
-											<h5 align="center">
-												<strong>보성녹돈불고기</strong>
-											</h5>
-											<h6 align="center">4200원</h6>
-											<h6 align="center" style="color: red;">1일 남았습니다.</h6>
+							<div style="overflow-x:hidden; width:480px; height:195px;">
+								<div id="collapse-One" class="accordion-body collapse in">
+									<div class="panel-body">
+										<div class="row">
+											<c:forEach var="sp" items="${requestScope.list4}">
+												<div class="col-md-4">
+													<img src="/everycvs/resources/user/img/fillers/filler1.jpg"
+														alt="filler image">
+													<h5 align="center">
+														<strong>${sp.product_name}</strong>
+													</h5>
+													<h6 align="center">${sp.price}원</h6>
+													<h6 align="center" style="color: red;">${sp.expiration_date}일 남았습니다.</h6>
+												</div>
+											</c:forEach>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="text-center">
-								<ul class="pagination">
-									<li><a href="#">&laquo;</a></li>
-									<li><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li class="active"><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#">&raquo;</a></li>
-								</ul>
 							</div>
 						</div>
 					</div>
