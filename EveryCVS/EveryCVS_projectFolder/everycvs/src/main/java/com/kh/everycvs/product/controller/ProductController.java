@@ -88,6 +88,22 @@ public class ProductController {
 		mv.addObject("plist", list);
 		mv.setViewName("admin/cvsmanager/productList");
 		return mv;
+		
+		/*map.put("0", (ArrayList<Product>) productService.searchProductList(productInfo));
+		map.put("1", (ArrayList<Product>) productService.searchProductList1(productInfo));
+		map.put("2", (ArrayList<Product>) productService.searchProductList2(productInfo));
+		map.put("3", (ArrayList<Product>) productService.searchProductList3(productInfo));
+		map.put("4", (ArrayList<Product>) productService.searchProductList4(productInfo));
+		map.put("5", (ArrayList<Product>) productService.searchProductList5(productInfo));
+		map.put("6", (ArrayList<Product>) productService.searchProductList6(productInfo));
+		map.put("7", (ArrayList<Product>) productService.searchProductList7(productInfo));
+		map.put("8", (ArrayList<Product>) productService.searchProductList8(productInfo));
+		map.put("9", (ArrayList<Product>) productService.searchProductList9(productInfo));
+		map.put("10", (ArrayList<Product>) productService.searchProductList10(productInfo));
+		map.put("11", (ArrayList<Product>) productService.searchProductList11(productInfo));
+		
+		mv.addObject("map", map);
+		mv.setViewName("admin/cvsmanager/productList");*/
 	}
 	
 	/** 상품 조회 : 선택한 상품 상세 조회 */
@@ -117,9 +133,9 @@ public class ProductController {
 			break;
 		}
 		
-		ArrayList<Product> list1 = (ArrayList<Product>) productService.searchProductList(productInfo);
+		ArrayList<Product> list = (ArrayList<Product>) productService.searchProductList(productInfo);
 		
-		mv.addObject("plist1", list1);
+		mv.addObject("plist", list);
 		mv.setViewName("admin/cvsmanager/productList");
 		return mv;
 	}
