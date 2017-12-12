@@ -19,11 +19,7 @@ public class StoreController {
 
 	/* 사용자 */
 	
-	/** 지도에 표시할 데이터**/
-	public ModelAndView cvsMapList(ModelAndView modelAndView) {
-		Map map = storeService.cvsMapList();
-		return null;
-	}
+	
 	
 	/* 지점관리자 */
 

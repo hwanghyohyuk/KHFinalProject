@@ -1,5 +1,6 @@
 package com.kh.everycvs.store.model.service;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,8 @@ public interface StoreService {
 	
 	/*사용자*/
 	/**지도에 표시할 데이터리스트**/
-	public Map cvsMapList();
+	ArrayList<Store> cvsMapList(int brand_no);
+	
 	/**지점 방문횟수증가**/
 	public void increamentJoinCount(String store_no);
 
@@ -38,6 +40,7 @@ public interface StoreService {
 	/* 사이트 관리자 */
 	/** 편의점별 방문자 수 통계 **/
 	public Map cvsJoinCount();
+
 	
 	
 

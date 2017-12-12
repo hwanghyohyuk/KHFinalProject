@@ -1,5 +1,6 @@
 package com.kh.everycvs.store.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.everycvs.common.model.vo.Store;
 
-@Repository("StoreDao")
+@Repository("storeDao")
 public class StoreDao {
 
 	@Autowired
@@ -37,9 +38,14 @@ public class StoreDao {
 
 	/* 사용자 */
 	/** 지도에 표시할 데이터리스트 **/
-	public Map cvsMapList() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Store> cvsMapList(int brand_no) {
+		List<Store> list=null;
+		if(brand_no==0){
+			list = sqlSession.selectList("store.allCvsMapList");
+		}else{
+			list = sqlSession.selectList("store.cvsMapList", brand_no);
+		}
+		return new ArrayList<Store>(list);
 	}
 
 	/* 편의점 관리자 */
