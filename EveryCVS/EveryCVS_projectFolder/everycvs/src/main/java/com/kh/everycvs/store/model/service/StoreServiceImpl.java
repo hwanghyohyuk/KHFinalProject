@@ -1,14 +1,10 @@
 package com.kh.everycvs.store.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.store.model.dao.StoreDao;
 
@@ -22,25 +18,6 @@ public class StoreServiceImpl implements StoreService {
 	public Store selectStore(String sno) {
 		return storeDao.selectStore(sno);
 	}	
-	
-	@Override
-	public ModelAndView selectStoreList(HttpServletRequest request) {
-		// 지점 조회 : 모든 지점을 조회
-		return null;
-	}
-
-	@Override
-	public ModelAndView searchStoreList(HttpServletRequest request) {
-		// 지점 검색 : 입력한 키워드와 필터링으로 지점을 검색
-		// 필터링 : 지점명/주소
-		return null;
-	}
-
-	@Override
-	public String DeleteStore(HttpServletRequest request) {
-		// 지점 삭제
-		return null;
-	}
 
 	/*사용자*/
 	/**지도에 표시할 데이터리스트**/
@@ -59,10 +36,38 @@ public class StoreServiceImpl implements StoreService {
 	/** 방문자 수 top5 지점 
 	 * @param brand_no **/
 	@Override
-	public Map joinCountTop5(int brand_no) {
-		Map map = storeDao.joinCountTop5(brand_no);
-		return null;
+	public List joinCountTop5(int brand_no) {
+		return storeDao.joinCountTop5(brand_no);
 	}
+	
+	/** 판매량 top5 지점
+	 * @param brand_no */
+	@Override
+	public List saleQuantityTop5(int brand_no) {
+		return storeDao.saleQuantityTop5(brand_no);
+	}
+	
+	/** 지점 조회 : 모든 지점을 조회
+	 * 	@param brand_no */
+	@Override
+	public List selectStoreList(int brand_no) {
+		return storeDao.selectStoreList(brand_no);
+	}
+
+	/** 지점 검색 : 입력한 키워드와 필터링으로 지점을 검색
+	 * @param store */
+	@Override
+	public List searchStoreList(Store store) {
+		return storeDao.searchStoreList(store);
+	}
+
+	/** 지점 삭제
+	 * @param store */
+	@Override
+	public void DeleteStore(Store store) {
+		storeDao.DeleteStore(store);
+	}
+	
 	
 	/* 사이트 관리자 */
 	/** 편의점별 방문자 수 통계 **/
@@ -71,9 +76,6 @@ public class StoreServiceImpl implements StoreService {
 		Map map = storeDao.cvsJoinCount();
 		return null;
 	}
-
 	
-	
-
 
 }

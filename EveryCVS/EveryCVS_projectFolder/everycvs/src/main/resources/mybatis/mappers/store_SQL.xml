@@ -45,7 +45,95 @@
       		select * from store_view
            ]]>
    </select>
-   
-   
-
-</mapper>	
+   	
+	<!-- 지점 리스트 조회 -->
+	<select id="storeList" parameterType="_int" resultType="list" resultMap="resultStore">
+		<![CDATA[
+			select * from store_view
+			where brand_no = #{brand_no}
+			order by store_no asc
+		]]>
+	</select>
+	
+	<!-- 방문자 수 top5 지점 조회 -->
+	<select id="joinCountTop5" parameterType="_int" resultType="list" resultMap="resultStore">
+		<![CDATA[
+			select * from
+			(select * from store_view
+			where brand_no = #{brand_no}
+			order by join_count desc, store_no asc)
+			where rownum <= 5
+		]]>
+	</select>
+	
+	<!-- 판매량 top5 지점 조회 -->
+	<select id="saleQuantityTop5" parameterType="_int" resultType="list" resultMap="resultStore">
+		<![CDATA[
+			select * from
+			(select * from store_view
+			where brand_no = #{brand_no}
+			order by salequantity desc, store_no asc)
+			where rownum <= 5
+		]]>
+	</select>
+	
+	<!-- 지점 검색 : 지점번호 -->
+	<select id="storeSearch1" parameterType="store" resultType="list" resultMap="resultStore">
+		<![CDATA[
+			select * from store_view
+			where brand_no = #{brand_no}
+			and store_no like #{store_no}
+			order by store_no asc
+		]]>
+	</select>
+	
+	<!-- 지점 검색 : 지점명 -->
+	<select id="storeSearch2" parameterType="store" resultType="list" resultMap="resultStore">
+		<![CDATA[
+			select * from store_view
+			where brand_no = #{brand_no}
+			and store_name like #{store_name}
+			order by store_no asc
+		]]>
+	</select>
+	
+	<!-- 지점 검색 : 시도명 -->
+	<select id="storeSearch3" parameterType="store" resultType="list" resultMap="resultStore">
+		<![CDATA[
+			select * from store_view
+			where brand_no = #{brand_no}
+			and loc_l_name like #{loc_l_name}
+			order by store_no asc
+		]]>
+	</select>
+	
+	<!-- 지점 검색 : 구군명 -->
+	<select id="storeSearch4" parameterType="store" resultType="list" resultMap="resultStore">
+		<![CDATA[
+			select * from store_view
+			where brand_no = #{brand_no}
+			and loc_m_name like #{loc_m_name}
+			order by store_no asc
+		]]>
+	</select>
+	
+	<!-- 지점 검색 : 법정동명 -->
+	<select id="storeSearch5" parameterType="store" resultType="list" resultMap="resultStore">
+		<![CDATA[
+			select * from store_view
+			where brand_no = #{brand_no}
+			and loc_s_name like #{loc_s_name}
+			order by store_no asc
+		]]>
+	</select>
+	
+	<!-- 지점 삭제 -->
+	<delete id="deleteStore" parameterType="store" flushCache="true" statementType="PREPARED">
+		<![CDATA[
+			delete from tb_store
+			where store_no = #{store_no}
+			and brand_no = #{brand_no}
+		]]>
+	</delete>
+	
+</mapper>

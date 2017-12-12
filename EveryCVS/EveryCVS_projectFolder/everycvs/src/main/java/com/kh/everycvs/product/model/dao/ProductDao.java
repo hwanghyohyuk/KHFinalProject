@@ -3,6 +3,8 @@ package com.kh.everycvs.product.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.everycvs.common.model.vo.Product;
@@ -10,9 +12,12 @@ import com.kh.everycvs.common.model.vo.Product;
 @Repository("ProductDao")
 public class ProductDao {
 
-	public List selectProductList() {
-		// 상품 조회 : 모든 상품을 조회
-		return null;
+	@Autowired
+	private SqlSession sqlSession;
+	
+	/** 상품 조회 : 모든 상품 조회 */
+	public List selectProductList(int brand_no) {
+		return sqlSession.selectList("product.productList", brand_no);
 	}
 
 	
@@ -21,11 +26,18 @@ public class ProductDao {
 		return null;
 	}
 
-	
-	public List searchProductList() {
-		// 상품 검색 : 입력한 키워드와 필터링으로 상품을 검색
-		// 필터링 : 상품명/상품코드
-		return null;
+	/** 상품 검색 : 입력한 키워드와 필터링으로 상품을 검색
+	 * 필터링 : 상품명/제조사
+	 * @param product */
+	public List searchProductList(Product product) {
+		List list = null;
+		
+		if(product.getProduct_name() != null)
+			list = sqlSession.selectList("product.productSearch1", product);
+		else if(product.getManufacturer() != null)
+			list = sqlSession.selectList("product.productSearch2", product);
+		
+		return list;
 	}
 
 	
@@ -40,10 +52,12 @@ public class ProductDao {
 		return 0;
 	}
 
-	
-	public int deleteProduct() {
-		// 상품 삭제 : 편의점 상품 삭제할 때 지점 상품도 연쇄 삭제
-		return 0;
+	/** 상품 삭제 : 편의점 상품 삭제할 때 지점 상품도 연쇄 삭제
+	 * @param product */
+	public void deleteProduct(Product product) {
+		sqlSession.delete("product.deleteProduct1", product);
+		sqlSession.delete("product.deleteProduct2", product);
+		sqlSession.delete("product.deleteProduct3", product);
 	}
 
 	/*사용자*/
