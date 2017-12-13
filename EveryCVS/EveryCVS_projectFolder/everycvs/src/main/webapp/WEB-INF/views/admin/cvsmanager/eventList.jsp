@@ -49,8 +49,7 @@
 									<c:forEach items="${list}" var="ead">
 									<tr class="text-center">
 										<td>${ead.event_no}</td>
-										<td data-toggle="modal" data-target="#myModal"
-											style="cursor: pointer;">${ead.title}</td>
+										<td><a href="javascript:ajaxDetail(${ead.event_no })">${ead.title}</a></td>
 										<td>${ead.start_date} ~ ${ead.end_date}</td>
 										<td>${ead.readcount}</td>
 										<td><i class="fa fa-trash-o jun21" onclick="del_event();"></i></td>
@@ -102,10 +101,55 @@
 </div>
 
 <!-- Modal -->
+<script type="text/javascript">
+	function ajaxDetail(eno){
+		$.ajax({
+			url : '/everycvs/cvsEventDetail.do',
+			data : {"eno": eno },
+			type : "post",
+			success:function(data){
+				var values="";
+				values+=
+					'<div class="modal-header">'+
+				'<button type="button" class="close" data-dismiss="modal"	aria-label="Close">'+
+					'<span aria-hidden="true">&times;</span>'+
+				'</button>'+
+				'<h4 class="modal-title" id="myModalLabel" style="color: #999;">Event detail</h4>'+
+			'</div>'+
+			'<div class="modal-body">'+
+				'<div class="jun_imgdiv">'+
+					'<img src="assets/img/exam_img.jpg" alt="이벤트 이미지가 없습니다." class="jun_img">'+
+				'</div>'+
+				'<div class="jun_contentdiv">'+
+					'<div class="jun_textdiv">'+data.event_no+'</div>'+
+					'<span style="padding-right: 22px;">이벤트명</span>'+data.title+'<br>'+
+					'<span style="padding-right: 22px;">시작일자</span>'+data.start_date+'<br> '+
+					'<span style="padding-right: 22px;">종료일자</span>'+data.end_date+'<br> '+
+					'<span style="padding-right: 20px;">참여제한 </span><b>'+data.join_limit+'</b>번<br>'+
+					'<span style="padding-right: 36px;">조회수</span>'+data.readcount+'<br> '+
+					'<span style="padding-right: 22px;">첨부파일</span>'+data.stored_file_name+'<br>'+
+				'</div>'+
+				'<div class="jun_contentdiv2">'+data.contents+'</div>'+
+			'</div>'+
+			'<div class="modal-footer" style="clear: both; margin-top: 2px;">'+
+				'<button type="button" onclick="del_event();" class="btn btn-gray" style="float: left;">DELETE</button>'+
+				'<button type="button" onclick="modify_event();" class="btn btn-danger">MODIFY</button>'+
+				'<button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>'+
+			'</div>';
+			$("#ajaxDetail").html(values);
+			$("#myModal").modal('toggle');
+			},
+			error:function(errorData){
+				alert("error : "+errorData);
+			}
+		});		
+	}
+</script>
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
-		<div class="modal-content">
+		<div id="ajaxDetail" class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">

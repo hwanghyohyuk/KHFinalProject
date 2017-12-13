@@ -34,13 +34,13 @@
 					<div class="col-sm-6" style="padding-left: 0px;">
 						<div class="jun5"></div>
 						<form class="form-inline" name="event" method="post" action="cvseventwrite.do">
+							<input type="hidden" name="writer" value="${sessionScope.user.user_no }">
 							<div class="form-group" id="jun_input1">
 								<label for="title" style="padding-right: 65px;">Event
 									Title</label> <input type="text" class="form-control" id="title"
 									style="width: 300px;" name="title" placeholder="제목을 입력하세요.">
 							</div>
 							<br>
-
 							<div class="form-group" id="jun_input1">
 								<label for="date1" style="padding-right: 70px;">Start
 									Date</label> <input type="date" name="start_date" class="form-control" id="date1"

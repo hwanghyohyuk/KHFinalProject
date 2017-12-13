@@ -16,53 +16,39 @@ import com.kh.everycvs.common.model.vo.Event;
 
 import com.kh.everycvs.event.model.dao.EventDao;
 
-@Service("EventService")
+@Service("eventService")
 public class EventServiceImpl implements EventService{
 	
 	@Autowired
-	private EventDao eventdao;
+	private EventDao eventDao;
 
 	@Override
 	public List<Event> selectEventList() throws Exception {
 		// 이벤트 조회 : 모든 공식이벤트를 조회
-		return eventdao.selectEventList();
+		return eventDao.selectEventList();
 	}
 
 	@Override
 	public Event selectEventOne(int no) {
 		// 이벤트 조회 : 선택한 이벤트 상세조회
-		return eventdao.selectEventOne(no);
+		return eventDao.selectEventOne(no);
 	}
 	
 	@Override
 	public void eventInsert(Event vo) {
-		String title = vo.getTitle();
-		int writer = vo.getWriter();
-		String contents = vo.getContents();
-		
-		 	title = title.replace("<", "&lt;");
-	        title = title.replace("<", "&gt;");
-	        // *공백문자 처리
-	        title = title.replace("  ",    "&nbsp;&nbsp;");
-	      
-	        // *줄바꿈 문자처리
-	        contents = contents.replace("\n", "<br>");
-	        vo.setTitle(title);
-	        vo.setContents(contents);
-	        vo.setWriter(writer);
-	        eventdao.cvseventwriteview(vo);
+	        eventDao.cvseventwriteview(vo);
 	}
 
 	
 	@Override
 	public int eventReadCount(int no) {
-		return eventdao.eventReadCount(no);
+		return eventDao.eventReadCount(no);
 	}
 	
 	@Override
 	public int eventDelete(int no) {
 		// 이벤트 삭제
-		return eventdao.eventDelete(no);
+		return eventDao.eventDelete(no);
 	}
 	
 	@Override
@@ -76,6 +62,12 @@ public class EventServiceImpl implements EventService{
 	public String updateEvent(HttpServletRequest request) {
 		// 이벤트 수정
 		return null;
+	}
+
+	@Override
+	public Event cvsEventDetail(int eno) {
+		// TODO Auto-generated method stub
+		return eventDao.cvsEventDetail(eno);
 	}
 
 	

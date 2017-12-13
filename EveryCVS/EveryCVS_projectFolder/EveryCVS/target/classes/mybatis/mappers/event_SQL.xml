@@ -60,4 +60,10 @@
 		]]>
 	</delete>
 	
+		<select id="cvsEventDetail" parameterType="_int" resultType="event" resultMap="resultEvent">
+		<![CDATA[
+			SELECT * FROM EVENT_VIEW where event_no = #{eno}
+		]]>
+		</select>
+	
 </mapper>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Event;
@@ -100,6 +101,21 @@ public class EventController {
 		}*/
 	}
 
+	@RequestMapping(value = "cvsEventDetail.do")
+	@ResponseBody
+	 public Event cvsEventDetail(@RequestParam("eno") int eno) throws Exception{
+		eventService.eventReadCount(eno);
+		Event event = eventService.cvsEventDetail(eno);	
+		return event;
+	}
+		
+	/*	날짜별로 바꾸는것 해야함
+	 * int code = Integer.parseInt(request.getParameter("code"));
+		if(code == 1) {
+			// 진행 중인 이벤트 리스트 조회
+		}else if (code == 2) {
+			// 종료된 이벤트 리스트 조회
+		}*/
 	
 	
 	

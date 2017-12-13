@@ -44,6 +44,8 @@ public interface EventService {
 	// 이벤트 수정
 	public String updateEvent(HttpServletRequest request);
 
+	public Event cvsEventDetail(int eno);
+
 	
 
 

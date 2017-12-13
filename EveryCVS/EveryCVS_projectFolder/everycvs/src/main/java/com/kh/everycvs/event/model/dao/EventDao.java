@@ -12,7 +12,7 @@ import com.kh.everycvs.common.model.vo.Event;
 
 
 
-@Repository("EventDao")
+@Repository("eventDao")
 public class EventDao {
 	
 	@Autowired
@@ -53,6 +53,11 @@ public class EventDao {
 	public int updateEvent() {
 		// 이벤트 수정
 		return 0;
+	}
+
+	public Event cvsEventDetail(int eno) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("event.cvsEventDetail", eno);
 	}
 	
 	
