@@ -21,8 +21,13 @@ public interface ProductService {
 	 * 필터링 : 상품명/제조사 */
 	public List searchProductList(Product product);
 	
-	// 상품 등록
-	public String insertProduct(HttpServletRequest request);
+	/** 상품 분류명 조회
+	 * @param product_kind_no */
+	public String selectKindName(int product_kind_no);
+	
+	/** 상품 등록
+	 * @param product */
+	public void insertProduct(Product product);
 	
 	// 상품 수정
 	public String updateProduct(HttpServletRequest request);

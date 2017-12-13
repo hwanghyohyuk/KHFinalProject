@@ -194,8 +194,8 @@
 
 					<!-- tab-content -->
 					<div class="tab-content">
-						<c:forEach var="i" begin="1" end="11" step="1">
-							<div class="tab-pane fade in active" id="sample-${i}">
+						<%-- <c:forEach var="i" begin="1" end="11" step="1"> --%>
+							<div class="tab-pane fade in active" id="sample-1">
 								<div class="row">
 									<div class="col-md-12">
 									<div style="height: 360px; overflow-y: auto; margin-bottom: 20px;">
@@ -210,10 +210,10 @@
 												<th width="6%">Del</th>
 											</tr>
 											<!-- start -->
-											<c:forEach var="entry" items="${map}">
+											<%-- <c:forEach var="entry" items="${map}">
 											${entry.key}
 											${entry.value}
-											${entry.key.class}
+											${entry.key.class} --%>
 											<!-- end -->
 											<c:forEach var="product" items="${plist}">
 												<tr class="text-center">
@@ -234,7 +234,7 @@
 									<div class="clearfix"></div>
 								</div>
 							</div>
-						</c:forEach>
+						<%-- </c:forEach> --%>
 						
 						<!-- End tab content -->
 						<!-- Search & Add block -->

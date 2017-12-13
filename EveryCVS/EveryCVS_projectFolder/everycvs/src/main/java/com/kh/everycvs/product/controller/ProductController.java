@@ -23,37 +23,6 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 
-	/** 상품 조회 : 전체 상품 조회 */
-	public ModelAndView selectProductList(HttpServletRequest request) {
-		return null;
-	}
-	
-	/** 상품 조회 : 선택한 상품 상세 조회 */
-	public ModelAndView selectProductOne(HttpServletRequest request) {
-		return null;
-	}
-	
-	/** 상품 검색 : 입력한 키워드와 필터링으로 상품을 검색
-	* 필터링 : 상품명/상품코드 */
-	public ModelAndView searchProductList(HttpServletRequest request) {
-		return null;
-	}
-	
-	/** 상품 등록 */
-	public String insertProduct(HttpServletRequest request) {
-		return null;
-	}
-	
-	/** 상품 수정 */
-	public String updateProduct(HttpServletRequest request) {
-		return null;
-	}
-	
-	/** 상품 삭제 : 편의점 상품 삭제할 때 지점 상품도 연쇄 삭제 */
-	public String deleteProduct(HttpServletRequest request) {
-		return null;
-	}
-
 	/*사용자*/
 	/**실시간 인기상품(전체) top 5**/
 	public ModelAndView popularProductTop5(ModelAndView modelAndView){
@@ -140,16 +109,47 @@ public class ProductController {
 		return mv;
 	}
 	
-	/** 상품 등록 */
+	/** 상품 등록 페이지 이동*/
 	@RequestMapping("cvsproductwriteview.do")
 	public String cvsProductWriteView() {
 		return "admin/cvsmanager/productWriteForm";
 	}
 	
-	/** 상품 수정 */
+	/** 상품 등록 */
+	@RequestMapping("cvsproductwrite.do")
+	public ModelAndView insertProduct(HttpSession session, HttpServletRequest request, ModelAndView mv) {
+		int brand_no = ((User)session.getAttribute("user")).getBrand_no();
+		
+		Product product = new Product();
+		product.setProduct_name(request.getParameter("productname"));
+		product.setManufacturer(request.getParameter("manufacturer"));
+		product.setPrice(Integer.parseInt(request.getParameter("price")));
+		product.setExpiration_date(Integer.parseInt(request.getParameter("deadline")));
+		int kind_no = Integer.parseInt(request.getParameter("kind"));
+		product.setProduct_kind_no(kind_no);
+		product.setProduct_kind_name(productService.selectKindName(kind_no));
+		product.setBrand_no(brand_no);
+		product.setOriginal_file_name("없음");
+		product.setStored_file_name("없음");
+		
+		productService.insertProduct(product);
+		
+		ArrayList<Product> list = (ArrayList<Product>) productService.selectProductList(brand_no);
+			
+		mv.addObject("plist", list);
+		mv.setViewName("admin/cvsmanager/productList");
+		return mv;
+	}
+	
+	/** 상품 수정 페이지 이동 */
 	@RequestMapping("cvsproductmodifyview.do")
 	public String cvsProductModifyView() {
 		return "admin/cvsmanager/productModifyForm";
+	}
+	
+	/** 상품 수정 */
+	public String updateProduct(HttpServletRequest request) {
+		return null;
 	}
 	
 	@RequestMapping(value = "cvsproductDelete.do", method = RequestMethod.GET)

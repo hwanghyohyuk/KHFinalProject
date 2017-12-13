@@ -17,45 +17,6 @@ public class ProductServiceImpl implements ProductService{
 
 	@Autowired
 	private ProductDao productDao;
-	
-	/** 상품 조회 : 모든 상품 조회 */
-	@Override
-	public List selectProductList(int brand_no) {
-		return productDao.selectProductList(brand_no);
-	}
-
-	@Override
-	public ModelAndView selectProductOne(HttpServletRequest request) {
-		// 상품 조회 : 선택한 상품 상세조회
-		return null;
-	}
-
-	/** 상품 검색 : 입력한 키워드와 필터링으로 상품을 검색
-	 * 필터링 : 상품명/제조사
-	 * @param product */
-	@Override
-	public List searchProductList(Product product) {
-		return productDao.searchProductList(product);
-	}
-
-	@Override
-	public String insertProduct(HttpServletRequest request) {
-		// 상품 등록
-		return null;
-	}
-
-	@Override
-	public String updateProduct(HttpServletRequest request) {
-		// 상품 수정
-		return null;
-	}
-
-	/** 상품 삭제 : 편의점 상품 삭제할 때 지점 상품도 연쇄 삭제
-	 * @param product */
-	@Override
-	public void deleteProduct(Product product) {
-		productDao.deleteProduct(product);
-	}
 
 	/*사용자*/
 	/**실시간 인기상품(전체) top 5**/
@@ -78,5 +39,53 @@ public class ProductServiceImpl implements ProductService{
 	public Map popularCvsProductTop5(int brand_no) {
 		return productDao.popularCvsProductTop5(brand_no);
 	}
+	
+	/** 상품 조회 : 모든 상품 조회 */
+	@Override
+	public List selectProductList(int brand_no) {
+		return productDao.selectProductList(brand_no);
+	}
+
+	@Override
+	public ModelAndView selectProductOne(HttpServletRequest request) {
+		// 상품 조회 : 선택한 상품 상세조회
+		return null;
+	}
+
+	/** 상품 검색 : 입력한 키워드와 필터링으로 상품을 검색
+	 * 필터링 : 상품명/제조사
+	 * @param product */
+	@Override
+	public List searchProductList(Product product) {
+		return productDao.searchProductList(product);
+	}
+	
+	/** 상품 분류명 조회
+	 * @param product_kind_no */
+	@Override
+	public String selectKindName(int product_kind_no) {
+		return productDao.selectKindName(product_kind_no);
+	}
+
+	/** 상품 등록
+	 * @param product */
+	@Override
+	public void insertProduct(Product product) {
+		productDao.insertProduct(product);
+	}
+
+	@Override
+	public String updateProduct(HttpServletRequest request) {
+		// 상품 수정
+		return null;
+	}
+
+	/** 상품 삭제 : 편의점 상품 삭제할 때 지점 상품도 연쇄 삭제
+	 * @param product */
+	@Override
+	public void deleteProduct(Product product) {
+		productDao.deleteProduct(product);
+	}
+	
 	
 }
