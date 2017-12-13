@@ -1,5 +1,6 @@
 package com.kh.everycvs.product.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.everycvs.common.model.vo.Product;
 import com.kh.everycvs.product.model.dao.ProductDao;
 
 @Service("ProductService")
@@ -16,10 +18,10 @@ public class ProductServiceImpl implements ProductService{
 	@Autowired
 	private ProductDao productDao;
 	
+	/** 상품 조회 : 모든 상품 조회 */
 	@Override
-	public ModelAndView selectProductList(HttpServletRequest request) {
-		// 상품 조회 : 모든 상품을 조회
-		return null;
+	public List selectProductList(int brand_no) {
+		return productDao.selectProductList(brand_no);
 	}
 
 	@Override
@@ -28,11 +30,12 @@ public class ProductServiceImpl implements ProductService{
 		return null;
 	}
 
+	/** 상품 검색 : 입력한 키워드와 필터링으로 상품을 검색
+	 * 필터링 : 상품명/제조사
+	 * @param product */
 	@Override
-	public ModelAndView searchProductList(HttpServletRequest request) {
-		// 상품 검색 : 입력한 키워드와 필터링으로 상품을 검색
-		// 필터링 : 상품명/상품코드
-		return null;
+	public List searchProductList(Product product) {
+		return productDao.searchProductList(product);
 	}
 
 	@Override
@@ -47,10 +50,11 @@ public class ProductServiceImpl implements ProductService{
 		return null;
 	}
 
+	/** 상품 삭제 : 편의점 상품 삭제할 때 지점 상품도 연쇄 삭제
+	 * @param product */
 	@Override
-	public String deleteProduct(HttpServletRequest request) {
-		// 상품 삭제 : 편의점 상품 삭제할 때 지점 상품도 연쇄 삭제
-		return null;
+	public void deleteProduct(Product product) {
+		productDao.deleteProduct(product);
 	}
 
 	/*사용자*/

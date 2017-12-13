@@ -3,6 +3,9 @@ package com.kh.everycvs.board.controller;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.board.model.service.BoardService;
 
@@ -24,4 +27,13 @@ public class BoardController {
 	//자유게시판 : 글삭제
 	
 	//자유게시판 : 검색
+	
+	/*사이트관리자 커뮤니티 관리 페이지*/
+	@RequestMapping("/admin/manageCmnt.do")
+	public ModelAndView manageService(@RequestParam(value = "p", required = false, defaultValue = "1") String page,
+			@RequestParam(value = "kwd", required = false, defaultValue = "") String keyword){
+		ModelAndView mv = new ModelAndView("admin/sitemanager/communitymanage");
+		
+		return mv;
+	}
 }

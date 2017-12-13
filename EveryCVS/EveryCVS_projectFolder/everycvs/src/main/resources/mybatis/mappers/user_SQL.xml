@@ -48,9 +48,18 @@
     </select>
     
     <!-- 잔고충전 -->
-    <update id="userIncreMoney" parameterType="int">
+    <update id="userIncreMoney" parameterType="map">
     	<![CDATA[
-    		update tb_user set cash = #{increMoney} + cash where user_no = #{user_no}
+    		update tb_user set cash = #{increMoney} + cash
+			where user_no = #{user_no}
     	]]>
+    
+       <selectKey keyProperty="cash" resultType="int" order="AFTER">
+			select cash FROM tb_user WHERE user_no = #{user_no}
+	   </selectKey>
+	   
     </update>
+    
+    
+    
 </mapper>

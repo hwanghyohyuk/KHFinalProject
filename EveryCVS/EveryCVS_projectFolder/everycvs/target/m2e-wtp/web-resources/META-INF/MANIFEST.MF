@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: HMK
 Build-Jdk: 1.8.0_144
+=======
+Built-By: user1
+Build-Jdk: 1.8.0_131
+>>>>>>> master
 Created-By: Maven Integration for Eclipse
 

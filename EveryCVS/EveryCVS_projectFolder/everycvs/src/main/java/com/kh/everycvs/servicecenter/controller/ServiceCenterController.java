@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.everycvs.common.model.vo.Purchase;
 import com.kh.everycvs.common.model.vo.ServiceCenter;
-import com.kh.everycvs.common.model.vo.StoreProduct;
 import com.kh.everycvs.servicecenter.model.service.ServiceCenterService;
 
 @Controller
@@ -32,6 +30,7 @@ public class ServiceCenterController {
 		return mv;
 		
 
+<<<<<<< HEAD
 	}
 
 	// 고객센터 : 고객센터 글쓰기
@@ -53,4 +52,24 @@ public class ServiceCenterController {
 		mv.setViewName("servicecenter/servicelist");
 		return mv;
 	}
+=======
+	}	
+	// 고객센터  : 고객센터 글쓰기
+		@RequestMapping(value="insertService.do", method=RequestMethod.GET)
+		public String serviceWrite(HttpServletRequest request){
+			return "servicecenter/serviceWrite";
+		}
+		
+	//고객센터: 
+		
+
+		/*사이트관리자 고객센터 관리 페이지*/
+		@RequestMapping("/admin/manageSrvc.do")
+		public ModelAndView manageService(@RequestParam(value = "p", required = false, defaultValue = "1") String page,
+				@RequestParam(value = "kwd", required = false, defaultValue = "") String keyword){
+			ModelAndView mv = new ModelAndView("admin/sitemanager/servicemanage");
+			
+			return mv;
+		}
+>>>>>>> master
 }

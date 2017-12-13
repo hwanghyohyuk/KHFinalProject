@@ -22,7 +22,7 @@ public class FavoriteServiceImpl implements FavoriteService{
 		//관심상품목록 조회
 		ArrayList<Favorite> flist = new ArrayList<Favorite>();
 		System.out.println(flist);
-		return (ArrayList<Favorite>)favoriteDao.favoriteList();
+		return (ArrayList<Favorite>) favoriteDao.favoriteList();
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package com.kh.everycvs.user.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Map;
@@ -11,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -126,14 +127,17 @@ public class UserController {
 
 	/** 마이 페이지 **/
 	@RequestMapping("mypage.do")
-	public ModelAndView myPage(HttpSession session, ModelAndView mv) {
+	public ModelAndView myPage(HttpSession session, ModelAndView mv, int month) {
 		
-		ArrayList<Purchase> list = (ArrayList<Purchase>) purchaseService.purchaseList();
+		ArrayList<Purchase> list = (ArrayList<Purchase>) purchaseService.purchaseList(month);
 		ArrayList<Favorite> flist = (ArrayList<Favorite>) favoriteService.favoriteList();
+		User user = (User) session.getAttribute("user");
+		
 		mv.addObject("list", list);		
 		mv.addObject("flist", flist); 
-		System.out.println(list);
-		System.out.println(flist);
+		/*System.out.println(list);
+		System.out.println(flist);*/
+		
 		mv.setViewName("user/mypage/main");
 		return mv;
 	}
@@ -141,38 +145,46 @@ public class UserController {
 	/** 잔고 충전  **/
 	@RequestMapping(value="increMoney.do", method=RequestMethod.POST)
 	@ResponseBody
-	public void userIncreMoney(@RequestParam Map<String,Object> map, HttpSession session, HttpServletResponse response, HttpServletRequest request, String increMoney) throws IOException {
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter();
-
-		increMoney = request.getParameter(increMoney);
-		int mon = Integer.parseInt(request.getParameter("increMoney"));
-		
-		
-	    User user = (User) session.getAttribute("user");
-	    session.setAttribute("user", user);
-	    request.setAttribute("increMoney", mon);
-	  
-	    userService.increMoney(map);
-	    
-		System.out.println("vo : " + user);
-		System.out.println("increMoney : " + mon);
+	public ModelAndView userIncreMoney(
+			@RequestParam ("increMoney") String increMoney,
+			@RequestParam("user_no") String user_no, 
+			@RequestParam("cash") String cash,
+			HttpSession session,
+			HttpServletRequest request, 
+			ModelAndView mv,
+		    Map<String, Object> map) throws IOException {
+				
+		//form input태그 값 int형으로 parsing 처리
+		int incre = Integer.parseInt(increMoney);
+		int uno = Integer.parseInt(user_no);
+		int c = Integer.parseInt(cash);
 	
-		/*
-		System.out.println("충전할 값 : " + increcash);*/
-		/*out.append("ok");
-		out.flush();
-		out.close();*/
-		
-		//userService.increMoney(increMoney);
-		/*session.setAttribute("increMoney", session);
-		mv.addObject("increNum", increMoney);
-		System.out.println(increMoney);*/
+		/*System.out.println("incre : " + incre);
+		System.out.println("uno : " + uno);
+		System.out.println("c : " + c);*/
+	
+	    map.put("increMoney", incre);
+	    map.put("user_no", uno);
+	    map.put("cash", c);
+	    
+	    int result = userService.increMoney(map);
+	    
+	    User user = (User) session.getAttribute("user");
+	    user.setCash(c + incre);
+	    
+	    session.setAttribute("user", user);
+	    
+	    mv.setViewName("jsonView");
+	    mv.addObject(result);
+	    
+	    System.out.println(user.getCash());
+
+	    return mv;
 	}
 
 
 	/** 로그아웃 **/
-	@RequestMapping(value = "user/signout.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/signout.do", method = RequestMethod.GET)
 	public String signOut(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		Object obj = session.getAttribute("user");
 		if (obj != null) {
@@ -304,12 +316,13 @@ public class UserController {
 	/* 사이트 관리자 */
 
 	/** 회원 목록 및 검색 **/
-	public ModelAndView userList(@RequestParam(value = "p", required = true, defaultValue = "1") String page,
+	@RequestMapping("/admin/manageUser.do")
+	public ModelAndView userList(@RequestParam(value = "p", required = false, defaultValue = "1") String page,
 			@RequestParam(value = "kwd", required = false, defaultValue = "") String keyword) {
-		return null;
+			ModelAndView mv = new ModelAndView("admin/sitemanager/usermanage");
+		return mv;
 	}
 
-	/* AJAX */
 	/** 사용자 등록 수 **/
 	public ModelAndView userEnrollCount(ModelAndView modelAndView) {
 

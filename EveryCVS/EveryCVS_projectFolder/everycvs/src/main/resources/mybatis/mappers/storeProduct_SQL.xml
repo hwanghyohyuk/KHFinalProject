@@ -26,6 +26,7 @@
 		<result property="purchase_count" column="PURCHASE_COUNT" />
 		<result property="discount_no" column="DISCOUNT_NO" />
 		<result property="discount_info" column="DISCOUNT_INFO" />
+		<result property="discount_name" column="DISCOUNT_NAME" />
 	</resultMap>
 	
 	<select id="getListCount" resultType="int">
@@ -45,6 +46,98 @@
 		   <![CDATA[
 		    select * from (
 		    select rownum rnum, store_product_no, product_name, price
+		    from store_popularity_product_view)
+		    where rnum >= #{start} and rnum <= #{end}
+		    and product_name like #{keyword}
+           ]]>
+   </select>
+   
+   <select id="top3Sproduct" resultType="list" resultMap="resultStoreProduct">
+		<![CDATA[
+			select * from (select rownum rnum, store_product_no, product_name, price
+			from (select * from store_popularity_product_view order by purchase_count desc)) 
+			where rnum >= 1 and rnum <= 3
+		]]>	
+	</select>
+	
+	<select id="new3Sproduct" resultType="list" resultMap="resultStoreProduct">
+		<![CDATA[
+			select * from (select rownum rnum, store_product_no, product_name, price
+			from (select * from store_popularity_product_view order by manufacture_date desc)) 
+			where rnum >= 1 and rnum <= 3
+		]]>	
+	</select>
+	
+	<select id="dcSproduct" parameterType="java.util.Map" resultType="list" resultMap="resultStoreProduct">
+		   <![CDATA[
+      		select * from store_popularity_product_view where discount_no is not null
+           ]]>
+   </select>
+   
+   <select id="expSproduct" parameterType="java.util.Map" resultType="list" resultMap="resultStoreProduct">
+		   <![CDATA[
+      		select * from store_popularity_product_view where expiration_date <= 3
+           ]]>
+   </select>
+	
+	<select id="listSpmanager" parameterType="java.util.Map" resultType="list" resultMap="resultStoreProduct">
+		   <![CDATA[
+      		select * from (
+            select rownum rnum, a.*
+            from store_popularity_product_view a)
+            where rnum >= #{startRow} and rnum <= #{endRow}
+           ]]>
+   </select>
+   
+   <select id="searchSpmanager" parameterType="hashmap" resultType="list" resultMap="resultStoreProduct">
+		   <![CDATA[
+		    select * from (
+		    select rownum rnum, store_product_no, product_kind_name, product_name,
+		    manufacturer, price, discount_name, manufacture_date, quantity
+		    from store_popularity_product_view)
+		    where rnum >= #{start} and rnum <= #{end}
+		    and product_name like #{keyword}
+           ]]>
+   </select>
+   
+   <delete id="deleteSpmanager1" parameterType="int">
+   		<![CDATA[
+			delete from tb_purchase where store_product_no = #{store_product_no, jdbcType=INTEGER}
+		]]>
+   </delete>
+   
+   <delete id="deleteSpmanager2" parameterType="int">
+   		<![CDATA[
+			delete from tb_gifticon where purchase_no = #{purchase_no, jdbcType=INTEGER}
+		]]>
+   </delete>
+   
+   <delete id="deleteSpmanager3" parameterType="int">
+   		<![CDATA[
+			delete from tb_dc_product where product_no = #{product_no, jdbcType=INTEGER}
+		]]>
+   </delete>
+   
+   <delete id="deleteSpmanager4" parameterType="int">
+   		<![CDATA[
+			delete from tb_store_product where store_product_no = #{spnum, jdbcType=INTEGER}
+		]]>
+   </delete>
+   
+   <select id="listApmanager" parameterType="java.util.Map" resultType="list" resultMap="resultStoreProduct">
+		   <![CDATA[
+      		select * from (
+            select rownum rnum, a.*
+            from store_popularity_product_view a)
+            where rnum >= #{startRow} and rnum <= #{endRow}
+           ]]>
+   </select>
+   
+   <select id="searchApmanager" parameterType="hashmap" resultType="list" resultMap="resultStoreProduct">
+		   <![CDATA[
+		    select * from (
+		    select rownum rnum, store_product_no, product_kind_name, product_name,
+		    manufacturer, price, discount_name
 		    from store_popularity_product_view)
 		    where rnum >= #{start} and rnum <= #{end}
 		    and product_name like #{keyword}
