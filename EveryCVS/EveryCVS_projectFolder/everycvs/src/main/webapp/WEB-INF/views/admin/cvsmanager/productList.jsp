@@ -212,7 +212,7 @@
 											<c:forEach var="product" items="${plist}">
 												<tr class="text-center">
 													<td>${product.product_no}</td>
-													<td onclick="show_modal('${product.product_no}' + '|' + '${product.product_name}' + '|' + '${product.product_kind_name}' + '|' + '${product.manufacturer}' + '|' + '${product.price}' + '|' + '${product.expiration_date}' + '|' + '${product.original_file_name}' + '|' + '${product.purchase_count}' + '|' + '${product.stored_file_name}');"
+													<td onclick="show_modal('${product.product_no}' + '/' + '${product.product_name}' + '/' + '${product.product_kind_name}' + '/' + '${product.manufacturer}' + '/' + '${product.price}' + '/' + '${product.expiration_date}' + '/' + '${product.original_file_name}' + '/' + '${product.purchase_count}' + '/' + '${product.stored_file_name}');"
 														data-toggle="modal" data-target="#myModal" 
 														style="cursor: pointer;">${product.product_name}</td>
 													<td>${product.manufacturer}</td>
@@ -325,7 +325,7 @@
 	
 	function del_product(product_no) {
 		var answer = false;
-		answer = confirm( product_no + "해당 상품을 삭제하시겠습니까?");
+		answer = confirm("해당 상품을 삭제하시겠습니까?");
 		if (answer)
 			location.href="/everycvs/cvsproductDelete.do?product_no=" + product_no;
 	}
@@ -356,21 +356,20 @@
 	}
 	
 	function show_modal(info) {
-		parr = info.split('|');
+		parr = info.split('/');
+		
 		$("#detail1").html("No. " + parr[0]);
 		$("#detail2").html(parr[1]);
 		$("#detail3").html(parr[2]);
 		$("#detail4").html(parr[3]);
 		$("#detail5").html(parr[4] + "원");
 		$("#detail6").html(parr[5] + "일");
-		if(parr[6] == "")
-			parr[6] = "없음";
 		$("#detail7").html(parr[6]);
 		$("#detail8").html(parr[7] + "EA");
 		if(parr[8] == "")
 			$("#detail9").html('<img src="" alt="상품 이미지가 없습니다." class="jun_img">');
 		else
-			$("#detail9").html('<img src="' + parr[8] + '" alt="상품 이미지가 없습니다." class="jun_img">');
+			$("#detail9").html('<img src="/everycvs/resources/upload/' + parr[8] + '" alt="상품 이미지가 없습니다." class="jun_img">');
 	}
 </script>
 <!-- End JS Custom Function -->

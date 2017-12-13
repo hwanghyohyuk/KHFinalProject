@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Product;
-import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.User;
+import com.kh.everycvs.common.util.FileUtils;
 import com.kh.everycvs.product.model.service.ProductService;
 
 @Controller
@@ -99,11 +99,15 @@ public class ProductController {
 		return "admin/cvsmanager/productWriteForm";
 	}
 	
-	/** 상품 등록 */
+	/** 상품 등록 
+	 * @throws Exception */
 	@RequestMapping("cvsproductwrite.do")
-	public ModelAndView insertProduct(HttpSession session, HttpServletRequest request, ModelAndView mv) {
-		
+	public ModelAndView insertProduct(HttpSession session, HttpServletRequest request, ModelAndView mv) throws Exception {
 		int brand_no = ((User)session.getAttribute("user")).getBrand_no();
+		
+		// 파일을 저장하고, "원래 파일명 | 변환된 파일명" 리턴
+		String fileName = new FileUtils().InsertFile(session, request);
+		String[] fName = fileName.split("/");
 		
 		Product product = new Product();
 		product.setProduct_name(request.getParameter("productname"));
@@ -112,8 +116,8 @@ public class ProductController {
 		product.setExpiration_date(Integer.parseInt(request.getParameter("deadline")));
 		product.setProduct_kind_no(Integer.parseInt(request.getParameter("kind")));
 		product.setBrand_no(brand_no);
-		product.setOriginal_file_name(null);
-		product.setStored_file_name(null);
+		product.setOriginal_file_name(fName[0]);
+		product.setStored_file_name(fName[1]);
 		
 		productService.insertProduct(product);
 		

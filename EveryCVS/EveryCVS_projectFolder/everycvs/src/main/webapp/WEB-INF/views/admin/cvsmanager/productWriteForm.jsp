@@ -88,7 +88,7 @@
 						<div class="form-group" id="jun_input1">
 							<label for="product5"
 								style="float: left; padding: 0px 24px 10px 0px; padding-top: 2px;">Product
-								image</label> <input type="file" name="file" id="product5"
+								image</label> <input type="file" name="imgfile" id="product5"
 								style="padding: 0px; float: left;">
 						</div>
 						<div class="col-sm-13 jun18">

@@ -1,13 +1,10 @@
 package com.kh.everycvs.common.util;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,93 +12,44 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Component("fileUtils")
 public class FileUtils {
-	private static final String filePath = "C:\\dev\\file\\";
 	
-	public List<Map<String,Object>> parseInsertFileInfo(Map<String,Object> map, HttpServletRequest request) throws Exception{
+	private static String filePath = null;
+	
+	/** 정해진 경로에 파일을 생성하고,
+	 *	[원래 파일명 | 변환한 파일명] 을 리턴하는 메소드 */
+	public String InsertFile(HttpSession session, HttpServletRequest request) throws Exception{
+		
+		// 경로 지정 : 웹 서비스 root 경로에 resources/upload 폴더 안
+		this.filePath = request.getSession().getServletContext().getRealPath("/") + "resources/upload/";
+		
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
     	Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
     	
     	MultipartFile multipartFile = null;
-    	String originalFileName = null;
-    	String originalFileExtension = null;
-    	String storedFileName = null;
+    	String originalFileName = null;		// 원래 파일명
+    	String originalFileExtension = null;	//원래 파일 확장자
+    	String storedFileName = null;	// 변환한 파일명("랜덤텍스트.확장자")
     	
-    	List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
-        Map<String, Object> listMap = null; 
-        
-        String boardIdx = (String)map.get("IDX");
-        
-        File file = new File(filePath);
+        File file = new File(filePath);	// 디렉토리 생성해보쟈.
+        // exists() : 파일이나 디렉토리의 존재 여부를 boolean으로 반환
         if(file.exists() == false){
-        	file.mkdirs();
+        	file.mkdirs();	// 없으면 만든닷!
         }
         
-        while(iterator.hasNext()){
+        if(iterator.hasNext()){
         	multipartFile = multipartHttpServletRequest.getFile(iterator.next());
-        	if(multipartFile.isEmpty() == false){
+        	if(multipartFile.isEmpty() == false){	// multipartFile이 비어있지 않으면
         		originalFileName = multipartFile.getOriginalFilename();
-        		originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+        		originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));	// .확장자 형태로 자름
+        		
+        		// 저장되는 파일명 : "랜덤텍스트.확장자"
         		storedFileName = CommonUtils.getRandomString() + originalFileExtension;
         		
-        		file = new File(filePath + storedFileName);
-        		multipartFile.transferTo(file);
-        		
-        		listMap = new HashMap<String,Object>();
-        		listMap.put("BOARD_IDX", boardIdx);
-        		listMap.put("ORIGINAL_FILE_NAME", originalFileName);
-        		listMap.put("STORED_FILE_NAME", storedFileName);
-        		listMap.put("FILE_SIZE", multipartFile.getSize());
-        		list.add(listMap);
+        		file = new File(filePath + storedFileName);	// 파일 객체 만들고,
+        		multipartFile.transferTo(file);	// 실제 파일을 만들어준다.
         	}
         }
-		return list;
+		return new String(originalFileName + "/" + storedFileName);	// 변환한 파일명을 반환
 	}
-
-	public List<Map<String, Object>> parseUpdateFileInfo(Map<String, Object> map, HttpServletRequest request) throws Exception{
-		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
-    	Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
-    	
-    	MultipartFile multipartFile = null;
-    	String originalFileName = null;
-    	String originalFileExtension = null;
-    	String storedFileName = null;
-    	
-    	List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
-        Map<String, Object> listMap = null; 
-        
-        String boardIdx = (String)map.get("IDX");
-        String requestName = null;
-        String idx = null;
-        
-        
-        while(iterator.hasNext()){
-        	multipartFile = multipartHttpServletRequest.getFile(iterator.next());
-        	if(multipartFile.isEmpty() == false){
-        		originalFileName = multipartFile.getOriginalFilename();
-        		originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-        		storedFileName = CommonUtils.getRandomString() + originalFileExtension;
-        		
-        		multipartFile.transferTo(new File(filePath + storedFileName));
-        		
-        		listMap = new HashMap<String,Object>();
-        		listMap.put("IS_NEW", "Y");
-        		listMap.put("BOARD_IDX", boardIdx);
-        		listMap.put("ORIGINAL_FILE_NAME", originalFileName);
-        		listMap.put("STORED_FILE_NAME", storedFileName);
-        		listMap.put("FILE_SIZE", multipartFile.getSize());
-        		list.add(listMap);
-        	}
-        	else{
-        		requestName = multipartFile.getName();
-            	idx = "IDX_"+requestName.substring(requestName.indexOf("_")+1);
-            	if(map.containsKey(idx) == true && map.get(idx) != null){
-            		listMap = new HashMap<String,Object>();
-            		listMap.put("IS_NEW", "N");
-            		listMap.put("FILE_IDX", map.get(idx));
-            		list.add(listMap);
-            	}
-        	}
-        }
-		return list;
-	}
+	
 }
