@@ -59,13 +59,6 @@ public class ProductServiceImpl implements ProductService{
 	public List searchProductList(Product product) {
 		return productDao.searchProductList(product);
 	}
-	
-	/** 상품 분류명 조회
-	 * @param product_kind_no */
-	@Override
-	public String selectKindName(int product_kind_no) {
-		return productDao.selectKindName(product_kind_no);
-	}
 
 	/** 상품 등록
 	 * @param product */

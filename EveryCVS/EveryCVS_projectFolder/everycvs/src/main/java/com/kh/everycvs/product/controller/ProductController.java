@@ -57,22 +57,6 @@ public class ProductController {
 		mv.addObject("plist", list);
 		mv.setViewName("admin/cvsmanager/productList");
 		return mv;
-		
-		/*map.put("0", (ArrayList<Product>) productService.searchProductList(productInfo));
-		map.put("1", (ArrayList<Product>) productService.searchProductList1(productInfo));
-		map.put("2", (ArrayList<Product>) productService.searchProductList2(productInfo));
-		map.put("3", (ArrayList<Product>) productService.searchProductList3(productInfo));
-		map.put("4", (ArrayList<Product>) productService.searchProductList4(productInfo));
-		map.put("5", (ArrayList<Product>) productService.searchProductList5(productInfo));
-		map.put("6", (ArrayList<Product>) productService.searchProductList6(productInfo));
-		map.put("7", (ArrayList<Product>) productService.searchProductList7(productInfo));
-		map.put("8", (ArrayList<Product>) productService.searchProductList8(productInfo));
-		map.put("9", (ArrayList<Product>) productService.searchProductList9(productInfo));
-		map.put("10", (ArrayList<Product>) productService.searchProductList10(productInfo));
-		map.put("11", (ArrayList<Product>) productService.searchProductList11(productInfo));
-		
-		mv.addObject("map", map);
-		mv.setViewName("admin/cvsmanager/productList");*/
 	}
 	
 	/** 상품 조회 : 선택한 상품 상세 조회 */
@@ -118,6 +102,10 @@ public class ProductController {
 	/** 상품 등록 */
 	@RequestMapping("cvsproductwrite.do")
 	public ModelAndView insertProduct(HttpSession session, HttpServletRequest request, ModelAndView mv) {
+		
+		//저장경로
+		String savePath = request.getServletContext().getRealPath("folderName");
+		
 		int brand_no = ((User)session.getAttribute("user")).getBrand_no();
 		
 		Product product = new Product();
@@ -125,12 +113,10 @@ public class ProductController {
 		product.setManufacturer(request.getParameter("manufacturer"));
 		product.setPrice(Integer.parseInt(request.getParameter("price")));
 		product.setExpiration_date(Integer.parseInt(request.getParameter("deadline")));
-		int kind_no = Integer.parseInt(request.getParameter("kind"));
-		product.setProduct_kind_no(kind_no);
-		product.setProduct_kind_name(productService.selectKindName(kind_no));
+		product.setProduct_kind_no(Integer.parseInt(request.getParameter("kind")));
 		product.setBrand_no(brand_no);
-		product.setOriginal_file_name("없음");
-		product.setStored_file_name("없음");
+		product.setOriginal_file_name(null);
+		product.setStored_file_name(null);
 		
 		productService.insertProduct(product);
 		

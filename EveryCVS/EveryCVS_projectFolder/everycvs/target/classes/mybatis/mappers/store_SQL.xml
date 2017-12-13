@@ -128,11 +128,28 @@
 	</select>
 	
 	<!-- 지점 삭제 -->
-	<delete id="deleteStore" parameterType="store" flushCache="true" statementType="PREPARED">
+	<!-- 연쇄 삭제 : 지점 테이블에서 삭제 -->
+	<delete id="deleteStore3" parameterType="store" flushCache="true" statementType="PREPARED">
 		<![CDATA[
 			delete from tb_store
 			where store_no = #{store_no}
 			and brand_no = #{brand_no}
+		]]>
+	</delete>
+	
+	<!-- 연쇄 삭제 : 지점상품 테이블에서 삭제 -->
+	<delete id="deleteStore1" parameterType="store" flushCache="true" statementType="PREPARED">
+		<![CDATA[
+			delete from tb_store_product
+			where store_no = #{store_no}
+		]]>
+	</delete>
+	
+	<!-- 연쇄 삭제 : 할인상품 테이블에서 삭제 -->
+	<delete id="deleteStore2" parameterType="store" flushCache="true" statementType="PREPARED">
+		<![CDATA[
+			delete from tb_dc_product
+			where store_no = #{store_no}
 		]]>
 	</delete>
 	

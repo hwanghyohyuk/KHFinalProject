@@ -73,7 +73,9 @@ public class StoreDao {
 	/** 지점 삭제
 	 * @param store */
 	public void DeleteStore(Store store) {
-		sqlSession.delete("store.deleteStore", store);
+		sqlSession.delete("store.deleteStore1", store);
+		sqlSession.delete("store.deleteStore2", store);
+		sqlSession.delete("store.deleteStore3", store);
 	}
 	
 		/* 사이트 관리자 */

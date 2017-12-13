@@ -60,12 +60,6 @@ public class ProductDao {
 		return list;
 	}
 	
-	/** 상품 분류명 조회
-	 * @param product_kind_no */
-	public String selectKindName(int product_kind_no) {
-		return sqlSession.selectOne("product.selectKindName", product_kind_no);
-	}
-	
 	/** 상품 등록 
 	 * @param product */
 	public void insertProduct(Product product) {

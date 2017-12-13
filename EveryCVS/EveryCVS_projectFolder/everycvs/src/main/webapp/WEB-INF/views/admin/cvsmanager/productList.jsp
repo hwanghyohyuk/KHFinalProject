@@ -218,7 +218,8 @@
 											<c:forEach var="product" items="${plist}">
 												<tr class="text-center">
 													<td>${product.product_no}</td>
-													<td data-toggle="modal" data-target="#myModal"
+													<td onclick="show_modal('${product.product_no}' + '|' + '${product.product_name}' + '|' + '${product.product_kind_name}' + '|' + '${product.manufacturer}' + '|' + '${product.price}' + '|' + '${product.expiration_date}' + '|' + '${product.original_file_name}' + '|' + '${product.purchase_count}' + '|' + '${product.stored_file_name}');"
+														data-toggle="modal" data-target="#myModal" 
 														style="cursor: pointer;">${product.product_name}</td>
 													<td>${product.manufacturer}</td>
 													<td>${product.product_kind_name}</td>
@@ -234,7 +235,6 @@
 									<div class="clearfix"></div>
 								</div>
 							</div>
-						<%-- </c:forEach> --%>
 						
 						<!-- End tab content -->
 						<!-- Search & Add block -->
@@ -291,25 +291,22 @@
 				<h4 class="modal-title" id="myModalLabel" style="color: #999;">Product detail</h4>
 			</div>
 			<div class="modal-body">
-				<div class="jun_imgdiv">
-					<img src="" alt="상품 이미지가 없습니다." class="jun_img">
-				</div>
+				<div class="jun_imgdiv" id="detail9"></div>
 				<div class="jun_contentdiv">
-					<div class="jun_textdiv">No.0001</div>
-					<span style="padding-right: 26px;">상품명</span>롯데)전주식한상도시락<br> <span
-						style="padding-right: 12px;">상품분류</span>도시락<br> <span
-						style="padding-right: 26px;">제조사</span>롯데푸드<br> <span
-						style="padding-right: 42px;">가격</span>3,000원<br> <span
-						style="padding-right: 14px;">유통기한</span>3일<br> <span
-						style="padding-right: 14px;">첨부파일</span>lotte-rice-002.png<br>
+					<div class="jun_textdiv"><span id="detail1"></span></div>
+					<span style="padding-right: 26px;">상품명</span><span id="detail2"></span><br> <span
+						style="padding-right: 12px;">상품분류</span><span id="detail3"></span><br> <span
+						style="padding-right: 26px;">제조사</span><span id="detail4"></span><br> <span
+						style="padding-right: 42px;">가격</span><span id="detail5"></span><br> <span
+						style="padding-right: 14px;">유통기한</span><span id="detail6"></span><br> <span
+						style="padding-right: 14px;">첨부파일</span><span id="detail7"></span><br>
 					<div style="margin-top: 4px;">
-						판매량<span
-							style="padding-left: 26px; color: #E6367A; font-weight: bold;">123942</span>
+						판매량<span id="detail8" style="padding-left: 26px; color: #E6367A; font-weight: bold;"></span>
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer" style="clear: both; margin-top: 2px;">
-				<button type="button" onclick="del_product();" class="btn btn-gray"
+				<button type="button" onclick="del_product2();" class="btn btn-gray"
 					style="float: left;">DELETE</button>
 				<button type="button" onclick="modify_product();"
 					class="btn btn-danger">MODIFY</button>
@@ -330,12 +327,20 @@
 <c:import url="../../include/admin/common/end.jsp"></c:import>
 <!-- JS Custom Function -->
 <script type="text/javascript">
+	var parr;
+	
 	function del_product(product_no) {
 		var answer = false;
-		var currentTab;
-		answer = confirm("해당 상품을 삭제하시겠습니까?");
+		answer = confirm( product_no + "해당 상품을 삭제하시겠습니까?");
 		if (answer)
 			location.href="/everycvs/cvsproductDelete.do?product_no=" + product_no;
+	}
+	
+	function del_product2(){
+		var answer = false;
+		answer = confirm("해당 상품을 삭제하시겠습니까?");
+		if (answer)
+			location.href="/everycvs/cvsproductDelete.do?product_no=" + parr[0];
 	}
 
 	function search_product() {
@@ -349,11 +354,29 @@
 	}
 
 	function modify_product() {
-		location.href = '/everycvs/cvsproductmodifyview.do';
+		location.href = '/everycvs/cvsproductmodifyview.do?product_no=' + parr[0];
 	}
 
 	function add_product() {
 		location.href = '/everycvs/cvsproductwriteview.do';
+	}
+	
+	function show_modal(info) {
+		parr = info.split('|');
+		$("#detail1").html("No. " + parr[0]);
+		$("#detail2").html(parr[1]);
+		$("#detail3").html(parr[2]);
+		$("#detail4").html(parr[3]);
+		$("#detail5").html(parr[4] + "원");
+		$("#detail6").html(parr[5] + "일");
+		if(parr[6] == "")
+			parr[6] = "없음";
+		$("#detail7").html(parr[6]);
+		$("#detail8").html(parr[7] + "EA");
+		if(parr[8] == "")
+			$("#detail9").html('<img src="" alt="상품 이미지가 없습니다." class="jun_img">');
+		else
+			$("#detail9").html('<img src="' + parr[8] + '" alt="상품 이미지가 없습니다." class="jun_img">');
 	}
 </script>
 <!-- End JS Custom Function -->

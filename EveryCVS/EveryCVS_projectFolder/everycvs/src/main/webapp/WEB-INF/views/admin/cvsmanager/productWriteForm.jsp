@@ -15,7 +15,6 @@
 <c:import url="../../include/admin/common/header.jsp"></c:import>
 <!-- === END HEADER === -->
 <!-- === BEGIN CONTENT === -->
-
 <!-- Right side column. Contains the navbar and content of the page -->
 <div class="content-wrapper">
 	<!-- Main content -->
@@ -29,9 +28,9 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">Add product</h3>
 				</div>
-
 				<div class="panel-body">
-					<form name="productFrm" action="/everycvs/cvsproductwrite.do" method="post" class="form-inline">
+					<form name="productFrm" action="/everycvs/cvsproductwrite.do"
+					method="post" class="form-inline" enctype="multipart/form-data">
 						<div class="form-group" id="jun_input1">
 							<label for="product0" style="padding-right: 54px;">Category</label>
 							<select name="kind" class="form-control input" id="product0"
@@ -68,7 +67,7 @@
 								style="padding-right: 82px; float: left; padding-top: 7px;">Price</label>
 							<div class="input-group">
 								<div class="input-group-addon">￦</div>
-								<input type="number" name="price" class="form-control" id="product3"
+								<input type="number" name="price" class="form-control" id="product3" step="100"
 									style="width: 80px; padding: 5px; text-align: center;"
 									placeholder="가격">
 							</div>
