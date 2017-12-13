@@ -409,18 +409,24 @@
 						        icon: {
 						        	<c:choose>
 						        		<c:when test="${s.brand_no eq 1}">
-						        		url:'/everycvs/resources/user/img/markers/marker_gs.png',
+						        		url:'/everycvs/resources/user/img/markers/marker_g.png',
+						        		 size: new naver.maps.Size(44, 44),
+								            origin: new naver.maps.Point(0, 0),
+								            anchor: new naver.maps.Point(22, 44)
 						        		</c:when>
 						        		<c:when test="${s.brand_no eq 2}">
-						        		url:'/everycvs/resources/user/img/markers/marker_cu.png',
+						        		url:'/everycvs/resources/user/img/markers/marker_c.png',
+						        		 size: new naver.maps.Size(44, 44),
+								            origin: new naver.maps.Point(0, 0),
+								            anchor: new naver.maps.Point(22, 44)
 						        		</c:when>
 						        		<c:when test="${s.brand_no eq 3}">
-						        		url:'/everycvs/resources/user/img/markers/marker_7e.png',
+						        		url:'/everycvs/resources/user/img/markers/marker_7.png',
+						        		 size: new naver.maps.Size(39, 41),
+								            origin: new naver.maps.Point(0, 0),
+								            anchor: new naver.maps.Point(19, 41)
 						        		</c:when>
 						        	</c:choose>
-						            size: new naver.maps.Size(17, 16),
-						            origin: new naver.maps.Point(0, 0),
-						            anchor: new naver.maps.Point(8, 8)
 						        }
 						    });
 						    var contentString = [
