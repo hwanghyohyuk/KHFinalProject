@@ -129,8 +129,16 @@
 			alert("가격을 입력하세요.");
 			return false;
 		}
+		if(productFrm.price.value < 0){
+			alert("0 이상의 가격을 입력하세요.");
+			return false;
+		}
 		if(productFrm.deadline.value == ""){
 			alert("유통기한을 입력하세요.");
+			return false;
+		}
+		if(productFrm.deadline.value < 0){
+			alert("0 이상의 유통기한을 입력하세요.");
 			return false;
 		}
 		productFrm.submit();
