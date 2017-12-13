@@ -16,25 +16,27 @@ public class StoreProductDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	public int getListCount() {
-		return sqlSession.selectOne("storeProduct.getListCount");
+	public int getListCount(String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(!keyword.equals("")){
+			map.put("keyword", "%"+keyword+"%");
+			return sqlSession.selectOne("storeProduct.getSearchListCount",map);
+		}else{
+			return sqlSession.selectOne("storeProduct.getListCount");
+		}	
+		
 	}
 
-	public List<StoreProduct> selectList(int startRow, int endRow) {
-		Map<String,Integer> map = new HashMap<String,Integer>();
+	public List<StoreProduct> selectList(int startRow, int endRow, String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("startRow", startRow); 
 		map.put("endRow", endRow); 
-		return sqlSession.selectList("storeProduct.selectList", map);
-	}
-	
-	public List<StoreProduct> searchSproduct(int startRow, int endRow, String keyword) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		String start =String.valueOf(startRow);
-		String end =String.valueOf(endRow);
-		map.put("start", start); 
-		map.put("end", end);
-		map.put("keyword", "%"+keyword+"%");
-		return sqlSession.selectList("storeProduct.searchSproduct", map);
+		if(!keyword.equals("")){
+			map.put("keyword", "%"+keyword+"%");
+			return sqlSession.selectList("storeProduct.searchSproduct", map);
+		}else{
+			return sqlSession.selectList("storeProduct.selectList", map);
+		}		
 	}
 
 	public List<StoreProduct> top3Sproduct() {
@@ -53,21 +55,16 @@ public class StoreProductDao {
 		return sqlSession.selectList("storeProduct.expSproduct");
 	}
 	
-	public List<StoreProduct> listSpmanager(int startRow, int endRow) {
-		Map<String,Integer> map = new HashMap<String,Integer>();
+	public List<StoreProduct> listSpmanager(int startRow, int endRow, String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("startRow", startRow); 
 		map.put("endRow", endRow); 
-		return sqlSession.selectList("storeProduct.listSpmanager", map);
-	}
-
-	public List<StoreProduct> searchSpmanager(int startRow, int endRow, String keyword) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		String start =String.valueOf(startRow);
-		String end =String.valueOf(endRow);
-		map.put("start", start); 
-		map.put("end", end);
-		map.put("keyword", "%"+keyword+"%");
-		return sqlSession.selectList("storeProduct.searchSpmanager", map);
+		if(!keyword.equals("")){
+			map.put("keyword", "%"+keyword+"%");
+			return sqlSession.selectList("storeProduct.searchSpmanager", map);
+		}else{
+			return sqlSession.selectList("storeProduct.listSpmanager", map);
+		}		
 	}
 
 	public void deleteSpmanager(int spnum) {
@@ -77,21 +74,16 @@ public class StoreProductDao {
 		 sqlSession.delete("deleteSpmanager4", spnum);
 	}
 
-	public List<StoreProduct> listApmanager(int startRow, int endRow) {
-		Map<String,Integer> map = new HashMap<String,Integer>();
+	public List<StoreProduct> listApmanager(int startRow, int endRow, String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("startRow", startRow); 
 		map.put("endRow", endRow); 
-		return sqlSession.selectList("storeProduct.listApmanager", map);
-	}
-
-	public List<StoreProduct> searchApmanager(int startRow, int endRow, String keyword) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		String start =String.valueOf(startRow);
-		String end =String.valueOf(endRow);
-		map.put("start", start); 
-		map.put("end", end);
-		map.put("keyword", "%"+keyword+"%");
-		return sqlSession.selectList("storeProduct.searchApmanager", map);
+		if(!keyword.equals("")){
+			map.put("keyword", "%"+keyword+"%");
+			return sqlSession.selectList("storeProduct.searchApmanager", map);
+		}else{
+			return sqlSession.selectList("storeProduct.listApmanager", map);
+		}	
 	}
 	
 }

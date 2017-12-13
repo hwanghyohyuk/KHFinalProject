@@ -23,7 +23,7 @@
 								영동대로86길 10 </small>
 						</h2>
 					</div>
-					<form action="spmsearch.do" method="post">
+					<form action="spmlist.do" method="post">
 						<div class="col-sm-3" style="margin-left: 190px;">
 							<br> <input class="form-control" type="search"
 								placeholder="상품명을 입력해주세요." name="keyword" value="${keyword}">
@@ -62,7 +62,7 @@
 										data-target="#spmmodal${spm.store_product_no}"> <strong>${spm.product_name}</strong>
 									</a></td>
 									<td>${spm.manufacturer}</td>
-									<td>${spm.price}원</td>
+									<td><fmt:formatNumber value="${spm.price}" pattern="#,###"/>원</td>
 									<td>${spm.discount_name}</td>
 									<td>${spm.manufacture_date}</td>
 									<td>${spm.quantity}개</td>
@@ -97,7 +97,7 @@
 																	</tr>
 																	<tr>
 																		<td><strong>가격</strong></td>
-																		<td>${spm.price}</td>
+																		<td><fmt:formatNumber value="${spm.price}" pattern="#,###"/>원</td>
 																	</tr>
 																	<tr>
 																		<td><strong>유통기한</strong></td>
