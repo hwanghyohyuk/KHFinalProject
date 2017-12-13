@@ -191,7 +191,7 @@ public class UserController {
 
 
 	/** 로그아웃 **/
-	@RequestMapping(value = "user/signout.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/signout.do", method = RequestMethod.GET)
 	public String signOut(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		Object obj = session.getAttribute("user");
 		if (obj != null) {
@@ -323,12 +323,13 @@ public class UserController {
 	/* 사이트 관리자 */
 
 	/** 회원 목록 및 검색 **/
-	public ModelAndView userList(@RequestParam(value = "p", required = true, defaultValue = "1") String page,
+	@RequestMapping("/admin/manageUser.do")
+	public ModelAndView userList(@RequestParam(value = "p", required = false, defaultValue = "1") String page,
 			@RequestParam(value = "kwd", required = false, defaultValue = "") String keyword) {
-		return null;
+			ModelAndView mv = new ModelAndView("admin/sitemanager/usermanage");
+		return mv;
 	}
 
-	/* AJAX */
 	/** 사용자 등록 수 **/
 	public ModelAndView userEnrollCount(ModelAndView modelAndView) {
 

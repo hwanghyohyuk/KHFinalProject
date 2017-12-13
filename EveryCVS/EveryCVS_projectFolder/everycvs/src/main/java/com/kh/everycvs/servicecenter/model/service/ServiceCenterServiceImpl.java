@@ -1,16 +1,31 @@
 package com.kh.everycvs.servicecenter.model.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-@Service("ServiceCenter")
+import com.kh.everycvs.common.model.vo.Purchase;
+import com.kh.everycvs.common.model.vo.ServiceCenter;
+import com.kh.everycvs.servicecenter.model.dao.ServiceCenterDao;
+import com.kh.everycvs.storeproduct.model.dao.StoreProductDao;
+
+@Service("ServiceCenterService")
 public class ServiceCenterServiceImpl implements ServiceCenterService{
+	
+	@Autowired
+	private ServiceCenterDao servicecenterDao;
+	
 	@Override
-	public ModelAndView selectServiceList(HttpServletRequest request) {
-		// 고객센터 조회 : 모든 공식고객센터를 조회
-		return null;
+	public ArrayList<ServiceCenter> serviceList() {
+		//고객센터 게시글 조회
+		ArrayList<ServiceCenter> list = new ArrayList<ServiceCenter>();
+		System.out.println("ServiceCenterServiceImpl : " + list);
+		return (ArrayList<ServiceCenter>) servicecenterDao.serviceList();
 	}
 
 	@Override

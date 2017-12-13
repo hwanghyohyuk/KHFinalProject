@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="serviceCenter">
 
-<resultMap id="resultService" type="serviceCenter">
+<resultMap id="resultServiceCenter" type="servicecenter">
 		<id property="service_no" column="SERVICE_NO"  />
 		<result property="title" column="TITLE"/>
 		<result property="writer" column="WRITER" />
@@ -15,11 +15,11 @@
 		<result property="del_check" column="DEL_CHECK" />
 	</resultMap>
 	
-	<select id="selectList" resultType="serviceCenter" resultMap="resultService">
-	<![CDATA[SELECT A.SERVICE_NO, A.TITLE, A.WRITER, B.USER_NAME, A.CONTENTS, A.WRITE_DATE, A.READCOUNT, A.ORIGINAL_FILE_NAME, 
-			A.STORED_FILE_NAME, A.DEL_CHECK
-			FROM TB_SERVICE_CENTER A
-			JOIN TB_USER B ON(A.WRITER = B.USER_NO)]]>
+	<select id="serviceList" resultType="list" resultMap="resultServiceCenter">
+	<![CDATA[
+	SELECT SERVICE_NO, TITLE, WRITER,WRITE_DATE,READCOUNT
+FROM TB_SERVICE_CENTER
+JOIN TB_USER ON (WRITER = USER_NO)]]>
 	</select>
 	
 	</mapper>

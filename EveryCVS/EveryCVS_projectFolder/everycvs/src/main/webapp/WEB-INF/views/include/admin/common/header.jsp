@@ -4,7 +4,7 @@
 <div class="wrapper">
 	<header class="main-header">
 		<!-- Logo -->
-		<a href="main/main.do" class="logo">ADMIN</a>
+		<a href="/everycvs/main/main.do" class="logo">ADMIN</a><!-- 절대경로 -->
 		<!-- Header Navbar: style can be found in header.less -->
 		<nav class="navbar navbar-static-top" role="navigation">
 			<!-- Sidebar toggle button-->
@@ -56,7 +56,7 @@
 									<a href="#" class="btn btn-default btn-flat">Profile</a>
 								</div>
 								<div class="pull-right">
-									<a href="signout.do" class="btn btn-default btn-flat">Sign
+									<a href="/everycvs/user/signout.do" class="btn btn-default btn-flat">Sign
 										out</a>
 								</div>
 							</li>
@@ -85,7 +85,7 @@
 				<li class="header">${sessionScope.user.brand_name}&nbsp;NAVIGATION</li>
 				<c:choose>
 					<c:when test="${sessionScope.user.job eq 'storemanager'}">
-						<li><a href="#"><i class="fa fa-home"></i>${sessionScope.user.store_name}</a></li>
+						<li><a href="/everycvs/main/main.do"><i class="fa fa-home"></i>${sessionScope.user.store_name}</a></li>
 						<li class="treeview"><a href="#"> <i class="fa fa-share"></i>
 								<span>지점 상품 관리</span> <i class="fa fa-angle-left pull-right"></i></a>
 							<ul class="treeview-menu">
@@ -104,7 +104,7 @@
 						<li><a href="#"><i class="fa fa-question-circle"></i>	고객센터</a></li>
 					</c:when>
 					<c:when test="${sessionScope.user.job eq 'cvsmanager'}">
-						<li><a href="#"><i class="fa fa-dashboard"></i> Dash Board</a></li>
+						<li><a href="/everycvs/main/main.do"><i class="fa fa-dashboard"></i> Dash Board</a></li>
 						<li><a href="/everycvs/cvsstorelist.do">
 							<i class="fa fa-home"></i> 지점 관리</a>
 						</li>
@@ -114,7 +114,7 @@
 								<span> 상품 관리</span>
 							</a>
 							<ul class="treeview-menu">
-								<li><a href="/everycvs/cvsproductlist.do"><i class="fa fa-search"></i> 상품 리스트</a></li>
+								<li><a href="/everycvs/cvsproductList.do"><i class="fa fa-search"></i> 상품 리스트</a></li>
 								<li><a href="/everycvs/cvsproductwriteview.do"><i class="fa fa-plus"></i> 상품 등록</a></li>
 							</ul>
 						</li>
@@ -134,19 +134,12 @@
 						</li>
 					</c:when>
 					<c:otherwise>
-					<li><a href="#"><i class="fa fa-dashboard"></i> Dash Board</a></li>
-						<li><a href="#"><i class="fa fa-users"></i>회원 관리</a></li>
-						<li><a href="#"><i class="fa fa-list-alt"></i>커뮤니티 관리</a></li>
-						<li><a href="#"><i class="fa fa-question-circle"></i>고객센터 관리</a></li>
+					<li><a href="/everycvs/main/main.do"><i class="fa fa-dashboard"></i> Dash Board</a></li>
+						<li><a href="/everycvs/admin/manageUser.do"><i class="fa fa-users"></i>회원 관리</a></li>
+						<li><a href="/everycvs/admin/manageCmnt.do"><i class="fa fa-list-alt"></i>커뮤니티 관리</a></li>
+						<li><a href="/everycvs/admin/manageSrvc.do"><i class="fa fa-question-circle"></i>고객센터 관리</a></li>
 					</c:otherwise>
 				</c:choose>
-<!-- 			<li class="header">LABELS</li>
-			<li><a href="#"><i class="fa fa-circle-o text-danger"></i>
-					Important</a></li>
-			<li><a href="#"><i class="fa fa-circle-o text-warning"></i>
-					Warning</a></li>
-			<li><a href="#"><i class="fa fa-circle-o text-info"></i>
-					Information</a></li> -->
 			</ul>
 		</section>
 		<!-- /.sidebar -->

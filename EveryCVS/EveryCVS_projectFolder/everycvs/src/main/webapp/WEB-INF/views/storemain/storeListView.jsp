@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page
-	import="com.kh.everycvs.common.model.vo.StoreProduct, java.util.ArrayList"%>
+<%@ page import="com.kh.everycvs.common.model.vo.StoreProduct, java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- === BEGIN HEAD ===  -->
@@ -26,7 +25,7 @@
 					<form action="spsearch.do" method="post">
 						<div class="col-sm-3" style="margin-left: 190px;">
 							<br> <input class="form-control" type="search"
-								placeholder="상품명을 입력해주세요." name="keyword" value="${keyword}">
+									placeholder="상품명을 입력해주세요." name="keyword" value="${keyword}">
 						</div>
 						<div>
 							<br>
@@ -38,21 +37,21 @@
 				<div class="row margin-bottom-30">
 					<!-- Person Details -->
 					<c:forEach var="sp" items="${requestScope.list}">
-						<div
-							class="col-md-3 col-sm-3 col-xs-6 person-details margin-bottom-30">
+						<div class="col-md-3 col-sm-3 col-xs-6 person-details margin-bottom-30">
 							<figure>
 								<figcaption>
-									<a href="#" data-toggle="modal" data-target="#spmodall${sp.store_product_no}"> 
-									<img src="/everycvs/resources/user/img/theteam/image1.jpg" alt="image1"></a> <br>
+									<a href="#" data-toggle="modal" data-target="#spmodal${sp.store_product_no}"> 
+										<img src="/everycvs/resources/user/img/theteam/image1.jpg" alt="image1">
+									</a> <br>
 									<h5 align="center">
 										<strong>${sp.product_name}</strong>
 									</h5>
-									<h6 align="center">${sp.price}</h6>
+									<h6 align="center">${sp.price}원</h6>
 								</figcaption>
 							</figure>
 						</div>
-						<!-- 모달 -->
-						<div id="spmodall${sp.store_product_no}" class="modal fade" role="dialog">
+						<!-- Modal -->
+						<div id="spmodal${sp.store_product_no}" class="modal fade" role="dialog">
 							<div class="modal-dialog">
 								<!-- Modal content-->
 								<div class="modal-content">
@@ -76,7 +75,7 @@
 													</tr>
 													<tr>
 														<td><strong>가격</strong></td>
-														<td>${sp.price}</td>
+														<td>${sp.price}원</td>
 													</tr>
 													<tr>
 														<td><strong>제조사</strong></td>
