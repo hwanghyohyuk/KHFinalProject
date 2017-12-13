@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -129,8 +128,11 @@ public class UserController {
 	@RequestMapping(value="mypage.do", method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView myPage(HttpSession session, ModelAndView mv, 
-			@Param (value="month") String month,
-			Map<String, Object> map, Purchase purchase) {
+			@RequestParam (value="month", required=false) String month,
+			Map<String, Object> map, Purchase purchase, HttpServletResponse response, HttpServletRequest request) {
+		
+			
+		//String month = request.getParameter("month");
 		
 		map.put("month", month);
 		map.put("purchase", purchase);
@@ -142,9 +144,10 @@ public class UserController {
 		mv.addObject("list", list);		
 		mv.addObject("flist", flist); 
 		System.out.println(list);
-		System.out.println(flist);
-		System.out.println(month);
 		
+		//System.out.println(flist);
+		System.out.println(month);
+				
 		mv.setViewName("user/mypage/main");
 		return mv;
 	}

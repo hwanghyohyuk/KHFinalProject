@@ -95,17 +95,17 @@
 								<button class="btn btn-primary" id="myBtn2">거래내역</button>
 
 								<!-- Modal -->
-								<div class="modal fade" id="myModal2" role="dialog">
+								<div class="modal fade" id="myModal2" role="dialog" data-backdrop="static">
 									<div class="modal-dialog modal-lg">
 
 										<!-- Modal content-->
-										<div class="modal-content" align="left">
+										<div class="modal-content" align="left" data-target="#myModal2">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h4 class="modal-title">거래내역</h4>
 											</div>
 											<div class="modal-body box-body no-padding" 
-												 style="overflow-x:hidden; width:890px; height:300px;">
+												 style="overflow-x:hidden; width:890px; height:300px;" id="purchaseTable">
 												 
 												<table class="table table-condensed" style="text-align: center;	">
 															<tr style="font-size: 8pt; text-align: center;">
@@ -114,7 +114,7 @@
 															<th style="text-align: center;">상품명</th><th>상품수량</th><th>합 계</th>
 															<th>사용포인트</th><th>적립포인트</th><th style="text-align: center;">구매날짜</th>
 															</tr>
-
+															
 														
 													<c:choose>
 													
@@ -138,36 +138,34 @@
 														   <%--  </c:if> --%>
 																		</c:forEach>
 																					</c:when>
-																					
 																					</c:choose>
-																				
-														
-									
-											
 														<%-- <c:forEach items="${list }" var="list">
-
-
-														    
-															
-															
 															</c:forEach> --%>
-													
-											
-													
-														
 															</table>
 												
 											</div>
 											
 											<!-- 거래내역 버튼 검색 -->
 											<div class="modal-footer" align="left">
+											<form id="purchaseFrm">
+												<button name="month" value="0">전체</button>
 												<button class="btn btn-default" style="float: left;" 
-												id="threeMonth">3개월</button>
-												<button class="btn btn-default" style="float: left;" id="oneMonth">1개월</button>
-												<button class="btn btn-default" style="float: left;" id="week">1주일</button>
+														name="month" value="1"
+														>3개월</button>
+														
+												<button class="btn btn-default" style="float: left;"
+														data-toggle="modal"
+														id="#purchaseTable" name="month" value="2"
+														>1개월</button>
+														
+												<button class="btn btn-default" style="float: left;"
+														data-toggle="modal" 
+														data-target="#myModal2" name="month" value="3"
+														>1주일</button>
 												
 												<button type="button" class="btn btn-default"
-													data-dismiss="modal">Close</button>
+														data-dismiss="modal">Close</button>
+											</form>
 											</div>
 										</div>
 
@@ -306,45 +304,44 @@
 		$(document).ready(function() {
 			$("#myBtn2").click(function() {
 				$("#myModal2").modal();
-			});
-		});
-		
-		//거래내역 3개월 단위로 검색하는 버튼
-		 $(document).ready(function() {
-			 
-			$("#threeMonth").click(function() {
-				$('#myModal2').modal('show') 
+				
 					
-				//1이면 3개월 조회
-					 	
-				 	 $.ajax({
-						url:"mypage.do",
-						data:{month:1},
-						dataType:"html",
-						type:"get",
+	
+		//거래내역 3개월 단위로 검색하는 버튼
+	
+ 			$("#purchaseTable").on('show.bs.modal', function (event) {
+			  var button = $(event.relatedTarget);
+			  //var params = purchaseFrm.month.value; 
+  				//1이면 3개월 조회
+				  $.ajax({
+						url:"purchaseList.do",
+						data: {month:params},
+						dataType: "text",
+						type:"get",	
+						async: false,
+						cache: false,
 						success:function(data){
-							alert("통신완료" + data);
-							$("#myModal").html(data);
+								$('#purchaseTable').text("${list}");
 						},
 						error:function(request, status, errorData){
 							alert("error code: " + request.status + "/n" 
 									+ "message : " + request.reponseText + "/n"
 									+ "error : " + request.errorData);
-						}
-					});   
+						} 
+						
+					});  
+  				return false;
+			 
+		});
 			});
-			
-			$("#oneMonth").click(function(){
-				//2면 1개월 조회
-				$('#myModal2').modal('show') 
-			});
-			
-			$("#week").click(function(){
-				//3이면 일주일조회
-				$('#myModal2').modal('show') 
-			
-			})
-		}); 
+		});
+		
+		
+	
+		
+		
+		
+	
 		
 	</script>
 

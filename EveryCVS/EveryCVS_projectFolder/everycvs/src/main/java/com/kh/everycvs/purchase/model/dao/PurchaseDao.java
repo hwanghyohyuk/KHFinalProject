@@ -53,7 +53,7 @@ public class PurchaseDao {
 	//사용자 구매내역 조회
 	public List<Map<String, Object>> purchaseList(Map<String, Object> map) {
 		//List<Map<String, Object>> list = (List<Map<String, Object>>) new HashMap<String, Object>();
-		//System.out.println(list);
+		System.out.println(map);
 		return sqlSession.selectList("purchase.purchaseList", map);
 	}
 	

@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -60,9 +61,11 @@ public class PurchaseController {
 	//전체거래내역 조회 : 3개월, 1개월, 1주일 단위로 조회(해당 리스트 목록조회)
 	@RequestMapping(value="purchaseList.do", method=RequestMethod.GET)
 	@ResponseBody
-	public ModelAndView purchaseList(ModelAndView mv, HttpServletRequest request,
+	public ModelAndView purchaseList(ModelAndView mv, HttpServletRequest request, HttpServletResponse response,
 			Map<String, Object> map, Purchase purchase, 
-			@Param (value="month") String month) {
+			@RequestParam (value="month", required=false) String month) {
+		
+		response.setContentType("text/html; charset=utf-8");
 		
 		map.put("month", month);
 		map.put("purchase", purchase);
@@ -72,6 +75,7 @@ public class PurchaseController {
 		
 		mv.addObject("list", list);
 		System.out.println(list);
+		System.out.println(month);
 		return mv;
 	}
 	
