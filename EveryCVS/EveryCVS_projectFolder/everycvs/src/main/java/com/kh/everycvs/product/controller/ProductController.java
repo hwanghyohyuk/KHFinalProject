@@ -103,9 +103,6 @@ public class ProductController {
 	@RequestMapping("cvsproductwrite.do")
 	public ModelAndView insertProduct(HttpSession session, HttpServletRequest request, ModelAndView mv) {
 		
-		//저장경로
-		String savePath = request.getServletContext().getRealPath("folderName");
-		
 		int brand_no = ((User)session.getAttribute("user")).getBrand_no();
 		
 		Product product = new Product();

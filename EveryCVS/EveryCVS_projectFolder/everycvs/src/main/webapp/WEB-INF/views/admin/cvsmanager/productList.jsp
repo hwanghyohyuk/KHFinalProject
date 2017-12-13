@@ -209,12 +209,6 @@
 												<th width="15%">유통기한</th>
 												<th width="6%">Del</th>
 											</tr>
-											<!-- start -->
-											<%-- <c:forEach var="entry" items="${map}">
-											${entry.key}
-											${entry.value}
-											${entry.key.class} --%>
-											<!-- end -->
 											<c:forEach var="product" items="${plist}">
 												<tr class="text-center">
 													<td>${product.product_no}</td>
