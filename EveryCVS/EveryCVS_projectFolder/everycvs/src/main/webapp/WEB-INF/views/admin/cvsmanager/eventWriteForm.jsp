@@ -32,31 +32,31 @@
 
 				<div class="panel-body">
 					<div class="col-sm-6" style="padding-left: 0px;">
-						<div class="jun5">No. 0001</div>
-						<form class="form-inline">
+						<div class="jun5"></div>
+						<form class="form-inline" name="event" method="post" action="cvseventwrite.do">
 							<div class="form-group" id="jun_input1">
 								<label for="title" style="padding-right: 65px;">Event
 									Title</label> <input type="text" class="form-control" id="title"
-									style="width: 300px;" placeholder="제목을 입력하세요.">
+									style="width: 300px;" name="title" placeholder="제목을 입력하세요.">
 							</div>
 							<br>
 
 							<div class="form-group" id="jun_input1">
 								<label for="date1" style="padding-right: 70px;">Start
-									Date</label> <input type="date" class="form-control" id="date1"
+									Date</label> <input type="date" name="start_date" class="form-control" id="date1"
 									style="width: 130px;">
 							</div>
 							<br>
 							<div class="form-group" id="jun_input1">
 								<label for="date2" style="padding-right: 77px;">End Date</label>
-								<input type="date" class="form-control" id="date2"
+								<input type="date" name="end_date" class="form-control" id="date2"
 									style="width: 130px;">
 							</div>
 							<br>
 							<div class="form-group" id="jun_input1">
 								<label for="limit"
 									style="padding-right: 22px; padding-top: 6px; float: left;">Participation
-									limit</label> <input type="number" class="form-control jun10"
+									limit</label> <input type="number" name="join_limit" class="form-control jun10"
 									id="limit" placeholder="참여제한횟수" style="width: 120px;">
 							</div>
 							<br>
@@ -69,12 +69,12 @@
 					<div class="col-sm-6 jun9">
 						<div class="form-group" id="jun_input1">
 							<label for="contents" style="padding-right: 61px;">Contents</label>
-							<textarea class="form-control" id="contents"
+							<textarea class="form-control" name="contents" id="contents"
 								style="height: 142px; padding: 2px 4px;"
 								placeholder="내용을 입력하세요."></textarea>
 						</div>
 						<br>
-						<button type="button" class="btn btn-danger btn-lg jun4 jun7"
+						<button type="submit" class="btn btn-danger btn-lg jun4 jun7"
 							id="width100">SUBMIT</button>
 					</div>
 					</form>

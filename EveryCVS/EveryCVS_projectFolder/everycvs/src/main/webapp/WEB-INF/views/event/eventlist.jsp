@@ -39,160 +39,61 @@
 						</div>
 						<!-- End Filter Buttons -->
 					</div>
-					<!--글 작성 버튼-->
+					<%-- 글 작성
+					 <!--글 작성 버튼-->
 					<div id=insert>
+					<c:if test="${!empty sessionScope.admin }">
 						<a href="eventInsert.do" class="category">글 등록</a>
+						</c:if>
+						<c:if test="${empty sessionScope.member }">
+							${b.boardTitle}
+						</c:if>
 					</div>
+					 --%>	
 				</div>
+			
 				<div class="row">
 					<div class="col-md-12 portfolio-group no-padding">
 						<!-- Portfolio Item -->
 						<div class="col-md-4 portfolio-item margin-bottom-40 GS25">
 							<div>
-								<a href="#">
+							<!-- 로그인시 상세보기 -->
+							<c:if test="${sessionScope.user ne null}">
+								<c:forEach items="${list}" var="e">
 									<figure>
-										<img src="/everycvs/resources/user/img/portfolio/image1.jpg" alt="image1">
+										<a href="/everycvs/eventDetail.do?no=${e.event_no}">
+										<img src="/everycvs/resources/uploadfile/image10.jpg" alt="image1">
 										<figcaption>
-											<h3 class="margin-top-20">GS 1+1 Event</h3>
-											<span></span> <br> <span></span>
+											<input type="hidden" class="margin-top-20" value="${e.event_no}"/>
+											<h3 class="margin-top-20">${e.title}</h3>
+											<span>시작일:${e.start_date}</span> 
+											<br> 
+											<span>종료일:${e.end_date}</span>
 										</figcaption>
 									</figure>
+								</c:forEach>
 								</a>
+							</c:if>
+							
+								<c:if test="${sessionScope.user eq null}">
+									<c:forEach items="${list}" var="e">
+								<figure>
+								<a href="javascript:alert('로그인을 해야 상세보기 가능합니다.')">
+									<img src="/everycvs/resources/uploadfile/image10.jpg" alt="image1">
+									<figcaption>
+										<input type="hidden" class="margin-top-20" value="${e.event_no}"/>
+										<h3 class="margin-top-20">${e.title}</h3>
+										<span>이벤트 시작일:${e.start_date}</span> 
+										<br> 
+										<span>이벤트 종료일:${e.end_date}</span>
+									</figcaption>
+								</figure>
+									</c:forEach>
+									</a>
+								</c:if>
 							</div>
 						</div>
-						<!-- End Portfolio Item -->
-						<!-- Portfolio Item -->
-						<div class="col-md-4 portfolio-item margin-bottom-40 CU">
-							<div>
-								<a href="#">
-									<figure>
-										<img src="/everycvs/resources/user/img/portfolio/image2.jpg" alt="image2">
-										<figcaption>
-											<h3 class="margin-top-20">CU 행운을 잡아라!</h3>
-											<span>잡혀줘라 ...</span>
-										</figcaption>
-									</figure>
-								</a>
-							</div>
-						</div>
-						<!-- End Portfolio Item -->
-						<!-- Portfolio Item -->
-						<div class="col-md-4 portfolio-item margin-bottom-40 7ELEVEN">
-							<div>
-								<a href="#">
-									<figure>
-										<img src="/everycvs/resources/user/img/portfolio/image3.jpg" alt="image3">
-										<figcaption>
-											<h3 class="margin-top-20">7ELEVEN 화이팅!</h3>
-											<span>에!!~~</span>
-										</figcaption>
-									</figure>
-								</a>
-							</div>
-						</div>
-						<!-- End Portfolio Item -->
-						<!-- Portfolio Item -->
-						<div class="col-md-4 portfolio-item margin-bottom-40 GS25">
-							<div>
-								<a href="#">
-									<figure>
-										<img src="/everycvs/resources/user/img/portfolio/image4.jpg" alt="image4">
-										<figcaption>
-											<h3 class="margin-top-20">Nam liber tempor</h3>
-											<span>Sed ut perspiciatis unde omnis iste natus error
-												sit voluptatem accusantium doloremque laudantium, totam rem
-												aperiam.</span>
-										</figcaption>
-									</figure>
-								</a>
-							</div>
-						</div>
-						<!-- End Portfolio Item -->
-						<!-- Portfolio Item -->
-						<div class="col-md-4 portfolio-item margin-bottom-40 CU">
-							<div>
-								<a href="#">
-									<figure>
-										<img src="/everycvs/resources/user/img/portfolio/image5.jpg" alt="image5">
-										<figcaption>
-											<h3 class="margin-top-20">Donec non urna</h3>
-											<span>Sed ut perspiciatis unde omnis iste natus error
-												sit voluptatem accusantium doloremque laudantium, totam rem
-												aperiam.</span>
-										</figcaption>
-									</figure>
-								</a>
-							</div>
-						</div>
-						<!-- End Portfolio Item -->
-						<!-- Portfolio Item -->
-						<div class="col-md-4 portfolio-item margin-bottom-40 7ELEVEN">
-							<div>
-								<a href="#">
-									<figure>
-										<img src="/everycvs/resources/user/img/portfolio/image6.jpg" alt="image6">
-										<figcaption>
-											<h3 class="margin-top-20">Nullam consectetur</h3>
-											<span>Sed ut perspiciatis unde omnis iste natus error
-												sit voluptatem accusantium doloremque laudantium, totam rem
-												aperiam.</span>
-										</figcaption>
-									</figure>
-								</a>
-							</div>
-						</div>
-						<!-- End Portfolio Item -->
-						<!-- Portfolio Item -->
-						<div class="col-md-4 portfolio-item margin-bottom-40 GS25">
-							<div>
-								<a href="#">
-									<figure>
-										<img src="/everycvs/resources/user/img/portfolio/image7.jpg" alt="image7">
-										<figcaption>
-											<h3 class="margin-top-20">Velit esse molestie</h3>
-											<span>Sed ut perspiciatis unde omnis iste natus error
-												sit voluptatem accusantium doloremque laudantium, totam rem
-												aperiam.</span>
-										</figcaption>
-									</figure>
-								</a>
-							</div>
-						</div>
-						<!-- End Portfolio Item -->
-						<!-- Portfolio Item -->
-						<div class="col-md-4 portfolio-item margin-bottom-40 CU">
-							<div>
-								<a href="#">
-									<figure>
-										<img src="/everycvs/resources/user/img/portfolio/image8.jpg" alt="image8">
-										<figcaption>
-											<h3 class="margin-top-20">Quam nunc putamus</h3>
-											<span>Sed ut perspiciatis unde omnis iste natus error
-												sit voluptatem accusantium doloremque laudantium, totam rem
-												aperiam.</span>
-										</figcaption>
-									</figure>
-								</a>
-							</div>
-						</div>
-						<!-- End Portfolio Item -->
-						<!-- Portfolio Item -->
-						<div class="col-md-4 portfolio-item margin-bottom-40 7ELEVEN">
-							<div>
-								<a href="#">
-									<figure>
-										<img src="/everycvs/resources/user/img/portfolio/image9.jpg" alt="image9">
-										<figcaption>
-											<h3 class="margin-top-20">Placerat facer possim</h3>
-											<span>Sed ut perspiciatis unde omnis iste natus error
-												sit voluptatem accusantium doloremque laudantium, totam rem
-												aperiam.</span>
-										</figcaption>
-									</figure>
-								</a>
-							</div>
-						</div>
-						<!-- End Portfolio Item -->
+						<!-- End Portfolio Item -->			
 					</div>
 				</div>
 				<!-- 페이지인 척 하는 새끼 -->

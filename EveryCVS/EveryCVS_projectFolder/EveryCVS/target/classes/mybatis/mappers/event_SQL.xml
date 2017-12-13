@@ -20,22 +20,44 @@
 	
 	
 	<!-- 이벤트 리스트 조회 -->
-	<select id="eventList" resultType="list" resultMap="resultEvent">
+	<select id="cvseventlist" resultType="list" resultMap="resultEvent">
 		<![CDATA[
-			SELECT * FROM TB_EVENT 
+			SELECT * FROM EVENT_VIEW ORDER BY EVENT_NO DESC
 		]]>
 	</select>
 	
-	<insert id="eventInsert" parameterType="event" flushCache="true"
+	<!-- 글작성 -->
+	<insert id="cvseventwrite" parameterType="event" flushCache="true"
       statementType="PREPARED" useGeneratedKeys="true">
 	<![CDATA[
-		insert into TB_EVENT values (SEQ_EVENT_NO.nextval, 
-									#{title},#{WRITER},#{CONTENTS},#{START_DATE},
-									#{END_DATE}, #{JOIN_LIMIT},#{READCOUNT},#{ORIGINAL_FILE_NAME, jdbcType=VARCHAR},
-									#{STORED_FILE_NAME, jdbcType=VARCHAR},#{DEL_CHECK})
-									
+		insert into TB_EVENT values (seq_event_no.nextval, 
+					#{title},#{writer},#{contents},#{start_date},
+					#{end_date},#{join_limit}, #{original_file_name, jdbcType=VARCHAR}, #{stored_file_name, jdbcType},
+					default,default)
 		]]>
 	</insert>
 	
-
+	<!-- 이벤트 사용자 상세보기 -->
+	<select id="eventDetail" resultType="Event" resultMap="resultEvent">
+		<![CDATA[
+		select * 
+		from EVENT_VIEW
+		where event_no=#{event_no}
+		]]>
+	</select>
+	
+	<!-- 조회수 증가 시키기  -->
+	<update id="eventReadCount" parameterType="_int" flushCache="true">
+		<![CDATA[
+		update tb_event set readcount = readcount + 1 where event_no=#{event_no}
+		]]>
+	</update>
+	
+	<!-- 이벤트 게시글 삭제 -->
+	<delete id="eventDelete" parameterType="_int">
+		<![CDATA[
+		delete from tb_event where event_no=#{event_no}
+		]]>
+	</delete>
+	
 </mapper>

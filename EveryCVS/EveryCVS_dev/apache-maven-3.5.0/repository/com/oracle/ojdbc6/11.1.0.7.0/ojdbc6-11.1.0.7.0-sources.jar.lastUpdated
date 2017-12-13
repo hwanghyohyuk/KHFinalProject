@@ -1,0 +1,10 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Tue Dec 12 15:12:02 KST 2017
+@default-oracle-http\://mesir.googlecode.com/svn/trunk/mavenrepo/.lastUpdated=1513059122153
+http\://repo1.maven.org/maven2/.error=Could not transfer artifact com.oracle\:ojdbc6\:jar\:sources\:11.1.0.7.0 from/to mvn2 (http\://repo1.maven.org/maven2/)\: repo1.maven.org
+http\://www.egovframe.go.kr/maven/.error=Could not transfer artifact com.oracle\:ojdbc6\:jar\:sources\:11.1.0.7.0 from/to egovframe (http\://www.egovframe.go.kr/maven/)\: www.egovframe.go.kr
+@default-mvn2-http\://repo1.maven.org/maven2/.lastUpdated=1513059122098
+http\://mesir.googlecode.com/svn/trunk/mavenrepo/.error=Could not transfer artifact com.oracle\:ojdbc6\:jar\:sources\:11.1.0.7.0 from/to oracle (http\://mesir.googlecode.com/svn/trunk/mavenrepo)\: mesir.googlecode.com
+@default-central-https\://repo.maven.apache.org/maven2/.lastUpdated=1513059122175
+@default-egovframe-http\://www.egovframe.go.kr/maven/.lastUpdated=1513059122126
+https\://repo.maven.apache.org/maven2/.error=Could not transfer artifact com.oracle\:ojdbc6\:jar\:sources\:11.1.0.7.0 from/to central (https\://repo.maven.apache.org/maven2)\: repo.maven.apache.org
