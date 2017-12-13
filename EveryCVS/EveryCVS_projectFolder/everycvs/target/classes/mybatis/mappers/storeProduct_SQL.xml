@@ -27,6 +27,11 @@
 		<result property="discount_no" column="DISCOUNT_NO" />
 		<result property="discount_info" column="DISCOUNT_INFO" />
 		<result property="discount_name" column="DISCOUNT_NAME" />
+		<result property="start_date" column="START_DATE" />
+		<result property="end_date" column="END_DATE" />
+		<result property="expiration_rate" column="EXPIRATION_RATE" />
+		<result property="discount_rate" column="DISCOUNT_RATE" />
+		<result property="expiration_price" column="EXPIRATION_PRICE" />
 	</resultMap>
 	
 	<select id="getListCount" resultType="int">
