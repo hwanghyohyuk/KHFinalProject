@@ -28,11 +28,11 @@
 	
 	<!-- 글작성 -->
 	<insert id="cvseventwrite" parameterType="event" flushCache="true"
-      statementType="PREPARED" useGeneratedKeys="true">
+      statementType="PREPARED">
 	<![CDATA[
 		insert into TB_EVENT values (seq_event_no.nextval, 
 					#{title},#{writer},#{contents},#{start_date},
-					#{end_date},#{join_limit}, #{original_file_name, jdbcType=VARCHAR}, #{stored_file_name, jdbcType},
+					#{end_date},#{join_limit}, default, default,
 					default,default)
 		]]>
 	</insert>

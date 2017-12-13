@@ -47,7 +47,7 @@ public class EventDao {
 	
 	//글쓰기
 	public void cvseventwriteview(Event vo) {
-		  int result = sqlSession.insert("event.cvseventwriteview", vo); 
+		  int result = sqlSession.insert("event.cvseventwrite", vo); 
 	}
 	
 	public int updateEvent() {

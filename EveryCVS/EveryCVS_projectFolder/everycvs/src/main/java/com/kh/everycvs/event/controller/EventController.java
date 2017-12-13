@@ -111,28 +111,11 @@ public class EventController {
 	}
 	//게시글 저장
 	@RequestMapping(value="cvseventwrite.do", method= RequestMethod.POST)
-	public String cvsEventWrite(HttpServletRequest request, HttpSession session) throws Exception {
+	public String cvsEventWrite(Event event) throws Exception {
 
-		String startDate = request.getParameter("start_date");
-		String endDate = request.getParameter("end_date");
-		   
-		java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd");
-		  
-		java.sql.Date sdate = new java.sql.Date(format.parse(startDate).getTime());
-		java.sql.Date edate = new java.sql.Date(format.parse(endDate).getTime());
+	
 		
-		User user= (User)session.getAttribute("user");
-		Event vo = new Event();
-		vo.setTitle(request.getParameter("title"));
-		vo.setContents(request.getParameter("contents"));
-		vo.setJoin_limit(Integer.parseInt(request.getParameter("join_limit")));
-		vo.setWriter(user.getUser_no());
-		vo.setStart_date(sdate);
-		vo.setEnd_date(edate);
-		vo.setOriginal_file_name(null);
-		vo.setStored_file_name(null);
-		
-        eventService.eventInsert(vo);
+        eventService.eventInsert(event);
         
          return "redirect:/cvseventlist.do";
 	}
