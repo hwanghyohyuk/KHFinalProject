@@ -22,21 +22,7 @@ public class StoreController {
 	@Autowired
 	private StoreService storeService;
 
-	/* 사용자 */
-	
-	/** 지도에 표시할 데이터**/
-	public ModelAndView cvsMapList(ModelAndView modelAndView) {
-		Map map = storeService.cvsMapList();
-		return null;
-	}
-	
-	/*지점메인으로 이동*/
-	public ModelAndView moveToStoreMain(String store_no){
-		/**지점방문횟수 증가**/
-		storeService.increamentJoinCount(store_no);
-		return null;
-	}
-	
+	/* 사용자 */	
 	
 	/* 지점관리자 */
 

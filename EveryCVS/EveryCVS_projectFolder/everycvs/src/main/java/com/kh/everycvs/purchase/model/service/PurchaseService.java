@@ -32,7 +32,7 @@ public interface PurchaseService {
 	public String userDecrePoint(HttpServletRequest request);
 	
 	//거래내역 조회 : 3개월, 1개월, 1주일 단위로 조회(해당 리스트 목록조회)
-	public ArrayList<Purchase> purchaseList();
+	public ArrayList<Purchase> purchaseList(int month);
 	
 	/*사이트관리자*/
 	/**월간 구매 이용 횟수**/

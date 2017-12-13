@@ -1,5 +1,7 @@
 package com.kh.everycvs.store.model.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,21 +11,27 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.everycvs.common.model.vo.Store;
 
-@Repository("StoreDao")
+@Repository("storeDao")
 public class StoreDao {
-	
+
 	@Autowired
 	private SqlSession sqlSession;
-	
-	/*사용자*/
-	/**지도에 표시할 데이터리스트**/
-	public Map cvsMapList() {
-		// TODO Auto-generated method stub
-		return null;
+
+	/* 사용자 */
+	/** 지도에 표시할 데이터리스트 **/
+	public ArrayList<Store> cvsMapList(int brand_no) {
+		List<Store> list=null;
+		if(brand_no==0){
+			list = sqlSession.selectList("store.allCvsMapList");
+		}else{
+			list = sqlSession.selectList("store.cvsMapList", brand_no);
+		}
+		return new ArrayList<Store>(list);
 	}
 	
 	
 	/* 편의점 관리자 */
+
 	/** 방문자 수 top5 지점 
 	 * @param brand_no */
 	public List joinCountTop5(int brand_no) {
@@ -68,16 +76,25 @@ public class StoreDao {
 		sqlSession.delete("store.deleteStore", store);
 	}
 	
-	
-	/* 사이트 관리자 */
+		/* 사이트 관리자 */
 	/** 편의점별 방문자 수 통계 **/
 	public Map cvsJoinCount() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	/**지점 방문횟수증가 update**/
 	public void increamentJoinCount(String store_no) {
-				
+//		Map<String,Object> store =  new HashMap<String, Object>();
+//		store.put("main_sno", store_no);
+//		store.put("sub_sno", store_no);
+//		sqlSession.update("store.increamentJoinCount", store);
+		sqlSession.update("store.increamentJoinCount", store_no);
+	}
+
+	/* 지점 조회 */
+	public Store selectStore(String store_no) {
+		return sqlSession.selectOne("store.selectStore", store_no);
 	}
 	
 

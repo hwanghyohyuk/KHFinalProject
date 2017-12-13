@@ -1,13 +1,19 @@
 package com.kh.everycvs.servicecenter.model.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.everycvs.common.model.vo.Purchase;
+import com.kh.everycvs.common.model.vo.ServiceCenter;
+
 public interface ServiceCenterService {
 
 	// 고객센터 조회 : 모든 공식고객센터를 조회
-		public ModelAndView selectServiceList(HttpServletRequest request);
+	public ArrayList<ServiceCenter> serviceList();
 		
 		// 고객센터 조회 : 선택한 고객센터 상세조회
 		public ModelAndView selectServiceOne(HttpServletRequest request);

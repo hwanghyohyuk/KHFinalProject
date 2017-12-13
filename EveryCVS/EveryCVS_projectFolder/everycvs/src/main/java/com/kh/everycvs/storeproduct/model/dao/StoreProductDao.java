@@ -1,6 +1,5 @@
 package com.kh.everycvs.storeproduct.model.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,28 +34,64 @@ public class StoreProductDao {
 		map.put("start", start); 
 		map.put("end", end);
 		map.put("keyword", "%"+keyword+"%");
-		System.out.println("keyword : "+"%"+keyword+"%");
 		return sqlSession.selectList("storeProduct.searchSproduct", map);
 	}
+
+	public List<StoreProduct> top3Sproduct() {
+		return sqlSession.selectList("storeProduct.top3Sproduct");
+	}
+
+	public List<StoreProduct> new3Sproduct() {
+		return sqlSession.selectList("storeProduct.new3Sproduct");
+	}
+
+	public List<StoreProduct> dcSproduct() {
+		return sqlSession.selectList("storeProduct.dcSproduct");
+	}
+
+	public List<StoreProduct> expSproduct() {
+		return sqlSession.selectList("storeProduct.expSproduct");
+	}
 	
-	public StoreProduct detailSproduct(int spnum) {
-		return sqlSession.selectOne("detailSproduct", spnum);
+	public List<StoreProduct> listSpmanager(int startRow, int endRow) {
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("startRow", startRow); 
+		map.put("endRow", endRow); 
+		return sqlSession.selectList("storeProduct.listSpmanager", map);
 	}
 
-	public ArrayList<StoreProduct> rankList() {
-		return null;
+	public List<StoreProduct> searchSpmanager(int startRow, int endRow, String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		String start =String.valueOf(startRow);
+		String end =String.valueOf(endRow);
+		map.put("start", start); 
+		map.put("end", end);
+		map.put("keyword", "%"+keyword+"%");
+		return sqlSession.selectList("storeProduct.searchSpmanager", map);
 	}
 
-	public int insertSproduct() {
-		return 0;
+	public void deleteSpmanager(int spnum) {
+		 sqlSession.delete("deleteSpmanager1");
+		 sqlSession.delete("deleteSpmanager2");
+		 sqlSession.delete("deleteSpmanager3");
+		 sqlSession.delete("deleteSpmanager4", spnum);
 	}
 
-	public int deleteSproduct() {
-		return 0;
+	public List<StoreProduct> listApmanager(int startRow, int endRow) {
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("startRow", startRow); 
+		map.put("endRow", endRow); 
+		return sqlSession.selectList("storeProduct.listApmanager", map);
 	}
 
-	public int updateSproduct() {
-		return 0;
+	public List<StoreProduct> searchApmanager(int startRow, int endRow, String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		String start =String.valueOf(startRow);
+		String end =String.valueOf(endRow);
+		map.put("start", start); 
+		map.put("end", end);
+		map.put("keyword", "%"+keyword+"%");
+		return sqlSession.selectList("storeProduct.searchApmanager", map);
 	}
 	
 }

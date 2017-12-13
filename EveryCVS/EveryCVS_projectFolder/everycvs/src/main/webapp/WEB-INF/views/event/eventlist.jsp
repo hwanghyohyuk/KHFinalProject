@@ -8,7 +8,7 @@
 <c:import url="../include/user/common/headend.jsp"></c:import>
 <!-- === END HEAD ===  -->
 <!-- === BEGIN HEADER ===  -->
-<c:import url="../include/user/main/header.jsp"></c:import>
+<c:import url="../include/user/common/header.jsp"></c:import>
 <!-- === END HEADER === -->
 <!-- === BEGIN CONTENT === -->
 		<div id="content">
@@ -51,7 +51,7 @@
 							<div>
 								<a href="#">
 									<figure>
-										<img src="assets/img/portfolio/image1.jpg" alt="image1">
+										<img src="/everycvs/resources/user/img/portfolio/image1.jpg" alt="image1">
 										<figcaption>
 											<h3 class="margin-top-20">GS 1+1 Event</h3>
 											<span></span> <br> <span></span>
@@ -66,7 +66,7 @@
 							<div>
 								<a href="#">
 									<figure>
-										<img src="assets/img/portfolio/image2.jpg" alt="image2">
+										<img src="/everycvs/resources/user/img/portfolio/image2.jpg" alt="image2">
 										<figcaption>
 											<h3 class="margin-top-20">CU 행운을 잡아라!</h3>
 											<span>잡혀줘라 ...</span>
@@ -81,7 +81,7 @@
 							<div>
 								<a href="#">
 									<figure>
-										<img src="assets/img/portfolio/image3.jpg" alt="image3">
+										<img src="/everycvs/resources/user/img/portfolio/image3.jpg" alt="image3">
 										<figcaption>
 											<h3 class="margin-top-20">7ELEVEN 화이팅!</h3>
 											<span>에!!~~</span>
@@ -96,7 +96,7 @@
 							<div>
 								<a href="#">
 									<figure>
-										<img src="assets/img/portfolio/image4.jpg" alt="image4">
+										<img src="/everycvs/resources/user/img/portfolio/image4.jpg" alt="image4">
 										<figcaption>
 											<h3 class="margin-top-20">Nam liber tempor</h3>
 											<span>Sed ut perspiciatis unde omnis iste natus error
@@ -113,7 +113,7 @@
 							<div>
 								<a href="#">
 									<figure>
-										<img src="assets/img/portfolio/image5.jpg" alt="image5">
+										<img src="/everycvs/resources/user/img/portfolio/image5.jpg" alt="image5">
 										<figcaption>
 											<h3 class="margin-top-20">Donec non urna</h3>
 											<span>Sed ut perspiciatis unde omnis iste natus error
@@ -130,7 +130,7 @@
 							<div>
 								<a href="#">
 									<figure>
-										<img src="assets/img/portfolio/image6.jpg" alt="image6">
+										<img src="/everycvs/resources/user/img/portfolio/image6.jpg" alt="image6">
 										<figcaption>
 											<h3 class="margin-top-20">Nullam consectetur</h3>
 											<span>Sed ut perspiciatis unde omnis iste natus error
@@ -147,7 +147,7 @@
 							<div>
 								<a href="#">
 									<figure>
-										<img src="assets/img/portfolio/image7.jpg" alt="image7">
+										<img src="/everycvs/resources/user/img/portfolio/image7.jpg" alt="image7">
 										<figcaption>
 											<h3 class="margin-top-20">Velit esse molestie</h3>
 											<span>Sed ut perspiciatis unde omnis iste natus error
@@ -164,7 +164,7 @@
 							<div>
 								<a href="#">
 									<figure>
-										<img src="assets/img/portfolio/image8.jpg" alt="image8">
+										<img src="/everycvs/resources/user/img/portfolio/image8.jpg" alt="image8">
 										<figcaption>
 											<h3 class="margin-top-20">Quam nunc putamus</h3>
 											<span>Sed ut perspiciatis unde omnis iste natus error
@@ -181,7 +181,7 @@
 							<div>
 								<a href="#">
 									<figure>
-										<img src="assets/img/portfolio/image9.jpg" alt="image9">
+										<img src="/everycvs/resources/user/img/portfolio/image9.jpg" alt="image9">
 										<figcaption>
 											<h3 class="margin-top-20">Placerat facer possim</h3>
 											<span>Sed ut perspiciatis unde omnis iste natus error
@@ -213,7 +213,7 @@
 	
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->
-<c:import url="../include/user/main/footer.jsp"></c:import>
+<c:import url="../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
 <!-- JS -->
 <c:import url="../include/user/common/end.jsp"></c:import>

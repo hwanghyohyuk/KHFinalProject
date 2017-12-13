@@ -1,29 +1,29 @@
 package com.kh.everycvs.store.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.store.model.dao.StoreDao;
 
-@Service("StoreService")
+@Service("storeService")
 public class StoreServiceImpl implements StoreService {
 
 	@Autowired
 	private StoreDao storeDao;
 
+	@Override
+	public Store selectStore(String sno) {
+		return storeDao.selectStore(sno);
+	}	
+
 	/*사용자*/
 	/**지도에 표시할 데이터리스트**/
 	@Override
-	public Map cvsMapList() {
-		Map map = storeDao.cvsMapList();
-		return null;
+	public ArrayList<Store> cvsMapList(int brand_no) {
+		return storeDao.cvsMapList(brand_no);
 	}
 	
 	/**지점 방문횟수증가**/
@@ -76,7 +76,6 @@ public class StoreServiceImpl implements StoreService {
 		Map map = storeDao.cvsJoinCount();
 		return null;
 	}
-	
 	
 
 }

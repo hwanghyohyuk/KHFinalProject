@@ -1,6 +1,5 @@
 package com.kh.everycvs.storeproduct.model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,31 +32,58 @@ public class StoreProductServiceImpl implements StoreProductService {
 		int endRow = startRow + limit - 1;
 		return sproductDao.searchSproduct(startRow,endRow,keyword);
 	}
+
+	@Override
+	public List<StoreProduct> top3Sproduct() {
+		return sproductDao.top3Sproduct();
+	}
+
+	@Override
+	public List<StoreProduct> new3Sproduct() {
+		return sproductDao.new3Sproduct();
+	}
+
+	@Override
+	public List<StoreProduct> dcSproduct() {
+		return sproductDao.dcSproduct();
+	}
+
+	@Override
+	public List<StoreProduct> expSproduct() {
+		return sproductDao.expSproduct();
+	}
+
+	@Override
+	public List<StoreProduct> listSpmanager(int currentPage, int limit) {
+		int startRow = (currentPage -1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		return sproductDao.listSpmanager(startRow,endRow);  
+	}
+
+	@Override
+	public List<StoreProduct> searchSpmanager(int currentPage, int limit, String keyword) {
+		int startRow = (currentPage -1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		return sproductDao.searchSpmanager(startRow,endRow,keyword);
+	}
+
+	@Override
+	public void deleteSpmanager(int spnum) {
+		sproductDao.deleteSpmanager(spnum);
+	}
+
+	@Override
+	public List<StoreProduct> listApmanager(int currentPage, int limit) {
+		int startRow = (currentPage -1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		return sproductDao.listApmanager(startRow,endRow);
+	}
+
+	@Override
+	public List<StoreProduct> searchApmanager(int currentPage, int limit, String keyword) {
+		int startRow = (currentPage -1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		return sproductDao.searchApmanager(startRow,endRow,keyword);
+	}
 	
-	@Override
-	public StoreProduct detailSproduct(int spnum) {
-		return sproductDao.detailSproduct(spnum);
-	}
-
-	@Override
-	public ArrayList<StoreProduct> rankList() {
-		return sproductDao.rankList();
-	}
-
-	@Override
-	public int insertSproduct(StoreProduct sp) {
-		return sproductDao.insertSproduct();
-	}
-
-	@Override
-	public int deleteSproduct(int spnum) {
-		return sproductDao.deleteSproduct();
-	}
-
-	@Override
-	public int updateSproduct(StoreProduct sp) {
-		return sproductDao.updateSproduct();
-	}
-
-
 }
