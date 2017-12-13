@@ -46,14 +46,16 @@
 										<th width="12%">조회수</th>
 										<th width="8%">Del</th>
 									</tr>
+									<c:forEach items="${list}" var="ead">
 									<tr class="text-center">
-										<td>02021</td>
+										<td>${ead.event_no}</td>
 										<td data-toggle="modal" data-target="#myModal"
-											style="cursor: pointer;">GS25 빼빼로데이 이벤트</td>
-										<td>2017.11.02 ~ 2017.11.12</td>
-										<td>12442</td>
+											style="cursor: pointer;">${ead.title}</td>
+										<td>${ead.start_date} ~ ${ead.end_date}</td>
+										<td>${ead.readcount}</td>
 										<td><i class="fa fa-trash-o jun21" onclick="del_event();"></i></td>
 									</tr>
+									</c:forEach>
 								</table>
 							</div>
 							<!-- Search & Add block -->
@@ -117,16 +119,15 @@
 						class="jun_img">
 				</div>
 				<div class="jun_contentdiv">
-					<div class="jun_textdiv">No.0001</div>
-					<span style="padding-right: 22px;">이벤트명</span>GS25와 함께하는 빼빼로데이 이벤트<br>
-					<span style="padding-right: 22px;">시작일자</span>2017.11.02<br> <span
-						style="padding-right: 22px;">종료일자</span>2017.11.12<br> <span
-						style="padding-right: 20px;">참여제한 </span><b>1</b>번<br> <span
-						style="padding-right: 36px;">조회수</span>312344<br> <span
-						style="padding-right: 36px;">참여수</span>12021<br> <span
-						style="padding-right: 22px;">첨부파일</span>lotte-rice-002.png<br>
+					<div class="jun_textdiv">${et.event_no}</div>
+					<span style="padding-right: 22px;">이벤트명</span>${et.title}<br>
+					<span style="padding-right: 22px;">시작일자</span>${et.start_event}<br> <span
+						style="padding-right: 22px;">종료일자</span>${et.end_event}<br> <span
+						style="padding-right: 20px;">참여제한 </span><b>${et.join_limit}</b>번<br> <span
+						style="padding-right: 36px;">조회수</span>${et.readcpunt}<br> <span
+						style="padding-right: 22px;">첨부파일</span>${et.orignal_file_name}<br>
 				</div>
-				<div class="jun_contentdiv2">이벤트 내용</div>
+				<div class="jun_contentdiv2">${et.contents}</div>
 			</div>
 			<div class="modal-footer" style="clear: both; margin-top: 2px;">
 				<button type="button" onclick="del_event();" class="btn btn-gray"

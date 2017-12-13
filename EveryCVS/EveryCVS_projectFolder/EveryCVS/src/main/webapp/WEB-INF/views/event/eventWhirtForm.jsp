@@ -24,34 +24,34 @@
 				</div>
 				<br>
 				<!-- Contact Form -->
-				<form id="event_form" name='event' method="post" action="eventInsert.do">
+				<form name="event" method="post" action="eventInsert.do">
 					<label>이벤트 이름</label>
 					<div class="row margin-bottom-20">
 						<div class="col-md-6 col-md-offset-0">
-							<input class="form-control" type="text" placeholder="이벤트명을 입력하세요">
+							<input class="form-control" name="title" type="text" placeholder="이벤트명을 입력하세요">
 						</div>
 					</div>
 					<label>이벤트 기간 <span class="color-red">*</span>
 					</label>
 					<div class="row margin-bottom-20">
 						<div class="col-md-6 col-md-offset-0">
-							<input class="form-text" type="Date" placeholder="시작일 입력">
-							<input class="form-text" type="Date" placeholder="종료일 입력">
+							<input class="form-text" type="Date" name="start_date" placeholder="시작일 입력">
+							<input class="form-text" type="Date" name="end_date" placeholder="종료일 입력">
 						</div>
 					</div>
+					<input type="hidden" name="writer" value="${sessionScope.admin.아직 여길 뭘써야할지 }">
 					<label>이미지 첨부</label>
 					<div class="row margin-bottom-20">
 						<div class="col-md-6 col-md-offset-0">
-							<input class="form-text" type="text" placeholder="파일을 선택하세요">
+							<input class="form-text" type="text" placeholder="파일을 선택하세요"><!-- 이건안넘어가고 --> 
 							<input type="button" value="파일첨부">
 						</div>
 					</div>
 					<label>상세내용</label>
 					<div class="row margin-bottom-20">
 						<div class="col-md-8 col-md-offset-0">
-							<textarea rows="8" class="form-control"
-								placeholder="이벤트의 상세내용을 입력하세요">
-                                        </textarea>
+							<textarea rows="8" name="contents" class="form-control"
+								placeholder="이벤트의 상세내용을 입력하세요"></textarea>
 						</div>
 					</div>
 					<p>

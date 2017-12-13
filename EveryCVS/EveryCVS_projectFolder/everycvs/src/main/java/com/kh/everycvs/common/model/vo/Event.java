@@ -31,6 +31,26 @@ public class Event implements Serializable {
 	public Event() {
 		super();
 	}
+	
+	
+	//게시글을 올리기위한 vo
+	public Event(int event_no, String title, int writer, String contents, Date start_date, Date end_date,
+			int join_limit, int readcount, String original_file_name, String stored_file_name, String del_check) {
+		super();
+		this.event_no = event_no;
+		this.title = title;
+		this.writer = writer;
+		this.contents = contents;
+		this.start_date = start_date;
+		this.end_date = end_date;
+		this.join_limit = join_limit;
+		this.readcount = readcount;
+		this.original_file_name = original_file_name;
+		this.stored_file_name = stored_file_name;
+		this.del_check = del_check;
+	}
+
+
 
 	public Event(int event_no, String title, int writer, String user_name, String contents, Date start_date,
 			Date end_date, int join_limit, int readcount, String original_file_name, String stored_file_name,
