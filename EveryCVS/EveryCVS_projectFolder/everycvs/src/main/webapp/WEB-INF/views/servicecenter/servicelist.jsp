@@ -21,12 +21,18 @@
                                  <h2>고객센터</h2>
                             </div>
                             <hr>
-                            <form>
-                                <div align="right">
-                                    <input type="text" placeholder="제목을 입력해주세요" size="30">
-                                    <input type="button" value="검색">
-                                </div>
-                                <br><br>
+
+								<form action="serviceSearch.do" method="post">
+									<div  align="right" class="col-sm-3" style="margin-left: 190px;">
+										<br> <input class="form-control" type="search"
+											placeholder="제목을 입력해 주세요" name="keyword" value="${keyword}">
+									</div>
+									<div>
+										<br>
+										<button type="submit" class="btn btn-primary btn-sm">검색</button>
+									</div>
+								</form>
+								<br><br>
                                 <div align="left" style="margin-left: 5%; margin-right: 5%">
                                     <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
@@ -66,7 +72,7 @@
                                       <li><a href="#">&raquo;</a></li>
                                    </ul>
                                 </div>
-                            </form>
+                            
                             <hr>
                             <!-- End Contact Form -->
                             <!-- End Main Content -->

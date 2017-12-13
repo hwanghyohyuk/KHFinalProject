@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Purchase;
@@ -23,7 +24,8 @@ public class ServiceCenterController {
 
 	// 고객센터 조회 : 고객센터 리스트조회
 	@RequestMapping(value = "selectServiceList.do")
-	public ModelAndView serviceList(ModelAndView mv) {
+	public ModelAndView serviceList(ModelAndView mv, HttpServletRequest request) {
+		mv.setViewName("servicecenter/servicelist");
 		ArrayList<ServiceCenter> list = (ArrayList<ServiceCenter>) serviceCenterService.serviceList();
 		mv.addObject("list", list);
 		System.out.println("ServiceCenterController : " + list);
@@ -34,9 +36,21 @@ public class ServiceCenterController {
 
 	// 고객센터 : 고객센터 글쓰기
 	@RequestMapping(value = "insertService.do", method = RequestMethod.GET)
-	public String serviceWrite(HttpServletRequest request) {
+	public String serviceInsert(HttpServletRequest request) {
+		
 		return "servicecenter/serviceWrite";
 	}
 
-	// 고객센터:
+	// 고객센터: 고객센터 검색
+	@RequestMapping(value="serviceSearch.do")
+	public ModelAndView serviceSearch(ModelAndView mv, @RequestParam("keyword") String keyword,HttpServletRequest request){
+		
+		ArrayList<ServiceCenter> list = (ArrayList<ServiceCenter>) serviceCenterService.serviceSearch(keyword);
+		mv.addObject("list", list);
+		
+		System.out.println("ServiceCenterController : " + list);
+		System.out.println("keyword : "+"%"+keyword+"%");
+		mv.setViewName("servicecenter/servicelist");
+		return mv;
+	}
 }

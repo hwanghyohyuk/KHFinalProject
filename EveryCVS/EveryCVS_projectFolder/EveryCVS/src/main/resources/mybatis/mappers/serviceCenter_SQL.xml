@@ -22,4 +22,10 @@ FROM TB_SERVICE_CENTER
 JOIN TB_USER ON (WRITER = USER_NO)]]>
 	</select>
 	
+	<select id="serviceSearch" resultType="list" resultMap="resultServiceCenter">
+	<![CDATA[
+	SELECT rownum service_no,title,writer,write_date,readcount FROM TB_SERVICE_CENTER
+	WHERE TITLE LIKE #{keyword}]]>
+	</select>
+	
 	</mapper>

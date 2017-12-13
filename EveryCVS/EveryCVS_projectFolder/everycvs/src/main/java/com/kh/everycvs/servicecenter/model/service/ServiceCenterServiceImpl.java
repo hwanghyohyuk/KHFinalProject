@@ -35,9 +35,10 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 	}
 
 	@Override
-	public ModelAndView searchServiceList(HttpServletRequest request) {
+	public List<ServiceCenter> serviceSearch(String keyword) {
 		// 고객센터 검색 : 제목으로 검색
-		return null;
+		
+		return (ArrayList<ServiceCenter>) servicecenterDao.serviceSearch(keyword);
 	}
 
 	@Override

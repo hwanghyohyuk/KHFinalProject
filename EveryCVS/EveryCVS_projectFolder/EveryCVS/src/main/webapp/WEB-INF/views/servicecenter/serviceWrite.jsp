@@ -21,17 +21,17 @@
                                  <h2>고객센터 / 글쓰기</h2>
                             </div>
                             <hr>
-                            <form>
-
                                  <label>작성자
                                     <span class="color-red">*</span>
                                  </label>
+                                  <%-- <c:if test="${sessionScope.user !=null }"> --%> <!-- 로그인 상태이면 -->
                                 <div class="row margin-bottom-20">
-                                    <div class="col-md-6 col-md-offset-0">
-                                        <input class="form-control" type="text" placeholder="작성자를 입력해주세요" >
+                                    <div class="col-md-6 col-md-offset-0">                                 
+                                        <input class="form-control" type="text"  value="${writer}" >
+                                      <%-- </c:if> --%>
                                     </div>
+                                    
                                 </div>
-                                
                                 <label>비밀번호
                                     <span class="color-red">*</span>
                                 </label>
@@ -40,7 +40,6 @@
                                         <input class="form-control" type="password" placeholder="비밀번호를 입력해주세요">
                                     </div>
                                 </div>
-
                                 <label>제목
                                     <span class="color-red">*</span>
                                  </label>
@@ -56,13 +55,15 @@
                                         <textarea rows="8" class="form-control" placeholder="내용을 입력해주세요"></textarea>
                                     </div>
                                 </div>
-                                <div align="center">
-                                    <input type="button" class="btn btn-primary" value="등록">
+                                <form action="serviceInsert.do" method="post">
+                                <div align="center">                           
+                                    <input type="button" class="btn btn-primary" value="등록">                              
                                     &nbsp&nbsp&nbsp&nbsp&nbsp
                                     <input type=button class="btn btn-primary" value="취소">
                                 </div>
+                                </form>
                                 </div>
-                            </form>
+                            
                             <hr>
                             <!-- End Contact Form -->
                             <!-- End Main Content -->
