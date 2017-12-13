@@ -22,7 +22,7 @@
 							<strong>GS25</strong><br> <small>상품 추가</small>
 						</h2>
 					</div>
-					<form action="apmsearch.do" method="post">
+					<form action="apmlist.do" method="post">
 						<div class="col-sm-3" style="margin-left: 190px;">
 							<br> <input class="form-control" type="search"
 								placeholder="상품명을 입력해주세요." name="keyword" value="${keyword}">
@@ -61,7 +61,7 @@
 										data-target="#apmmodal${apm.store_product_no}"><strong>${apm.product_name}</strong>
 									</a></td>
 									<td>${apm.manufacturer}</td>
-									<td>${apm.price}</td>
+									<td><fmt:formatNumber value="${apm.price}" pattern="#,###"/>원</td>
 									<td>${apm.discount_name}</td>
 									<td><input class="form-control" type="text"
 										placeholder="날짜를 입력해주세요."></td>
@@ -95,7 +95,7 @@
 																	</tr>
 																	<tr>
 																		<td><strong>가격</strong></td>
-																		<td>${apm.price}원</td>
+																		<td><fmt:formatNumber value="${apm.price}" pattern="#,###"/>원</td>
 																	</tr>
 																	<tr>
 																		<td><strong>유통기한</strong></td>
