@@ -405,10 +405,26 @@
 						        map: map,
 						        position: new naver.maps.LatLng(${s.lat},${s.lng}),
 						        title: "${s.store_name}",
-						        zIndex: 100
+						        zIndex: 100,
+						        icon: {
+						        	<c:choose>
+						        		<c:when test="${s.brand_no eq 1}">
+						        		url:'/everycvs/resources/user/img/markers/marker_gs.png',
+						        		</c:when>
+						        		<c:when test="${s.brand_no eq 2}">
+						        		url:'/everycvs/resources/user/img/markers/marker_cu.png',
+						        		</c:when>
+						        		<c:when test="${s.brand_no eq 3}">
+						        		url:'/everycvs/resources/user/img/markers/marker_7e.png',
+						        		</c:when>
+						        	</c:choose>
+						            size: new naver.maps.Size(17, 16),
+						            origin: new naver.maps.Point(0, 0),
+						            anchor: new naver.maps.Point(8, 8)
+						        }
 						    });
 						    var contentString = [
-						        '<div class="iw_inner">',
+						        '<div class="iw_inner" style="padding:10px auto">',
 						        '<h3><b>${s.brand_name}</b> ${s.store_name}</h3>',
 						        '<p>${s.road_address}<br><br>',
 						        '<a href="/everycvs/page/storemain.do?sno=${s.store_no}">지점 페이지로 이동</a>',
