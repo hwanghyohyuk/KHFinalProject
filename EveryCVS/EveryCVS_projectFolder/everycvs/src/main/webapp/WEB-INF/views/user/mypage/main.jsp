@@ -323,17 +323,17 @@
   				//1이면 3개월 조회
 				   $.ajax({
 						url:"purchaseList.do",
-						data: JSON.stringify(params),//{month:params},
-						dataType: "json",
+						data: {month:params},
+						dataType: "text",
 						type:"post",	
 						async: false,
 						cache: false,
-						contentType : "application/json; charset=UTF-8",
+						//contentType : "application/json; charset=UTF-8",
 						success:function(data){
 						
 							// console.log(JSON.stringify(data));
 
-							$('#purchaseTable').html(JSON.stringify(data));
+							$('#purchaseTable').html(data);
 
 						},
 						error:function(request, status, errorData){

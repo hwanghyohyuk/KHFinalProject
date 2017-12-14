@@ -76,7 +76,7 @@ public class PurchaseController {
 		mv.addObject("list", list);
 		System.out.println(list);
 		System.out.println(month);
-		mv.setViewName("jsonView");
+		//mv.setViewName("jsonView");
 		return list;
 	}
 	
