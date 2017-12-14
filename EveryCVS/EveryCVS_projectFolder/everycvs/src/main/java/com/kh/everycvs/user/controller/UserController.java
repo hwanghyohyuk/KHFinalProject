@@ -130,14 +130,14 @@ public class UserController {
 			Map<String, Object> map, Purchase purchase, HttpServletResponse response, HttpServletRequest request) {
 				
 		//map.put("month", month);
-		map.put("purchase", purchase);
+		//map.put("purchase", purchase);
 		
 		List<Map<String, Object>> list = purchaseService.purchaseList(map);
-		ArrayList<Favorite> flist = (ArrayList<Favorite>) favoriteService.favoriteList();
+		//ArrayList<Favorite> flist = (ArrayList<Favorite>) favoriteService.favoriteList();
 		User user = (User) session.getAttribute("user");
 		
 		mv.addObject("list", list);		
-		mv.addObject("flist", flist); 
+		//mv.addObject("flist", flist); 
 		System.out.println(list);
 		
 		//System.out.println(flist);

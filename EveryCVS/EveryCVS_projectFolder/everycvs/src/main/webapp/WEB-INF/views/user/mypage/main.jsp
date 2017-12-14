@@ -118,7 +118,7 @@
 													
 														<c:when test="${fn:length(list) > 0}">
 															<c:forEach items="${list }" var="list">
-															<%-- <c:if test="${list.user_no eq sessionScope.user.user_no }"> --%>
+															 <c:if test="${list.user_no eq sessionScope.user.user_no }"> 
 															 <tr>
 															<td>${list.purchase_no }</td>
 														    <td>${list.user_no }</td>
@@ -133,7 +133,7 @@
 														    <td>${list.accumulate_point }p</td>
 														    <td>${list.purchase_date }</td>
 														    </tr> 
-														   <%--  </c:if> --%>
+														     </c:if> 
 																		</c:forEach>
 																					</c:when>
 																					</c:choose>
@@ -319,16 +319,22 @@
  	 		$("#purchaseTable").on('show.bs.modal', function (event) {
  	 		  var button = $(event.relatedTarget);
 			  var params =  button.data('month');
+			 
   				//1이면 3개월 조회
 				   $.ajax({
 						url:"purchaseList.do",
-						data: {month:params},
-						dataType: "text",
+						data: JSON.stringify(params),//{month:params},
+						dataType: "json",
 						type:"post",	
 						async: false,
 						cache: false,
+						contentType : "application/json; charset=UTF-8",
 						success:function(data){
-							$('#table').html(data);
+						
+							// console.log(JSON.stringify(data));
+
+							$('#purchaseTable').html(JSON.stringify(data));
+
 						},
 						error:function(request, status, errorData){
 							alert("error code: " + request.status + "/n" 
@@ -337,7 +343,7 @@
 						} 
 					
 					});  
-			  return false;
+			 return false;
 		});  
 			});
 		});
