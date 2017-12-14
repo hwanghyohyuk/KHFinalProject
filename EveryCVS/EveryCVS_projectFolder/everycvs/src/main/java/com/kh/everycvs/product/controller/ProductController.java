@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Product;
-import com.kh.everycvs.common.model.vo.SaleProductKind;
 import com.kh.everycvs.common.model.vo.User;
 import com.kh.everycvs.common.util.FileUtils;
 import com.kh.everycvs.product.model.service.ProductService;
@@ -53,41 +52,8 @@ public class ProductController {
 		int brand_no = ((User) session.getAttribute("user")).getBrand_no();
 		
 		ArrayList<Product> list = (ArrayList<Product>) productService.selectProductList(brand_no);
-		List<Map<String,Object>> list2 = saleService.kindCvsSale(brand_no);
-		ArrayList<Product> list3 = (ArrayList<Product>) productService.popularCvsProductTop5(brand_no);
 		
-		HashMap map = new HashMap();
-		int productCount = 0;
-		
-		for(int i = 0; i<list2.size(); i++) {
-			String s = String.valueOf(list2.get(i).get("PRODUCT_KIND_NO"));
-			String p = String.valueOf(list2.get(i).get("SALE_QUANTITY"));
-			
-			if(s.equals("1"))	map.put("1", p);
-			else if(s.equals("2"))	map.put("2", p);
-			else if(s.equals("3"))	map.put("3", p);
-			else if(s.equals("4"))	map.put("4", p);
-			else if(s.equals("5"))	map.put("5", p);
-			else if(s.equals("6"))	map.put("6", p);
-			else if(s.equals("7"))	map.put("7", p);
-			else if(s.equals("8"))	map.put("8", p);
-			else if(s.equals("9"))	map.put("9", p);
-			else if(s.equals("10"))	map.put("10", p);
-			
-			productCount += Integer.parseInt(p);
-		}
-		
-		for(int i=1; i<11; i++) {
-			if(map.get(Integer.toString(i)) == null)
-				map.put(Integer.toString(i), "0");
-		}
-		
-		mv.addObject("plist", list);
-		mv.addObject("tlist", list3);
-		mv.addObject("tmap", map);
-		mv.addObject("count", productCount);
-		
-		mv.setViewName("admin/cvsmanager/productList");
+		setMVProductList(brand_no, mv, list);
 		return mv;
 	}
 	
@@ -115,8 +81,7 @@ public class ProductController {
 		
 		ArrayList<Product> list = (ArrayList<Product>) productService.searchProductList(productInfo);
 		
-		mv.addObject("plist", list);
-		mv.setViewName("admin/cvsmanager/productList");
+		setMVProductList(user.getBrand_no(), mv, list);
 		return mv;
 	}
 	
@@ -152,8 +117,7 @@ public class ProductController {
 		
 		ArrayList<Product> list = (ArrayList<Product>) productService.selectProductList(brand_no);
 			
-		mv.addObject("plist", list);
-		mv.setViewName("admin/cvsmanager/productList");
+		setMVProductList(brand_no, mv, list);
 		return mv;
 	}
 	
@@ -200,8 +164,7 @@ public class ProductController {
 		
 		ArrayList<Product> list = (ArrayList<Product>) productService.selectProductList(brand_no);
 		
-		mv.addObject("plist", list);
-		mv.setViewName("admin/cvsmanager/productList");
+		setMVProductList(brand_no, mv, list);
 		return mv;
 	}
 	
@@ -218,10 +181,47 @@ public class ProductController {
 		productService.deleteProduct(product);
 		ArrayList<Product> list = (ArrayList<Product>) productService.selectProductList(brand_no);
 		
-		mv.addObject("plist", list);
-		mv.setViewName("admin/cvsmanager/productList");
+		setMVProductList(brand_no, mv, list);
 		return mv;
 	}
-	
+
+	/** ModelAndView 에 리스트 3개 addObject 해주고, 뷰네임(리스트로) 지정해주는 메소드 **/
+	public void setMVProductList(int brand_no, ModelAndView mv, ArrayList<Product> plist) {
+		List<Map<String,Object>> list2 = saleService.kindCvsSale(brand_no);
+		ArrayList<Product> list3 = (ArrayList<Product>) productService.popularCvsProductTop5(brand_no);
+		
+		HashMap map = new HashMap();
+		int productCount = 0;
+		
+		for(int i = 0; i<list2.size(); i++) {
+			String s = String.valueOf(list2.get(i).get("PRODUCT_KIND_NO"));
+			String p = String.valueOf(list2.get(i).get("SALE_QUANTITY"));
+			
+			if(s.equals("1"))	map.put("1", p);
+			else if(s.equals("2"))	map.put("2", p);
+			else if(s.equals("3"))	map.put("3", p);
+			else if(s.equals("4"))	map.put("4", p);
+			else if(s.equals("5"))	map.put("5", p);
+			else if(s.equals("6"))	map.put("6", p);
+			else if(s.equals("7"))	map.put("7", p);
+			else if(s.equals("8"))	map.put("8", p);
+			else if(s.equals("9"))	map.put("9", p);
+			else if(s.equals("10"))	map.put("10", p);
+			
+			productCount += Integer.parseInt(p);
+		}
+		
+		for(int i=1; i<11; i++) {
+			if(map.get(Integer.toString(i)) == null)
+				map.put(Integer.toString(i), "0");
+		}
+		
+		mv.addObject("plist", plist);
+		mv.addObject("tlist", list3);
+		mv.addObject("tmap", map);
+		mv.addObject("count", productCount);
+		
+		mv.setViewName("admin/cvsmanager/productList");
+	}
 	
 }
