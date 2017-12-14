@@ -46,10 +46,11 @@ public class ProductServiceImpl implements ProductService{
 		return productDao.selectProductList(brand_no);
 	}
 
+	/** 한 상품의 정보를 조회
+	 * @param product */
 	@Override
-	public ModelAndView selectProductOne(HttpServletRequest request) {
-		// 상품 조회 : 선택한 상품 상세조회
-		return null;
+	public Product selectProductOne(Product product) {
+		return productDao.selectProductOne(product);
 	}
 
 	/** 상품 검색 : 입력한 키워드와 필터링으로 상품을 검색
@@ -67,10 +68,11 @@ public class ProductServiceImpl implements ProductService{
 		productDao.insertProduct(product);
 	}
 
+	/** 상품 수정
+	 * @param product */
 	@Override
-	public String updateProduct(HttpServletRequest request) {
-		// 상품 수정
-		return null;
+	public void updateProduct(Product product) {
+		productDao.updateProduct(product);
 	}
 
 	/** 상품 삭제 : 편의점 상품 삭제할 때 지점 상품도 연쇄 삭제

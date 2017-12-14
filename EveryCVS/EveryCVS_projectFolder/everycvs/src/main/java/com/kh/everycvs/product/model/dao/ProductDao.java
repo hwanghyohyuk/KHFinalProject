@@ -41,9 +41,10 @@ public class ProductDao {
 		return sqlSession.selectList("product.productList", brand_no);
 	}
 
-	public Product selectProductOne() {
-		// 상품 조회 : 선택한 상품 상세조회
-		return null;
+	/** 한 상품의 정보를 조회
+	 * @param product */
+	public Product selectProductOne(Product product) {
+		return sqlSession.selectOne("product.selectProduct", product);
 	}
 
 	/** 상품 검색 : 입력한 키워드와 필터링으로 상품을 검색
@@ -66,9 +67,10 @@ public class ProductDao {
 		sqlSession.insert("product.insertProduct", product);
 	}
 	
-	public int updateProduct() {
-		// 상품 수정
-		return 0;
+	/** 상품 수정
+	 * @param product */
+	public void updateProduct(Product product) {
+		sqlSession.update("product.updateProduct", product);
 	}
 
 	/** 상품 삭제 : 편의점 상품 삭제할 때 지점 상품도 연쇄 삭제

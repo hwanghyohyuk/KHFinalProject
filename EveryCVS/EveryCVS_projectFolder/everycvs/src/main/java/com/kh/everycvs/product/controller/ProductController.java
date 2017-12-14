@@ -59,11 +59,6 @@ public class ProductController {
 		return mv;
 	}
 	
-	/** 상품 조회 : 선택한 상품 상세 조회 */
-	public ModelAndView selectProductOne() {
-		return null;
-	}
-	
 	/** 상품 검색 : 입력한 키워드와 필터링으로 상품을 검색
 	* 필터링 : 상품명/제조사 */
 	@RequestMapping("cvsproductSearch.do")
@@ -102,7 +97,9 @@ public class ProductController {
 	/** 상품 등록 
 	 * @throws Exception */
 	@RequestMapping("cvsproductwrite.do")
-	public ModelAndView insertProduct(HttpSession session, HttpServletRequest request, ModelAndView mv) throws Exception {
+	public ModelAndView insertProduct(
+			HttpSession session, HttpServletRequest request, ModelAndView mv)
+					throws Exception {
 		int brand_no = ((User)session.getAttribute("user")).getBrand_no();
 		
 		// 파일을 저장하고, "원래 파일명 | 변환된 파일명" 리턴
@@ -130,13 +127,50 @@ public class ProductController {
 	
 	/** 상품 수정 페이지 이동 */
 	@RequestMapping("cvsproductmodifyview.do")
-	public String cvsProductModifyView() {
-		return "admin/cvsmanager/productModifyForm";
+	public ModelAndView cvsProductModifyView(
+			HttpSession session, HttpServletRequest request, ModelAndView mv) {
+		Product sendProduct = new Product();
+		sendProduct.setBrand_no(((User)session.getAttribute("user")).getBrand_no());
+		sendProduct.setProduct_no(Integer.parseInt(request.getParameter("product_no")));
+		
+		Product resultProduct = productService.selectProductOne(sendProduct);
+		
+		mv.addObject("product", resultProduct);
+		mv.setViewName("admin/cvsmanager/productModifyForm");
+		return mv;
 	}
 	
-	/** 상품 수정 */
-	public String updateProduct(HttpServletRequest request) {
-		return null;
+	/** 상품 수정 
+	 * @throws Exception */
+	@RequestMapping("cvsproductmodify.do")
+	public ModelAndView modifyProduct(
+			HttpSession session, HttpServletRequest request, ModelAndView mv)
+					throws Exception {
+		int brand_no = ((User)session.getAttribute("user")).getBrand_no();
+		
+		String fileName = new FileUtils().InsertFile(session, request);
+		String[] fName = fileName.split("/");
+		
+		String prevFileName = request.getParameter("prevfile");
+		
+		Product product = new Product();
+		product.setProduct_no(Integer.parseInt(request.getParameter("productno")));
+		product.setProduct_name(request.getParameter("productname"));
+		product.setManufacturer(request.getParameter("manufacturer"));
+		product.setPrice(Integer.parseInt(request.getParameter("price")));
+		product.setExpiration_date(Integer.parseInt(request.getParameter("deadline")));
+		product.setProduct_kind_no(Integer.parseInt(request.getParameter("kind")));
+		product.setOriginal_file_name(fName[0]);
+		product.setStored_file_name(fName[1]);
+		
+		productService.updateProduct(product);
+		new FileUtils().deleteFile(request);	// 기존에 있던 저장파일 삭제
+		
+		ArrayList<Product> list = (ArrayList<Product>) productService.selectProductList(brand_no);
+		
+		mv.addObject("plist", list);
+		mv.setViewName("admin/cvsmanager/productList");
+		return mv;
 	}
 	
 	@RequestMapping(value = "cvsproductDelete.do", method = RequestMethod.GET)

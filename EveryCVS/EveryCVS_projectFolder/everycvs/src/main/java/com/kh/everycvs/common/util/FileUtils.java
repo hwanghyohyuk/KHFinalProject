@@ -52,4 +52,15 @@ public class FileUtils {
 		return new String(originalFileName + "/" + storedFileName);	// 변환한 파일명을 반환
 	}
 	
+	/** 정해진 경로의 파일을 삭제하는 메소드 */
+	public void deleteFile(HttpServletRequest request) {
+		this.filePath = request.getSession().getServletContext().getRealPath("/") + "resources/upload/";
+		String fileName = request.getParameter("prevfile");
+		
+		File file = new File(filePath + fileName);
+		if(file.exists() == true){	// 존재하면
+			file.delete();	// 삭제
+		}
+	}
+	
 }

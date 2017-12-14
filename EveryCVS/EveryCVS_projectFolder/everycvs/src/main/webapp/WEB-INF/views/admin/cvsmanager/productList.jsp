@@ -358,6 +358,8 @@
 	function show_modal(info) {
 		parr = info.split('/');
 		
+		if(parr[6] == "null") parr[6] = "없음";	//첨부파일 없으면 "없음"
+		
 		$("#detail1").html("No. " + parr[0]);
 		$("#detail2").html(parr[1]);
 		$("#detail3").html(parr[2]);
