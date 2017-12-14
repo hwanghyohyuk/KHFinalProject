@@ -137,6 +137,10 @@
 	padding-top: 10px;
 }
 
+.jun23 {
+	margin-left: 0px;
+}
+
 .jun_contentdiv{
 	color: #777;
 	padding: 0px;
@@ -188,8 +192,8 @@
 
 .jun_img2{
 	display: inline-block;
-	min-width: 100%;
-	min-height: 100%;
+	max-width: 100%;
+	max-height: 100%;
 }
 
 #jun_input1 {

@@ -46,13 +46,6 @@ public class ProductController {
 	}
 	
 	/*편의점관리자*/
-	/**주간 인기상품 top 5**/
-	public ModelAndView popularCvsProductTop5(ModelAndView modelAndView){
-		int brand_no = 0;
-		Map map = productService.popularCvsProductTop5(brand_no);
-		return modelAndView;
-	}
-	
 	@RequestMapping("cvsproductList.do")
 	/** 상품 조회 : 모든 상품 조회 */
 	public ModelAndView selectProductList(
@@ -61,6 +54,7 @@ public class ProductController {
 		
 		ArrayList<Product> list = (ArrayList<Product>) productService.selectProductList(brand_no);
 		List<Map<String,Object>> list2 = saleService.kindCvsSale(brand_no);
+		ArrayList<Product> list3 = (ArrayList<Product>) productService.popularCvsProductTop5(brand_no);
 		
 		HashMap map = new HashMap();
 		int productCount = 0;
@@ -89,6 +83,7 @@ public class ProductController {
 		}
 		
 		mv.addObject("plist", list);
+		mv.addObject("tlist", list3);
 		mv.addObject("tmap", map);
 		mv.addObject("count", productCount);
 		

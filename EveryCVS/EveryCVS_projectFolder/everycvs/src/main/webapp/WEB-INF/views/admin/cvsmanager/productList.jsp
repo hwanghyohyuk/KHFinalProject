@@ -38,52 +38,18 @@
 					<div id="collapse-One" class="accordion-body collapse in">
 						<div class="panel-body"
 							style="padding-top: 20px; padding-bottom: 56px;">
-							<div class="row">
-								<div class="jun1" id="modify1" data-toggle="modal"
+							<div class="row jun23">
+								<c:forEach var="product" items="${tlist}">
+									<div class="jun1" id="modify1" data-toggle="modal"
 									data-target="#myModal" style="cursor: pointer;">
 									<div class="jun_imgdiv2">
-										<img src="assets/img/background.jpg" class="jun_img2"
+										<img src="/everycvs/resources/upload/${product.stored_file_name}" class="jun_img2"
 											alt="NO IMAGE">
 									</div>
-									<div class="jun19">롯데)전주한상도시락</div>
-									<span class="label label-blue jun20">562 EA</span>
+									<div class="jun19">${product.product_name}</div>
+									<span class="label label-blue jun20">${product.purchase_count} EA</span>
 								</div>
-								<div class="jun1" id="modify1" data-toggle="modal"
-									data-target="#myModal" style="cursor: pointer;">
-									<div class="jun_imgdiv2">
-										<img src="assets/img/background.jpg" class="jun_img2"
-											alt="NO IMAGE">
-									</div>
-									<div class="jun19">참치마요김밥</div>
-									<span class="label label-blue jun20">544 EA</span>
-								</div>
-								<div class="jun1" id="modify1" data-toggle="modal"
-									data-target="#myModal" style="cursor: pointer;">
-									<div class="jun_imgdiv2">
-										<img src="assets/img/background.jpg" class="jun_img2"
-											alt="NO IMAGE">
-									</div>
-									<div class="jun19">치즈불닭볶음면</div>
-									<span class="label label-blue jun20">538 EA</span>
-								</div>
-								<div class="jun1" id="modify1" data-toggle="modal"
-									data-target="#myModal" style="cursor: pointer;">
-									<div class="jun_imgdiv2">
-										<img src="assets/img/background.jpg" class="jun_img2"
-											alt="NO IMAGE">
-									</div>
-									<div class="jun19">데미소다애플</div>
-									<span class="label label-blue jun20">289 EA</span>
-								</div>
-								<div class="jun1" id="modify1" data-toggle="modal"
-									data-target="#myModal" style="cursor: pointer;">
-									<div class="jun_imgdiv2">
-										<img src="assets/img/background.jpg" class="jun_img2"
-											alt="NO IMAGE">
-									</div>
-									<div class="jun19">불고기양념도시락</div>
-									<span class="label label-blue jun20">228 EA</span>
-								</div>
+								</c:forEach>
 							</div>
 						</div>
 					</div>

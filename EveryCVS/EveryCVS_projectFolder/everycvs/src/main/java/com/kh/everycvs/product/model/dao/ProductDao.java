@@ -31,9 +31,8 @@ public class ProductDao {
 
 	/*편의점관리자*/
 	/**주간 인기상품 top 5**/
-	public Map popularCvsProductTop5(int brand_no) {
-		// TODO Auto-generated method stub
-		return null;
+	public List popularCvsProductTop5(int brand_no) {
+		return sqlSession.selectList("product.popularProductTop5", brand_no);
 	}
 	
 	/** 상품 조회 : 모든 상품 조회 */

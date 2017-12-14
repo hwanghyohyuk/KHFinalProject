@@ -19,9 +19,14 @@
 	</resultMap>
 	
 	<!-- 금주의 인기 상품 top5 조회 -->
-	<select id="hotProductTop5" parameterType="_int" resultType="list" resultMap="resultProduct">
+	<select id="popularProductTop5" parameterType="_int" resultType="list" resultMap="resultProduct">
 		<![CDATA[
-			
+			SELECT A.PRODUCT_NO, A.PRODUCT_NAME, B.MANUFACTURER, B.PRICE, B.EXPIRATION_DATE, B.PRODUCT_KIND_NO,
+			B.PRODUCT_KIND_NAME, A.BRAND_NO, B.ORIGINAL_FILE_NAME, B.STORED_FILE_NAME, B.DEL_CHECK, A.SALE_QUANTITY purchase_count
+			from POPULARITY_PRODUCT_VIEW A
+			JOIN PRODUCT_VIEW B ON (A.PRODUCT_NO = B.PRODUCT_NO)
+			WHERE A.BRAND_NO = 2 AND ROWNUM <= 5
+			ORDER BY SALE_QUANTITY DESC, PRODUCT_NO ASC
 		]]>
 	</select>
 	

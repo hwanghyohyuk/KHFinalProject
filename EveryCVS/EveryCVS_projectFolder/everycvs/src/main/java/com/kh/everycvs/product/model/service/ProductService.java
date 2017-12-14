@@ -44,6 +44,6 @@ public interface ProductService {
 	
 	/*편의점관리자*/
 	/**주간 인기상품 top 5**/
-	public Map popularCvsProductTop5(int brand_no);
+	public List popularCvsProductTop5(int brand_no);
 	
 }

@@ -36,7 +36,7 @@ public class ProductServiceImpl implements ProductService{
 	/*편의점관리자*/
 	/**주간 인기상품 top 5**/
 	@Override
-	public Map popularCvsProductTop5(int brand_no) {
+	public List popularCvsProductTop5(int brand_no) {
 		return productDao.popularCvsProductTop5(brand_no);
 	}
 	
