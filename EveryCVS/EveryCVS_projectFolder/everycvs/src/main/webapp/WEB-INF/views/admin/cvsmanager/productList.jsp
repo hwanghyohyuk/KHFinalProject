@@ -101,12 +101,6 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-md-6">
-									<c:forEach var="saleProductKind" items="${tlist1}">
-										${saleProductKind.product_kind_no}***${saleProductKind.sale_quantity}<br>
-										<c:if test="${saleProductKind.product_kind_no eq 2}">
-											
-										</c:if>
-									</c:forEach>
 									<!-- progress bar -->
 									<!-- first progress block -->
 									<span class="jun2">과일(5%)</span>
@@ -169,7 +163,7 @@
 									<div class="progress progress-sm height20">
 										<div class="progress-bar progress-bar-aqua" role="progressbar"
 											aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-											style="width: 18%">900 EA</div>
+											style="width: ${tmap['1'].sale_quantity}%">900 EA</div>
 									</div>
 
 									<!-- End progress bar -->

@@ -14,10 +14,11 @@
 	<!-- 상품 종류별  판매량 조회 -->
 	<select id="selectSaleProductKind" parameterType="_int" resultType="list" resultMap="resultSaleProductKindMap">
 		<![CDATA[
-			select brand_no, product_kind_no, sum(sale_quantity) sale_quantity
+			select null, brand_no, product_kind_no, null, sum(sale_quantity) sale_quantity
 			from sale_product_kind_view
 			group by brand_no, product_kind_no
 			having brand_no = #{brand_no}
+			order by product_kind_no asc;
 		]]>
 	</select>
 	
