@@ -289,7 +289,8 @@
 				<h2>페이지 여기 모아놨따.</h2>
 				<a href="splist.do">지점상품</a><br> <a href="cvsstorelist.do">지점1</a><br>
 				<a href="selectServiceList.do">고객센터1</a><br> <a
-					href="insertService.do">고객센터2</a><br> <a
+					href="insertService.do">고객센터2</a><br>
+				<a href="detailService.do">고객센터3</a><br><a
 					href="cvsproductlist.do">편의점상품1</a><br> <a
 					href="cvsproductwriteview.do">편의점상품2</a><br> <a
 					href="cvsproductmodifyview.do">편의점상품3</a><br> <a

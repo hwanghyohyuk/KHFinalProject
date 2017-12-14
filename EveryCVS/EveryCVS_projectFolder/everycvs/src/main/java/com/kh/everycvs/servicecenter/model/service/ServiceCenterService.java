@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Purchase;
 import com.kh.everycvs.common.model.vo.ServiceCenter;
+import com.kh.everycvs.common.model.vo.StoreProduct;
 
 public interface ServiceCenterService {
 
@@ -19,10 +20,10 @@ public interface ServiceCenterService {
 		public ModelAndView selectServiceOne(HttpServletRequest request);
 		
 		// 고객센터 검색 : 제목으로 검색
-		public ModelAndView searchServiceList(HttpServletRequest request);
+		public List<ServiceCenter> serviceSearch(String keyword);
 		
 		// 고객센터 등록
-		public String insertService(HttpServletRequest request);
+		public List<ServiceCenter> serviceInsert();
 		
 		// 고객센터 수정
 		public String updateService(HttpServletRequest request);

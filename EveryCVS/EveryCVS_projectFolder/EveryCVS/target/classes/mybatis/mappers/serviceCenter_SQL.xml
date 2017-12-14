@@ -27,5 +27,9 @@ JOIN TB_USER ON (WRITER = USER_NO)]]>
 	SELECT rownum service_no,title,writer,write_date,readcount FROM TB_SERVICE_CENTER
 	WHERE TITLE LIKE #{keyword}]]>
 	</select>
-	
+	<insert id="serviceInsert" parameterType="map">
+	<![CDATA[
+	INSERT INTO TB_SERVICE_CENTER VALUES(MAX(SERVICE_NO)+1, #{TITLE}, #{WRITER}, #{CONTENTS}, 
+                                                                          #{WRITE_DATE}, #{READCOUNT}, default, default,#{DEL_CHECK});]]>
+	</insert>
 	</mapper>
