@@ -40,7 +40,8 @@
 							style="padding-top: 20px; padding-bottom: 56px;">
 							<div class="row jun23">
 								<c:forEach var="product" items="${tlist}">
-									<div class="jun1" id="modify1" data-toggle="modal"
+									<div onclick="show_modal('${product.product_no}' + '/' + '${product.product_name}' + '/' + '${product.product_kind_name}' + '/' + '${product.manufacturer}' + '/' + '${product.price}' + '/' + '${product.expiration_date}' + '/' + '${product.original_file_name}' + '/' + '${product.purchase_count}' + '/' + '${product.stored_file_name}');"
+									class="jun1" id="modify1" data-toggle="modal"
 									data-target="#myModal" style="cursor: pointer;">
 									<div class="jun_imgdiv2">
 										<img src="/everycvs/resources/upload/${product.stored_file_name}" class="jun_img2"
