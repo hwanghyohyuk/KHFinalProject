@@ -13,15 +13,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Product;
+import com.kh.everycvs.common.model.vo.SaleProductKind;
 import com.kh.everycvs.common.model.vo.User;
 import com.kh.everycvs.common.util.FileUtils;
 import com.kh.everycvs.product.model.service.ProductService;
+import com.kh.everycvs.sale.model.service.SaleService;
 
 @Controller
 public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private SaleService saleService;
 
 	/*사용자*/
 	/**실시간 인기상품(전체) top 5**/
@@ -53,8 +58,10 @@ public class ProductController {
 		int brand_no = ((User) session.getAttribute("user")).getBrand_no();
 		
 		ArrayList<Product> list = (ArrayList<Product>) productService.selectProductList(brand_no);
+		ArrayList<SaleProductKind> tlist1 = (ArrayList<SaleProductKind>) saleService.kindCvsSale(brand_no);
 		
 		mv.addObject("plist", list);
+		mv.addObject("tlist1", tlist1);
 		mv.setViewName("admin/cvsmanager/productList");
 		return mv;
 	}

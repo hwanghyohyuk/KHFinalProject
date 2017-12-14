@@ -36,12 +36,10 @@ public class StoreController {
 	/* 편의점 관리자 */
 
 	/** 방문자 수 top5 지점 **/
-	public ModelAndView joinCountTop5(HttpSession session, ModelAndView mv) {
+	public void joinCountTop5(HttpSession session, ModelAndView mv) {
 		User user = (User) session.getAttribute("user");
 		ArrayList<Store> list = (ArrayList<Store>) storeService.joinCountTop5(user.getBrand_no());
 		mv.addObject("slist", list);
-		mv.setViewName("admin/cvsmanager/main");
-		return mv;
 	}
 	
 	/** 지점 조회 : 모든 지점을 조회 */
