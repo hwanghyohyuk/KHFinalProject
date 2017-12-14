@@ -63,7 +63,7 @@
    
    <select id="top3Sproduct" resultType="list" resultMap="resultStoreProduct">
 		<![CDATA[
-			select * from (select rownum rnum, store_product_no, product_name, price
+			select * from (select rownum rnum, store_product_no, product_name, price, manufacturer, manufacture_date
 			from (select * from store_popularity_product_view order by purchase_count desc)) 
 			where rnum >= 1 and rnum <= 3
 		]]>	
@@ -71,7 +71,7 @@
 	
 	<select id="new3Sproduct" resultType="list" resultMap="resultStoreProduct">
 		<![CDATA[
-			select * from (select rownum rnum, store_product_no, product_name, price
+			select * from (select rownum rnum, store_product_no, product_name, price, manufacturer, manufacture_date
 			from (select * from store_popularity_product_view order by manufacture_date desc)) 
 			where rnum >= 1 and rnum <= 3
 		]]>	
@@ -137,7 +137,7 @@
 		   <![CDATA[
       		select * from (
             select rownum rnum, a.*
-            from store_popularity_product_view a)
+            from tb_product a)
             where rnum >= #{startRow} and rnum <= #{endRow}
            ]]>
    </select>

@@ -87,7 +87,7 @@ public class StoreProductController {
 		ArrayList<StoreProduct> list = (ArrayList<StoreProduct>)sproductService.top3Sproduct();
 		
 		mv.addObject("list",list);
-		mv.setViewName("jsonView");
+		mv.setViewName("storemain/storeRankView");
 		
 		return mv;
 	}
@@ -101,7 +101,7 @@ public class StoreProductController {
 		ArrayList<StoreProduct> list = (ArrayList<StoreProduct>)sproductService.new3Sproduct();
 		
 		mv.addObject("list2",list);
-		mv.setViewName("jsonView");
+		mv.setViewName("storemain/storeRankView");
 		
 		return mv;
 	}
@@ -114,7 +114,7 @@ public class StoreProductController {
 		ArrayList<StoreProduct> list = (ArrayList<StoreProduct>) sproductService.dcSproduct();
 
 		mv.addObject("list3",list);
-		mv.setViewName("jsonView");
+		mv.setViewName("storemain/storeRankView");
 
 		return mv;
 
@@ -128,7 +128,7 @@ public class StoreProductController {
 		ArrayList<StoreProduct> list = (ArrayList<StoreProduct>) sproductService.expSproduct();
 
 		mv.addObject("list4",list);
-		mv.setViewName("jsonView");
+		mv.setViewName("storemain/storeRankView");
 
 		return mv;
 
