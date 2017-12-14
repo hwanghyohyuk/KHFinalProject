@@ -20,25 +20,23 @@
 
 	</resultMap>
 	<!-- 구매내역 리스트 조회 -->
-	<select id="purchaseList" parameterType="string" resultType="map" resultMap="resultPurchase">
+	<select id="purchaseList" parameterType="hashmap" resultType="purchase" resultMap="resultPurchase">
 		SELECT * FROM PURCHASE_VIEW 
-		
 	<where>
-		 <if test = 'month != null and month.equals("0")'>
-		
+		<if test = 'month != null and month.equals("0")'>
+		 	and user_no = #{user_no}
 		</if>	
 		<if test = 'month != null and month.equals("1")'>
-			and purchase_date >=  to_char(SYSDATE-90, 'YY/MM/DD')
+			and purchase_date >=  to_char(SYSDATE-90, 'YY/MM/DD') and user_no = #{user_no}
 		</if>
 		<if test = 'month != null and month.equals("2")'>
-   			and purchase_date >=  to_char(SYSDATE-30, 'YY/MM/DD')
+   			and purchase_date >=  to_char(SYSDATE-30, 'YY/MM/DD') and user_no = #{user_no}
   		</if>
   		<if test = 'month != null and month.equals("3")'>
-   			and purchase_date >=  to_char(SYSDATE-7, 'YY/MM/DD')
+   			and purchase_date >=  to_char(SYSDATE-7, 'YY/MM/DD') and user_no = #{user_no}
   		</if>
   		</where>
-  		ORDER BY PURCHASE_DATE DESC
-		
+  		ORDER BY PURCHASE_DATE DESC		
 	</select>
 	
 	

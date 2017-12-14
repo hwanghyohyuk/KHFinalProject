@@ -126,22 +126,15 @@ public class UserController {
 
 	/** 마이 페이지 **/
 	@RequestMapping(value="mypage.do")
-	public ModelAndView myPage(HttpSession session, ModelAndView mv, 
-			Map<String, Object> map, Purchase purchase, HttpServletResponse response, HttpServletRequest request) {
-				
-		//map.put("month", month);
-		//map.put("purchase", purchase);
-		
-		List<Map<String, Object>> list = purchaseService.purchaseList(map);
-		ArrayList<Favorite> flist = (ArrayList<Favorite>) favoriteService.favoriteList();
+	public ModelAndView myPage(HttpSession session, ModelAndView mv) {
+		String month="0";
 		User user = (User) session.getAttribute("user");
+		ArrayList<Purchase> list = purchaseService.purchaseList(user.getUser_no(),month);
+		ArrayList<Favorite> flist = (ArrayList<Favorite>) favoriteService.favoriteList();
 		
 		mv.addObject("list", list);		
 		mv.addObject("flist", flist); 
 		System.out.println(list);
-		
-		//System.out.println(flist);
-		//System.out.println(month);
 				
 		mv.setViewName("user/mypage/main");
 		return mv;
