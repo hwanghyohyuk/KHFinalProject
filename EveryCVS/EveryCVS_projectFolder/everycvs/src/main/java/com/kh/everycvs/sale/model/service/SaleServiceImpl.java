@@ -43,7 +43,7 @@ public class SaleServiceImpl implements SaleService {
 	/* 편의점관리자 */
 	/** 편의점 상품 종류별 판매량 **/
 	@Override
-	public List kindCvsSale(int brand_no) {
+	public List<Map<String, Object>> kindCvsSale(int brand_no) {
 		return saleDao.kindCvsSale(brand_no);
 	}
 

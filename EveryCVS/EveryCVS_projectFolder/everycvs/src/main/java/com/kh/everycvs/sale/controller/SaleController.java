@@ -1,6 +1,7 @@
 package com.kh.everycvs.sale.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -49,27 +50,9 @@ public class SaleController {
 	
 	/*편의점관리자*/
 	/** 편의점 상품 종류별 판매량**/
-	public void kindCvsSale(HttpSession session, ModelAndView mv){
-		int brand_no = ((User)session.getAttribute("user")).getBrand_no();
-		
-		ArrayList<SaleProductKind> list = (ArrayList<SaleProductKind>) saleService.kindCvsSale(brand_no);
-		
-		Map<String, SaleProductKind> map =  null;
-		
-		for(SaleProductKind s : list) {
-			if(s.getProduct_kind_no() == 1) map.put(Integer.toString(1), s);
-			if(s.getProduct_kind_no() == 2) map.put(Integer.toString(2), s);
-			if(s.getProduct_kind_no() == 3) map.put(Integer.toString(3), s);
-			if(s.getProduct_kind_no() == 4) map.put(Integer.toString(4), s);
-			if(s.getProduct_kind_no() == 5) map.put(Integer.toString(5), s);
-			if(s.getProduct_kind_no() == 6) map.put(Integer.toString(6), s);
-			if(s.getProduct_kind_no() == 7) map.put(Integer.toString(7), s);
-			if(s.getProduct_kind_no() == 8) map.put(Integer.toString(8), s);
-			if(s.getProduct_kind_no() == 9) map.put(Integer.toString(9), s);
-			if(s.getProduct_kind_no() == 10) map.put(Integer.toString(10), s);
-		}
-		
-		mv.addObject("tmap", map);
+	public ModelAndView kindCvsSale(HttpSession session, ModelAndView mv){
+		int brand_no = 0;
+		return mv;
 	}
 	
 	/**판매량 Top5 지점**/

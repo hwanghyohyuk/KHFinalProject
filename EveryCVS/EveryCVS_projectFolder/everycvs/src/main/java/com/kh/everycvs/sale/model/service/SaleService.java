@@ -22,7 +22,7 @@ public interface SaleService {
 
 	/* 편의점관리자 */
 	/** 편의점 상품 종류별 판매량 **/
-	List kindCvsSale(int brand_no);
+	List<Map<String, Object>> kindCvsSale(int brand_no);
 
 	/** 판매량 Top5 지점 **/
 	Map saleTop5Store(int brand_no);

@@ -41,7 +41,7 @@ public class SaleDao {
 
 	/* 편의점관리자 */
 	/** 편의점 상품 종류별 판매량 **/
-	public List kindCvsSale(int brand_no) {
+	public List<Map<String, Object>> kindCvsSale(int brand_no) {
 		return sqlSession.selectList("sale.selectSaleProductKind", brand_no);
 	}
 

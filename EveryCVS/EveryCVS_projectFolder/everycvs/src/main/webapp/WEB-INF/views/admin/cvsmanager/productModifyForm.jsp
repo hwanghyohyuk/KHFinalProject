@@ -33,13 +33,13 @@
 				<div class="panel-body">
 					<div class="jun5">No. ${product.product_no}</div>
 					<form name="productFrm" action="/everycvs/cvsproductmodify.do"
-					method="post" class="form-inline" enctype="multipart/form-data">
-						<input type="hidden" name="productno" value="${product.product_no}">
-						<input type="hidden" name="prevfile" value="${product.stored_file_name}">
+						method="post" class="form-inline" enctype="multipart/form-data">
+						<input type="hidden" name="productno"
+							value="${product.product_no}"> <input type="hidden"
+							name="prevfile" value="${product.stored_file_name}">
 						<div class="form-group" id="jun_input1">
 							<label for="product0" style="padding-right: 54px;">Category</label>
-							<select name="kind" class="form-control input" id="product0"
-								style="padding-left: 5px;">
+							<select name="kind" class="form-control input" id="product0" style="padding-left: 5px;">
 								<option value="0">분류 선택</option>
 								<option value="1" <c:if test="${product.product_kind_no eq 1}">selected</c:if>>과일</option>
 								<option value="2" <c:if test="${product.product_kind_no eq 2}">selected</c:if>>도시락</option>

@@ -103,67 +103,66 @@
 								<div class="col-md-6">
 									<!-- progress bar -->
 									<!-- first progress block -->
-									<span class="jun2">과일(5%)</span>
+									<span class="jun2">과일(<fmt:formatNumber value="${tmap['1']/count*100}" pattern="#.##"/>%)</span>
 									<div class="progress progress-sm height20">
 										<div class="progress-bar progress-bar-red" role="progressbar"
 											aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-											style="width: 20%">500 EA</div>
+											style="width: <c:out value="${tmap['1']/count*100}"/>%">${tmap['1']} EA</div>
 									</div>
-									<span class="jun2">도시락(22%)</span>
+									<span class="jun2">도시락(<fmt:formatNumber value="${tmap['2']/count*100}" pattern="#.##"/>%)</span>
 									<div class="progress progress-sm height20">
-										<div class="progress-bar progress-bar-green"
-											role="progressbar" aria-valuenow="90" aria-valuemin="0"
-											aria-valuemax="100" style="width: 88%">2200 EA</div>
+										<div class="progress-bar progress-bar-green" role="progressbar"
+										aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
+										style="width: <c:out value="${tmap['2']/count*100}"/>%">${tmap['2']} EA</div>
 									</div>
-									<span class="jun2">김밥(16%)</span>
+									<span class="jun2">김밥(<fmt:formatNumber value="${tmap['3']/count*100}" pattern="#.##"/>%)</span>
 									<div class="progress progress-sm height20">
 										<div class="progress-bar progress-bar-yellow"
-											role="progressbar" aria-valuenow="90" aria-valuemin="0"
-											aria-valuemax="100" style="width: 64%">1600 EA</div>
+											role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
+											style="width: <c:out value="${tmap['3']/count*100}"/>%">${tmap['3']} EA</div>
 									</div>
-									<span class="jun2">햄버거(13%)</span>
+									<span class="jun2">햄버거(<fmt:formatNumber value="${tmap['4']/count*100}" pattern="#.##"/>%)</span>
 									<div class="progress progress-sm height20">
-										<div class="progress-bar progress-bar-ppple"
-											role="progressbar" aria-valuenow="90" aria-valuemin="0"
-											aria-valuemax="100" style="width: 52%">1300 EA</div>
+										<div class="progress-bar progress-bar-ppple" role="progressbar" aria-valuenow="90" aria-valuemin="0"
+										aria-valuemax="100" style="width: <c:out value="${tmap['4']/count*100}"/>%">${tmap['4']} EA</div>
 									</div>
-									<span class="jun2">햄(6%)</span>
+									<span class="jun2">햄(<fmt:formatNumber value="${tmap['5']/count*100}" pattern="#.##"/>%)</span>
 									<div class="progress progress-sm height20">
 										<div class="progress-bar progress-bar-pink" role="progressbar"
 											aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-											style="width: 24%">600 EA</div>
+											style="width: <c:out value="${tmap['5']/count*100}"/>%">${tmap['5']} EA</div>
 									</div>
 								</div>
 								<div class="col-md-6">
-									<span class="jun2">라면(12%)</span>
+									<span class="jun2">라면(<fmt:formatNumber value="${tmap['6']/count*100}" pattern="#.##"/>%)</span>
 									<div class="progress progress-sm height20">
 										<div class="progress-bar progress-bar-salgu"
-											role="progressbar" aria-valuenow="90" aria-valuemin="0"
-											aria-valuemax="100" style="width: 48%">1200 EA</div>
+											role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
+											style="width: <c:out value="${tmap['6']/count*100}"/>%">${tmap['6']} EA</div>
 									</div>
-									<span class="jun2">아이스크림(6%)</span>
+									<span class="jun2">아이스크림(<fmt:formatNumber value="${tmap['7']/count*100}" pattern="#.##"/>%)</span>
 									<div class="progress progress-sm height20">
-										<div class="progress-bar progress-bar-skyblue"
-											role="progressbar" aria-valuenow="90" aria-valuemin="0"
-											aria-valuemax="100" style="width: 24%">600 EA</div>
+										<div class="progress-bar progress-bar-skyblue" role="progressbar"
+										aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
+										style="width: <c:out value="${tmap['7']/count*100}"/>%">${tmap['7']} EA</div>
 									</div>
-									<span class="jun2">샐러드(1%)</span>
+									<span class="jun2">샐러드(<fmt:formatNumber value="${tmap['8']/count*100}" pattern="#.##"/>%)</span>
 									<div class="progress progress-sm height20">
 										<div class="progress-bar progress-bar-gray" role="progressbar"
 											aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-											style="width: 2%">100 EA</div>
+											style="width: <c:out value="${tmap['8']/count*100}"/>%">${tmap['8']} EA</div>
 									</div>
-									<span class="jun2">과자(10%)</span>
+									<span class="jun2">과자(<fmt:formatNumber value="${tmap['9']/count*100}" pattern="#.##"/>%)</span>
 									<div class="progress progress-sm height20">
 										<div class="progress-bar progress-bar-blue" role="progressbar"
 											aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-											style="width: 20%">1000 EA</div>
+											style="width: <c:out value="${tmap['9']/count*100}"/>%">${tmap['9']} EA</div>
 									</div>
-									<span class="jun2">음료(9%)</span>
+									<span class="jun2">음료(<fmt:formatNumber value="${tmap['10']/count*100}" pattern="#.##"/>%)</span>
 									<div class="progress progress-sm height20">
 										<div class="progress-bar progress-bar-aqua" role="progressbar"
 											aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-											style="width: ${tmap['1'].sale_quantity}%">900 EA</div>
+											style="width: <c:out value="${tmap['10']/count*100}"/>%">${tmap['10']} EA</div>
 									</div>
 
 									<!-- End progress bar -->
