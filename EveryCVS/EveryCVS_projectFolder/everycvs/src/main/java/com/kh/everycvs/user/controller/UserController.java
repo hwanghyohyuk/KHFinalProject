@@ -125,16 +125,11 @@ public class UserController {
 	}
 
 	/** 마이 페이지 **/
-	@RequestMapping(value="mypage.do", method=RequestMethod.GET)
-	@ResponseBody
+	@RequestMapping(value="mypage.do")
 	public ModelAndView myPage(HttpSession session, ModelAndView mv, 
-			@RequestParam (value="month", required=false) String month,
 			Map<String, Object> map, Purchase purchase, HttpServletResponse response, HttpServletRequest request) {
-		
-			
-		//String month = request.getParameter("month");
-		
-		map.put("month", month);
+				
+		//map.put("month", month);
 		map.put("purchase", purchase);
 		
 		List<Map<String, Object>> list = purchaseService.purchaseList(map);
@@ -146,7 +141,7 @@ public class UserController {
 		System.out.println(list);
 		
 		//System.out.println(flist);
-		System.out.println(month);
+		//System.out.println(month);
 				
 		mv.setViewName("user/mypage/main");
 		return mv;
@@ -168,11 +163,7 @@ public class UserController {
 		int incre = Integer.parseInt(increMoney);
 		int uno = Integer.parseInt(user_no);
 		int c = Integer.parseInt(cash);
-	
-		/*System.out.println("incre : " + incre);
-		System.out.println("uno : " + uno);
-		System.out.println("c : " + c);*/
-	
+
 	    map.put("increMoney", incre);
 	    map.put("user_no", uno);
 	    map.put("cash", c);

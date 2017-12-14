@@ -59,12 +59,12 @@ public class PurchaseController {
 	}
 	
 	//전체거래내역 조회 : 3개월, 1개월, 1주일 단위로 조회(해당 리스트 목록조회)
-	@RequestMapping(value="purchaseList.do", method=RequestMethod.GET)
+	@RequestMapping(value="purchaseList.do", method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView purchaseList(ModelAndView mv, HttpServletRequest request, HttpServletResponse response,
-			Map<String, Object> map, Purchase purchase, 
-			@RequestParam (value="month", required=false) String month) {
-		
+	public List<Map<String, Object>> purchaseList(ModelAndView mv, HttpServletRequest request, 
+			HttpServletResponse response,
+			Map<String, Object> map, Purchase purchase,
+			@RequestParam (value="month", required=false) String month){
 		response.setContentType("text/html; charset=utf-8");
 		
 		map.put("month", month);
@@ -76,7 +76,7 @@ public class PurchaseController {
 		mv.addObject("list", list);
 		System.out.println(list);
 		System.out.println(month);
-		return mv;
+		return list;
 	}
 	
 	/*사이트관리자*/

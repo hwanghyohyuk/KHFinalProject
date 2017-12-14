@@ -51,9 +51,7 @@
 							<div class="panel-body" align="right" id="result">
 								
 								<b style="font-size: 20pt;">
-								 <fmt:formatNumber
-										value="${user.cash }" pattern="#,###"/>원
-										
+								 <fmt:formatNumber value="${user.cash }" pattern="#,###"/>원	
 								</b>
 
 								<button class="btn btn-primary" id="myBtn">충전하기</button>
@@ -99,7 +97,7 @@
 									<div class="modal-dialog modal-lg">
 
 										<!-- Modal content-->
-										<div class="modal-content" align="left" data-target="#myModal2">
+										<div class="modal-content" align="left">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h4 class="modal-title">거래내역</h4>
@@ -107,7 +105,7 @@
 											<div class="modal-body box-body no-padding" 
 												 style="overflow-x:hidden; width:890px; height:300px;" id="purchaseTable">
 												 
-												<table class="table table-condensed" style="text-align: center;	">
+												<table class="table table-condensed" style="text-align: center;	" id="table">
 															<tr style="font-size: 8pt; text-align: center;">
 															<th>구매번호</th><th>사용자번호</th><th>지점상품번호</th>
 															<th style="text-align: center;">지점번호</th><th style="text-align: center;">지점명</th><th>상품번호</th>
@@ -147,25 +145,40 @@
 											
 											<!-- 거래내역 버튼 검색 -->
 											<div class="modal-footer" align="left">
-											<form id="purchaseFrm">
-												<button name="month" value="0">전체</button>
+											
 												<button class="btn btn-default" style="float: left;" 
-														name="month" value="1"
+														data-toggle="modal"
+														data-target="#purchaseTable"
+														data-month="0"
+														type="button">
+														전체</button>
+														
+												<button class="btn btn-default" style="float: left;" 
+														data-toggle="modal"
+														data-target="#purchaseTable"
+														data-month="1"
+														type="button"
 														>3개월</button>
 														
 												<button class="btn btn-default" style="float: left;"
 														data-toggle="modal"
-														id="#purchaseTable" name="month" value="2"
+														data-target="#purchaseTable"
+														data-month="2"
+														type="button"
+														
 														>1개월</button>
 														
 												<button class="btn btn-default" style="float: left;"
 														data-toggle="modal" 
-														data-target="#myModal2" name="month" value="3"
+														data-target="#purchaseTable" 
+														data-month="3"
+														type="button"
+														
 														>1주일</button>
 												
 												<button type="button" class="btn btn-default"
 														data-dismiss="modal">Close</button>
-											</form>
+											
 											</div>
 										</div>
 
@@ -284,7 +297,6 @@
 					success: function(data){
 						cash = data.cash;	
 						//var result = confirm("충전금액 : " + incre + "원을 충전하시겠습니까?")
-						
 					},	
 					error: function(request, status, errorData){
 						alert("error code: " + request.status + "/n" 
@@ -292,9 +304,7 @@
 								+ "error : " + request.errorData);
 					}
 				});
-				
 				return cash;
-				
 				});
 			});
 			
@@ -305,44 +315,32 @@
 			$("#myBtn2").click(function() {
 				$("#myModal2").modal();
 				
-					
-	
 		//거래내역 3개월 단위로 검색하는 버튼
-	
- 			$("#purchaseTable").on('show.bs.modal', function (event) {
-			  var button = $(event.relatedTarget);
-			  //var params = purchaseFrm.month.value; 
+ 	 		$("#purchaseTable").on('show.bs.modal', function (event) {
+ 	 		  var button = $(event.relatedTarget);
+			  var params =  button.data('month');
   				//1이면 3개월 조회
-				  $.ajax({
+				   $.ajax({
 						url:"purchaseList.do",
 						data: {month:params},
 						dataType: "text",
-						type:"get",	
+						type:"post",	
 						async: false,
 						cache: false,
 						success:function(data){
-								$('#purchaseTable').text("${list}");
+							$('#table').html(data);
 						},
 						error:function(request, status, errorData){
 							alert("error code: " + request.status + "/n" 
 									+ "message : " + request.reponseText + "/n"
 									+ "error : " + request.errorData);
 						} 
-						
+					
 					});  
-  				return false;
-			 
-		});
+			  return false;
+		});  
 			});
 		});
-		
-		
-	
-		
-		
-		
-	
-		
 	</script>
 
 	<!-- JS -->

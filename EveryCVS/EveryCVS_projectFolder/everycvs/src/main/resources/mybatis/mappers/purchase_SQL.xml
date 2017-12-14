@@ -23,7 +23,7 @@
 	<select id="purchaseList" parameterType="string" resultType="map" resultMap="resultPurchase">
 		SELECT * FROM PURCHASE_VIEW 
 		
-		 <where>
+	<where>
 		 <if test = 'month != null and month.equals("0")'>
 		
 		</if>	
