@@ -48,7 +48,7 @@ public class MainController {
 		Object store = session.getAttribute("store");
 		// 현재 세션에 store정보가 있다면
 		if(store!=null){
-			session.invalidate(); //정보를 삭제한다
+			session.setAttribute("store", null); //정보를 삭제한다
 		}
 		ArrayList<Store> list = storeService.cvsMapList(0);//전체 브랜드 조회
 		mv.addObject("cvslist", list);

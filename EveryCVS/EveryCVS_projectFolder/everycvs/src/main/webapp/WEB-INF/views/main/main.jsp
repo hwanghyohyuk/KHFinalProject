@@ -69,7 +69,7 @@
 					</h2>
 				</div>
 				<div class="col-md-6 col-sm-6 col-xs-6 text-right">
-					<a href="/everycvs/eventAll.do">more</a>
+					<a href="/everycvs/eventList.do">more</a>
 				</div>
 			</div>
 			<!-- Icons -->
@@ -406,10 +406,32 @@
 						        map: map,
 						        position: new naver.maps.LatLng(${s.lat},${s.lng}),
 						        title: "${s.store_name}",
-						        zIndex: 100
+						        zIndex: 100,
+						        icon: {
+						        	<c:choose>
+						        		<c:when test="${s.brand_no eq 1}">
+						        		url:'/everycvs/resources/user/img/markers/marker_g.png',
+						        		 size: new naver.maps.Size(44, 44),
+								            origin: new naver.maps.Point(0, 0),
+								            anchor: new naver.maps.Point(22, 44)
+						        		</c:when>
+						        		<c:when test="${s.brand_no eq 2}">
+						        		url:'/everycvs/resources/user/img/markers/marker_c.png',
+						        		 size: new naver.maps.Size(44, 44),
+								            origin: new naver.maps.Point(0, 0),
+								            anchor: new naver.maps.Point(22, 44)
+						        		</c:when>
+						        		<c:when test="${s.brand_no eq 3}">
+						        		url:'/everycvs/resources/user/img/markers/marker_7.png',
+						        		 size: new naver.maps.Size(39, 41),
+								            origin: new naver.maps.Point(0, 0),
+								            anchor: new naver.maps.Point(19, 41)
+						        		</c:when>
+						        	</c:choose>
+						        }
 						    });
 						    var contentString = [
-						        '<div class="iw_inner">',
+						        '<div class="iw_inner" style="padding:10px auto">',
 						        '<h3><b>${s.brand_name}</b> ${s.store_name}</h3>',
 						        '<p>${s.road_address}<br><br>',
 						        '<a href="/everycvs/page/storemain.do?sno=${s.store_no}">지점 페이지로 이동</a>',

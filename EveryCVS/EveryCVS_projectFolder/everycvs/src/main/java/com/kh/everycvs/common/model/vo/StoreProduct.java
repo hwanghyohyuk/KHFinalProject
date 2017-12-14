@@ -35,6 +35,11 @@ public class StoreProduct implements Serializable {
 	private int discount_no; // 할인번호
 	private String discount_info; // 할인정보
 	private String discount_name; // 할인이름
+	private Date start_date; //할인시작날짜
+	private Date end_date; //할인마감날짜
+	private String expiration_rate; //유통기한율
+	private String discount_rate; //유통기한 할인율
+	private int expiration_price; //유통기한 할인율 적용한 가격
 
 	public StoreProduct() {
 		super();
@@ -94,6 +99,41 @@ public class StoreProduct implements Serializable {
 		this.discount_name = discount_name;
 	}
 	
+	public StoreProduct(int store_product_no, String store_no, int product_no, String product_name, String manufacturer,
+			int price, Date manufacture_date, int expiration_date, int expiration_hour, int quantity,
+			int product_kind_no, String product_kind_name, int brand_no, String brand_name, String original_file_name,
+			String stored_file_name, String del_check, int purchase_count, int discount_no, String discount_info,
+			String discount_name, Date start_date, Date end_date, String expiration_rate, String discount_rate,
+			int expiration_price) {
+		super();
+		this.store_product_no = store_product_no;
+		this.store_no = store_no;
+		this.product_no = product_no;
+		this.product_name = product_name;
+		this.manufacturer = manufacturer;
+		this.price = price;
+		this.manufacture_date = manufacture_date;
+		this.expiration_date = expiration_date;
+		this.expiration_hour = expiration_hour;
+		this.quantity = quantity;
+		this.product_kind_no = product_kind_no;
+		this.product_kind_name = product_kind_name;
+		this.brand_no = brand_no;
+		this.brand_name = brand_name;
+		this.original_file_name = original_file_name;
+		this.stored_file_name = stored_file_name;
+		this.del_check = del_check;
+		this.purchase_count = purchase_count;
+		this.discount_no = discount_no;
+		this.discount_info = discount_info;
+		this.discount_name = discount_name;
+		this.start_date = start_date;
+		this.end_date = end_date;
+		this.expiration_rate = expiration_rate;
+		this.discount_rate = discount_rate;
+		this.expiration_price = expiration_price;
+	}
+
 	/* Getter & Setter */
 	public int getStore_product_no() {
 		return store_product_no;
@@ -262,11 +302,51 @@ public class StoreProduct implements Serializable {
 	public void setDiscount_name(String discount_name) {
 		this.discount_name = discount_name;
 	}
+	
+	public Date getStart_date() {
+		return start_date;
+	}
+
+	public void setStart_date(Date start_date) {
+		this.start_date = start_date;
+	}
+
+	public Date getEnd_date() {
+		return end_date;
+	}
+
+	public void setEnd_date(Date end_date) {
+		this.end_date = end_date;
+	}
+
+	public String getExpiration_rate() {
+		return expiration_rate;
+	}
+
+	public void setExpiration_rate(String expiration_rate) {
+		this.expiration_rate = expiration_rate;
+	}
+
+	public String getDiscount_rate() {
+		return discount_rate;
+	}
+
+	public void setDiscount_rate(String discount_rate) {
+		this.discount_rate = discount_rate;
+	}
+
+	public int getExpiration_price() {
+		return expiration_price;
+	}
+
+	public void setExpiration_price(int expiration_price) {
+		this.expiration_price = expiration_price;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 	/* ToString */
 	@Override
 	public String toString() {
@@ -278,7 +358,7 @@ public class StoreProduct implements Serializable {
 				+ ", brand_name=" + brand_name + ", original_file_name=" + original_file_name + ", stored_file_name="
 				+ stored_file_name + ", del_check=" + del_check + ", purchase_count=" + purchase_count
 				+ ", discount_no=" + discount_no + ", discount_info=" + discount_info + ", discount_name="
-				+ discount_name + "]";
-	}
-
+				+ discount_name + ", start_date=" + start_date + ", end_date=" + end_date + ", expiration_rate="
+				+ expiration_rate + ", discount_rate=" + discount_rate + ", expiration_price=" + expiration_price + "]";
+	}	
 }

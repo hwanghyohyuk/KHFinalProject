@@ -22,7 +22,7 @@
 							<small>${sessionScope.store.road_address}</small>
 						</h2>
 					</div>
-					<form action="spsearch.do" method="post">
+					<form action="splist.do" method="post">
 						<div class="col-sm-3" style="margin-left: 190px;">
 							<br> <input class="form-control" type="search"
 									placeholder="상품명을 입력해주세요." name="keyword" value="${keyword}">
@@ -33,7 +33,11 @@
 						</div>
 					</form>
 				</div>
-				<br> <br>
+				<div class="row" style="margin-left: 1px;">
+					<br> <a href="sprank.do">
+					<button type="button" class="btn btn-primary btn-sm">지점메인으로 이동하기</button> </a>
+				</div>
+				<br>
 				<div class="row margin-bottom-30">
 					<!-- Person Details -->
 					<c:forEach var="sp" items="${requestScope.list}">
@@ -46,10 +50,11 @@
 									<h5 align="center">
 										<strong>${sp.product_name}</strong>
 									</h5>
-									<h6 align="center">${sp.price}원</h6>
+									<h6 align="center"><fmt:formatNumber value="${sp.price}" pattern="#,###"/>원</h6>
 								</figcaption>
 							</figure>
 						</div>
+						<c:if test="${ sessionScope.user ne null }">
 						<!-- Modal -->
 						<div id="spmodal${sp.store_product_no}" class="modal fade" role="dialog">
 							<div class="modal-dialog">
@@ -75,7 +80,7 @@
 													</tr>
 													<tr>
 														<td><strong>가격</strong></td>
-														<td>${sp.price}원</td>
+														<td><fmt:formatNumber value="${sp.price}" pattern="#,###"/>원</td>
 													</tr>
 													<tr>
 														<td><strong>제조사</strong></td>
@@ -99,6 +104,8 @@
 								</div>
 							</div>
 						</div>
+						<!-- Modal End -->
+						</c:if>
 					</c:forEach>
 				</div>
 			</div>

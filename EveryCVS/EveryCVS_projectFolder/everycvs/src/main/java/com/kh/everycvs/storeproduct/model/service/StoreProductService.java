@@ -6,11 +6,9 @@ import com.kh.everycvs.common.model.vo.StoreProduct;
 
 public interface StoreProductService {
 
-	public int getListCount();
+	public int getListCount(String keyword);
 
-	public List<StoreProduct> selectList(int currentPage, int limit);
-	
-	public List<StoreProduct> searchSproduct(int currentPage, int limit, String keyword);
+	public List<StoreProduct> selectList(int currentPage, int limit, String keyword);
 
 	public List<StoreProduct> top3Sproduct();
 
@@ -20,14 +18,11 @@ public interface StoreProductService {
 
 	public List<StoreProduct> expSproduct();
 
-	public List<StoreProduct> listSpmanager(int currentPage, int limit);
-
-	public List<StoreProduct> searchSpmanager(int currentPage, int limit, String keyword);
+	public List<StoreProduct> listSpmanager(int currentPage, int limit, String keyword);
 
 	public void deleteSpmanager(int spnum);
 
-	public List<StoreProduct> listApmanager(int currentPage, int limit);
+	public List<StoreProduct> listApmanager(int currentPage, int limit, String keyword);
 
-	public List<StoreProduct> searchApmanager(int currentPage, int limit, String keyword);
 
 }
