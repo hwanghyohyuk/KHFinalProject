@@ -52,6 +52,7 @@
 					</div>
 				</div>
 				<br> <br>
+				<c:if test="${list ne null }">
 				<div class="row">
 					<!-- 인기상품 -->
 					<div class="col-md-6">
@@ -72,7 +73,7 @@
 												<h5 align="center">
 													<strong>${sp.product_name}</strong>
 												</h5>
-												<h6 align="center">${sp.price}원</h6>
+												<h6 align="center"><fmt:formatNumber value="${sp.price}" pattern="#,###"/>원</h6>
 											</div>
 										</c:forEach>
 									</div>
@@ -100,7 +101,7 @@
 												<h5 align="center">
 													<strong>${sp.product_name}</strong>
 												</h5>
-												<h6 align="center">${sp.price}원</h6>
+												<h6 align="center"><fmt:formatNumber value="${sp.price}" pattern="#,###"/>원</h6>
 											</div>
 										</c:forEach>
 									</div>
@@ -132,11 +133,14 @@
 													</h5>
 													<c:choose>
 														<c:when test="${sp.discount_no==4}">
-															<h6 align="center">${sp.price}원 -> ${sp.discount_info}원</h6>
+															<h6 align="center">
+																<fmt:formatNumber value="${sp.price}" pattern="#,###"/>원 -> 
+																<fmt:formatNumber value="${sp.discount_info}" pattern="#,###"/>원
+															</h6>
 															<h6 align="center" style="color: red;">${sp.discount_name}</h6>
 														</c:when>
 														<c:otherwise>
-															<h6 align="center">${sp.price}원 </h6>
+															<h6 align="center"><fmt:formatNumber value="${sp.price}" pattern="#,###"/>원 </h6>
 															<h6 align="center" style="color: red;">${sp.discount_name}</h6>
 														</c:otherwise>
 													</c:choose>
@@ -168,7 +172,7 @@
 													<h5 align="center">
 														<strong>${sp.product_name}</strong>
 													</h5>
-													<h6 align="center">${sp.price}원</h6>
+													<h6 align="center"><fmt:formatNumber value="${sp.price}" pattern="#,###"/>원</h6>
 													<h6 align="center" style="color: red;">${sp.expiration_date}일 남았습니다.</h6>
 												</div>
 											</c:forEach>
@@ -179,6 +183,12 @@
 						</div>
 					</div>
 				</div>
+				</c:if>
+				<c:if test="${ list eq null}">
+				<div class="row">
+				준비중입니다.<!-- 선주 이미지 넣을꺼 -->
+				</div>
+				</c:if>
 			</div>
 		</div>
 	</div>
