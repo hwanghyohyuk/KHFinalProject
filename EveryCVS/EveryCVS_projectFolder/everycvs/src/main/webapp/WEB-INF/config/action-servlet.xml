@@ -23,6 +23,7 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="contentType" value="text/html; charset=UTF-8"/>
 	</beans:bean>
 
 	<!-- 첨부파일관련 -->
@@ -65,6 +66,7 @@
 	
 	<beans:bean id="jsonView"
 		class="net.sf.json.spring.web.servlet.view.JsonView">
+		<beans:property name="contentType" value="application/json;charset=UTF-8" />
 	</beans:bean>
 
 	<beans:bean id="viewResolver"

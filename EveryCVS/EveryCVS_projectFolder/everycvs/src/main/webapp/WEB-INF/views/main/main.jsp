@@ -324,12 +324,24 @@
 		<div class="row margin-vert-30">
 			<div class="row">
 				<br> <br>
-				<div class="col-md-4">
+				<div class="col-md-12">
 					<h2>
 						<span class="fa-search">CVS Search</span>
 					</h2>
 				</div>
-				<div class="col-md-4 col-md-offset-4">
+				<div class="col-md-4">
+					<div class="btn-group" role="group">
+						<button id="cvsAll" type="button" class="btn btn-default"
+							onclick="onLoadStore(map,0)">전체</button>
+						<button id="cvsGS" type="button" class="btn btn-info"
+							onclick="onLoadStore(map,1)">GS25</button>
+						<button id="cvsCU" type="button" class="btn btn-success"
+							onclick="onLoadStore(map,2)">CU</button>
+						<button id="cvs7E" type="button" class="btn btn-warning"
+							onclick="onLoadStore(map,3)">7ELEVEN</button>
+					</div>
+				</div>
+				<div class="col-md-4 col-md-offset-4 ">
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1">주소검색</span> <input
 							id="address" type="text" class="form-control"
@@ -350,18 +362,27 @@
 			<div id="map" style='height: 500px'>
 				<script type="text/javascript">
 					var map = new naver.maps.Map("map");
+					var brand_no=0;
 					var markers = [];
+					var infoWindows =[];
+
 					map.setCursor('pointer');
 					function searchAddressToCoordinate(address) {
-						naver.maps.Service.geocode({address : address	},
-							function(status, response) {
-								if (status === naver.maps.Service.Status.ERROR) {
-									return alert('검색어가 올바르지 않습니다.');
-								}
-								var item = response.result.items[0], 
-								point = new naver.maps.Point(item.point.x, item.point.y);
-								map.setCenter(point);});
-						}
+						naver.maps.Service
+								.geocode(
+										{
+											address : address
+										},
+										function(status, response) {
+											if (status === naver.maps.Service.Status.ERROR) {
+												return alert('검색어가 올바르지 않습니다.');
+											}
+											var item = response.result.items[0], point = new naver.maps.Point(
+													item.point.x, item.point.y);
+											map.setCenter(point);
+											onLoadStore(map, brand_no);
+										});
+					}
 
 					function initGeocoder() {//이벤트등록
 						map.setOptions({
@@ -369,11 +390,12 @@
 							logoControl : false,
 							mapDataControl : false,
 							zoomControl : false,
-							minZoom : 11,
-							maxZoom : 12,
+							minZoom : 12,
+							maxZoom : 13,
 							zoom : 12,
 							mapTypeControl : false
 						});
+
 						$('#address').on('keydown', function(e) {
 							var keyCode = e.which;
 
@@ -381,6 +403,7 @@
 								searchAddressToCoordinate($('#address').val());
 							}
 						});
+						
 						$('#submit').on('click', function(e) {
 							e.preventDefault();
 
@@ -389,117 +412,169 @@
 						$('#init').on('click', function(e) {
 							onLoadGeolocation();
 						});
-						naver.maps.Event.addListener(map, 'zoom_changed', function() {
-						    updateMarkers(map, markers);
+						naver.maps.Event.addListener(map, 'zoom_changed',
+								function() {
+									// updateMarkers(map, markers);
+									onLoadStore(map, brand_no);
+								});
 
-						});
+						naver.maps.Event.addListener(map, 'dragend',
+								function() {
+									//  updateMarkers(map, markers);
+									onLoadStore(map, brand_no);
+								});
+					}
 
-						naver.maps.Event.addListener(map, 'dragend', function() {
-						    updateMarkers(map, markers);
-						});
+					function getClickHandler(seq) {
+					    return function(e) {
+					        var marker = markers[seq],
+					            infoWindow = infoWindows[seq];
+
+					        if (infoWindow.getMap()) {
+					            infoWindow.close();
+					        } else {
+					            infoWindow.open(map, marker);
+					        }
+					    }
 					}
 					
-					function onLoadStore(){
-						<c:forEach var="s" items="${cvslist}"  varStatus="status">
-						    var marker${status.index} = new naver.maps.Marker({
-						        map: map,
-						        position: new naver.maps.LatLng(${s.lat},${s.lng}),
-						        title: "${s.store_name}",
-						        zIndex: 100,
-						        icon: {
-						        	<c:choose>
-						        		<c:when test="${s.brand_no eq 1}">
-						        		url:'/everycvs/resources/user/img/markers/marker_g.png',
+					function onLoadStore(map, brand_no) {
+						var mapBounds = map.getBounds();
+						var minLat = mapBounds.minY();
+						var maxLat = mapBounds.maxY();
+						var minLng = mapBounds.minX();
+						var maxLng = mapBounds.maxX();
+						var queryString = {
+							"brand_no" : brand_no,
+							"minLat" : minLat,
+							"maxLat" : maxLat,
+							"minLng" : minLng,
+							"maxLng" : maxLng
+						};
+						$.ajax({
+							url : 'ajax/brandmap.do',
+							data : queryString,
+							type : 'post',
+							dataType : "json",
+							success : function(data) {
+								var jsonStr = JSON.stringify(data);
+								var json = JSON.parse(jsonStr);
+								var stores = "";
+								for (var i in json.storelist) {
+									stores += json.storelist[i] + "\n";
+								var marker;
+								
+								if(json.storelist[i].brand_no == 1){
+								marker = new naver.maps.Marker({
+							        map: map,
+							        position: new naver.maps.LatLng(json.storelist[i].lat,json.storelist[i].lng),
+							        title: json.storelist[i].store_name,
+							        zIndex: 100,
+							        icon: {
+							        	url:'/everycvs/resources/user/img/markers/marker_g.png',
+							        	size: new naver.maps.Size(44, 44),
+										origin: new naver.maps.Point(0, 0),
+										anchor: new naver.maps.Point(22, 44)
+							        }});
+								}else if(json.storelist[i].brand_no == 2){
+									marker = new naver.maps.Marker({
+							        map: map,
+							        position: new naver.maps.LatLng(json.storelist[i].lat,json.storelist[i].lng),
+							        title: json.storelist[i].store_name,
+							        zIndex: 100,
+							        icon: {
+							        	url:'/everycvs/resources/user/img/markers/marker_c.png',
 						        		 size: new naver.maps.Size(44, 44),
 								            origin: new naver.maps.Point(0, 0),
 								            anchor: new naver.maps.Point(22, 44)
-						        		</c:when>
-						        		<c:when test="${s.brand_no eq 2}">
-						        		url:'/everycvs/resources/user/img/markers/marker_c.png',
-						        		 size: new naver.maps.Size(44, 44),
-								            origin: new naver.maps.Point(0, 0),
-								            anchor: new naver.maps.Point(22, 44)
-						        		</c:when>
-						        		<c:when test="${s.brand_no eq 3}">
-						        		url:'/everycvs/resources/user/img/markers/marker_7.png',
-						        		 size: new naver.maps.Size(39, 41),
-								            origin: new naver.maps.Point(0, 0),
-								            anchor: new naver.maps.Point(19, 41)
-						        		</c:when>
-						        	</c:choose>
-						        }
-						    });
-						    var contentString = [
-						        '<div class="iw_inner" style="padding:10px auto">',
-						        '<h3><b>${s.brand_name}</b> ${s.store_name}</h3>',
-						        '<p>${s.road_address}<br><br>',
-						        '<a href="/everycvs/page/storemain.do?sno=${s.store_no}">지점 페이지로 이동</a>',
-						        '</p>',
-						        '</div>'
-						    ].join('');
-						    var infoWindow${status.index} = new naver.maps.InfoWindow({
-								anchorSkew : true,
-								content : contentString
-							});
-						    
-						    naver.maps.Event.addListener(marker${status.index}, "click", function(e) {
-							    if (infoWindow${status.index}.getMap()) {
-							    	infoWindow${status.index}.close();
-							    } else {
-							    	infoWindow${status.index}.open(map, marker${status.index});
-							    }
-							});
-						    
-						    markers.push(marker${status.index});
-						    
-						</c:forEach>
-						}
-						
-						function updateMarkers(map, markers) {
-
-						    var mapBounds = map.getBounds();
-						    var marker, position;
-
-						    for (var i = 0; i < markers.length; i++) {
-
-						        marker = markers[i]
-						        position = marker.getPosition();
-
-						        if (mapBounds.hasLatLng(position)) {
-						            showMarker(map, marker);
-						        } else {
-						            hideMarker(map, marker);
-						        }
+							        }});
+								}else{
+									marker = new naver.maps.Marker({
+								        map: map,
+								        position: new naver.maps.LatLng(json.storelist[i].lat,json.storelist[i].lng),
+								        title: json.storelist[i].store_name,
+								        zIndex: 100,
+								        icon: {
+								        	url:'/everycvs/resources/user/img/markers/marker_7.png',
+							        		 size: new naver.maps.Size(39, 41),
+									            origin: new naver.maps.Point(0, 0),
+									            anchor: new naver.maps.Point(19, 41)
+									}});
+								}
+								 console.log(marker);
+						var contentString = [
+					        '<div style="padding:10px auto">',
+					        '<h3><b>'+json.storelist[i].brand_name+'</b>'+json.storelist[i].store_name+'</h3>',
+					        '<p>'+json.storelist[i].road_address+'<br><br>',
+					        '<a href="/everycvs/page/storemain.do?sno='+json.storelist[i].store_no+'">지점 페이지로 이동</a>',
+					        '</p>',
+					        '</div>'
+					    ].join('');
+					    var infoWindow = new naver.maps.InfoWindow({
+							anchorSkew : true,
+							content : contentString
+						});
+					    naver.maps.Event.addListener(marker, "click", function(e) {
+						    if (infoWindow.getMap()) {
+						    	infoWindow.close();
+						    } else {
+						    	infoWindow.open(map, marker);
 						    }
-						}
+						});
+					    
+					    markers.push(marker);
+					    infoWindows.push(infoWindow);
+					    
+							}		
+								for (var i=0, ii=markers.length; i<ii; i++) {
+								    naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
+								}
+								},
+							error : function(request, status, error) {
+								alert("code:" + request.status + "\n"
+										+ "message:" + request.responseText
+										+ "\n" + "error:" + error);
+							}
+						});
 
-						function showMarker(map, marker) {
-
-						    if (marker.setMap()) return;
-						    marker.setMap(map);
-						}
-
-						function hideMarker(map, marker) {
-
-						    if (!marker.setMap()) return;
-						    marker.setMap(null);
-						}
+					}
 					
+
+					
+
 					function onSuccessGeolocation(position) {
 						var location = new naver.maps.LatLng(
 								position.coords.latitude,
 								position.coords.longitude);
 
+						var mapBounds = map.getBounds();
+						 var infoWindow = new naver.maps.InfoWindow({
+								anchorSkew : true
+							});
+						infoWindow
+								.setContent('<div style="padding:20px;">'
+										+ '<h5 style="margin-bottom:5px;color:#f00;">현재 보는 화면의 각 꼭지점의 좌표</h5>'
+										+ '<br />현재위치 : ' + location
+										+ '<br />NW : ' + mapBounds.maxY()
+										+ ',' + mapBounds.minX()
+										+ '<br />NE : ' + mapBounds.maxY()
+										+ ',' + mapBounds.maxX()
+										+ '<br />SW : ' + mapBounds.minY()
+										+ ',' + mapBounds.minX()
+										+ '<br />SE : ' + mapBounds.minY()
+										+ ',' + mapBounds.maxX() + '</div>');
+
 						map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
 						map.setZoom(12); // 지도의 줌 레벨을 변경합니다.
-
+						infoWindow.open(map, location);
 					}
 
 					function onErrorGeolocation() {
 						var center = map.getCenter();
-
-						infoWindow
-								.setContent('<div style="padding:20px;">'
+						 var infoWindow = new naver.maps.InfoWindow({
+								anchorSkew : true
+							});
+						infoWindow.setContent('<div style="padding:20px;">'
 										+ '<h5 style="margin-bottom:5px;color:#f00;">Geolocation failed!</h5>'
 										+ "latitude: " + center.lat()
 										+ "<br />longitude: " + center.lng()
@@ -527,8 +602,8 @@
 					}
 					$(window).on("load", function() {
 						initGeocoder();
-						onLoadStore();
-						onLoadGeolocation();					
+						onLoadStore(map, 0);
+						//onLoadGeolocation();					
 					});
 				</script>
 				<br> <br>
