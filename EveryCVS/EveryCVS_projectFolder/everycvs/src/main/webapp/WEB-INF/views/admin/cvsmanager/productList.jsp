@@ -101,7 +101,6 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-md-6">
-									${tlist1[0].product_kind_no}*****${tlist1[0].sale_quantity}<br>
 									<c:forEach var="saleProductKind" items="${tlist1}">
 										${saleProductKind.product_kind_no}***${saleProductKind.sale_quantity}<br>
 										<c:if test="${saleProductKind.product_kind_no eq 2}">
