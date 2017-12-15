@@ -19,12 +19,30 @@
 	</resultMap>
 	
 	
+	
+	<!-- 게시글 갯수 조회 -->
+	<select id="getListCount" resultType="_int">
+		select count(*) from EVENT_VIEW
+	</select>
+	
 	<!-- 이벤트 리스트 조회 -->
-	<select id="cvseventlist" resultType="list" resultMap="resultEvent">
+	<select id="cvseventlist" resultType="list" parameterType="hashmap" resultMap="resultEvent">
 		<![CDATA[
-			SELECT * FROM EVENT_VIEW ORDER BY EVENT_NO DESC
+			select * from (
+            select rownum rnum, a.*
+            from EVENT_VIEW a)
+            where rnum >= #{startRow} and rnum <= #{endRow}
+            order by EVENT_NO
 		]]>
 	</select>
+	<!-- 제목 내용 검색 -->
+	<select id="cvseventsearch" resultType="list" parameterType="hashmap" resultMap="resultEvent">
+		<![CDATA[
+			SELECT * FROM EVENT_VIEW where title like #{mainkeyword} or contents like #{subkeyword}
+			ORDER BY EVENT_NO DESC
+		]]>
+	</select>
+	
 	
 	<!-- 글작성 -->
 	<insert id="cvseventwrite" parameterType="event" flushCache="true"
@@ -60,10 +78,34 @@
 		]]>
 	</delete>
 	
-		<select id="cvsEventDetail" parameterType="_int" resultType="event" resultMap="resultEvent">
-		<![CDATA[
-			SELECT * FROM EVENT_VIEW where event_no = #{eno}
+	<!-- 관리자 게시글 상세보기 -->
+	<select id="cvsEventDetail" parameterType="_int" resultType="event" resultMap="resultEvent">
+	<![CDATA[
+		SELECT * FROM EVENT_VIEW where event_no = #{eno}
+	]]>
+	</select>
+	
+	<!-- 관리자 게시글 수정페이지 이동 -->
+	<select id="cvseventmodifyview" parameterType="event" resultMap="resultEvent">
+	<![CDATA[
+		select * from tb_event where event_no=#{event_no}
 		]]>
-		</select>
+	</select>
+	
+	<!-- 관리자 게시글 수정-->
+	<update id="cvseventmodifywrite" parameterType="event">
+	<![CDATA[
+		update tb_event 
+		set 
+			title = #{title},
+			contents = #{contents},
+			start_date = #{start_date},
+			end_date = #{end_date},
+			join_limit = #{join_limit},
+			original_file_name = default,
+			stored_file_name = default
+		where event_no=#{event_no}
+		]]>
+	</update>
 	
 </mapper>

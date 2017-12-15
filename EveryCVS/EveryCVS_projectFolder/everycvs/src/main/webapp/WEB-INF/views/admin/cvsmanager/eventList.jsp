@@ -17,6 +17,72 @@
 <!-- === BEGIN CONTENT === -->
 
 <!-- Right side column. Contains the navbar and content of the page -->
+<script type="text/javascript">
+function pageload(page)
+{
+   $.ajax({
+      url:"pageload.do",
+      type: "post",
+      dataType: "json",
+      data: {"page":page},
+      success: function(data)
+      {
+         console.log(data.currentPage);
+         console.log(data.maxPage);
+         console.log(data.list);
+         var jsonStr = JSON.stringify(data);
+              
+            var json = JSON.parse(jsonStr);
+            
+            var values = "";
+            
+            for(var i in json.list)
+            {
+               values += "<tr><td>" + json.list[i].event_no + "</td>"+ "<td><a href='cvseventlist.do?no=" + json.list[i].event_no + "'>" +
+                     json.list[i].title + "</a></td><td>" + json.list[i].start_date + "</td><td>" +
+                     json.list[i].end_date + "</td><td>" + 
+                     json.list[i].readcount + "</td></tr>";
+            }
+            
+            $("#eventlist").html(values);
+         
+            var valuesPaging="";
+            
+            if(data.currentPage <= 1){
+               valuesPaging+="<li class='disabled'>" + 
+                 "<a href='#' aria-label='Previous'>" +
+                   "<span aria-hidden='true'>&laquo;</span></a></li>";
+            } else {
+               valuesPaging += "<li><a href='javascript:pageload(" + (data.currentPage - 1) + ")'  aria-label='Previous'>"
+                + "<span aria-hidden='true'>&laquo;</span></a></li>";
+            }
+            
+           for(var i = data.startPage; i<=data.endPage; i++)
+           {
+              if(data.currentPage == i)
+              {
+                valuesPaging+="<li class='disabled'>"+"<a href='#'>"+ i + "</a></li>";
+              } else {
+                  valuesPaging+="<li><a href='javascript:pageload(" + i + ")'>"+ i + "</a></li>";
+              }
+
+           }
+           
+            if(data.currentPage >= data.maxPage)
+            {
+               valuesPaging+= "<li class='disabled'>" + 
+                  "<a href='#' aria-label='Next'>"+
+                      "<span aria-hidden='true'>&raquo;</span></a></li>";
+            } else {
+               valuesPaging += "<li><a href='javascript:pageload(" + (data.currentPage + 1)+ "') aria-label='Next'>" +
+                "<span aria-hidden='true'>&raquo;</span></a></li>";
+            }
+            
+            $("#eventpaging").html(valuesPaging);
+      }
+   });
+}
+</script>
 <div class="content-wrapper">
 	<!-- Main content -->
 	<div id="content">
@@ -46,7 +112,8 @@
 										<th width="12%">조회수</th>
 										<th width="8%">Del</th>
 									</tr>
-									<c:forEach items="${list}" var="ead">
+									<tbody id="eventlist">
+									<c:forEach items="${event.list}" var="ead">
 									<tr class="text-center">
 										<td>${ead.event_no}</td>
 										<td><a href="javascript:ajaxDetail(${ead.event_no })">${ead.title}</a></td>
@@ -55,6 +122,7 @@
 										<td><i class="fa fa-trash-o jun21" onclick="del_event();"></i></td>
 									</tr>
 									</c:forEach>
+									</tbody>
 								</table>
 							</div>
 							<!-- Search & Add block -->
@@ -62,15 +130,13 @@
 								style="padding-left: 5px; padding-right: 8px;">
 								<!--start-->
 								<div class="col-sm-2 jun16">
-									<select class="form-control input jun15">
-										<option>번호</option>
-										<option>상품명</option>
-										<option>제조사</option>
+									<select class="form-control input jun15" >
+										<option value="both">제목+내용</option>
 									</select>
 								</div>
-								<form>
+								<form action="cvseventlist.do" method="GET">
 									<div class="col-sm-4 jun12">
-										<input class="form-control jun11" type="text"
+										<input class="form-control jun11" type="text" name="keyword" 
 											placeholder="검색 키워드를 입력하세요.">
 									</div>
 									<div class="col-sm-1 jun13">
@@ -89,6 +155,52 @@
 								<!--end-->
 							</div>
 							<!-- End Search & Add block -->
+							<!-- 페이지 시작 -->
+							<div id="paging">
+								<nav>
+									<ul class="pagination" id="eventpaging">
+
+										<c:if test="${event.currentPage <= 1}">
+											<li class="disabled"><a href="#" aria-label="Previous">
+													<span aria-hidden="true">&laquo;</span>
+											</a></li>
+										</c:if>
+
+										<c:if test="${event.currentPage > 1}">
+											<li><a
+												href="javascript:pageload(${event.currentPage - 1})"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+											</a></li>
+										</c:if>
+
+										<c:forEach var="i" begin="${event.startPage}"
+											end="${event.endPage}" step="1">
+											<c:if test="${event.currentPage eq i}">
+												<li class="disabled"><a href="#">${i}</a></li>
+											</c:if>
+
+											<c:if test="${event.currentPage ne i}">
+												<li><a href='javascript:pageload(${i})'>${i}</a></li>
+											</c:if>
+
+										</c:forEach>
+
+										<c:if test="${event.currentPage >= event.maxPage}">
+											<li class="disabled"><a href="#" aria-label="Next">
+													<span aria-hidden="true">&raquo;</span>
+											</a></li>
+										</c:if>
+
+										<c:if test="${event.currentPage < event.maxPage}">
+											<li><a
+												href='javascript:pageload(${event.currentPage + 1})'
+												aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+											</a></li>
+										</c:if>
+									</ul>
+								</nav>
+							</div>
+							<!-- page끝 -->
 						</div>
 					</div>
 					<!-- End tab content -->
@@ -118,7 +230,7 @@
 			'</div>'+
 			'<div class="modal-body">'+
 				'<div class="jun_imgdiv">'+
-					'<img src="assets/img/exam_img.jpg" alt="이벤트 이미지가 없습니다." class="jun_img">'+
+					'<img src="/everycvs/resourses/user/img/exam_img.jpg" alt="이벤트 이미지가 없습니다." class="jun_img">'+
 				'</div>'+
 				'<div class="jun_contentdiv">'+
 					'<div class="jun_textdiv">'+data.event_no+'</div>'+
@@ -132,8 +244,8 @@
 				'<div class="jun_contentdiv2">'+data.contents+'</div>'+
 			'</div>'+
 			'<div class="modal-footer" style="clear: both; margin-top: 2px;">'+
-				'<button type="button" onclick="del_event();" class="btn btn-gray" style="float: left;">DELETE</button>'+
-				'<button type="button" onclick="modify_event();" class="btn btn-danger">MODIFY</button>'+
+				'<button type="button" onclick="del_event('+data.event_no+');" class="btn btn-gray" style="float: left;">DELETE</button>'+
+				'<button type="button" onclick="modify_event('+data.event_no+');" class="btn btn-danger">MODIFY</button>'+
 				'<button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>'+
 			'</div>';
 			$("#ajaxDetail").html(values);
@@ -142,7 +254,7 @@
 			error:function(errorData){
 				alert("error : "+errorData);
 			}
-		});		
+		});
 	}
 </script>
 
@@ -159,7 +271,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="jun_imgdiv">
-					<img src="assets/img/exam_img.jpg" alt="이벤트 이미지가 없습니다."
+					<img src="/everycvs/resourses/user/img/exam_img.jpg" alt="이벤트 이미지가 없습니다."
 						class="jun_img">
 				</div>
 				<div class="jun_contentdiv">
@@ -193,20 +305,19 @@
 <c:import url="../../include/admin/common/end.jsp"></c:import>
 <!-- JS Custom Function -->
 <script type="text/javascript">
-	function del_event() {
+	
+	function del_event(no) {
 		var answer = false;
+		
 		answer = confirm("해당 이벤트를 삭제하시겠습니까?");
-		if (answer)
-			alert("이벤트가 삭제되었습니다.");
+		if (answer){
+			location.href ='/everycvs/eventDelete.do?no='+no;
+			alert("이벤트가 삭제되었습니다.");}
 	}
 
-	function search_event() {
-		// 검색창 null 이면 alert
-		location.href = '/everycvs/cvseventlist.do';
-	}
-
-	function modify_event() {
-		location.href = '/everycvs/cvseventmodifyview.do';
+	function modify_event(no) {
+		location.href = '/everycvs/cvseventmodifyview.do?no='+no;
+		
 	}
 
 	function add_event() {

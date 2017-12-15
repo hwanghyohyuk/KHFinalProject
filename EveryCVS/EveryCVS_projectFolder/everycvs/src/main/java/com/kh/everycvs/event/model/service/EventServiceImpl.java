@@ -3,6 +3,7 @@ package com.kh.everycvs.event.model.service;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,11 +22,19 @@ public class EventServiceImpl implements EventService{
 	
 	@Autowired
 	private EventDao eventDao;
-
+	
 	@Override
-	public List<Event> selectEventList() throws Exception {
-		// 이벤트 조회 : 모든 공식이벤트를 조회
-		return eventDao.selectEventList();
+	public List<Event> selectEventList(String keyword,int currentPage, int limit){
+		
+		  HashMap<String, Object> parameters = new HashMap<String, Object>();
+	      int startRow=(currentPage - 1) * limit + 1;
+	      int endRow=startRow + limit - 1;
+	      
+	      parameters.put("startRow", startRow);
+	      parameters.put("endRow", endRow);
+	      parameters.put("keyword", keyword);
+	           
+	      return eventDao.selectEventList(parameters);
 	}
 
 	@Override
@@ -57,20 +66,31 @@ public class EventServiceImpl implements EventService{
 		return null;
 	}
 	
-	
-	@Override
-	public String updateEvent(HttpServletRequest request) {
-		// 이벤트 수정
-		return null;
-	}
-
 	@Override
 	public Event cvsEventDetail(int eno) {
-		// TODO Auto-generated method stub
+		// 관리자 디테일
 		return eventDao.cvsEventDetail(eno);
 	}
 
-	
+	@Override
+	public Event updateEvent(int no) {
+		// 수정하기로 이동
+		return eventDao.updateEvent(no);
+	}
+
+	@Override
+	public int updateEventPage(Event event) {
+		// 수정하기 
+		return eventDao.updateEventPage(event);
+	}
+
+	@Override
+	public int getListCount() {
+		// 게시글  조회
+		return eventDao.listCount();
+	}
+
+
 	
 
 }

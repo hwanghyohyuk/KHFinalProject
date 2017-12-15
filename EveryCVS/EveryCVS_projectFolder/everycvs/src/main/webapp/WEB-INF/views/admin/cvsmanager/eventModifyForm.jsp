@@ -32,32 +32,34 @@
 
 				<div class="panel-body">
 					<div class="col-sm-6" style="padding-left: 0px;">
-						<div class="jun5">No. 0001</div>
-						<form class="form-inline">
+						<div class="jun5">No. ${event.event_no}</div>
+						<form class="form-inline" name="event" method="post" action="cvseventmodifywrite.do">
+						<input type="hidden" name="writer" value="${sessionScope.user.user_no}">
+						<input type="hidden" name="event_no" value="${event.event_no}">
 							<div class="form-group" id="jun_input1">
 								<label for="title" style="padding-right: 65px;">Event
-									Title</label> <input type="text" class="form-control" id="title" value="GS25와 함께하는 빼빼로데이 이벤트"
-									style="width: 300px;" placeholder="제목을 입력하세요.">
+									Title</label> <input type="text" class="form-control" id="title" name="title"
+									style="width: 300px;" value="${event.title}">
 							</div>
 							<br>
 
 							<div class="form-group" id="jun_input1">
 								<label for="date1" style="padding-right: 70px;">Start
-									Date</label> <input type="date" class="form-control" id="date1" value="2017-11-02"
-									style="width: 130px;">
+									Date</label> <input type="date" class="form-control" id="date1" name="start_date"
+									style="width: 130px;" value="${event.start_date}">
 							</div>
 							<br>
 							<div class="form-group" id="jun_input1">
 								<label for="date2" style="padding-right: 77px;">End Date</label>
-								<input type="date" class="form-control" id="date2" value="2017-11-12"
-									style="width: 130px;">
+								<input type="date" class="form-control" id="date2" name="end_date"
+									style="width: 130px;" value="${event.end_date}">
 							</div>
 							<br>
 							<div class="form-group" id="jun_input1">
 								<label for="limit"
 									style="padding-right: 22px; padding-top: 6px; float: left;">Participation
-									limit</label> <input type="number" class="form-control jun10" value="1"
-									id="limit" placeholder="참여제한횟수" style="width: 120px;">
+									limit</label> <input type="number" class="form-control jun10" name="join_limit"
+									id="limit" placeholder="참여제한횟수" style="width: 120px;" value="${event.join_limit}">
 							</div>
 							<br>
 							<div class="form-group" id="jun_input1" style="margin-top: 10px;">
@@ -69,12 +71,11 @@
 					<div class="col-sm-6 jun9">
 						<div class="form-group" id="jun_input1">
 							<label for="contents" style="padding-right: 61px;">Contents</label>
-							<textarea class="form-control" id="contents"
-								style="height: 142px; padding: 2px 4px;"
-								placeholder="내용을 입력하세요.">이번 빼빼로데이를 맞아 지에스가 큰 선물을 준비했숩니당!</textarea>
+							<textarea class="form-control" id="contents" name="contents"
+								style="height: 142px; padding: 2px 4px;" value="">${event.contents}</textarea>
 						</div>
 						<br>
-						<button type="button" class="btn btn-danger btn-lg jun4 jun7"
+						<button type="submit" class="btn btn-danger btn-lg jun4 jun7"
 							id="width100">SUBMIT</button>
 					</div>
 					</form>

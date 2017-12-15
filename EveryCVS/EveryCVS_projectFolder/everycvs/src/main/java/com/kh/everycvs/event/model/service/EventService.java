@@ -12,12 +12,15 @@ import com.kh.everycvs.common.model.vo.Event;
 
 public interface EventService {
 	
+	//게시글 갯수 조회
+	int getListCount();
+
 	// 이벤트 조회 : 모든 공식이벤트를 조회
-	public List<Event>selectEventList() throws Exception;
+	public List<Event> selectEventList(String keyword, int currentPage, int limit);
+	
 	
 	//이벤트 글작성
 	public void eventInsert(Event vo);
-	
 	
 	// 이벤트 조회수 증가
 	int eventReadCount(int no);
@@ -31,20 +34,23 @@ public interface EventService {
 	
 	//-------------------------- 절취선 ---------------//
 	
-	
-	
-	
-	
+
 	
 	// 이벤트 검색 : 제목으로 검색
 	public ModelAndView searchEventList(HttpServletRequest request);
 	
-
-	
-	// 이벤트 수정
-	public String updateEvent(HttpServletRequest request);
-
+	//관리자 상세 조회
 	public Event cvsEventDetail(int eno);
+	
+	
+	// 이벤트 수정하기로 이동
+	Event updateEvent(int no);
+	
+	//이벤트 수정하기
+	public int updateEventPage(Event event);
+
+
+
 
 	
 
