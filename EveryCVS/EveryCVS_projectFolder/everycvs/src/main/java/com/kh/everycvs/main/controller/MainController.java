@@ -89,6 +89,33 @@ public class MainController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
+	
+	/* ajax로 보여줄 가장 가까운 편의점 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/ajax/neareststore.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView nearestStore(ModelAndView mv,@RequestParam("brand_no") int brand_no,@RequestParam("lat") double lat,@RequestParam("lng") double lng) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("brand_no", brand_no);
+		params.put("lat", lat);
+		params.put("lng", lng);
+		Map<String, Object> map = new HashMap<String, Object>();//보낼맵
+		Store store = storeService.nearestStore(params);// 전체 브랜드 조회
+		JSONObject jstore = new JSONObject();
+			jstore.put("brand_no", store.getBrand_no());
+			jstore.put("brand_name", store.getBrand_name());
+			jstore.put("store_no", store.getStore_no());
+			jstore.put("store_name", store.getStore_name());
+			jstore.put("road_address", store.getRoad_address());
+			jstore.put("lat", store.getLat());
+			jstore.put("lng", store.getLng());
+		map.put("store", jstore);
+		mv.addAllObjects(map);
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	
 
 	/* 사용자가 지점메인에 접속 */
 	@RequestMapping("/page/storemain.do")

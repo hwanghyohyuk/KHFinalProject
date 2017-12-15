@@ -497,6 +497,10 @@
 	var brand_no = 0;
 	var markers = [];
 	var infoWindows = [];
+	var markerBuffer;
+	var markerCurrent;
+	var uMarkerBuffer;
+	var uMarkerCurrent;
 
 	function searchAddressToCoordinate(address) {
 		naver.maps.Service.geocode({
@@ -549,6 +553,124 @@
 		});
 	}
 
+	function onNearestStore(map,brand_no){
+		this.markerBuffer=this.markerCurrent;
+		this.uMarkerBuffer = this.uMarkerCurrent;
+		var mapCenter = map.getCenter();
+		var lat = mapCenter.lat();
+		var lng = mapCenter.lng();
+		var queryString = {
+			"brand_no" : brand_no,
+			"lat" : lat,
+			"lng" : lng
+		};
+		uMarkerCurrent = new naver.maps.Marker(
+				{
+					map : map,
+					position : mapCenter,
+					title : '나의 위치',
+					zIndex : 100,
+					icon : {
+						url : '/everycvs/resources/user/img/markers/marker_u.png',
+						size : new naver.maps.Size(44,
+								44),
+						origin : new naver.maps.Point(
+								0, 0),
+						anchor : new naver.maps.Point(
+								22, 44)
+					}
+				});
+		$.ajax({
+			url : 'ajax/neareststore.do',
+			data : queryString,
+			dataType : "json",
+			type : 'post',
+			success : function(data) {
+				var store = data.store;
+				if (store.brand_no == 1) {
+					markerCurrent = new naver.maps.Marker(
+							{
+								map : map,
+								position : new naver.maps.LatLng(
+										store.lat,
+										store.lng),
+								title : store.store_name,
+								zIndex : 100,
+								icon : {
+									url : '/everycvs/resources/user/img/markers/marker_g.png',
+									size : new naver.maps.Size(44,
+											44),
+									origin : new naver.maps.Point(
+											0, 0),
+									anchor : new naver.maps.Point(
+											22, 44)
+								}
+							});
+				} else if (store.brand_no == 2) {
+					markerCurrent = new naver.maps.Marker(
+							{
+								map : map,
+								position : new naver.maps.LatLng(
+										store.lat,
+										store.lng),
+								title : store.store_name,
+								zIndex : 100,
+								icon : {
+									url : '/everycvs/resources/user/img/markers/marker_c.png',
+									size : new naver.maps.Size(44,
+											44),
+									origin : new naver.maps.Point(
+											0, 0),
+									anchor : new naver.maps.Point(
+											22, 44)
+								}
+							});
+				} else {
+					markerCurrent = new naver.maps.Marker(
+							{
+								map : map,
+								position : new naver.maps.LatLng(
+										store.lat,
+										store.lng),
+								title : store.store_name,
+								zIndex : 100,
+								icon : {
+									url : '/everycvs/resources/user/img/markers/marker_7.png',
+									size : new naver.maps.Size(39,
+											41),
+									origin : new naver.maps.Point(
+											0, 0),
+									anchor : new naver.maps.Point(
+											19, 41)
+								}
+							});
+				}
+				console.log(markerCurrent);
+				var contentString = [
+						'<div style="padding:20px;">',
+						'<h3><b>' + store.brand_name + '</b>'
+								+ store.store_name + '</h3>',
+						'<p>' + store.road_address + '<br><br>',
+						'<a href="/everycvs/page/storemain.do?sno='
+								+ store.store_no
+								+ '">지점 페이지로 이동</a>', '</p>',
+						'</div>' ].join('');
+				var infoWindow = new naver.maps.InfoWindow({
+					anchorSkew : true,
+					content : contentString
+				});
+				infoWindow.open(map, markerCurrent);
+				markerBuffer.setMap(null);
+			},
+			error : function(request, status, error) {
+				alert("code:" + request.status + "\n" + "message:"
+						+ request.responseText + "\n" + "error:"
+						+ error);
+			}			
+		});
+		uMarkerBuffer.setMap(null);
+	}
+	
 	function onLoadStore(map, brand_no) {
 		var mapBounds = map.getBounds();
 		var minLat = mapBounds.minY();
@@ -562,8 +684,7 @@
 			"minLng" : minLng,
 			"maxLng" : maxLng
 		};
-		$
-				.ajax({
+		$.ajax({
 					url : 'ajax/brandmap.do',
 					data : queryString,
 					type : 'post',
@@ -571,7 +692,6 @@
 					success : function(data) {
 						var jsonStr = JSON.stringify(data);
 						var json = JSON.parse(jsonStr);
-						var stores = "";
 						for ( var i in json.storelist) {
 							var marker;
 							var storelist = json.storelist[i];
@@ -661,6 +781,7 @@
 								+ error);
 					}
 				});
+		onNearestStore(map,brand_no);
 	}
 	function getClickHandler(seq) {
 		return function(e) {
@@ -674,7 +795,7 @@
 			}
 		}
 	}
-
+	
 	function setStoreList(bno) {//이벤트 발생시 맵 속성을 초기화 하는 함수
 		console.clear();
 		console.log(markers);
@@ -691,28 +812,12 @@
 		this.infoWindows = [];
 		onLoadStore(map, bno);
 	}
+	
 
 	function onSuccessGeolocation(position) {
 		var location = new naver.maps.LatLng(position.coords.latitude,
 				position.coords.longitude);
-
-		var mapBounds = map.getBounds();
-		marker = new naver.maps.Marker(
-				{
-					map : map,
-					position : location,
-					title : "나의 위치",
-					zIndex : 200,
-					icon : {
-						url : '/everycvs/resources/user/img/markers/marker_u.png',
-						size : new naver.maps.Size(27,
-								36),
-						origin : new naver.maps.Point(
-								0, 0),
-						anchor : new naver.maps.Point(
-								14, 36)
-					}
-				});
+		
 		map.setCenter(location);
 		map.setZoom(12);
 	}
@@ -751,7 +856,7 @@
 	$(window).on("load", function() {
 		initGeocoder();
 		onLoadStore(map, 0);
-		onLoadGeolocation();
+		//onLoadGeolocation();
 	});
 </script>
 

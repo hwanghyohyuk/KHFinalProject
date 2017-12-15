@@ -294,4 +294,28 @@ CREATE VIEW USER_VIEW AS
 SELECT A.*,B.BRAND_NAME,C.STORE_NAME FROM TB_USER A LEFT OUTER JOIN TB_BRAND B ON(B.BRAND_NO = A.BRAND_NO) LEFT OUTER JOIN TB_STORE C ON (A.STORE_NO = C.STORE_NO)  ORDER BY 1 ASC
 WITH READ ONLY;
 
+
+/* oracle function */
+/
+CREATE OR REPLACE FUNCTION RADIANS(nDegrees IN NUMBER) 
+RETURN NUMBER DETERMINISTIC 
+IS
+BEGIN
+  RETURN nDegrees / 57.29577951308232087679815481410517033235;
+END RADIANS;
+ /
+create or replace function DISTNACE_WGS84( H_LAT in number, H_LNG in number, T_LAT in number, T_LNG in number)
+return number deterministic
+is
+begin
+  return ( 6371.0 * acos(  
+          cos( radians( H_LAT ) )*cos( radians( T_LAT /* 위도 */ ) )
+          *cos( radians( T_LNG /* 경도 */ )-radians( H_LNG ) )
+          +
+          sin( radians( H_LAT ) )*sin( radians( T_LAT /* 위도 */ ) )        
+         ));
+end DISTNACE_WGS84;
+ /
+
+
 COMMIT;

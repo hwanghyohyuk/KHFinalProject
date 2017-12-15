@@ -29,6 +29,15 @@ public class StoreDao {
 		}
 		return new ArrayList<Store>(list);
 	}
+
+	public Store nearestStore(Map<String, Object> params) {
+		if((int)params.get("brand_no")==0){
+			return sqlSession.selectOne("store.allNearestStore", params);
+		}else{
+			return sqlSession.selectOne("store.nearestStore", params);
+		}
+		
+	}
 	
 	
 	/* 편의점 관리자 */
@@ -93,10 +102,12 @@ public class StoreDao {
 		sqlSession.update("store.increamentJoinCount", store_no);
 	}
 
+
 	/* 지점 조회 */
 	public Store selectStore(String store_no) {
 		return sqlSession.selectOne("store.selectStore", store_no);
 	}
-	
+
+
 
 }
