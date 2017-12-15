@@ -23,12 +23,6 @@ public class StoreDao {
 	public ArrayList<Store> cvsMapList(NaverMap location) {
 		List<Store> list=null;
 		if(location.getBrand_no()==0){
-			/*Map<String,Object> map = new HashMap<String,Object>();
-			map.put("minLat", location.getMinLat());
-			map.put("maxLat", location.getMaxLat());
-			map.put("minLng", location.getMinLng());
-			map.put("maxLng", location.getMaxLng());
-			list = sqlSession.selectList("store.allCvsMapList", map);*/
 			list = sqlSession.selectList("store.allCvsMapList", location);
 		}else{
 			list = sqlSession.selectList("store.cvsMapList", location);

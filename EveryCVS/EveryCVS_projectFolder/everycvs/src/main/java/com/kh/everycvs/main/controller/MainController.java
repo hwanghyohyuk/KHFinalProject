@@ -69,7 +69,6 @@ public class MainController {
 	@RequestMapping(value = "/ajax/brandmap.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView brandMap(ModelAndView mv, NaverMap location) {
-		System.out.println(location);
 		Map<String, Object> map = new HashMap<String, Object>();
 		ArrayList<Store> list = storeService.cvsMapList(location);// 전체 브랜드 조회
 		JSONArray jar = new JSONArray();
