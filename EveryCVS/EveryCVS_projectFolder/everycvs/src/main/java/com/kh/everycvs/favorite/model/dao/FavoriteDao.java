@@ -19,7 +19,6 @@ public class FavoriteDao {
 	//관심상품 목록조회
 	public List<Favorite> favoriteList() {
 		ArrayList<Favorite> flist = new ArrayList<Favorite>();
-		System.out.println("Dao에서 favorite리스트 : " + flist);
 		return sqlSession.selectList("favorite.favoriteList", flist);
 	}
 	

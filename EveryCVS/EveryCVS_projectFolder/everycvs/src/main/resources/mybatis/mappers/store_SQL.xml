@@ -34,15 +34,15 @@
            ]]>
    </select>
    
-   <select id="cvsMapList" parameterType="_int" resultType="list" resultMap="resultStore">
+   <select id="cvsMapList" parameterType="navermap" resultType="list" resultMap="resultStore">
 		   <![CDATA[
-      		select * from store_view where brand_no = #{brand_no}
+      		select * from store_view where brand_no = #{brand_no} and (to_number(lat,'999.99999999') between #{minLat} and #{maxLat}) and (to_number(lng,'999.99999999') between #{minLng} and #{maxLng}) 
            ]]>
    </select>
-   
-   <select id="allCvsMapList" resultType="list" resultMap="resultStore">
+
+   <select id="allCvsMapList" parameterType="hashmap" resultType="list" resultMap="resultStore">
 		   <![CDATA[
-      		select * from store_view
+      		select * from store_view where (to_number(lat,'999.99999999') between #{minLat} and #{maxLat}) and (to_number(lng,'999.99999999') between #{minLng} and #{maxLng}) 
            ]]>
    </select>
    	

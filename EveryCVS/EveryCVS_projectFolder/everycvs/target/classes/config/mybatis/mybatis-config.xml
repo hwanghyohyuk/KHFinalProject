@@ -20,6 +20,7 @@
 		<typeAlias type="com.kh.everycvs.common.model.vo.ServiceCenter" alias="servicecenter" />
 		<typeAlias type="com.kh.everycvs.common.model.vo.ServiceCenterComment" alias="servicecentercomment" />
 		<typeAlias type="com.kh.everycvs.common.model.vo.Store" alias="store" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.NaverMap" alias="navermap" />
 		<typeAlias type="com.kh.everycvs.common.model.vo.StoreProduct" alias="storeproduct" />
 		<typeAlias type="com.kh.everycvs.common.model.vo.User" alias="user" />
 	</typeAliases>
