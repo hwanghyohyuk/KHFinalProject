@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.kh.everycvs.common.model.vo.NaverMap;
 import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.store.model.dao.StoreDao;
 
@@ -22,9 +24,15 @@ public class StoreServiceImpl implements StoreService {
 	/*사용자*/
 	/**지도에 표시할 데이터리스트**/
 	@Override
-	public ArrayList<Store> cvsMapList(int brand_no) {
-		return storeDao.cvsMapList(brand_no);
+	public ArrayList<Store> cvsMapList(NaverMap location) {
+		return storeDao.cvsMapList(location);
 	}
+
+	@Override
+	public Store nearestStore(Map<String, Object> params) {
+		return storeDao.nearestStore(params);
+	}
+
 	
 	/**지점 방문횟수증가**/
 	@Override
@@ -76,6 +84,7 @@ public class StoreServiceImpl implements StoreService {
 		Map map = storeDao.cvsJoinCount();
 		return null;
 	}
+
 	
 
 }
