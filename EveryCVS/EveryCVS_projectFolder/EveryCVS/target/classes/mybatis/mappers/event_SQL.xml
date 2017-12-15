@@ -24,22 +24,32 @@
 	<select id="getListCount" resultType="_int">
 		select count(*) from EVENT_VIEW
 	</select>
+	<!-- 검색 후 게시글 조회 -->
+	<select id="getSearchCount" parameterType="hashmap" resultType="_int">
+		<![CDATA[
+		select count(*) from event_view where title like #{mainkeyword} or contents like #{subkeyword}
+		]]>
+	</select>
 	
 	<!-- 이벤트 리스트 조회 -->
 	<select id="cvseventlist" resultType="list" parameterType="hashmap" resultMap="resultEvent">
 		<![CDATA[
-			select * from (
-            select rownum rnum, a.*
-            from EVENT_VIEW a)
-            where rnum >= #{startRow} and rnum <= #{endRow}
-            order by EVENT_NO
+            select * from(select rownum rnum, T.* 
+			from (select * from event_view
+			order by event_no desc ) T ) a where a.rnum >= #{startRow} and a.rnum <=#{endRow}
+            
 		]]>
 	</select>
+	
 	<!-- 제목 내용 검색 -->
-	<select id="cvseventsearch" resultType="list" parameterType="hashmap" resultMap="resultEvent">
+	<select id="cvseventsearch" resultType="list" parameterType="java.util.Map" resultMap="resultEvent">
 		<![CDATA[
-			SELECT * FROM EVENT_VIEW where title like #{mainkeyword} or contents like #{subkeyword}
-			ORDER BY EVENT_NO DESC
+			select * from (
+		    select rownum rnum,event_no,title,start_date,end_date,contents,readcount
+		    from event_view)
+		    where rnum >= #{startRow} and rnum <= #{endRow}
+		    and title like #{mainkeyword} or contents like #{subkeyword}
+		    order by event_no desc
 		]]>
 	</select>
 	

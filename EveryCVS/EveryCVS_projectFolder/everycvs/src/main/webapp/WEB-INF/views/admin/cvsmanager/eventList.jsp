@@ -38,10 +38,9 @@ function pageload(page)
             
             for(var i in json.list)
             {
-               values += "<tr><td>" + json.list[i].event_no + "</td>"+ "<td><a href='cvseventlist.do?no=" + json.list[i].event_no + "'>" +
-                     json.list[i].title + "</a></td><td>" + json.list[i].start_date + "</td><td>" +
-                     json.list[i].end_date + "</td><td>" + 
-                     json.list[i].readcount + "</td></tr>";
+               values += "<tr><td>" + json.list[i].event_no + "</td>"+ "<td><a href='javascript:ajaxDetail("+json.list[i].event_no+")'>" +
+                     json.list[i].title + "</a></td><td>" + json.list[i].start_date + '~' +json.list[i].end_date + "</td><td>" + 
+                     json.list[i].readcount + "</td><td>"+'<i class="fa fa-trash-o jun21" onclick="del_event('+json.list[i].event_no+');"></i>'+"</td></tr>";     
             }
             
             $("#eventlist").html(values);
@@ -116,7 +115,7 @@ function pageload(page)
 									<c:forEach items="${event.list}" var="ead">
 									<tr class="text-center">
 										<td>${ead.event_no}</td>
-										<td><a href="javascript:ajaxDetail(${ead.event_no })">${ead.title}</a></td>
+										<td><a href="javascript:ajaxDetail(${ead.event_no})">${ead.title}</a></td>
 										<td>${ead.start_date} ~ ${ead.end_date}</td>
 										<td>${ead.readcount}</td>
 										<td><i class="fa fa-trash-o jun21" onclick="del_event();"></i></td>
@@ -211,7 +210,6 @@ function pageload(page)
 		</div>
 	</div>
 </div>
-
 <!-- Modal -->
 <script type="text/javascript">
 	function ajaxDetail(eno){
@@ -296,7 +294,6 @@ function pageload(page)
 	</div>
 </div>
 <!-- End Modal -->
-
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->
 <c:import url="../../include/admin/common/footer.jsp"></c:import>

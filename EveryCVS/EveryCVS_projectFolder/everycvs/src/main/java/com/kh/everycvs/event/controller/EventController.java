@@ -24,10 +24,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Event;
 import com.kh.everycvs.common.model.vo.User;
-import com.kh.everycvs.common.util.FileUtils;
 import com.kh.everycvs.event.model.service.EventService;
 
 import net.sf.json.JSONObject;
+
 
 @Controller
 public class EventController {
@@ -96,11 +96,10 @@ public class EventController {
 		mv.setViewName("admin/cvsmanager/eventList");
 		  int currentPage = 1;
           int limit = 10;
-          
           List<Event> list = eventService.selectEventList(keyword,currentPage, limit);
                 System.out.println("list : " + list);
           Map<String, Object> map = new HashMap<String, Object>();
-          int listCount = eventService.getListCount();
+          int listCount = eventService.getListCount(keyword);
           int maxPage = (int) ((double) listCount / limit + 0.9);
           int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
           int endPage = startPage + limit - 1;
@@ -132,14 +131,14 @@ public class EventController {
          int limit = 10;
          List<Event> list = eventService.selectEventList(keyword, currentPage, limit);
          
-   
          Map<String, Object> map = new HashMap<String, Object>();
-         int listCount = eventService.getListCount();
+         int listCount = eventService.getListCount(keyword);
          int maxPage = (int) ((double) listCount / limit + 0.9);
          int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
          int endPage = startPage + limit - 1;
-          if (maxPage < endPage)
+          if (maxPage < endPage) {
                   endPage = maxPage;
+          }
           
           map.put("currentPage", currentPage);
           map.put("listCount", listCount);
@@ -148,18 +147,17 @@ public class EventController {
           map.put("endPage", endPage);
           map.put("limit", limit);
             
-            JSONArray jar = new JSONArray();
+          JSONArray jar = new JSONArray();
             
-            for(Event ev : list)
+          for(Event ev : list)
             {
                JSONObject jev = new JSONObject();
                jev.put("event_no", ev.getEvent_no());
                jev.put("title", ev.getTitle());
-               jev.put("strat_date",ev.getStart_date().toString());
+               jev.put("start_date",ev.getStart_date().toString());
                jev.put("end_date", ev.getEnd_date().toString());
                jev.put("readcount", ev.getReadcount());
                jar.add(jev);
-               
             }
             
            map.put("list", jar);
@@ -229,7 +227,7 @@ public class EventController {
 	@RequestMapping(value="eventDelete.do")
 	public String deleteEvent(@RequestParam int no) {
 		eventService.eventDelete(no);
-		return "redirect:/eventlist.do";
+		return "redirect:/cvseventlist.do";
 	}
 	
 

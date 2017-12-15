@@ -13,7 +13,7 @@ import com.kh.everycvs.common.model.vo.Event;
 public interface EventService {
 	
 	//게시글 갯수 조회
-	int getListCount();
+	int getListCount(String keyword);
 
 	// 이벤트 조회 : 모든 공식이벤트를 조회
 	public List<Event> selectEventList(String keyword, int currentPage, int limit);

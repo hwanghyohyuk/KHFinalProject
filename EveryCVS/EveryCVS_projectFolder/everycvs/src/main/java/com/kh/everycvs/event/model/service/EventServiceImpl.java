@@ -24,17 +24,16 @@ public class EventServiceImpl implements EventService{
 	private EventDao eventDao;
 	
 	@Override
+	public int getListCount(String keyword) {
+		// 게시글  조회
+		return eventDao.listCount(keyword);
+	}
+	
+	@Override
 	public List<Event> selectEventList(String keyword,int currentPage, int limit){
-		
-		  HashMap<String, Object> parameters = new HashMap<String, Object>();
-	      int startRow=(currentPage - 1) * limit + 1;
-	      int endRow=startRow + limit - 1;
-	      
-	      parameters.put("startRow", startRow);
-	      parameters.put("endRow", endRow);
-	      parameters.put("keyword", keyword);
-	           
-	      return eventDao.selectEventList(parameters);
+	      int startRow = (currentPage - 1) * limit + 1;
+	      int endRow = startRow + limit - 1;        
+	      return eventDao.selectEventList(keyword,startRow,endRow);
 	}
 
 	@Override
@@ -83,13 +82,6 @@ public class EventServiceImpl implements EventService{
 		// 수정하기 
 		return eventDao.updateEventPage(event);
 	}
-
-	@Override
-	public int getListCount() {
-		// 게시글  조회
-		return eventDao.listCount();
-	}
-
 
 	
 

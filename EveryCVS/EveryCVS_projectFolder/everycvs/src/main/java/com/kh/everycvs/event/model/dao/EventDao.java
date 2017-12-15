@@ -32,11 +32,32 @@ public class EventDao {
 			return sqlSession.selectList("event.cvseventsearch",map);
 		}
 	}*/
-	public List<Event> selectEventList(HashMap<String, Object> parameters) {
-		  List<Event> list = sqlSession.selectList("event.cvseventlist", parameters);
-	      return list;
+	
+	public List<Event> selectEventList(String keyword, int startRow, int endRow) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("startRow", startRow); 
+		map.put("endRow", endRow);
+		if(keyword.equals("")) {
+			return sqlSession.selectList("event.cvseventlist",map);
+		}else{
+			map.put("mainkeyword", "%"+keyword+"%");
+			map.put("subkeyword", "%"+keyword+"%");
+			return sqlSession.selectList("event.cvseventsearch",map);
+		}
 	}
-
+	
+	public int listCount(String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(!keyword.equals("")){
+			map.put("mainkeyword", "%"+keyword+"%");
+			map.put("subkeyword", "%"+keyword+"%");
+			return sqlSession.selectOne("event.getSearchCount",map);
+		}else{
+			return sqlSession.selectOne("event.getListCount");
+		}	
+	}
+	
+	
 	public Event selectEventOne(int no) {
 		// 이벤트 조회 : 선택한 이벤트 상세조회
 		Event event = sqlSession.selectOne("event.eventDetail",no);
@@ -67,7 +88,6 @@ public class EventDao {
 		return sqlSession.selectOne("event.cvsEventDetail", eno);
 	}
 
-	
 	//수정하기 페이지로 이동
 	public Event updateEvent(int no) {
 		Event event = sqlSession.selectOne("event.cvseventmodifyview", no);
@@ -80,12 +100,5 @@ public class EventDao {
 		return result;
 	}
 
-	public int listCount() {
-		return sqlSession.selectOne("event.getListCount");
-	}
 
-	
-
-	
-	
 }
