@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.everycvs.common.model.vo.NaverMap;
 import com.kh.everycvs.common.model.vo.Store;
 
 @Repository("storeDao")
@@ -19,12 +20,18 @@ public class StoreDao {
 
 	/* 사용자 */
 	/** 지도에 표시할 데이터리스트 **/
-	public ArrayList<Store> cvsMapList(int brand_no) {
+	public ArrayList<Store> cvsMapList(NaverMap location) {
 		List<Store> list=null;
-		if(brand_no==0){
-			list = sqlSession.selectList("store.allCvsMapList");
+		if(location.getBrand_no()==0){
+			/*Map<String,Object> map = new HashMap<String,Object>();
+			map.put("minLat", location.getMinLat());
+			map.put("maxLat", location.getMaxLat());
+			map.put("minLng", location.getMinLng());
+			map.put("maxLng", location.getMaxLng());
+			list = sqlSession.selectList("store.allCvsMapList", map);*/
+			list = sqlSession.selectList("store.allCvsMapList", location);
 		}else{
-			list = sqlSession.selectList("store.cvsMapList", brand_no);
+			list = sqlSession.selectList("store.cvsMapList", location);
 		}
 		return new ArrayList<Store>(list);
 	}

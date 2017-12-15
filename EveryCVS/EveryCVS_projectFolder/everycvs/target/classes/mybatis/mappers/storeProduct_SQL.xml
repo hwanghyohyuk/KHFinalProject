@@ -27,13 +27,22 @@
 		<result property="discount_no" column="DISCOUNT_NO" />
 		<result property="discount_info" column="DISCOUNT_INFO" />
 		<result property="discount_name" column="DISCOUNT_NAME" />
+		<result property="start_date" column="START_DATE" />
+		<result property="end_date" column="END_DATE" />
+		<result property="expiration_rate" column="EXPIRATION_RATE" />
+		<result property="discount_rate" column="DISCOUNT_RATE" />
+		<result property="expiration_price" column="EXPIRATION_PRICE" />
 	</resultMap>
 	
 	<select id="getListCount" resultType="int">
 		select count(*) from store_popularity_product_view
 	</select>
 	
-	<select id="selectList" parameterType="java.util.Map" resultType="list" resultMap="resultStoreProduct">
+	<select id="getSearchListCount" parameterType="hashmap" resultType="int">
+		select count(*) from store_popularity_product_view where product_name like #{keyword}
+	</select>
+	
+	<select id="selectList" parameterType="hashmap" resultType="list" resultMap="resultStoreProduct">
 		   <![CDATA[
       		select * from (
             select rownum rnum, a.*
@@ -47,7 +56,7 @@
 		    select * from (
 		    select rownum rnum, store_product_no, product_name, price
 		    from store_popularity_product_view)
-		    where rnum >= #{start} and rnum <= #{end}
+		    where rnum >= #{startRow} and rnum <= #{endRow}
 		    and product_name like #{keyword}
            ]]>
    </select>
@@ -76,7 +85,7 @@
    
    <select id="expSproduct" parameterType="java.util.Map" resultType="list" resultMap="resultStoreProduct">
 		   <![CDATA[
-      		select * from store_popularity_product_view where expiration_date <= 3
+      		select * from store_popularity_product_view where expiration_hour <= 72 and expiration_hour > 0
            ]]>
    </select>
 	
@@ -95,18 +104,18 @@
 		    select rownum rnum, store_product_no, product_kind_name, product_name,
 		    manufacturer, price, discount_name, manufacture_date, quantity
 		    from store_popularity_product_view)
-		    where rnum >= #{start} and rnum <= #{end}
+		    where rnum >= #{startRow} and rnum <= #{endRow}
 		    and product_name like #{keyword}
            ]]>
    </select>
    
-   <delete id="deleteSpmanager1" parameterType="int">
+   <delete id="deleteSpmanager1" parameterType="_int">
    		<![CDATA[
 			delete from tb_purchase where store_product_no = #{store_product_no, jdbcType=INTEGER}
 		]]>
    </delete>
    
-   <delete id="deleteSpmanager2" parameterType="int">
+   <delete id="deleteSpmanager2" parameterType="_int">
    		<![CDATA[
 			delete from tb_gifticon where purchase_no = #{purchase_no, jdbcType=INTEGER}
 		]]>
@@ -139,7 +148,7 @@
 		    select rownum rnum, store_product_no, product_kind_name, product_name,
 		    manufacturer, price, discount_name
 		    from store_popularity_product_view)
-		    where rnum >= #{start} and rnum <= #{end}
+		    where rnum >= #{startRow} and rnum <= #{endRow}
 		    and product_name like #{keyword}
            ]]>
    </select>

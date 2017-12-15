@@ -15,22 +15,15 @@ public class StoreProductServiceImpl implements StoreProductService {
 	private StoreProductDao sproductDao;
 
 	@Override
-	public int getListCount() {
-		return sproductDao.getListCount();
+	public int getListCount(String keyword) {
+		return sproductDao.getListCount(keyword);
 	}
 
 	@Override
-	public List<StoreProduct> selectList(int currentPage, int limit) {
+	public List<StoreProduct> selectList(int currentPage, int limit, String keyword) {
 		int startRow = (currentPage -1) * limit + 1;
 		int endRow = startRow + limit - 1;
-		return sproductDao.selectList(startRow,endRow);  
-	}
-	
-	@Override
-	public List<StoreProduct> searchSproduct(int currentPage, int limit, String keyword) {
-		int startRow = (currentPage -1) * limit + 1;
-		int endRow = startRow + limit - 1;
-		return sproductDao.searchSproduct(startRow,endRow,keyword);
+		return sproductDao.selectList(startRow,endRow,keyword);  
 	}
 
 	@Override
@@ -54,17 +47,10 @@ public class StoreProductServiceImpl implements StoreProductService {
 	}
 
 	@Override
-	public List<StoreProduct> listSpmanager(int currentPage, int limit) {
+	public List<StoreProduct> listSpmanager(int currentPage, int limit, String keyword) {
 		int startRow = (currentPage -1) * limit + 1;
 		int endRow = startRow + limit - 1;
-		return sproductDao.listSpmanager(startRow,endRow);  
-	}
-
-	@Override
-	public List<StoreProduct> searchSpmanager(int currentPage, int limit, String keyword) {
-		int startRow = (currentPage -1) * limit + 1;
-		int endRow = startRow + limit - 1;
-		return sproductDao.searchSpmanager(startRow,endRow,keyword);
+		return sproductDao.listSpmanager(startRow,endRow,keyword);  
 	}
 
 	@Override
@@ -73,17 +59,10 @@ public class StoreProductServiceImpl implements StoreProductService {
 	}
 
 	@Override
-	public List<StoreProduct> listApmanager(int currentPage, int limit) {
+	public List<StoreProduct> listApmanager(int currentPage, int limit, String keyword) {
 		int startRow = (currentPage -1) * limit + 1;
 		int endRow = startRow + limit - 1;
-		return sproductDao.listApmanager(startRow,endRow);
-	}
-
-	@Override
-	public List<StoreProduct> searchApmanager(int currentPage, int limit, String keyword) {
-		int startRow = (currentPage -1) * limit + 1;
-		int endRow = startRow + limit - 1;
-		return sproductDao.searchApmanager(startRow,endRow,keyword);
+		return sproductDao.listApmanager(startRow,endRow,keyword);
 	}
 	
 }

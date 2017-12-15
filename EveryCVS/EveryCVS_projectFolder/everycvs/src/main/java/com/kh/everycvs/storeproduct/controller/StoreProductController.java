@@ -21,9 +21,9 @@ public class StoreProductController {
 	@Autowired
 	private StoreProductService sproductService;
 
-	// 지점상품 전체페이지 전체보기
+	//storeListView 전체보기, 검색하기
 	@RequestMapping(value = "/splist.do")
-	public ModelAndView selectList(String page, HttpServletRequest request) {
+	public ModelAndView selectList(String page, @RequestParam(value="keyword", required=false, defaultValue="") String keyword) {
 		ModelAndView mv = new ModelAndView();
 
 		int currentPage = 1;
@@ -32,9 +32,9 @@ public class StoreProductController {
 		if (page != null)
 			currentPage = Integer.parseInt(page);
 
-		int listCount = sproductService.getListCount();
+		int listCount = sproductService.getListCount(keyword);
 
-		ArrayList<StoreProduct> list = (ArrayList<StoreProduct>) sproductService.selectList(currentPage, limit);
+		ArrayList<StoreProduct> list = (ArrayList<StoreProduct>) sproductService.selectList(currentPage, limit, keyword);
 
 		int maxPage = (int) ((double) listCount / limit + 0.92);
 
@@ -59,55 +59,11 @@ public class StoreProductController {
 		return mv;
 
 	}
-
-	// 지점상품 전체페이지 검색하기
-	@RequestMapping(value = "/spsearch.do")
-	public ModelAndView searchSproduct(String page, @RequestParam("keyword") String keyword,
-			HttpServletRequest request) {
-
-		ModelAndView mv = new ModelAndView();
-
-		int currentPage = 1;
-		int limit = 8;
-
-		if (page != null)
-			currentPage = Integer.parseInt(page);
-
-		int listCount = sproductService.getListCount();
-
-		ArrayList<StoreProduct> list = (ArrayList<StoreProduct>)sproductService.searchSproduct(currentPage, limit,
-				keyword);
-
-		int maxPage = (int) ((double) listCount / limit + 0.92);
-
-		int startPage = ((int) ((double) currentPage / limit + 0.92) - 1) * limit + 1;
-
-		int endPage = startPage + limit - 1;
-		if (maxPage < endPage)
-			endPage = maxPage;
-
-		if (list != null) {
-			mv.addObject("list", list);
-			mv.addObject("currentPage", currentPage);
-			mv.addObject("maxPage", maxPage);
-			mv.addObject("startPage", startPage);
-			mv.addObject("endPage", endPage);
-			mv.addObject("listCount", listCount);
-
-			mv.setViewName("storemain/storeListView");
-		} else {
-			mv.addObject("message", "게시글 검색 실패");
-		}
-
-		return mv;
-	}
-
 	
-	// 랭크뷰 전체보기
+	//storeRankView 전체보기
 	@RequestMapping(value = "/sprank.do")
 	public ModelAndView rankSproduct(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		
 		
 		ArrayList<StoreProduct> list = (ArrayList<StoreProduct>)sproductService.top3Sproduct();
 		ArrayList<StoreProduct> list2 = (ArrayList<StoreProduct>)sproductService.new3Sproduct();
@@ -122,7 +78,7 @@ public class StoreProductController {
 		return mv;
 	}
 	
-	//랭크뷰 top3
+	//storeRankView 인기상품
 	@RequestMapping(value="/sptop3.do",method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView top3Sproduct(){
@@ -136,7 +92,7 @@ public class StoreProductController {
 		return mv;
 	}
 	
-	//랭크뷰 new3
+	//storeRankView 신상품
 	@RequestMapping(value="/spnew3.do",method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView new3Sproduct(){
@@ -150,7 +106,7 @@ public class StoreProductController {
 		return mv;
 	}
 	
-	//랭크뷰 할인상품
+	//storeRankView 할인상품
 	@RequestMapping(value = "/spdc.do")
 	public ModelAndView dcSproduct(String page, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
@@ -164,7 +120,7 @@ public class StoreProductController {
 
 	}
 	
-	//랭크뷰 유통기한 임박상품
+	//storeRankView 유통기한 임박상품
 	@RequestMapping(value = "/spexp.do")
 	public ModelAndView expSproduct(String page, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
@@ -178,9 +134,9 @@ public class StoreProductController {
 
 	}
 	
-	// 지점관리자 지점상품관리 전체보기
+	//storeProduct 전체보기, 검색하기
 	@RequestMapping(value = "/spmlist.do")
-	public ModelAndView listSpmanager(String page, HttpServletRequest request) {
+	public ModelAndView listSpmanager(String page, @RequestParam(value="keyword", required=false, defaultValue="") String keyword) {
 		ModelAndView mv = new ModelAndView();
 
 		int currentPage = 1;
@@ -189,9 +145,9 @@ public class StoreProductController {
 		if (page != null)
 			currentPage = Integer.parseInt(page);
 
-		int listCount = sproductService.getListCount();
+		int listCount = sproductService.getListCount(keyword);
 
-		ArrayList<StoreProduct> list = (ArrayList<StoreProduct>) sproductService.listSpmanager(currentPage, limit);
+		ArrayList<StoreProduct> list = (ArrayList<StoreProduct>) sproductService.listSpmanager(currentPage, limit,keyword);
 
 		int maxPage = (int) ((double) listCount / limit + 0.9);
 
@@ -216,46 +172,7 @@ public class StoreProductController {
 		return mv;
 	}
 	
-	// 지점관리자 지점상품관리 검색하기
-	@RequestMapping(value = "/spmsearch.do")
-	public ModelAndView searchSpmanager(String page, @RequestParam("keyword") String keyword, HttpServletRequest request) {
-
-		ModelAndView mv = new ModelAndView();
-
-		int currentPage = 1;
-		int limit = 10;
-
-		if (page != null)
-			currentPage = Integer.parseInt(page);
-
-		int listCount = sproductService.getListCount();
-
-		ArrayList<StoreProduct> list = (ArrayList<StoreProduct>)sproductService.searchSpmanager(currentPage, limit, keyword);
-
-		int maxPage = (int) ((double) listCount / limit + 0.9);
-
-		int startPage = ((int) ((double) currentPage / limit + 0.9) - 1) * limit + 1;
-
-		int endPage = startPage + limit - 1;
-		if (maxPage < endPage)
-			endPage = maxPage;
-
-		if (list != null) {
-			mv.addObject("list", list);
-			mv.addObject("currentPage", currentPage);
-			mv.addObject("maxPage", maxPage);
-			mv.addObject("startPage", startPage);
-			mv.addObject("endPage", endPage);
-			mv.addObject("listCount", listCount);
-			mv.setViewName("admin/storemanager/storeProduct");
-		} else {
-			mv.addObject("message", "게시글 검색 실패");
-		}
-
-		return mv;
-	}
-	
-	// 지점관리자 지점상품관리 삭제하기
+	//storeProduct 삭제하기
 	@RequestMapping(value="/spmdelete.do")
 	public ModelAndView deleteSpmanager(int spnum){
 		ModelAndView mv = new ModelAndView();
@@ -268,9 +185,9 @@ public class StoreProductController {
 		
 	}
 	
-	// 지점관리자 전체상품관리 전체보기
+	//allProduct 전체보기, 검색하기
 	@RequestMapping(value = "/apmlist.do")
-	public ModelAndView listApmanager(String page, HttpServletRequest request) {
+	public ModelAndView listApmanager(String page, @RequestParam(value="keyword", required=false, defaultValue="") String keyword) {
 		ModelAndView mv = new ModelAndView();
 
 		int currentPage = 1;
@@ -279,9 +196,9 @@ public class StoreProductController {
 		if (page != null)
 			currentPage = Integer.parseInt(page);
 
-		int listCount = sproductService.getListCount();
+		int listCount = sproductService.getListCount(keyword);
 
-		ArrayList<StoreProduct> list = (ArrayList<StoreProduct>) sproductService.listApmanager(currentPage, limit);
+		ArrayList<StoreProduct> list = (ArrayList<StoreProduct>) sproductService.listApmanager(currentPage, limit,keyword);
 
 		int maxPage = (int) ((double) listCount / limit + 0.9);
 
@@ -306,43 +223,6 @@ public class StoreProductController {
 		return mv;
 	}
 	
-	// 지점관리자 지점상품관리 검색하기
-	@RequestMapping(value = "/apmsearch.do")
-	public ModelAndView searchApmanager(String page, @RequestParam("keyword") String keyword, HttpServletRequest request) {
 
-		ModelAndView mv = new ModelAndView();
-
-		int currentPage = 1;
-		int limit = 10;
-
-		if (page != null)
-			currentPage = Integer.parseInt(page);
-
-		int listCount = sproductService.getListCount();
-
-		ArrayList<StoreProduct> list = (ArrayList<StoreProduct>)sproductService.searchApmanager(currentPage, limit, keyword);
-
-		int maxPage = (int) ((double) listCount / limit + 0.9);
-
-		int startPage = ((int) ((double) currentPage / limit + 0.9) - 1) * limit + 1;
-
-		int endPage = startPage + limit - 1;
-		if (maxPage < endPage)
-			endPage = maxPage;
-
-		if (list != null) {
-			mv.addObject("list", list);
-			mv.addObject("currentPage", currentPage);
-			mv.addObject("maxPage", maxPage);
-			mv.addObject("startPage", startPage);
-			mv.addObject("endPage", endPage);
-			mv.addObject("listCount", listCount);
-			mv.setViewName("admin/storemanager/allProduct");
-		} else {
-			mv.addObject("message", "게시글 검색 실패");
-		}
-
-		return mv;
-	}
 	
 }
