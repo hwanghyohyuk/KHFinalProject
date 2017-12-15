@@ -659,6 +659,13 @@
 					anchorSkew : true,
 					content : contentString
 				});
+				naver.maps.Event.addListener(markerCurrent, 'click',function(){
+						if (infoWindow.getMap()) {
+							infoWindow.close();
+						} else {
+							infoWindow.open(map, markerCurrent);
+						}
+				});			
 				infoWindow.open(map, markerCurrent);
 				markerBuffer.setMap(null);
 			},
@@ -791,7 +798,7 @@
 				infoWindow.close();
 			} else {
 				infoWindow.open(map, marker);
-				setStoreList(this.brand_no);
+				//setStoreList(this.brand_no);
 			}
 		}
 	}
