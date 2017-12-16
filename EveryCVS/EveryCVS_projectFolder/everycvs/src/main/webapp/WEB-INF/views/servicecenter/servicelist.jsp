@@ -9,6 +9,16 @@
 <!-- === BEGIN HEADER ===  -->
 <c:import url="../include/user/common/header.jsp"></c:import>
 <!-- === END HEADER === -->
+<script type="text/javascript">
+	function writeService(){
+		if(${sessionScope.user == null}){
+			alert("로그인을 해주세요");
+			return;
+		}else{
+		location.href = "/everycvs/writeService.do";
+		}
+	}
+</script>
 <!-- === BEGIN CONTENT === -->
 
             <div id="content">
@@ -21,12 +31,18 @@
                                  <h2>고객센터</h2>
                             </div>
                             <hr>
-                            <form>
-                                <div align="right">
-                                    <input type="text" placeholder="제목을 입력해주세요" size="30">
-                                    <input type="button" value="검색">
-                                </div>
-                                <br><br>
+
+								<form action="serviceSearch.do" method="post">
+									<div  align="right" class="col-sm-3" style="margin-left: 190px;">
+										<br> <input class="form-control" type="search"
+											placeholder="제목을 입력해 주세요" name="keyword" value="${keyword}">
+									</div>
+									<div>
+										<br>
+										<button type="submit" class="btn btn-primary btn-sm">검색</button>
+									</div>
+								</form>
+								<br><br>
                                 <div align="left" style="margin-left: 5%; margin-right: 5%">
                                     <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
@@ -39,21 +55,18 @@
                                             </tr>
                                          <c:forEach var="sc" items="${requestScope.list }">
                                         <tr>
-                                                <td style="text-align: center;">${sc.service_no}</td>
-                                                <td style="text-align: center;">${sc.title}</td>
+                                                <td style="text-align: center;">${sc.service_no}</td>                                                                                                                                  
+                                                <td style="text-align: center;">${sc.title}</td>                                                                                                                                        
                                                 <td style="text-align: center;">${sc.writer}</td>
                                                 <td style="text-align: center;">${sc.write_date}</td>
                                                 <td style="text-align: center;">${sc.readcount}</td>
                                             </tr>
                                             </c:forEach>
-                                            
-                                    </table>
+                                    </table>                               
                                 <div align="right">
-                                    <button type="submit" class="btn btn-primary">내가쓴글</button>&nbsp&nbsp&nbsp
-                                    <a href="/everycvs/insertService.do">
-                                    <input type="button" class="btn btn-primary" value="글쓰기">
-                                    </a>
-                                </div>
+                                    <input type="button" class="btn btn-primary" value="내가쓴글" >&nbsp&nbsp&nbsp                                 
+                                    <button class="btn btn-primary" onclick="writeService();"  >글쓰기</button>                                    
+                                </div>                                                               
                                 <!-- 페이지 -->
                                 <div class="text-center">
                                    <ul class="pagination">
@@ -66,50 +79,11 @@
                                       <li><a href="#">&raquo;</a></li>
                                    </ul>
                                 </div>
-                            </form>
+                            
                             <hr>
                             <!-- End Contact Form -->
                             <!-- End Main Content -->
                         </div>
-                        <!-- End Main Column -->
-                        <!-- Side Column -->
-                        <div class="col-md-3">
-                            <!-- Recent Posts -->
-                             <!-- <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Contact Info</h3>
-                                </div>
-                                <div class="panel-body">
-                                    <p>Lorem ipsum dolor sit amet, no cetero voluptatum est, audire sensibus maiestatis vis et. Vitae audire prodesset an his. Nulla ubique omnesque in sit.</p>
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            <i class="fa-phone color-primary"></i>+353-44-55-66</li>
-                                        <li>
-                                            <i class="fa-envelope color-primary"></i>info@example.com</li>
-                                        <li>
-                                            <i class="fa-home color-primary"></i>http://www.example.com</li>
-                                    </ul>
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            <strong class="color-primary">Monday-Friday:</strong>9am to 6pm</li>
-                                        <li>
-                                            <strong class="color-primary">Saturday:</strong>10am to 3pm</li>
-                                        <li>
-                                            <strong class="color-primary">Sunday:</strong>Closed</li>
-                                    </ul>
-                                </div>
-                            </div>  -->
-                            <!-- End recent Posts -->
-                            <!-- About -->
-                             <!-- <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">About</h3>
-                                </div>
-                                <div class="panel-body">
-                                    Et harum quidem rerum facilis est et expedita distinctio lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero consectetur adipiscing elit magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat.
-                                </div>
-                            </div> -->
-                            <!-- End About -->
                         </div>
                         <!-- End Side Column -->
                     </div>
