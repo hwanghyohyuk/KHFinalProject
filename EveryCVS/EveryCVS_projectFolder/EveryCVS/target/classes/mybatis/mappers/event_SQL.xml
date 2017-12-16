@@ -19,12 +19,40 @@
 	</resultMap>
 	
 	
-	<!-- 이벤트 리스트 조회 -->
-	<select id="cvseventlist" resultType="list" resultMap="resultEvent">
+	
+	<!-- 게시글 갯수 조회 -->
+	<select id="getListCount" resultType="_int">
+		select count(*) from EVENT_VIEW
+	</select>
+	<!-- 검색 후 게시글 조회 -->
+	<select id="getSearchCount" parameterType="hashmap" resultType="_int">
 		<![CDATA[
-			SELECT * FROM EVENT_VIEW ORDER BY EVENT_NO DESC
+		select count(*) from event_view where title like #{mainkeyword} or contents like #{subkeyword}
 		]]>
 	</select>
+	
+	<!-- 이벤트 리스트 조회 -->
+	<select id="cvseventlist" resultType="list" parameterType="hashmap" resultMap="resultEvent">
+		<![CDATA[
+            select * from(select rownum rnum, T.* 
+			from (select * from event_view
+			order by event_no desc ) T ) a where a.rnum >= #{startRow} and a.rnum <=#{endRow}
+            
+		]]>
+	</select>
+	
+	<!-- 제목 내용 검색 -->
+	<select id="cvseventsearch" resultType="list" parameterType="java.util.Map" resultMap="resultEvent">
+		<![CDATA[
+			select * from (
+		    select rownum rnum,event_no,title,start_date,end_date,contents,readcount
+		    from event_view)
+		    where rnum >= #{startRow} and rnum <= #{endRow}
+		    and title like #{mainkeyword} or contents like #{subkeyword}
+		    order by event_no desc
+		]]>
+	</select>
+	
 	
 	<!-- 글작성 -->
 	<insert id="cvseventwrite" parameterType="event" flushCache="true"
@@ -60,10 +88,34 @@
 		]]>
 	</delete>
 	
-		<select id="cvsEventDetail" parameterType="_int" resultType="event" resultMap="resultEvent">
-		<![CDATA[
-			SELECT * FROM EVENT_VIEW where event_no = #{eno}
+	<!-- 관리자 게시글 상세보기 -->
+	<select id="cvsEventDetail" parameterType="_int" resultType="event" resultMap="resultEvent">
+	<![CDATA[
+		SELECT * FROM EVENT_VIEW where event_no = #{eno}
+	]]>
+	</select>
+	
+	<!-- 관리자 게시글 수정페이지 이동 -->
+	<select id="cvseventmodifyview" parameterType="event" resultMap="resultEvent">
+	<![CDATA[
+		select * from tb_event where event_no=#{event_no}
 		]]>
-		</select>
+	</select>
+	
+	<!-- 관리자 게시글 수정-->
+	<update id="cvseventmodifywrite" parameterType="event">
+	<![CDATA[
+		update tb_event 
+		set 
+			title = #{title},
+			contents = #{contents},
+			start_date = #{start_date},
+			end_date = #{end_date},
+			join_limit = #{join_limit},
+			original_file_name = default,
+			stored_file_name = default
+		where event_no=#{event_no}
+		]]>
+	</update>
 	
 </mapper>

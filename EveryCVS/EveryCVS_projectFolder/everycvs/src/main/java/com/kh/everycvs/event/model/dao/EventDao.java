@@ -1,6 +1,7 @@
 package com.kh.everycvs.event.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,11 +21,43 @@ public class EventDao {
 	
 	public EventDao(){}
 	
-	public List<Event> selectEventList() throws Exception{
-		return sqlSession.selectList("event.cvseventlist");
+	/*백업
+	 * public List<Event> selectEventList(String keyword, int currentPage, int limit){
+		if(keyword.equals("")) {
+			return sqlSession.selectList("event.cvseventlist");
+		}else{
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("mainkeyword", "%"+keyword+"%");
+			map.put("subkeyword", "%"+keyword+"%");
+			return sqlSession.selectList("event.cvseventsearch",map);
+		}
+	}*/
 	
+	public List<Event> selectEventList(String keyword, int startRow, int endRow) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("startRow", startRow); 
+		map.put("endRow", endRow);
+		if(keyword.equals("")) {
+			return sqlSession.selectList("event.cvseventlist",map);
+		}else{
+			map.put("mainkeyword", "%"+keyword+"%");
+			map.put("subkeyword", "%"+keyword+"%");
+			return sqlSession.selectList("event.cvseventsearch",map);
+		}
 	}
-
+	
+	public int listCount(String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(!keyword.equals("")){
+			map.put("mainkeyword", "%"+keyword+"%");
+			map.put("subkeyword", "%"+keyword+"%");
+			return sqlSession.selectOne("event.getSearchCount",map);
+		}else{
+			return sqlSession.selectOne("event.getListCount");
+		}	
+	}
+	
+	
 	public Event selectEventOne(int no) {
 		// 이벤트 조회 : 선택한 이벤트 상세조회
 		Event event = sqlSession.selectOne("event.eventDetail",no);
@@ -49,16 +82,23 @@ public class EventDao {
 	public void cvseventwriteview(Event vo) {
 		  int result = sqlSession.insert("event.cvseventwrite", vo); 
 	}
-	
-	public int updateEvent() {
-		// 이벤트 수정
-		return 0;
-	}
 
 	public Event cvsEventDetail(int eno) {
-		// TODO Auto-generated method stub
+		// 이벤트 상세보기
 		return sqlSession.selectOne("event.cvsEventDetail", eno);
 	}
-	
-	
+
+	//수정하기 페이지로 이동
+	public Event updateEvent(int no) {
+		Event event = sqlSession.selectOne("event.cvseventmodifyview", no);
+		return event;
+	}
+	//수정하기 완료
+	public int updateEventPage(Event event) {
+		int result = sqlSession.update("event.cvseventmodifywrite", event);
+		System.out.println(result);
+		return result;
+	}
+
+
 }
