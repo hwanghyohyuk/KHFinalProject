@@ -149,8 +149,11 @@
 													<div class="modal-footer">
 														<button type="submit" class="btn btn-primary btn-sm" data-dismiss="modal"
 														onclick="updateSubmit();">수정</button> &nbsp;
-														<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" 
-														onclick="location.href='spmdelete.do?spnum=${spm.store_product_no}'">삭제</button>
+														<button type="button" class="btn btn-primary btn-sm" 
+														onclick="location.href='spmdelete.do?spnum=${spm.store_product_no}&toggle=${spm.del_check}'">
+															<c:if test="${spm.del_check eq 'N'}">삭제</c:if>
+															<c:if test="${spm.del_check ne 'N'}">복구</c:if>										
+														</button>
 													</div>
 												</div>
 											</div><!-- Get방식으로 넘김 -->
@@ -208,10 +211,8 @@
 <!-- JS -->
 <script type="text/javascript">
 	function updateSubmit(){
-		console.log("POST방식 제출");
 		$("#updateform").submit();
 	}
 </script>
-<!-- JS -->
 <c:import url="../../include/user/common/end.jsp"></c:import>
 <!-- === END FOOTER === -->

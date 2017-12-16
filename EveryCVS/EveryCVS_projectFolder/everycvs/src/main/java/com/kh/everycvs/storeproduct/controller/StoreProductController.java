@@ -60,7 +60,6 @@ public class StoreProductController {
 		}
 
 		return mv;
-
 	}
 	
 	//storeRankView 전체보기
@@ -78,6 +77,7 @@ public class StoreProductController {
 		mv.addObject("list3",list3);
 		mv.addObject("list4",list4);
 		mv.setViewName("storemain/storeRankView");
+		
 		return mv;
 	}
 	
@@ -120,7 +120,6 @@ public class StoreProductController {
 		mv.setViewName("storemain/storeRankView");
 
 		return mv;
-
 	}
 	
 	//storeRankView 유통기한 임박상품
@@ -134,7 +133,6 @@ public class StoreProductController {
 		mv.setViewName("storemain/storeRankView");
 
 		return mv;
-
 	}
 	
 	//storeProduct 전체보기, 검색하기
@@ -189,7 +187,6 @@ public class StoreProductController {
 		mv.setViewName("redirect:/spmlist.do?page=1");
 		
 		return mv;
-		
 	}
 	
 	//storeProduct 수정하기
@@ -251,7 +248,5 @@ public class StoreProductController {
 		
 		return mv;
 	}
-	
-
 	
 }

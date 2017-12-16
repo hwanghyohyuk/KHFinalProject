@@ -46,7 +46,7 @@
 		   <![CDATA[
       		select * from (
             select rownum rnum, a.*
-            from store_popularity_product_view a)
+            from store_popularity_product_view a where del_check like 'N')
             where rnum >= #{startRow} and rnum <= #{endRow}
            ]]>
    </select>
@@ -55,7 +55,7 @@
 		   <![CDATA[
 		    select * from (
 		    select rownum rnum, store_product_no, product_name, price
-		    from store_popularity_product_view)
+		    from store_popularity_product_view where del_check like 'N')
 		    where rnum >= #{startRow} and rnum <= #{endRow}
 		    and product_name like #{keyword}
            ]]>

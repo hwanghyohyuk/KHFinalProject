@@ -1,6 +1,5 @@
 package com.kh.everycvs.storeproduct.model.dao;
 
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +24,6 @@ public class StoreProductDao {
 		}else{
 			return sqlSession.selectOne("storeProduct.getListCount");
 		}	
-		
 	}
 
 	public List<StoreProduct> selectList(int startRow, int endRow, String keyword) {
@@ -75,7 +73,10 @@ public class StoreProductDao {
 		 sqlSession.update("storeProduct.deleteSpmanager", map);
 	}
 	
-
+	public int updateSpmanager(Map<String, Object> map) {
+		return sqlSession.update("storeProduct.updateSpmanager", map); 
+	}
+	
 	public List<StoreProduct> listApmanager(int startRow, int endRow, String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("startRow", startRow); 
@@ -86,10 +87,6 @@ public class StoreProductDao {
 		}else{
 			return sqlSession.selectList("storeProduct.listApmanager", map);
 		}	
-	}
-
-	public int updateSpmanager(Map<String, Object> map) {
-		return sqlSession.update("storeProduct.updateSpmanager", map); 
 	}
 	
 }
