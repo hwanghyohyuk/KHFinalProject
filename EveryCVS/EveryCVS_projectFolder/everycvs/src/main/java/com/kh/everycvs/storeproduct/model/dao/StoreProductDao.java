@@ -1,5 +1,6 @@
 package com.kh.everycvs.storeproduct.model.dao;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,6 +73,10 @@ public class StoreProductDao {
 		 sqlSession.delete("deleteSpmanager2");
 		 sqlSession.delete("deleteSpmanager3");
 		 sqlSession.delete("deleteSpmanager4", spnum);
+	}
+	
+	public int updateSpmanager(int spnum, Date manufacturedate, int quantity) {
+		return sqlSession.update("updateSpmanager", spnum); 
 	}
 
 	public List<StoreProduct> listApmanager(int startRow, int endRow, String keyword) {

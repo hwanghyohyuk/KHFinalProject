@@ -91,6 +91,9 @@
 																	alt="image1" align="left" style="margin-left: 5px;">
 															</div>
 															<div class="col-sm-6">
+															<form action="spmupdate.do" method="post" enctype="multipart/form-data">
+															<input type="hidden" name="spnum" value="${spm.store_product_no}">
+															<input type="hidden" name="page" value="${currentPage}">
 																<table class="table table-condensed">
 																	<tr>
 																		<td><strong>상품명</strong></td>
@@ -110,15 +113,16 @@
 																	</tr>
 																	<tr>
 																		<td><strong>제조일</strong></td>
-																		<td><input class="form-control" type="date"
+																		<td><input class="form-control" type="date" name="mdate"
 																			value="${spm.manufacture_date}"></td>
 																	</tr>
 																	<tr>
 																		<td><strong>수량</strong></td>
 																		<td><input class="form-control" type="number" min="1"
-																			max="100" step="1" value="${spm.quantity}"></td>
+																			max="100" step="1" name="quantity" value="${spm.quantity}"></td>
 																	</tr>
 																</table>
+																</form>
 															</div>
 														</div>
 														<div class="row" style="margin-left: 10px;">
@@ -138,15 +142,15 @@
 														</div>
 													</div>
 													<div class="modal-footer">
-														<button type="button" class="btn btn-primary btn-sm"
-															data-dismiss="modal">수정</button> &nbsp;
+														<button type="submit" class="btn btn-primary btn-sm" data-dismiss="modal"
+														onclick="location.href='spmupdate.do?spnum=${spm.store_product_no}'">수정</button> &nbsp;
 														<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" 
 														onclick="location.href='spmdelete.do?spnum=${spm.store_product_no}'">삭제</button>
 													</div>
 												</div>
 											</div>
 										</div> 
-									<td>
+									</td>
 									<!-- Modal End -->
 								</tr>
 							</c:forEach>
