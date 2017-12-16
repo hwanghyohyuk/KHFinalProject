@@ -25,7 +25,8 @@
 					</div>
 					<form action="spmlist.do" method="post">
 						<div class="col-sm-3" style="margin-left: 190px;">
-							<br> <input class="form-control" type="search"
+							<br> 
+							<input class="form-control" type="search"
 								placeholder="상품명을 입력해주세요." name="keyword" value="${keyword}">
 						</div>
 						<div>
@@ -44,7 +45,7 @@
 					<div class="box-body no-padding">
 						<table class="table table-condensed">
 							<tr>
-								<th>상품번호</th>
+								<th>지점상품번호</th>
 								<th>종류</th>
 								<th>상품명</th>
 								<th>제조사</th>
@@ -109,14 +110,13 @@
 																	</tr>
 																	<tr>
 																		<td><strong>제조일</strong></td>
-																		<td><input class="form-control" type="text"
-																			placeholder="${spm.manufacture_date}"></td>
+																		<td><input class="form-control" type="date"
+																			value="${spm.manufacture_date}"></td>
 																	</tr>
 																	<tr>
 																		<td><strong>수량</strong></td>
-																		<td><input class="form-control" type="number"
-																			placeholder="${spm.manufacture_date}" min="1"
-																			max="100" step="1" value="1"></td>
+																		<td><input class="form-control" type="number" min="1"
+																			max="100" step="1" value="${spm.quantity}"></td>
 																	</tr>
 																</table>
 															</div>

@@ -48,26 +48,23 @@
 								<th>상품명</th>
 								<th>제조사</th>
 								<th>가격</th>
-								<th>할인정보</th>
+								<th>유통기한</th>
 								<th>제조일</th>
 								<th>수량</th>
-								<th>추가</th>
 							</tr>
 							<c:forEach var="apm" items="${requestScope.list}">
 								<tr>
-									<td>${apm.store_product_no}</td>
+									<td>${apm.product_no}</td>
 									<td>${apm.product_kind_name}</td>
 									<td><a href="#" data-toggle="modal"
 										data-target="#apmmodal${apm.store_product_no}"><strong>${apm.product_name}</strong>
 									</a></td>
 									<td>${apm.manufacturer}</td>
 									<td><fmt:formatNumber value="${apm.price}" pattern="#,###"/>원</td>
-									<td>${apm.discount_name}</td>
-									<td><input class="form-control" type="text"
-										placeholder="날짜를 입력해주세요."></td>
+									<td>${apm.expiration_date}일</td>
+									<td><input class="form-control" type="date"></td>
 									<td><input class="form-control" type="number" min="1"
-										max="100" step="1" value="1"></td>
-									<td><button type="button" class="btn btn-primary btn-sm">추가</button></td>
+										max="100" step="1" value="0"></td>
 									<!-- Modal -->
 									<td>
 										<div id="apmmodal${apm.store_product_no}" class="modal fade" role="dialog">
@@ -98,22 +95,21 @@
 																		<td><fmt:formatNumber value="${apm.price}" pattern="#,###"/>원</td>
 																	</tr>
 																	<tr>
+																		<td><strong>제조사</strong></td>
+																		<td>${apm.manufacturer}</td>
+																	</tr>
+																	<tr>
 																		<td><strong>유통기한</strong></td>
 																		<td>${apm.expiration_date}일</td>
 																	</tr>
 																	<tr>
-																		<td><strong>할인정보</strong></td>
-																		<td>${apm.discount_name}</td>
-																	</tr>
-																	<tr>
 																		<td><strong>제조일</strong></td>
-																		<td><input class="form-control" type="text"
-																			placeholder="날짜를 입력해주세요."></td>
+																		<td><input class="form-control" type="date"></td>
 																	</tr>
 																	<tr>
 																		<td><strong>수량</strong></td>
 																		<td><input class="form-control" type="number"
-																			min="1" max="100" step="1" value="1"></td>
+																			min="1" max="100" step="1" value="0"></td>
 																	</tr>
 																</table>
 															</div>
@@ -134,6 +130,10 @@
 					</div>
 				</div>
 			</div>
+			<div align="right" style="margin-right: 40px;">
+					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">추가</button>
+			</div>
+			<br>
 			<div class="text-center">
 				<ul class="pagination">
 					<c:choose>
