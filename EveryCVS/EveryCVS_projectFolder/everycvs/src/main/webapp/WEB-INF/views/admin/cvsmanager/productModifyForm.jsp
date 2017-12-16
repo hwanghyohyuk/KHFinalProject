@@ -31,35 +31,38 @@
 				</div>
 
 				<div class="panel-body">
-					<div class="jun5">No. 0001</div>
-					<form class="form-inline">
-
+					<div class="jun5">No. ${product.product_no}</div>
+					<form name="productFrm" action="/everycvs/cvsproductmodify.do"
+						method="post" class="form-inline" enctype="multipart/form-data">
+						<input type="hidden" name="productno"
+							value="${product.product_no}"> <input type="hidden"
+							name="prevfile" value="${product.stored_file_name}">
 						<div class="form-group" id="jun_input1">
 							<label for="product0" style="padding-right: 54px;">Category</label>
-							<select class="form-control input" id="product0"
-								style="padding-left: 5px;">
-								<option>분류 선택</option>
-								<option>과일</option>
-								<option selected>도시락</option>
-								<option>김밥</option>
-								<option>햄버거</option>
-								<option>햄</option>
-								<option>라면</option>
-								<option>아이스크림</option>
-								<option>과자</option>
-								<option>음료</option>
+							<select name="kind" class="form-control input" id="product0" style="padding-left: 5px;">
+								<option value="0">분류 선택</option>
+								<option value="1" <c:if test="${product.product_kind_no eq 1}">selected</c:if>>과일</option>
+								<option value="2" <c:if test="${product.product_kind_no eq 2}">selected</c:if>>도시락</option>
+								<option value="3" <c:if test="${product.product_kind_no eq 3}">selected</c:if>>김밥</option>
+								<option value="4" <c:if test="${product.product_kind_no eq 4}">selected</c:if>>햄버거</option>
+								<option value="5" <c:if test="${product.product_kind_no eq 5}">selected</c:if>>햄</option>
+								<option value="6" <c:if test="${product.product_kind_no eq 6}">selected</c:if>>라면</option>
+								<option value="7" <c:if test="${product.product_kind_no eq 7}">selected</c:if>>아이스크림</option>
+								<option value="8" <c:if test="${product.product_kind_no eq 8}">selected</c:if>>샐러드</option>
+								<option value="9" <c:if test="${product.product_kind_no eq 9}">selected</c:if>>과자</option>
+								<option value="10" <c:if test="${product.product_kind_no eq 10}">selected</c:if>>음료</option>
 							</select>
 						</div>
 						<br>
 						<div class="form-group" id="jun_input1">
 							<label for="product1" style="padding-right: 22px;">Product
-								Name</label> <input type="text" class="form-control" id="product1" value="롯데)전주식한상도시락"
+								Name</label> <input type="text" name="productname" class="form-control" id="product1" value="${product.product_name}"
 								style="width: 300px;" placeholder="상품명을 입력하세요.">
 						</div>
 						<br>
 						<div class="form-group" id="jun_input1">
 							<label for="product2" style="padding-right: 27px;">Manufacturer</label>
-							<input type="text" class="form-control" id="product2" value="롯데푸드"
+							<input type="text" name="manufacturer" class="form-control" id="product2" value="${product.manufacturer}"
 								style="width: 248px;" placeholder="제조사를 입력하세요.">
 						</div>
 						<br>
@@ -68,8 +71,8 @@
 								style="padding-right: 82px; float: left; padding-top: 7px;">Price</label>
 							<div class="input-group">
 								<div class="input-group-addon">￦</div>
-								<input type="number" class="form-control" id="product3" value="3000"
-									style="width: 80px; padding: 5px; text-align: center;"
+								<input type="number" name="price" class="form-control" id="product3" value="${product.price}"
+									step="100" style="width: 80px; padding: 5px; text-align: center;"
 									placeholder="가격">
 							</div>
 						</div>
@@ -79,7 +82,7 @@
 								style="padding-right: 19px; float: left; padding-top: 6px;">Expiration
 								Date</label>
 							<div class="input-group col-md-1">
-								<input type="number" class="form-control" id="product4" value="3"
+								<input type="number" name="deadline" class="form-control" id="product4" value="${product.expiration_date}"
 									style="width: 48px; padding: 5px; text-align: center;">
 								<div class="input-group-addon" id="modify2">day</div>
 								<div class="jun6" id="displayblock">day</div>
@@ -89,18 +92,16 @@
 						<div class="form-group" id="jun_input1">
 							<label for="product5"
 								style="float: left; padding: 0px 24px 10px 0px; padding-top: 2px;">Product
-								image</label> <input type="file" id="product5"
-								style="padding: 0px; float: left;">
+								image</label> <input type="file" name="imgfile" id="product5" style="padding: 0px; float: left;">
 						</div>
 						<div class="col-sm-13 jun18">
-							<button type="button" class="btn btn-danger btn-lg jun4 jun7"
+							<button type="submit" onclick="input_check();" class="btn btn-danger btn-lg jun4 jun7"
 								id="width100">SUBMIT</button>
 						</div>
 					</form>
 				</div>
 			</div>
 			<!-- End aqua panel -->
-
 		</div>
 	</div>
 </div>
@@ -113,8 +114,36 @@
 <c:import url="../../include/admin/common/end.jsp"></c:import>
 <!-- JS Custom Function -->
 <script type="text/javascript">
-	function check() {
-		// input 이 비었으면 alert
+	function input_check() {
+		if(productFrm.kind.value == 0){
+			alert("상품 분류를 선택하세요.");
+			return false;
+		}
+		if(productFrm.productname.value == ""){
+			alert("상품명을 입력하세요.");
+			return false;
+		}
+		if(productFrm.manufacturer.value == ""){
+			alert("제조사를 입력하세요.");
+			return false;
+		}
+		if(productFrm.price.value == ""){
+			alert("가격을 입력하세요.");
+			return false;
+		}
+		if(productFrm.price.value < 0){
+			alert("0 이상의 가격을 입력하세요.");
+			return false;
+		}
+		if(productFrm.deadline.value == ""){
+			alert("유통기한을 입력하세요.");
+			return false;
+		}
+		if(productFrm.deadline.value < 0){
+			alert("0 이상의 유통기한을 입력하세요.");
+			return false;
+		}
+		productFrm.submit();
 	}
 </script>
 <!-- End JS Custom Function -->

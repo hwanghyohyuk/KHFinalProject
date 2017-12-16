@@ -18,6 +18,27 @@
 		<result property="purchase_count" column="purchase_count" />
 	</resultMap>
 	
+	<!-- 금주의 인기 상품 top5 조회 -->
+	<select id="popularProductTop5" parameterType="_int" resultType="list" resultMap="resultProduct">
+		<![CDATA[
+			SELECT A.PRODUCT_NO, A.PRODUCT_NAME, B.MANUFACTURER, B.PRICE, B.EXPIRATION_DATE, B.PRODUCT_KIND_NO,
+			B.PRODUCT_KIND_NAME, A.BRAND_NO, B.ORIGINAL_FILE_NAME, B.STORED_FILE_NAME, B.DEL_CHECK, A.SALE_QUANTITY purchase_count
+			from POPULARITY_PRODUCT_VIEW A
+			JOIN PRODUCT_VIEW B ON (A.PRODUCT_NO = B.PRODUCT_NO)
+			WHERE A.BRAND_NO = 2 AND ROWNUM <= 5
+			ORDER BY SALE_QUANTITY DESC, PRODUCT_NO ASC
+		]]>
+	</select>
+	
+	<!-- 상품 조회 -->
+	<select id="selectProduct" parameterType="product" resultType="list" resultMap="resultProduct">
+		<![CDATA[
+			select * from product_view
+			where brand_no = #{brand_no}
+			and product_no = #{product_no}
+		]]>
+	</select>
+	
 	<!-- 상품 리스트 조회 -->
 	<select id="productList" parameterType="_int" resultType="list" resultMap="resultProduct">
 		<![CDATA[
@@ -26,14 +47,7 @@
 			order by product_no asc
 		]]>
 	</select>
-	
-	<!-- 금주의 인기 상품 top5 조회 -->
-	<select id="hotProductTop5" parameterType="_int" resultType="list" resultMap="resultProduct">
-		<![CDATA[
-			
-		]]>
-	</select>
-	
+		
 	<!-- 상품 검색 : 상품명 -->
 	<select id="productSearch1" parameterType="product" resultType="list" resultMap="resultProduct">
 		<![CDATA[
@@ -54,9 +68,34 @@
 		]]>
 	</select>
 	
+	<!-- 상품 등록 -->
+	<insert id="insertProduct" parameterType="product" flushCache="true">
+		<![CDATA[
+			insert into tb_product values(
+			seq_product_no.nextval, #{product_name}, #{manufacturer}, #{price}, #{expiration_date},
+			#{product_kind_no}, #{brand_no}, #{original_file_name, jdbcType=VARCHAR},
+			#{stored_file_name, jdbcType=VARCHAR}, default)
+		]]>
+	</insert>
+	
+	<!-- 상품 수정 -->
+	<update id="updateProduct" parameterType="product" flushCache="true">
+		<![CDATA[
+			update tb_product set
+			product_name = #{product_name},
+			manufacturer = #{manufacturer},
+			product_kind_no = #{product_kind_no},
+			price = #{price},
+			expiration_date = #{expiration_date},
+			original_file_name = #{original_file_name},
+			stored_file_name = #{stored_file_name}
+			where product_no = #{product_no}
+		]]>
+	</update>
+	
 	<!-- 상품 삭제 -->
 	<!-- 연쇄 삭제 : 상품 테이블에서 상품 삭제 -->
-	<delete id="deleteProduct3" parameterType="product" flushCache="true" statementType="PREPARED">
+	<delete id="deleteProduct3" parameterType="product" flushCache="true">
 		<![CDATA[
 			delete from tb_product
 			where product_no = #{product_no}
