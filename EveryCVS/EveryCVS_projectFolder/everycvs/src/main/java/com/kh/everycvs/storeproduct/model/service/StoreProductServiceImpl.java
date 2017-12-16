@@ -1,5 +1,6 @@
 package com.kh.everycvs.storeproduct.model.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,11 @@ public class StoreProductServiceImpl implements StoreProductService {
 	@Override
 	public void deleteSpmanager(int spnum) {
 		sproductDao.deleteSpmanager(spnum);
+	}
+	
+	@Override
+	public int updateSpmanager(int spnum, Date manufacturedate, int quantity) {
+		return sproductDao.updateSpmanager(spnum, manufacturedate, quantity); 
 	}
 
 	@Override

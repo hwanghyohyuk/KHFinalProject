@@ -133,6 +133,11 @@
 		]]>
    </delete>
    
+   <update id="updateSpmanager" parameterType="int">
+		update store_popularity_product_view 
+		set MANUFACTURE_DATE = #{manufacture_date}, QUANTITY = #{quantity} where STORE_PRODUCT_NO = #{store_product_no}
+   </update>
+   
    <select id="listApmanager" parameterType="java.util.Map" resultType="list" resultMap="resultStoreProduct">
 		   <![CDATA[
       		select * from (

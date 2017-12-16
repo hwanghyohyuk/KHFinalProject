@@ -1,5 +1,6 @@
 package com.kh.everycvs.storeproduct.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -183,6 +184,25 @@ public class StoreProductController {
 		
 		return mv;
 		
+	}
+	
+	//storeProduct 수정하기
+	@RequestMapping(value="/spmupdate.do")
+	public ModelAndView updateSpmanager(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		
+		Date manufacturedate = Date.valueOf(request.getParameter("mdate"));
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		int spnum = Integer.parseInt(request.getParameter("spnum"));
+		int currentPage = Integer.parseInt(request.getParameter("page"));
+		
+		if(sproductService.updateSpmanager(spnum, manufacturedate, quantity) > 0){
+			mv.setViewName("redirect:/spmlist.do?page="+currentPage);
+		}else{
+			mv.addObject("message", "수정 실패!");
+		}
+		
+		return mv;
 	}
 	
 	//allProduct 전체보기, 검색하기
