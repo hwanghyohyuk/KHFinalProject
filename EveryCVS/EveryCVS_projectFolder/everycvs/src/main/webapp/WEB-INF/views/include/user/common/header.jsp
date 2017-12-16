@@ -32,13 +32,11 @@
 											class="fa-question-circle">HELP</span></a></li>
 								</c:if>
 								<c:if test="${ sessionScope.store ne null}">
-									<li><a
-										href="/everycvs/page/storemain.do?sno=${sessionScope.store.store_no}"
+									<li><a href="/everycvs/page/storemain.do?sno=${sessionScope.store.store_no}"
 										class="fa-home active">STORE MAIN</a></li>
 									<li><a href="/everycvs/main.do#cvssearch"><span
 											class="fa-search">CVS SEARCH</span></a></li>
-									<li><a href="#"><span class="fa-cubes">STORE
-												PRODUCT</span></a></li>
+									<li><a href="#"><span class="fa-cubes">STORE PRODUCT</span></a></li>
 								</c:if>
 							</c:if>
 						</ul>

@@ -38,4 +38,9 @@ public class ServiceCenterDao {
 			System.out.println("keyword : "+"%"+keyword+"%");
 			return sqlSession.selectList("serviceCenter.serviceSearch", map);
 		}
+
+		public ArrayList<ServiceCenter> serviceInsert() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 }

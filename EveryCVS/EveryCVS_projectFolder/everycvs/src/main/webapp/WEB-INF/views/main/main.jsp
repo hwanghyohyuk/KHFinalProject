@@ -519,6 +519,7 @@
 
 	function initGeocoder() {//이벤트등록
 		map.setOptions({
+			center: new naver.maps.LatLng(37.4990056, 127.0328696),
 			scaleControl : true,
 			logoControl : false,
 			mapDataControl : false,
@@ -543,14 +544,16 @@
 			searchAddressToCoordinate($('#address').val());
 		});
 		$('#init').on('click', function(e) {
-			onLoadGeolocation();
+			//onLoadGeolocation();
+			map.setCenter(new naver.maps.LatLng(37.4990056, 127.0328696));
+			setStoreList(brand_no);
 		});
 		naver.maps.Event.addListener(map, 'zoom_changed', function() {
-			setStoreList(this.brand_no);
+			setStoreList(brand_no);
 		});
 
 		naver.maps.Event.addListener(map, 'dragend', function() {
-			setStoreList(this.brand_no);
+			setStoreList(brand_no);
 		});
 	}
 
@@ -565,6 +568,7 @@
 			"lat" : lat,
 			"lng" : lng
 		};
+		//console.log(mapCenter);
 		uMarkerCurrent = new naver.maps.Marker(
 				{
 					map : map,
@@ -573,12 +577,9 @@
 					zIndex : 100,
 					icon : {
 						url : '/everycvs/resources/user/img/markers/marker_u.png',
-						size : new naver.maps.Size(44,
-								44),
-						origin : new naver.maps.Point(
-								0, 0),
-						anchor : new naver.maps.Point(
-								22, 44)
+						size : new naver.maps.Size(44,	44),
+						origin : new naver.maps.Point(0, 0),
+						anchor : new naver.maps.Point(22, 44)
 					}
 				});
 		$.ajax({
@@ -592,57 +593,42 @@
 					markerCurrent = new naver.maps.Marker(
 							{
 								map : map,
-								position : new naver.maps.LatLng(
-										store.lat,
-										store.lng),
+								position : new naver.maps.LatLng(	store.lat, store.lng),
 								title : store.store_name,
 								zIndex : 100,
 								icon : {
 									url : '/everycvs/resources/user/img/markers/marker_g.png',
-									size : new naver.maps.Size(44,
-											44),
-									origin : new naver.maps.Point(
-											0, 0),
-									anchor : new naver.maps.Point(
-											22, 44)
+									size : new naver.maps.Size(44, 44),
+									origin : new naver.maps.Point(0, 0),
+									anchor : new naver.maps.Point(22, 44)
 								}
 							});
 				} else if (store.brand_no == 2) {
 					markerCurrent = new naver.maps.Marker(
 							{
 								map : map,
-								position : new naver.maps.LatLng(
-										store.lat,
-										store.lng),
+								position : new naver.maps.LatLng(store.lat, store.lng),
 								title : store.store_name,
 								zIndex : 100,
 								icon : {
 									url : '/everycvs/resources/user/img/markers/marker_c.png',
-									size : new naver.maps.Size(44,
-											44),
-									origin : new naver.maps.Point(
-											0, 0),
-									anchor : new naver.maps.Point(
-											22, 44)
+									size : new naver.maps.Size(44,44),
+									origin : new naver.maps.Point(0, 0),
+									anchor : new naver.maps.Point(22, 44)
 								}
 							});
 				} else {
 					markerCurrent = new naver.maps.Marker(
 							{
 								map : map,
-								position : new naver.maps.LatLng(
-										store.lat,
-										store.lng),
+								position : new naver.maps.LatLng(store.lat,store.lng),
 								title : store.store_name,
 								zIndex : 100,
 								icon : {
 									url : '/everycvs/resources/user/img/markers/marker_7.png',
-									size : new naver.maps.Size(39,
-											41),
-									origin : new naver.maps.Point(
-											0, 0),
-									anchor : new naver.maps.Point(
-											19, 41)
+									size : new naver.maps.Size(39,	41),
+									origin : new naver.maps.Point(0, 0),
+									anchor : new naver.maps.Point(19, 41)
 								}
 							});
 				}
@@ -668,7 +654,9 @@
 						}
 				});			
 				infoWindow.open(map, markerCurrent);
-				markerBuffer.setMap(null);
+				if(markerBuffer!=null){
+					markerBuffer.setMap(null);
+				}
 			},
 			error : function(request, status, error) {
 				alert("code:" + request.status + "\n" + "message:"
@@ -676,7 +664,9 @@
 						+ error);
 			}			
 		});
-		uMarkerBuffer.setMap(null);
+		if(uMarkerBuffer!=null){
+			uMarkerBuffer.setMap(null);
+		}
 	}
 	
 	function onLoadStore(map, brand_no) {
@@ -707,57 +697,42 @@
 								marker = new naver.maps.Marker(
 										{
 											map : map,
-											position : new naver.maps.LatLng(
-													storelist.lat,
-													storelist.lng),
+											position : new naver.maps.LatLng(storelist.lat,	storelist.lng),
 											title : storelist.store_name,
 											zIndex : 100,
 											icon : {
 												url : '/everycvs/resources/user/img/markers/marker_g.png',
-												size : new naver.maps.Size(44,
-														44),
-												origin : new naver.maps.Point(
-														0, 0),
-												anchor : new naver.maps.Point(
-														22, 44)
+												size : new naver.maps.Size(44,44),
+												origin : new naver.maps.Point(0, 0),
+												anchor : new naver.maps.Point(22, 44)
 											}
 										});
 							} else if (storelist.brand_no == 2) {
 								marker = new naver.maps.Marker(
 										{
 											map : map,
-											position : new naver.maps.LatLng(
-													storelist.lat,
-													storelist.lng),
+											position : new naver.maps.LatLng(storelist.lat,storelist.lng),
 											title : storelist.store_name,
 											zIndex : 100,
 											icon : {
 												url : '/everycvs/resources/user/img/markers/marker_c.png',
-												size : new naver.maps.Size(44,
-														44),
-												origin : new naver.maps.Point(
-														0, 0),
-												anchor : new naver.maps.Point(
-														22, 44)
+												size : new naver.maps.Size(44,44),
+												origin : new naver.maps.Point(0, 0),
+												anchor : new naver.maps.Point(22, 44)
 											}
 										});
 							} else {
 								marker = new naver.maps.Marker(
 										{
 											map : map,
-											position : new naver.maps.LatLng(
-													storelist.lat,
-													storelist.lng),
+											position : new naver.maps.LatLng(storelist.lat,storelist.lng),
 											title : storelist.store_name,
 											zIndex : 100,
 											icon : {
 												url : '/everycvs/resources/user/img/markers/marker_7.png',
-												size : new naver.maps.Size(39,
-														41),
-												origin : new naver.maps.Point(
-														0, 0),
-												anchor : new naver.maps.Point(
-														19, 41)
+												size : new naver.maps.Size(39,41),
+												origin : new naver.maps.Point(0, 0),
+												anchor : new naver.maps.Point(19, 41)
 											}
 										});
 							}
