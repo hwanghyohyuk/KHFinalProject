@@ -21,6 +21,7 @@
 		<result property="brand_no" column="BRAND_NO" />
 		<result property="join_count" column="JOIN_COUNT" />
 		<result property="brand_name" column="BRAND_NAME" />
+		<result property="del_check" column="del_check" />
 	</resultMap>
 		
 	<update id="increamentJoinCount"  parameterType="string" flushCache="true"
