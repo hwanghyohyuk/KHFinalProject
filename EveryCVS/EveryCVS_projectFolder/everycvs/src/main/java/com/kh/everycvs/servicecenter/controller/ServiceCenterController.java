@@ -30,13 +30,6 @@ public class ServiceCenterController {
 		return mv;
 	}
 
-	// 고객센터 : 고객센터 글쓰기
-	@RequestMapping(value = "insertService.do", method = RequestMethod.GET)
-	public String serviceInsert(HttpServletRequest request) {
-
-		return "servicecenter/serviceWrite";
-	}
-
 	// 고객센터: 고객센터 검색
 	@RequestMapping(value = "serviceSearch.do")
 	public ModelAndView serviceSearch(ModelAndView mv, @RequestParam("keyword") String keyword,
@@ -50,6 +43,14 @@ public class ServiceCenterController {
 		mv.setViewName("servicecenter/servicelist");
 		return mv;
 	}
+
+	// 고객센터 : 고객센터 글쓰기
+	@RequestMapping(value = "insertService.do", method = RequestMethod.GET)
+	public String serviceWrite(HttpServletRequest request) {
+		return "servicecenter/serviceWrite";
+	}
+
+	// 고객센터:
 
 	/* 사이트관리자 고객센터 관리 페이지 */
 	@RequestMapping("/admin/manageSrvc.do")
