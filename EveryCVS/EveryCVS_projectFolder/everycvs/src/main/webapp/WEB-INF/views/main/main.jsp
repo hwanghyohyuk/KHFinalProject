@@ -635,7 +635,7 @@
 				console.log(markerCurrent);
 				var contentString = [
 						'<div style="padding:20px;">',
-						'<h3><b>' + store.brand_name + '</b>'
+						'<h3><b>' + store.brand_name + '</b>&nbsp;'
 								+ store.store_name + '</h3>',
 						'<p>' + store.road_address + '<br><br>',
 						'<a href="/everycvs/page/storemain.do?sno='
@@ -739,7 +739,7 @@
 							console.log(marker);
 							var contentString = [
 									'<div style="padding:20px;">',
-									'<h3><b>' + storelist.brand_name + '</b>'
+									'<h3><b>' + storelist.brand_name + '</b>&nbsp;'
 											+ storelist.store_name + '</h3>',
 									'<p>' + storelist.road_address + '<br><br>',
 									'<a href="/everycvs/page/storemain.do?sno='
