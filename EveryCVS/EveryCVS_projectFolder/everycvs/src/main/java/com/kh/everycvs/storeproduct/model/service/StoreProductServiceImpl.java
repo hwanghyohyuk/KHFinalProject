@@ -2,6 +2,7 @@ package com.kh.everycvs.storeproduct.model.service;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,17 +59,17 @@ public class StoreProductServiceImpl implements StoreProductService {
 	public void deleteSpmanager(int spnum) {
 		sproductDao.deleteSpmanager(spnum);
 	}
-	
-	@Override
-	public int updateSpmanager(int spnum, Date manufacturedate, int quantity) {
-		return sproductDao.updateSpmanager(spnum, manufacturedate, quantity); 
-	}
 
 	@Override
 	public List<StoreProduct> listApmanager(int currentPage, int limit, String keyword) {
 		int startRow = (currentPage -1) * limit + 1;
 		int endRow = startRow + limit - 1;
 		return sproductDao.listApmanager(startRow,endRow,keyword);
+	}
+
+	@Override
+	public int updateSpmanager(Map<String, Object> map) {
+			return sproductDao.updateSpmanager(map); 
 	}
 	
 }

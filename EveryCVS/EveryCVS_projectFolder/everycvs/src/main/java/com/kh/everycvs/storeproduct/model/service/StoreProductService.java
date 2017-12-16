@@ -1,7 +1,7 @@
 package com.kh.everycvs.storeproduct.model.service;
 
-import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.kh.everycvs.common.model.vo.StoreProduct;
 
@@ -23,7 +23,7 @@ public interface StoreProductService {
 
 	public void deleteSpmanager(int spnum);
 	
-	public int updateSpmanager(int spnum, Date manufacturedate, int quantity);
+	public int updateSpmanager(Map<String, Object> map);
 
 	public List<StoreProduct> listApmanager(int currentPage, int limit, String keyword);
 

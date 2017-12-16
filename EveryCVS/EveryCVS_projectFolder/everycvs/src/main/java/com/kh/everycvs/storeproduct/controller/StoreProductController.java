@@ -2,6 +2,8 @@ package com.kh.everycvs.storeproduct.controller;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -188,15 +190,18 @@ public class StoreProductController {
 	
 	//storeProduct 수정하기
 	@RequestMapping(value="/spmupdate.do")
-	public ModelAndView updateSpmanager(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView();
+	public ModelAndView updateSpmanager(ModelAndView mv, 
+			@RequestParam("page") int currentPage,
+			 @RequestParam("spnum") int spnum,
+			 @RequestParam("mdate") Date manufacturedate,
+			 @RequestParam("quantity") int quantity) {
 		
-		Date manufacturedate = Date.valueOf(request.getParameter("mdate"));
-		int quantity = Integer.parseInt(request.getParameter("quantity"));
-		int spnum = Integer.parseInt(request.getParameter("spnum"));
-		int currentPage = Integer.parseInt(request.getParameter("page"));
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("spnum", spnum);
+		map.put("manufacturedate", manufacturedate);
+		map.put("quantity", quantity);
 		
-		if(sproductService.updateSpmanager(spnum, manufacturedate, quantity) > 0){
+		if(sproductService.updateSpmanager(map) > 0){
 			mv.setViewName("redirect:/spmlist.do?page="+currentPage);
 		}else{
 			mv.addObject("message", "수정 실패!");

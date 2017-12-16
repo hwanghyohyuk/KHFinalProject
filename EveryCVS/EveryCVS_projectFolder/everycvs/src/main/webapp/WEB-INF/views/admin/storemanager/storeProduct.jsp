@@ -91,7 +91,7 @@
 																	alt="image1" align="left" style="margin-left: 5px;">
 															</div>
 															<div class="col-sm-6">
-															<form action="spmupdate.do" method="post" enctype="multipart/form-data">
+															<form id="updateform" action="/everycvs/spmupdate.do" method="post" enctype="multipart/form-data">
 															<input type="hidden" name="spnum" value="${spm.store_product_no}">
 															<input type="hidden" name="page" value="${currentPage}">
 																<table class="table table-condensed">
@@ -143,12 +143,12 @@
 													</div>
 													<div class="modal-footer">
 														<button type="submit" class="btn btn-primary btn-sm" data-dismiss="modal"
-														onclick="location.href='spmupdate.do?spnum=${spm.store_product_no}'">수정</button> &nbsp;
+														onclick="updateSubmit();">수정</button> &nbsp;
 														<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" 
 														onclick="location.href='spmdelete.do?spnum=${spm.store_product_no}'">삭제</button>
 													</div>
 												</div>
-											</div>
+											</div><!-- Get방식으로 넘김 -->
 										</div> 
 									</td>
 									<!-- Modal End -->
@@ -195,10 +195,18 @@
 		</div>
 	</div>
 </div>
+
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->
 <c:import url="../../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
+<!-- JS -->
+<script type="text/javascript">
+	function updateSubmit(){
+		console.log("POST방식 제출");
+		$("#updateform").submit();
+	}
+</script>
 <!-- JS -->
 <c:import url="../../include/user/common/end.jsp"></c:import>
 <!-- === END FOOTER === -->

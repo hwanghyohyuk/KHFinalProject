@@ -75,9 +75,6 @@ public class StoreProductDao {
 		 sqlSession.delete("deleteSpmanager4", spnum);
 	}
 	
-	public int updateSpmanager(int spnum, Date manufacturedate, int quantity) {
-		return sqlSession.update("updateSpmanager", spnum); 
-	}
 
 	public List<StoreProduct> listApmanager(int startRow, int endRow, String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -89,6 +86,10 @@ public class StoreProductDao {
 		}else{
 			return sqlSession.selectList("storeProduct.listApmanager", map);
 		}	
+	}
+
+	public int updateSpmanager(Map<String, Object> map) {
+		return sqlSession.update("storeProduct.updateSpmanager", map); 
 	}
 	
 }

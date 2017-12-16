@@ -133,9 +133,9 @@
 		]]>
    </delete>
    
-   <update id="updateSpmanager" parameterType="int">
-		update store_popularity_product_view 
-		set MANUFACTURE_DATE = #{manufacture_date}, QUANTITY = #{quantity} where STORE_PRODUCT_NO = #{store_product_no}
+   <update id="updateSpmanager" parameterType="hashmap">
+		update tb_store_product 
+		set manufacture_date = #{manufacturedate}, quantity = #{quantity} where store_product_no = #{spnum}
    </update>
    
    <select id="listApmanager" parameterType="java.util.Map" resultType="list" resultMap="resultStoreProduct">
