@@ -21,7 +21,7 @@ public interface StoreProductService {
 
 	public List<StoreProduct> listSpmanager(int currentPage, int limit, String keyword);
 
-	public void deleteSpmanager(int spnum);
+	public void deleteSpmanager(int spnum, String toggle);
 	
 	public int updateSpmanager(Map<String, Object> map);
 

@@ -68,11 +68,11 @@ public class StoreProductDao {
 		}		
 	}
 
-	public void deleteSpmanager(int spnum) {
-		 sqlSession.delete("deleteSpmanager1");
-		 sqlSession.delete("deleteSpmanager2");
-		 sqlSession.delete("deleteSpmanager3");
-		 sqlSession.delete("deleteSpmanager4", spnum);
+	public void deleteSpmanager(int spnum, String toggle) {
+		Map<String,Object>map = new HashMap<String,Object>();
+		map.put("spnum", spnum);
+		map.put("toggle", toggle);
+		 sqlSession.update("storeProduct.deleteSpmanager", map);
 	}
 	
 

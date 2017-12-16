@@ -56,8 +56,8 @@ public class StoreProductServiceImpl implements StoreProductService {
 	}
 
 	@Override
-	public void deleteSpmanager(int spnum) {
-		sproductDao.deleteSpmanager(spnum);
+	public void deleteSpmanager(int spnum,String toggle) {
+		sproductDao.deleteSpmanager(spnum,toggle);
 	}
 
 	@Override

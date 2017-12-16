@@ -19,8 +19,8 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<h2>
-							<strong>GS25대치점</strong><br> <small>서울특별시 강남구
-								영동대로86길 10 </small>
+							<strong>${sessionScope.store.brand_name}&nbsp;${sessionScope.store.store_name}</strong><br>
+							<small>${sessionScope.store.road_address}</small>
 						</h2>
 					</div>
 					<form action="spmlist.do" method="post">
@@ -53,6 +53,7 @@
 								<th>할인정보</th>
 								<th>제조일</th>
 								<th>수량</th>
+								<th>삭제여부</th>
 								<th>삭제</th>
 							</tr>
 							<c:forEach var="spm" items="${requestScope.list}">
@@ -67,9 +68,13 @@
 									<td>${spm.discount_name}</td>
 									<td>${spm.manufacture_date}</td>
 									<td>${spm.quantity}개</td>
+									<td class="text-center">${spm.del_check}</td>
 									<td>
 										<button type="button" class="btn btn-primary btn-xs" 
-										onclick="location.href='spmdelete.do?spnum=${spm.store_product_no}'">삭제</button>
+										onclick="location.href='spmdelete.do?spnum=${spm.store_product_no}&toggle=${spm.del_check}'">
+										<c:if test="${spm.del_check eq 'N'}">삭제</c:if>
+										<c:if test="${spm.del_check ne 'N'}">복구</c:if>										
+										</button>
 									</td>
 									<!-- Modal -->
 									<td>

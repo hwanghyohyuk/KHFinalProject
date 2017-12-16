@@ -108,30 +108,12 @@
 		    and product_name like #{keyword}
            ]]>
    </select>
-   
-   <delete id="deleteSpmanager1" parameterType="_int">
+     
+   <update id="deleteSpmanager" parameterType="hashmap">
    		<![CDATA[
-			delete from tb_purchase where store_product_no = #{store_product_no, jdbcType=INTEGER}
+			update tb_store_product set del_check = #{toggle} where store_product_no = #{spnum}
 		]]>
-   </delete>
-   
-   <delete id="deleteSpmanager2" parameterType="_int">
-   		<![CDATA[
-			delete from tb_gifticon where purchase_no = #{purchase_no, jdbcType=INTEGER}
-		]]>
-   </delete>
-   
-   <delete id="deleteSpmanager3" parameterType="int">
-   		<![CDATA[
-			delete from tb_dc_product where product_no = #{product_no, jdbcType=INTEGER}
-		]]>
-   </delete>
-   
-   <delete id="deleteSpmanager4" parameterType="int">
-   		<![CDATA[
-			delete from tb_store_product where store_product_no = #{spnum, jdbcType=INTEGER}
-		]]>
-   </delete>
+   </update>
    
    <update id="updateSpmanager" parameterType="hashmap">
 		update tb_store_product 

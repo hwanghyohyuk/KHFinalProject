@@ -177,10 +177,14 @@ public class StoreProductController {
 	
 	//storeProduct 삭제하기
 	@RequestMapping(value="/spmdelete.do")
-	public ModelAndView deleteSpmanager(int spnum){
+	public ModelAndView deleteSpmanager(@RequestParam("spnum") int spnum,@RequestParam("toggle") String toggle){
 		ModelAndView mv = new ModelAndView();
-		
-		sproductService.deleteSpmanager(spnum);
+		if(toggle.equals("N")){
+			toggle="Y";
+		}else{
+			toggle="N";
+		}
+		sproductService.deleteSpmanager(spnum,toggle);
 		
 		mv.setViewName("redirect:/spmlist.do?page=1");
 		
