@@ -19,7 +19,8 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<h2>
-							<strong>GS25</strong><br> <small>상품 추가</small>
+							<strong>${sessionScope.store.brand_name}&nbsp;${sessionScope.store.store_name}</strong><br>
+							<small>${sessionScope.store.road_address}</small>
 						</h2>
 					</div>
 					<form action="apmlist.do" method="post">

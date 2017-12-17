@@ -1,6 +1,5 @@
 package com.kh.everycvs.storeproduct.model.service;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -59,6 +58,11 @@ public class StoreProductServiceImpl implements StoreProductService {
 	public void deleteSpmanager(int spnum,String toggle) {
 		sproductDao.deleteSpmanager(spnum,toggle);
 	}
+	
+	@Override
+	public int updateSpmanager(Map<String, Object> map) {
+			return sproductDao.updateSpmanager(map); 
+	}
 
 	@Override
 	public List<StoreProduct> listApmanager(int currentPage, int limit, String keyword) {
@@ -67,9 +71,4 @@ public class StoreProductServiceImpl implements StoreProductService {
 		return sproductDao.listApmanager(startRow,endRow,keyword);
 	}
 
-	@Override
-	public int updateSpmanager(Map<String, Object> map) {
-			return sproductDao.updateSpmanager(map); 
-	}
-	
 }
