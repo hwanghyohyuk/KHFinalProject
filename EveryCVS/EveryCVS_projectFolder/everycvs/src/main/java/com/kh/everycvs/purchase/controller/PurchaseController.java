@@ -2,7 +2,6 @@ package com.kh.everycvs.purchase.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,22 +51,86 @@ public class PurchaseController {
 	
 	//사용자 구매 영역
 	//사용자 잔고 금액 감소 : 사용자가 상품을 잔고로 결제 시 차감, 포인트 자동적립
-	public String userDecreMoney(HttpServletRequest request) {
+	@RequestMapping("userDecreMoney.do")
+	public ModelAndView userDecreMoney(ModelAndView mv,
+									   HttpSession session,
+									   @RequestParam ("price") int price,
+									   @RequestParam ("cash") String cash,
+									   @RequestParam ("user_no") String user_no,
+									   @RequestParam ("point") String point){
 		//입력받은 금액만큼 잔고에서 차감후 리턴
-		return null;
+		System.out.println("차감할 금액 : " + price);
+		System.out.println("결제하기 전 cash : " + cash);
+		System.out.println("point : " + point);
+		
+		int c = Integer.parseInt(cash);
+		int uno = Integer.parseInt(user_no);
+		int p = Integer.parseInt(point);
+		
+		int addPoint = (int) (price * 0.01);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("price", price);
+		map.put("cash", c);
+		map.put("user_no", uno);
+		map.put("point", p);
+		map.put("addPoint", addPoint);
+		
+		int resultCash = purchaseService.userDecreMoney(map);
+		int resultPoint = purchaseService.userIncrePoint(map);
+		
+		 User user = (User) session.getAttribute("user");
+		 user.setCash(c - price);
+		 user.setPoint(p + addPoint);
+		 
+		 session.setAttribute("user", user);
+		 
+		mv.addObject("resultCash", resultCash);
+		mv.addObject("resultPoint", resultPoint);
+		
+		mv.setViewName("user/mypage/main");
+		
+		System.out.println("결제 후 : " + user.getCash());
+		System.out.println("결제 후 포인트 증가 : " + user.getPoint());
+		return mv;
 	}
 	
 	//포인트 감소 : 포인트로 결제할 시 포인트 차감
-	public String userDecrePoint(HttpServletRequest request) {
-		//입력받은 금액만큼 잔고의 포인트를 차감 후 리턴
-		return null;
+	@RequestMapping("userDecrePoint.do")
+	public ModelAndView userDecrePoint( @RequestParam ("price") int price,
+										@RequestParam ("point") String point,
+										@RequestParam ("user_no") String user_no,
+										ModelAndView mv,
+										HttpSession session) {
+		int dp = Integer.parseInt(point);
+		int uno = Integer.parseInt(user_no);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("point", dp);
+		map.put("user_no", uno);
+		map.put("price", price);
+		
+		int result = purchaseService.userDecrePoint(map);
+		
+		 User user = (User) session.getAttribute("user");
+		 user.setPoint(dp - price);
+		 session.setAttribute("user", user);
+		 
+		mv.addObject("result", result);
+		mv.setViewName("user/mypage/main");
+		
+		System.out.println("포인트 결제 결과 : " + user.getPoint());
+		return mv;
 	}
 	
 	//전체거래내역 조회 : 3개월, 1개월, 1주일 단위로 조회(해당 리스트 목록조회)
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="purchaseList.do", method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView purchaseList(ModelAndView mv,@RequestParam (value="month", required=false,defaultValue="0") String month, HttpSession session){
+	public ModelAndView purchaseList(ModelAndView mv,
+			                        @RequestParam (value="month", required=false,defaultValue="0") String month, 
+			                        HttpSession session){
+		
 		User user = (User)session.getAttribute("user");
 		//구매내역 조회를 요청하면 가지고 있는 구매내역 리스트를 리턴함
 		ArrayList<Purchase> list =purchaseService.purchaseList(user.getUser_no(),month);

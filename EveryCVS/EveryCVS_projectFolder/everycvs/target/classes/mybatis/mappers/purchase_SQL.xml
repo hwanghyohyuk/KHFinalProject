@@ -39,6 +39,45 @@
   		ORDER BY PURCHASE_DATE DESC		
 	</select>
 	
+	<!-- 사용자 잔고 감소 -->
+	 <update id="userDecreMoney" parameterType="hashmap">
+    	<![CDATA[
+    		update tb_user set cash = cash - #{price}
+			where user_no = #{user_no}
+    	]]>
+    
+       <selectKey keyProperty="cash" resultType="int" order="AFTER">
+			select cash FROM tb_user WHERE user_no = #{user_no}
+	   </selectKey>
+	   
+    </update>
+    
+    <!-- 사용자 포인트 증가 -->
+	 <update id="userIncrePoint" parameterType="hashmap">
+    	<![CDATA[
+    		update tb_user set point = point + #{addPoint}
+			where user_no = #{user_no}
+    	]]>
+    
+       <selectKey keyProperty="point" resultType="int" order="AFTER">
+			select point FROM tb_user WHERE user_no = #{user_no}
+	   </selectKey>
+	   
+    </update>
+    
+    <!-- 사용자 point 감소 -->
+	 <update id="userDecrePoint" parameterType="hashmap">
+    	<![CDATA[
+    		update tb_user set point = point - #{price}
+			where user_no = #{user_no}
+    	]]>
+    
+       <selectKey keyProperty="point" resultType="int" order="AFTER">
+			select point FROM tb_user WHERE user_no = #{user_no}
+	   </selectKey>
+	   
+    </update>
+	
 	
 
 </mapper>

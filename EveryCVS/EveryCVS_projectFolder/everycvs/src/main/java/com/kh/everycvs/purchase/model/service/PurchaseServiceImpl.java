@@ -51,15 +51,21 @@ public class PurchaseServiceImpl implements PurchaseService{
 	}
 
 	@Override
-	public String userDecreMoney(HttpServletRequest request) {
+	public int userDecreMoney(Map<String, Object> map) {
 		//사용자 잔고 감소 : 사용자가 잔고로 결제 시 해당금액 만큼 차감, 포인트 자동 적립
-		return null;
+		return purchaseDao.userDecreMoney(map);
 	}
 
 	@Override
-	public String userDecrePoint(HttpServletRequest request) {
+	public int userDecrePoint(Map<String, Object> map) {
 		//사용자 포인트 감소 : 포인트로 결제 시 해당금액 만큼 차감
-		return null;
+		return purchaseDao.userDecrePoint(map);
+	}
+	
+	//잔고로 구매시 포인트 증가 메소드
+	@Override
+	public int userIncrePoint(Map<String, Object> map) {
+		return purchaseDao.userIncrePoint(map);
 	}
 
 	@Override
@@ -74,5 +80,7 @@ public class PurchaseServiceImpl implements PurchaseService{
 	public int monthlyPurchaseCount() {
 		return purchaseDao.monthlyPurchaseCount();
 	}
+
+	
 
 }
