@@ -9,8 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Event;
+import com.kh.everycvs.common.model.vo.Product;
 
 public interface EventService {
+	/*사용자 : 이벤트 메인*/
+	List<Event> eventList();
+	/*사용자 : 메인화면 이벤트 top3*/
+	List<Product> eventTop3();
 	
 	//게시글 갯수 조회
 	int getListCount(String keyword);
@@ -48,6 +53,9 @@ public interface EventService {
 	
 	//이벤트 수정하기
 	public int updateEventPage(Event event);
+
+
+	
 
 
 

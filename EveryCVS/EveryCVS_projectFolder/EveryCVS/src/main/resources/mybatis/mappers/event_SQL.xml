@@ -8,18 +8,32 @@
 		<result property="event_no" column="EVENT_NO" />
 		<result property="title" column="TITLE" />
 		<result property="writer" column="WRITER" />
+		<result property="user_name" column="USER_NAME" />
 		<result property="contents" column="CONTENTS" />
 		<result property="start_date" column="START_DATE" />
 		<result property="end_date" column="END_DATE" />
 		<result property="join_limit" column="JOIN_LIMIT" />
 		<result property="readcount" column="READCOUNT" />
+		<result property="brand_no" column="brand_no" />
+		<result property="brand_name" column="brand_name" />
 		<result property="original_file_name" column="ORIGINAL_FILE_NAME" />
 		<result property="stored_file_name" column="STORED_FILE_NAME" />
 		<result property="del_check" column="DEL_CHECK" />
 	</resultMap>
 	
+	<select id="eventList" resultType="list" resultMap="resultEvent">
+		<![CDATA[
+		select * from event_view 
+		]]>
+	</select>
 	
-	
+	<select id="eventTop3" resultType="list" resultMap="resultEvent">
+		<![CDATA[
+		select a.* from event_view a 
+		join (select brand_no,max(start_date) as newest from event_view a group by brand_no) b 
+		on (a.start_date = b.newest and a.brand_no = b.brand_no) order by a.brand_no asc
+		]]>
+	</select>
 	<!-- 게시글 갯수 조회 -->
 	<select id="getListCount" resultType="_int">
 		select count(*) from EVENT_VIEW

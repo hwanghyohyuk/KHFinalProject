@@ -22,6 +22,7 @@ import com.kh.everycvs.common.model.vo.NaverMap;
 import com.kh.everycvs.common.model.vo.Product;
 import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.User;
+import com.kh.everycvs.event.model.service.EventService;
 import com.kh.everycvs.product.model.service.ProductService;
 import com.kh.everycvs.store.model.service.StoreService;
 
@@ -33,6 +34,9 @@ public class MainController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private EventService eventService;
 
 	// 인터셉터를 거치는 페이지이동 메소드
 	@RequestMapping("main/main.do")
@@ -65,6 +69,8 @@ public class MainController {
 			session.setAttribute("store", null); // 정보를 삭제한다
 		}
 		// 이벤트 top 3 편의점별 서비스 불러오기
+		List<Product> eveTop3 = eventService.eventTop3();
+		mv.addObject("evetop3",eveTop3);
 		// 인기상품 top 3 서비스 불러오기
 		List<Product> popTop3 = productService.popularTop3();
 		mv.addObject("poptop3",popTop3);

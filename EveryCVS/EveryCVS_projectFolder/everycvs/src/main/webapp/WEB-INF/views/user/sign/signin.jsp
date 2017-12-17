@@ -4,6 +4,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- === BEGIN HEAD ===  -->
 <c:import url="../../include/user/common/head.jsp"></c:import>
+<!-- JS -->
+<c:if test="${result eq false }">
+<script type="text/javascript">
+alert("Sign in fail...\n check your email or password...");
+</script>
+</c:if>
+<c:if test="${sign eq false }">
+<script type="text/javascript">
+alert("로그인이 필요한 서비스입니다.");
+</script>
+</c:if>
+<!-- /JS -->
 <c:import url="../../include/user/common/headend.jsp"></c:import>
 <!-- === END HEAD ===  -->
 <!-- === BEGIN HEADER ===  -->
@@ -60,11 +72,6 @@
 <!-- === BEGIN FOOTER === -->
 <c:import url="../../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
-<!-- JS -->
-<c:if test="${result eq false }">
-<script type="text/javascript">
-alert("Sign in fail...\n check your email or password...");
-</script>
-</c:if>
+
 <c:import url="../../include/user/common/end.jsp"></c:import>
 <!-- === END === -->

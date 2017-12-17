@@ -26,9 +26,9 @@
 										class="fa-home active">EVERYCVS</a></li>
 									<li><a href="/everycvs/main.do#cvssearch"><span
 											class="fa-search">CVS SEARCH</span></a></li>
-									<li><a href="/everycvs/main.do#event"><span
+									<li><a href="/everycvs/page/eventmain.do"><span
 											class="fa-gift">EVENT</span></a></li>
-									<li><a href="/everycvs/main.do#help"><span
+									<li><a href="/everycvs/page/servicemain.do"><span
 											class="fa-question-circle">HELP</span></a></li>
 								</c:if>
 								<c:if test="${ sessionScope.store ne null}">

@@ -21,6 +21,15 @@ public class ServiceCenterController {
 	private ServiceCenterService serviceCenterService;
 
 	// 고객센터 조회 : 고객센터 리스트조회
+		@RequestMapping(value = "/page/servicemain.do")
+		public ModelAndView servicemain(ModelAndView mv, HttpServletRequest request) {
+			mv.setViewName("servicecenter/servicelist");
+			ArrayList<ServiceCenter> list = (ArrayList<ServiceCenter>) serviceCenterService.serviceList();
+			mv.addObject("list", list);
+			return mv;
+		}
+	
+	// 고객센터 조회 : 고객센터 리스트조회
 	@RequestMapping(value = "selectServiceList.do")
 	public ModelAndView serviceList(ModelAndView mv, HttpServletRequest request) {
 		mv.setViewName("servicecenter/servicelist");

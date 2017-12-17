@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Event;
-
+import com.kh.everycvs.common.model.vo.Product;
 import com.kh.everycvs.event.model.dao.EventDao;
 
 @Service("eventService")
@@ -23,6 +23,18 @@ public class EventServiceImpl implements EventService{
 	@Autowired
 	private EventDao eventDao;
 	
+	/*사용자 : 이벤트 목록*/
+	@Override
+	public List<Event> eventList() {
+			return eventDao.eventList();
+	}
+
+	/*사용자 : 메인화면 이벤트 top3*/
+	@Override
+	public List<Product> eventTop3() {
+		return eventDao.eventTop3();
+	}
+
 	@Override
 	public int getListCount(String keyword) {
 		// 게시글  조회
@@ -82,6 +94,9 @@ public class EventServiceImpl implements EventService{
 		// 수정하기 
 		return eventDao.updateEventPage(event);
 	}
+
+
+
 
 	
 

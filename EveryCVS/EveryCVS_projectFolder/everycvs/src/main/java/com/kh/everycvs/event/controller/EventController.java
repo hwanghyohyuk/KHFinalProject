@@ -1,21 +1,15 @@
 package com.kh.everycvs.event.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Event;
-import com.kh.everycvs.common.model.vo.User;
 import com.kh.everycvs.event.model.service.EventService;
 
 import net.sf.json.JSONObject;
@@ -34,6 +27,16 @@ public class EventController {
 	
 	@Autowired
 	private EventService eventService;
+	
+	/*사용자 : 이벤트 메인*/
+	@RequestMapping(value="/page/eventmain.do", method=RequestMethod.GET)
+	public ModelAndView eventList(ModelAndView mv) {
+		mv.setViewName("event/eventlist");
+		List<Event> list = eventService.eventList();
+		mv.addObject("list", list);
+		return mv;
+	}
+
 	
 	// 이벤트 리스트 이건 유저 뷰인데 다시작업해야함
 	/*@RequestMapping(value="eventList.do", method=RequestMethod.GET)

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.everycvs.common.model.vo.Event;
+import com.kh.everycvs.common.model.vo.Product;
 
 
 
@@ -20,6 +21,17 @@ public class EventDao {
 	private SqlSessionTemplate sqlSession;
 	
 	public EventDao(){}
+
+	/*사용자 : 이벤트 목록*/
+	public List<Event> eventList() {
+		return sqlSession.selectList("event.eventList");
+	}
+
+	/*사용자 : 메인화면 이벤트 top3*/
+	public List<Product> eventTop3() {
+		return sqlSession.selectList("event.eventTop3");
+	}
+
 	
 	/*백업
 	 * public List<Event> selectEventList(String keyword, int currentPage, int limit){

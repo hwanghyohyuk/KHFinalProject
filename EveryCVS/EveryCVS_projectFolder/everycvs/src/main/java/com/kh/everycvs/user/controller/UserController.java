@@ -42,8 +42,12 @@ public class UserController {
 
 	/* 로그인 페이지 이동 */
 	@RequestMapping(value = "sign/signin.do", method = RequestMethod.GET)
-	public String intercepterSignin() {
-		return "user/sign/signin";
+	public ModelAndView intercepterSignin(ModelAndView mv,@RequestParam(value = "sign", required=false, defaultValue="true") boolean sign) {
+		mv.setViewName("user/sign/signin");
+		if(!sign){
+			mv.addObject("sign", sign);
+		}		
+		return mv;
 	}
 
 	/** 로그인 **/
