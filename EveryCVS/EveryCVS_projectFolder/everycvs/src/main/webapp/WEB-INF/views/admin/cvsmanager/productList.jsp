@@ -40,16 +40,19 @@
 							style="padding-top: 20px; padding-bottom: 56px;">
 							<div class="row jun23">
 								<c:forEach var="product" items="${tlist}">
-									<div onclick="show_modal('${product.product_no}' + '/' + '${product.product_name}' + '/' + '${product.product_kind_name}' + '/' + '${product.manufacturer}' + '/' + '${product.price}' + '/' + '${product.expiration_date}' + '/' + '${product.original_file_name}' + '/' + '${product.purchase_count}' + '/' + '${product.stored_file_name}');"
-									class="jun1" id="modify1" data-toggle="modal"
-									data-target="#myModal" style="cursor: pointer;">
-									<div class="jun_imgdiv2">
-										<img src="/everycvs/resources/upload/${product.stored_file_name}" class="jun_img2"
-											alt="NO IMAGE">
+									<div
+										onclick="show_modal('${product.product_no}' + '/' + '${product.product_name}' + '/' + '${product.product_kind_name}' + '/' + '${product.manufacturer}' + '/' + '${product.price}' + '/' + '${product.expiration_date}' + '/' + '${product.original_file_name}' + '/' + '${product.purchase_count}' + '/' + '${product.stored_file_name}');"
+										class="jun1" id="modify1" data-toggle="modal"
+										data-target="#myModal" style="cursor: pointer;">
+										<div class="jun_imgdiv2">
+											<img
+												src="/everycvs/resources/upload/${product.stored_file_name}"
+												class="jun_img2" alt="NO IMAGE">
+										</div>
+										<div class="jun19">${product.product_name}</div>
+										<span class="label label-blue jun20">${product.purchase_count}
+											EA</span>
 									</div>
-									<div class="jun19">${product.product_name}</div>
-									<span class="label label-blue jun20">${product.purchase_count} EA</span>
-								</div>
 								</c:forEach>
 							</div>
 						</div>
@@ -70,66 +73,102 @@
 								<div class="col-md-6">
 									<!-- progress bar -->
 									<!-- first progress block -->
-									<span class="jun2">과일(<fmt:formatNumber value="${tmap['1']/count*100}" pattern="#.##"/>%)</span>
+									<span class="jun2">과일(<fmt:formatNumber
+											value="${tmap['1']/count*100}" pattern="#.##" />%)
+									</span>
 									<div class="progress progress-sm height20">
 										<div class="progress-bar progress-bar-red" role="progressbar"
 											aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-											style="width: <c:out value="${tmap['1']/count*100}"/>%">${tmap['1']} EA</div>
+											style="width: <c:out value="${tmap['1']/count*100}"/>%">${tmap['1']}
+											EA</div>
 									</div>
-									<span class="jun2">도시락(<fmt:formatNumber value="${tmap['2']/count*100}" pattern="#.##"/>%)</span>
+									<span class="jun2">도시락(<fmt:formatNumber
+											value="${tmap['2']/count*100}" pattern="#.##" />%)
+									</span>
 									<div class="progress progress-sm height20">
-										<div class="progress-bar progress-bar-green" role="progressbar"
-										aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-										style="width: <c:out value="${tmap['2']/count*100}"/>%">${tmap['2']} EA</div>
+										<div class="progress-bar progress-bar-green"
+											role="progressbar" aria-valuenow="90" aria-valuemin="0"
+											aria-valuemax="100"
+											style="width: <c:out value="${tmap['2']/count*100}"/>%">${tmap['2']}
+											EA</div>
 									</div>
-									<span class="jun2">김밥(<fmt:formatNumber value="${tmap['3']/count*100}" pattern="#.##"/>%)</span>
+									<span class="jun2">김밥(<fmt:formatNumber
+											value="${tmap['3']/count*100}" pattern="#.##" />%)
+									</span>
 									<div class="progress progress-sm height20">
 										<div class="progress-bar progress-bar-yellow"
-											role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-											style="width: <c:out value="${tmap['3']/count*100}"/>%">${tmap['3']} EA</div>
+											role="progressbar" aria-valuenow="90" aria-valuemin="0"
+											aria-valuemax="100"
+											style="width: <c:out value="${tmap['3']/count*100}"/>%">${tmap['3']}
+											EA</div>
 									</div>
-									<span class="jun2">햄버거(<fmt:formatNumber value="${tmap['4']/count*100}" pattern="#.##"/>%)</span>
+									<span class="jun2">햄버거(<fmt:formatNumber
+											value="${tmap['4']/count*100}" pattern="#.##" />%)
+									</span>
 									<div class="progress progress-sm height20">
-										<div class="progress-bar progress-bar-ppple" role="progressbar" aria-valuenow="90" aria-valuemin="0"
-										aria-valuemax="100" style="width: <c:out value="${tmap['4']/count*100}"/>%">${tmap['4']} EA</div>
+										<div class="progress-bar progress-bar-ppple"
+											role="progressbar" aria-valuenow="90" aria-valuemin="0"
+											aria-valuemax="100"
+											style="width: <c:out value="${tmap['4']/count*100}"/>%">${tmap['4']}
+											EA</div>
 									</div>
-									<span class="jun2">햄(<fmt:formatNumber value="${tmap['5']/count*100}" pattern="#.##"/>%)</span>
+									<span class="jun2">햄(<fmt:formatNumber
+											value="${tmap['5']/count*100}" pattern="#.##" />%)
+									</span>
 									<div class="progress progress-sm height20">
 										<div class="progress-bar progress-bar-pink" role="progressbar"
 											aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-											style="width: <c:out value="${tmap['5']/count*100}"/>%">${tmap['5']} EA</div>
+											style="width: <c:out value="${tmap['5']/count*100}"/>%">${tmap['5']}
+											EA</div>
 									</div>
 								</div>
 								<div class="col-md-6">
-									<span class="jun2">라면(<fmt:formatNumber value="${tmap['6']/count*100}" pattern="#.##"/>%)</span>
+									<span class="jun2">라면(<fmt:formatNumber
+											value="${tmap['6']/count*100}" pattern="#.##" />%)
+									</span>
 									<div class="progress progress-sm height20">
 										<div class="progress-bar progress-bar-salgu"
-											role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-											style="width: <c:out value="${tmap['6']/count*100}"/>%">${tmap['6']} EA</div>
+											role="progressbar" aria-valuenow="90" aria-valuemin="0"
+											aria-valuemax="100"
+											style="width: <c:out value="${tmap['6']/count*100}"/>%">${tmap['6']}
+											EA</div>
 									</div>
-									<span class="jun2">아이스크림(<fmt:formatNumber value="${tmap['7']/count*100}" pattern="#.##"/>%)</span>
+									<span class="jun2">아이스크림(<fmt:formatNumber
+											value="${tmap['7']/count*100}" pattern="#.##" />%)
+									</span>
 									<div class="progress progress-sm height20">
-										<div class="progress-bar progress-bar-skyblue" role="progressbar"
-										aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-										style="width: <c:out value="${tmap['7']/count*100}"/>%">${tmap['7']} EA</div>
+										<div class="progress-bar progress-bar-skyblue"
+											role="progressbar" aria-valuenow="90" aria-valuemin="0"
+											aria-valuemax="100"
+											style="width: <c:out value="${tmap['7']/count*100}"/>%">${tmap['7']}
+											EA</div>
 									</div>
-									<span class="jun2">샐러드(<fmt:formatNumber value="${tmap['8']/count*100}" pattern="#.##"/>%)</span>
+									<span class="jun2">샐러드(<fmt:formatNumber
+											value="${tmap['8']/count*100}" pattern="#.##" />%)
+									</span>
 									<div class="progress progress-sm height20">
 										<div class="progress-bar progress-bar-gray" role="progressbar"
 											aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-											style="width: <c:out value="${tmap['8']/count*100}"/>%">${tmap['8']} EA</div>
+											style="width: <c:out value="${tmap['8']/count*100}"/>%">${tmap['8']}
+											EA</div>
 									</div>
-									<span class="jun2">과자(<fmt:formatNumber value="${tmap['9']/count*100}" pattern="#.##"/>%)</span>
+									<span class="jun2">과자(<fmt:formatNumber
+											value="${tmap['9']/count*100}" pattern="#.##" />%)
+									</span>
 									<div class="progress progress-sm height20">
 										<div class="progress-bar progress-bar-blue" role="progressbar"
 											aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-											style="width: <c:out value="${tmap['9']/count*100}"/>%">${tmap['9']} EA</div>
+											style="width: <c:out value="${tmap['9']/count*100}"/>%">${tmap['9']}
+											EA</div>
 									</div>
-									<span class="jun2">음료(<fmt:formatNumber value="${tmap['10']/count*100}" pattern="#.##"/>%)</span>
+									<span class="jun2">음료(<fmt:formatNumber
+											value="${tmap['10']/count*100}" pattern="#.##" />%)
+									</span>
 									<div class="progress progress-sm height20">
 										<div class="progress-bar progress-bar-aqua" role="progressbar"
 											aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-											style="width: <c:out value="${tmap['10']/count*100}"/>%">${tmap['10']} EA</div>
+											style="width: <c:out value="${tmap['10']/count*100}"/>%">${tmap['10']}
+											EA</div>
 									</div>
 
 									<!-- End progress bar -->
@@ -142,100 +181,82 @@
 			<!-- End Acordion -->
 
 			<div class="panel" style="padding: 8px;">
-				<!-- Tab v1 -->
-				<div class="tabs">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#sample-1" data-toggle="tab">전체</a></li>
-						<li><a href="#sample-2" data-toggle="tab">과일</a></li>
-						<li><a href="#sample-3" data-toggle="tab">도시락</a></li>
-						<li><a href="#sample-4" data-toggle="tab">김밥</a></li>
-						<li><a href="#sample-5" data-toggle="tab">햄버거</a></li>
-						<li><a href="#sample-6" data-toggle="tab">햄</a></li>
-						<li><a href="#sample-7" data-toggle="tab">라면</a></li>
-						<li><a href="#sample-8" data-toggle="tab">아이스크림</a></li>
-						<li><a href="#sample-9" data-toggle="tab">샐러드</a></li>
-						<li><a href="#sample-10" data-toggle="tab">과자</a></li>
-						<li><a href="#sample-11" data-toggle="tab">음료</a></li>
-					</ul>
-
-					<!-- tab-content -->
-					<div class="tab-content">
-						<%-- <c:forEach var="i" begin="1" end="11" step="1"> --%>
-							<div class="tab-pane fade in active" id="sample-1">
-								<div class="row">
-									<div class="col-md-12">
-									<div style="height: 360px; overflow-y: auto; margin-bottom: 20px;">
-										<table class="table">
-											<tr class="active text-center">
-												<th width="10%">번호</th>
-												<th width="28%">상품명</th>
-												<th width="17%">제조사</th>
-												<th width="12%">분류</th>
-												<th width="12%">가격</th>
-												<th width="15%">유통기한</th>
-												<th width="6%">Del</th>
-											</tr>
-											<c:forEach var="product" items="${plist}">
-												<tr class="text-center">
-													<td>${product.product_no}</td>
-													<td onclick="show_modal('${product.product_no}' + '/' + '${product.product_name}' + '/' + '${product.product_kind_name}' + '/' + '${product.manufacturer}' + '/' + '${product.price}' + '/' + '${product.expiration_date}' + '/' + '${product.original_file_name}' + '/' + '${product.purchase_count}' + '/' + '${product.stored_file_name}');"
-														data-toggle="modal" data-target="#myModal" 
-														style="cursor: pointer;">${product.product_name}</td>
-													<td>${product.manufacturer}</td>
-													<td>${product.product_kind_name}</td>
-													<td>${product.price}원</td>
-													<td>${product.expiration_date}일</td>
-													<td><i class="fa fa-trash-o jun21"
-														onclick="del_product(${product.product_no});"></i></td>
-												</tr>
-											</c:forEach>
-										</table>
-										</div>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						
-						<!-- End tab content -->
-						<!-- Search & Add block -->
-						<div class="row">
-							<div class="col-sm-12" style="padding-left: 16px;">
-								<!--start-->
-								<form name="searchProductFrm" action="/everycvs/cvsproductSearch.do" method="post">
-								<div class="col-sm-2 jun16">
-									<select name="category" class="form-control input jun15">
-										<option>상품명</option>
-										<option>제조사</option>
-									</select>
-								</div>
-									<div class="col-sm-4 jun12">
-										<input class="form-control jun11" name="keyword" type="text"
-											placeholder="검색 키워드를 입력하세요.">
-									</div>
-									<div class="col-sm-1 jun13">
-										<button type="submit" class="btn btn-default btn jun14"
-											onclick="search_product();">
-											<i class="fa fa-search"></i>
-										</button>
-									</div>
-								</form>
-								<div class="col-sm-5 jun17">
-									<button type="button" onclick="add_product();"
-										class="btn btn-danger btn jun4" id="width100">
-										<i class="fa fa-cube" style="margin-right: 6px;"></i>ADD
-									</button>
-								</div>
-								<!--end-->
+				<div class="tab-pane fade in active" id="sample-1">
+					<div class="row">
+						<div class="col-md-12">
+							<div
+								style="height: 360px; overflow-y: auto; margin-bottom: 20px;">
+								<table class="table">
+									<tr class="active text-center">
+										<th width="10%">번호</th>
+										<th width="28%">상품명</th>
+										<th width="17%">제조사</th>
+										<th width="12%">분류</th>
+										<th width="12%">가격</th>
+										<th width="15%">유통기한</th>
+										<th width="6%">Del</th>
+									</tr>
+									<c:forEach var="product" items="${plist}">
+										<tr class="text-center">
+											<td>${product.product_no}</td>
+											<td
+												onclick="show_modal('${product.product_no}' + '/' + '${product.product_name}' + '/' + '${product.product_kind_name}' + '/' + '${product.manufacturer}' + '/' + '${product.price}' + '/' + '${product.expiration_date}' + '/' + '${product.original_file_name}' + '/' + '${product.purchase_count}' + '/' + '${product.stored_file_name}');"
+												data-toggle="modal" data-target="#myModal"
+												style="cursor: pointer;">${product.product_name}</td>
+											<td>${product.manufacturer}</td>
+											<td>${product.product_kind_name}</td>
+											<td>${product.price}원</td>
+											<td>${product.expiration_date}일</td>
+											<td><i class="fa fa-trash-o jun21"
+												onclick="del_product(${product.product_no});"></i></td>
+										</tr>
+									</c:forEach>
+								</table>
 							</div>
 						</div>
-						<!-- End Search & Add block -->
+						<div class="clearfix"></div>
 					</div>
 				</div>
-				<!-- End Tab v1 -->
 
+				<!-- End tab content -->
+				<!-- Search & Add block -->
+				<div class="row">
+					<div class="col-sm-12" style="padding-left: 16px;">
+						<!--start-->
+						<form name="searchProductFrm"
+							action="/everycvs/cvsproductSearch.do" method="post">
+							<div class="col-sm-2 jun16">
+								<select name="category" class="form-control input jun15">
+									<option>상품명</option>
+									<option>제조사</option>
+									<option>분류</option>
+								</select>
+							</div>
+							<div class="col-sm-4 jun12">
+								<input class="form-control jun11" name="keyword" type="text"
+									placeholder="검색 키워드를 입력하세요.">
+							</div>
+							<div class="col-sm-1 jun13">
+								<button type="submit" class="btn btn-default btn jun14"
+									onclick="search_product();">
+									<i class="fa fa-search"></i>
+								</button>
+							</div>
+						</form>
+						<div class="col-sm-5 jun17">
+							<button type="button" onclick="add_product();"
+								class="btn btn-danger btn jun4" id="width100">
+								<i class="fa fa-cube" style="margin-right: 6px;"></i>ADD
+							</button>
+						</div>
+						<!--end-->
+					</div>
+				</div>
+				<!-- End Search & Add block -->
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 
 <!-- Modal -->
@@ -248,20 +269,24 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title" id="myModalLabel" style="color: #999;">Product detail</h4>
+				<h4 class="modal-title" id="myModalLabel" style="color: #999;">Product
+					detail</h4>
 			</div>
 			<div class="modal-body">
 				<div class="jun_imgdiv" id="detail9"></div>
 				<div class="jun_contentdiv">
-					<div class="jun_textdiv"><span id="detail1"></span></div>
-					<span style="padding-right: 26px;">상품명</span><span id="detail2"></span><br> <span
-						style="padding-right: 12px;">상품분류</span><span id="detail3"></span><br> <span
-						style="padding-right: 26px;">제조사</span><span id="detail4"></span><br> <span
-						style="padding-right: 42px;">가격</span><span id="detail5"></span><br> <span
-						style="padding-right: 14px;">유통기한</span><span id="detail6"></span><br> <span
-						style="padding-right: 14px;">첨부파일</span><span id="detail7"></span><br>
+					<div class="jun_textdiv">
+						<span id="detail1"></span>
+					</div>
+					<span style="padding-right: 26px;">상품명</span><span id="detail2"></span><br>
+					<span style="padding-right: 12px;">상품분류</span><span id="detail3"></span><br>
+					<span style="padding-right: 26px;">제조사</span><span id="detail4"></span><br>
+					<span style="padding-right: 42px;">가격</span><span id="detail5"></span><br>
+					<span style="padding-right: 14px;">유통기한</span><span id="detail6"></span><br>
+					<span style="padding-right: 14px;">첨부파일</span><span id="detail7"></span><br>
 					<div style="margin-top: 4px;">
-						판매량<span id="detail8" style="padding-left: 26px; color: #E6367A; font-weight: bold;"></span>
+						판매량<span id="detail8"
+							style="padding-left: 26px; color: #E6367A; font-weight: bold;"></span>
 					</div>
 				</div>
 			</div>

@@ -33,7 +33,7 @@
 			B.PRODUCT_KIND_NAME, A.BRAND_NO, B.ORIGINAL_FILE_NAME, B.STORED_FILE_NAME, B.DEL_CHECK, A.SALE_QUANTITY purchase_count
 			from POPULARITY_PRODUCT_VIEW A
 			JOIN PRODUCT_VIEW B ON (A.PRODUCT_NO = B.PRODUCT_NO)
-			WHERE A.BRAND_NO = 2 AND ROWNUM <= 5
+			WHERE A.BRAND_NO = 2 AND ROWNUM <= 5 AND DEL_CHECK = 'N'
 			ORDER BY SALE_QUANTITY DESC, PRODUCT_NO ASC
 		]]>
 	</select>
@@ -44,6 +44,7 @@
 			select * from product_view
 			where brand_no = #{brand_no}
 			and product_no = #{product_no}
+			and del_check = 'N'
 		]]>
 	</select>
 	
@@ -52,6 +53,7 @@
 		<![CDATA[
 			select * from product_view
 			where brand_no = #{brand_no}
+			and del_check = 'N'
 			order by product_no asc
 		]]>
 	</select>
@@ -62,6 +64,7 @@
 			select * from product_view
 			where brand_no = #{brand_no}
 			and product_name like #{product_name}
+			and del_check = 'N'
 			order by product_no asc
 		]]>
 	</select>
@@ -72,6 +75,18 @@
 			select * from product_view
 			where brand_no = #{brand_no}
 			and manufacturer like #{manufacturer}
+			and del_check = 'N'
+			order by product_no asc
+		]]>
+	</select>
+	
+	<!-- 상품 검색 : 분류 -->
+	<select id="productSearch3" parameterType="product" resultType="list" resultMap="resultProduct">
+		<![CDATA[
+			select * from product_view
+			where brand_no = #{brand_no}
+			and product_kind_name like #{product_kind_name}
+			and del_check = 'N'
 			order by product_no asc
 		]]>
 	</select>
@@ -102,30 +117,13 @@
 	</update>
 	
 	<!-- 상품 삭제 -->
-	<!-- 연쇄 삭제 : 상품 테이블에서 상품 삭제 -->
-	<delete id="deleteProduct3" parameterType="product" flushCache="true">
+	<update id="deleteProduct" parameterType="product" flushCache="true">
 		<![CDATA[
-			delete from tb_product
-			where product_no = #{product_no}
-			and brand_no = #{brand_no}
-		]]>
-	</delete>
-	
-	<!-- 연쇄 삭제 : 할인 상품 테이블에서 상품 삭제 -->
-	<delete id="deleteProduct1" parameterType="product" flushCache="true" statementType="PREPARED">
-		<![CDATA[
-			delete from tb_dc_product
+			update tb_product set
+			del_check = 'Y'
 			where product_no = #{product_no}
 		]]>
-	</delete>
-	
-	<!-- 연쇄 삭제 : 지점 상품 테이블에서 상품 삭제 -->
-	<delete id="deleteProduct2" parameterType="product" flushCache="true" statementType="PREPARED">
-		<![CDATA[
-			delete from tb_store_product
-			where product_no = #{product_no}
-		]]>
-	</delete>
+	</update>
 	
 </mapper>
 

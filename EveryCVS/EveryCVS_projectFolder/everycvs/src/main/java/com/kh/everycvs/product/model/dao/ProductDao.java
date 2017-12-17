@@ -61,6 +61,8 @@ public class ProductDao {
 			list = sqlSession.selectList("product.productSearch1", product);
 		else if(product.getManufacturer() != null)
 			list = sqlSession.selectList("product.productSearch2", product);
+		else if(product.getProduct_kind_name() != null)
+			list = sqlSession.selectList("product.productSearch3", product);
 		
 		return list;
 	}
@@ -80,9 +82,7 @@ public class ProductDao {
 	/** 상품 삭제 : 편의점 상품 삭제할 때 지점 상품도 연쇄 삭제
 	 * @param product */
 	public void deleteProduct(Product product) {
-		sqlSession.delete("product.deleteProduct1", product);
-		sqlSession.delete("product.deleteProduct2", product);
-		sqlSession.delete("product.deleteProduct3", product);
+		sqlSession.update("product.deleteProduct", product);
 	}
 
 
