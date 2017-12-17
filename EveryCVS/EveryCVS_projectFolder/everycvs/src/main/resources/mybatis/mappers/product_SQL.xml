@@ -12,11 +12,19 @@
 		<result property="product_kind_no" column="product_kind_no" />
 		<result property="product_kind_name" column="product_kind_name" />
 		<result property="brand_no" column="brand_no" />
+		<result property="brand_name" column="brand_name" />
 		<result property="original_file_name" column="original_file_name" />
 		<result property="stored_file_name" column="stored_file_name" />
 		<result property="del_check" column="del_check" />
 		<result property="purchase_count" column="purchase_count" />
 	</resultMap>
+	
+	<!-- 사용자 : 실시간 인기상품 top 3 -->
+	<select id="popularTop3" resultType="list" resultMap="resultProduct">
+	<![CDATA[
+		select rownum, a.* from(select * from product_view order by purchase_count desc,price asc) a where rownum<=3
+	]]>
+	</select>
 	
 	<!-- 금주의 인기 상품 top5 조회 -->
 	<select id="popularProductTop5" parameterType="_int" resultType="list" resultMap="resultProduct">

@@ -11,6 +11,9 @@ import com.kh.everycvs.common.model.vo.Product;
 
 public interface ProductService {
 	
+	/*사용자 메인 : 인기상품 top3*/
+	public List<Product> popularTop3();
+	
 	/** 상품 조회 : 모든 상품 조회 */
 	public List selectProductList(int brand_no);
 	
@@ -45,5 +48,6 @@ public interface ProductService {
 	/*편의점관리자*/
 	/**주간 인기상품 top 5**/
 	public List popularCvsProductTop5(int brand_no);
-	
+
+
 }

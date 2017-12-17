@@ -233,6 +233,7 @@
 							</h4>
 						</div>
 					</div>
+					
 					<div
 						class="col-md-4 col-md-offset-1 col-sm-5 col-sm-offset-6 col-xs-10 col-xs-offset-1">
 						<div id="carousel-popprd-1" class="carousel slide"
@@ -244,24 +245,22 @@
 								<li data-target="#carousel-popprd-1" data-slide-to="1"></li>
 								<li data-target="#carousel-popprd-1" data-slide-to="2"></li>
 							</ol>
-
+							
 							<!-- Wrapper for slides -->
 							<div class="carousel-inner" role="listbox">
-								<div class="item active">
-									<img alt="image6"
+							<c:forEach var="pt3" items="${poptop3}" varStatus="status">
+							<c:if test = "${status.first}">
+							<div class="item active">
+							</c:if>
+							<c:if test = "${!status.first}">
+							<div class="item">
+							</c:if>
+									<img alt="${pt3.product_name }"
 										src="/everycvs/resources/user/img/frontpage/image6.jpg">
-									<div class="carousel-caption"></div>
+									<div class="carousel-caption" style="background-color: rgba( 255, 255, 255, 0.5 );"><b>${pt3.brand_name }&nbsp;&nbsp;</b>${pt3.product_name }
+									<br><fmt:formatNumber value="${pt3.price }" type="currency" groupingUsed="true"/></div>
 								</div>
-								<div class="item">
-									<img alt="image5"
-										src="/everycvs/resources/user/img/frontpage/image5.jpg">
-									<div class="carousel-caption"></div>
-								</div>
-								<div class="item">
-									<img alt="image4"
-										src="/everycvs/resources/user/img/frontpage/image4.jpg">
-									<div class="carousel-caption"></div>
-								</div>
+							</c:forEach>
 							</div>
 
 							<!-- Controls -->
@@ -632,7 +631,7 @@
 								}
 							});
 				}
-				console.log(markerCurrent);
+				//console.log(markerCurrent);
 				var contentString = [
 						'<div style="padding:20px;">',
 						'<h3><b>' + store.brand_name + '</b>&nbsp;'
@@ -736,7 +735,7 @@
 											}
 										});
 							}
-							console.log(marker);
+							//console.log(marker);
 							var contentString = [
 									'<div style="padding:20px;">',
 									'<h3><b>' + storelist.brand_name + '</b>&nbsp;'
@@ -780,8 +779,8 @@
 	}
 	
 	function setStoreList(bno) {//이벤트 발생시 맵 속성을 초기화 하는 함수
-		console.clear();
-		console.log(markers);
+		//console.clear();
+		//console.log(markers);
 		//현재 브랜드번호와 다르다면
 		if(this.brand_no!=bno){
 			this.brand_no = bno;

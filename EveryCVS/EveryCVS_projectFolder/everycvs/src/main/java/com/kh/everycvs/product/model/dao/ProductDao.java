@@ -16,6 +16,11 @@ public class ProductDao {
 	private SqlSession sqlSession;
 
 	/*사용자*/
+	/*실시간 인기상품 top3*/
+	public List<Product> popularTop3() {
+		return sqlSession.selectList("product.popularTop3");
+	}
+	
 	/**실시간 인기상품(전체) top 5**/
 	public Map popularProductTop5() {
 		// TODO Auto-generated method stub
@@ -79,6 +84,8 @@ public class ProductDao {
 		sqlSession.delete("product.deleteProduct2", product);
 		sqlSession.delete("product.deleteProduct3", product);
 	}
+
+
 	
 	
 	

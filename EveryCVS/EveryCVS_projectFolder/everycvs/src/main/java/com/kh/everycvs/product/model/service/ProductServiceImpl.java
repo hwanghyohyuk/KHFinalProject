@@ -19,6 +19,12 @@ public class ProductServiceImpl implements ProductService{
 	private ProductDao productDao;
 
 	/*사용자*/
+	/*실시간 인기상품 top 3*/
+	@Override
+	public List<Product> popularTop3() {
+		return productDao.popularTop3();
+	}
+	
 	/**실시간 인기상품(전체) top 5**/
 	@Override
 	public Map popularProductTop5() {
@@ -81,6 +87,8 @@ public class ProductServiceImpl implements ProductService{
 	public void deleteProduct(Product product) {
 		productDao.deleteProduct(product);
 	}
+
+
 	
 	
 }
