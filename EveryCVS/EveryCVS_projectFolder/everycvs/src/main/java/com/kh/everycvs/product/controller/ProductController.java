@@ -77,6 +77,9 @@ public class ProductController {
 		case "제조사" :
 			productInfo.setManufacturer(keyword);
 			break;
+		case "분류" :
+			productInfo.setProduct_kind_name(keyword);
+			break;
 		}
 		
 		ArrayList<Product> list = (ArrayList<Product>) productService.searchProductList(productInfo);
