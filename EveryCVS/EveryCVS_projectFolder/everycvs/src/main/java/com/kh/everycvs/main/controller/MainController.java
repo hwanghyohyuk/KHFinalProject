@@ -10,7 +10,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -132,7 +131,7 @@ public class MainController {
 		storeService.increamentJoinCount(sno);
 		Store store = storeService.selectStore(sno);
 		session.setAttribute("store", store);
-		return "storemain/storeRankView";
+		return "redirect:/page/sprank.do";
 	}
 
 	/* 지점관리자가 지점메인에 접속 */

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page
-	import="com.kh.everycvs.common.model.vo.StoreProduct, java.util.ArrayList"%>
+<%@ page import="com.kh.everycvs.common.model.vo.StoreProduct, java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- === BEGIN HEAD ===  -->
@@ -58,17 +57,18 @@
 									<td>${apm.product_no}</td>
 									<td>${apm.product_kind_name}</td>
 									<td><a href="#" data-toggle="modal"
-										data-target="#apmmodal${apm.store_product_no}"><strong>${apm.product_name}</strong>
+										data-target="#apmmodal${apm.product_no}"><strong>${apm.product_name}</strong>
 									</a></td>
 									<td>${apm.manufacturer}</td>
-									<td><fmt:formatNumber value="${apm.price}" pattern="#,###"/>원</td>
+									<td><fmt:formatNumber value="${apm.price}" pattern="#,###" />원</td>
 									<td>${apm.expiration_date}일</td>
 									<td><input class="form-control" type="date"></td>
 									<td><input class="form-control" type="number" min="1"
 										max="100" step="1" value="0"></td>
 									<!-- Modal -->
 									<td>
-										<div id="apmmodal${apm.store_product_no}" class="modal fade" role="dialog">
+										<div id="apmmodal${apm.product_no}" class="modal fade"
+											role="dialog">
 											<div class="modal-dialog">
 												<!-- Modal content-->
 												<div class="modal-content">
@@ -81,11 +81,12 @@
 													<div class="modal-body">
 														<div class="row">
 															<div class="col-sm-6">
-																<img
-																	src="/everycvs/resources/user/img/theteam/image1.jpg"
-																	alt="image1" align="left" style="margin-left: 5px;">
+																<img src="/everycvs/resources/upload/${apm.stored_file_name}"
+																	alt="No_Image" align="left" style="margin-left: 5px;">
 															</div>
 															<div class="col-sm-6">
+															<form id="insertform" action="/everycvs/apminsert.do" method="post" enctype="multipart/form-data">
+																<input type="hidden" name="pnum" value="${apm.product_no}">
 																<table class="table table-condensed">
 																	<tr>
 																		<td><strong>상품명</strong></td>
@@ -93,7 +94,8 @@
 																	</tr>
 																	<tr>
 																		<td><strong>가격</strong></td>
-																		<td><fmt:formatNumber value="${apm.price}" pattern="#,###"/>원</td>
+																		<td><fmt:formatNumber value="${apm.price}"
+																				pattern="#,###" />원</td>
 																	</tr>
 																	<tr>
 																		<td><strong>제조사</strong></td>
@@ -105,20 +107,21 @@
 																	</tr>
 																	<tr>
 																		<td><strong>제조일</strong></td>
-																		<td><input class="form-control" type="date"></td>
+																		<td><input class="form-control" type="date" name="mdate"></td>
 																	</tr>
 																	<tr>
 																		<td><strong>수량</strong></td>
 																		<td><input class="form-control" type="number"
-																			min="1" max="100" step="1" value="0"></td>
+																			min="1" max="100" step="1" name="quantity" value="0"></td>
 																	</tr>
 																</table>
+																</form>
 															</div>
 														</div>
 													</div>
 													<div class="modal-footer">
-														<button type="button" class="btn btn-primary btn-sm"
-															data-dismiss="modal">추가</button>
+														<button type="submit" class="btn btn-primary btn-sm"
+														data-dismiss="modal" onclick="insertSubmit();">추가</button>
 													</div>
 												</div>
 											</div>
@@ -128,11 +131,13 @@
 								</tr>
 							</c:forEach>
 						</table>
+						</form>
 					</div>
 				</div>
 			</div>
 			<div align="right" style="margin-right: 40px;">
-					<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">추가</button>
+				<button type="button" class="btn btn-primary btn-sm"
+					data-dismiss="modal">추가</button>
 			</div>
 			<br>
 			<div class="text-center">
@@ -177,5 +182,10 @@
 <c:import url="../../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
 <!-- JS -->
+<script type="text/javascript">
+	function insertSubmit() {
+		$("#insertform").submit();
+	}
+</script>
 <c:import url="../../include/user/common/end.jsp"></c:import>
 <!-- === END FOOTER === -->

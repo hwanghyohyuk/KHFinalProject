@@ -16,7 +16,7 @@
 					<div class="visible-lg">
 						<ul id="hornavmenu" class="nav navbar-nav">
 							<c:if test="${sessionScope.user.job eq 'storemanager'}">
-								<li><a href="/everycvs/sprank.do" class="fa-home active">EVERYCVS</a></li>
+								<li><a href="/everycvs/main/main.do" class="fa-home active">EVERYCVS</a></li>
 								<li><a href="/everycvs/spmlist.do"><span class="fa-cubes">지점 상품 관리</span></a></li>
 								<li><a href="/everycvs/apmlist.do"><span class="fa-question-circle">지점 상품 추가</span></a></li>
 							</c:if>
