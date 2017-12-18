@@ -22,6 +22,17 @@ public class EventDao {
 	
 	public EventDao(){}
 	//관리자 검색 및 페이징
+
+	/*사용자 : 이벤트 목록*/
+	public List<Event> eventList() {
+		return sqlSession.selectList("event.eventList");
+	}
+
+	/*사용자 : 메인화면 이벤트 top3*/
+	public List<Event> eventTop3() {
+		return sqlSession.selectList("event.eventTop3");
+	}
+	
 	public List<Event> selectEventList(String keyword, int startRow, int endRow) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("startRow", startRow); 

@@ -1,11 +1,17 @@
 package com.kh.everycvs.sale.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.everycvs.common.model.vo.SaleProductKind;
+import com.kh.everycvs.common.model.vo.User;
 import com.kh.everycvs.sale.model.service.SaleService;
 
 @Controller
@@ -44,10 +50,9 @@ public class SaleController {
 	
 	/*편의점관리자*/
 	/** 편의점 상품 종류별 판매량**/
-	public ModelAndView kindCvsSale(ModelAndView modelAndView){
+	public ModelAndView kindCvsSale(HttpSession session, ModelAndView mv){
 		int brand_no = 0;
-		Map map = saleService.kindCvsSale(brand_no);
-		return modelAndView;		
+		return mv;
 	}
 	
 	/**판매량 Top5 지점**/

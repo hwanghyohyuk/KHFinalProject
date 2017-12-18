@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!-- === BEGIN HEAD ===  -->
 <c:import url="../include/user/common/head.jsp"></c:import>
 <c:import url="../include/user/common/headend.jsp"></c:import>
@@ -10,6 +11,8 @@
 <!-- === BEGIN HEADER ===  -->
 <c:import url="../include/user/common/header.jsp"></c:import>
 <!-- === END HEADER === -->
+
+</script>
 <!-- === BEGIN CONTENT === -->
             <div id="content">
                 <div class="container background-white">
@@ -21,17 +24,19 @@
                                  <h2>고객센터 / 글쓰기</h2>
                             </div>
                             <hr>
-                            <form>
-
+                            <form action="/everycvs/serviceInsert.do">
                                  <label>작성자
                                     <span class="color-red">*</span>
-                                 </label>
+                                 </label>                              
+                                <c:if test="${sessionScope.user !=null }">  <!-- 로그인 상태이면 -->
                                 <div class="row margin-bottom-20">
-                                    <div class="col-md-6 col-md-offset-0">
-                                        <input class="form-control" type="text" placeholder="작성자를 입력해주세요" >
-                                    </div>
+                                    <div class="col-md-6 col-md-offset-0">                                           
+                                        <input class="form-control" type="text"  value=" ${sessionScope.user.user_name}" readonly>
+                                      </c:if>
+                                      <c:if test="${sessionScop.user ==null }">                                   
+                                      </c:if>
+                                    </div>                                   
                                 </div>
-                                
                                 <label>비밀번호
                                     <span class="color-red">*</span>
                                 </label>
@@ -40,7 +45,6 @@
                                         <input class="form-control" type="password" placeholder="비밀번호를 입력해주세요">
                                     </div>
                                 </div>
-
                                 <label>제목
                                     <span class="color-red">*</span>
                                  </label>
@@ -55,57 +59,22 @@
                                     <div class="col-md-8 col-md-offset-0">
                                         <textarea rows="8" class="form-control" placeholder="내용을 입력해주세요"></textarea>
                                     </div>
-                                </div>
-                                <div align="center">
-                                    <input type="button" class="btn btn-primary" value="등록">
+                                </div>                              
+                                <div align="center">                           
+                                <a href="">
+                                    <input type="button" class="btn btn-primary" value="등록" >        
+                                </a>                      
                                     &nbsp&nbsp&nbsp&nbsp&nbsp
                                     <input type=button class="btn btn-primary" value="취소">
                                 </div>
+                               
                                 </div>
                             </form>
                             <hr>
                             <!-- End Contact Form -->
                             <!-- End Main Content -->
                         </div>
-                        <!-- End Main Column -->
-                        <!-- Side Column -->
-                        <div class="col-md-3">
-                            <!-- Recent Posts -->
-                            <!-- <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Contact Info</h3>
-                                </div>
-                                <div class="panel-body">
-                                    <p>Lorem ipsum dolor sit amet, no cetero voluptatum est, audire sensibus maiestatis vis et. Vitae audire prodesset an his. Nulla ubique omnesque in sit.</p>
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            <i class="fa-phone color-primary"></i>+353-44-55-66</li>
-                                        <li>
-                                            <i class="fa-envelope color-primary"></i>info@example.com</li>
-                                        <li>
-                                            <i class="fa-home color-primary"></i>http://www.example.com</li>
-                                    </ul>
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            <strong class="color-primary">Monday-Friday:</strong>9am to 6pm</li>
-                                        <li>
-                                            <strong class="color-primary">Saturday:</strong>10am to 3pm</li>
-                                        <li>
-                                            <strong class="color-primary">Sunday:</strong>Closed</li>
-                                    </ul>
-                                </div>
-                            </div> -->
-                            <!-- End recent Posts -->
-                            <!-- About -->
-                            <!-- <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">About</h3>
-                                </div>
-                                <div class="panel-body">
-                                    Et harum quidem rerum facilis est et expedita distinctio lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero consectetur adipiscing elit magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat.
-                                </div>
-                            </div> -->
-                            <!-- End About -->
+                      
                         </div>
                         <!-- End Side Column -->
                     </div>

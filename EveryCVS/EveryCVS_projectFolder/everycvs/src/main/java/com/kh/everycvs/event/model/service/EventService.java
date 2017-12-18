@@ -12,6 +12,10 @@ import com.kh.everycvs.common.model.vo.Event;
 import com.kh.everycvs.common.model.vo.EventResult;
 
 public interface EventService {
+	/*사용자 : 이벤트 메인*/
+	List<Event> eventList();
+	/*사용자 : 메인화면 이벤트 top3*/
+	List<Event> eventTop3();
 	
 	//관리자 게시글 갯수 조회
 	int getListCount(String keyword);
@@ -51,10 +55,5 @@ public interface EventService {
 	EventResult selectEventResultOne(int rno);
 	//사용자 게시글 조회수 증가
 	int eventResultRead(int rno);
-	
-
-	
-
-
 	
 }

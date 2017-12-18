@@ -29,4 +29,18 @@ public class ServiceCenterDao {
 			System.out.println("ServiceCenterDao : " + list);
 			return sqlSession.selectList("serviceCenter.serviceList", list);
 		}
+		
+		public List<ServiceCenter> serviceSearch(String keyword) {
+			//ArrayList<ServiceCenter> list = new ArrayList<ServiceCenter>();
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("keyword", "%"+keyword+"%");
+			System.out.println("ServiceCenterDao : " + map);
+			System.out.println("keyword : "+"%"+keyword+"%");
+			return sqlSession.selectList("serviceCenter.serviceSearch", map);
+		}
+
+		public ArrayList<ServiceCenter> serviceInsert() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 }

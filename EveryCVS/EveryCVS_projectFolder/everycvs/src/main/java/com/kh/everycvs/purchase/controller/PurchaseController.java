@@ -1,11 +1,15 @@
 package com.kh.everycvs.purchase.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Purchase;
+import com.kh.everycvs.common.model.vo.User;
 import com.kh.everycvs.purchase.model.service.PurchaseService;
 
 
@@ -59,25 +64,35 @@ public class PurchaseController {
 	}
 	
 	//전체거래내역 조회 : 3개월, 1개월, 1주일 단위로 조회(해당 리스트 목록조회)
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="purchaseList.do", method=RequestMethod.POST)
 	@ResponseBody
-	public List<Map<String, Object>> purchaseList(ModelAndView mv, HttpServletRequest request, 
-			HttpServletResponse response,
-			Map<String, Object> map, Purchase purchase,
-			@RequestParam (value="month", required=false) String month){
-		response.setContentType("text/html; charset=utf-8");
-		
-		map.put("month", month);
-		map.put("purchase", purchase);
-		
+	public ModelAndView purchaseList(ModelAndView mv,@RequestParam (value="month", required=false,defaultValue="0") String month, HttpSession session){
+		User user = (User)session.getAttribute("user");
 		//구매내역 조회를 요청하면 가지고 있는 구매내역 리스트를 리턴함
-		List<Map<String, Object>> list =purchaseService.purchaseList(map);
-		
-		mv.addObject("list", list);
-		System.out.println(list);
-		System.out.println(month);
-		//mv.setViewName("jsonView");
-		return list;
+		ArrayList<Purchase> list =purchaseService.purchaseList(user.getUser_no(),month);
+
+		JSONArray jplist = new JSONArray();
+		for(Purchase p : list) {
+			JSONObject jp = new JSONObject();			
+			jp.put("purchase_no",p.getPurchase_no());
+			jp.put("store_product_no",p.getStore_product_no());
+			jp.put("store_no",p.getStore_no());
+			jp.put("store_name",p.getStore_name());
+			jp.put("product_no",p.getProduct_no());
+			jp.put("product_name",p.getProduct_name());
+			jp.put("purchase_quantity",p.getPurchase_quantity());
+			jp.put("calculated_price",p.getCalculated_price());
+			jp.put("using_point",p.getUsing_point());
+			jp.put("accumulate_point",p.getAccumulate_point());
+			jp.put("purchase_date",p.getPurchase_date().toString());
+			jplist.add(jp);
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("plist", jplist);
+		mv.addAllObjects(map);
+		mv.setViewName("jsonView");
+		return mv;
 	}
 	
 	/*사이트관리자*/

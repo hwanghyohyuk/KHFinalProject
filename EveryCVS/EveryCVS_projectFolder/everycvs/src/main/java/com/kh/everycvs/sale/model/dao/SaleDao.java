@@ -1,11 +1,17 @@
 package com.kh.everycvs.sale.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository("saleDao")
 public class SaleDao {
+	
+	@Autowired
+	private SqlSession sqlSession;
 
 	/* 지점관리자 */
 	/* AJAX */
@@ -35,9 +41,8 @@ public class SaleDao {
 
 	/* 편의점관리자 */
 	/** 편의점 상품 종류별 판매량 **/
-	public Map kindCvsSale(int brand_no) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Map<String, Object>> kindCvsSale(int brand_no) {
+		return sqlSession.selectList("sale.selectSaleProductKind", brand_no);
 	}
 
 	/** 판매량 Top5 지점 **/

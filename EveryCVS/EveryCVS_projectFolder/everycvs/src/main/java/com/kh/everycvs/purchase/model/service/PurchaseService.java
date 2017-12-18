@@ -1,11 +1,14 @@
 package com.kh.everycvs.purchase.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.servlet.ModelAndView;
+
+import com.kh.everycvs.common.model.vo.Purchase;
 
 public interface PurchaseService {
 	
@@ -31,7 +34,7 @@ public interface PurchaseService {
 	public String userDecrePoint(HttpServletRequest request);
 	
 	//거래내역 조회 : 3개월, 1개월, 1주일 단위로 조회(해당 리스트 목록조회)
-	public List<Map<String, Object>> purchaseList(Map<String, Object> map);
+	public ArrayList<Purchase> purchaseList(int user_no, String month);
 	
 	/*사이트관리자*/
 	/**월간 구매 이용 횟수**/

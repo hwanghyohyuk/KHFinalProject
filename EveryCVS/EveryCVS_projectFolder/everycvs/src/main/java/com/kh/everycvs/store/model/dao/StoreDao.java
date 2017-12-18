@@ -23,17 +23,20 @@ public class StoreDao {
 	public ArrayList<Store> cvsMapList(NaverMap location) {
 		List<Store> list=null;
 		if(location.getBrand_no()==0){
-			/*Map<String,Object> map = new HashMap<String,Object>();
-			map.put("minLat", location.getMinLat());
-			map.put("maxLat", location.getMaxLat());
-			map.put("minLng", location.getMinLng());
-			map.put("maxLng", location.getMaxLng());
-			list = sqlSession.selectList("store.allCvsMapList", map);*/
 			list = sqlSession.selectList("store.allCvsMapList", location);
 		}else{
 			list = sqlSession.selectList("store.cvsMapList", location);
 		}
 		return new ArrayList<Store>(list);
+	}
+
+	public Store nearestStore(Map<String, Object> params) {
+		if((int)params.get("brand_no")==0){
+			return sqlSession.selectOne("store.allNearestStore", params);
+		}else{
+			return sqlSession.selectOne("store.nearestStore", params);
+		}
+		
 	}
 	
 	
@@ -80,7 +83,9 @@ public class StoreDao {
 	/** 지점 삭제
 	 * @param store */
 	public void DeleteStore(Store store) {
-		sqlSession.delete("store.deleteStore", store);
+		sqlSession.delete("store.deleteStore1", store);
+		sqlSession.delete("store.deleteStore2", store);
+		sqlSession.delete("store.deleteStore3", store);
 	}
 	
 		/* 사이트 관리자 */
@@ -99,10 +104,12 @@ public class StoreDao {
 		sqlSession.update("store.increamentJoinCount", store_no);
 	}
 
+
 	/* 지점 조회 */
 	public Store selectStore(String store_no) {
 		return sqlSession.selectOne("store.selectStore", store_no);
 	}
-	
+
+
 
 }

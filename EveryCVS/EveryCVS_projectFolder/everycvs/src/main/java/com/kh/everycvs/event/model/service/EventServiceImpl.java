@@ -23,6 +23,18 @@ public class EventServiceImpl implements EventService{
 	@Autowired
 	private EventDao eventDao;
 	
+	/*사용자 : 이벤트 목록*/
+	@Override
+	public List<Event> eventList() {
+			return eventDao.eventList();
+	}
+
+	/*사용자 : 메인화면 이벤트 top3*/
+	@Override
+	public List<Event> eventTop3() {
+		return eventDao.eventTop3();
+	}
+
 	@Override
 	public int getListCount(String keyword) {
 		// 관리자 게시글  조회

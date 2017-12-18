@@ -105,10 +105,10 @@
 											<div class="modal-body box-body no-padding" 
 												 style="overflow-x:hidden; width:890px; height:300px;" id="purchaseTable">
 												 
-												<table class="table table-condensed" style="text-align: center;	" id="table">
+												<table id="purchaseList" class="table table-condensed" style="text-align: center;	" id="table">
 															<tr style="font-size: 8pt; text-align: center;">
-															<th>구매번호</th><th>사용자번호</th><th>지점상품번호</th>
-															<th style="text-align: center;">지점번호</th><th style="text-align: center;">지점명</th><th>상품번호</th>
+															<th>구매번호</th><th>지점상품번호</th>
+															<th style="text-align: center;">지점번호</th><th style="text-align: center;">지점명</th>
 															<th style="text-align: center;">상품명</th><th>상품수량</th><th>합 계</th>
 															<th>사용포인트</th><th>적립포인트</th><th style="text-align: center;">구매날짜</th>
 															</tr>
@@ -121,11 +121,9 @@
 															 <c:if test="${list.user_no eq sessionScope.user.user_no }"> 
 															 <tr>
 															<td>${list.purchase_no }</td>
-														    <td>${list.user_no }</td>
 														    <td>${list.store_product_no }</td>
 														    <td>${list.store_no }</td>
 														    <td>${list.store_name }</td>
-														    <td>${list.product_no }</td>
 														    <td>${list.product_name }</td>
 														    <td>${list.purchase_quantity }</td>
 														    <td>${list.calculated_price }</td>
@@ -319,22 +317,38 @@
  	 		$("#purchaseTable").on('show.bs.modal', function (event) {
  	 		  var button = $(event.relatedTarget);
 			  var params =  button.data('month');
-			 
+			  console.log(params);
   				//1이면 3개월 조회
 				   $.ajax({
 						url:"purchaseList.do",
 						data: {month:params},
-						dataType: "text",
-						type:"post",	
-						async: false,
-						cache: false,
-						//contentType : "application/json; charset=UTF-8",
+						dataType: "json",
+						type:"post",							
 						success:function(data){
-						
-							// console.log(JSON.stringify(data));
-
-							$('#purchaseTable').html(data);
-
+							console.log(data);
+							var jsonStr = JSON.stringify(data);
+							var json = JSON.parse(jsonStr);
+							var values = '<tr style="font-size: 8pt; text-align: center;">'
+							+'<th>구매번호</th><th>지점상품번호</th>'
+							+'<th style="text-align: center;">지점번호</th><th style="text-align: center;">지점명</th>'
+							+'<th style="text-align: center;">상품명</th><th>상품수량</th><th>합 계</th>'
+							+'<th>사용포인트</th><th>적립포인트</th><th style="text-align: center;">구매날짜</th>'
+							+'</tr>';//이부분이 테이블 헤더 (고정부분)			
+							for(var i in json.plist){ //이부분은 테이블 바디(가변부분)
+								var p = json.plist[i];
+								values += '<tr>'
+									+'<td>'+p.purchase_no+'</td>'
+									+'<td>'+p.store_product_no+'</td>'
+									+'<td>'+p.store_no+'</td>'
+									+'<td>'+p.store_name+'</td>'
+									+'<td>'+p.product_name+'</td>'
+									+'<td>'+p.purchase_quantity+'</td>'
+									+'<td>'+p.calculated_price+'</td>'
+									+'<td>'+p.using_point+'</td>'
+									+'<td>'+p.accumulate_point+'</td>'
+									+'<td>'+p.purchase_date+'</td></tr>';	
+							}
+							$("#purchaseList").html(values);
 						},
 						error:function(request, status, errorData){
 							alert("error code: " + request.status + "/n" 
@@ -345,8 +359,8 @@
 					});  
 			 return false;
 		});  
-			});
-		});
+	});
+});
 	</script>
 
 	<!-- JS -->
