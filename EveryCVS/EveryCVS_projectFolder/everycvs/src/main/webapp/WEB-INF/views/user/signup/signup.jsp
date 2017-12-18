@@ -14,8 +14,11 @@
 	<div class="container background-white">
 		<div class="row margin-vert-30">
 			<!-- Register Box -->
+			
 			<div class="col-lg-10 col-lg-offset-1col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">
-				<form class="signup-page">
+					
+					<div class="signup-page">
+					<form>
 					<div class="signup-header">
 						<h2>Register a new account</h2>
 						<p>
@@ -99,8 +102,10 @@
 							</div>
 						</div>
 					</div>
-				</form>
+					</form>
+					</div>
 			</div>
+			
 			<!-- End Register Box -->
 		</div>
 	</div>
