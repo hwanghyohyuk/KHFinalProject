@@ -37,7 +37,7 @@
 					<label>Your Store Information</label>
 					</div>
 					<div class="col-md-12 col-sm-12 col-xs-12">
-					 <textarea class="form-control margin-bottom-20" placeholder="Information" rows="5" disabled id="storeinfo" name="sinfo"></textarea>
+					 <textarea class="form-control margin-bottom-20" style="resize: none;" placeholder="Information" rows="5" disabled id="storeinfo" name="sinfo"></textarea>
 					</div>
 					<div class="col-md-12 col-sm-12 col-xs-12">
 					<label>Your Name</label>

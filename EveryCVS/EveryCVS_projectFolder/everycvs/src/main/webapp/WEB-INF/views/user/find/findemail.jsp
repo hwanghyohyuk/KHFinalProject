@@ -11,9 +11,8 @@
 <!-- === END HEADER === -->
 <!-- === BEGIN CONTENT === -->
 <div id="content">
-	<div class="container background-white">
-		<div class="container">
-			<div class="row margin-vert-30">
+		<div class="container background-white padding-vert-60">
+			<div class="row margin-vert-60 padding-vert-60 ">
 				<!-- Login Box -->
 				<div class="col-md-6 col-md-offset-3 col-sm-offset-3">
 					<form class="login-page" name="form1" method="post" action="/everycvs/user/findemailpost.do">
@@ -38,7 +37,6 @@
 			</div>
 		</div>
 	</div>
-</div>
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->
 <c:import url="../../include/user/common/footer.jsp"></c:import>
