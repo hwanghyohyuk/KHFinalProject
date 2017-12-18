@@ -1,6 +1,7 @@
 package com.kh.everycvs.storeproduct.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,8 +55,13 @@ public class StoreProductServiceImpl implements StoreProductService {
 	}
 
 	@Override
-	public void deleteSpmanager(int spnum) {
-		sproductDao.deleteSpmanager(spnum);
+	public void deleteSpmanager(int spnum,String toggle) {
+		sproductDao.deleteSpmanager(spnum,toggle);
+	}
+	
+	@Override
+	public int updateSpmanager(Map<String, Object> map) {
+			return sproductDao.updateSpmanager(map); 
 	}
 
 	@Override
@@ -64,5 +70,5 @@ public class StoreProductServiceImpl implements StoreProductService {
 		int endRow = startRow + limit - 1;
 		return sproductDao.listApmanager(startRow,endRow,keyword);
 	}
-	
+
 }

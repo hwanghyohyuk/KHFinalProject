@@ -32,6 +32,8 @@ public interface ServiceCenterService {
 		// 고객센터 삭제
 		public String deleteService(HttpServletRequest request);
 
+		public void serviceInsert(ServiceCenter vo);
+
 		
 		
 }

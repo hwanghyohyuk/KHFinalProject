@@ -3,13 +3,17 @@ package com.kh.everycvs.store.model.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import com.kh.everycvs.common.model.vo.NaverMap;
 import com.kh.everycvs.common.model.vo.Store;
 
 public interface StoreService {
 	
 	/*사용자*/
 	/**지도에 표시할 데이터리스트**/
-	ArrayList<Store> cvsMapList(int brand_no);
+	ArrayList<Store> cvsMapList(NaverMap location);
+	/**지도에 표시할 가장 가까운 편의점**/
+	Store nearestStore(Map<String, Object> params);
 	
 	/**지점 방문횟수증가**/
 	public void increamentJoinCount(String store_no);

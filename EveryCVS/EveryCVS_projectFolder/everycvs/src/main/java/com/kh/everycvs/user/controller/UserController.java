@@ -3,6 +3,7 @@ package com.kh.everycvs.user.controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -10,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,8 +42,12 @@ public class UserController {
 
 	/* 로그인 페이지 이동 */
 	@RequestMapping(value = "sign/signin.do", method = RequestMethod.GET)
-	public String intercepterSignin() {
-		return "user/sign/signin";
+	public ModelAndView intercepterSignin(ModelAndView mv,@RequestParam(value = "sign", required=false, defaultValue="true") boolean sign) {
+		mv.setViewName("user/sign/signin");
+		if(!sign){
+			mv.addObject("sign", sign);
+		}		
+		return mv;
 	}
 
 	/** 로그인 **/
@@ -126,18 +129,17 @@ public class UserController {
 	}
 
 	/** 마이 페이지 **/
-	@RequestMapping("mypage.do")
-	public ModelAndView myPage(HttpSession session, ModelAndView mv, int month) {
-		
-		ArrayList<Purchase> list = (ArrayList<Purchase>) purchaseService.purchaseList(month);
-		ArrayList<Favorite> flist = (ArrayList<Favorite>) favoriteService.favoriteList();
+	@RequestMapping(value="mypage.do")
+	public ModelAndView myPage(HttpSession session, ModelAndView mv) {
+		String month="0";
 		User user = (User) session.getAttribute("user");
+		ArrayList<Purchase> list = purchaseService.purchaseList(user.getUser_no(),month);
+		ArrayList<Favorite> flist = (ArrayList<Favorite>) favoriteService.favoriteList();
 		
 		mv.addObject("list", list);		
 		mv.addObject("flist", flist); 
-		/*System.out.println(list);
-		System.out.println(flist);*/
-		
+		System.out.println(list);
+				
 		mv.setViewName("user/mypage/main");
 		return mv;
 	}
@@ -146,23 +148,25 @@ public class UserController {
 	@RequestMapping(value="increMoney.do", method=RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView userIncreMoney(
-			@RequestParam ("increMoney") String increMoney,
-			@RequestParam("user_no") String user_no, 
-			@RequestParam("cash") String cash,
+			@RequestParam (value="increMoney", required=false) String increMoney,
+			@RequestParam(value="user_no", required=false) String user_no, 
+			@RequestParam(value="cash", required=false) String cash,
 			HttpSession session,
 			HttpServletRequest request, 
 			ModelAndView mv,
 		    Map<String, Object> map) throws IOException {
 				
+		//파라미터 값 넘어왔는지 확인
+		System.out.println("parameter값 controller로 넘어왔는지 확인 : " + increMoney + ", " + user_no + ", " + cash);
+		
 		//form input태그 값 int형으로 parsing 처리
 		int incre = Integer.parseInt(increMoney);
 		int uno = Integer.parseInt(user_no);
 		int c = Integer.parseInt(cash);
-	
-		/*System.out.println("incre : " + incre);
-		System.out.println("uno : " + uno);
-		System.out.println("c : " + c);*/
-	
+		
+		//parsing후 넘어왔는지 확인
+		System.out.println("parameter값 parse후 넘어왔는지 확인 : " + increMoney + ", " + user_no + ", " + cash);
+
 	    map.put("increMoney", incre);
 	    map.put("user_no", uno);
 	    map.put("cash", c);
@@ -177,7 +181,7 @@ public class UserController {
 	    mv.setViewName("jsonView");
 	    mv.addObject(result);
 	    
-	    System.out.println(user.getCash());
+	    System.out.println("결과 : " + user.getCash());
 
 	    return mv;
 	}

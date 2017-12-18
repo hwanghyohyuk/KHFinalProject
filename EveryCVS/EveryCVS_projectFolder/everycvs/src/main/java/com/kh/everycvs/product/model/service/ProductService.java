@@ -11,21 +11,27 @@ import com.kh.everycvs.common.model.vo.Product;
 
 public interface ProductService {
 	
+	/*사용자 메인 : 인기상품 top3*/
+	public List<Product> popularTop3();
+	
 	/** 상품 조회 : 모든 상품 조회 */
 	public List selectProductList(int brand_no);
 	
-	// 상품 조회 : 선택한 상품 상세조회
-	public ModelAndView selectProductOne(HttpServletRequest request);
+	/** 한 상품의 정보를 조회
+	 * @param product */
+	public Product selectProductOne(Product product);
 	
 	/** 상품 검색 : 입력한 키워드와 필터링으로 상품을 검색
 	 * 필터링 : 상품명/제조사 */
 	public List searchProductList(Product product);
 	
-	// 상품 등록
-	public String insertProduct(HttpServletRequest request);
+	/** 상품 등록
+	 * @param product */
+	public void insertProduct(Product product);
 	
-	// 상품 수정
-	public String updateProduct(HttpServletRequest request);
+	/** 상품 수정
+	 * @param product */
+	public void updateProduct(Product product);
 	
 	/** 상품 삭제 : 편의점 상품 삭제할 때 지점 상품도 연쇄 삭제
 	 * @param product */
@@ -41,6 +47,7 @@ public interface ProductService {
 	
 	/*편의점관리자*/
 	/**주간 인기상품 top 5**/
-	public Map popularCvsProductTop5(int brand_no);
-	
+	public List popularCvsProductTop5(int brand_no);
+
+
 }

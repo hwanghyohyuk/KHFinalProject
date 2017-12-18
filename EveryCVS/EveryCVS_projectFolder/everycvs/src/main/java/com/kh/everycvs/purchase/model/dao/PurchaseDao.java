@@ -1,7 +1,9 @@
 package com.kh.everycvs.purchase.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,10 +54,12 @@ public class PurchaseDao {
 	}
 	
 	//사용자 구매내역 조회
-	public List<Purchase> purchaseList(int month) {
-		ArrayList<Purchase> list = new ArrayList<Purchase>();
-		System.out.println(list);
-		return sqlSession.selectList("purchase.purchaseList", list);
+	public ArrayList<Purchase> purchaseList(int user_no, String month) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("user_no", user_no);
+		map.put("month", month);
+		List<Purchase> list = sqlSession.selectList("purchase.purchaseList", map);
+		return new ArrayList<Purchase>(list);
 	}
 	
 	/*사이트관리자*/

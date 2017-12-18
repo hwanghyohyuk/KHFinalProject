@@ -21,6 +21,7 @@
 		<result property="brand_no" column="BRAND_NO" />
 		<result property="join_count" column="JOIN_COUNT" />
 		<result property="brand_name" column="BRAND_NAME" />
+		<result property="del_check" column="del_check" />
 	</resultMap>
 		
 	<update id="increamentJoinCount"  parameterType="string" flushCache="true"
@@ -34,18 +35,34 @@
            ]]>
    </select>
    
-   <select id="cvsMapList" parameterType="_int" resultType="list" resultMap="resultStore">
+   <select id="cvsMapList" parameterType="navermap" resultType="list" resultMap="resultStore">
 		   <![CDATA[
-      		select * from store_view where brand_no = #{brand_no}
+      		select * from store_view where brand_no = #{brand_no} and (to_number(lat,'999.99999999') between #{minLat} and #{maxLat}) and (to_number(lng,'999.99999999') between #{minLng} and #{maxLng}) 
+           ]]>
+   </select>
+
+   <select id="allCvsMapList" parameterType="hashmap" resultType="list" resultMap="resultStore">
+		   <![CDATA[
+      		select * from store_view where (to_number(lat,'999.99999999') between #{minLat} and #{maxLat}) and (to_number(lng,'999.99999999') between #{minLng} and #{maxLng}) 
            ]]>
    </select>
    
-   <select id="allCvsMapList" resultType="list" resultMap="resultStore">
+   <select id="nearestStore" parameterType="hashmap" resultType="store" resultMap="resultStore">
 		   <![CDATA[
-      		select * from store_view
+      		select store_no,store_name,road_address,lat,lng,brand_no,brand_name from(
+			select store_no,store_name,road_address,lat,lng,brand_no,brand_name, DISTNACE_WGS84(#{lat}, #{lng}, to_number(lat,'999.99999999') , to_number(lng,'999.99999999')) as DISTANCE
+			from store_view
+			order by DISTANCE asc) where rownum = 1 and brand_no = #{brand_no}
            ]]>
    </select>
-   	
+   <select id="allNearestStore" parameterType="hashmap" resultType="store" resultMap="resultStore">
+		   <![CDATA[
+      		select store_no,store_name,road_address,lat,lng,brand_no,brand_name from(
+			select store_no,store_name,road_address,lat,lng,brand_no,brand_name, DISTNACE_WGS84(#{lat}, #{lng}, to_number(lat,'999.99999999') , to_number(lng,'999.99999999')) as DISTANCE
+			from store_view
+			order by DISTANCE asc) where rownum = 1
+           ]]>
+   </select>
 	<!-- 지점 리스트 조회 -->
 	<select id="storeList" parameterType="_int" resultType="list" resultMap="resultStore">
 		<![CDATA[
@@ -128,11 +145,28 @@
 	</select>
 	
 	<!-- 지점 삭제 -->
-	<delete id="deleteStore" parameterType="store" flushCache="true" statementType="PREPARED">
+	<!-- 연쇄 삭제 : 지점 테이블에서 삭제 -->
+	<delete id="deleteStore3" parameterType="store" flushCache="true" statementType="PREPARED">
 		<![CDATA[
 			delete from tb_store
 			where store_no = #{store_no}
 			and brand_no = #{brand_no}
+		]]>
+	</delete>
+	
+	<!-- 연쇄 삭제 : 지점상품 테이블에서 삭제 -->
+	<delete id="deleteStore1" parameterType="store" flushCache="true" statementType="PREPARED">
+		<![CDATA[
+			delete from tb_store_product
+			where store_no = #{store_no}
+		]]>
+	</delete>
+	
+	<!-- 연쇄 삭제 : 할인상품 테이블에서 삭제 -->
+	<delete id="deleteStore2" parameterType="store" flushCache="true" statementType="PREPARED">
+		<![CDATA[
+			delete from tb_dc_product
+			where store_no = #{store_no}
 		]]>
 	</delete>
 	

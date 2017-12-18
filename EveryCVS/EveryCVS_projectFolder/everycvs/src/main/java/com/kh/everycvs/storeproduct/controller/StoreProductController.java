@@ -1,6 +1,9 @@
 package com.kh.everycvs.storeproduct.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -57,7 +60,6 @@ public class StoreProductController {
 		}
 
 		return mv;
-
 	}
 	
 	//storeRankView 전체보기
@@ -75,6 +77,7 @@ public class StoreProductController {
 		mv.addObject("list3",list3);
 		mv.addObject("list4",list4);
 		mv.setViewName("storemain/storeRankView");
+		
 		return mv;
 	}
 	
@@ -87,7 +90,7 @@ public class StoreProductController {
 		ArrayList<StoreProduct> list = (ArrayList<StoreProduct>)sproductService.top3Sproduct();
 		
 		mv.addObject("list",list);
-		mv.setViewName("jsonView");
+		mv.setViewName("storemain/storeRankView");
 		
 		return mv;
 	}
@@ -101,7 +104,7 @@ public class StoreProductController {
 		ArrayList<StoreProduct> list = (ArrayList<StoreProduct>)sproductService.new3Sproduct();
 		
 		mv.addObject("list2",list);
-		mv.setViewName("jsonView");
+		mv.setViewName("storemain/storeRankView");
 		
 		return mv;
 	}
@@ -114,10 +117,9 @@ public class StoreProductController {
 		ArrayList<StoreProduct> list = (ArrayList<StoreProduct>) sproductService.dcSproduct();
 
 		mv.addObject("list3",list);
-		mv.setViewName("jsonView");
+		mv.setViewName("storemain/storeRankView");
 
 		return mv;
-
 	}
 	
 	//storeRankView 유통기한 임박상품
@@ -128,10 +130,9 @@ public class StoreProductController {
 		ArrayList<StoreProduct> list = (ArrayList<StoreProduct>) sproductService.expSproduct();
 
 		mv.addObject("list4",list);
-		mv.setViewName("jsonView");
+		mv.setViewName("storemain/storeRankView");
 
 		return mv;
-
 	}
 	
 	//storeProduct 전체보기, 검색하기
@@ -174,15 +175,40 @@ public class StoreProductController {
 	
 	//storeProduct 삭제하기
 	@RequestMapping(value="/spmdelete.do")
-	public ModelAndView deleteSpmanager(int spnum){
+	public ModelAndView deleteSpmanager(@RequestParam("spnum") int spnum,@RequestParam("toggle") String toggle){
 		ModelAndView mv = new ModelAndView();
-		
-		sproductService.deleteSpmanager(spnum);
+		if(toggle.equals("N")){
+			toggle="Y";
+		}else{
+			toggle="N";
+		}
+		sproductService.deleteSpmanager(spnum,toggle);
 		
 		mv.setViewName("redirect:/spmlist.do?page=1");
 		
 		return mv;
+	}
+	
+	//storeProduct 수정하기
+	@RequestMapping(value="/spmupdate.do")
+	public ModelAndView updateSpmanager(ModelAndView mv, 
+			@RequestParam("page") int currentPage,
+			 @RequestParam("spnum") int spnum,
+			 @RequestParam("mdate") Date manufacturedate,
+			 @RequestParam("quantity") int quantity) {
 		
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("spnum", spnum);
+		map.put("manufacturedate", manufacturedate);
+		map.put("quantity", quantity);
+		
+		if(sproductService.updateSpmanager(map) > 0){
+			mv.setViewName("redirect:/spmlist.do?page="+currentPage);
+		}else{
+			mv.addObject("message", "수정 실패!");
+		}
+		
+		return mv;
 	}
 	
 	//allProduct 전체보기, 검색하기
@@ -222,7 +248,5 @@ public class StoreProductController {
 		
 		return mv;
 	}
-	
-
 	
 }

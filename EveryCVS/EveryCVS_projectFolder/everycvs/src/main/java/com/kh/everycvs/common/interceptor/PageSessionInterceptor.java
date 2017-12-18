@@ -21,7 +21,7 @@ public class PageSessionInterceptor extends HandlerInterceptorAdapter {
 		Object obj = session.getAttribute("user");
 
 		if (obj == null) { // 로그인된 세션이 없는 경우...
-			response.sendRedirect("/everycvs/sign/signin.do");
+			response.sendRedirect("/everycvs/sign/signin.do?sign=false");
 			return false;
 		} else {			
 			return true;

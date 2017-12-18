@@ -44,7 +44,12 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 	}
 	
 	// 고객센터 등록
-	
+	@Override
+	public void serviceInsert(ServiceCenter vo) {
+		servicecenterDao.serviceWrite(vo);
+		System.out.println("ServiceCenterServiceImpl : " + vo);
+		
+	}
 	@Override
 	public String updateService(HttpServletRequest request) {
 		// 고객센터 수정
@@ -56,6 +61,8 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 		// 고객센터 삭제
 		return null;
 	}
+
+	
 
 	
 }

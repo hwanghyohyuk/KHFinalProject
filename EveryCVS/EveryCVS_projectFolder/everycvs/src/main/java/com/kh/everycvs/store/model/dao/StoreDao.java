@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.everycvs.common.model.vo.NaverMap;
 import com.kh.everycvs.common.model.vo.Store;
 
 @Repository("storeDao")
@@ -19,14 +20,23 @@ public class StoreDao {
 
 	/* 사용자 */
 	/** 지도에 표시할 데이터리스트 **/
-	public ArrayList<Store> cvsMapList(int brand_no) {
+	public ArrayList<Store> cvsMapList(NaverMap location) {
 		List<Store> list=null;
-		if(brand_no==0){
-			list = sqlSession.selectList("store.allCvsMapList");
+		if(location.getBrand_no()==0){
+			list = sqlSession.selectList("store.allCvsMapList", location);
 		}else{
-			list = sqlSession.selectList("store.cvsMapList", brand_no);
+			list = sqlSession.selectList("store.cvsMapList", location);
 		}
 		return new ArrayList<Store>(list);
+	}
+
+	public Store nearestStore(Map<String, Object> params) {
+		if((int)params.get("brand_no")==0){
+			return sqlSession.selectOne("store.allNearestStore", params);
+		}else{
+			return sqlSession.selectOne("store.nearestStore", params);
+		}
+		
 	}
 	
 	
@@ -73,7 +83,9 @@ public class StoreDao {
 	/** 지점 삭제
 	 * @param store */
 	public void DeleteStore(Store store) {
-		sqlSession.delete("store.deleteStore", store);
+		sqlSession.delete("store.deleteStore1", store);
+		sqlSession.delete("store.deleteStore2", store);
+		sqlSession.delete("store.deleteStore3", store);
 	}
 	
 		/* 사이트 관리자 */
@@ -92,10 +104,12 @@ public class StoreDao {
 		sqlSession.update("store.increamentJoinCount", store_no);
 	}
 
+
 	/* 지점 조회 */
 	public Store selectStore(String store_no) {
 		return sqlSession.selectOne("store.selectStore", store_no);
 	}
-	
+
+
 
 }

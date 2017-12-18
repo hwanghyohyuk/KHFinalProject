@@ -1,6 +1,7 @@
 package com.kh.everycvs.purchase.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -62,11 +63,9 @@ public class PurchaseServiceImpl implements PurchaseService{
 	}
 
 	@Override
-	public ArrayList<Purchase> purchaseList(int month) {
-		//구매내역 조회
-		ArrayList<Purchase> list = new ArrayList<Purchase>();
-		System.out.println(list);
-		return (ArrayList<Purchase>) purchaseDao.purchaseList(month);
+	public ArrayList<Purchase> purchaseList(int user_no,String month) {
+		//구매내역 조회;
+		return purchaseDao.purchaseList(user_no,month);
 	}
 
 	/*사이트관리자*/

@@ -46,4 +46,16 @@ public class ServiceCenterDao {
 		}*/
 
 		
+
+		public ArrayList<ServiceCenter> serviceInsert() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		public void serviceWrite(ServiceCenter vo) {
+			
+			int result = sqlSession.insert("serviceCenter.serviceInsert", vo); 
+			System.out.println("ServiceDao : " + vo);
+		}
+
 }
