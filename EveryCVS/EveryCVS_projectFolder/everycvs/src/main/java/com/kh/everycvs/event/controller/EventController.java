@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.everycvs.common.model.vo.Event;
 import com.kh.everycvs.common.model.vo.EventResult;
 import com.kh.everycvs.common.model.vo.User;
+import com.kh.everycvs.common.util.FileUtils;
 import com.kh.everycvs.event.model.service.EventService;
 
 import net.sf.json.JSONObject;
@@ -159,6 +162,7 @@ public class EventController {
           int endPage = startPage + limit - 1;
            if (maxPage < endPage)
                    endPage = maxPage;
+           System.out.println("파일명 나오는지:" + list.get(1));
            
            	map.put("currentPage", currentPage);
             map.put("listCount", listCount);
@@ -239,7 +243,26 @@ public class EventController {
 	}
 	//게시글 저장
 	@RequestMapping(value="cvseventwrite.do", method= RequestMethod.POST)
-	public String cvsEventWrite(Event event) throws Exception {
+	public String cvsEventWrite(HttpSession session, HttpServletRequest request) throws Exception {
+		int user_no = ((User)session.getAttribute("user")).getUser_no();
+		
+		String file_name = new FileUtils().InsertFile(session, request);
+		String[] file = file_name.split("/");
+		
+		System.out.println(file[0] + " , " + file[1]);
+		
+		Event event = new Event();		
+		event.setWriter(Integer.parseInt(request.getParameter("writer")));
+		event.setTitle(request.getParameter("title"));
+		event.setStart_date(java.sql.Date.valueOf(request.getParameter("start_date")));
+		event.setEnd_date(java.sql.Date.valueOf(request.getParameter("end_date")));
+		event.setJoin_limit(Integer.parseInt(request.getParameter("join_limit")));
+		event.setContents(request.getParameter("contents"));
+		event.setOriginal_file_name(file[0]);
+		event.setStored_file_name(file[1]);
+		
+		System.out.println("controller : "+event);
+		
         eventService.eventInsert(event);
          return "redirect:/cvseventlist.do";
 	}

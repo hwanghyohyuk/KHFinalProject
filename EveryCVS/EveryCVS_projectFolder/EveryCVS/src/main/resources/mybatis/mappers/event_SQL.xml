@@ -94,8 +94,8 @@
 	<![CDATA[
 		insert into TB_EVENT values (seq_event_no.nextval, 
 					#{title},#{writer},#{contents},#{start_date},
-					#{end_date},#{join_limit}, default, default,
-					default,default)
+					#{end_date},#{join_limit}, default, #{original_file_name},
+					#{stored_file_name},default)
 		]]>
 	</insert>
 	

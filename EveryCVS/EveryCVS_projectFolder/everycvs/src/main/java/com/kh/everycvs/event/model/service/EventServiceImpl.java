@@ -58,6 +58,7 @@ public class EventServiceImpl implements EventService{
 	@Override
 	public void eventInsert(Event vo) {
 		//관리자 글 작성 폼으로 이동
+		System.out.println("service : "+vo);
 	        eventDao.cvseventwriteview(vo);
 	}
 	
