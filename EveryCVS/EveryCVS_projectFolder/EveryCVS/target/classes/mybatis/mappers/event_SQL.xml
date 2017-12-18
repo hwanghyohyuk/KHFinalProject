@@ -160,8 +160,8 @@
 			start_date = #{start_date},
 			end_date = #{end_date},
 			join_limit = #{join_limit},
-			original_file_name = default,
-			stored_file_name = default
+			original_file_name = #{original_file_name},
+			stored_file_name = #{stored_file_name}
 		where event_no=#{event_no}
 		]]>
 	</update>

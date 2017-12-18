@@ -33,9 +33,10 @@
 				<div class="panel-body">
 					<div class="col-sm-6" style="padding-left: 0px;">
 						<div class="jun5">No. ${event.event_no}</div>
-						<form class="form-inline" name="event" method="post" action="cvseventmodifywrite.do">
+						<form class="form-inline" name="event" method="post" action="cvseventmodifywrite.do" enctype="multipart/form-data">
 						<input type="hidden" name="writer" value="${sessionScope.user.user_no}">
 						<input type="hidden" name="event_no" value="${event.event_no}">
+						<input type="hidden" name="prevfile" value="${event.stored_file_name}">
 							<div class="form-group" id="jun_input1">
 								<label for="title" style="padding-right: 65px;">Event
 									Title</label> <input type="text" class="form-control" id="title" name="title"
@@ -65,7 +66,7 @@
 							<div class="form-group" id="jun_input1" style="margin-top: 10px;">
 								<label for="imgurl"
 									style="float: left; padding: 0px 59px 10px 0px;">Event
-									image</label> <input type="file" id="imgurl" style="padding: 0px;">
+									image</label> <input type="file" name="imgfile" id="imgurl" style="padding: 0px;">
 							</div>
 					</div>
 					<div class="col-sm-6 jun9">

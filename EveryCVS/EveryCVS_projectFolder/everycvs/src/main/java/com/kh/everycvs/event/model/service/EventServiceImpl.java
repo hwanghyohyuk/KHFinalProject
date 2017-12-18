@@ -87,6 +87,7 @@ public class EventServiceImpl implements EventService{
 	@Override
 	public int updateEventPage(Event event) {
 		// 수정하기 
+		System.out.println("수정service : "+event);
 		return eventDao.updateEventPage(event);
 	}
 

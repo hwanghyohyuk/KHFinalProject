@@ -51,7 +51,7 @@
 								<c:forEach items="${event.list}" var="e">
 									<figure>
 										<a href="/everycvs/eventDetail.do?no=${e.event_no}">
-										<img src="/everycvs/resources/uploadfile/image10.jpg" alt="image1">
+										<img src="/everycvs/resources/upload/${e.stored_file_name}" alt="이벤트 이미지가 없습니다." class="jun_img">
 										<figcaption>
 											<input type="hidden" class="margin-top-20" value="${e.event_no}"/>
 											<h3 class="margin-top-20">${e.title}</h3>

@@ -21,8 +21,7 @@
 				<h2>${et.event_no}번 상세보기</h2>
 				<div class="row">
 					<div class="col-md-6 animate fadeIn">
-						<img src="/everycvs/resources/user/img/fillers/aboutme.jpg" alt="about-me"
-							class="margin-top-10">
+						<img src="/everycvs/resources/upload/${et.stored_file_name}" alt="이벤트 이미지가 없습니다." class="jun_img">
 					</div>
 					<div class="col-md-6 margin-bottom-10 animate fadeInRight">
 						<form name="event" method="post" action="eventDetail.do">
@@ -37,12 +36,7 @@
 									<input class="modify" type="text" value="${et.start_date}" readonly> 
 									<input class="modify" type="text" value="${et.end_date}" readonly>
 									<br><br> 
-									
-									
-									<div id="jun_input1">
-										<label for="imgurl" style="float: left; padding: 0px 59px 10px 0px;">Eventimage</label> 
-										<input type="file" id="imgurl">
-									</div>								
+																
 									<label>상세내용</label><br>
 									<textarea rows="5" class="form-control"
 										style="margin-bottom: 4px; width: 100%;" readonly>${et.contents}

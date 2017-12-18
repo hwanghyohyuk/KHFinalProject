@@ -35,7 +35,7 @@ public class EventController {
 	//--------------------------- 이벤트 사용자 글보고 이벤트참여하도록 확인해야함----------------------------------
 	
 	/*사용자 : 이벤트 메인*/
-	@RequestMapping(value="/page/eventmain.do", method=RequestMethod.GET)
+	@RequestMapping(value="test/page/eventmain.do", method=RequestMethod.GET)
 	public ModelAndView eventList(ModelAndView mv) {
 		mv.setViewName("event/eventlist");
 		List<Event> list = eventService.eventList();
@@ -44,7 +44,7 @@ public class EventController {
 	}
 
 	// 이벤트 리스트 이건 유저 뷰인데 다시작업해야함
-	@RequestMapping(value="eventList.do", method=RequestMethod.GET)
+	@RequestMapping(value="/page/eventmain.do", method=RequestMethod.GET)
 	public ModelAndView selectEventList(@RequestParam(value="keyword",required = false, defaultValue="") String keyword, String page) {
 		
 		ModelAndView mv = new ModelAndView();
@@ -79,7 +79,7 @@ public class EventController {
 		int currentPage = 1;
 	    int limit = 10;
 	       List<EventResult> list = eventService.resultEventList(keyword,currentPage, limit);
-	                System.out.println("list : " + list);
+	                System.out.println("이벤트결과list : " + list);
 	          Map<String, Object> map = new HashMap<String, Object>();
 	          int listCount = eventService.getListCount(keyword);
 	          int maxPage = (int) ((double) listCount / limit + 0.9);
@@ -153,7 +153,7 @@ public class EventController {
 		  int currentPage = 1;
           int limit = 10;
           List<Event> list = eventService.selectEventList(keyword,currentPage, limit);
-                System.out.println("list : " + list);
+                System.out.println("관리자list : " + list);
                 
           Map<String, Object> map = new HashMap<String, Object>();
           int listCount = eventService.getListCount(keyword);
@@ -249,7 +249,7 @@ public class EventController {
 		String file_name = new FileUtils().InsertFile(session, request);
 		String[] file = file_name.split("/");
 		
-		System.out.println(file[0] + " , " + file[1]);
+		System.out.println("이건 insert"+file[0] + " , " + file[1]);
 		
 		Event event = new Event();		
 		event.setWriter(Integer.parseInt(request.getParameter("writer")));
@@ -261,8 +261,7 @@ public class EventController {
 		event.setOriginal_file_name(file[0]);
 		event.setStored_file_name(file[1]);
 		
-		System.out.println("controller : "+event);
-		
+			
         eventService.eventInsert(event);
          return "redirect:/cvseventlist.do";
 	}
@@ -278,7 +277,7 @@ public class EventController {
 		return mv;
 	
 	}
-	//이벤트 수정하기
+	/*//이벤트 수정하기-------------------------------------------------------------------
 	@RequestMapping(value="cvseventmodifywrite.do", method = RequestMethod.POST)
 	public String cvsEventModiftwriter(Event event) {
 		System.out.println(event);
@@ -288,6 +287,31 @@ public class EventController {
 	
 		return "redirect:/cvseventlist.do";
 		
+	}*/
+	@RequestMapping(value="cvseventmodifywrite.do", method = RequestMethod.POST)
+	public String cvsEventModiftwriter(HttpSession session, HttpServletRequest request) throws Exception {
+
+		int user_no = ((User)session.getAttribute("user")).getUser_no();		
+		String filename = new FileUtils().InsertFile(session, request);
+		String[] fName = filename.split("/");
+		String prevFileName = request.getParameter("prevfile");
+			
+		System.out.println("이건 수정" + fName[0] + " , " + fName[1]);
+			
+		Event event = new Event();		
+		event.setWriter(Integer.parseInt(request.getParameter("writer")));
+		event.setTitle(request.getParameter("title"));
+		event.setEvent_no(Integer.parseInt(request.getParameter("event_no")));
+		event.setStart_date(java.sql.Date.valueOf(request.getParameter("start_date")));
+		event.setEnd_date(java.sql.Date.valueOf(request.getParameter("end_date")));
+		event.setJoin_limit(Integer.parseInt(request.getParameter("join_limit")));
+		event.setContents(request.getParameter("contents"));
+		event.setOriginal_file_name(fName[0]);
+		event.setStored_file_name(fName[1]);				
+	    
+		eventService.updateEventPage(event);
+		
+		return "redirect:/cvseventlist.do";
 	}
 	//수정 끝
 
