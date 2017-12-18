@@ -106,20 +106,18 @@
 												 style="overflow-x:hidden; width:890px; height:300px;" id="purchaseTable">
 												 
 												<table id="purchaseList" class="table table-condensed" style="text-align: center;	" id="table">
-															<tr style="font-size: 8pt; text-align: center;">
+														<tr style="font-size: 8pt; text-align: center;">
 															<th>구매번호</th><th>지점상품번호</th>
 															<th style="text-align: center;">지점번호</th><th style="text-align: center;">지점명</th>
 															<th style="text-align: center;">상품명</th><th>상품수량</th><th>합 계</th>
 															<th>사용포인트</th><th>적립포인트</th><th style="text-align: center;">구매날짜</th>
-															</tr>
+														</tr>
 															
-														
 													<c:choose>
-													
 														<c:when test="${fn:length(list) > 0}">
 															<c:forEach items="${list }" var="list">
 															 <c:if test="${list.user_no eq sessionScope.user.user_no }"> 
-															 <tr>
+															<tr>
 															<td>${list.purchase_no }</td>
 														    <td>${list.store_product_no }</td>
 														    <td>${list.store_no }</td>
@@ -132,13 +130,10 @@
 														    <td>${list.purchase_date }</td>
 														    </tr> 
 														     </c:if> 
-																		</c:forEach>
-																					</c:when>
-																					</c:choose>
-														<%-- <c:forEach items="${list }" var="list">
-															</c:forEach> --%>
-															</table>
-												
+															</c:forEach>
+														</c:when>
+													</c:choose>
+												</table>
 											</div>
 											
 											<!-- 거래내역 버튼 검색 -->
@@ -251,13 +246,12 @@
 										
 									<c:forEach items="${flist }" var="flist">
 									    <tr>
-										<td>${flist.brand_name }</td>
-										<td>${flist.store_name }</td>
-										<td>${flist.product_name }</td>
-										<td>${flist.stored_file_name }</td>
-										<td>${flist.min_expiration_hour }</td>
+											<td>${flist.brand_name }</td>
+											<td>${flist.store_name }</td>
+											<td>${flist.product_name }</td>
+											<td>${flist.stored_file_name }</td>
+											<td>${flist.min_expiration_hour }</td>
 										</tr> 
-									
 									</c:forEach>
 									</table>
 								</div>
@@ -277,6 +271,13 @@
 
 	<script>
 		$(document).ready(function() {
+			//자주구매하는 목록 ajax
+			$.ajax({
+				
+			});
+			
+			
+			//충전하기  ajax
 			$("#myBtn").click(function() {
 				var cash;
 				$("#myModal").modal();

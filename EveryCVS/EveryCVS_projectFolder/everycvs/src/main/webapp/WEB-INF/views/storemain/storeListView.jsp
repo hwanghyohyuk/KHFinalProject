@@ -138,7 +138,6 @@
 											<input type="hidden" name="calculated_price" value="${sp.price }">
 											<input type="hidden" name="using_point" value=0>
 											
-											
 											<br>
 											<button type="submit" class="btn"
 												    name="price" value="${sp.price}"
@@ -155,8 +154,7 @@
 											<input type="number" name="purchase_quantity" value="${purchase.purchase_quantity }">
 											수량
 											<input type="hidden" name="calculated_price" value="${sp.price }">
-											
-											
+
 											<button type="submit" class="btn"
 												    name="price" value="${sp.price }"
 												     id="frm">포인트 결제</button>
