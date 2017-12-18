@@ -1,5 +1,6 @@
 package com.kh.everycvs.sale.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.servlet.ModelAndView;
@@ -21,7 +22,7 @@ public interface SaleService {
 
 	/* 편의점관리자 */
 	/** 편의점 상품 종류별 판매량 **/
-	Map kindCvsSale(int brand_no);
+	List<Map<String, Object>> kindCvsSale(int brand_no);
 
 	/** 판매량 Top5 지점 **/
 	Map saleTop5Store(int brand_no);

@@ -1,5 +1,6 @@
 package com.kh.everycvs.sale.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class SaleServiceImpl implements SaleService {
 	/* 편의점관리자 */
 	/** 편의점 상품 종류별 판매량 **/
 	@Override
-	public Map kindCvsSale(int brand_no) {
+	public List<Map<String, Object>> kindCvsSale(int brand_no) {
 		return saleDao.kindCvsSale(brand_no);
 	}
 

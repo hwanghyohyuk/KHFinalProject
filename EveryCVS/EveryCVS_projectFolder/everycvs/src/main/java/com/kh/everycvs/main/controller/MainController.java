@@ -2,6 +2,7 @@ package com.kh.everycvs.main.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -18,8 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.NaverMap;
+import com.kh.everycvs.common.model.vo.Product;
 import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.User;
+import com.kh.everycvs.event.model.service.EventService;
+import com.kh.everycvs.product.model.service.ProductService;
 import com.kh.everycvs.store.model.service.StoreService;
 
 @Controller
@@ -27,6 +31,12 @@ public class MainController {
 
 	@Autowired
 	private StoreService storeService;
+	
+	@Autowired
+	private ProductService productService;
+	
+	@Autowired
+	private EventService eventService;
 
 	// 인터셉터를 거치는 페이지이동 메소드
 	@RequestMapping("main/main.do")
@@ -59,8 +69,12 @@ public class MainController {
 			session.setAttribute("store", null); // 정보를 삭제한다
 		}
 		// 이벤트 top 3 편의점별 서비스 불러오기
+		List<Product> eveTop3 = eventService.eventTop3();
+		mv.addObject("evetop3",eveTop3);
 		// 인기상품 top 3 서비스 불러오기
-
+		List<Product> popTop3 = productService.popularTop3();
+		mv.addObject("poptop3",popTop3);
+		
 		return mv;
 	}
 
@@ -69,7 +83,6 @@ public class MainController {
 	@RequestMapping(value = "/ajax/brandmap.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView brandMap(ModelAndView mv, NaverMap location) {
-		System.out.println(location);
 		Map<String, Object> map = new HashMap<String, Object>();
 		ArrayList<Store> list = storeService.cvsMapList(location);// 전체 브랜드 조회
 		JSONArray jar = new JSONArray();
@@ -90,6 +103,33 @@ public class MainController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
+	
+	/* ajax로 보여줄 가장 가까운 편의점 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/ajax/neareststore.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView nearestStore(ModelAndView mv,@RequestParam("brand_no") int brand_no,@RequestParam("lat") double lat,@RequestParam("lng") double lng) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("brand_no", brand_no);
+		params.put("lat", lat);
+		params.put("lng", lng);
+		Map<String, Object> map = new HashMap<String, Object>();//보낼맵
+		Store store = storeService.nearestStore(params);// 전체 브랜드 조회
+		JSONObject jstore = new JSONObject();
+			jstore.put("brand_no", store.getBrand_no());
+			jstore.put("brand_name", store.getBrand_name());
+			jstore.put("store_no", store.getStore_no());
+			jstore.put("store_name", store.getStore_name());
+			jstore.put("road_address", store.getRoad_address());
+			jstore.put("lat", store.getLat());
+			jstore.put("lng", store.getLng());
+		map.put("store", jstore);
+		mv.addAllObjects(map);
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	
 
 	/* 사용자가 지점메인에 접속 */
 	@RequestMapping("/page/storemain.do")

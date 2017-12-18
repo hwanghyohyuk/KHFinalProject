@@ -19,13 +19,14 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<h2>
-							<strong>GS25대치점</strong><br> <small>서울특별시 강남구
-								영동대로86길 10 </small>
+							<strong>${sessionScope.store.brand_name}&nbsp;${sessionScope.store.store_name}</strong><br>
+							<small>${sessionScope.store.road_address}</small>
 						</h2>
 					</div>
 					<form action="spmlist.do" method="post">
 						<div class="col-sm-3" style="margin-left: 190px;">
-							<br> <input class="form-control" type="search"
+							<br> 
+							<input class="form-control" type="search"
 								placeholder="상품명을 입력해주세요." name="keyword" value="${keyword}">
 						</div>
 						<div>
@@ -44,7 +45,7 @@
 					<div class="box-body no-padding">
 						<table class="table table-condensed">
 							<tr>
-								<th>상품번호</th>
+								<th>지점상품번호</th>
 								<th>종류</th>
 								<th>상품명</th>
 								<th>제조사</th>
@@ -52,6 +53,7 @@
 								<th>할인정보</th>
 								<th>제조일</th>
 								<th>수량</th>
+								<th>삭제여부</th>
 								<th>삭제</th>
 							</tr>
 							<c:forEach var="spm" items="${requestScope.list}">
@@ -66,9 +68,13 @@
 									<td>${spm.discount_name}</td>
 									<td>${spm.manufacture_date}</td>
 									<td>${spm.quantity}개</td>
+									<td class="text-center">${spm.del_check}</td>
 									<td>
 										<button type="button" class="btn btn-primary btn-xs" 
-										onclick="location.href='spmdelete.do?spnum=${spm.store_product_no}'">삭제</button>
+										onclick="location.href='spmdelete.do?spnum=${spm.store_product_no}&toggle=${spm.del_check}'">
+										<c:if test="${spm.del_check eq 'N'}">삭제</c:if>
+										<c:if test="${spm.del_check ne 'N'}">복구</c:if>										
+										</button>
 									</td>
 									<!-- Modal -->
 									<td>
@@ -90,6 +96,9 @@
 																	alt="image1" align="left" style="margin-left: 5px;">
 															</div>
 															<div class="col-sm-6">
+															<form id="updateform" action="/everycvs/spmupdate.do" method="post" enctype="multipart/form-data">
+															<input type="hidden" name="spnum" value="${spm.store_product_no}">
+															<input type="hidden" name="page" value="${currentPage}">
 																<table class="table table-condensed">
 																	<tr>
 																		<td><strong>상품명</strong></td>
@@ -109,16 +118,16 @@
 																	</tr>
 																	<tr>
 																		<td><strong>제조일</strong></td>
-																		<td><input class="form-control" type="text"
-																			placeholder="${spm.manufacture_date}"></td>
+																		<td><input class="form-control" type="date" name="mdate"
+																			value="${spm.manufacture_date}"></td>
 																	</tr>
 																	<tr>
 																		<td><strong>수량</strong></td>
-																		<td><input class="form-control" type="number"
-																			placeholder="${spm.manufacture_date}" min="1"
-																			max="100" step="1" value="1"></td>
+																		<td><input class="form-control" type="number" min="1"
+																			max="100" step="1" name="quantity" value="${spm.quantity}"></td>
 																	</tr>
 																</table>
+																</form>
 															</div>
 														</div>
 														<div class="row" style="margin-left: 10px;">
@@ -138,15 +147,18 @@
 														</div>
 													</div>
 													<div class="modal-footer">
-														<button type="button" class="btn btn-primary btn-sm"
-															data-dismiss="modal">수정</button> &nbsp;
-														<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" 
-														onclick="location.href='spmdelete.do?spnum=${spm.store_product_no}'">삭제</button>
+														<button type="submit" class="btn btn-primary btn-sm" data-dismiss="modal"
+														onclick="updateSubmit();">수정</button> &nbsp;
+														<button type="button" class="btn btn-primary btn-sm" 
+														onclick="location.href='spmdelete.do?spnum=${spm.store_product_no}&toggle=${spm.del_check}'">
+															<c:if test="${spm.del_check eq 'N'}">삭제</c:if>
+															<c:if test="${spm.del_check ne 'N'}">복구</c:if>										
+														</button>
 													</div>
 												</div>
-											</div>
+											</div><!-- Get방식으로 넘김 -->
 										</div> 
-									<td>
+									</td>
 									<!-- Modal End -->
 								</tr>
 							</c:forEach>
@@ -191,10 +203,16 @@
 		</div>
 	</div>
 </div>
+
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->
 <c:import url="../../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
 <!-- JS -->
+<script type="text/javascript">
+	function updateSubmit(){
+		$("#updateform").submit();
+	}
+</script>
 <c:import url="../../include/user/common/end.jsp"></c:import>
 <!-- === END FOOTER === -->

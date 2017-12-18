@@ -3,6 +3,7 @@ package com.kh.everycvs.event.model.service;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Event;
-
+import com.kh.everycvs.common.model.vo.Product;
 import com.kh.everycvs.event.model.dao.EventDao;
 
 @Service("eventService")
@@ -21,11 +22,30 @@ public class EventServiceImpl implements EventService{
 	
 	@Autowired
 	private EventDao eventDao;
+	
+	/*사용자 : 이벤트 목록*/
+	@Override
+	public List<Event> eventList() {
+			return eventDao.eventList();
+	}
+
+	/*사용자 : 메인화면 이벤트 top3*/
+	@Override
+	public List<Product> eventTop3() {
+		return eventDao.eventTop3();
+	}
 
 	@Override
-	public List<Event> selectEventList() throws Exception {
-		// 이벤트 조회 : 모든 공식이벤트를 조회
-		return eventDao.selectEventList();
+	public int getListCount(String keyword) {
+		// 게시글  조회
+		return eventDao.listCount(keyword);
+	}
+	
+	@Override
+	public List<Event> selectEventList(String keyword,int currentPage, int limit){
+	      int startRow = (currentPage - 1) * limit + 1;
+	      int endRow = startRow + limit - 1;        
+	      return eventDao.selectEventList(keyword,startRow,endRow);
 	}
 
 	@Override
@@ -57,20 +77,27 @@ public class EventServiceImpl implements EventService{
 		return null;
 	}
 	
-	
-	@Override
-	public String updateEvent(HttpServletRequest request) {
-		// 이벤트 수정
-		return null;
-	}
-
 	@Override
 	public Event cvsEventDetail(int eno) {
-		// TODO Auto-generated method stub
+		// 관리자 디테일
 		return eventDao.cvsEventDetail(eno);
 	}
 
-	
+	@Override
+	public Event updateEvent(int no) {
+		// 수정하기로 이동
+		return eventDao.updateEvent(no);
+	}
+
+	@Override
+	public int updateEventPage(Event event) {
+		// 수정하기 
+		return eventDao.updateEventPage(event);
+	}
+
+
+
+
 	
 
 }

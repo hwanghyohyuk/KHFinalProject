@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sale">
+
+	<!-- 상품 종류별  판매량 조회 -->
+	<select id="selectSaleProductKind" parameterType="_int" resultType="hashmap">
+		<![CDATA[
+			select brand_no, product_kind_no, sum(sale_quantity) sale_quantity
+			from sale_product_kind_view
+			group by brand_no, product_kind_no
+			having brand_no = #{brand_no}
+			order by product_kind_no
+		]]>
+	</select>
+	
+</mapper>
+

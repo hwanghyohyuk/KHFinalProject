@@ -27,6 +27,12 @@ public class StoreServiceImpl implements StoreService {
 	public ArrayList<Store> cvsMapList(NaverMap location) {
 		return storeDao.cvsMapList(location);
 	}
+
+	@Override
+	public Store nearestStore(Map<String, Object> params) {
+		return storeDao.nearestStore(params);
+	}
+
 	
 	/**지점 방문횟수증가**/
 	@Override

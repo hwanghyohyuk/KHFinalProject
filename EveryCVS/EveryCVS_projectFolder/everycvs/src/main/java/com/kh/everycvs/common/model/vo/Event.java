@@ -25,36 +25,17 @@ public class Event implements Serializable {
 	private int readcount; //조회수
 	private String original_file_name; //첨부파일기존명
 	private String stored_file_name; //첨부파일변경명
-	private int brand_no; //상호번호
+	private int brand_no; // 상호번호
+	private String brand_name;// 상호명
 	private String del_check; //삭제구분
 	
 	public Event() {
 		super();
 	}
-	
-	
-	//게시글을 올리기위한 vo
-	public Event(int event_no, String title, int writer, String contents, Date start_date, Date end_date,
-			int join_limit, int readcount, String original_file_name, String stored_file_name, String del_check) {
-		super();
-		this.event_no = event_no;
-		this.title = title;
-		this.writer = writer;
-		this.contents = contents;
-		this.start_date = start_date;
-		this.end_date = end_date;
-		this.join_limit = join_limit;
-		this.readcount = readcount;
-		this.original_file_name = original_file_name;
-		this.stored_file_name = stored_file_name;
-		this.del_check = del_check;
-	}
-
-
 
 	public Event(int event_no, String title, int writer, String user_name, String contents, Date start_date,
 			Date end_date, int join_limit, int readcount, String original_file_name, String stored_file_name,
-			int brand_no, String del_check) {
+			int brand_no, String brand_name, String del_check) {
 		super();
 		this.event_no = event_no;
 		this.title = title;
@@ -68,10 +49,10 @@ public class Event implements Serializable {
 		this.original_file_name = original_file_name;
 		this.stored_file_name = stored_file_name;
 		this.brand_no = brand_no;
+		this.brand_name = brand_name;
 		this.del_check = del_check;
 	}
-	
-	/* Getter & Setter */
+
 	public int getEvent_no() {
 		return event_no;
 	}
@@ -168,6 +149,14 @@ public class Event implements Serializable {
 		this.brand_no = brand_no;
 	}
 
+	public String getBrand_name() {
+		return brand_name;
+	}
+
+	public void setBrand_name(String brand_name) {
+		this.brand_name = brand_name;
+	}
+
 	public String getDel_check() {
 		return del_check;
 	}
@@ -179,12 +168,15 @@ public class Event implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	/* ToString */
+
 	@Override
 	public String toString() {
-		return event_no + ", " + title + ", " + writer + ", " + user_name + ", " + contents + ", " + start_date + ", " + end_date + ", " + 
-			   join_limit + ", " + readcount + ", " + original_file_name + ", " + stored_file_name + ", " + brand_no + ", " + del_check;
+		return "Event [event_no=" + event_no + ", title=" + title + ", writer=" + writer + ", user_name=" + user_name
+				+ ", contents=" + contents + ", start_date=" + start_date + ", end_date=" + end_date + ", join_limit="
+				+ join_limit + ", readcount=" + readcount + ", original_file_name=" + original_file_name
+				+ ", stored_file_name=" + stored_file_name + ", brand_no=" + brand_no + ", brand_name=" + brand_name
+				+ ", del_check=" + del_check + "]";
 	}
+
 	
 }

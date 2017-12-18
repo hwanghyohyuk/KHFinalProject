@@ -27,7 +27,7 @@ public class StoreProduct implements Serializable {
 	private int product_kind_no; // 상품종류번호
 	private String product_kind_name; // 상품종류명
 	private int brand_no; // 상호번호
-	private String brand_name;
+	private String brand_name; //상호명
 	private String original_file_name; // 첨부파일기존명
 	private String stored_file_name; // 첨부파일변경명
 	private String del_check; // 삭제구분

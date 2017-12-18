@@ -24,7 +24,6 @@ public class StoreProductDao {
 		}else{
 			return sqlSession.selectOne("storeProduct.getListCount");
 		}	
-		
 	}
 
 	public List<StoreProduct> selectList(int startRow, int endRow, String keyword) {
@@ -67,13 +66,17 @@ public class StoreProductDao {
 		}		
 	}
 
-	public void deleteSpmanager(int spnum) {
-		 sqlSession.delete("deleteSpmanager1");
-		 sqlSession.delete("deleteSpmanager2");
-		 sqlSession.delete("deleteSpmanager3");
-		 sqlSession.delete("deleteSpmanager4", spnum);
+	public void deleteSpmanager(int spnum, String toggle) {
+		Map<String,Object>map = new HashMap<String,Object>();
+		map.put("spnum", spnum);
+		map.put("toggle", toggle);
+		 sqlSession.update("storeProduct.deleteSpmanager", map);
 	}
-
+	
+	public int updateSpmanager(Map<String, Object> map) {
+		return sqlSession.update("storeProduct.updateSpmanager", map); 
+	}
+	
 	public List<StoreProduct> listApmanager(int startRow, int endRow, String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("startRow", startRow); 

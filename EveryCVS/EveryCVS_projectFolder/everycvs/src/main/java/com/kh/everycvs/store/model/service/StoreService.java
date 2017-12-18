@@ -12,6 +12,8 @@ public interface StoreService {
 	/*사용자*/
 	/**지도에 표시할 데이터리스트**/
 	ArrayList<Store> cvsMapList(NaverMap location);
+	/**지도에 표시할 가장 가까운 편의점**/
+	Store nearestStore(Map<String, Object> params);
 	
 	/**지점 방문횟수증가**/
 	public void increamentJoinCount(String store_no);
