@@ -57,15 +57,14 @@ public class PurchaseController {
 	public ModelAndView userDecreMoney(ModelAndView mv,
 									   HttpSession session,
 									   Purchase purchase,
-									   @RequestParam ("store_product_no") int store_product_no,
 									   @RequestParam ("price") int price,
 									   @RequestParam ("cash") String cash,
 									   @RequestParam ("user_no") String user_no,
 									   @RequestParam ("point") String point,
+									   @RequestParam ("store_product_no") int store_product_no,
 									   @RequestParam ("purchase_quantity") int purchase_quantity,
 									   @RequestParam ("calculated_price") int calculated_price,
-									   @RequestParam ("using_point") int using_point,
-									   @RequestParam ("accumulate_point") int accumulate_point){
+									   @RequestParam ("using_point") int using_point) {
 
 		//입력받은 금액만큼 잔고에서 차감후 리턴
 		System.out.println("차감할 금액 : " + price);
@@ -76,19 +75,20 @@ public class PurchaseController {
 		int uno = Integer.parseInt(user_no);
 		int p = Integer.parseInt(point);
 		
-		int addPoint = (int) (price * 0.01);
+		int cprice = (price * purchase_quantity);
+		int addPoint = (int) (cprice * 0.01);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("price", price);
+		map.put("price", cprice);
 		map.put("cash", c);
 		map.put("user_no", uno);
 		map.put("point", p);
 		map.put("addPoint", addPoint);
 		map.put("store_product_no", store_product_no);
 		map.put("purchase_quantity", purchase_quantity);
-		map.put("calculated_price", calculated_price);
+		map.put("calculated_price", cprice);
 		map.put("using_point", using_point);
-		map.put("accumulate_point", accumulate_point);
+		map.put("accumulate_point", addPoint);
 		
 		
 		System.out.println("컨트롤러로 넘어온 객체 : " + purchase);
@@ -97,7 +97,7 @@ public class PurchaseController {
 		int insertPurchaseList = purchaseService.userInsertPurchaseList(map);
 		
 		 User user = (User) session.getAttribute("user");
-		 user.setCash(c - price);
+		 user.setCash(c - cprice);
 		 user.setPoint(p + addPoint);
 		 
 		 session.setAttribute("user", user);
@@ -119,24 +119,39 @@ public class PurchaseController {
 	public ModelAndView userDecrePoint( @RequestParam ("price") int price,
 										@RequestParam ("point") String point,
 										@RequestParam ("user_no") String user_no,
+										@RequestParam ("store_product_no") int store_product_no,
+										@RequestParam ("purchase_quantity") int purchase_quantity,
+										@RequestParam ("calculated_price") int calculated_price,
+									
 										ModelAndView mv,
 										HttpSession session) {
 		int dp = Integer.parseInt(point);
 		int uno = Integer.parseInt(user_no);
 		
+		int usingPoint = (price * purchase_quantity);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("point", dp);
 		map.put("user_no", uno);
 		map.put("price", price);
+		map.put("store_product_no", store_product_no);
+		map.put("purchase_quantity", purchase_quantity);
+		map.put("calculated_price", usingPoint);
+		map.put("using_point", usingPoint);
+		map.put("accumulate_point", 0);
+		
 		
 		int result = purchaseService.userDecrePoint(map);
+		int insertPurchaseList = purchaseService.userInsertPurchaseList(map);
 		
 		 User user = (User) session.getAttribute("user");
-		 user.setPoint(dp - price);
+		 user.setPoint(dp - usingPoint);
 		 session.setAttribute("user", user);
 		 
 		mv.addObject("result", result);
+		mv.addObject("insertPurchaseList", insertPurchaseList);
 		mv.setViewName("user/mypage/main");
+		
 		
 		System.out.println("포인트 결제 결과 : " + user.getPoint());
 		return mv;

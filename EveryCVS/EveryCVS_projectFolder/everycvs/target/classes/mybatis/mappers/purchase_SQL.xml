@@ -42,7 +42,7 @@
 	<!-- 사용자 잔고 감소 -->
 	 <update id="userDecreMoney" parameterType="hashmap">
     	<![CDATA[
-    		update tb_user set cash = cash - #{price}
+    		update tb_user set cash = cash - #{calculated_price}
 			where user_no = #{user_no}
     	]]>
     
@@ -68,7 +68,7 @@
     <!-- 사용자 point 감소 -->
 	 <update id="userDecrePoint" parameterType="hashmap">
     	<![CDATA[
-    		update tb_user set point = point - #{price}
+    		update tb_user set point = point - #{calculated_price}
 			where user_no = #{user_no}
     	]]>
     
@@ -82,8 +82,8 @@
 	 <insert id="insertPurchaseList" parameterType="hashmap">
     	<![CDATA[
     		insert into tb_purchase values(
-			seq_purchase_no.nextval, #{user_no}, #{STORE_PRODUCT_NO}, #{PURCHASE_QUANTITY}, 
-			#{CALCULATED_PRICE}, #{USING_POINT}, #{ACCUMULATE_POINT}, sysdate)
+			seq_purchase_no.nextval, #{user_no}, #{store_product_no}, #{purchase_quantity}, 
+			#{calculated_price}, #{using_point}, #{accumulate_point}, sysdate)
     	]]>   
     </insert>
 	
