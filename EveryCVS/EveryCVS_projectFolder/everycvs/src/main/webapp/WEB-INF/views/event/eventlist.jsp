@@ -20,7 +20,7 @@
 								onClick="location.href='#"> <input type="button"
 								class="category" value="종료된 이벤트" onClick="location.href='#">
 							<input type="button" class="category" value="이벤트 당첨자"
-								onClick="location.href='#">
+								onClick="location.href='/everycvs/eventresultlist.do'">
 						</div>
 						<!-- Filter Buttons -->
 						<div class="portfolio-filter-container margin-top-20">
@@ -39,27 +39,16 @@
 						</div>
 						<!-- End Filter Buttons -->
 					</div>
-					<%-- 글 작성
-					 <!--글 작성 버튼-->
-					<div id=insert>
-					<c:if test="${!empty sessionScope.admin }">
-						<a href="eventInsert.do" class="category">글 등록</a>
-						</c:if>
-						<c:if test="${empty sessionScope.member }">
-							${b.boardTitle}
-						</c:if>
-					</div>
-					 --%>	
 				</div>
 			
 				<div class="row">
-					<div class="col-md-12 portfolio-group no-padding">
+					<div class="col-md-12 portfolio-group no-padding" style="float: left;">
 						<!-- Portfolio Item -->
 						<div class="col-md-4 portfolio-item margin-bottom-40 GS25">
 							<div>
 							<!-- 로그인시 상세보기 -->
 							<c:if test="${sessionScope.user ne null}">
-								<c:forEach items="${list}" var="e">
+								<c:forEach items="${event.list}" var="e">
 									<figure>
 										<a href="/everycvs/eventDetail.do?no=${e.event_no}">
 										<img src="/everycvs/resources/uploadfile/image10.jpg" alt="image1">
@@ -69,14 +58,15 @@
 											<span>시작일:${e.start_date}</span> 
 											<br> 
 											<span>종료일:${e.end_date}</span>
+											<br>
+											<span>조회수:${e.readcount}</span>
 										</figcaption>
 									</figure>
 								</c:forEach>
 								</a>
 							</c:if>
-							
 								<c:if test="${sessionScope.user eq null}">
-									<c:forEach items="${list}" var="e">
+									<c:forEach items="${event.list}" var="e">
 								<figure>
 								<a href="javascript:alert('로그인을 해야 상세보기 가능합니다.')">
 									<img src="/everycvs/resources/uploadfile/image10.jpg" alt="image1">
@@ -96,22 +86,12 @@
 						<!-- End Portfolio Item -->	
 					</div>
 				</div>
-				<!-- 페이지인 척 하는 새끼 -->
-				<div class="text-center">
-					<ul class="pagination">
-						<li><a href="#">&laquo;</a></li>
-						<li><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li class="active"><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#">&raquo;</a></li>
-					</ul>
-				</div>
+				<!-- 페이지인 여기서부터 들어감-->
+				
+				<!-- 페이지 여기까지 들어가면됨 -->
 			</div>
 		</div>
 
-	
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->
 <c:import url="../include/user/common/footer.jsp"></c:import>

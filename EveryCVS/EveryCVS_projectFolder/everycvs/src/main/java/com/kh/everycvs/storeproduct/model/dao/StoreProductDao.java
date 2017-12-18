@@ -30,7 +30,7 @@ public class StoreProductDao {
 	public List<StoreProduct> selectList(int startRow, int endRow, String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("startRow", startRow); 
-		map.put("endRow", endRow); 
+		map.put("endRow", endRow);
 		if(!keyword.equals("")){
 			map.put("keyword", "%"+keyword+"%");
 			return sqlSession.selectList("storeProduct.searchSproduct", map);

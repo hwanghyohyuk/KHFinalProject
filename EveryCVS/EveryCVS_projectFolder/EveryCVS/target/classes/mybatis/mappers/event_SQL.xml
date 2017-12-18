@@ -18,6 +18,19 @@
 		<result property="del_check" column="DEL_CHECK" />
 	</resultMap>
 	
+	<resultMap id="resultWin" type="eventresult">
+		<result property="event_result_no" column="EVENT_RESULT_NO" />
+		<result property="event_no" column="EVENT_NO" />
+		<result property="title" column="TITLE" />
+		<result property="writer" column="WRITER" />
+		<result property="contents" column="CONTENTS" />
+		<result property="write_date" column="WRITE_DATE" />
+		<result property="readcount" column="READCOUNT" />
+		<result property="original_file_name" column="ORIGINAL_FILE_NAME" />
+		<result property="stored_file_name" column="STORED_FILE_NAME" />
+		<result property="del_check" column="DEL_CHECK" />		
+	</resultMap>
+	
 	
 	
 	<!-- 게시글 갯수 조회 -->
@@ -37,10 +50,17 @@
             select * from(select rownum rnum, T.* 
 			from (select * from event_view
 			order by event_no desc ) T ) a where a.rnum >= #{startRow} and a.rnum <=#{endRow}
-            
 		]]>
 	</select>
 	
+	<!-- 이벤트 결과 조회 -->
+	<select id="resulteventlist" resultType="list" parameterType="java.util.Map" resultMap="resultWin">
+		<![CDATA[
+			select * from(select rownum rnum, T.* 
+			from (select * from event_result_view
+			order by event_result_no desc ) T ) a where a.rnum >=#{startRow} and a.rnum <=#{endRow}
+		]]>
+	</select>
 	<!-- 제목 내용 검색 -->
 	<select id="cvseventsearch" resultType="list" parameterType="java.util.Map" resultMap="resultEvent">
 		<![CDATA[
@@ -81,6 +101,13 @@
 		]]>
 	</update>
 	
+	<!-- 당첨자 게시판 조회수 증가 -->
+	<update id="eventResultReadCount" parameterType="_int" flushCache="true">
+		<![CDATA[
+		update tb_event_result set readcount = readcount + 1 where event_result_no=#{event_result_no}
+		]]>
+	</update>
+	
 	<!-- 이벤트 게시글 삭제 -->
 	<delete id="eventDelete" parameterType="_int">
 		<![CDATA[
@@ -92,6 +119,13 @@
 	<select id="cvsEventDetail" parameterType="_int" resultType="event" resultMap="resultEvent">
 	<![CDATA[
 		SELECT * FROM EVENT_VIEW where event_no = #{eno}
+	]]>
+	</select>
+	
+	<!-- 사용자 당첨 게시판 상세보기 -->
+	<select id="eventResultDetail" parameterType="_int" resultType="eventresult" resultMap="resultWin">
+	<![CDATA[
+		SELECT * FROM EVENT_RESULT_VIEW where event_result_no = #{rno}
 	]]>
 	</select>
 	
