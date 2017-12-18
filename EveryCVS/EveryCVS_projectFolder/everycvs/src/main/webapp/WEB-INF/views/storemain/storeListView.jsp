@@ -100,7 +100,7 @@
 										&nbsp;
 										<button type="button" class="btn btn-primary btn-sm"
 											data-toggle="modal" 
-											data-target="#purchaseModal">구매하기</button>
+											data-target="#s${sp.store_product_no}">구매하기</button>
 									</div>
 								</div>
 							</div>
@@ -109,7 +109,7 @@
 
 						<!-- 구매하는 새 모달 띄우기 -->
 							<!-- Modal -->
-							<div class="modal fade" id="purchaseModal" role="dialog" tabindex="-1">
+							<div class="modal fade" id="s${sp.store_product_no}" role="dialog" tabindex="-1">
 								<div class="modal-dialog">
 
 									<!-- Modal content-->
@@ -133,16 +133,18 @@
 											<input type="hidden" name="user_no" value="${user.user_no }">
 											<input type="hidden" name="point" value="${user.point }">
 											<button type="submit" class="btn"
-												    name="price" value="${sp.price}">잔고 결제</button>
+												    name="price" value="${sp.price}"
+												     id="frm">잔고 결제</button>
 											
 										</form>
 										
 										<!-- 포인트 결제 버튼 -->
-										<form action="userDecrePoint.do" id="frm">
+										<form action="userDecrePoint.do">
 											<input type="hidden" name="user_no" value="${user.user_no }">
 											<input type="hidden" name="point" value="${user.point }">
 											<button type="submit" class="btn"
-												    name="price" value="${sp.price }">포인트 결제</button>
+												    name="price" value="${sp.price }"
+												     id="frm">포인트 결제</button>
 										</form>
 										
 										</div>
@@ -211,7 +213,7 @@
 //결제하기에 대한 js
   $(document).ready(function() {
 	$("#frm").click(function() {
-		alert("정말로 결제하시겠습니까?");
+		confirm("정말로 결제하시겠습니까?");
 	});
 });  
 

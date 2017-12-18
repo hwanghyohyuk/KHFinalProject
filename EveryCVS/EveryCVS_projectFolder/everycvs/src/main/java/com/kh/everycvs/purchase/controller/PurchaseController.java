@@ -54,6 +54,7 @@ public class PurchaseController {
 	@RequestMapping("userDecreMoney.do")
 	public ModelAndView userDecreMoney(ModelAndView mv,
 									   HttpSession session,
+									   Purchase purchase,
 									   @RequestParam ("price") int price,
 									   @RequestParam ("cash") String cash,
 									   @RequestParam ("user_no") String user_no,
@@ -75,9 +76,12 @@ public class PurchaseController {
 		map.put("user_no", uno);
 		map.put("point", p);
 		map.put("addPoint", addPoint);
+		map.put("purchase", purchase);
 		
+		System.out.println(purchase);
 		int resultCash = purchaseService.userDecreMoney(map);
 		int resultPoint = purchaseService.userIncrePoint(map);
+		//int insertPurchaseList = purchaseService.userInsertPurchaseList(map);
 		
 		 User user = (User) session.getAttribute("user");
 		 user.setCash(c - price);

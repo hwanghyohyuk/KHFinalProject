@@ -61,10 +61,10 @@
 
 						<!-- Modal -->
 						<div class="modal fade" id="gifticon" role="dialog">
-							<div class="modal-dialog">
+							<div class="modal-dialog modal-80size">
 
 								<!-- Modal content-->
-								<div class="modal-content">
+								<div class="modal-content modal-80size">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
 									<div class="modal-body">
 										<img alt="" src="./resources/user/img/gifticon/gifticon_1.jpeg" style="height:500px;">
