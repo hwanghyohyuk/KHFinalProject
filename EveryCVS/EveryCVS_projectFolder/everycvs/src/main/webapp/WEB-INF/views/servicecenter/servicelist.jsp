@@ -55,8 +55,10 @@
                                             </tr>
                                          <c:forEach var="sc" items="${requestScope.list }">
                                         <tr>
-                                                <td style="text-align: center;">${sc.service_no}</td>                                                                                                                                  
-                                                <td style="text-align: center;">${sc.title}</td>                                                                                                                                        
+                                                <td style="text-align: center;">${sc.service_no}</td> 
+                                                <a href="detailService.do">                                                                                                                                 
+                                                <td style="text-align: center;">${sc.title}</td>                 
+                                                </a>                                                                                                                       
                                                 <td style="text-align: center;">${sc.writer}</td>
                                                 <td style="text-align: center;">${sc.write_date}</td>
                                                 <td style="text-align: center;">${sc.readcount}</td>

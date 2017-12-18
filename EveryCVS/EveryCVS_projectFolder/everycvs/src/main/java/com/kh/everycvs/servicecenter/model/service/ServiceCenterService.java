@@ -2,6 +2,7 @@ package com.kh.everycvs.servicecenter.model.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,11 +24,14 @@ public interface ServiceCenterService {
 		public List<ServiceCenter> serviceSearch(String keyword);
 		
 		// 고객센터 등록
-		public List<ServiceCenter> serviceInsert();
+		
 		
 		// 고객센터 수정
 		public String updateService(HttpServletRequest request);
 		
 		// 고객센터 삭제
 		public String deleteService(HttpServletRequest request);
+
+		
+		
 }

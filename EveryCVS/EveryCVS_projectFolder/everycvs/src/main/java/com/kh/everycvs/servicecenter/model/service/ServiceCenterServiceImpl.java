@@ -2,6 +2,7 @@ package com.kh.everycvs.servicecenter.model.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,13 +42,9 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 		System.out.println("ServiceCenterServiceImpl : " + list);*/
 		return (ArrayList<ServiceCenter>) servicecenterDao.serviceSearch(keyword);
 	}
-
-	@Override
-	public List<ServiceCenter> serviceInsert() {
-		// 고객센터 등록
-		return (ArrayList<ServiceCenter>) servicecenterDao.serviceInsert();
-	}
-
+	
+	// 고객센터 등록
+	
 	@Override
 	public String updateService(HttpServletRequest request) {
 		// 고객센터 수정

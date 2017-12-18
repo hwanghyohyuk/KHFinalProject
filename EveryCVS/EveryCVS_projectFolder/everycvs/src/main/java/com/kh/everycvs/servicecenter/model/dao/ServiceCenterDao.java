@@ -38,4 +38,12 @@ public class ServiceCenterDao {
 			System.out.println("keyword : "+"%"+keyword+"%");
 			return sqlSession.selectList("serviceCenter.serviceSearch", map);
 		}
+
+		/*public List<ServiceCenter> serviceInsert() {
+			ArrayList<ServiceCenter> list = new ArrayList<ServiceCenter>();
+			System.out.println("ServiceCenterDao : " + list);
+			return sqlSession.selectList("serviceCenter.serviceList", list);
+		}*/
+
+		
 }

@@ -47,6 +47,8 @@
                                 <div align="center">
                                     <button type="submit" class="btn btn-primary">댓글등록</button>
                                     &nbsp&nbsp&nbsp&nbsp&nbsp
+                                    <button type="submit" class="btn btn-primary" >삭제</button>
+                                    &nbsp&nbsp&nbsp&nbsp&nbsp
                                     <button type="submit" class="btn btn-primary">취소</button>
                                 </div>
                                 </div>
