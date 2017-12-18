@@ -26,7 +26,7 @@
 							
 							<!-- 관심목록 -->
 							<li class="list-group-item list-toggle">
-							<a href="favoritePage.do">관심목록</a>
+							<a href="favoriteList.do">관심목록</a>
 								</li>
 								
 							<!-- 회원탈퇴 -->
@@ -194,7 +194,7 @@
 								<!-- 내가 쓴글 보기 영역 -->
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<h3 class="panel-title">내가 쓴글 보기</h3>
+										<h3 class="panel-title">내가 쓴 글 보기</h3>
 									</div>
 									<div class="panel-body">
 										<a href="#" style="margin-right: 50px; font-size: 15pt;">
@@ -251,7 +251,7 @@
 											<th>최소유통기한</th>
 											</tr>
 										
-									<c:forEach items="${flist }" var="flist">
+									<%-- <c:forEach items="${flist }" var="flist">
 									    <tr>
 										<td>${flist.brand_name }</td>
 										<td>${flist.store_name }</td>
@@ -260,7 +260,7 @@
 										<td>${flist.min_expiration_hour }</td>
 										</tr> 
 									
-									</c:forEach>
+									</c:forEach> --%>
 									</table>
 								</div>
 							</div>

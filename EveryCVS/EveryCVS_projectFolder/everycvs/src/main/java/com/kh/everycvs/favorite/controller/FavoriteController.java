@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.everycvs.common.model.vo.User;
 import com.kh.everycvs.common.model.vo.Favorite;
 import com.kh.everycvs.common.model.vo.StoreProduct;
 import com.kh.everycvs.favorite.model.service.FavoriteService;
@@ -23,12 +25,12 @@ public class FavoriteController {
 	@Autowired
 	private StoreProductService sproductService;
 	
-	//관심상품 목록 조회 : 마이페이지에서 관심상품 목록을 조회함
+	//관심상품 리스트
 	@RequestMapping("favoriteList.do")
-	public ModelAndView favoriteList(ModelAndView mv) {
-		ArrayList<Favorite> flist = (ArrayList<Favorite>)favoriteService.favoriteList();
-		mv.addObject("flist", flist);
-		System.out.println(flist);
+	public ModelAndView favoriteList(HttpSession session, ModelAndView mv) {
+		int user_no = ((User)session.getAttribute("user")).getUser_no();
+		System.out.println("Controller : " + user_no);
+		setFavoriteList(user_no, mv);
 		return mv;
 	}
 	
@@ -42,14 +44,17 @@ public class FavoriteController {
 		
 	}
 	
-	//관심상품 페이지 이동
-	@RequestMapping("favoritePage.do")
-	public ModelAndView favoritePage(ModelAndView mv){
-		
-		ArrayList<Favorite> flist = (ArrayList<Favorite>) favoriteService.favoriteList();
+	// 관심상품 리스트 조회 후 리스트와 뷰네임을 set하는 메소드
+	public ModelAndView setFavoriteList(int user_no, ModelAndView mv){
 		//지점상품 상세보기 모달 리스트 가져오기
+		System.out.println("setFavoriteList() 실행됨!");
+		ArrayList<Favorite> flist = (ArrayList<Favorite>)favoriteService.favoriteList(user_no);
+		for(Favorite f : flist){
+			System.out.println(f.getProduct_name());
+		}
+		
 		mv.addObject("flist", flist);
-		mv.setViewName("user/mypage/favoritePage"); 
+		mv.setViewName("user/mypage/favoritePage");
 		return mv;
 	}
 	

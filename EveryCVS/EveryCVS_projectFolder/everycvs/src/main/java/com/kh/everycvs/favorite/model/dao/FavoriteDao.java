@@ -17,9 +17,8 @@ public class FavoriteDao {
 	private SqlSession sqlSession;
 	
 	//관심상품 목록조회
-	public List<Favorite> favoriteList() {
-		ArrayList<Favorite> flist = new ArrayList<Favorite>();
-		return sqlSession.selectList("favorite.favoriteList", flist);
+	public List favoriteList(int user_no) {
+		return sqlSession.selectList("favorite.favoriteList", user_no);
 	}
 	
 	//관심상품 추가

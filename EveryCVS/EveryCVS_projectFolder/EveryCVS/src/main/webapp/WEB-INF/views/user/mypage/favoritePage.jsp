@@ -25,7 +25,7 @@
 							
 							<!-- 관심목록 -->
 							<li class="list-group-item list-toggle">
-							<a href="/everycvs/favoritePage.do">관심목록</a>
+							<a href="/everycvs/favoriteList.do">관심목록</a>
 								</li>
 								
 							<!-- 회원탈퇴 -->
@@ -53,17 +53,17 @@
                                                         <th width="20%">지점명</th>
                                                         <th width="38%">상품명</th>
                                                         <th width="12%">가격</th>
-                                                        <th width="12%">유통기한</th>
                                                         <th width="6%">Del</th>
                                                     </tr>
-                                                    <tr class="text-center">
-                                                        <td>GS25</td>
-                                                        <td>역삼달샘점</td>
-                                                        <td><a id="productName">비빔참치마요</a></td>
-                                                        <td>1500원</td>
-                                                        <td>2일</td>
-                                                        <td><i class="fa fa-trash-o" style="padding: 5px 10px;"></i></td>
-                                                    </tr>
+                                                    <c:forEach var="favorite" items="${flist}">
+	                                                    <tr class="text-center">
+	                                                        <td>${favorite.brand_name}</td>
+	                                                        <td>${favorite.store_name}</td>
+	                                                        <td><a id="productName">${favorite.product_name}</a></td>
+	                                                        <td>${favorite.price}원</td>
+	                                                        <td><i class="fa fa-trash-o" style="padding: 5px 10px;"></i></td>
+	                                                    </tr>
+                                                    </c:forEach>
                                                 </table>
                                             </div>
 
