@@ -43,5 +43,7 @@ public interface PurchaseService {
 	/**월간 구매 이용 횟수**/
 	int monthlyPurchaseCount();
 
+	public int userInsertPurchaseList(Map<String, Object> map);
+
 	
 }

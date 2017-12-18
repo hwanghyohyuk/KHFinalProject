@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.everycvs.common.model.vo.Product;
 import com.kh.everycvs.common.model.vo.Purchase;
 import com.kh.everycvs.common.model.vo.User;
+import com.kh.everycvs.product.model.service.ProductService;
 import com.kh.everycvs.purchase.model.service.PurchaseService;
 
 
@@ -27,7 +29,7 @@ public class PurchaseController {
 	
 	@Autowired
 	private PurchaseService purchaseService;
-	
+
 	// 판매내역 조회 : 해당 지점의 사용자의 구매내역을 전체 조회
 	public ModelAndView selectPurchaseList(HttpServletRequest request) {
 		return null;
@@ -55,10 +57,16 @@ public class PurchaseController {
 	public ModelAndView userDecreMoney(ModelAndView mv,
 									   HttpSession session,
 									   Purchase purchase,
+									   @RequestParam ("store_product_no") int store_product_no,
 									   @RequestParam ("price") int price,
 									   @RequestParam ("cash") String cash,
 									   @RequestParam ("user_no") String user_no,
-									   @RequestParam ("point") String point){
+									   @RequestParam ("point") String point,
+									   @RequestParam ("purchase_quantity") int purchase_quantity,
+									   @RequestParam ("calculated_price") int calculated_price,
+									   @RequestParam ("using_point") int using_point,
+									   @RequestParam ("accumulate_point") int accumulate_point){
+
 		//입력받은 금액만큼 잔고에서 차감후 리턴
 		System.out.println("차감할 금액 : " + price);
 		System.out.println("결제하기 전 cash : " + cash);
@@ -76,12 +84,17 @@ public class PurchaseController {
 		map.put("user_no", uno);
 		map.put("point", p);
 		map.put("addPoint", addPoint);
-		map.put("purchase", purchase);
+		map.put("store_product_no", store_product_no);
+		map.put("purchase_quantity", purchase_quantity);
+		map.put("calculated_price", calculated_price);
+		map.put("using_point", using_point);
+		map.put("accumulate_point", accumulate_point);
 		
-		System.out.println(purchase);
+		
+		System.out.println("컨트롤러로 넘어온 객체 : " + purchase);
 		int resultCash = purchaseService.userDecreMoney(map);
 		int resultPoint = purchaseService.userIncrePoint(map);
-		//int insertPurchaseList = purchaseService.userInsertPurchaseList(map);
+		int insertPurchaseList = purchaseService.userInsertPurchaseList(map);
 		
 		 User user = (User) session.getAttribute("user");
 		 user.setCash(c - price);
@@ -91,11 +104,13 @@ public class PurchaseController {
 		 
 		mv.addObject("resultCash", resultCash);
 		mv.addObject("resultPoint", resultPoint);
+		mv.addObject("insertPurchaseList", insertPurchaseList);
 		
 		mv.setViewName("user/mypage/main");
 		
 		System.out.println("결제 후 : " + user.getCash());
 		System.out.println("결제 후 포인트 증가 : " + user.getPoint());
+		System.out.println(purchase);
 		return mv;
 	}
 	

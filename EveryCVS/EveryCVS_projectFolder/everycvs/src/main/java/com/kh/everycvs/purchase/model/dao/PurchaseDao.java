@@ -62,11 +62,18 @@ public class PurchaseDao {
 		return new ArrayList<Purchase>(list);
 	}
 	
+	//잔고로 구매시 거래내역 추가
+	public int insertPurchaseList(Map<String, Object> map) {
+		return sqlSession.insert("purchase.insertPurchaseList", map);
+	}
+	
 	/*사이트관리자*/
 	/**월간 구매 이용 횟수**/
 	public int monthlyPurchaseCount() {
 		return 0;
 	}
+
+	
 
 	
 }

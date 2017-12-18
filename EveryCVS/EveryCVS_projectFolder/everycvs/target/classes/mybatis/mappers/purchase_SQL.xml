@@ -77,6 +77,15 @@
 	   </selectKey>
 	   
     </update>
+    
+     <!-- 사용자 구매 시 거래내역 추가 -->
+	 <insert id="insertPurchaseList" parameterType="hashmap">
+    	<![CDATA[
+    		insert into tb_purchase values(
+			seq_purchase_no.nextval, #{user_no}, #{STORE_PRODUCT_NO}, #{PURCHASE_QUANTITY}, 
+			#{CALCULATED_PRICE}, #{USING_POINT}, #{ACCUMULATE_POINT}, sysdate)
+    	]]>   
+    </insert>
 	
 	
 

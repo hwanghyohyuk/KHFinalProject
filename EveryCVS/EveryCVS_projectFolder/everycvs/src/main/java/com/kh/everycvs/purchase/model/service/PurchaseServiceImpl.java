@@ -73,6 +73,13 @@ public class PurchaseServiceImpl implements PurchaseService{
 		//구매내역 조회;
 		return purchaseDao.purchaseList(user_no,month);
 	}
+	
+	//잔고 결제시 거래내역 추가
+	@Override
+	public int userInsertPurchaseList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return purchaseDao.insertPurchaseList(map);
+	}
 
 	/*사이트관리자*/
 	/**월간 구매 이용 횟수**/
@@ -80,6 +87,8 @@ public class PurchaseServiceImpl implements PurchaseService{
 	public int monthlyPurchaseCount() {
 		return purchaseDao.monthlyPurchaseCount();
 	}
+
+	
 
 	
 

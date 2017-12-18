@@ -132,9 +132,17 @@
 											<input type="hidden" name="cash" value="${user.cash }">
 											<input type="hidden" name="user_no" value="${user.user_no }">
 											<input type="hidden" name="point" value="${user.point }">
+											<input type="hidden" name="store_product_no" value="${sp.store_product_no}">
+											<input type="number" name="purchase_quantity" value="${purchase.purchase_quantity }">
+											<input type="hidden" name="calculated_price" value="${sp.price }">
+											<input type="hidden" name="using_point" value=0>
+											<input type="hidden" name="accumulate_point" value=42>
+											
+											
+												
 											<button type="submit" class="btn"
 												    name="price" value="${sp.price}"
-												     id="frm">잔고 결제</button>
+												    id="frm">잔고 결제</button>
 											
 										</form>
 										
