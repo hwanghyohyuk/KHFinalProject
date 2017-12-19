@@ -60,16 +60,76 @@ public class EventController {
            if (maxPage < endPage)
                    endPage = maxPage;
            
-           	map.put("currentPage", currentPage);
-            map.put("listCount", listCount);
-            map.put("maxPage", maxPage);
-            map.put("startPage", startPage);
-            map.put("endPage", endPage);
-            map.put("limit", limit);
-            map.put("list", list);
+           map.put("currentPage", currentPage);
+           map.put("listCount", listCount);
+           map.put("maxPage", maxPage);
+           map.put("startPage", startPage);
+           map.put("endPage", endPage);
+           map.put("limit", limit);
+           map.put("list", list);
           mv.addObject("event", map);      
-          return mv;	
+          return mv;
 	}
+	
+	/*//유저 페이징
+	@RequestMapping(value="userpageload.do")
+	@ResponseBody
+    public ModelAndView userpageload(ModelAndView mv, @RequestParam("page") int page, HttpServletRequest request,@RequestParam(value="keyword",required = false, defaultValue="") String keyword) {
+				
+		 int currentPage = page;
+         int limit = 10;
+         
+         List<Event> list = eventService.selectEventList(keyword, currentPage, limit);
+         
+         Map<String, Object> map = new HashMap<String, Object>();
+         int listCount = eventService.getListCount(keyword);
+         int maxPage = (int) ((double) listCount / limit + 0.9);
+         int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
+         int endPage = startPage + limit - 1;
+          if (maxPage < endPage) {
+                  endPage = maxPage;
+          }
+          
+          map.put("currentPage", currentPage);
+          map.put("listCount", listCount);
+          map.put("maxPage", maxPage);
+          map.put("startPage", startPage);
+          map.put("endPage", endPage);
+          map.put("limit", limit);
+            
+          JSONArray jar = new JSONArray();
+            
+          for(Event ev : list)
+            {
+               JSONObject jev = new JSONObject();
+               jev.put("event_no", ev.getEvent_no());
+               jev.put("title", ev.getTitle());
+               jev.put("start_date",ev.getStart_date().toString());
+               jev.put("end_date", ev.getEnd_date().toString());
+               jev.put("readcount", ev.getReadcount());
+               jev.put("original_file_name",ev.getOriginal_file_name());
+               jev.put("stored_file_name",ev.getStored_file_name());
+               jar.add(jev);
+            }
+            
+           map.put("list", jar);
+           mv.addAllObjects(map);
+           
+           mv.setViewName("jsonView");
+         
+         return mv;
+		
+	}*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//사용자 이벤트 결과 리스트를 보여주는 화면
 	@RequestMapping(value = "eventresultlist.do", method = RequestMethod.GET)
@@ -142,7 +202,7 @@ public class EventController {
 	
 	
 	
-	//--------------------------- 이벤트 관리자 파일 업로드랑 날짜 별로보는거랑 각 편의점관리자 마다 보이는 리스트 다르게----------------------------------
+	//--------------------------- 날짜 별로보는거랑 각 편의점관리자 마다 보이는 리스트 다르게----------------------------------
 	// 편의점 관리자 
 	// 이벤트 조회 : 모든 공식이벤트를 조회 및 제목 + 내용 검색
 	@RequestMapping(value = "cvseventlist.do", method = RequestMethod.GET)
@@ -246,6 +306,7 @@ public class EventController {
 	public String cvsEventWrite(HttpSession session, HttpServletRequest request) throws Exception {
 		int user_no = ((User)session.getAttribute("user")).getUser_no();
 		
+		
 		String file_name = new FileUtils().InsertFile(session, request);
 		String[] file = file_name.split("/");
 		
@@ -277,17 +338,7 @@ public class EventController {
 		return mv;
 	
 	}
-	/*//이벤트 수정하기-------------------------------------------------------------------
-	@RequestMapping(value="cvseventmodifywrite.do", method = RequestMethod.POST)
-	public String cvsEventModiftwriter(Event event) {
-		System.out.println(event);
-	
-		int resultUpdate = eventService.updateEventPage(event);
-		String result = null;
-	
-		return "redirect:/cvseventlist.do";
-		
-	}*/
+	/*//이벤트 수정하기-------------------------------------------------------------------*/
 	@RequestMapping(value="cvseventmodifywrite.do", method = RequestMethod.POST)
 	public String cvsEventModiftwriter(HttpSession session, HttpServletRequest request) throws Exception {
 

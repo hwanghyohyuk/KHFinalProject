@@ -79,6 +79,7 @@ function pageload(page)
             
             $("#eventpaging").html(valuesPaging);
       }
+      
    });
 }
 </script>

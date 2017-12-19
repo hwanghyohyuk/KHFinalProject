@@ -36,14 +36,14 @@
 									<input class="modify" type="text" value="${et.start_date}" readonly> 
 									<input class="modify" type="text" value="${et.end_date}" readonly>
 									<br><br> 
-																
+									<input type="hidden" class="margin-top-20" value="${et.join_limit}"/>
 									<label>상세내용</label><br>
 									<textarea rows="5" class="form-control"
 										style="margin-bottom: 4px; width: 100%;" readonly>${et.contents}
                                     </textarea>
 									<p>
 										<button type="submit" class="btn btn-primary" style=float:left;>참여하기</button>
-										<button type="button" class="btn btn-primary" onclick='location.href="/everycvs/eventList.do"' style=float:right;>CANCEL</button>
+										<button type="button" class="btn btn-primary" onclick='location.href="/everycvs/page/eventmain.do"' style=float:right;>CANCEL</button>
 									</p>
 								</div>
 							</div>
