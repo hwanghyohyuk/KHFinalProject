@@ -103,7 +103,7 @@
 												</div>
 											</div>
 										</div>
-<<<<<<< HEAD
+
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-primary btn-sm"
@@ -183,7 +183,7 @@
 							</div>
 							<!-- 구매하기 모달 끝 -->
 
-=======
+
 										<div class="modal-footer">
 											<button type="button" class="btn btn-primary btn-sm"
 												data-dismiss="modal">관심상품</button>
@@ -195,7 +195,7 @@
 								</div>
 							</div>
 							<!-- Modal End -->
->>>>>>> master
+
 						</c:if>
 					</c:forEach>
 				</div>

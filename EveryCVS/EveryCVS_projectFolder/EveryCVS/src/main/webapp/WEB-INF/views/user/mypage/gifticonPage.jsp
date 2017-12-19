@@ -81,7 +81,7 @@
 									
 								<!-- 기프티콘 이미지 영역 -->
 					
-											<img alt="" 
+											<img alt="이미지를 준비중입니다." 
 												 src="/everycvs/resources/upload/${glist.stored_file_name}" 
 												 style="height:250px;">
 												<br><br>
@@ -114,6 +114,9 @@
 						</div>
 					
 				 </div>
+				 
+				</div>
+				</div>
 			
 	
 	<!-- === BEGIN FOOTER === -->
@@ -123,7 +126,7 @@
 	<script>
 
  		$(document).ready(function() {
- 			$("#bcTarget").barcode("1234 5678 1234", "code128");
+ 			$("#bcTarget").barcode("1234 5678 1290", "code128");
  			
 		});
 
