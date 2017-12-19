@@ -33,6 +33,35 @@ public class FavoriteController {
 		return mv;
 	}
 	
+	//관심상품 검색
+	@RequestMapping("favoriteSearch.do")
+	public ModelAndView favoriteSearch(
+			HttpSession session, HttpServletRequest request, ModelAndView mv){
+		int user_no = ((User)session.getAttribute("user")).getUser_no();
+		String category = request.getParameter("category");
+		String keyword = "%" + request.getParameter("keyword") + "%";
+		
+		Favorite favorite = new Favorite();
+		favorite.setUser_no(user_no);
+		
+		switch(category) {
+		case "상호명" :
+			favorite.setBrand_name(keyword);
+			break;
+		case "지점명" :
+			favorite.setStore_name(keyword);
+			break;
+		case "상품명" :
+			favorite.setProduct_name(keyword);
+			break;
+		}
+		
+		ArrayList<Favorite> flist = (ArrayList<Favorite>)favoriteService.favoriteSearch(favorite);
+		mv.addObject("flist", flist);
+		mv.setViewName("user/mypage/favoritePage");
+		return mv;
+	}
+	
 	//관심상품 등록 : 해당상품을 클릭하면 관심상품등록이 실행
 	public ModelAndView favoriteInsert(HttpServletRequest request) {
 		return null;

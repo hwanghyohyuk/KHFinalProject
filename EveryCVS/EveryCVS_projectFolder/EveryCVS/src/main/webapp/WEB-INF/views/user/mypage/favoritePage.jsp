@@ -87,26 +87,28 @@
 					</div>
 					<!-- End tab content -->
 					<!-- Search & Add block -->
+					<form name="searchFavoriteFrm"
+							action="/everycvs/favoriteSearch.do" method="post">
 					<div class="col-sm-12" style="padding-left: 5px;">
 						<div class="col-sm-2" style="padding-right: 0px;" id="paddingrmv3">
-							<select class="form-control input" style="padding-left: 5px;">
-								<option>지점번호</option>
+							<select name="category" class="form-control input" style="padding-left: 5px;">
+								<option>상호명</option>
 								<option>지점명</option>
-								<option>시도명</option>
-								<option>구군명</option>
-								<option>법정동명</option>
+								<option selected>상품명</option>
 							</select>
 						</div>
 						<div class="col-sm-4" style="padding-right: 4px" id="paddingrmv3">
-							<input class="form-control" type="text" style="height: 34px;"
+							<input name="keyword" class="form-control" type="text" style="height: 34px;"
 								placeholder="검색 키워드를 입력하세요.">
 						</div>
 						<div class="col-sm-1" style="padding-left: 4px;" id="paddingrmv3">
-							<button type="button" class="btn btn-default btn" id="width100">
+							<button type="submit" onclick="search_favorite();"
+							class="btn btn-default btn" id="width100">
 								<i class="fa fa-search"></i>
 							</button>
 						</div>
 					</div>
+					</form>
 					<!-- End Search & Add block -->
 				</div>
 				<!-- End Tab v1 -->
@@ -138,6 +140,16 @@
 			answer = confirm("해당 상품을 삭제하시겠습니까?");
 			if(answer)
 				location.href="/everycvs/favoriteDelete.do?product_no=" + narr[0] + "&store_no=" + narr[1];
+		}
+		
+		function search_favorite(){
+			var category = searchFavoriteFrm.category.value;
+			var keyword = searchFavoriteFrm.keyword.value;
+			if(keyword == ""){
+				alert("검색 키워드를 입력하세요.");
+				return false;
+			}
+			searchFavoriteFrm.submit();
 		}
 	</script>
 

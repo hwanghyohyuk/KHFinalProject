@@ -26,6 +26,34 @@
 		]]>
 	</select>
 	
+	<!-- 관심상품 검색 -->
+	<!-- 검색 키워드 : 상호명 -->
+	<select id="favoriteSearch1" parameterType="favorite" resultType="list" resultMap="resultFavorite">
+		<![CDATA[
+			SELECT * FROM FAVORITE_LIST_VIEW
+			WHERE USER_NO = #{user_no}
+			AND BRAND_NAME LIKE #{brand_name}
+		]]>
+	</select>
+	
+	<!-- 검색 키워드 : 지점명 -->
+	<select id="favoriteSearch2" parameterType="favorite" resultType="list" resultMap="resultFavorite">
+		<![CDATA[
+			SELECT * FROM FAVORITE_LIST_VIEW
+			WHERE USER_NO = #{user_no}
+			AND STORE_NAME LIKE #{store_name}
+		]]>
+	</select>
+	
+	<!-- 검색 키워드 : 상품명 -->
+	<select id="favoriteSearch3" parameterType="favorite" resultType="list" resultMap="resultFavorite">
+		<![CDATA[
+			SELECT * FROM FAVORITE_LIST_VIEW
+			WHERE USER_NO = #{user_no}
+			AND PRODUCT_NAME LIKE #{product_name}
+		]]>
+	</select>
+	
 	<!-- 관심상품 삭제 -->
 	<delete id="favoriteDelete" parameterType="favorite" flushCache="true">
 		<![CDATA[

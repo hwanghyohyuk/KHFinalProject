@@ -12,6 +12,8 @@ public interface FavoriteService {
 
 	public List favoriteList(int user_no);
 	
+	public List favoriteSearch(Favorite favorite);
+	
 	public ModelAndView favoriteInsert(HttpServletRequest request);
 	
 	public void favoriteDelete(Favorite favorite);

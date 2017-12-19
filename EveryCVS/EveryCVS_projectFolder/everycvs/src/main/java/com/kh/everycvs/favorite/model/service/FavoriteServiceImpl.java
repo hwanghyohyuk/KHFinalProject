@@ -23,6 +23,12 @@ public class FavoriteServiceImpl implements FavoriteService{
 		//관심상품목록 조회
 		return favoriteDao.favoriteList(user_no);
 	}
+	
+	@Override
+	public List favoriteSearch(Favorite favorite) {
+		//관심상품목록 검색
+		return favoriteDao.favoriteSearch(favorite);
+	}
 
 	@Override
 	public ModelAndView favoriteInsert(HttpServletRequest request) {
