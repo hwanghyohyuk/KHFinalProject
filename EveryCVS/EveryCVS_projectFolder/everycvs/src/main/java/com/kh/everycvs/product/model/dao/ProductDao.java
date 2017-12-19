@@ -1,5 +1,6 @@
 package com.kh.everycvs.product.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.everycvs.common.model.vo.Product;
+import com.kh.everycvs.common.model.vo.StoreProduct;
 
 @Repository("ProductDao")
 public class ProductDao {
@@ -87,10 +89,29 @@ public class ProductDao {
 
 
 	
+	//allProduct 개수 조회
+	public int getListCount(String keyword, int brand_no) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("brand_no", brand_no);
+		if(!keyword.equals("")){
+			map.put("keyword", "%"+keyword+"%");
+			return sqlSession.selectOne("product.getSearchListCount",map);
+		}else{
+			return sqlSession.selectOne("product.getListCount",map);
+		}	
+	}
 	
-	
-	
-	
-	
-	
+	//allProduct 전체보기, 검색하기
+	public List<StoreProduct> listApmanager(int startRow, int endRow, String keyword, int brand_no) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("startRow", startRow); 
+		map.put("endRow", endRow); 
+		map.put("brand_no", brand_no);
+		if(!keyword.equals("")){
+			map.put("keyword", "%"+keyword+"%");
+			return sqlSession.selectList("product.searchApmanager", map);
+		}else{
+			return sqlSession.selectList("product.listApmanager", map);
+		}	
+	}	
 }

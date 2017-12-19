@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page
-	import="com.kh.everycvs.common.model.vo.StoreProduct, java.util.ArrayList"%>
+<%@ page import="com.kh.everycvs.common.model.vo.StoreProduct, java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- === BEGIN HEAD ===  -->
@@ -25,8 +24,7 @@
 					</div>
 					<form action="spmlist.do" method="post">
 						<div class="col-sm-3" style="margin-left: 190px;">
-							<br> 
-							<input class="form-control" type="search"
+							<br> <input class="form-control" type="search"
 								placeholder="상품명을 입력해주세요." name="keyword" value="${keyword}">
 						</div>
 						<div>
@@ -41,7 +39,8 @@
 						<h3 class="box-title">
 							<strong>지점상품관리</strong>
 						</h3>
-					</div> <br>
+					</div>
+					<br>
 					<div class="box-body no-padding">
 						<table class="table table-condensed">
 							<tr>
@@ -64,21 +63,22 @@
 										data-target="#spmmodal${spm.store_product_no}"> <strong>${spm.product_name}</strong>
 									</a></td>
 									<td>${spm.manufacturer}</td>
-									<td><fmt:formatNumber value="${spm.price}" pattern="#,###"/>원</td>
+									<td><fmt:formatNumber value="${spm.price}" pattern="#,###" />원</td>
 									<td>${spm.discount_name}</td>
 									<td>${spm.manufacture_date}</td>
-									<td>${spm.quantity}개</td>
+									<td align="center">${spm.quantity}개</td>
 									<td class="text-center">${spm.del_check}</td>
 									<td>
-										<button type="button" class="btn btn-primary btn-xs" 
-										onclick="location.href='spmdelete.do?spnum=${spm.store_product_no}&toggle=${spm.del_check}'">
-										<c:if test="${spm.del_check eq 'N'}">삭제</c:if>
-										<c:if test="${spm.del_check ne 'N'}">복구</c:if>										
+										<button type="button" class="btn btn-primary btn-xs"
+											onclick="location.href='spmdelete.do?spnum=${spm.store_product_no}&toggle=${spm.del_check}'">
+											<c:if test="${spm.del_check eq 'N'}">삭제</c:if>
+											<c:if test="${spm.del_check ne 'N'}">복구</c:if>
 										</button>
 									</td>
 									<!-- Modal -->
 									<td>
-										<div id="spmmodal${spm.store_product_no}" class="modal fade" role="dialog">
+										<div id="spmmodal${spm.store_product_no}" class="modal fade"
+											role="dialog">
 											<div class="modal-dialog">
 												<!-- Modal content-->
 												<div class="modal-content">
@@ -91,48 +91,49 @@
 													<div class="modal-body">
 														<div class="row">
 															<div class="col-sm-6">
-																<img
-																	src="/everycvs/resources/user/img/theteam/image1.jpg"
-																	alt="image1" align="left" style="margin-left: 5px;">
+																<img src="/everycvs/resources/upload/${spm.stored_file_name}"
+																	alt="No_Image" align="left" style="margin-left: 5px;">
 															</div>
 															<div class="col-sm-6">
-															<form id="updateform" action="/everycvs/spmupdate.do" method="post" enctype="multipart/form-data">
-															<input type="hidden" name="spnum" value="${spm.store_product_no}">
-															<input type="hidden" name="page" value="${currentPage}">
-																<table class="table table-condensed">
-																	<tr>
-																		<td><strong>상품명</strong></td>
-																		<td>${spm.product_name}</td>
-																	</tr>
-																	<tr>
-																		<td><strong>가격</strong></td>
-																		<td><fmt:formatNumber value="${spm.price}" pattern="#,###"/>원</td>
-																	</tr>
-																	<tr>
-																		<td><strong>유통기한</strong></td>
-																		<td>${spm.expiration_date}일</td>
-																	</tr>
-																	<tr>
-																		<td><strong>구매횟수</strong></td>
-																		<td>${spm.purchase_count}번</td>
-																	</tr>
-																	<tr>
-																		<td><strong>제조일</strong></td>
-																		<td><input class="form-control" type="date" name="mdate"
-																			value="${spm.manufacture_date}"></td>
-																	</tr>
-																	<tr>
-																		<td><strong>수량</strong></td>
-																		<td><input class="form-control" type="number" min="1"
-																			max="100" step="1" name="quantity" value="${spm.quantity}"></td>
-																	</tr>
-																</table>
+																<form id="updateform" action="/everycvs/spmupdate.do" method="post" enctype="multipart/form-data">
+																<input type="hidden" name="spnum" value="${spm.store_product_no}"> 
+																<input type="hidden" name="page" value="${currentPage}">
+																	<table class="table table-condensed">
+																		<tr>
+																			<td><strong>상품명</strong></td>
+																			<td>${spm.product_name}</td>
+																		</tr>
+																		<tr>
+																			<td><strong>가격</strong></td>
+																			<td><fmt:formatNumber value="${spm.price}"
+																					pattern="#,###" />원</td>
+																		</tr>
+																		<tr>
+																			<td><strong>유통기한</strong></td>
+																			<td>${spm.expiration_date}일</td>
+																		</tr>
+																		<tr>
+																			<td><strong>구매횟수</strong></td>
+																			<td>${spm.purchase_count}번</td>
+																		</tr>
+																		<tr>
+																			<td><strong>제조일</strong></td>
+																			<td><input class="form-control" type="date"
+																				name="mdate" value="${spm.manufacture_date}"></td>
+																		</tr>
+																		<tr>
+																			<td><strong>수량</strong></td>
+																			<td><input class="form-control" type="number"
+																				min="1" max="100" step="1" name="quantity"
+																				value="${spm.quantity}"></td>
+																		</tr>
+																	</table>
 																</form>
 															</div>
 														</div>
 														<div class="row" style="margin-left: 10px;">
 															<h3>
-																<strong>진행중인 EVENT</strong>
+																<br> <strong>진행중인 EVENT</strong>
 															</h3>
 															<br>
 															<button type="button" class="btn btn-default">없음</button>
@@ -147,17 +148,19 @@
 														</div>
 													</div>
 													<div class="modal-footer">
-														<button type="submit" class="btn btn-primary btn-sm" data-dismiss="modal"
-														onclick="updateSubmit();">수정</button> &nbsp;
-														<button type="button" class="btn btn-primary btn-sm" 
-														onclick="location.href='spmdelete.do?spnum=${spm.store_product_no}&toggle=${spm.del_check}'">
+														<button type="submit" class="btn btn-primary btn-sm"
+															data-dismiss="modal" onclick="updateSubmit();">수정</button>
+														&nbsp;
+														<button type="button" class="btn btn-primary btn-sm"
+															onclick="location.href='spmdelete.do?spnum=${spm.store_product_no}&toggle=${spm.del_check}'">
 															<c:if test="${spm.del_check eq 'N'}">삭제</c:if>
-															<c:if test="${spm.del_check ne 'N'}">복구</c:if>										
+															<c:if test="${spm.del_check ne 'N'}">복구</c:if>
 														</button>
 													</div>
 												</div>
-											</div><!-- Get방식으로 넘김 -->
-										</div> 
+											</div>
+											<!-- Get방식으로 넘김 -->
+										</div>
 									</td>
 									<!-- Modal End -->
 								</tr>
@@ -210,7 +213,7 @@
 <!-- === END FOOTER === -->
 <!-- JS -->
 <script type="text/javascript">
-	function updateSubmit(){
+	function updateSubmit() {
 		$("#updateform").submit();
 	}
 </script>
