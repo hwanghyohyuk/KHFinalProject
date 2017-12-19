@@ -4,18 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- === BEGIN HEAD ===  -->
 <c:import url="../../include/user/common/head.jsp"></c:import>
-<!-- JS -->
-<c:if test="${result eq false }">
-<script type="text/javascript">
-alert("Sign in fail...\n check your email or password...");
-</script>
-</c:if>
-<c:if test="${sign eq false }">
-<script type="text/javascript">
-alert("로그인이 필요한 서비스입니다.");
-</script>
-</c:if>
-<!-- /JS -->
 <c:import url="../../include/user/common/headend.jsp"></c:import>
 <!-- === END HEAD ===  -->
 <!-- === BEGIN HEADER ===  -->
@@ -32,11 +20,11 @@ alert("로그인이 필요한 서비스입니다.");
 						<div class="login-header margin-bottom-30">
 							<h2>Sign In to your account</h2>
 						</div>
-						<div class="input-group margin-bottom-20">
+						<div class="input-group input-group-lg  margin-bottom-20">
 							<span class="input-group-addon"> <i class="fa fa-user"></i>
 							</span> <input placeholder="Email" id="email" name = "email" class="form-control" type="email">
 						</div>
-						<div class="input-group margin-bottom-20">
+						<div class="input-group input-group-lg margin-bottom-20">
 							<span class="input-group-addon"> <i class="fa fa-lock"></i>
 							</span> <input placeholder="Password" id="pwd" name = "pwd" class="form-control"
 								type="password">
@@ -48,18 +36,18 @@ alert("로그인이 필요한 서비스입니다.");
 								</label>
 							</div>
 							<div class="col-md-6">
-								<button class="btn btn-primary pull-right" type="submit">Sign In</button>
+								<button class="btn btn-primary btn-lg pull-right" type="submit">Sign In</button>
 							</div>
 						</div>
 						<hr>
 						<h4>Need Account ?</h4>
 						<p>
-							<a href="signupintro.do">Click here</a>&nbsp;to create your account!
+							<a href="/everycvs/sign/signupintro.do">Click here</a>&nbsp;to create your account!
 						</p>
 						<br>
 						<h4>Forget your Password ?</h4>
 						<p>
-							<a href="findemail.do">Click here</a>&nbsp;to reset your password.
+							<a href="/everycvs/sign/findemail.do">Click here</a>&nbsp;to reset your password.
 						</p>
 					</form>
 				</div>
@@ -72,6 +60,17 @@ alert("로그인이 필요한 서비스입니다.");
 <!-- === BEGIN FOOTER === -->
 <c:import url="../../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
-
+<!-- JS -->
+<c:if test="${result eq false }">
+<script type="text/javascript">
+swal("SIGN IN FAIL", "check your email or password...", "error");
+</script>
+</c:if>
+<c:if test="${sign eq false }">
+<script type="text/javascript">
+swal("INFORMATION", "로그인이 필요한 서비스입니다.", "info");
+</script>
+</c:if>
+<!-- /JS -->
 <c:import url="../../include/user/common/end.jsp"></c:import>
 <!-- === END === -->

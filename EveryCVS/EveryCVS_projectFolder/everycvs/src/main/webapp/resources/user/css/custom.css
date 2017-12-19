@@ -1,6 +1,7 @@
-@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
-.hanna{
-font-family: 'Hanna', serif;
+@import url(notosanskr.css);
+
+body{
+font-family: 'Noto Sans KR', sans-serif; !important
 }
 
 .sy1 {

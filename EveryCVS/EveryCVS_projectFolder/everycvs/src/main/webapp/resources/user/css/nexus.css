@@ -36,7 +36,6 @@ html {
 }
 body {
   line-height: 1.7em;
-  font-family: Roboto Condensed;
   font-size: 14px;
   font-weight: 400;
   background-color: #f0f0f0;
@@ -737,7 +736,7 @@ p.site-slogan {
 #hornav ul#hornavmenu > li > a,
 #hornav ul#hornavmenu > li > span {
   color: #e3e3e3;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: normal;
   letter-spacing: 1px;
   line-height: normal;
@@ -1118,7 +1117,6 @@ h2 {
   line-height: 1em;
   margin: 0 0 10px;
   color: #555555;
-  font-family: 'Roboto Condensed', sans-serif;
   font-size: 32px;
 }
 h3 {
