@@ -109,8 +109,13 @@
   height: 100%;
   margin: 0;
   padding: 0;
+  left: 30%;
+
 }
 
+.modal.modal-center {
+ 
+}
 .modal-content.modal-80size {
   height: auto;
   min-height: 60%;

@@ -46,9 +46,9 @@
 			where user_no = #{user_no}
     	]]>
     
-       <selectKey keyProperty="cash" resultType="int" order="AFTER">
-			select cash FROM tb_user WHERE user_no = #{user_no}
-	   </selectKey>
+       <!-- <selectKey keyProperty="gifticon_no" resultType="int" order="AFTER">
+			select cash FROM tb_gifticon WHERE user_no = #{user_no}
+	   </selectKey>  -->
 	   
     </update>
     

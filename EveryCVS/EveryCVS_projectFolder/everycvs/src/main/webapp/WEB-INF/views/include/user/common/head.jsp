@@ -60,4 +60,7 @@
 <!-- Modernizr -->
 <script src="/everycvs/resources/user/js/modernizr.custom.js"
 	type="text/javascript"></script>
+<!-- 바코드 api -->	
+<script type="text/javascript" 
+		src="/everycvs/resources/user/js/jquery-barcode.js"></script>
 <!-- End JS -->

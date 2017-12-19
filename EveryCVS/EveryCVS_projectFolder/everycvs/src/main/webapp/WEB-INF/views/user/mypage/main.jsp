@@ -272,9 +272,6 @@
 	<script>
 		$(document).ready(function() {
 			//자주구매하는 목록 ajax
-			$.ajax({
-				
-			});
 			
 			
 			//충전하기  ajax

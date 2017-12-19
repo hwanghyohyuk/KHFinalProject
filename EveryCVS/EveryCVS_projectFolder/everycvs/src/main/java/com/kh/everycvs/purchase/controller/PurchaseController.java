@@ -67,7 +67,6 @@ public class PurchaseController {
 									   @RequestParam ("using_point") int using_point) {
 
 		//입력받은 금액만큼 잔고에서 차감후 리턴
-		System.out.println("차감할 금액 : " + price);
 		System.out.println("결제하기 전 cash : " + cash);
 		System.out.println("point : " + point);
 		
@@ -90,8 +89,6 @@ public class PurchaseController {
 		map.put("using_point", using_point);
 		map.put("accumulate_point", addPoint);
 		
-		
-		System.out.println("컨트롤러로 넘어온 객체 : " + purchase);
 		int resultCash = purchaseService.userDecreMoney(map);
 		int resultPoint = purchaseService.userIncrePoint(map);
 		int insertPurchaseList = purchaseService.userInsertPurchaseList(map);
@@ -106,7 +103,7 @@ public class PurchaseController {
 		mv.addObject("resultPoint", resultPoint);
 		mv.addObject("insertPurchaseList", insertPurchaseList);
 		
-		mv.setViewName("user/mypage/main");
+		mv.setViewName("user/mypage/gifticonPage");
 		
 		System.out.println("결제 후 : " + user.getCash());
 		System.out.println("결제 후 포인트 증가 : " + user.getPoint());
@@ -150,7 +147,7 @@ public class PurchaseController {
 		 
 		mv.addObject("result", result);
 		mv.addObject("insertPurchaseList", insertPurchaseList);
-		mv.setViewName("user/mypage/main");
+		mv.setViewName("user/mypage/gifticonPage");
 		
 		
 		System.out.println("포인트 결제 결과 : " + user.getPoint());
