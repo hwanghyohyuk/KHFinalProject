@@ -33,10 +33,8 @@ function userpageload(page)
       			if((i%3)==0)
       				 values +='<div class="row">';
       				 
-               values += '<div class="col-md-4"><figure>'+
-					'<a href="/everycvs/eventDetail.do?no='+list[i].event_no+'">'+
+               values += '<div class="col-md-4"><a href="/everycvs/eventDetail.do?no='+list[i].event_no+'"><figure>'+
 					'<img src="/everycvs/resources/upload/'+list[i].stored_file_name+'" alt="이벤트 이미지가 없습니다." class="jun_img">'+
-					'</a>'+
 					'<figcaption>'+
 					'<input type="hidden" class="margin-top-20" value="'+list[i].event_no+'"/>'+
 					'<h3 class="margin-top-20">'+list[i].title+'</h3>'+
@@ -46,7 +44,7 @@ function userpageload(page)
 					'<br>'+
 					'<span>조회수:'+list[i].readcount+'</span>'+
 					'</figcaption>'+
-					'</figure></div>';        
+					'</figure></a></div>';        
 					
                if((i%3)==2 || i==(list.length-1))
     				 values +='</div>';
@@ -135,10 +133,9 @@ function userpageload(page)
 								<div class="row">
 								</c:if>
 								<div class="col-md-4">
-									<figure>
-										<a href="/everycvs/eventDetail.do?no=${e.event_no}">
+								<a href="/everycvs/eventDetail.do?no=${e.event_no}">
+									<figure>										
 										<img src="/everycvs/resources/upload/${e.stored_file_name}" alt="이벤트 이미지가 없습니다." class="jun_img">
-										</a>
 										<figcaption>
 											<input type="hidden" class="margin-top-20" value="${e.event_no}"/>
 											<h3 class="margin-top-20">${e.title}</h3>
@@ -147,8 +144,9 @@ function userpageload(page)
 											<span>종료일:${e.end_date}</span>
 											<br>
 											<span>조회수:${e.readcount}</span>
-										</figcaption>										
+										</figcaption>						
 									</figure>
+									</a>	
 								</div>
 								<c:if test="${ ((status.index % 3)eq 2) || status.last}">
 								</div>
