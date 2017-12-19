@@ -60,7 +60,12 @@
 <!-- Modernizr -->
 <script src="/everycvs/resources/user/js/modernizr.custom.js"
 	type="text/javascript"></script>
+<<<<<<< HEAD
 <!-- 바코드 api -->	
 <script type="text/javascript" 
 		src="/everycvs/resources/user/js/jquery-barcode.js"></script>
+=======
+<!-- sweetalert2 -->
+<script src="/everycvs/resources/user/js/sweetalert2.all.js"></script> 
+>>>>>>> master
 <!-- End JS -->

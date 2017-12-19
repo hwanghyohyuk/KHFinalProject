@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.everycvs.common.model.vo.Event;
-import com.kh.everycvs.common.model.vo.Product;
+import com.kh.everycvs.common.model.vo.EventResult;
 
 
 
@@ -21,6 +21,7 @@ public class EventDao {
 	private SqlSessionTemplate sqlSession;
 	
 	public EventDao(){}
+	//관리자 검색 및 페이징
 
 	/*사용자 : 이벤트 목록*/
 	public List<Event> eventList() {
@@ -28,22 +29,9 @@ public class EventDao {
 	}
 
 	/*사용자 : 메인화면 이벤트 top3*/
-	public List<Product> eventTop3() {
+	public List<Event> eventTop3() {
 		return sqlSession.selectList("event.eventTop3");
 	}
-
-	
-	/*백업
-	 * public List<Event> selectEventList(String keyword, int currentPage, int limit){
-		if(keyword.equals("")) {
-			return sqlSession.selectList("event.cvseventlist");
-		}else{
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("mainkeyword", "%"+keyword+"%");
-			map.put("subkeyword", "%"+keyword+"%");
-			return sqlSession.selectList("event.cvseventsearch",map);
-		}
-	}*/
 	
 	public List<Event> selectEventList(String keyword, int startRow, int endRow) {
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -57,7 +45,15 @@ public class EventDao {
 			return sqlSession.selectList("event.cvseventsearch",map);
 		}
 	}
-	
+	//사용자 이벤트 결과 리스트 불러오기
+	public List<EventResult> resultEventList(String keyword, int startRow, int endRow) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("startRow", startRow); 
+		map.put("endRow", endRow);
+		
+		return sqlSession.selectList("event.resulteventlist",map);
+	}
+	//관리자 검색 후 게시글 갯수
 	public int listCount(String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		if(!keyword.equals("")){
@@ -76,6 +72,7 @@ public class EventDao {
 		return event;
 	}
 	
+	//조회수 증가
 	public int eventReadCount(int no) {
 		return sqlSession.update("event.eventReadCount",no);
 	}
@@ -84,15 +81,11 @@ public class EventDao {
 		//이벤트 삭제
 		return sqlSession.delete("event.eventDelete", no);
 	}
-
-	public List searchEventList() {
-		// 이벤트 검색 : 제목으로 검색
-		return null;
-	}
 	
 	//글쓰기
 	public void cvseventwriteview(Event vo) {
-		  int result = sqlSession.insert("event.cvseventwrite", vo); 
+		System.out.println("dao : "+vo);
+		  sqlSession.insert("event.cvseventwrite", vo); 
 	}
 
 	public Event cvsEventDetail(int eno) {
@@ -108,8 +101,26 @@ public class EventDao {
 	//수정하기 완료
 	public int updateEventPage(Event event) {
 		int result = sqlSession.update("event.cvseventmodifywrite", event);
-		System.out.println(result);
+		System.out.println("수정dao : "+event);
+		System.out.println("result : "+result);
 		return result;
+	}
+	
+	
+	
+	//이거는 사용자에 써야하나?
+	public List searchEventList() {
+		// 이벤트 검색 : 제목으로 검색
+		return null;
+	}
+	public int eventResultReadCount(int rno) {
+		// 결과페이지 조회수 증가
+		return sqlSession.update("event.eventResultReadCount",rno);
+	}
+	public EventResult eventResultDetail(int rno) {
+		// 이벤트 조회 : 선택한 이벤트 상세조회
+		EventResult eventresult = sqlSession.selectOne("event.eventResultDetail",rno);
+		return eventresult;
 	}
 
 

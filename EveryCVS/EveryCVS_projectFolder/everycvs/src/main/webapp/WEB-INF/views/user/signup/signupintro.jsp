@@ -11,8 +11,8 @@
 <!-- === END HEADER === -->
 <!-- === BEGIN CONTENT === -->
 <div id="content">
-	<div class="container background-white">
-		<div class="row margin-vert-30">
+	<div class="container background-white padding-vert-60">
+		<div class="row margin-vert-60 padding-vert-60 ">
 			<!-- Register Box -->
 			<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
 				<form class="signup-page">

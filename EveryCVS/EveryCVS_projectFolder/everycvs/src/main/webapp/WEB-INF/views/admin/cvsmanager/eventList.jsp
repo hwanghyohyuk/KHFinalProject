@@ -79,6 +79,7 @@ function pageload(page)
             
             $("#eventpaging").html(valuesPaging);
       }
+      
    });
 }
 </script>
@@ -228,7 +229,7 @@ function pageload(page)
 			'</div>'+
 			'<div class="modal-body">'+
 				'<div class="jun_imgdiv">'+
-					'<img src="/everycvs/resourses/user/img/exam_img.jpg" alt="이벤트 이미지가 없습니다." class="jun_img">'+
+					'<img src="/everycvs/resources/upload/' +data.stored_file_name+'" alt="이벤트 이미지가 없습니다." class="jun_img">'+
 				'</div>'+
 				'<div class="jun_contentdiv">'+
 					'<div class="jun_textdiv">'+data.event_no+'</div>'+
@@ -237,7 +238,7 @@ function pageload(page)
 					'<span style="padding-right: 22px;">종료일자</span>'+data.end_date+'<br> '+
 					'<span style="padding-right: 20px;">참여제한 </span><b>'+data.join_limit+'</b>번<br>'+
 					'<span style="padding-right: 36px;">조회수</span>'+data.readcount+'<br> '+
-					'<span style="padding-right: 22px;">첨부파일</span>'+data.stored_file_name+'<br>'+
+					'<span style="padding-right: 22px;">첨부파일</span>'+data.original_file_name+'<br>'+
 				'</div>'+
 				'<div class="jun_contentdiv2">'+data.contents+'</div>'+
 			'</div>'+

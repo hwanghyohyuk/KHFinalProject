@@ -16,42 +16,22 @@ public class StoreProductServiceImpl implements StoreProductService {
 	private StoreProductDao sproductDao;
 
 	@Override
-	public int getListCount(String keyword) {
-		return sproductDao.getListCount(keyword);
+	public int getListCount(String keyword, String store_no) {
+		return sproductDao.getListCount(keyword,store_no);
 	}
 
 	@Override
-	public List<StoreProduct> selectList(int currentPage, int limit, String keyword) {
+	public List<StoreProduct> selectList(int currentPage, int limit, String keyword, String store_no) {
 		int startRow = (currentPage -1) * limit + 1;
 		int endRow = startRow + limit - 1;
-		return sproductDao.selectList(startRow,endRow,keyword);  
+		return sproductDao.selectList(startRow,endRow,keyword,store_no);  
 	}
 
 	@Override
-	public List<StoreProduct> top3Sproduct() {
-		return sproductDao.top3Sproduct();
-	}
-
-	@Override
-	public List<StoreProduct> new3Sproduct() {
-		return sproductDao.new3Sproduct();
-	}
-
-	@Override
-	public List<StoreProduct> dcSproduct() {
-		return sproductDao.dcSproduct();
-	}
-
-	@Override
-	public List<StoreProduct> expSproduct() {
-		return sproductDao.expSproduct();
-	}
-
-	@Override
-	public List<StoreProduct> listSpmanager(int currentPage, int limit, String keyword) {
+	public List<StoreProduct> listSpmanager(int currentPage, int limit, String keyword, String store_no) {
 		int startRow = (currentPage -1) * limit + 1;
 		int endRow = startRow + limit - 1;
-		return sproductDao.listSpmanager(startRow,endRow,keyword);  
+		return sproductDao.listSpmanager(startRow,endRow,keyword,store_no);  
 	}
 
 	@Override
@@ -65,10 +45,27 @@ public class StoreProductServiceImpl implements StoreProductService {
 	}
 
 	@Override
-	public List<StoreProduct> listApmanager(int currentPage, int limit, String keyword) {
-		int startRow = (currentPage -1) * limit + 1;
-		int endRow = startRow + limit - 1;
-		return sproductDao.listApmanager(startRow,endRow,keyword);
+	public List<StoreProduct> top3Sproduct(String store_no) {
+		return sproductDao.top3Sproduct(store_no);
 	}
 
+	@Override
+	public List<StoreProduct> new3Sproduct(String store_no) {
+		return sproductDao.new3Sproduct(store_no);
+	}
+
+	@Override
+	public List<StoreProduct> dcSproduct(String store_no) {
+		return sproductDao.dcSproduct(store_no);
+	}
+
+	@Override
+	public List<StoreProduct> expSproduct(String store_no) {
+		return sproductDao.expSproduct(store_no);
+	}
+	
+	@Override
+	public int insertApmanager(List<StoreProduct> spList) {
+		return sproductDao.insertProduct(spList);
+	}
 }

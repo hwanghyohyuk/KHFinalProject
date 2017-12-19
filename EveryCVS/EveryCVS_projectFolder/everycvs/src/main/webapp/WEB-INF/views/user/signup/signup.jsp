@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!-- === BEGIN HEAD ===  -->
 <c:import url="../../include/user/common/head.jsp"></c:import>
 <c:import url="../../include/user/common/headend.jsp"></c:import>
@@ -14,65 +15,142 @@
 	<div class="container background-white">
 		<div class="row margin-vert-30">
 			<!-- Register Box -->
-			<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
-				<form class="signup-page">
-					<div class="signup-header">
-						<h2>Register a new account</h2>
+			
+			<div class="col-lg-10 col-lg-offset-1col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">
+					
+					<div class="signup-page">
+					<form>
+					<div class="signup-header margin-bottom-40">
+						<h2 >Register a new account</h2>
 						<p>
 							Already a member? Click <a href="#">HERE</a> to login to your
 							account.
 						</p>
 					</div>
-					<label>Your Name</label> <input
-						class="form-control margin-bottom-20" placeholder="Name" type="text"> 
-					<label>Email Address <span class="color-red">*</span>
-					</label> <input class="form-control margin-bottom-20" placeholder="Email" id="signupemail" name="email" type="email">
-					<div class="row">
-						<div class="col-sm-6">
-							<label>Password <span class="color-red">*</span>
-							</label> <input class="form-control margin-bottom-20" placeholder="length more than 8"  type="password">
-						</div>
-						<div class="col-sm-6">
-							<label>Confirm Password <span class="color-red">*</span>
-							</label> <input class="form-control margin-bottom-20" placeholder="re-input password"  type="password">
-						</div>
-					</div>
 					<hr>
 					<div class="row">
-						<div class="col-lg-8">
-							<label class="checkbox"> <input type="checkbox">I
-								read the <a href="#">Terms and Conditions</a>
-							</label>
+						<!-- 페이지 왼쪽부분 -->
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+							<div class=" input-group-lg  margin-bottom-40">
+								<label>Email Address <span class="color-red">*</span></label> <span
+									class="input-group input-group-lg "> <input
+									class="form-control" placeholder="Email" id="signupemail"
+									name="email" type="email"> <span
+									class="input-group-btn">
+										<button type="button" class="btn btn-primary"
+											data-toggle="modal" data-target="#certifyform">Certify</button>
+								</span>
+								</span>
+							</div>
+							<div class="input-group-lg  margin-bottom-40">
+								<label>Password <span class="color-red">*</span>
+								</label> <input class="form-control" placeholder="length more than 8"
+									type="password">
+							</div>
+							<div class="input-group-lg  margin-bottom-40">
+								<label>Confirm Password <span class="color-red">*</span>
+								</label> <input class="form-control " placeholder="re-input password"
+									type="password">
+							</div>
+							<div class="input-group-lg  margin-bottom-40">
+								<label>Your Name</label> <input class="form-control"
+									placeholder="Name" type="text">
+							</div>
 						</div>
-						<div class="col-lg-4 text-right">
-							<button class="btn btn-primary" type="submit">Register</button>
+						<!-- 페이지 오른쪽부분 -->
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+							<div
+								class="form-group input-group-lg  margin-bottom-40">
+								<label>Gender</label> <br>
+								<div class="btn-group margin-bottom-40" data-toggle="buttons">
+									<label class="btn btn-primary btn-lg"> <input type="radio"
+										name="gender" id="option1" value="M" autocomplete="off">남
+									</label> <label class="btn btn-primary btn-lg"> <input type="radio"
+										name="gender" id="option2" value="W" autocomplete="off">여
+									</label> <label class="btn btn-primary btn-lg active"> <input
+										type="radio" name="gender" id="option3" value="default"
+										autocomplete="off" checked>비공개
+									</label>									
+								</div>
+								<div class="input-group-lg  margin-bottom-40">
+									<label>Birth day</label> <input class="form-control"
+										id="birthday" name="birthday" type="date" min="1901-1-1"
+										max="2009-12-31">
+								</div>
+								<div class="input-group-lg  margin-bottom-40">
+									<label>Phone</label> <input class="form-control"
+										placeholder="01012341234" type="tel">
+								</div>
+								<div class="input-group-lg  margin-bottom-40">
+									<label>Address</label> <span
+										class="input-group-lg "> <input
+										class="form-control" placeholder="Address" id="address"
+										name="address" type="text">
+									</span>
+								</div>
+							</div>
+						</div>
+						<!-- 페이지 하단부분 -->
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<hr>
+							<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+								<label class="checkbox"> <input type="checkbox">I read the <a href="#" data-toggle="modal" data-target="#tcmodal">Terms and Conditions</a>
+								</label>
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+								<button class="btn btn-primary btn-lg pull-right" type="submit">Registration</button>
+							</div>
 						</div>
 					</div>
-				</form>
+					</form>
+					</div>
 			</div>
+			
 			<!-- End Register Box -->
 		</div>
 	</div>
 </div>
-<!-- Small modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
-
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        <p>One fine body&hellip;</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
+<!-- certifyform modal -->
+<div class="modal fade" id="certifyform" tabindex="-1" role="dialog"
+	aria-labelledby="" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Email Certify</h4>
+			</div>
+			<div class="modal-body">
+				<p>One fine body&hellip;</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Terms and Conditions modal -->
+<div class="modal fade" id="tcmodal" tabindex="-1" role="dialog"
+	aria-labelledby="" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Terms and Conditions</h4>
+			</div>
+			<div class="modal-body">
+				<p>One fine body&hellip;</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->
