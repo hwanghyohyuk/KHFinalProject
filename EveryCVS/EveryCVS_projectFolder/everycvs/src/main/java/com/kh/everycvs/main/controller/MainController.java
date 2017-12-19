@@ -146,7 +146,7 @@ public class MainController {
 		storeService.increamentJoinCount(sno);
 		Store store = storeService.selectStore(sno);
 		session.setAttribute("store", store);
-		return "storemain/storeRankView";
+		return "redirect:/page/sprank.do";
 	}
 
 	/* 지점관리자가 지점메인에 접속 */
