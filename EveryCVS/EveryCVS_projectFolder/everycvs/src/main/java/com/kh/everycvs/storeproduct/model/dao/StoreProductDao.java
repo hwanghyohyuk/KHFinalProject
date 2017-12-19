@@ -88,7 +88,6 @@ public class StoreProductDao {
 				int count = sqlSession.selectOne("storeProduct.selectCountSp", spList.get(i));
 				if(count>0){//같은 상품이 존재하면 업데이트
 					Map<String,Object> map = new HashMap<String,Object>();
-					System.out.println(spList.get(i));
 					map.put("sp", spList.get(i));
 					map.put("store_no", spList.get(i).getStore_no());
 					map.put("product_no", spList.get(i).getProduct_no());
