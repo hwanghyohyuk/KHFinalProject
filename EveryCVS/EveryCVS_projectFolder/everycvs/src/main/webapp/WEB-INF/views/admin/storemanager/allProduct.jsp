@@ -51,6 +51,7 @@
 								<th>유통기한</th>
 								<th>제조일</th>
 								<th>수량</th>
+								<th>추가</th>
 							</tr>
 							<c:forEach var="apm" items="${requestScope.list}">
 								<tr>
@@ -61,10 +62,12 @@
 									</a></td>
 									<td>${apm.manufacturer}</td>
 									<td><fmt:formatNumber value="${apm.price}" pattern="#,###" />원</td>
-									<td>${apm.expiration_date}일</td>
-									<td><input class="form-control" type="date"></td>
+									<td align="center">${apm.expiration_date}일</td>
+									<td><input class="form-control" type="date" name="mdate"></td>
 									<td><input class="form-control" type="number" min="1"
-										max="100" step="1" value="0"></td>
+										max="100" step="1" name="quantity" value="0"></td>
+									<td><button type="button" class="btn btn-primary btn-sm"
+									data-dismiss="modal" onclick="insertSubmit();">추가</button></td>
 									<!-- Modal -->
 									<td>
 										<div id="apmmodal${apm.product_no}" class="modal fade"
@@ -86,7 +89,9 @@
 															</div>
 															<div class="col-sm-6">
 															<form id="insertform" action="/everycvs/apminsert.do" method="post" enctype="multipart/form-data">
-																<input type="hidden" name="pnum" value="${apm.product_no}">
+															<input type="hidden" name="sno" value="${sessionScope.store.store_no}">
+															<input type="hidden" name="pnum" value="${apm.product_no}">
+															<input type="hidden" name="page" value="${currentPage}">
 																<table class="table table-condensed">
 																	<tr>
 																		<td><strong>상품명</strong></td>
@@ -115,7 +120,7 @@
 																			min="1" max="100" step="1" name="quantity" value="0"></td>
 																	</tr>
 																</table>
-																</form>
+															</form>
 															</div>
 														</div>
 													</div>
@@ -131,13 +136,8 @@
 								</tr>
 							</c:forEach>
 						</table>
-						</form>
 					</div>
 				</div>
-			</div>
-			<div align="right" style="margin-right: 40px;">
-				<button type="button" class="btn btn-primary btn-sm"
-					data-dismiss="modal">추가</button>
 			</div>
 			<br>
 			<div class="text-center">

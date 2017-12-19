@@ -66,7 +66,7 @@
 									<td><fmt:formatNumber value="${spm.price}" pattern="#,###" />원</td>
 									<td>${spm.discount_name}</td>
 									<td>${spm.manufacture_date}</td>
-									<td>${spm.quantity}개</td>
+									<td align="center">${spm.quantity}개</td>
 									<td class="text-center">${spm.del_check}</td>
 									<td>
 										<button type="button" class="btn btn-primary btn-xs"
