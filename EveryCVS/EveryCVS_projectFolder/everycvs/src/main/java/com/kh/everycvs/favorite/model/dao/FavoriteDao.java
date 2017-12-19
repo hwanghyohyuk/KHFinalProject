@@ -27,7 +27,7 @@ public class FavoriteDao {
 	}
 	
 	//관심상품 삭제
-	public int favoriteDelete() {
-		return 0;
+	public void favoriteDelete(Favorite favorite) {
+		sqlSession.delete("favorite.favoriteDelete", favorite);
 	}
 }

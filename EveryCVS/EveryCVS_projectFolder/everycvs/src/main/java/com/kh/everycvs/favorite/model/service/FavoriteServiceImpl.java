@@ -31,9 +31,9 @@ public class FavoriteServiceImpl implements FavoriteService{
 	}
 
 	@Override
-	public void favoriteDelete() {
+	public void favoriteDelete(Favorite favorite) {
 		//관심상품 삭제
-		
+		favoriteDao.favoriteDelete(favorite);
 	}
 
 }

@@ -25,8 +25,16 @@
 			WHERE USER_NO = #{user_no}
 		]]>
 	</select>
-
-
+	
+	<!-- 관심상품 삭제 -->
+	<delete id="favoriteDelete" parameterType="favorite" flushCache="true">
+		<![CDATA[
+			DELETE FROM TB_FAVORITE_LIST
+			WHERE USER_NO = #{user_no}
+			AND STORE_NO = #{store_no, jdbcType=VARCHAR}
+			AND PRODUCT_NO = #{product_no}
+		]]>
+	</delete>
 
 
 </mapper>

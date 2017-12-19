@@ -29,7 +29,6 @@ public class FavoriteController {
 	@RequestMapping("favoriteList.do")
 	public ModelAndView favoriteList(HttpSession session, ModelAndView mv) {
 		int user_no = ((User)session.getAttribute("user")).getUser_no();
-		System.out.println("Controller : " + user_no);
 		setFavoriteList(user_no, mv);
 		return mv;
 	}
@@ -40,19 +39,27 @@ public class FavoriteController {
 	}
 	
 	//관심상품 삭제 : 등록되어있는 관심상품을 해제하면 목록에서 삭제
-	public void favoriteDelete() {
+	@RequestMapping("favoriteDelete.do")
+	public ModelAndView favoriteDelete(
+			HttpSession session, HttpServletRequest request, ModelAndView mv) {
+		int user_no = ((User)session.getAttribute("user")).getUser_no();
+		int product_no = Integer.parseInt(request.getParameter("product_no"));
+		String store_no = request.getParameter("store_no");
 		
+		Favorite favorite = new Favorite();
+		favorite.setUser_no(user_no);
+		favorite.setProduct_no(product_no);
+		favorite.setStore_no(store_no);
+		
+		favoriteService.favoriteDelete(favorite);
+		
+		setFavoriteList(user_no, mv);
+		return mv;
 	}
 	
 	// 관심상품 리스트 조회 후 리스트와 뷰네임을 set하는 메소드
 	public ModelAndView setFavoriteList(int user_no, ModelAndView mv){
-		//지점상품 상세보기 모달 리스트 가져오기
-		System.out.println("setFavoriteList() 실행됨!");
 		ArrayList<Favorite> flist = (ArrayList<Favorite>)favoriteService.favoriteList(user_no);
-		for(Favorite f : flist){
-			System.out.println(f.getProduct_name());
-		}
-		
 		mv.addObject("flist", flist);
 		mv.setViewName("user/mypage/favoritePage");
 		return mv;
