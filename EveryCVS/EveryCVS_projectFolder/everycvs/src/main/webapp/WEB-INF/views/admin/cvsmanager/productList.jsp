@@ -299,10 +299,10 @@
 			</div>
 		</div>
 	</div>
-	<!-- End Modal -->
-
-	<!-- End Main content -->
 </div>
+<!-- End Modal -->
+
+<!-- End Main content -->
 
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->
