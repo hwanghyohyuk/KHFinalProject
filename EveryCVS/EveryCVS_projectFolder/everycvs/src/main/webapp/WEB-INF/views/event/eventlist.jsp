@@ -16,7 +16,7 @@
 function userpageload(page)
 {
    $.ajax({
-      url:"/userpageload.do",
+      url:"/everycvs/userpageload.do",
       type: "post",
       dataType: "json",
       data: {"page":page},
@@ -26,17 +26,32 @@ function userpageload(page)
          console.log(data.maxPage);
          console.log(data.list);
          
-         var jsonStr = JSON.stringify(data);
-         var json = JSON.parse(jsonStr);
-           var values = "";
-            
-            for(var i in json.list)
-            {				//여기부분 수정 손을...못대고있습니다 ...	2ㅍㅔ이지 .후 ...													
-               values += "<tr><td>" + json.list[i].event_no + "</td>"+ "<td><a href='/everycvs/eventDetail.do?no='+json.list[i].event_no+'>" +
-                     json.list[i].title + "</a></td><td>" + json.list[i].start_date + '~' +json.list[i].end_date + "</td><td>" + 
-                     json.list[i].readcount + "</td><td>"+"</td></tr>";     
+         var list = data.list;
+         var values = "";
+         for(var i in list)
+            {				//여기부분 수정 손을...못대고있습니다 ...	2ㅍㅔ이지 .후 ...		
+      			if((i%3)==0)
+      				 values +='<div class="row">';
+      				 
+               values += '<div class="col-md-4"><figure>'+
+					'<a href="/everycvs/eventDetail.do?no='+list[i].event_no+'">'+
+					'<img src="/everycvs/resources/upload/'+list[i].stored_file_name+'" alt="이벤트 이미지가 없습니다." class="jun_img">'+
+					'</a>'+
+					'<figcaption>'+
+					'<input type="hidden" class="margin-top-20" value="'+list[i].event_no+'"/>'+
+					'<h3 class="margin-top-20">'+list[i].title+'</h3>'+
+					'<span>시작일:'+list[i].start_date+'</span> '+
+					'<br> '+
+					'<span>종료일:'+list[i].end_date+'</span>'+
+					'<br>'+
+					'<span>조회수:'+list[i].readcount+'</span>'+
+					'</figcaption>'+
+					'</figure></div>';        
+					
+               if((i%3)==2 || i==(list.length-1))
+    				 values +='</div>';
             }
-            
+       		console.log(values);
             $("#usereventlist").html(values);
          
             var valuesPaging="";
@@ -72,11 +87,10 @@ function userpageload(page)
             }
             
             $("#usereventpaging").html(valuesPaging);
-      }
-      /* ,
-      error:function(errorData){
-			alert("error : "+errorData);
-		} */
+      },
+  	error : function(request, status, error) {
+		swal("오류",error,"error");
+	}	
    });
 }
 </script>
@@ -113,15 +127,18 @@ function userpageload(page)
 				<div class="row">
 					<div class="col-md-12 portfolio-group no-padding" style="float: left;">
 						<!-- Portfolio Item -->
-						<div class="col-md-4 portfolio-item margin-bottom-40 GS25">
-							<div>
+						<div class="col-md-12 portfolio-item margin-bottom-40 GS25">
 							<!-- 로그인시 상세보기 -->
-							<c:if test="${sessionScope.user ne null}">
-							<tbody id="usereventlist">
-								<c:forEach items="${event.list}" var="e">
+							<div id="usereventlist">
+								<c:forEach items="${event.list}" var="e" varStatus="status">
+								<c:if test="${ (status.index % 3)eq 0}">
+								<div class="row">
+								</c:if>
+								<div class="col-md-4">
 									<figure>
 										<a href="/everycvs/eventDetail.do?no=${e.event_no}">
 										<img src="/everycvs/resources/upload/${e.stored_file_name}" alt="이벤트 이미지가 없습니다." class="jun_img">
+										</a>
 										<figcaption>
 											<input type="hidden" class="margin-top-20" value="${e.event_no}"/>
 											<h3 class="margin-top-20">${e.title}</h3>
@@ -130,36 +147,19 @@ function userpageload(page)
 											<span>종료일:${e.end_date}</span>
 											<br>
 											<span>조회수:${e.readcount}</span>
-										</figcaption>
+										</figcaption>										
 									</figure>
-								</c:forEach>
-								</tbody>
-								</a>
-							</c:if>
-								<c:if test="${sessionScope.user eq null}">
-									<c:forEach items="${event.list}" var="e">
-								<figure>
-								<a href="javascript:alert('로그인을 해야 상세보기 가능합니다.')">
-									<img src="/everycvs/resources/uploadfile/image10.jpg" alt="image1">
-									<figcaption>
-										<input type="hidden" class="margin-top-20" value="${e.event_no}"/>
-										<h3 class="margin-top-20">${e.title}</h3>
-										<span>이벤트 시작일:${e.start_date}</span> 
-										<br> 
-										<span>이벤트 종료일:${e.end_date}</span>
-									</figcaption>
-								</figure>
-									</c:forEach>
-									</a>
+								</div>
+								<c:if test="${ ((status.index % 3)eq 2) || status.last}">
+								</div>
 								</c:if>
+								</c:forEach>		
+								</div>		
 							</div>
 						</div>
 						<!-- End Portfolio Item -->	
-						
-					</div>
-				</div>
 				<!-- 페이지 시작 -->
-<%-- 							<div id="paging">
+							<div id="paging">
 								<nav>
 									<ul class="pagination" id="usereventpaging">
 
@@ -203,8 +203,8 @@ function userpageload(page)
 									</ul>
 								</nav>
 							</div>
-				<!-- page끝 --> --%>
-			</div>
+				<!-- page끝 --> 
+				</div>
 		</div>
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->

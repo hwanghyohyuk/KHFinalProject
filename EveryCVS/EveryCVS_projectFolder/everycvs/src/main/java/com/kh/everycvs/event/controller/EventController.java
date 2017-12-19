@@ -50,12 +50,12 @@ public class EventController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("event/eventlist");
 		  int currentPage = 1;
-          int limit = 10;
+          int limit = 6;
           List<Event> list = eventService.selectEventList(keyword,currentPage, limit);       
           Map<String, Object> map = new HashMap<String, Object>();
           int listCount = eventService.getListCount(keyword);
-          int maxPage = (int) ((double) listCount / limit + 0.9);
-          int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
+          int maxPage = (int) ((double) listCount / limit + 0.94);
+          int startPage = (((int) ((double) currentPage / limit + 0.94)) - 1) * limit + 1;
           int endPage = startPage + limit - 1;
            if (maxPage < endPage)
                    endPage = maxPage;
@@ -71,20 +71,21 @@ public class EventController {
           return mv;
 	}
 	
-	/*//유저 페이징
+	//유저 페이징
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="userpageload.do")
 	@ResponseBody
-    public ModelAndView userpageload(ModelAndView mv, @RequestParam("page") int page, HttpServletRequest request,@RequestParam(value="keyword",required = false, defaultValue="") String keyword) {
+    public ModelAndView userpageload(ModelAndView mv, @RequestParam("page") int page, @RequestParam(value="keyword",required = false, defaultValue="") String keyword) {
 				
 		 int currentPage = page;
-         int limit = 10;
+         int limit = 6;
          
          List<Event> list = eventService.selectEventList(keyword, currentPage, limit);
          
          Map<String, Object> map = new HashMap<String, Object>();
          int listCount = eventService.getListCount(keyword);
-         int maxPage = (int) ((double) listCount / limit + 0.9);
-         int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
+         int maxPage = (int) ((double) listCount / limit + 0.94);
+         int startPage = (((int) ((double) currentPage / limit + 0.94)) - 1) * limit + 1;
          int endPage = startPage + limit - 1;
           if (maxPage < endPage) {
                   endPage = maxPage;
@@ -119,17 +120,7 @@ public class EventController {
          
          return mv;
 		
-	}*/
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 	
 	//사용자 이벤트 결과 리스트를 보여주는 화면
 	@RequestMapping(value = "eventresultlist.do", method = RequestMethod.GET)
