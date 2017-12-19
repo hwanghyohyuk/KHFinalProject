@@ -113,11 +113,5 @@ public class ProductDao {
 		}else{
 			return sqlSession.selectList("product.listApmanager", map);
 		}	
-	}
-	
-	//allProduct 상품등록
-	public int insertApmanager(Map<String, Object> map) {
-		return sqlSession.insert("product.insertApmanager", map); 
-	}
-	
+	}	
 }

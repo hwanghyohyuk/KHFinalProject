@@ -64,4 +64,8 @@ public class StoreProductServiceImpl implements StoreProductService {
 		return sproductDao.expSproduct(store_no);
 	}
 	
+	@Override
+	public int insertApmanager(List<StoreProduct> spList) {
+		return sproductDao.insertProduct(spList);
+	}
 }

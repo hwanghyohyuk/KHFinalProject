@@ -100,10 +100,5 @@ public class ProductServiceImpl implements ProductService{
 	public List<StoreProduct> listApmanager(int currentPage, int limit, String keyword, int brand_no) {
 		return productDao.listApmanager(currentPage, limit, keyword, brand_no);
 	}
-
-	@Override
-	public int insertApmanager(Map<String, Object> map) {
-		return productDao.insertApmanager(map); 
-	}
 	
 }

@@ -80,4 +80,31 @@ public class StoreProductDao {
 		return sqlSession.update("storeProduct.updateSpmanager", map); 
 	}
 	
+	 /*지점 상품등록 spList */
+		public int insertProduct(List<StoreProduct> spList) {
+			int result=0;
+			int insertResult=0;
+			for(int i=0;i<spList.size();i++){
+				int count = sqlSession.selectOne("storeProduct.selectCountSp", spList.get(i));
+				if(count>0){//같은 상품이 존재하면 업데이트
+					Map<String,Object> map = new HashMap<String,Object>();
+					System.out.println(spList.get(i));
+					map.put("sp", spList.get(i));
+					map.put("store_no", spList.get(i).getStore_no());
+					map.put("product_no", spList.get(i).getProduct_no());
+					map.put("manufacture_date", spList.get(i).getManufacture_date());
+					insertResult = sqlSession.update("storeProduct.updateSp", map);
+					if(insertResult>0){
+						result++;
+					}
+				}else{//같은상품이 없으면 추가
+					insertResult = sqlSession.insert("storeProduct.insertSp", spList.get(i));
+					if(insertResult>0){
+						result++;
+					}	
+				}					
+			}		
+			return result;
+		}
+	
 }

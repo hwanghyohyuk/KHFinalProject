@@ -3,11 +3,18 @@ package com.kh.everycvs.storeproduct.controller;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.set.SynchronizedSortedSet;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.object.StoredProcedure;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,8 +23,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.storeproduct.model.service.StoreProductService;
+import com.kh.everycvs.common.model.vo.Product;
 import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.StoreProduct;
+import com.kh.everycvs.product.model.dao.ProductDao;
 import com.kh.everycvs.product.model.service.ProductService;
 
 @Controller
@@ -260,7 +269,7 @@ public class StoreProductController {
 		
 		return mv;
 	}
-	
+	/*
 	//allProduct 상품추가
 	@RequestMapping(value="/apminsert.do")
 	public ModelAndView insertApmanager(ModelAndView mv,
@@ -283,6 +292,31 @@ public class StoreProductController {
 		}
 		
 		return mv;
+	}
+	*/
+	//allProduct 상품추가
+	@RequestMapping(value="/apminsert.do")
+	@ResponseBody
+	public int insertApmanager(@RequestParam("sno") String sno, @RequestParam("page") int currentPage,@RequestParam("jlists")String jlists ) {
+		List<StoreProduct> spList = new ArrayList<StoreProduct>();
+		 JSONParser jsonParser = new JSONParser();
+         //JSON데이터를 넣어 JSON Object 로 만들어 준다.
+		try {
+			JSONArray plist = (JSONArray) jsonParser.parse(jlists);
+			for(int i=0; i<plist.size(); i++){
+				 JSONObject p = (JSONObject) plist.get(i);
+				 int productNo = Integer.parseInt((String)p.get("product_no"));
+				 Date manufactureDate = Date.valueOf((String)p.get("manufacture_date"));
+				 int quantity = Integer.parseInt((String)p.get("quantity"));
+                 StoreProduct sp = new StoreProduct(sno,productNo,manufactureDate,quantity);
+                 spList.add(sp);
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        int result = sproductService.insertApmanager(spList); 
+        return result;
 	}
 	
 }

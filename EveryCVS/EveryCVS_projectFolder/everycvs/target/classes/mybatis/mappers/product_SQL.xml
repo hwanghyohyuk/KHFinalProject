@@ -155,12 +155,7 @@
            ]]>
    </select>
    
-   <insert id="insertApmanager" parameterType="hashmap">
-   		<![CDATA[
-			insert into tb_store_product
-			values (seq_store_product_no.nextval, #{sno}, #{pnum}, #{manufacturedate}, #{quantity}, default)
-  		]]>
-   </insert>
+   
    
 </mapper>
 

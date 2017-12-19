@@ -25,4 +25,5 @@ public interface StoreProductService {
 	
 	public int updateSpmanager(Map<String, Object> map);
 
+	public int insertApmanager(List<StoreProduct> spList);
 }

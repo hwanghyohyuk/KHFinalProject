@@ -50,6 +50,4 @@ public interface ProductService {
 	
 	public List<StoreProduct> listApmanager(int currentPage, int limit, String keyword, int brand_no);
 
-	public int insertApmanager(Map<String, Object> map);
-
 }

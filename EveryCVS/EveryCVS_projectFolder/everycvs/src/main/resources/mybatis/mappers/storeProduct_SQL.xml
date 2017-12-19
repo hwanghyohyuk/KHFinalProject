@@ -119,5 +119,27 @@
 		update tb_store_product 
 		set manufacture_date = #{manufacturedate}, quantity = #{quantity} where store_product_no = #{spnum}
    </update>
+   
+  
+   <!-- 지점상품 등록관련 -->
+   <select id="selectCountSp" parameterType="storeproduct" resultType="_int">
+		   <![CDATA[
+      		select count(*) from tb_store_product where store_no=#{store_no} and product_no = #{product_no} and manufacture_date = #{manufacture_date}
+           ]]>
+   </select>
+   
+   <update id="updateSp" parameterType="hashmap">
+		update tb_store_product 
+		set quantity = (select quantity+#{sp.quantity} from tb_store_product where store_no=#{store_no} and product_no = #{product_no} and manufacture_date = #{manufacture_date}) 
+		where store_no=#{sp.store_no} and product_no = #{sp.product_no} and manufacture_date = #{sp.manufacture_date}
+   </update>
+   
+    <insert id="insertSp" parameterType="storeproduct" >
+   		<![CDATA[
+			insert into tb_store_product
+			values (seq_store_product_no.nextval, #{store_no}, #{product_no}, #{manufacture_date}, #{quantity}, default)
+  		]]>
+   </insert>
+   <!-- /지점상품 등록관련 -->
 
 </mapper>	
