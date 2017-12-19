@@ -264,17 +264,20 @@ public class StoreProductController {
 	//allProduct 상품추가
 	@RequestMapping(value="/apminsert.do")
 	public ModelAndView insertApmanager(ModelAndView mv,
+			 @RequestParam("page") int currentPage,
+			 @RequestParam("sno") String sno,
 			 @RequestParam("pnum") int pnum,
 			 @RequestParam("mdate") Date manufacturedate,
 			 @RequestParam("quantity") int quantity) {
 
 		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("sno", sno);
 		map.put("pnum", pnum);
 		map.put("manufacturedate", manufacturedate);
 		map.put("quantity", quantity);
 		
 		if(productService.insertApmanager(map) > 0){
-			mv.setViewName("redirect:/spmlist.do?page=1");
+			mv.setViewName("redirect:/spmlist.do?page="+currentPage);
 		}else{
 			mv.addObject("message", "등록 실패!");
 		}
