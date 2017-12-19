@@ -101,7 +101,8 @@ public class EventDao {
 	//수정하기 완료
 	public int updateEventPage(Event event) {
 		int result = sqlSession.update("event.cvseventmodifywrite", event);
-		System.out.println(result);
+		System.out.println("수정dao : "+event);
+		System.out.println("result : "+result);
 		return result;
 	}
 	

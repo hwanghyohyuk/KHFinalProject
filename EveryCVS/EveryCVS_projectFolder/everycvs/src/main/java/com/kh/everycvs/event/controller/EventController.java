@@ -35,7 +35,7 @@ public class EventController {
 	//--------------------------- 이벤트 사용자 글보고 이벤트참여하도록 확인해야함----------------------------------
 	
 	/*사용자 : 이벤트 메인*/
-	@RequestMapping(value="/page/eventmain.do", method=RequestMethod.GET)
+	@RequestMapping(value="test/page/eventmain.do", method=RequestMethod.GET)
 	public ModelAndView eventList(ModelAndView mv) {
 		mv.setViewName("event/eventlist");
 		List<Event> list = eventService.eventList();
@@ -44,7 +44,7 @@ public class EventController {
 	}
 
 	// 이벤트 리스트 이건 유저 뷰인데 다시작업해야함
-	@RequestMapping(value="eventList.do", method=RequestMethod.GET)
+	@RequestMapping(value="/page/eventmain.do", method=RequestMethod.GET)
 	public ModelAndView selectEventList(@RequestParam(value="keyword",required = false, defaultValue="") String keyword, String page) {
 		
 		ModelAndView mv = new ModelAndView();
@@ -60,16 +60,76 @@ public class EventController {
            if (maxPage < endPage)
                    endPage = maxPage;
            
-           	map.put("currentPage", currentPage);
-            map.put("listCount", listCount);
-            map.put("maxPage", maxPage);
-            map.put("startPage", startPage);
-            map.put("endPage", endPage);
-            map.put("limit", limit);
-            map.put("list", list);
+           map.put("currentPage", currentPage);
+           map.put("listCount", listCount);
+           map.put("maxPage", maxPage);
+           map.put("startPage", startPage);
+           map.put("endPage", endPage);
+           map.put("limit", limit);
+           map.put("list", list);
           mv.addObject("event", map);      
-          return mv;	
+          return mv;
 	}
+	
+	/*//유저 페이징
+	@RequestMapping(value="userpageload.do")
+	@ResponseBody
+    public ModelAndView userpageload(ModelAndView mv, @RequestParam("page") int page, HttpServletRequest request,@RequestParam(value="keyword",required = false, defaultValue="") String keyword) {
+				
+		 int currentPage = page;
+         int limit = 10;
+         
+         List<Event> list = eventService.selectEventList(keyword, currentPage, limit);
+         
+         Map<String, Object> map = new HashMap<String, Object>();
+         int listCount = eventService.getListCount(keyword);
+         int maxPage = (int) ((double) listCount / limit + 0.9);
+         int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
+         int endPage = startPage + limit - 1;
+          if (maxPage < endPage) {
+                  endPage = maxPage;
+          }
+          
+          map.put("currentPage", currentPage);
+          map.put("listCount", listCount);
+          map.put("maxPage", maxPage);
+          map.put("startPage", startPage);
+          map.put("endPage", endPage);
+          map.put("limit", limit);
+            
+          JSONArray jar = new JSONArray();
+            
+          for(Event ev : list)
+            {
+               JSONObject jev = new JSONObject();
+               jev.put("event_no", ev.getEvent_no());
+               jev.put("title", ev.getTitle());
+               jev.put("start_date",ev.getStart_date().toString());
+               jev.put("end_date", ev.getEnd_date().toString());
+               jev.put("readcount", ev.getReadcount());
+               jev.put("original_file_name",ev.getOriginal_file_name());
+               jev.put("stored_file_name",ev.getStored_file_name());
+               jar.add(jev);
+            }
+            
+           map.put("list", jar);
+           mv.addAllObjects(map);
+           
+           mv.setViewName("jsonView");
+         
+         return mv;
+		
+	}*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//사용자 이벤트 결과 리스트를 보여주는 화면
 	@RequestMapping(value = "eventresultlist.do", method = RequestMethod.GET)
@@ -79,7 +139,7 @@ public class EventController {
 		int currentPage = 1;
 	    int limit = 10;
 	       List<EventResult> list = eventService.resultEventList(keyword,currentPage, limit);
-	                System.out.println("list : " + list);
+	                System.out.println("이벤트결과list : " + list);
 	          Map<String, Object> map = new HashMap<String, Object>();
 	          int listCount = eventService.getListCount(keyword);
 	          int maxPage = (int) ((double) listCount / limit + 0.9);
@@ -142,7 +202,7 @@ public class EventController {
 	
 	
 	
-	//--------------------------- 이벤트 관리자 파일 업로드랑 날짜 별로보는거랑 각 편의점관리자 마다 보이는 리스트 다르게----------------------------------
+	//--------------------------- 날짜 별로보는거랑 각 편의점관리자 마다 보이는 리스트 다르게----------------------------------
 	// 편의점 관리자 
 	// 이벤트 조회 : 모든 공식이벤트를 조회 및 제목 + 내용 검색
 	@RequestMapping(value = "cvseventlist.do", method = RequestMethod.GET)
@@ -153,7 +213,7 @@ public class EventController {
 		  int currentPage = 1;
           int limit = 10;
           List<Event> list = eventService.selectEventList(keyword,currentPage, limit);
-                System.out.println("list : " + list);
+                System.out.println("관리자list : " + list);
                 
           Map<String, Object> map = new HashMap<String, Object>();
           int listCount = eventService.getListCount(keyword);
@@ -246,10 +306,11 @@ public class EventController {
 	public String cvsEventWrite(HttpSession session, HttpServletRequest request) throws Exception {
 		int user_no = ((User)session.getAttribute("user")).getUser_no();
 		
+		
 		String file_name = new FileUtils().InsertFile(session, request);
 		String[] file = file_name.split("/");
 		
-		System.out.println(file[0] + " , " + file[1]);
+		System.out.println("이건 insert"+file[0] + " , " + file[1]);
 		
 		Event event = new Event();		
 		event.setWriter(Integer.parseInt(request.getParameter("writer")));
@@ -261,8 +322,7 @@ public class EventController {
 		event.setOriginal_file_name(file[0]);
 		event.setStored_file_name(file[1]);
 		
-		System.out.println("controller : "+event);
-		
+			
         eventService.eventInsert(event);
          return "redirect:/cvseventlist.do";
 	}
@@ -278,16 +338,31 @@ public class EventController {
 		return mv;
 	
 	}
-	//이벤트 수정하기
+	/*//이벤트 수정하기-------------------------------------------------------------------*/
 	@RequestMapping(value="cvseventmodifywrite.do", method = RequestMethod.POST)
-	public String cvsEventModiftwriter(Event event) {
-		System.out.println(event);
-	
-		int resultUpdate = eventService.updateEventPage(event);
-		String result = null;
-	
-		return "redirect:/cvseventlist.do";
+	public String cvsEventModiftwriter(HttpSession session, HttpServletRequest request) throws Exception {
+
+		int user_no = ((User)session.getAttribute("user")).getUser_no();		
+		String filename = new FileUtils().InsertFile(session, request);
+		String[] fName = filename.split("/");
+		String prevFileName = request.getParameter("prevfile");
+			
+		System.out.println("이건 수정" + fName[0] + " , " + fName[1]);
+			
+		Event event = new Event();		
+		event.setWriter(Integer.parseInt(request.getParameter("writer")));
+		event.setTitle(request.getParameter("title"));
+		event.setEvent_no(Integer.parseInt(request.getParameter("event_no")));
+		event.setStart_date(java.sql.Date.valueOf(request.getParameter("start_date")));
+		event.setEnd_date(java.sql.Date.valueOf(request.getParameter("end_date")));
+		event.setJoin_limit(Integer.parseInt(request.getParameter("join_limit")));
+		event.setContents(request.getParameter("contents"));
+		event.setOriginal_file_name(fName[0]);
+		event.setStored_file_name(fName[1]);				
+	    
+		eventService.updateEventPage(event);
 		
+		return "redirect:/cvseventlist.do";
 	}
 	//수정 끝
 

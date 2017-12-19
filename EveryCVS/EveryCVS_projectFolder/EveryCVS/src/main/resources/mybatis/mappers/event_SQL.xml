@@ -36,7 +36,9 @@
 	
 	<select id="eventList" resultType="list" resultMap="resultEvent">
 		<![CDATA[
-		select * from event_view 
+		 select * from(select rownum rnum, T.* 
+			from (select * from event_view
+			order by event_no desc ) T ) a where a.rnum >= #{startRow} and a.rnum <=#{endRow}
 		]]>
 	</select>
 	
@@ -73,6 +75,7 @@
 			select * from(select rownum rnum, T.* 
 			from (select * from event_result_view
 			order by event_result_no desc ) T ) a where a.rnum >=#{startRow} and a.rnum <=#{endRow}
+
 		]]>
 	</select>
 	<!-- 제목 내용 검색 -->
@@ -160,8 +163,8 @@
 			start_date = #{start_date},
 			end_date = #{end_date},
 			join_limit = #{join_limit},
-			original_file_name = default,
-			stored_file_name = default
+			original_file_name = #{original_file_name},
+			stored_file_name = #{stored_file_name}
 		where event_no=#{event_no}
 		]]>
 	</update>

@@ -11,6 +11,75 @@
 <c:import url="../include/user/common/header.jsp"></c:import>
 <!-- === END HEADER === -->
 <!-- === BEGIN CONTENT === -->
+<script type="text/javascript">
+
+function userpageload(page)
+{
+   $.ajax({
+      url:"/userpageload.do",
+      type: "post",
+      dataType: "json",
+      data: {"page":page},
+      success: function(data)
+      {
+         console.log(data.currentPage);
+         console.log(data.maxPage);
+         console.log(data.list);
+         
+         var jsonStr = JSON.stringify(data);
+         var json = JSON.parse(jsonStr);
+           var values = "";
+            
+            for(var i in json.list)
+            {				//여기부분 수정 손을...못대고있습니다 ...	2ㅍㅔ이지 .후 ...													
+               values += "<tr><td>" + json.list[i].event_no + "</td>"+ "<td><a href='/everycvs/eventDetail.do?no='+json.list[i].event_no+'>" +
+                     json.list[i].title + "</a></td><td>" + json.list[i].start_date + '~' +json.list[i].end_date + "</td><td>" + 
+                     json.list[i].readcount + "</td><td>"+"</td></tr>";     
+            }
+            
+            $("#usereventlist").html(values);
+         
+            var valuesPaging="";
+            
+            if(data.currentPage <= 1){
+               valuesPaging+="<li class='disabled'>" + 
+                 "<a href='#' aria-label='Previous'>" +
+                   "<span aria-hidden='true'>&laquo;</span></a></li>";
+            } else {
+               valuesPaging += "<li><a href='javascript:userpageload(" + (data.currentPage - 1) + ")'  aria-label='Previous'>"
+                + "<span aria-hidden='true'>&laquo;</span></a></li>";
+            }
+            
+           for(var i = data.startPage; i<=data.endPage; i++)
+           {
+              if(data.currentPage == i)
+              {
+                valuesPaging+="<li class='disabled'>"+"<a href='#'>"+ i + "</a></li>";
+              } else {
+                  valuesPaging+="<li><a href='javascript:userpageload(" + i + ")'>"+ i + "</a></li>";
+              }
+
+           }
+           
+            if(data.currentPage >= data.maxPage)
+            {
+               valuesPaging+= "<li class='disabled'>" + 
+                  "<a href='#' aria-label='Next'>"+
+                      "<span aria-hidden='true'>&raquo;</span></a></li>";
+            } else {
+               valuesPaging += "<li><a href='javascript:userpageload(" + (data.currentPage + 1)+ "') aria-label='Next'>" +
+                "<span aria-hidden='true'>&raquo;</span></a></li>";
+            }
+            
+            $("#usereventpaging").html(valuesPaging);
+      }
+      /* ,
+      error:function(errorData){
+			alert("error : "+errorData);
+		} */
+   });
+}
+</script>
 		<div id="content">
 			<div class="container background-white">
 				<div class="row margin-vert-30">
@@ -48,10 +117,11 @@
 							<div>
 							<!-- 로그인시 상세보기 -->
 							<c:if test="${sessionScope.user ne null}">
+							<tbody id="usereventlist">
 								<c:forEach items="${event.list}" var="e">
 									<figure>
 										<a href="/everycvs/eventDetail.do?no=${e.event_no}">
-										<img src="/everycvs/resources/uploadfile/image10.jpg" alt="image1">
+										<img src="/everycvs/resources/upload/${e.stored_file_name}" alt="이벤트 이미지가 없습니다." class="jun_img">
 										<figcaption>
 											<input type="hidden" class="margin-top-20" value="${e.event_no}"/>
 											<h3 class="margin-top-20">${e.title}</h3>
@@ -63,6 +133,7 @@
 										</figcaption>
 									</figure>
 								</c:forEach>
+								</tbody>
 								</a>
 							</c:if>
 								<c:if test="${sessionScope.user eq null}">
@@ -84,14 +155,57 @@
 							</div>
 						</div>
 						<!-- End Portfolio Item -->	
+						
 					</div>
 				</div>
-				<!-- 페이지인 여기서부터 들어감-->
-				
-				<!-- 페이지 여기까지 들어가면됨 -->
+				<!-- 페이지 시작 -->
+<%-- 							<div id="paging">
+								<nav>
+									<ul class="pagination" id="usereventpaging">
+
+										<c:if test="${event.currentPage <= 1}">
+											<li class="disabled"><a href="#" aria-label="Previous">
+													<span aria-hidden="true">&laquo;</span>
+											</a></li>
+										</c:if>
+
+										<c:if test="${event.currentPage > 1}">
+											<li><a
+												href="javascript:userpageload(${event.currentPage - 1})"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+											</a></li>
+										</c:if>
+
+										<c:forEach var="i" begin="${event.startPage}"
+											end="${event.endPage}" step="1">
+											<c:if test="${event.currentPage eq i}">
+												<li class="disabled"><a href="#">${i}</a></li>
+											</c:if>
+
+											<c:if test="${event.currentPage ne i}">
+												<li><a href='javascript:userpageload(${i})'>${i}</a></li>
+											</c:if>
+
+										</c:forEach>
+
+										<c:if test="${event.currentPage >= event.maxPage}">
+											<li class="disabled"><a href="#" aria-label="Next">
+													<span aria-hidden="true">&raquo;</span>
+											</a></li>
+										</c:if>
+
+										<c:if test="${event.currentPage < event.maxPage}">
+											<li><a
+												href='javascript:userpageload(${event.currentPage + 1})'
+												aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+											</a></li>
+										</c:if>
+									</ul>
+								</nav>
+							</div>
+				<!-- page끝 --> --%>
 			</div>
 		</div>
-
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->
 <c:import url="../include/user/common/footer.jsp"></c:import>
