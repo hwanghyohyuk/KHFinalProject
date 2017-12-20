@@ -1,16 +1,22 @@
 package com.kh.everycvs.servicecenter.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.everycvs.common.model.vo.Event;
 import com.kh.everycvs.common.model.vo.ServiceCenter;
 import com.kh.everycvs.servicecenter.model.service.ServiceCenterService;
 
@@ -37,6 +43,31 @@ public class ServiceCenterController {
 		mv.addObject("list", list);
 		System.out.println("ServiceCenterController : " + list);
 		return mv;
+
+	}
+
+	// 고객센터 : 고객센터 글쓰기 페이지 이동
+	@RequestMapping(value = "writeService.do", method = RequestMethod.GET)
+	public String serviceWriteView(HttpServletRequest request) {
+		return "servicecenter/serviceWrite";
+
+
+	}
+	
+	//고객센터 : 글 등록
+	@RequestMapping(value="serviceInsert.do", method= RequestMethod.POST)
+	public String serviceInsert(ServiceCenter servicecenter) throws Exception {
+		serviceCenterService.serviceInsert(servicecenter);
+		System.out.println("ServiceController : " + servicecenter);
+		
+		
+         return "redirect:/servicelist.do";
+	}
+	//고객센터 : 상세보기
+	@RequestMapping(value = "detailService.do", method = RequestMethod.GET)
+	public String serviceDetail(HttpServletRequest request) {
+		
+		return "servicecenter/serviceDetailView";
 	}
 
 	// 고객센터: 고객센터 검색
@@ -47,14 +78,17 @@ public class ServiceCenterController {
 		ArrayList<ServiceCenter> list = (ArrayList<ServiceCenter>) serviceCenterService.serviceSearch(keyword);
 		mv.addObject("list", list);
 
-		System.out.println("ServiceCenterController : " + list);
-		System.out.println("keyword : " + "%" + keyword + "%");
+		
+		/*System.out.println("ServiceCenterController : " + list);
+		System.out.println("keyword : "+"%"+keyword+"%");*/
 		mv.setViewName("servicecenter/servicelist");
 		return mv;
 	}
 
+		
+
 	// 고객센터 : 고객센터 글쓰기
-	@RequestMapping(value = "insertService.do", method = RequestMethod.GET)
+	@RequestMapping(value = "insertService.do", method = RequestMethod.POST)
 	public String serviceWrite(HttpServletRequest request) {
 		return "servicecenter/serviceWrite";
 	}
@@ -69,4 +103,5 @@ public class ServiceCenterController {
 
 		return mv;
 	}
+
 }

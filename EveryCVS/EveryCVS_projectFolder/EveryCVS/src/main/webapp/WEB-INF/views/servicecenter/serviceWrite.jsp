@@ -11,63 +11,77 @@
 <!-- === BEGIN HEADER ===  -->
 <c:import url="../include/user/common/header.jsp"></c:import>
 <!-- === END HEADER === -->
-
+<script type="text/javascript">
+	function check(){
+		if(servicecenter.title.value == ""){
+			alert("제목을 입력해주세요");
+			return ;
+		}
+		if(servicecenter.contents.value=""){
+			alert("내용을 입력해주세요")
+			return;
+		}
+	}
 </script>
 <!-- === BEGIN CONTENT === -->
             <div id="content">
                 <div class="container background-white">
-                    <div class="row margin-vert-30">
-                        <!-- Main Column -->
-                        <div class="col-md-12">
-                            <!-- Main Content -->
-                            <div class="headline">
-                                 <h2>고객센터 / 글쓰기</h2>
-                            </div>
-                            <hr>
-                            <form action="/everycvs/serviceInsert.do">
-                                 <label>작성자
-                                    <span class="color-red">*</span>
-                                 </label>                              
-                                <c:if test="${sessionScope.user !=null }">  <!-- 로그인 상태이면 -->
-                                <div class="row margin-bottom-20">
-                                    <div class="col-md-6 col-md-offset-0">                                           
-                                        <input class="form-control" type="text"  value=" ${sessionScope.user.user_name}" readonly>
-                                      </c:if>
-                                      <c:if test="${sessionScop.user ==null }">                                   
-                                      </c:if>
-                                    </div>                                   
-                                </div>
-                                <label>비밀번호
+		<div class="row margin-vert-30">
+			<!-- Main Column -->
+			<div class="col-md-12">
+				<!-- Main Content -->
+				<div class="headline">
+					<h2>고객센터 / 글쓰기</h2>
+				</div>
+				<hr>
+				<form action="serviceInsert.do" name="servicecenter" method="post">
+					<label>작성자 <span class="color-red">*</span>
+					</label>
+					<c:if test="${sessionScope.user !=null }">
+						<!-- 로그인 상태이면 -->
+						<div class="row margin-bottom-20">
+							<div class="col-md-6 col-md-offset-0">
+								<input name="writer" class="form-control" type="text"
+									value=" ${sessionScope.user.user_name}" readonly>
+					</c:if>
+					<c:if test="${sessionScop.user ==null }">
+					</c:if>
+			</div>
+		</div>
+
+		<!-- <label>비밀번호
                                     <span class="color-red">*</span>
                                 </label>
                                 <div class="row margin-bottom-20">
                                     <div class="col-md-6 col-md-offset-0">
                                         <input class="form-control" type="password" placeholder="비밀번호를 입력해주세요">
                                     </div>
-                                </div>
+                                </div>  -->
+                                
                                 <label>제목
                                     <span class="color-red">*</span>
                                  </label>
                                 <div class="row margin-bottom-20">
                                     <div class="col-md-6 col-md-offset-0">
-                                        <input class="form-control" type="text" placeholder="제목을 입력해주세요">
+                                        <input id="title" name="title" class="form-control" type="text" placeholder="제목을 입력해주세요">
                                     </div>
                                 </div>
                                 <div>
                                 <label>내용</label>
                                 <div class="row margin-bottom-20">
                                     <div class="col-md-8 col-md-offset-0">
-                                        <textarea rows="8" class="form-control" placeholder="내용을 입력해주세요"></textarea>
+                                        <textarea id="contents" name="contents" rows="8" class="form-control" placeholder="내용을 입력해주세요"></textarea>
                                     </div>
-                                </div>                              
-                                <div align="center">                           
-                                <a href="">
-                                    <input type="button" class="btn btn-primary" value="등록" >        
-                                </a>                      
+                                </div>            
+                                              
+                                <div align="center">                                	                                                 
+                                    <button type="submit" class="btn btn-primary" onclick="check();">등록</button>                                                                                          
                                     &nbsp&nbsp&nbsp&nbsp&nbsp
-                                    <input type=button class="btn btn-primary" value="취소">
+                                    <a href="javascript:history.go(-1);">
+                                    <input type="button" class="btn btn-primary" value="취소">
+                                    </a>
                                 </div>
-                               
+                              
                                 </div>
                             </form>
                             <hr>
@@ -75,7 +89,7 @@
                             <!-- End Main Content -->
                         </div>
                       
-                        </div>
+                        
                         <!-- End Side Column -->
                     </div>
                 </div>
