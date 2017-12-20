@@ -12,17 +12,15 @@ public class EmailCertification implements Serializable {
 	 */
 	private static final long serialVersionUID = 2000L;
 	private String email;
-	private String session_key; // 세션id
 	private String certification_no;
 
 	public EmailCertification() {
 		super();
 	}
 
-	public EmailCertification(String email, String session_key, String certification_no) {
+	public EmailCertification(String email, String certification_no) {
 		super();
 		this.email = email;
-		this.session_key = session_key;
 		this.certification_no = certification_no;
 	}
 
@@ -32,14 +30,6 @@ public class EmailCertification implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getSession_key() {
-		return session_key;
-	}
-
-	public void setSession_key(String session_key) {
-		this.session_key = session_key;
 	}
 
 	public String getCertification_no() {
@@ -56,8 +46,7 @@ public class EmailCertification implements Serializable {
 
 	@Override
 	public String toString() {
-		return "EmailCertification [email=" + email + ", session_key=" + session_key + ", certification_no="
-				+ certification_no + "]";
+		return "EmailCertification [email=" + email + ", certification_no=" + certification_no + "]";
 	}
 
 }

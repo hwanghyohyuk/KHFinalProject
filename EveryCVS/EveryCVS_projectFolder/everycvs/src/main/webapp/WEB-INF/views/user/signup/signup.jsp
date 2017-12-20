@@ -23,7 +23,7 @@
 					<div class="signup-header margin-bottom-40">
 						<h2 >Register a new account</h2>
 						<p>
-							Already a member? Click <a href="/everycvs/sign/signin.do">HERE</a> to login to your
+							Already a member? Click <a href="#">HERE</a> to login to your
 							account.
 						</p>
 					</div>
@@ -37,7 +37,8 @@
 									class="form-control" placeholder="Email" id="signupemail"
 									name="email" type="email"> <span
 									class="input-group-btn">
-										<button type="button" class="btn btn-primary" onclick="certify();">Certify</button>
+										<button type="button" class="btn btn-primary"
+											data-toggle="modal" data-target="#certifyform">Certify</button>
 								</span>
 								</span>
 							</div>
@@ -155,27 +156,6 @@
 <!-- === BEGIN FOOTER === -->
 <c:import url="../../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
-<!-- JS -->
-<script type="text/javascript">
-function certify(){
-	var email = $("#signupemail").val();
-	if(email != ''){
-	$.ajax({
-		url:'/everycvs/sign/checkemail.do',
-		data:{'email':email},
-		type:'post',
-		success:function(data){
-			
-		},
-		error : function(request, status, error) {
-			swal("오류",error,"error");
-		}	
-	});
-	}else{
-		swal("입력 오류","이메일을 입력해주세요","error");
-	}
-}
-</script>
 <!-- JS -->
 <c:import url="../../include/user/common/end.jsp"></c:import>
 <!-- === END === -->
