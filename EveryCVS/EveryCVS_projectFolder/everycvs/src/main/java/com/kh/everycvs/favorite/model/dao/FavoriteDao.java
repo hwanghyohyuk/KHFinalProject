@@ -17,9 +17,19 @@ public class FavoriteDao {
 	private SqlSession sqlSession;
 	
 	//관심상품 목록조회
-	public List<Favorite> favoriteList() {
-		ArrayList<Favorite> flist = new ArrayList<Favorite>();
-		return sqlSession.selectList("favorite.favoriteList", flist);
+	public List favoriteList(int user_no) {
+		return sqlSession.selectList("favorite.favoriteList", user_no);
+	}
+	
+	public List favoriteSearch(Favorite favorite){
+		List list = null;
+		if(favorite.getBrand_name() != null)
+			list = sqlSession.selectList("favorite.favoriteSearch1", favorite);
+		else if(favorite.getStore_name() != null)
+			list = sqlSession.selectList("favorite.favoriteSearch2", favorite);
+		else if(favorite.getProduct_name() != null)
+			list = sqlSession.selectList("favorite.favoriteSearch3", favorite);
+		return list;
 	}
 	
 	//관심상품 추가
@@ -28,7 +38,7 @@ public class FavoriteDao {
 	}
 	
 	//관심상품 삭제
-	public int favoriteDelete() {
-		return 0;
+	public void favoriteDelete(Favorite favorite) {
+		sqlSession.delete("favorite.favoriteDelete", favorite);
 	}
 }

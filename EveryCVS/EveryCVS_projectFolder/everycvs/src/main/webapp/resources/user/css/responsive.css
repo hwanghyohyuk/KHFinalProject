@@ -5,11 +5,11 @@
 
 .is-sticky #header,
 .is-sticky #hornav {
-   position: relative !important;
-   width: auto !important;
-   top: 0 !important;
-   left: 0;
-   margin-left: 0;
+	position: relative !important;
+	width: auto !important;
+	top: 0 !important;
+	left: 0;
+	margin-left: 0;
 }
 
 .primary-container-background .primary-container {width: 100%;}
@@ -23,10 +23,10 @@
 }
 
 #modify1{
-      width: 19%;
-      padding-left: 2%;
-      text-align: center;
-   }
+		width: 19%;
+		padding-left: 2%;
+		text-align: center;
+	}
 
 
 }
@@ -35,49 +35,127 @@
 ================================================== */
     
 @media only screen and (max-width: 959px) {
-   table {
-      font-size: 9pt;
-   }
+	table {
+		font-size: 9pt;
+	}
 
-   #paddingrmv {
-      padding: 0%;
-      width: 98%;
-   }
+	.jun9 {
+		padding-left: 0px;
+		margin-top: 30px;
+		width: 100%;
+	}
 
-   #paddingrmv2{
-      padding: 0px;
-      width: 98%;
-   }
+	.jun11 {
+		border-radius: 0px;
+		padding-left: 5px;
+		margin-left: 2px;
+	}
 
-   #paddingrmv3{
-   padding-left: 30px;
-   }
+	.jun12 {
+		padding-left: 0px;
+	}
 
-   #marginrmv {
-      margin: 1%;
-      width: 99%;
-   }
+	.jun13 {
+		width: 99%;
+		padding: 0px;
+		margin-left: 4px;
+	}
+	
+	.jun13 > button {
+		border: 1px solid #999;
+	}
 
-   #width100{
-      margin-top: 1%;
-      width: 100%;
-   }
+	.jun14 {
+		border-radius: 5px;
+		margin-top: 1%;
+		width:100%;
+		border-width: 0px;
+	}
 
-   #modify1{
-      font-size: 9pt;
-   }
+	.jun15 {
+		border-radius: 0px;
+	}
 
-   #displaynone{
-      display: none;
-   }
+	.jun16 {
+		padding-left: 4px;
+		width: 100.5%;
+	}
 
-   #displayblock{
-      display: inline-block;
-   }
+	.jun17 {
+		padding: 0px 0px 0px 4px;
+		width: 100%;
+	}
 
-   #modify2{
-      display: none;
-   }
+	.jun18 {
+		margin-top: 80px;
+	}
+
+	.jun19 {
+		width: 100%;
+	}
+	
+	.jun20 {
+		margin-left: 0%;
+		float: none;
+	}
+	
+	#paddingrmv {
+		padding: 0%;
+		width: 98%;
+	}
+
+	#paddingrmv2{
+		padding: 0px;
+		width: 98%;
+	}
+
+	#paddingrmv3{
+	padding-left: 0px;
+	width:100%;
+	}
+
+	#marginrmv {
+		margin: 1%;
+		width: 99%;
+	}
+
+	#width100{
+		margin-top: 1%;
+		width: 100%;
+	}
+	
+	.jun42 {
+		height: 34px;
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+		border-right-width: 1px;
+	}
+	
+	#searchbtn{
+		margin-top: 2px;
+		width: 100%;
+		border-radius: 5px;
+	}
+
+	#modify1{
+		font-size: 9pt;
+	}
+
+	#displaynone{
+		display: none;
+	}
+
+	#displayblock{
+		display: inline-block;
+	}
+
+	#modify2{
+		display: none;
+	}
+	
+	.jun_imgdiv2{
+		width: 100%;
+	}
 
 }
 
@@ -100,6 +178,7 @@
 
 @media only screen and (max-width: 440px) {
 
-   
+	
 }
+
 

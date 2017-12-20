@@ -1,6 +1,7 @@
 package com.kh.everycvs.favorite.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,11 +19,15 @@ public class FavoriteServiceImpl implements FavoriteService{
 	private FavoriteDao favoriteDao;
 	
 	@Override
-	public ArrayList<Favorite> favoriteList() {
+	public List favoriteList(int user_no) {
 		//관심상품목록 조회
-		ArrayList<Favorite> flist = new ArrayList<Favorite>();
-		System.out.println(flist);
-		return (ArrayList<Favorite>) favoriteDao.favoriteList();
+		return favoriteDao.favoriteList(user_no);
+	}
+	
+	@Override
+	public List favoriteSearch(Favorite favorite) {
+		//관심상품목록 검색
+		return favoriteDao.favoriteSearch(favorite);
 	}
 
 	@Override
@@ -32,9 +37,9 @@ public class FavoriteServiceImpl implements FavoriteService{
 	}
 
 	@Override
-	public void favoriteDelete() {
+	public void favoriteDelete(Favorite favorite) {
 		//관심상품 삭제
-		
+		favoriteDao.favoriteDelete(favorite);
 	}
 
 }
