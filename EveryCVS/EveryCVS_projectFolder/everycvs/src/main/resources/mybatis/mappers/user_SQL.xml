@@ -79,7 +79,7 @@
 
 	<insert id="insertCertify" parameterType="emailcertification">
 	<![CDATA[
-	insert into tb_email_certification value(#{email},#{session_key},#{certification_no})
+	insert into tb_email_certification values(#{email},#{session_key},#{certification_no})
 	]]>
 	</insert>
 	
@@ -88,12 +88,32 @@
 	update tb_email_certification set certification_no = #{certification_no} where email=#{email} and session_key=#{session_key}
 	]]>
 	</update>
-
+	
+	<delete id="deleteCertify" parameterType="string">
+	<![CDATA[
+	delete from tb_email_certification where email=#{email}
+	]]>
+	</delete>
+<!-- 인증번호 확인용 -->
 	<select id="certificationCheck" parameterType="emailcertification"
 		resultType="_int">
 	<![CDATA[
 	select count(*) from tb_email_certification where email=#{email} and session_key=#{session_key} and certification_no=#{certification_no}
 	]]>
 	</select>
-
+	
+	<insert id="insertUser" parameterType="user">
+	<![CDATA[
+	insert into tb_user(user_no,email,user_pwd,user_name,birthday,gender,phone,address,job) 
+	values(seq_user_no.nextval,#{email},#{user_pwd},#{user_name},#{birthday},#{gender},#{phone},#{address},#{job})
+	]]>
+	</insert>
+	
+	<insert id="insertAdmin" parameterType="user">
+	<![CDATA[
+	insert into tb_user(user_no,email,user_pwd,user_name,birthday,gender,phone,address,job,store_no,brand_no) 
+	values(seq_user_no.nextval,#{email},#{user_pwd},#{user_name},#{birthday},#{gender},#{phone},#{address},#{job},#{store_no},#{brand_no})
+	]]>
+	</insert>
+	
 </mapper>

@@ -31,8 +31,10 @@ public interface UserService {
 	boolean sendCertifyMail(String email, String certifyNo);
 
 	/** 회원가입 **/
-	User signUp(User user);
-
+	int insertUser(User user);
+	
+	int insertAdmin(User user);
+	
 	/** 이메일 중복 검사 **/
 	int checkEmail(String email);
 
@@ -69,6 +71,7 @@ public interface UserService {
 
 	/** 회원 목록 및 검색 **/
 	Map<String, Object> userList(String page, String keyword);
+
 
 	
 

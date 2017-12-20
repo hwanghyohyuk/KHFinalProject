@@ -49,9 +49,12 @@ public class UserDao {
 		return null;
 	}
 
-	public User signUp(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public int insertUser(User user) {
+		return sqlSession.insert("user.insertUser",user);
+	}
+	
+	public int insertAdmin(User user) {
+		return sqlSession.insert("user.insertAdmin",user);
 	}
 
 	public int checkEmail(String email) {
@@ -63,11 +66,15 @@ public class UserDao {
 	}
 
 	public int insertCertify(EmailCertification emailCertification) {
-		return sqlSession.selectOne("user.insertCertify", emailCertification);
+		return sqlSession.insert("user.insertCertify", emailCertification);
 	}
 	
 	public int updateCertify(EmailCertification emailCertification) {
-		return sqlSession.selectOne("user.updateCertify", emailCertification);
+		return sqlSession.update("user.updateCertify", emailCertification);
+	}
+	
+	public void deleteCertify(String email) {
+		sqlSession.delete("user.deleteCertify", email);
 	}
 	
 	public int certificationCheck(EmailCertification emailCertification) {

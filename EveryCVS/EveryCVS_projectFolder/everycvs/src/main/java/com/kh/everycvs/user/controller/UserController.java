@@ -231,8 +231,19 @@ public class UserController {
 
 	/** 회원가입 **/
 	@RequestMapping("/sign/signuppost.do")
-	public String signUp(@ModelAttribute User user) {
-		return null;
+	public ModelAndView signUp(ModelAndView mv,User user) {
+		mv.setViewName("user/sign/signin");
+		int insertUser = userService.insertUser(user);
+		mv.addObject("signup",insertUser);
+		return mv;
+	}
+	
+	@RequestMapping("/sign/signupadminpost.do")
+	public ModelAndView signUpAdmin(ModelAndView mv,User user) {
+		mv.setViewName("user/sign/signin");
+		int insertAdmin = userService.insertAdmin(user);
+		mv.addObject("signup",insertAdmin);
+		return mv;
 	}
 
 	/** 이메일 중복 검사 **/
@@ -241,14 +252,16 @@ public class UserController {
 	public int checkEmail(@RequestParam("email") String email,HttpSession session) {
 		//이메일 중복체크 - 같은 이메일의 수 반환
 		int result = userService.checkEmail(email);
-		/*if(result>0){
+		
+		if(result>0){
 			//이메일 중복O
 			return result; //결과 : 중복
 		}else{
 			//이메일 중복X
 			String certifyNo = userService.createCertifyNo();
+			EmailCertification ec = new EmailCertification(email, session.getId(), certifyNo);
 			if(certifyNo!=null){
-			int insertCertify = userService.insertCertify(new EmailCertification(email, session.getId(), certifyNo));
+			int insertCertify = userService.insertCertify(ec);
 			if(insertCertify>0){
 				boolean sendMail = userService.sendCertifyMail(email,certifyNo);
 				if(!sendMail){
@@ -261,13 +274,14 @@ public class UserController {
 				return -1;//인증번호 생성 오류
 			}
 			return result;//결과 : 오류없음
-		}*/
-		return result;//결과 : 오류없음
+		}
+		//return result;
 	}
 
 	/** 인증번호 확인 **/
 	@RequestMapping("/sign/checkcertification.do")
-	public int checkCertification(@RequestParam("email") String email,@RequestParam("certifyNo") String certifyNo,HttpSession session) {
+	@ResponseBody
+	public int checkCertification(@RequestParam("email") String email,@RequestParam("certifyno") String certifyNo,HttpSession session) {
 		int result=userService.certificationCheck(new EmailCertification(email, session.getId(), certifyNo));
 		return result;
 	}

@@ -47,6 +47,11 @@ public class UserServiceImpl implements UserService {
 	public User getUser(int user_no) {
 		return userDao.getUser(user_no);
 	}
+	
+	@Override
+	public int checkEmail(String email) {
+		return userDao.checkEmail(email);
+	}
 
 	@Override
 	public String createCertifyNo() {
@@ -54,9 +59,10 @@ public class UserServiceImpl implements UserService {
 		StringBuilder tempSb = new StringBuilder();
 		for (int i = 0; i < 8; i++) {
 			int randomIdx = (int) (Math.random() * BASE.length());
-			tempSb.append(BASE.indexOf(randomIdx));
+			tempSb.append(BASE.charAt(randomIdx));
 		}
-		return tempSb.toString();
+		String result = tempSb.toString();
+		return result;
 	}
 
 	@Override
@@ -68,14 +74,14 @@ public class UserServiceImpl implements UserService {
 			return userDao.insertCertify(emailCertification);
 		}	
 	}
-
+	
 	@Override
 	public boolean sendCertifyMail(String email, String certifyNo) {
 		try {
 			MailUtils sendMail = new MailUtils(mailSender);
 			sendMail.setSubject("[모두의 편의점] 이메일 인증번호");
-			sendMail.setText(new StringBuffer().append("<h1>모두의 편의점 이메일 인증</h1><br>")
-					.append("<p>인증번호는 <b>" + certifyNo + "</b> 입니다.<br>").append("<p>해당 페이지에 입력 바랍니다.</p>").toString());
+			sendMail.setText(new StringBuffer().append("<h1>[모두의 편의점] 이메일 인증번호</h1><br>")
+					.append("<p style='font-size:18px'>인증번호는 <b>" + certifyNo + "</b> 입니다.<br>").append("<p>해당 페이지에 입력 바랍니다.</p>").toString());
 			sendMail.setFrom("everycvs0105@gmail.com", "모두의편의점");
 			sendMail.setTo(email);
 			sendMail.send();
@@ -85,22 +91,25 @@ public class UserServiceImpl implements UserService {
 		}
 		return true;
 	}
-
-	@Override
-	public User signUp(User user) {
-		return userDao.signUp(user);
-	}
-
-	@Override
-	public int checkEmail(String email) {
-		return userDao.checkEmail(email);
-	}
-
 	@Override
 	public int certificationCheck(EmailCertification emailCertification) {
-		return userDao.certificationCheck(emailCertification);
+		int result = userDao.certificationCheck(emailCertification);
+		if(result>0){
+			userDao.deleteCertify(emailCertification.getEmail());
+		}
+		return result;
 	}
 
+	@Override
+	public int insertUser(User user) {
+		return userDao.insertUser(user);
+	}
+	
+	@Override
+	public int insertAdmin(User user) {
+		return userDao.insertAdmin(user);
+	}
+	
 	@Override
 	public boolean deleteUser(int user_no) {
 		return userDao.deleteUser(user_no);
@@ -150,5 +159,7 @@ public class UserServiceImpl implements UserService {
 	public int increMoney(Map<String, Object> map) {
 		return userDao.userIncreMoney(map);
 	}
+
+
 
 }

@@ -71,6 +71,11 @@ swal("SIGN IN FAIL", "check your email or password...", "error");
 swal("INFORMATION", "로그인이 필요한 서비스입니다.", "info");
 </script>
 </c:if>
+<c:if test="${signup eq 1 }">
+<script type="text/javascript">
+swal("회원가입을 축하합니다!", "이제 모두의 편의점을 마음껏 이용하실 수 있습니다.", "info");
+</script>
+</c:if>
 <!-- /JS -->
 <c:import url="../../include/user/common/end.jsp"></c:import>
 <!-- === END === -->
