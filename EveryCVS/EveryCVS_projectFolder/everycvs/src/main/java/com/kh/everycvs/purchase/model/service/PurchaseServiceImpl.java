@@ -88,8 +88,5 @@ public class PurchaseServiceImpl implements PurchaseService{
 		return purchaseDao.monthlyPurchaseCount();
 	}
 
-	
-
-	
 
 }

@@ -3,6 +3,7 @@ package com.kh.everycvs.purchase.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -53,7 +54,7 @@ public class PurchaseController {
 	
 	//사용자 구매 영역
 	//사용자 잔고 금액 감소 : 사용자가 상품을 잔고로 결제 시 차감, 포인트 자동적립
-	@RequestMapping("userDecreMoney.do")
+	@RequestMapping("/page/userDecreMoney.do")
 	public ModelAndView userDecreMoney(ModelAndView mv,
 									   HttpSession session,
 									   Purchase purchase,
@@ -76,6 +77,7 @@ public class PurchaseController {
 		
 		int cprice = (price * purchase_quantity);
 		int addPoint = (int) (cprice * 0.01);
+		int randomNum = new Random().nextInt(99999999 - 10000000 + 1) + 10000000;
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("price", cprice);
@@ -88,10 +90,12 @@ public class PurchaseController {
 		map.put("calculated_price", cprice);
 		map.put("using_point", using_point);
 		map.put("accumulate_point", addPoint);
+		map.put("randomNum", randomNum);
 		
 		int resultCash = purchaseService.userDecreMoney(map);
 		int resultPoint = purchaseService.userIncrePoint(map);
 		int insertPurchaseList = purchaseService.userInsertPurchaseList(map);
+		
 		
 		 User user = (User) session.getAttribute("user");
 		 user.setCash(c - cprice);
@@ -112,7 +116,7 @@ public class PurchaseController {
 	}
 	
 	//포인트 감소 : 포인트로 결제할 시 포인트 차감
-	@RequestMapping("userDecrePoint.do")
+	@RequestMapping("/page/userDecrePoint.do")
 	public ModelAndView userDecrePoint( @RequestParam ("price") int price,
 										@RequestParam ("point") String point,
 										@RequestParam ("user_no") String user_no,
