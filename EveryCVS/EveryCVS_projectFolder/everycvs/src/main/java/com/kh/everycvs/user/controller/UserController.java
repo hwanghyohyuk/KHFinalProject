@@ -285,13 +285,13 @@ public class UserController {
 	}
 
 	/* 이메일 찾기 페이지 이동 */
-	@RequestMapping("sign/findemail.do")
+	@RequestMapping("/user/findemail.do")
 	public String moveToFindEmail() {
 		return "user/find/findemail";
 	}
 
 	/** 이메일찾기 **/
-	@RequestMapping("user/findemailpost.do")
+	@RequestMapping("/user/findemailpost.do")
 	public ModelAndView findEmail(ModelAndView mv/*,@RequestParam("email") String email*/) {
 		mv.setViewName("user/find/findname");
 		/* 성공시 이름 확인 */
@@ -302,7 +302,7 @@ public class UserController {
 	}
 
 	/** 이름 확인 **/
-	@RequestMapping("user/findnamepost.do")
+	@RequestMapping("/user/findnamepost.do")
 	public ModelAndView findName(ModelAndView mv/*,@RequestParam("name") String name*/) {
 		mv.setViewName("user/find/findphone");
 		/* 성공시 전화번호 확인 */
@@ -313,7 +313,7 @@ public class UserController {
 	}
 
 	/** 전화번호 확인 **/
-	@RequestMapping("user/findphonepost.do")
+	@RequestMapping("/user/findphonepost.do")
 	public ModelAndView findPhone(ModelAndView mv/*,@RequestParam("phone") String phone*/) {
 		mv.setViewName("user/find/findsuccess");
 		/* 성공시 비밀번호 임시 비밀번호 이메일 보내기 */

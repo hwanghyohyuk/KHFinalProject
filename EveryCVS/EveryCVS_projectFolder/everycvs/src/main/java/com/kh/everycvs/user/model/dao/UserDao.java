@@ -59,12 +59,11 @@ public class UserDao {
 	}
 
 	public int insertCertify(EmailCertification emailCertification) {
-		return 0;
+		return sqlSession.selectOne("user.insertCertify", emailCertification);
 	}
 	
 	public int certificationCheck(EmailCertification emailCertification) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("user.certificationCheck",emailCertification);
 	}
 
 	public Map<String, Object> userList(String page, String keyword) {

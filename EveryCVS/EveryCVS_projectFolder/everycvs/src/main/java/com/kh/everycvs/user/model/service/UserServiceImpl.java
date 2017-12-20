@@ -43,8 +43,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String createCertifyNo() {
-		// TODO Auto-generated method stub
-		return null;
+		String BASE = "abcdefghijklmnopqrstuvwxyz0123456789";
+		StringBuilder tempSb = new StringBuilder();
+		for(int i=0;i<8;i++){
+			int randomIdx = (int)(Math.random()*BASE.length());
+			tempSb.append(BASE.indexOf(randomIdx));
+		}
+		return tempSb.toString();
 	}
 	@Override
 	public int insertCertify(EmailCertification emailCertification) {
@@ -53,7 +58,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean sendCertifyMail(String email,String certifyNo) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 

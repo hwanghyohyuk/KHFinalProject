@@ -6,8 +6,8 @@
 	<!-- resultMap 은 MyBatis의 핵심 기능! - 각 컬럼을 셋해주는 역할을 함 - 필드명과 데이터베이스의 컬럼명을 
 		정확하게 기재할 것 -->
 	<resultMap id="resultUser" type="user">
-		<id property="email" column="EMAIL"  />
-		<result property="user_no" column="USER_NO"/>
+		<id property="email" column="EMAIL" />
+		<result property="user_no" column="USER_NO" />
 		<result property="user_pwd" column="USER_PWD" />
 		<result property="user_name" column="USER_NAME" />
 		<result property="birthday" column="BIRTHDAY" />
@@ -28,10 +28,16 @@
 		<result property="session_key" column="SESSION_KEY" />
 		<result property="session_limit" column="SESSION_LIMIT" />
 	</resultMap>
-	
+
+	<resultMap id="resultCertify" type="emailcertification">
+		<id property="email" column="EMAIL" />
+		<result property="session_key" column="SESSION_KEY" />
+		<result property="certification_no" column="CERTIFICATION_NO" />
+	</resultMap>
+
 	<select id="signIn" parameterType="user" resultMap="resultUser">
 	<![CDATA[select * from user_view where email=#{email} and user_pwd=#{user_pwd}]]>
-	</select>	
+	</select>
 
 	<update id="keepSignIn">
 		 <![CDATA[update tb_user set session_key = #{sessionId}, session_limit = #{next} where email = #{email}]]>
@@ -39,30 +45,43 @@
 
 	<select id="checkUserWithSessionKey" resultType="user">
         <![CDATA[select * from user_view where session_key = #{value} and session_limit > sysdate]]>
-    </select>
-    
-    <select id="mypage" resultMap="resultUser" parameterType="user">
+	</select>
+
+	<select id="mypage" resultMap="resultUser" parameterType="user">
         <![CDATA[
         select * from tb_user where user_no = #{user_no}
         ]]>
-    </select>
-    
-    <!-- 잔고충전 -->
-    <update id="userIncreMoney" parameterType="map">
+	</select>
+
+	<!-- 잔고충전 -->
+	<update id="userIncreMoney" parameterType="map">
     	<![CDATA[
     		update tb_user set cash = #{increMoney} + cash
 			where user_no = #{user_no}
     	]]>
-    
-       <selectKey keyProperty="cash" resultType="int" order="AFTER">
-			select cash FROM tb_user WHERE user_no = #{user_no}
-	   </selectKey>
-	   
-    </update>    
-    
-    <select id="checkEmail" parameterType="string" resultType="_int">
+
+		<selectKey keyProperty="cash" resultType="int" order="AFTER">
+			select
+			cash FROM tb_user WHERE user_no = #{user_no}
+		</selectKey>
+
+	</update>
+
+	<select id="checkEmail" parameterType="string" resultType="_int">
 	<![CDATA[select count(*) from user_view where email=#{email}]]>
-	</select>	
-    
-    
+	</select>
+
+	<insert id="insertCertify" parameterType="emailcertification">
+	<![CDATA[
+	insert into tb_email_certification value(#{email},#{session_key},#{certification_no})
+	]]>
+	</insert>
+
+	<select id="certificationCheck" parameterType="emailcertification"
+		resultType="_int">
+	<![CDATA[
+	select count(*) from tb_email_certification where email=#{email} and session_key=#{session_key} and certification_no=#{certification_no}
+	]]>
+	</select>
+
 </mapper>
