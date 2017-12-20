@@ -57,9 +57,17 @@ public class UserDao {
 	public int checkEmail(String email) {
 		return sqlSession.selectOne("user.checkEmail", email);
 	}
+	
+	public int checkCertify(EmailCertification emailCertification) {
+		return sqlSession.selectOne("user.checkCertify", emailCertification);
+	}
 
 	public int insertCertify(EmailCertification emailCertification) {
 		return sqlSession.selectOne("user.insertCertify", emailCertification);
+	}
+	
+	public int updateCertify(EmailCertification emailCertification) {
+		return sqlSession.selectOne("user.updateCertify", emailCertification);
 	}
 	
 	public int certificationCheck(EmailCertification emailCertification) {

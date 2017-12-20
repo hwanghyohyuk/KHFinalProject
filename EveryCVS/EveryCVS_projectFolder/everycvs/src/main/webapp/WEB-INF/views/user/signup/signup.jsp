@@ -32,12 +32,11 @@
 						<!-- 페이지 왼쪽부분 -->
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 							<div class=" input-group-lg  margin-bottom-40">
-								<label>Email Address <span class="color-red">*</span></label> <span
-									class="input-group input-group-lg "> <input
-									class="form-control" placeholder="Email" id="signupemail"
-									name="email" type="email"> <span
-									class="input-group-btn">
-										<button type="button" class="btn btn-primary" onclick="certify();">Certify</button>
+								<label>Email Address <span class="color-red">*</span></label> 
+								<span class="input-group input-group-lg "> 
+								<input class="form-control" placeholder="Email" id="signupemail" name="email" type="email"> 
+								<span class="input-group-btn">
+								<button type="button" class="btn btn-primary" onclick="certify();">Certify</button>
 								</span>
 								</span>
 							</div>
@@ -115,9 +114,6 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
 				<h4 class="modal-title">Email Certify</h4>
 			</div>
 			<div class="modal-body">
@@ -158,19 +154,37 @@
 <!-- JS -->
 <script type="text/javascript">
 function certify(){
+	var isGood = "";
 	var email = $("#signupemail").val();
 	if(email != ''){
-	$.ajax({
-		url:'/everycvs/sign/checkemail.do',
-		data:{'email':email},
-		type:'post',
-		success:function(data){
-			
-		},
-		error : function(request, status, error) {
-			swal("오류",error,"error");
-		}	
-	});
+		var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		if (email.match(regExp) != null) {
+			isGood = true;
+		}else{
+			isGood = false;
+		}
+		if (isGood) {
+			$.ajax({
+				url:'/everycvs/sign/checkemail.do',
+				data:{'email':email},
+				type:'post',
+				success:function(data){
+					if(data===(-3)){//이메일 전송 오류
+						swal("오류","이메일 전송 오류","error");
+					}else if(data===(-2)){
+						swal("오류","서버 오류","error");
+					}else if(data===(-1)){
+						swal("오류","인증번호 생성 오류","error");
+					}else{
+						$('#certifyform').modal({backdrop:'static', keyboard: false}) ;
+					}					
+				},
+				error : function(request, status, error) {
+					swal("오류",error,"error");
+				}});	
+		}else {
+			swal("입력 오류","이메일을 확인해주세요","error");
+		}
 	}else{
 		swal("입력 오류","이메일을 입력해주세요","error");
 	}

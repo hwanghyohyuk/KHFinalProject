@@ -70,12 +70,24 @@
 	<select id="checkEmail" parameterType="string" resultType="_int">
 	<![CDATA[select count(*) from user_view where email=#{email}]]>
 	</select>
+	
+	<select id="checkCertify" parameterType="emailcertification" resultType="_int">
+	<![CDATA[
+	select count(*) from tb_email_certification where email=#{email} and session_key=#{session_key}
+	]]>
+	</select>
 
 	<insert id="insertCertify" parameterType="emailcertification">
 	<![CDATA[
 	insert into tb_email_certification value(#{email},#{session_key},#{certification_no})
 	]]>
 	</insert>
+	
+	<update id="updateCertify" parameterType="emailcertification">
+	<![CDATA[
+	update tb_email_certification set certification_no = #{certification_no} where email=#{email} and session_key=#{session_key}
+	]]>
+	</update>
 
 	<select id="certificationCheck" parameterType="emailcertification"
 		resultType="_int">

@@ -38,6 +38,7 @@ public class UserController {
 	@Autowired
 	private FavoriteService favoriteService;
 	
+	
 
 	/* 로그인 페이지 이동 */
 	@RequestMapping(value = "/sign/signin.do", method = RequestMethod.GET)
@@ -236,10 +237,11 @@ public class UserController {
 
 	/** 이메일 중복 검사 **/
 	@RequestMapping("/sign/checkemail.do")
+	@ResponseBody
 	public int checkEmail(@RequestParam("email") String email,HttpSession session) {
 		//이메일 중복체크 - 같은 이메일의 수 반환
 		int result = userService.checkEmail(email);
-		if(result>0){
+		/*if(result>0){
 			//이메일 중복O
 			return result; //결과 : 중복
 		}else{
@@ -259,7 +261,8 @@ public class UserController {
 				return -1;//인증번호 생성 오류
 			}
 			return result;//결과 : 오류없음
-		}
+		}*/
+		return result;//결과 : 오류없음
 	}
 
 	/** 인증번호 확인 **/
