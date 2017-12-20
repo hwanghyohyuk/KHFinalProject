@@ -1,3 +1,6 @@
+/*비밀번호 재설정*/
+DELETE FROM TB_PASSLINK;
+
 /*이메일인증*/
 DELETE FROM TB_EMAIL_CERTIFICATION;
 

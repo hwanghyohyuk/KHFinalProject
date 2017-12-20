@@ -3,7 +3,6 @@ package com.kh.everycvs.user.controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -129,10 +127,8 @@ public class UserController {
 		String month="0";
 		User user = (User) session.getAttribute("user");
 		ArrayList<Purchase> list = purchaseService.purchaseList(user.getUser_no(),month);
-		ArrayList<Favorite> flist = (ArrayList<Favorite>) favoriteService.favoriteList();
 		
 		mv.addObject("list", list);		
-		mv.addObject("flist", flist); 
 		System.out.println(list);
 				
 		mv.setViewName("user/mypage/main");
