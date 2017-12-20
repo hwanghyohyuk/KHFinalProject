@@ -59,9 +59,11 @@
 								<tr>
 									<td>${spm.store_product_no}</td>
 									<td>${spm.product_kind_name}</td>
-									<td><a href="#" data-toggle="modal"
-										data-target="#spmmodal${spm.store_product_no}"> <strong>${spm.product_name}</strong>
-									</a></td>
+									<td>
+										<a href="#" data-toggle="modal" data-target="#spmmodal${spm.store_product_no}"> 
+											<strong>${spm.product_name}</strong>
+										</a>
+									</td>
 									<td>${spm.manufacturer}</td>
 									<td><fmt:formatNumber value="${spm.price}" pattern="#,###" />원</td>
 									<td>${spm.discount_name}</td>
@@ -95,9 +97,10 @@
 																	alt="No_Image" align="left" style="margin-left: 5px;">
 															</div>
 															<div class="col-sm-6">
-																<form id="updateform" action="/everycvs/spmupdate.do" method="post" enctype="multipart/form-data">
-																<input type="hidden" name="spnum" value="${spm.store_product_no}"> 
-																<input type="hidden" name="page" value="${currentPage}">
+																<form id="updateform" action="/everycvs/spmupdate.do"
+																	method="post" enctype="multipart/form-data">
+																	<input type="hidden" name="spnum" value="${spm.store_product_no}">
+																	<input type="hidden" name="page" value="${currentPage}">
 																	<table class="table table-condensed">
 																		<tr>
 																			<td><strong>상품명</strong></td>
@@ -105,8 +108,7 @@
 																		</tr>
 																		<tr>
 																			<td><strong>가격</strong></td>
-																			<td><fmt:formatNumber value="${spm.price}"
-																					pattern="#,###" />원</td>
+																			<td><fmt:formatNumber value="${spm.price}" pattern="#,###" />원</td>
 																		</tr>
 																		<tr>
 																			<td><strong>유통기한</strong></td>
@@ -124,7 +126,7 @@
 																		<tr>
 																			<td><strong>수량</strong></td>
 																			<td><input class="form-control" type="number"
-																				min="1" max="100" step="1" name="quantity"
+																				min="0" max="100" step="1" name="quantity"
 																				value="${spm.quantity}"></td>
 																		</tr>
 																	</table>
@@ -206,7 +208,6 @@
 		</div>
 	</div>
 </div>
-
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->
 <c:import url="../../include/user/common/footer.jsp"></c:import>

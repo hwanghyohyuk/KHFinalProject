@@ -68,4 +68,5 @@ public class StoreProductServiceImpl implements StoreProductService {
 	public int insertApmanager(List<StoreProduct> spList) {
 		return sproductDao.insertProduct(spList);
 	}
+	
 }

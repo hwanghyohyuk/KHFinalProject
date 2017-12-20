@@ -44,36 +44,39 @@
 				<div class="box">
 					<div class="box-body no-padding">
 						<form id="productinsert" action="apminsert.do" method="post">
-						<table class="table table-condensed">
-							<tr>
-								<th>상품번호</th>
-								<th>종류</th>
-								<th>상품명</th>
-								<th>제조사</th>
-								<th>가격</th>
-								<th>유통기한</th>
-								<th>제조일</th>
-								<th>수량</th>
-							</tr>
-							<c:forEach var="apm" items="${requestScope.list}" varStatus="status">
+							<table class="table table-condensed">
 								<tr>
-									<td><input type="hidden" id="list_${status.index}" value="${apm.product_no}">${apm.product_no}</td>
-									<td>${apm.product_kind_name}</td>
-									<td>${apm.product_name}</td>
-									<td>${apm.manufacturer}</td>
-									<td><fmt:formatNumber value="${apm.price}" pattern="#,###" />원</td>
-									<td align="center">${apm.expiration_date}일</td>
-									<td><input class="form-control" id ="listmdate_${status.index}" type="date" name="mdate" value="${today }"></td>
-									<td><input class="form-control" id ="listquantity_${status.index}" type="number" min="1"	max="100" step="1" name="quantity" value="0" ></td>
+									<th>상품번호</th>
+									<th>종류</th>
+									<th>상품명</th>
+									<th>제조사</th>
+									<th>가격</th>
+									<th>유통기한</th>
+									<th>제조일</th>
+									<th>수량</th>
 								</tr>
-							</c:forEach>
-						</table>
-						<button type="button" class="btn btn-primary btn-lg pull-right" onclick="insertSubmit(${sessionScope.store.store_no},${currentPage},${listCount});">추가</button>
+								<c:forEach var="apm" items="${requestScope.list}"
+									varStatus="status">
+									<tr>
+										<td><input type="hidden" id="list_${status.index}" value="${apm.product_no}">${apm.product_no}</td>
+										<td>${apm.product_kind_name}</td>
+										<td><a href="#"><strong>${apm.product_name}</strong></a></td>
+										<td>${apm.manufacturer}</td>
+										<td><fmt:formatNumber value="${apm.price}" pattern="#,###" />원</td>
+										<td align="center">${apm.expiration_date}일</td>
+										<td><input class="form-control" id="listmdate_${status.index}"
+											type="date" name="mdate" value="${today}"></td>
+										<td><input class="form-control" id="listquantity_${status.index}"
+											type="number" min="0" max="100" step="1" name="quantity" value="0"></td>
+									</tr>
+								</c:forEach>
+							</table>
+							<button type="button" class="btn btn-primary btn-sm pull-right" style="margin-right: 10px;"
+								onclick="insertSubmit(${sessionScope.store.store_no},${currentPage},${listCount});">추가</button>
 						</form>
 					</div>
 				</div>
 			</div>
-			
 			<br>
 			<div class="text-center">
 				<ul class="pagination">

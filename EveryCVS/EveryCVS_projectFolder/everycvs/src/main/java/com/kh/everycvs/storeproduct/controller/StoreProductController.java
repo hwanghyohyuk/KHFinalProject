@@ -8,13 +8,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.collections.set.SynchronizedSortedSet;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.object.StoredProcedure;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,10 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.storeproduct.model.service.StoreProductService;
-import com.kh.everycvs.common.model.vo.Product;
 import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.StoreProduct;
-import com.kh.everycvs.product.model.dao.ProductDao;
 import com.kh.everycvs.product.model.service.ProductService;
 
 @Controller
@@ -38,7 +34,8 @@ public class StoreProductController {
 	@Autowired
 	private ProductService productService;
 	
-	//storeListView 전체보기, 검색하기
+	/*사용자*/
+	/**storeListView 전체보기, 검색하기**/
 	@RequestMapping(value = "/page/splist.do")
 	public ModelAndView selectList(String page, @RequestParam(value="keyword", required=false, defaultValue="") String keyword, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
@@ -78,7 +75,8 @@ public class StoreProductController {
 		return mv;
 	}
 	
-	//storeRankView 전체보기
+	/*사용자*/
+	/**storeRankView 전체보기**/
 	@RequestMapping(value = "/page/sprank.do")
 	public ModelAndView rankSproduct(HttpSession session, ModelAndView mv) {
 		Store store = (Store)session.getAttribute("store");
@@ -98,7 +96,8 @@ public class StoreProductController {
 		return mv;
 	}
 	
-	//storeRankView 인기상품
+	/*사용자*/
+	/**storeRankView 인기상품**/
 	@RequestMapping(value="/sptop3.do",method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView top3Sproduct(HttpSession session, ModelAndView mv){
@@ -112,7 +111,8 @@ public class StoreProductController {
 		return mv;
 	}
 	
-	//storeRankView 신상품
+	/*사용자*/
+	/**storeRankView 신상품**/
 	@RequestMapping(value="/spnew3.do",method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView new3Sproduct(HttpSession session, ModelAndView mv){
@@ -126,7 +126,8 @@ public class StoreProductController {
 		return mv;
 	}
 	
-	//storeRankView 할인상품
+	/*사용자*/
+	/**storeRankView 할인상품**/
 	@RequestMapping(value = "/spdc.do")
 	public ModelAndView dcSproduct(HttpSession session, ModelAndView mv) {
 
@@ -139,7 +140,8 @@ public class StoreProductController {
 		return mv;
 	}
 	
-	//storeRankView 유통기한 임박상품
+	/*사용자*/
+	/**storeRankView 유통기한 임박상품**/
 	@RequestMapping(value = "/spexp.do")
 	public ModelAndView expSproduct(HttpSession session, ModelAndView mv) {
 
@@ -152,7 +154,8 @@ public class StoreProductController {
 		return mv;
 	}
 	
-	//storeProduct 전체보기, 검색하기
+	/*지점관리자*/
+	/**storeProduct 전체보기, 검색하기**/
 	@RequestMapping(value = "/spmlist.do")
 	public ModelAndView listSpmanager(String page, @RequestParam(value="keyword", required=false, defaultValue="") String keyword, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
@@ -192,7 +195,8 @@ public class StoreProductController {
 		return mv;
 	}
 	
-	//storeProduct 삭제하기
+	/*지점관리자*/
+	/**storeProduct 삭제하기**/
 	@RequestMapping(value="/spmdelete.do")
 	public ModelAndView deleteSpmanager(@RequestParam("spnum") int spnum,@RequestParam("toggle") String toggle){
 		ModelAndView mv = new ModelAndView();
@@ -208,7 +212,8 @@ public class StoreProductController {
 		return mv;
 	}
 	
-	//storeProduct 수정하기
+	/*지점관리자*/
+	/**storeProduct 수정하기**/
 	@RequestMapping(value="/spmupdate.do")
 	public ModelAndView updateSpmanager(ModelAndView mv, 
 			 @RequestParam("page") int currentPage,
@@ -230,7 +235,8 @@ public class StoreProductController {
 		return mv;
 	}
 	
-	//allProduct 전체보기, 검색하기
+	/*지점관리자*/
+	/**allProduct 전체보기, 검색하기**/
 	@RequestMapping(value = "/apmlist.do")
 	public ModelAndView listApmanager(String page, @RequestParam(value="keyword", required=false, defaultValue="") String keyword, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
@@ -269,32 +275,9 @@ public class StoreProductController {
 		
 		return mv;
 	}
-	/*
-	//allProduct 상품추가
-	@RequestMapping(value="/apminsert.do")
-	public ModelAndView insertApmanager(ModelAndView mv,
-			 @RequestParam("page") int currentPage,
-			 @RequestParam("sno") String sno,
-			 @RequestParam("pnum") int pnum,
-			 @RequestParam("mdate") Date manufacturedate,
-			 @RequestParam("quantity") int quantity) {
-
-		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("sno", sno);
-		map.put("pnum", pnum);
-		map.put("manufacturedate", manufacturedate);
-		map.put("quantity", quantity);
-		
-		if(productService.insertApmanager(map) > 0){
-			mv.setViewName("redirect:/spmlist.do?page="+currentPage);
-		}else{
-			mv.addObject("message", "등록 실패!");
-		}
-		
-		return mv;
-	}
-	*/
-	//allProduct 상품추가
+	
+	/*지점관리자*/
+	/**allProduct 상품추가**/
 	@RequestMapping(value="/apminsert.do")
 	@ResponseBody
 	public int insertApmanager(@RequestParam("sno") String sno, @RequestParam("page") int currentPage,@RequestParam("jlists")String jlists ) {
@@ -312,7 +295,6 @@ public class StoreProductController {
                  spList.add(sp);
 			}
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         int result = sproductService.insertApmanager(spList); 
