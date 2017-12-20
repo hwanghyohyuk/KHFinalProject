@@ -28,10 +28,13 @@ public interface PurchaseService {
 	public String userIncreMoney(HttpServletRequest request);
 	
 	//사용자 잔고 금액 감소 : 사용자가 상품을 잔고로 결제 시 차감, 포인트 자동적립
-	public String userDecreMoney(HttpServletRequest request);
+	public int userDecreMoney(Map<String, Object> map);
 	
 	//포인트 감소 : 포인트로 결제할 시 포인트 차감
-	public String userDecrePoint(HttpServletRequest request);
+	public int userDecrePoint(Map<String, Object> map);
+	
+	//포인트 증가 : 잔고로 구매시 포인트 증가
+	public int userIncrePoint(Map<String, Object> map);
 	
 	//거래내역 조회 : 3개월, 1개월, 1주일 단위로 조회(해당 리스트 목록조회)
 	public ArrayList<Purchase> purchaseList(int user_no, String month);
@@ -39,4 +42,8 @@ public interface PurchaseService {
 	/*사이트관리자*/
 	/**월간 구매 이용 횟수**/
 	int monthlyPurchaseCount();
+
+	public int userInsertPurchaseList(Map<String, Object> map);
+
+	
 }

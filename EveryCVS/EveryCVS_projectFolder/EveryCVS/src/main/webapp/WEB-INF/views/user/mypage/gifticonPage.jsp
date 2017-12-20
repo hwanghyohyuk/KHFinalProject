@@ -9,6 +9,7 @@
 <!-- === END HEAD ===  -->
 <!-- === BEGIN HEADER ===  -->
 <c:import url="../../include/user/common/header.jsp"></c:import>
+
 <!-- === END HEADER === -->
 		
 		<!-- === 본문내용 === -->
@@ -26,7 +27,7 @@
 							<!-- 관심목록 -->
 							<li class="list-group-item list-toggle">
 							<a href="/everycvs/favoritePage.do">관심목록</a>
-								</li>
+							</li>
 								
 							<!-- 회원탈퇴 -->
 							<li class="list-group-item list-toggle"><a
@@ -41,33 +42,61 @@
 						<div class="row">
 					
 						<!-- 컬럼 시작 -->
+						
                         <div class="col-md-12 no-padding">
-                            <!-- Portfolio Item -->
+                            <!-- gifticon Item -->
+                            <c:forEach items="${glist }" var="glist">
                             <div class="col-md-4 portfolio-item margin-bottom-40 video">
                                 <div class="sy1">
-                                    <a href="#">
+                                    <a>
                                         <figure>
-                                            <img src="./resources/user/img/gifticon/10.jpg" 
-                                            alt="이미지가 존재하지 않습니다." id="image">
+                                            <img src="/everycvs/resources/upload/${glist.stored_file_name}" 
+                                            alt="이미지가 존재하지 않습니다." id="image"
+                                            data-toggle="modal"
+                                            data-target="#gifticon${glist.product_no }">
+                                            
                                             <figcaption>
-                                                <h3 class="margin-top-20">Velit esse molestie</h3>
-                                                <span>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</span>
+                                                <h3 class="margin-top-20"></h3>
+                                                <span> 상품명 : ${glist.product_name }<br>
+                                                	      지점명 : ${glist.store_name }<br>
+                                                	      유효기간 : ${glist.extinction_date}
+                                                </span>
                                             </figcaption>
+                                           
                                         </figure>
                                     </a>
-                                </div>
+                                </div>	
                             </div>
-
+							
 
 						<!-- Modal -->
-						<div class="modal fade" id="gifticon" role="dialog">
-							<div class="modal-dialog">
-
+						<div class="modal fade" id="gifticon${glist.product_no }" role="dialog" align="center">
+							<div class="modal-dialog modal-80size">
+								
+								
 								<!-- Modal content-->
-								<div class="modal-content">
+								<div class="modal-content modal-80size">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<div class="modal-body">
-										<img alt="" src="./resources/user/img/gifticon/gifticon_1.jpeg" style="height:500px;">
+									<div class="modal-body" align="center">
+									
+								<!-- 기프티콘 이미지 영역 -->
+					
+											<img alt="이미지를 준비중입니다." 
+												 src="/everycvs/resources/upload/${glist.stored_file_name}" 
+												 style="height:250px;">
+												<br><br>
+												
+											<b>${glist.product_name }</b>
+										
+										<div id="bcTarget" align="center"></div>	
+										
+										<br>		
+										<div align="right">						
+											<b>유효기간 : ${glist.extinction_date }</b><br>
+											<b>교환처 : ${glist.store_name }</b> <br>
+											
+										</div>
+									
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default"
@@ -77,96 +106,32 @@
 
 							</div>
 						</div>
+						</c:forEach>
 
-
-
-
-						<!-- Portfolio Item -->
-                            <div class="col-md-4 portfolio-item margin-bottom-40 video">
-                                <div class="sy1">
-                                    <a href="#">
-                                        <figure>
-                                            <img src="./resources/user/img/gifticon/11.jpg" alt="image1">
-                                            <figcaption>
-                                                <h3 class="margin-top-20">Velit esse molestie</h3>
-                                                <span>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</span>
-                                            </figcaption>
-                                        </figure>
-                                    </a>
-                                </div>
-                            </div>
-                            
-                            
-                           
-                            <!-- Portfolio Item -->
-                            <div class="col-md-4 portfolio-item margin-bottom-40 video">
-                                <div class="sy1">
-                                    <a href="#">
-                                        <figure>
-                                            <img src="./resources/user/img/gifticon/12.jpg" alt="image1">
-                                            <figcaption>
-                                                <span>참치마요</span>
-                                            </figcaption>
-                                        </figure>
-                                    </a>
-                                </div>
-                            </div>
-                            
-                            
-                            <!-- Portfolio Item -->
-                            <div class="col-md-4 portfolio-item margin-bottom-40 video">
-                                <div class="sy1">
-                                    <a href="#">
-                                        <figure>
-                                            <img src="./resources/user/img/gifticon/12.jpg" alt="image1">
-                                            <figcaption>
-                                                <span>참치마요</span>
-                                            </figcaption>
-                                        </figure>
-                                    </a>
-                                </div>
-                            </div>
-                            
-                            
-                            <!-- Portfolio Item -->
-                            <div class="col-md-4 portfolio-item margin-bottom-40 video">
-                                <div class="sy1">
-                                    <a href="#">
-                                        <figure>
-                                            <img src="./resources/user/img/gifticon/12.jpg" alt="image1">
-                                            <figcaption>
-                                                <span>참치마요</span>
-                                            </figcaption>
-                                        </figure>
-                                    </a>
-                                </div>
-                            </div>
-                            
-                            </div>
-                            </div>
-		
 						<!-- 컬럼 끝 -->
 								</div>
 							</div>
 						</div>
 					
 				 </div>
+				 
+				</div>
+				</div>
 			
-	
-	
 	
 	<!-- === BEGIN FOOTER === -->
 	<c:import url="../../include/user/common/footer.jsp"></c:import>
 	<!-- === END FOOTER === -->
 
 	<script>
-		$(document).ready(function() {
-			$("#image").click(function() {
-				$("#gifticon").modal();
-			});
-		});
-	</script>
 
+ 		$(document).ready(function() {
+ 			$("#bcTarget").barcode("1234 5678 1290", "code128");
+ 			
+		});
+
+ 		
+	</script>
 
 	<!-- JS -->
 	<c:import url="../../include/user/common/end.jsp"></c:import>

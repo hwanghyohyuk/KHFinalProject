@@ -108,3 +108,21 @@ font-family: 'Noto Sans KR', sans-serif; !important
    border-top-right-radius: 5px;
    border-bottom-right-radius: 5px;
 }
+
+/* 부트스트랩 모달사이즈 조정 */
+.modal-dialog.modal-80size {
+  width: 20.5%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  left: 30%;
+
+}
+
+.modal.modal-center {
+ 
+}
+.modal-content.modal-80size {
+  height: auto;
+  min-height: 60%;
+}
