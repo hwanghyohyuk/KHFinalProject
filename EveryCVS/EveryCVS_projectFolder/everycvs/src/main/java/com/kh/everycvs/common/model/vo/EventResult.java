@@ -30,23 +30,6 @@ public class EventResult implements Serializable {
 	public EventResult() {
 		super();
 	}
-	
-
-	public EventResult(int event_result_no, int event_no, String title, int writer, String contents, Date write_date,
-			int readcount, String original_file_name, String stored_file_name, String del_check) {
-		super();
-		this.event_result_no = event_result_no;
-		this.event_no = event_no;
-		this.title = title;
-		this.writer = writer;
-		this.contents = contents;
-		this.write_date = write_date;
-		this.readcount = readcount;
-		this.original_file_name = original_file_name;
-		this.stored_file_name = stored_file_name;
-		this.del_check = del_check;
-	}
-
 
 	public EventResult(int event_result_no, int event_no, String title, int writer, String user_name, String contents,
 			Date write_date, int readcount, String original_file_name, String stored_file_name, int brand_no,

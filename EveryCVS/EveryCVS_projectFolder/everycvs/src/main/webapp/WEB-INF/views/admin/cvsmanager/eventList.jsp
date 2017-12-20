@@ -17,75 +17,6 @@
 <!-- === BEGIN CONTENT === -->
 
 <!-- Right side column. Contains the navbar and content of the page -->
-<<<<<<< HEAD
-=======
-<script type="text/javascript">
-function pageload(page)
-{
-   $.ajax({
-      url:"pageload.do",
-      type: "post",
-      dataType: "json",
-      data: {"page":page},
-      success: function(data)
-      {
-         console.log(data.currentPage);
-         console.log(data.maxPage);
-         console.log(data.list);
-         var jsonStr = JSON.stringify(data);
-              
-            var json = JSON.parse(jsonStr);
-            
-            var values = "";
-            
-            for(var i in json.list)
-            {
-               values += "<tr><td>" + json.list[i].event_no + "</td>"+ "<td><a href='javascript:ajaxDetail("+json.list[i].event_no+")'>" +
-                     json.list[i].title + "</a></td><td>" + json.list[i].start_date + '~' +json.list[i].end_date + "</td><td>" + 
-                     json.list[i].readcount + "</td><td>"+'<i class="fa fa-trash-o jun21" onclick="del_event('+json.list[i].event_no+');"></i>'+"</td></tr>";     
-            }
-            
-            $("#eventlist").html(values);
-         
-            var valuesPaging="";
-            
-            if(data.currentPage <= 1){
-               valuesPaging+="<li class='disabled'>" + 
-                 "<a href='#' aria-label='Previous'>" +
-                   "<span aria-hidden='true'>&laquo;</span></a></li>";
-            } else {
-               valuesPaging += "<li><a href='javascript:pageload(" + (data.currentPage - 1) + ")'  aria-label='Previous'>"
-                + "<span aria-hidden='true'>&laquo;</span></a></li>";
-            }
-            
-           for(var i = data.startPage; i<=data.endPage; i++)
-           {
-              if(data.currentPage == i)
-              {
-                valuesPaging+="<li class='disabled'>"+"<a href='#'>"+ i + "</a></li>";
-              } else {
-                  valuesPaging+="<li><a href='javascript:pageload(" + i + ")'>"+ i + "</a></li>";
-              }
-
-           }
-           
-            if(data.currentPage >= data.maxPage)
-            {
-               valuesPaging+= "<li class='disabled'>" + 
-                  "<a href='#' aria-label='Next'>"+
-                      "<span aria-hidden='true'>&raquo;</span></a></li>";
-            } else {
-               valuesPaging += "<li><a href='javascript:pageload(" + (data.currentPage + 1)+ "') aria-label='Next'>" +
-                "<span aria-hidden='true'>&raquo;</span></a></li>";
-            }
-            
-            $("#eventpaging").html(valuesPaging);
-      }
-      
-   });
-}
-</script>
->>>>>>> master
 <div class="content-wrapper">
 	<!-- Main content -->
 	<div id="content">
@@ -187,11 +118,7 @@ function pageload(page)
 			'</div>'+
 			'<div class="modal-body">'+
 				'<div class="jun_imgdiv">'+
-<<<<<<< HEAD
 					'<img src="assets/img/exam_img.jpg" alt="이벤트 이미지가 없습니다." class="jun_img">'+
-=======
-					'<img src="/everycvs/resources/upload/' +data.stored_file_name+'" alt="이벤트 이미지가 없습니다." class="jun_img">'+
->>>>>>> master
 				'</div>'+
 				'<div class="jun_contentdiv">'+
 					'<div class="jun_textdiv">'+data.event_no+'</div>'+
@@ -200,7 +127,7 @@ function pageload(page)
 					'<span style="padding-right: 22px;">종료일자</span>'+data.end_date+'<br> '+
 					'<span style="padding-right: 20px;">참여제한 </span><b>'+data.join_limit+'</b>번<br>'+
 					'<span style="padding-right: 36px;">조회수</span>'+data.readcount+'<br> '+
-					'<span style="padding-right: 22px;">첨부파일</span>'+data.original_file_name+'<br>'+
+					'<span style="padding-right: 22px;">첨부파일</span>'+data.stored_file_name+'<br>'+
 				'</div>'+
 				'<div class="jun_contentdiv2">'+data.contents+'</div>'+
 			'</div>'+

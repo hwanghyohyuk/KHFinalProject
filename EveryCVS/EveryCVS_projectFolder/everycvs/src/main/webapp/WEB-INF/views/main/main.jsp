@@ -329,15 +329,10 @@
 						<span class="fa-search">CVS Search</span>
 					</h2>
 				</div>
-<<<<<<< HEAD
 				<div class="col-md-4">
-=======
-				<div class="col-md-6 col-sm-6 col-xs-12">
->>>>>>> master
 					<div class="btn-group" role="group">
 						<button id="cvsAll" type="button" class="btn btn-default"
 							onclick="setStoreList(0);">전체</button>
-<<<<<<< HEAD
 						<button id="cvsGS" type="button" class="btn btn-info"
 							onclick="setStoreList(1);">GS25</button>
 						<button id="cvsCU" type="button" class="btn btn-success"
@@ -347,17 +342,6 @@
 					</div>
 				</div>
 				<div class="col-md-4 col-md-offset-4 ">
-=======
-						<button id="cvsGS" type="button" class="btn btn-blue btn-lg"
-							onclick="setStoreList(1);">GS25</button>
-						<button id="cvsCU" type="button" class="btn btn-green btn-lg"
-							onclick="setStoreList(2);">CU</button>
-						<button id="cvs7E" type="button" class="btn btn-red btn-lg"
-							onclick="setStoreList(3);">7ELEVEN</button>
-					</div>
-				</div>
-				<div class="col-md-6  col-sm-6 col-xs-12">
->>>>>>> master
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1">주소검색</span> <input
 							id="address" type="text" class="form-control"

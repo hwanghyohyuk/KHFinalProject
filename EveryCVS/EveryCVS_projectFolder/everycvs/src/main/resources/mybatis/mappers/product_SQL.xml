@@ -116,38 +116,6 @@
 			where product_no = #{product_no}
 		]]>
 	</update>
-
-   <!-- allProduct 개수 조회 -->
-   <select id="getListCount" parameterType="hashmap" resultType="int">
-		select count(*) from product_view where brand_no = #{brand_no}
-   </select>
 	
-   <!-- allProduct 검색 개수 조회 -->
-   <select id="getSearchListCount" parameterType="hashmap" resultType="int">
-		select count(*) from product_view where brand_no = #{brand_no} and product_name like #{keyword} 
-   </select>
-   
-   <select id="listApmanager" parameterType="hashmap" resultType="list" resultMap="resultProduct">
-		   <![CDATA[
-      		select * from (
-            select rownum rnum, a.*
-            from product_view a where brand_no = #{brand_no})
-            where rnum >= #{startRow} and rnum <= #{endRow}
-           ]]>
-   </select>
-   
-   <select id="searchApmanager" parameterType="hashmap" resultType="list" resultMap="resultProduct">
-		   <![CDATA[
-		    select * from (
-		    select rownum rnum, product_no, product_kind_name, product_name,
-		    manufacturer, price, expiration_date
-		    from product_view where brand_no = #{brand_no})
-		    where rnum >= #{startRow} and rnum <= #{endRow}
-		    and product_name like #{keyword}
-           ]]>
-   </select>
-   
-   
-   
 </mapper>
 

@@ -58,11 +58,8 @@
 			select cash FROM tb_user WHERE user_no = #{user_no}
 	   </selectKey>
 	   
-    </update>    
+    </update>
     
-    <select id="checkEmail" parameterType="string" resultType="_int">
-	<![CDATA[select count(*) from user_view where email=#{email}]]>
-	</select>	
     
     
 </mapper>

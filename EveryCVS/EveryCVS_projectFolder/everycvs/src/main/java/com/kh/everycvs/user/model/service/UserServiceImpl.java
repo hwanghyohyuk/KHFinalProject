@@ -42,17 +42,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String createCertifyNo() {
+	public String createCertfiNo() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
-	public int insertCertify(EmailCertification emailCertification) {
-		return userDao.insertCertify(emailCertification);
+	public boolean insertEmailCertification(EmailCertification emailCertification) {
+		return userDao.insertEmailCertification(emailCertification);
 	}
 
 	@Override
-	public boolean sendCertifyMail(String email,String certifyNo) {
+	public boolean sendCertiMail(String certfiNo) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -63,13 +64,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int checkEmail(String email) {
-		return userDao.checkEmail(email);
+	public boolean emailCheck(String email) {
+		return userDao.emailCheck(email);
 	}
 
 	@Override
-	public int certificationCheck(EmailCertification emailCertification) {
-		return userDao.certificationCheck(emailCertification);
+	public boolean certificationCheck(String certificationNo) {
+		return userDao.certificationCheck(certificationNo);
 	}
 
 	@Override
@@ -121,7 +122,6 @@ public class UserServiceImpl implements UserService {
 	public int increMoney(Map<String, Object> map) {
 		return userDao.userIncreMoney(map);
 	}
-
 
 	
 

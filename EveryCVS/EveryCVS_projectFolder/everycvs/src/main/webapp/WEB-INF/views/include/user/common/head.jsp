@@ -60,6 +60,4 @@
 <!-- Modernizr -->
 <script src="/everycvs/resources/user/js/modernizr.custom.js"
 	type="text/javascript"></script>
-<!-- sweetalert2 -->
-<script src="/everycvs/resources/user/js/sweetalert2.all.js"></script> 
 <!-- End JS -->

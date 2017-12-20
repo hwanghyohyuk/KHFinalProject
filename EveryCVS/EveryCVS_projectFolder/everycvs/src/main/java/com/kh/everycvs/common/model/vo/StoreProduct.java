@@ -44,14 +44,6 @@ public class StoreProduct implements Serializable {
 	public StoreProduct() {
 		super();
 	}
-	
-	public StoreProduct(String store_no, int product_no, Date manufacture_date, int quantity) {
-		super();
-		this.store_no = store_no;
-		this.product_no = product_no;
-		this.manufacture_date = manufacture_date;
-		this.quantity = quantity;
-	}
 
 	public StoreProduct(int store_product_no, String store_no, int product_no, String product_name, String manufacturer,
 			int price, Date manufacture_date, int expiration_date, int expiration_hour, int quantity,

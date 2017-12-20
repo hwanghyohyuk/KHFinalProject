@@ -3,12 +3,13 @@ package com.kh.everycvs.product.model.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Product;
-import com.kh.everycvs.common.model.vo.StoreProduct;
 import com.kh.everycvs.product.model.dao.ProductDao;
 
 @Service("ProductService")
@@ -81,16 +82,5 @@ public class ProductServiceImpl implements ProductService{
 		productDao.deleteProduct(product);
 	}
 	
-	//allProduct 개수 조회
-	@Override
-	public int getListCount(String keyword, int brand_no) {
-		return productDao.getListCount(keyword,brand_no);
-	}
-	
-	//allProduct 전체보기, 검색하기
-	@Override
-	public List<StoreProduct> listApmanager(int currentPage, int limit, String keyword, int brand_no) {
-		return productDao.listApmanager(currentPage, limit, keyword, brand_no);
-	}
 	
 }
