@@ -97,60 +97,63 @@
 																	alt="No_Image" align="left" style="margin-left: 5px;">
 															</div>
 															<div class="col-sm-6">
-																<form id="updateform" action="/everycvs/spmupdate.do"
-																	method="post" enctype="multipart/form-data">
-																	<input type="hidden" name="spnum" value="${spm.store_product_no}">
-																	<input type="hidden" name="page" value="${currentPage}">
-																	<table class="table table-condensed">
-																		<tr>
-																			<td><strong>상품명</strong></td>
-																			<td>${spm.product_name}</td>
-																		</tr>
-																		<tr>
-																			<td><strong>가격</strong></td>
-																			<td><fmt:formatNumber value="${spm.price}" pattern="#,###" />원</td>
-																		</tr>
-																		<tr>
-																			<td><strong>유통기한</strong></td>
-																			<td>${spm.expiration_date}일</td>
-																		</tr>
-																		<tr>
-																			<td><strong>구매횟수</strong></td>
-																			<td>${spm.purchase_count}번</td>
-																		</tr>
-																		<tr>
-																			<td><strong>제조일</strong></td>
-																			<td><input class="form-control" type="date"
-																				name="mdate" value="${spm.manufacture_date}"></td>
-																		</tr>
-																		<tr>
-																			<td><strong>수량</strong></td>
-																			<td><input class="form-control" type="number"
-																				min="0" max="100" step="1" name="quantity"
-																				value="${spm.quantity}"></td>
-																		</tr>
-																	</table>
-																</form>
-															</div>
+																<input type="hidden" id="spnum" value="${spm.store_product_no}">
+																<input type="hidden" id="page" value="${currentPage}">
+																<table class="table table-condensed">
+																	<tr>
+																		<td><strong>상품명</strong></td>
+																		<td>${spm.product_name}</td>
+																	</tr>
+																	<tr>
+																		<td><strong>가격</strong></td>
+																		<td><fmt:formatNumber value="${spm.price}" pattern="#,###" />원</td>
+																	</tr>
+																	<tr>
+																		<td><strong>유통기한</strong></td>
+																		<td>${spm.expiration_date}일</td>
+																	</tr>
+																	<tr>
+																		<td><strong>구매횟수</strong></td>
+																		<td>${spm.purchase_count}번</td>
+																	</tr>
+																	<tr>
+																		<td><strong>제조일</strong></td>
+																		<td><input class="form-control" type="date" id="mdate_${spm.store_product_no}" value="${spm.manufacture_date}"></td>
+																	</tr>
+																	<tr>
+																		<td><strong>수량</strong></td>
+																		<td><input class="form-control" type="number" id="quantity_${spm.store_product_no}"
+																			min="0" max="100" step="1" value="${spm.quantity}"></td>
+																	</tr>
+																</table>
+																</div>
 														</div>
 														<div class="row" style="margin-left: 10px;">
 															<h3>
 																<br> <strong>진행중인 EVENT</strong>
 															</h3>
 															<br>
-															<button type="button" class="btn btn-default">없음</button>
-															&nbsp;&nbsp;&nbsp;&nbsp;
-															<button type="button" class="btn btn-default">1+1</button>
-															&nbsp;&nbsp;&nbsp;&nbsp;
-															<button type="button" class="btn btn-default">2+1</button>
-															&nbsp;&nbsp;&nbsp;&nbsp;
-															<button type="button" class="btn btn-default">증정행사</button>
-															&nbsp;&nbsp;&nbsp;&nbsp;
-															<button type="button" class="btn btn-default">할인행사</button>
+															<div data-toggle="buttons">
+																<label class="btn btn-danger btn-lg"> 
+																	<input type="radio" name="discount" value="0">없음
+																</label>
+																<label class="btn btn-danger btn-lg"> 
+																	<input type="radio" name="discount" value="1">1+1행사
+																</label>
+																<label class="btn btn-danger btn-lg"> 
+																	<input type="radio" name="discount" value="2">2+1행사
+																</label>
+																<label class="btn btn-danger btn-lg"> 
+																	<input type="radio" name="discount" value="3">할인행사
+																</label>
+																<label class="btn btn-danger btn-lg"> 
+																	<input type="radio" name="discount" value="4">증정행사
+																</label>							
+															</div>
 														</div>
 													</div>
 													<div class="modal-footer">
-														<button type="submit" class="btn btn-primary btn-sm"
+														<button type="button" class="btn btn-primary btn-sm"
 															data-dismiss="modal" onclick="updateSubmit();">수정</button>
 														&nbsp;
 														<button type="button" class="btn btn-primary btn-sm"
@@ -214,8 +217,24 @@
 <!-- === END FOOTER === -->
 <!-- JS -->
 <script type="text/javascript">
-	function updateSubmit() {
-		$("#updateform").submit();
+	function updateSubmit(){
+		
+		var st = $(":input:radio[name=discount]:checked").val();
+		console.log(st);
+		/* 
+		$.ajax({
+			url:'/everycvs/ajax/dcmodify.do',
+			data:{"storeNo":storeNo,
+				"productNo":productNo,
+				"dcNo":dcNo},
+			type:'post',
+			success:function(data){
+				
+			},
+			error : function(request, status, error) {
+				swal("오류",error,"error");
+			}		
+		});	 */
 	}
 </script>
 <c:import url="../../include/user/common/end.jsp"></c:import>
