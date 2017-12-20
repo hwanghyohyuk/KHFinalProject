@@ -48,6 +48,7 @@
                             <c:forEach items="${glist }" var="glist">
                             <div class="col-md-4 portfolio-item margin-bottom-40 video">
                                 <div class="sy1">
+                                
                                     <a>
                                         <figure>
                                             <img src="/everycvs/resources/upload/${glist.stored_file_name}" 
@@ -73,14 +74,12 @@
 						<div class="modal fade" id="gifticon${glist.product_no }" role="dialog" align="center">
 							<div class="modal-dialog modal-80size">
 								
-								
 								<!-- Modal content-->
 								<div class="modal-content modal-80size">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
 									<div class="modal-body" align="center">
 									
 								<!-- 기프티콘 이미지 영역 -->
-					
 											<img alt="이미지를 준비중입니다." 
 												 src="/everycvs/resources/upload/${glist.stored_file_name}" 
 												 style="height:250px;">
@@ -93,7 +92,7 @@
 										<br>		
 										<div align="right">						
 											<b>유효기간 : ${glist.extinction_date }</b><br>
-											<b>교환처 : ${glist.store_name }</b> <br>
+											<b>교환처 : ${glist.store_name}</b> <br>
 											
 										</div>
 									
@@ -124,13 +123,10 @@
 	<!-- === END FOOTER === -->
 
 	<script>
-
  		$(document).ready(function() {
- 			$("#bcTarget").barcode("1234 5678 1290", "code128");
+ 			$("#bcTarget").barcode("${barcode_img_name}", "code128");
  			
 		});
-
- 		
 	</script>
 
 	<!-- JS -->

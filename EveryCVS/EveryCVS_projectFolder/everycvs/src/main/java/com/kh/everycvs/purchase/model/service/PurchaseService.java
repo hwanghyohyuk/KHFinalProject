@@ -44,6 +44,5 @@ public interface PurchaseService {
 	int monthlyPurchaseCount();
 
 	public int userInsertPurchaseList(Map<String, Object> map);
-
 	
 }

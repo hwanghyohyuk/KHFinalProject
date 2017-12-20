@@ -2,6 +2,7 @@ package com.kh.everycvs.gifticon.model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class GifticonDao {
 
 	
 	//기프티콘 생성
-	public void createGifticon() {
-		
+	public int createGifticon(Map<String, Object> map) {
+		return sqlSession.insert("gifticon.insertGifticon", map);
 	}
 	
 	//기프티콘 조회

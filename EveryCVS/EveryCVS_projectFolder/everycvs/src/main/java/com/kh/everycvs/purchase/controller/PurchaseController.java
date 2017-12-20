@@ -3,6 +3,7 @@ package com.kh.everycvs.purchase.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.everycvs.common.model.vo.Product;
+import com.kh.everycvs.common.model.vo.Gifticon;
 import com.kh.everycvs.common.model.vo.Purchase;
 import com.kh.everycvs.common.model.vo.User;
-import com.kh.everycvs.product.model.service.ProductService;
+import com.kh.everycvs.gifticon.model.service.GifticonService;
 import com.kh.everycvs.purchase.model.service.PurchaseService;
 
 
@@ -29,6 +30,8 @@ public class PurchaseController {
 	
 	@Autowired
 	private PurchaseService purchaseService;
+	
+	@Autowired GifticonService gifticonService;
 
 	// 판매내역 조회 : 해당 지점의 사용자의 구매내역을 전체 조회
 	public ModelAndView selectPurchaseList(HttpServletRequest request) {
@@ -53,7 +56,7 @@ public class PurchaseController {
 	
 	//사용자 구매 영역
 	//사용자 잔고 금액 감소 : 사용자가 상품을 잔고로 결제 시 차감, 포인트 자동적립
-	@RequestMapping("userDecreMoney.do")
+	@RequestMapping("/page/userDecreMoney.do")
 	public ModelAndView userDecreMoney(ModelAndView mv,
 									   HttpSession session,
 									   Purchase purchase,
@@ -64,7 +67,8 @@ public class PurchaseController {
 									   @RequestParam ("store_product_no") int store_product_no,
 									   @RequestParam ("purchase_quantity") int purchase_quantity,
 									   @RequestParam ("calculated_price") int calculated_price,
-									   @RequestParam ("using_point") int using_point) {
+									   @RequestParam ("using_point") int using_point
+									  ) {
 
 		//입력받은 금액만큼 잔고에서 차감후 리턴
 		System.out.println("결제하기 전 cash : " + cash);
@@ -77,6 +81,9 @@ public class PurchaseController {
 		int cprice = (price * purchase_quantity);
 		int addPoint = (int) (cprice * 0.01);
 		
+		Gifticon gifticon = new Gifticon();
+		String name = "1000000";
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("price", cprice);
 		map.put("cash", c);
@@ -88,10 +95,13 @@ public class PurchaseController {
 		map.put("calculated_price", cprice);
 		map.put("using_point", using_point);
 		map.put("accumulate_point", addPoint);
+		map.put("barcode_img_name", name);
 		
-		int resultCash = purchaseService.userDecreMoney(map);
-		int resultPoint = purchaseService.userIncrePoint(map);
-		int insertPurchaseList = purchaseService.userInsertPurchaseList(map);
+		//구매 시 작동하는 기능들을 service로 보냄
+		int resultCash = purchaseService.userDecreMoney(map); //잔고결제
+		int resultPoint = purchaseService.userIncrePoint(map); //포인트결제
+		int insertPurchaseList = purchaseService.userInsertPurchaseList(map); //구매내역 생성
+		int insertGifticon = gifticonService.createGifticon(map); //기프티콘 생성
 		
 		 User user = (User) session.getAttribute("user");
 		 user.setCash(c - cprice);
@@ -102,17 +112,21 @@ public class PurchaseController {
 		mv.addObject("resultCash", resultCash);
 		mv.addObject("resultPoint", resultPoint);
 		mv.addObject("insertPurchaseList", insertPurchaseList);
+		mv.addObject("insertGifticon", insertGifticon);
+		mv.addObject("barcode_img_name", name);
 		
 		mv.setViewName("user/mypage/gifticonPage");
 		
-		System.out.println("결제 후 : " + user.getCash());
+		/*System.out.println("결제 후 : " + user.getCash());
 		System.out.println("결제 후 포인트 증가 : " + user.getPoint());
-		System.out.println(purchase);
+		System.out.println(purchase);*/
+		System.out.println("gifticon : " + gifticon);
+		System.out.println(purchase.getPurchase_no());
 		return mv;
 	}
 	
 	//포인트 감소 : 포인트로 결제할 시 포인트 차감
-	@RequestMapping("userDecrePoint.do")
+	@RequestMapping("/page/userDecrePoint.do")
 	public ModelAndView userDecrePoint( @RequestParam ("price") int price,
 										@RequestParam ("point") String point,
 										@RequestParam ("user_no") String user_no,

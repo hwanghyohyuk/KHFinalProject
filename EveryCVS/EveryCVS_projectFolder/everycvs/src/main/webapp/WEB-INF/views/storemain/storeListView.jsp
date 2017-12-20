@@ -129,13 +129,14 @@
 											<input type="hidden" name="user_no" value="${user.user_no }">
 											<input type="hidden" name="point" value="${user.point }">
 											<input type="hidden" name="store_product_no" value="${sp.store_product_no}">
-											<input type="number" name="purchase_quantity" value="${purchase.purchase_quantity }">
-											수량
+											<input type="number" name="purchase_quantity" 
+												   value="${purchase.purchase_quantity }"
+												   style="width:40px;">
+											
 											<input type="hidden" name="calculated_price" value="${sp.price }">
 											<input type="hidden" name="using_point" value=0>
-											
-											<br>
-											<button type="submit" class="btn"
+									
+											<button type="submit" class="btn btn-primary"
 												    name="price" value="${sp.price}"
 												    id="frm">잔고 결제</button>         
 											
@@ -146,11 +147,13 @@
 											<input type="hidden" name="user_no" value="${user.user_no }">
 											<input type="hidden" name="point" value="${user.point }">
 											<input type="hidden" name="store_product_no" value="${sp.store_product_no}">
-											<input type="number" name="purchase_quantity" value="${purchase.purchase_quantity }">
-											수량
+											<input type="number" name="purchase_quantity" 
+													value="${purchase.purchase_quantity }"
+													style="width:40px;">
+											
 											<input type="hidden" name="calculated_price" value="${sp.price }">
 
-											<button type="submit" class="btn"
+											<button type="submit" class="btn btn-primary"
 												    name="price" value="${sp.price }"
 												     id="frm">포인트 결제</button>
 										</form>										

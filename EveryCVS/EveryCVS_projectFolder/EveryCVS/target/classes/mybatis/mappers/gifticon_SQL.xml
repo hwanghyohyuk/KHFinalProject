@@ -26,4 +26,12 @@
 		]]>
 	</select>
 	
+	 <!-- 사용자 구매 시 거래내역 추가 -->
+	 <insert id="insertGifticon" parameterType="hashmap">
+    	<![CDATA[
+    		insert into tb_gifticon values(
+			seq_gifticon_no.nextval, 5, #{barcode_img_name, jdbcType=VARCHAR} + 1, 'Y')
+    	]]>   
+    </insert>
+    
 	</mapper>

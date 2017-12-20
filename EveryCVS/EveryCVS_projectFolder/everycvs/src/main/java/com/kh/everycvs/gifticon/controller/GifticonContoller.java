@@ -23,7 +23,7 @@ public class GifticonContoller {
 	//상품 결제 시 보관함에 기프티곤 생성
 	@RequestMapping(value = "createGifticon.do")
 	public ModelAndView createGifticon(ModelAndView mv) {
-		return null;
+		return mv;
 	}
 	
 	//기프티콘 삭제 : 기프티콘 사용 후 리스트에서 삭제

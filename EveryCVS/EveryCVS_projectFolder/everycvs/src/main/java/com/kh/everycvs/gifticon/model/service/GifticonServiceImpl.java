@@ -1,13 +1,13 @@
 package com.kh.everycvs.gifticon.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Gifticon;
 import com.kh.everycvs.gifticon.model.dao.GifticonDao;
@@ -19,9 +19,9 @@ public class GifticonServiceImpl implements GifticonService{
 	private GifticonDao gifticonDao;
 	
 	@Override
-	public ModelAndView createGifticon(HttpServletRequest request) {
+	public int createGifticon(Map<String, Object> map) {
 		//기프티콘 생성
-		return null;
+		return gifticonDao.createGifticon(map);
 	}
 
 	@Override
