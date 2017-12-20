@@ -48,6 +48,7 @@
                             <c:forEach items="${glist }" var="glist">
                             <div class="col-md-4 portfolio-item margin-bottom-40 video">
                                 <div class="sy1">
+                                
                                     <a>
                                         <figure>
                                             <img src="/everycvs/resources/upload/${glist.stored_file_name}" 
@@ -91,7 +92,7 @@
 										<br>		
 										<div align="right">						
 											<b>유효기간 : ${glist.extinction_date }</b><br>
-											<b>교환처 : ${glist.store_name }</b> <br>
+											<b>교환처 : ${glist.store_name}</b> <br>
 											
 										</div>
 									
@@ -123,7 +124,7 @@
 
 	<script>
  		$(document).ready(function() {
- 			$("#bcTarget").barcode("123456781290", "code128");
+ 			$("#bcTarget").barcode("${barcode_img_name}", "code128");
  			
 		});
 	</script>
