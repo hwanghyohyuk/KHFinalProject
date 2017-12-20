@@ -87,9 +87,9 @@ public class ProductDao {
 		sqlSession.update("product.deleteProduct", product);
 	}
 
-
 	
-	//allProduct 개수 조회
+	/*지점관리자*/
+	/**allProduct 개수 조회**/
 	public int getListCount(String keyword, int brand_no) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("brand_no", brand_no);
@@ -101,7 +101,8 @@ public class ProductDao {
 		}	
 	}
 	
-	//allProduct 전체보기, 검색하기
+	/*지점관리자*/
+	/**allProduct 전체보기, 검색하기**/
 	public List<StoreProduct> listApmanager(int startRow, int endRow, String keyword, int brand_no) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("startRow", startRow); 
@@ -113,5 +114,6 @@ public class ProductDao {
 		}else{
 			return sqlSession.selectList("product.listApmanager", map);
 		}	
-	}	
+	}
+	
 }

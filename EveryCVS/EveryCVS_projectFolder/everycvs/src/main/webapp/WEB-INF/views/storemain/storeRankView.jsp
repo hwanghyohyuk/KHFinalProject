@@ -46,8 +46,10 @@
 						</h2>
 					</div>
 					<div class="col-sm-1" style="margin-left: 350px;">
-						<br> <a href="splist.do"><button type="button"
-								class="btn btn-primary btn-sm">지점상품 전체보기</button></a>
+						<br> 
+						<a href="splist.do">
+							<button type="button" class="btn btn-primary btn-sm">지점상품 전체보기</button>
+						</a>
 					</div>
 				</div>
 				<br> <br>
@@ -67,9 +69,9 @@
 										<div class="row">
 											<c:forEach var="sp" items="${requestScope.list}">
 												<div class="col-md-4 col-sm-4 col-xs-6">
-													<a href="#" data-toggle="modal"
-														data-target="#amodal${sp.store_product_no}"> 
-													<img src="/everycvs/resources/upload/${sp.stored_file_name}" alt="No_Image"></a>
+													<a href="#" data-toggle="modal" data-target="#amodal${sp.store_product_no}">
+														<img src="/everycvs/resources/upload/${sp.stored_file_name}" alt="No_Image">
+													</a>
 													<h5 align="center">
 														<strong>${sp.product_name}</strong>
 													</h5>
@@ -77,8 +79,7 @@
 														<fmt:formatNumber value="${sp.price}" pattern="#,###" />원
 													</h6>
 													<!-- Modal -->
-													<div id="amodal${sp.store_product_no}" class="modal fade"
-														role="dialog">
+													<div id="amodal${sp.store_product_no}" class="modal fade" role="dialog">
 														<div class="modal-dialog">
 															<!-- Modal content-->
 															<div class="modal-content">
@@ -93,7 +94,8 @@
 																	<div class="row">
 																		<div class="col-sm-6">
 																			<img src="/everycvs/resources/upload/${sp.stored_file_name}"
-																				alt="No_Image" align="left" style="margin-left: 5px;">
+																				alt="No_Image" align="left"
+																				style="margin-left: 5px;">
 																		</div>
 																		<div class="col-sm-6">
 																			<table class="table table-condensed">
@@ -103,8 +105,7 @@
 																				</tr>
 																				<tr>
 																					<td><strong>가격</strong></td>
-																					<td><fmt:formatNumber value="${sp.price}"
-																							pattern="#,###" />원</td>
+																					<td><fmt:formatNumber value="${sp.price}" pattern="#,###" />원</td>
 																				</tr>
 																				<tr>
 																					<td><strong>제조사</strong></td>
@@ -145,15 +146,14 @@
 										<strong>신상품</strong>
 									</h4>
 								</div>
-								<div id="collapse-One" class="accordion-body collapse in"
-									id="newlist">
+								<div id="collapse-One" class="accordion-body collapse in" id="newlist">
 									<div class="panel-body">
 										<div class="row">
 											<c:forEach var="sp" items="${requestScope.list2}">
 												<div class="col-md-4 col-sm-4 col-xs-6">
-													<a href="#" data-toggle="modal"
-														data-target="#bmodal${sp.store_product_no}"> 
-														<img src="/everycvs/resources/upload/${sp.stored_file_name}" alt="No_Image"></a>
+													<a href="#" data-toggle="modal" data-target="#bmodal${sp.store_product_no}">
+														<img src="/everycvs/resources/upload/${sp.stored_file_name}" alt="No_Image">
+													</a>
 													<h5 align="center">
 														<strong>${sp.product_name}</strong>
 													</h5>
@@ -167,8 +167,7 @@
 															<!-- Modal content-->
 															<div class="modal-content">
 																<div class="modal-header">
-																	<button type="button" class="close"
-																		data-dismiss="modal">&times;</button>
+																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title" style="color: black;">
 																		<strong>제품 상세보기</strong>
 																	</h4>
@@ -177,7 +176,8 @@
 																	<div class="row">
 																		<div class="col-sm-6">
 																			<img src="/everycvs/resources/upload/${sp.stored_file_name}"
-																				alt="No_Image" align="left" style="margin-left: 5px;">
+																				alt="No_Image" align="left"
+																				style="margin-left: 5px;">
 																		</div>
 																		<div class="col-sm-6">
 																			<table class="table table-condensed">
@@ -187,8 +187,7 @@
 																				</tr>
 																				<tr>
 																					<td><strong>가격</strong></td>
-																					<td><fmt:formatNumber value="${sp.price}"
-																							pattern="#,###" />원</td>
+																					<td><fmt:formatNumber value="${sp.price}" pattern="#,###" />원</td>
 																				</tr>
 																				<tr>
 																					<td><strong>제조사</strong></td>
@@ -237,10 +236,9 @@
 											<div class="row">
 												<c:forEach var="sp" items="${requestScope.list3}">
 													<div class="col-md-4 col-sm-4 col-xs-6">
-														<a href="#" data-toggle="modal"
-															data-target="#cmodal${sp.store_product_no}"> 
-															<img src="/everycvs/resources/upload/${sp.stored_file_name}"
-															alt="No_Image"></a>
+														<a href="#" data-toggle="modal" data-target="#cmodal${sp.store_product_no}">
+															<img src="/everycvs/resources/upload/${sp.stored_file_name}" alt="No_Image">
+														</a>
 														<h5 align="center">
 															<strong>${sp.product_name}</strong>
 														</h5>
@@ -262,7 +260,8 @@
 																		<div class="row">
 																			<div class="col-sm-6">
 																				<img src="/everycvs/resources/upload/${sp.stored_file_name}"
-																					alt="No_Image" align="left" style="margin-left: 5px;">
+																					alt="No_Image" align="left"
+																					style="margin-left: 5px;">
 																			</div>
 																			<div class="col-sm-6">
 																				<table class="table table-condensed">
@@ -272,8 +271,7 @@
 																					</tr>
 																					<tr>
 																						<td><strong>가격</strong></td>
-																						<td><fmt:formatNumber value="${sp.price}"
-																								pattern="#,###" />원</td>
+																						<td><fmt:formatNumber value="${sp.price}" pattern="#,###" />원</td>
 																					</tr>
 																					<tr>
 																						<td><strong>제조사</strong></td>
@@ -295,8 +293,7 @@
 																							</c:when>
 																							<c:when test="${sp.discount_no==4}">
 																								<td><strong>할인가격</strong></td>
-																								<td><fmt:formatNumber
-																										value="${sp.discount_info}" pattern="#,###" />원</td>
+																								<td><fmt:formatNumber value="${sp.discount_info}" pattern="#,###" />원</td>
 																							</c:when>
 																						</c:choose>
 																					</tr>
@@ -338,26 +335,22 @@
 											<div class="row">
 												<c:forEach var="sp" items="${requestScope.list4}">
 													<div class="col-md-4 col-sm-4 col-xs-6">
-														<a href="#" data-toggle="modal"
-															data-target="#dmodal${sp.store_product_no}"> 
-															<img src="/everycvs/resources/upload/${sp.stored_file_name}"
-															alt="No_Image"></a>
+														<a href="#" data-toggle="modal" data-target="#dmodal${sp.store_product_no}">
+															<img src="/everycvs/resources/upload/${sp.stored_file_name}" alt="No_Image">
+														</a>
 														<h5 align="center">
 															<strong>${sp.product_name}</strong>
 														</h5>
 														<c:set var="day">
-															<fmt:formatNumber value="${sp.expiration_hour/24-1}"
-																type="number" maxFractionDigits="0" />
+															<fmt:formatNumber value="${sp.expiration_hour/24-1}" type="number" maxFractionDigits="0" />
 														</c:set>
 														<c:set var="hour" value="${sp.expiration_hour%24}" />
 														<c:choose>
 															<c:when test="${day<1}">
-																<h6 align="center" style="color: red; font-size: 10pt;">${hour}시간
-																	남았습니다.</h6>
+																<h6 align="center" style="color: red; font-size: 10pt;">${hour}시간 남았습니다.</h6>
 															</c:when>
 															<c:otherwise>
-																<h6 align="center" style="color: red; font-size: 10pt;">${day}일
-																	${hour}시간<br>남았습니다.
+																<h6 align="center" style="color: red; font-size: 10pt;">${day}일 ${hour}시간<br>남았습니다.
 																</h6>
 															</c:otherwise>
 														</c:choose>
@@ -368,8 +361,7 @@
 																<!-- Modal content-->
 																<div class="modal-content">
 																	<div class="modal-header">
-																		<button type="button" class="close"
-																			data-dismiss="modal">&times;</button>
+																		<button type="button" class="close" data-dismiss="modal">&times;</button>
 																		<h4 class="modal-title" style="color: black;">
 																			<strong>제품 상세보기</strong>
 																		</h4>
@@ -378,7 +370,8 @@
 																		<div class="row">
 																			<div class="col-sm-6">
 																				<img src="/everycvs/resources/upload/${sp.stored_file_name}"
-																					alt="No_Image" align="left" style="margin-left: 5px;">
+																					alt="No_Image" align="left"
+																					style="margin-left: 5px;">
 																			</div>
 																			<div class="col-sm-6">
 																				<table class="table table-condensed">
@@ -388,13 +381,11 @@
 																					</tr>
 																					<tr>
 																						<td><strong>가격</strong></td>
-																						<td><fmt:formatNumber value="${sp.price}"
-																								pattern="#,###" />원</td>
+																						<td><fmt:formatNumber value="${sp.price}" pattern="#,###" />원</td>
 																					</tr>
 																					<tr>
 																						<td><strong>할인가격</strong></td>
-																						<td><fmt:formatNumber
-																								value="${sp.expiration_price}" pattern="#,###" />원
+																						<td><fmt:formatNumber value="${sp.expiration_price}" pattern="#,###" />원
 																							&nbsp;(${sp.discount_rate}할인)</td>
 																					</tr>
 																					<tr>
@@ -431,9 +422,8 @@
 					</div>
 				</c:if>
 				<c:if test="${count==0}">
-					<div class="row">
-						준비중입니다.
-						<!-- 선주 이미지 넣을꺼 -->
+					<div class="row" align="center">
+						<img src="/everycvs/resources/upload/ready_img.jpg" alt="No_Image">
 					</div>
 				</c:if>
 			</div>

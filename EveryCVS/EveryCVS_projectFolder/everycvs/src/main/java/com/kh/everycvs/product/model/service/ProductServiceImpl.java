@@ -87,15 +87,16 @@ public class ProductServiceImpl implements ProductService{
 		productDao.deleteProduct(product);
 	}
 
-
 	
-	//allProduct 개수 조회
+	/*지점관리자*/
+	/**allProduct 개수 조회**/
 	@Override
 	public int getListCount(String keyword, int brand_no) {
 		return productDao.getListCount(keyword,brand_no);
 	}
 	
-	//allProduct 전체보기, 검색하기
+	/*지점관리자*/
+	/**allProduct 전체보기, 검색하기**/
 	@Override
 	public List<StoreProduct> listApmanager(int currentPage, int limit, String keyword, int brand_no) {
 		return productDao.listApmanager(currentPage, limit, keyword, brand_no);

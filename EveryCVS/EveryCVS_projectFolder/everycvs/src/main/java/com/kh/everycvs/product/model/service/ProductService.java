@@ -40,12 +40,13 @@ public interface ProductService {
 	/**주간 인기상품 top 5**/	
 	public Map popularStoreProductTop5(String store_no);
 	
-	/*편의점관리자*/
-	/**주간 인기상품 top 5**/
+	
+	/*지점관리자*/
+	/**allProduct 개수 조회**/
 	public List popularCvsProductTop5(int brand_no);
 	
 	/*지점관리자*/
-	/**상품 리스트 카운트**/
+	/**allProduct 전체보기, 검색하기**/
 	public int getListCount(String keyword, int brand_no);
 	
 	public List<StoreProduct> listApmanager(int currentPage, int limit, String keyword, int brand_no);

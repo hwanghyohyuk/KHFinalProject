@@ -134,7 +134,7 @@
 		where store_no=#{sp.store_no} and product_no = #{sp.product_no} and manufacture_date = #{sp.manufacture_date}
    </update>
    
-    <insert id="insertSp" parameterType="storeproduct" >
+   <insert id="insertSp" parameterType="storeproduct" >
    		<![CDATA[
 			insert into tb_store_product
 			values (seq_store_product_no.nextval, #{store_no}, #{product_no}, #{manufacture_date}, #{quantity}, default)

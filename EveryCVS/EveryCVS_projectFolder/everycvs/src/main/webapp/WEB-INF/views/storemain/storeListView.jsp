@@ -28,15 +28,14 @@
 								placeholder="상품명을 입력해주세요." name="keyword" value="${keyword}">
 						</div>
 						<div>
-							<br>
-							<button type="submit" class="btn btn-primary btn-sm">검색</button>
+							<br><button type="submit" class="btn btn-primary btn-sm">검색</button>
 						</div>
 					</form>
 				</div>
 				<div class="row" style="margin-left: 1px;">
-					<br> <a href="sprank.do">
-						<button type="button" class="btn btn-primary btn-sm">지점메인으로
-							이동하기</button>
+					<br>
+					<a href="sprank.do">
+						<button type="button" class="btn btn-primary btn-sm">지점메인으로 이동하기</button>
 					</a>
 				</div>
 				<br>
@@ -46,23 +45,20 @@
 						<div class="col-md-3 col-sm-3 col-xs-6 person-details margin-bottom-30">
 							<figure>
 								<figcaption>
-									<a href="#" data-toggle="modal"
-										data-target="#spmodal${sp.store_product_no}"> 
+									<a href="#" data-toggle="modal" data-target="#spmodal${sp.store_product_no}">
 										<img src="/everycvs/resources/upload/${sp.stored_file_name}" alt="No_Image">
-									</a> <br>
+									</a><br>
 									<h5 align="center">
 										<strong>${sp.product_name}</strong>
 									</h5>
 									<h6 align="center">
-										<fmt:formatNumber value="${sp.price}" pattern="#,###" />
-										원
+										<fmt:formatNumber value="${sp.price}" pattern="#,###" />원
 									</h6>
 								</figcaption>
 							</figure>
 						</div>
 							<!-- Modal -->
-							<div id="spmodal${sp.store_product_no}" class="modal fade"
-								role="dialog">
+							<div id="spmodal${sp.store_product_no}" class="modal fade" role="dialog">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -85,8 +81,7 @@
 														</tr>
 														<tr>
 															<td><strong>가격</strong></td>
-															<td><fmt:formatNumber value="${sp.price}"
-																	pattern="#,###" />원</td>
+															<td><fmt:formatNumber value="${sp.price}" pattern="#,###" />원</td>
 														</tr>
 														<tr>
 															<td><strong>제조사</strong></td>
@@ -208,7 +203,6 @@
 				</ul>
 			</div>
 </div>
-
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->
 <c:import url="../include/user/common/footer.jsp"></c:import>
