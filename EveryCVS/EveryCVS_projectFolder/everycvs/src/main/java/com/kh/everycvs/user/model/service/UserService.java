@@ -23,21 +23,21 @@ public interface UserService {
 	User getUser(int user_no);
 
 	/** 인증번호 생성 및 DB insert **/
-	String createCertfiNo();
-
-	boolean insertEmailCertification(EmailCertification emailCertification);
+	String createCertifyNo();
+	
+	int insertCertify(EmailCertification emailCertification);
 
 	/** 이메일 보내기 **/
-	boolean sendCertiMail(String certfiNo);
+	boolean sendCertifyMail(String email, String certifyNo);
 
 	/** 회원가입 **/
 	User signUp(User user);
 
 	/** 이메일 중복 검사 **/
-	boolean emailCheck(String email);
+	int checkEmail(String email);
 
 	/** 인증번호 확인 **/
-	boolean certificationCheck(String certificationNo);
+	int certificationCheck(EmailCertification emailCertification);
 
 	/** 회원탈퇴 **/
 	boolean deleteUser(int user_no);
@@ -69,6 +69,8 @@ public interface UserService {
 
 	/** 회원 목록 및 검색 **/
 	Map<String, Object> userList(String page, String keyword);
+
+	
 
 
 	

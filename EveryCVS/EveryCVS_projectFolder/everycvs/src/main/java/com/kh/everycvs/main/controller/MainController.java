@@ -10,13 +10,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.everycvs.common.model.vo.Event;
 import com.kh.everycvs.common.model.vo.NaverMap;
 import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.User;
@@ -59,6 +59,11 @@ public class MainController {
 			session.setAttribute("store", null); // 정보를 삭제한다
 		}
 		// 이벤트 top 3 편의점별 서비스 불러오기
+<<<<<<< HEAD
+=======
+		List<Event> eveTop3 = eventService.eventTop3();
+		mv.addObject("evetop3",eveTop3);
+>>>>>>> master
 		// 인기상품 top 3 서비스 불러오기
 
 		return mv;
@@ -132,7 +137,7 @@ public class MainController {
 		storeService.increamentJoinCount(sno);
 		Store store = storeService.selectStore(sno);
 		session.setAttribute("store", store);
-		return "storemain/storeRankView";
+		return "redirect:/page/sprank.do";
 	}
 
 	/* 지점관리자가 지점메인에 접속 */

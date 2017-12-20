@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
+import com.kh.everycvs.common.model.vo.EmailCertification;
 import com.kh.everycvs.common.model.vo.Favorite;
 import com.kh.everycvs.common.model.vo.Purchase;
 import com.kh.everycvs.common.model.vo.User;
@@ -41,13 +42,23 @@ public class UserController {
 	
 
 	/* 로그인 페이지 이동 */
+<<<<<<< HEAD
 	@RequestMapping(value = "sign/signin.do", method = RequestMethod.GET)
 	public String intercepterSignin() {
 		return "user/sign/signin";
+=======
+	@RequestMapping(value = "/sign/signin.do", method = RequestMethod.GET)
+	public ModelAndView intercepterSignin(ModelAndView mv,@RequestParam(value = "sign", required=false, defaultValue="true") boolean sign) {
+		mv.setViewName("user/sign/signin");
+		if(!sign){
+			mv.addObject("sign", sign);
+		}		
+		return mv;
+>>>>>>> master
 	}
 
 	/** 로그인 **/
-	@RequestMapping(value = "user/signinpost.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/signinpost.do", method = RequestMethod.POST)
 	public ModelAndView signIn(@RequestParam("email") String email, @RequestParam("pwd") String pwd,
 			@RequestParam(value = "usecookie", defaultValue = "false", required = false) boolean useCookie,
 			HttpSession session, HttpServletResponse response) {
@@ -65,13 +76,7 @@ public class UserController {
 
 		if (user != null) { // 로그인 성공
 			session.setAttribute("user", user); // 세션에 user란 이름으로 User 객체를 저장한다.
-			
-			// switch(사용자 직책으로)
-			// customer
-			// storemanager
-			// cvsmanager
-			// sitemanager
-			
+				
 			switch(user.getJob()){
 			case "customer":
 				returnURL = "redirect:/main/main.do"; // 로그인 성공시 사용자 메인페이지 이동
@@ -223,48 +228,62 @@ public class UserController {
 	}
 	
 	/* 회원가입 페이지 이동 */
-	@RequestMapping("sign/signupintro.do")
+	@RequestMapping("/sign/signupintro.do")
 	public String moveToSignupIntro() {
 		return "user/signup/signupintro";
 	}
 
 	/* 일반 사용자 회원가입 페이지 이동 */
-	@RequestMapping("sign/signup.do")
+	@RequestMapping("/sign/signup.do")
 	public String moveToSignup() {
 		return "user/signup/signup";
 	}
 	
-	/* 일반 사용자 회원가입 페이지 이동 */
-	@RequestMapping("sign/signupadmin.do")
+	/* 지점 관리자 회원가입 페이지 이동 */
+	@RequestMapping("/sign/signupadmin.do")
 	public String moveToSignupAdmin() {
 		return "user/signup/signupadmin";
 	}
 
 	/** 회원가입 **/
-	@RequestMapping("user/signuppost.do")
+	@RequestMapping("/sign/signuppost.do")
 	public String signUp(@ModelAttribute User user) {
 		return null;
 	}
 
 	/** 이메일 중복 검사 **/
-	public Model emailCheck(@RequestParam("emailcheck") String email) {
-
-		/* 중복아닐경우 */
-		/** Service : 인증번호 생성 및 DB insert **/
-
-		/** Service : 이메일 보내기 **/
-
-		/** 페이지 이동 **/
-		// return ture
-
-		/* 중복일경우 */
-		// return false
-		return null;
+	@RequestMapping("/sign/checkemail.do")
+	public int checkEmail(@RequestParam("email") String email,HttpSession session) {
+		//이메일 중복체크 - 같은 이메일의 수 반환
+		int result = userService.checkEmail(email);
+		if(result>0){
+			//이메일 중복O
+			return result; //결과 : 중복
+		}else{
+			//이메일 중복X
+			String certifyNo = userService.createCertifyNo();
+			if(certifyNo!=null){
+			int insertCertify = userService.insertCertify(new EmailCertification(email, session.getId(), certifyNo));
+			if(insertCertify>0){
+				boolean sendMail = userService.sendCertifyMail(email,certifyNo);
+				if(!sendMail){
+					return -3;//이메일 전송 오류
+				}
+			}else{
+				return -2;//DB insert 오류
+			}
+			}else{
+				return -1;//인증번호 생성 오류
+			}
+			return result;//결과 : 오류없음
+		}
 	}
 
 	/** 인증번호 확인 **/
-	public Model certificationCheck(@RequestParam("certificationNo") String certificationNo) {
-		return null;
+	@RequestMapping("/sign/checkcertification.do")
+	public int checkCertification(@RequestParam("email") String email,@RequestParam("certifyNo") String certifyNo,HttpSession session) {
+		int result=userService.certificationCheck(new EmailCertification(email, session.getId(), certifyNo));
+		return result;
 	}
 
 	/** 회원탈퇴 **/

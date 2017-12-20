@@ -40,6 +40,7 @@ public class FileUtils {
         	multipartFile = multipartHttpServletRequest.getFile(iterator.next());
         	if(multipartFile.isEmpty() == false){	// multipartFile이 비어있지 않으면
         		originalFileName = multipartFile.getOriginalFilename();
+        		System.out.println("fileutils : " + multipartFile.getOriginalFilename());
         		originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));	// .확장자 형태로 자름
         		
         		// 저장되는 파일명 : "랜덤텍스트.확장자"

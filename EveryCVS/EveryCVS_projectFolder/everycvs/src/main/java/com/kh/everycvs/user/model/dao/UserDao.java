@@ -44,11 +44,6 @@ public class UserDao {
 		return sqlSession.selectOne("user.checkUserWithSessionKey", sessionId);
 	}
 
-	public boolean insertEmailCertification(EmailCertification emailCertification) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	public User getUser(int user_no) {
 		// TODO Auto-generated method stub
 		return null;
@@ -59,14 +54,17 @@ public class UserDao {
 		return null;
 	}
 
-	public boolean emailCheck(String email) {
-		// TODO Auto-generated method stub
-		return false;
+	public int checkEmail(String email) {
+		return sqlSession.selectOne("user.checkEmail", email);
 	}
 
-	public boolean certificationCheck(String certificationNo) {
+	public int insertCertify(EmailCertification emailCertification) {
+		return 0;
+	}
+	
+	public int certificationCheck(EmailCertification emailCertification) {
 		// TODO Auto-generated method stub
-		return false;
+		return 0;
 	}
 
 	public Map<String, Object> userList(String page, String keyword) {

@@ -2,12 +2,8 @@ package com.kh.everycvs.product.model.service;
 
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.web.servlet.ModelAndView;
-
 import com.kh.everycvs.common.model.vo.Product;
+import com.kh.everycvs.common.model.vo.StoreProduct;
 
 public interface ProductService {
 	
@@ -38,7 +34,6 @@ public interface ProductService {
 	/**실시간 인기상품(전체) top 5**/
 	public Map popularProductTop5();
 	
-	/*지점관리자*/
 	/**주간 인기상품 top 5**/	
 	public Map popularStoreProductTop5(String store_no);
 	
@@ -46,4 +41,13 @@ public interface ProductService {
 	/**주간 인기상품 top 5**/
 	public List popularCvsProductTop5(int brand_no);
 	
+<<<<<<< HEAD
+=======
+	/*지점관리자*/
+	/**상품 리스트 카운트**/
+	public int getListCount(String keyword, int brand_no);
+	
+	public List<StoreProduct> listApmanager(int currentPage, int limit, String keyword, int brand_no);
+
+>>>>>>> master
 }

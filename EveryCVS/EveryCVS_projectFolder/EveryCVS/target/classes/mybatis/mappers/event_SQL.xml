@@ -18,22 +18,94 @@
 		<result property="del_check" column="DEL_CHECK" />
 	</resultMap>
 	
+<<<<<<< HEAD
+=======
+	<resultMap id="resultWin" type="eventresult">
+		<result property="event_result_no" column="EVENT_RESULT_NO" />
+		<result property="event_no" column="EVENT_NO" />
+		<result property="title" column="TITLE" />
+		<result property="writer" column="WRITER" />
+		<result property="contents" column="CONTENTS" />
+		<result property="write_date" column="WRITE_DATE" />
+		<result property="readcount" column="READCOUNT" />
+		<result property="original_file_name" column="ORIGINAL_FILE_NAME" />
+		<result property="stored_file_name" column="STORED_FILE_NAME" />
+		<result property="del_check" column="DEL_CHECK" />		
+	</resultMap>
+	
+	<select id="eventList" resultType="list" resultMap="resultEvent">
+		<![CDATA[
+		 select * from(select rownum rnum, T.* 
+			from (select * from event_view
+			order by event_no desc ) T ) a where a.rnum >= #{startRow} and a.rnum <=#{endRow}
+		]]>
+	</select>
+	
+	<select id="eventTop3" resultType="list" resultMap="resultEvent">
+		<![CDATA[
+		select a.* from event_view a 
+		join (select brand_no,max(start_date) as newest from event_view a group by brand_no) b 
+		on (a.start_date = b.newest and a.brand_no = b.brand_no) order by a.brand_no asc
+		]]>
+	</select>
+	<!-- 게시글 갯수 조회 -->
+	<select id="getListCount" resultType="_int">
+		select count(*) from EVENT_VIEW
+	</select>
+	<!-- 검색 후 게시글 조회 -->
+	<select id="getSearchCount" parameterType="hashmap" resultType="_int">
+		<![CDATA[
+		select count(*) from event_view where title like #{mainkeyword} or contents like #{subkeyword}
+		]]>
+	</select>
+>>>>>>> master
 	
 	<!-- 이벤트 리스트 조회 -->
 	<select id="cvseventlist" resultType="list" resultMap="resultEvent">
 		<![CDATA[
+<<<<<<< HEAD
 			SELECT * FROM EVENT_VIEW ORDER BY EVENT_NO DESC
 		]]>
 	</select>
 	
+=======
+            select * from(select rownum rnum, T.* 
+			from (select * from event_view
+			order by event_no desc ) T ) a where a.rnum >= #{startRow} and a.rnum <=#{endRow}
+		]]>
+	</select>
+	
+	<!-- 이벤트 결과 조회 -->
+	<select id="resulteventlist" resultType="list" parameterType="java.util.Map" resultMap="resultWin">
+		<![CDATA[
+			select * from(select rownum rnum, T.* 
+			from (select * from event_result_view
+			order by event_result_no desc ) T ) a where a.rnum >=#{startRow} and a.rnum <=#{endRow}
+
+		]]>
+	</select>
+	<!-- 제목 내용 검색 -->
+	<select id="cvseventsearch" resultType="list" parameterType="java.util.Map" resultMap="resultEvent">
+		<![CDATA[
+			select * from (
+		    select rownum rnum,event_no,title,start_date,end_date,contents,readcount
+		    from event_view)
+		    where rnum >= #{startRow} and rnum <= #{endRow}
+		    and title like #{mainkeyword} or contents like #{subkeyword}
+		    order by event_no desc
+		]]>
+	</select>
+	
+	
+>>>>>>> master
 	<!-- 글작성 -->
 	<insert id="cvseventwrite" parameterType="event" flushCache="true"
       statementType="PREPARED">
 	<![CDATA[
 		insert into TB_EVENT values (seq_event_no.nextval, 
 					#{title},#{writer},#{contents},#{start_date},
-					#{end_date},#{join_limit}, default, default,
-					default,default)
+					#{end_date},#{join_limit}, default, #{original_file_name},
+					#{stored_file_name},default)
 		]]>
 	</insert>
 	
@@ -53,6 +125,13 @@
 		]]>
 	</update>
 	
+	<!-- 당첨자 게시판 조회수 증가 -->
+	<update id="eventResultReadCount" parameterType="_int" flushCache="true">
+		<![CDATA[
+		update tb_event_result set readcount = readcount + 1 where event_result_no=#{event_result_no}
+		]]>
+	</update>
+	
 	<!-- 이벤트 게시글 삭제 -->
 	<delete id="eventDelete" parameterType="_int">
 		<![CDATA[
@@ -60,9 +139,46 @@
 		]]>
 	</delete>
 	
+<<<<<<< HEAD
 		<select id="cvsEventDetail" parameterType="_int" resultType="event" resultMap="resultEvent">
 		<![CDATA[
 			SELECT * FROM EVENT_VIEW where event_no = #{eno}
+=======
+	<!-- 관리자 게시글 상세보기 -->
+	<select id="cvsEventDetail" parameterType="_int" resultType="event" resultMap="resultEvent">
+	<![CDATA[
+		SELECT * FROM EVENT_VIEW where event_no = #{eno}
+	]]>
+	</select>
+	
+	<!-- 사용자 당첨 게시판 상세보기 -->
+	<select id="eventResultDetail" parameterType="_int" resultType="eventresult" resultMap="resultWin">
+	<![CDATA[
+		SELECT * FROM EVENT_RESULT_VIEW where event_result_no = #{rno}
+	]]>
+	</select>
+	
+	<!-- 관리자 게시글 수정페이지 이동 -->
+	<select id="cvseventmodifyview" parameterType="event" resultMap="resultEvent">
+	<![CDATA[
+		select * from tb_event where event_no=#{event_no}
+		]]>
+	</select>
+	
+	<!-- 관리자 게시글 수정-->
+	<update id="cvseventmodifywrite" parameterType="event">
+	<![CDATA[
+		update tb_event 
+		set 
+			title = #{title},
+			contents = #{contents},
+			start_date = #{start_date},
+			end_date = #{end_date},
+			join_limit = #{join_limit},
+			original_file_name = #{original_file_name},
+			stored_file_name = #{stored_file_name}
+		where event_no=#{event_no}
+>>>>>>> master
 		]]>
 		</select>
 	

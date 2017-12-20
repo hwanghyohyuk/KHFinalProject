@@ -11,31 +11,32 @@
 <!-- === END HEADER === -->
 <!-- === BEGIN CONTENT === -->
 <div id="content">
-	<div class="container background-white">
-		<div class="container">
-			<div class="row margin-vert-30">
-				<!-- Login Box -->
-				<div class="col-md-6 col-md-offset-3 col-sm-offset-3">
-					<form class="login-page" name="form1" method="post" action="/everycvs/user/findemailpost.do">
-						<div class="login-header margin-bottom-30">
-							<h2>Check your account</h2>
+	<div class="container background-white padding-vert-60">
+		<div class="row margin-vert-60 padding-vert-60 ">
+			<!-- Login Box -->
+			<div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+				<form class="login-page" name="form1" method="post"
+					action="/everycvs/user/findemailpost.do">
+					<div class="login-header margin-bottom-30">
+						<h2>Check your account</h2>
+					</div>
+					<div class="input-group input-group-lg margin-bottom-20">
+						<span class="input-group-addon"> <i class="fa fa-user"></i>
+						</span> <input placeholder="Email" id="email" name="email"
+							class="form-control " type="email">
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<button class="btn btn-primary btn-lg btn-block" type="button" onclick="onClick();">Submit</button>
 						</div>
-						<div class="input-group margin-bottom-20">
-							<span class="input-group-addon"> <i class="fa fa-user"></i>
-							</span> <input placeholder="Email" id="email" name = "email" class="form-control" type="email">
+						<div class="col-md-12">
+							<a class="btn btn-default btn-lg btn-block"
+								href="/everycvs/user/findemailpost.do">Next</a>
 						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<button class="btn btn-primary pull-right" type="submit">Submit</button>
-							</div>
-							<div class="col-md-12">
-								<a class="btn btn-primary pull-right" href="/everycvs/user/findemailpost.do">Next</a>
-							</div>
-						</div>
-					</form>
-				</div>
-				<!-- End Sign In Box -->
+					</div>
+				</form>
 			</div>
+			<!-- End Sign In Box -->
 		</div>
 	</div>
 </div>
@@ -44,10 +45,10 @@
 <c:import url="../../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
 <!-- JS -->
-<c:if test="${result eq false }">
-<script type="text/javascript">
-alert("Sign in fail...\n check your email or password...");
-</script>
-</c:if>
+	<script type="text/javascript">
+	function onClick(){
+		swal("Good job!", "You clicked the button!", "success");
+	}
+	</script>
 <c:import url="../../include/user/common/end.jsp"></c:import>
 <!-- === END === -->
