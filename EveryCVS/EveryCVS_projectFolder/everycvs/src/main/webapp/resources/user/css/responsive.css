@@ -110,7 +110,8 @@
 	}
 
 	#paddingrmv3{
-	padding-left: 30px;
+	padding-left: 0px;
+	width:100%;
 	}
 
 	#marginrmv {
@@ -121,6 +122,19 @@
 	#width100{
 		margin-top: 1%;
 		width: 100%;
+	}
+	
+	.jun42 {
+		height: 34px;
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+		border-right-width: 1px;
+	}
+	
+	#searchbtn{
+		margin-top: 2px;
+		width: 100%;
+		border-radius: 5px;
 	}
 
 	#modify1{
