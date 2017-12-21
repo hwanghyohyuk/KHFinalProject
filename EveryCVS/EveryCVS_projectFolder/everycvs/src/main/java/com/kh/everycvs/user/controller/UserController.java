@@ -313,15 +313,18 @@ public class UserController {
 
 	/** 이메일찾기 **/
 	@RequestMapping("/user/findemailpost.do")
-	public ModelAndView findEmail(ModelAndView mv/*,@RequestParam("email") String email*/) {
-		mv.setViewName("user/find/findname");
-		/* 성공시 이름 확인 */
-
-		/* 실패시 오류페이지 */
-
-		return mv;
+	@ResponseBody
+	public int findEmail(ModelAndView mv, @RequestParam("email") String email) {
+		int result = userService.checkEmail(email);
+		return result;
 	}
-
+	
+	/* 이름 찾기 페이지 이동 */
+	@RequestMapping("/user/findname.do")
+	public String moveToFindName() {
+		return "user/find/findname";
+	}
+	
 	/** 이름 확인 **/
 	@RequestMapping("/user/findnamepost.do")
 	public ModelAndView findName(ModelAndView mv/*,@RequestParam("name") String name*/) {
@@ -333,6 +336,12 @@ public class UserController {
 		return mv;
 	}
 
+	/* 이름 찾기 페이지 이동 */
+	@RequestMapping("/user/findphone.do")
+	public String moveToFindPhone() {
+		return "user/find/findphone";
+	}
+	
 	/** 전화번호 확인 **/
 	@RequestMapping("/user/findphonepost.do")
 	public ModelAndView findPhone(ModelAndView mv/*,@RequestParam("phone") String phone*/) {

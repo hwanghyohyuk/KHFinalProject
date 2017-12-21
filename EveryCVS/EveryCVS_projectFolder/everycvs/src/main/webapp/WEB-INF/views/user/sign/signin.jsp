@@ -47,7 +47,7 @@
 						<br>
 						<h4>Forget your Password ?</h4>
 						<p>
-							<a href="/everycvs/sign/findemail.do">Click here</a>&nbsp;to reset your password.
+							<a href="/everycvs/user/findemail.do">Click here</a>&nbsp;to reset your password.
 						</p>
 					</form>
 				</div>
