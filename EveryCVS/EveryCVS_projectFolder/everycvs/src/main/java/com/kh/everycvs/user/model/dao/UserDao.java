@@ -92,21 +92,6 @@ public class UserDao {
 		return false;
 	}
 
-	public boolean findPhone(String phone) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean findName(String name) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean findEmail(String email) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	public boolean modifyUser(User user) {
 		// TODO Auto-generated method stub
 		return false;

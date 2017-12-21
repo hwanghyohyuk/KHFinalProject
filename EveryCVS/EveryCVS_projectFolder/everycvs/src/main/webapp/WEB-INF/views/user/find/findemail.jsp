@@ -19,10 +19,9 @@
 					<div class="login-header margin-bottom-30">
 						<h2>Check your account</h2>
 					</div>
-					<div class="input-group input-group-lg margin-bottom-20" id="emailstatus">
-						<span class="input-group-addon"> <i class="fa fa-user"></i>
-						</span> <input placeholder="Email" id="email" name="email"
-							class="form-control " type="email" oninput="checkEmail();">
+					<div class=" input-group-lg margin-bottom-20 has-feedback" id="emailstatus">
+						<input placeholder="Email" id="email" name="email" class="form-control " type="email" oninput="checkEmail();">
+						<span class="glyphicon form-control-feedback" id="emailfeedback" style="font-size:20px;line-height:0px" aria-hidden="true"></span>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
@@ -54,15 +53,21 @@ function checkEmail(){
 			isGood = true;
 			$("#emailstatus").addClass("has-success");
 			$("#emailstatus").removeClass("has-error");
+			$("#emailfeedback").addClass("glyphicon-ok");
+			$("#emailfeedback").removeClass("glyphicon-remove");
 		}else{
 			isGood = false;
 			$("#emailstatus").removeClass("has-success");
 			$("#emailstatus").addClass("has-error");
+			$("#emailfeedback").removeClass("glyphicon-ok");
+			$("#emailfeedback").addClass("glyphicon-remove");
 		}
 	}else{
 		isGood = false;
 		$("#emailstatus").removeClass("has-success");
 		$("#emailstatus").removeClass("has-error");
+		$("#emailfeedback").removeClass("glyphicon-ok");
+		$("#emailfeedback").removeClass("glyphicon-remove");
 	}
 }
 function next(){
@@ -71,7 +76,6 @@ function next(){
 
 function findEmail(){
 	var email = $("#email").val();
-	var isComplete=0;
 	if (isGood) {			
 		$.ajax({
 			url:'/everycvs/user/findemailpost.do',
@@ -86,25 +90,33 @@ function findEmail(){
 			},
 			success:function(data){
 				if(data===0){
-					$("#emailstatus").addClass("has-success");
-					$("#emailstatus").removeClass("has-error");
+					$("#emailstatus").removeClass("has-success");
+					$("#emailstatus").addClass("has-error");	
+					$("#emailfeedback").removeClass("glyphicon-ok");
+					$("#emailfeedback").addClass("glyphicon-remove");
 					swal({
 						title: '이메일을 찾을 수 없습니다',
 						timer: 1500,
 						type: 'error'
 					});
 				}else{
-					$("#emailstatus").removeClass("has-success");
-					$("#emailstatus").addClass("has-error");
+					$("#emailstatus").addClass("has-success");
+					$("#emailstatus").removeClass("has-error");	
+					$("#emailfeedback").addClass("glyphicon-ok");
+					$("#emailfeedback").removeClass("glyphicon-remove");
 					swal({
 						title: '이메일이 확인되었습니다',
 						timer: 1500,
 						type: 'success'
 					});
-					setTimeout("next()",1500);
+					setTimeout("next()",1000);
 				}	
 			},
 			error : function(request, status, error) {
+				$("#emailstatus").removeClass("has-success");
+				$("#emailstatus").addClass("has-error");	
+				$("#emailfeedback").removeClass("glyphicon-ok");
+				$("#emailfeedback").addClass("glyphicon-remove");
 				swal({
 					title: '오류',
 					text: error,
@@ -113,6 +125,10 @@ function findEmail(){
 				});
 			}});	
 	}else {
+		$("#emailstatus").removeClass("has-success");
+		$("#emailstatus").addClass("has-error");	
+		$("#emailfeedback").removeClass("glyphicon-ok");
+		$("#emailfeedback").addClass("glyphicon-remove");
 		swal({
 			title: '입력 오류',
 			text: '이메일을 확인해주세요',

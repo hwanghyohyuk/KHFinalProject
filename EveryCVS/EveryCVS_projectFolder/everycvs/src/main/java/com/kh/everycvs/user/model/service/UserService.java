@@ -39,6 +39,7 @@ public interface UserService {
 	
 	int insertAdmin(User user);
 	
+	/** 이메일찾기 **/
 	/** 이메일 중복 검사 **/
 	int checkEmail(String email);
 
@@ -51,14 +52,11 @@ public interface UserService {
 	/** 정보수정 **/
 	boolean modifyUser(User user);
 
-	/** 이메일찾기 **/
-	boolean findEmail(String email);
-
 	/** 이름 확인 **/
-	boolean findName(String name);
-
+	int checkName(String email, String name);
+	
 	/** 전화번호 확인 **/
-	boolean findPhone(String phone);
+	int checkPhone(String email, String name, String phone);
 
 	/** 임시비밀번호 생성 및 DB update **/
 	String createTempPwd();
@@ -75,6 +73,9 @@ public interface UserService {
 
 	/** 회원 목록 및 검색 **/
 	Map<String, Object> userList(String page, String keyword);
+
+
+	
 
 	
 

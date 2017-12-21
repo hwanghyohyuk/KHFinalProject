@@ -127,21 +127,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean findEmail(String email) {
-		return userDao.findEmail(email);
-	}
-
-	@Override
-	public boolean findName(String name) {
-		return userDao.findName(name);
-	}
-
-	@Override
-	public boolean findPhone(String phone) {
-		return userDao.findPhone(phone);
-	}
-
-	@Override
 	public String createTempPwd() {
 		return null;
 	}

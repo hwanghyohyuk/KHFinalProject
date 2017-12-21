@@ -29,11 +29,10 @@
 							</h4>
 						</div>
 						<div class="col-md-12">
-							<button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+							<a class="btn btn-primary btn-lg btn-block"href="/everycvs/sign/signin.do">go Sign in</a>
 						</div>
 						<div class="col-md-12">
-							<a class="btn btn-default btn-lg btn-block"
-								href="/everycvs/sign/signin.do">Next</a>
+							<a class="btn btn-primary btn-lg btn-block"href="/everycvs/main/main.do">go Home</a>
 						</div>
 					</div>
 				</form>

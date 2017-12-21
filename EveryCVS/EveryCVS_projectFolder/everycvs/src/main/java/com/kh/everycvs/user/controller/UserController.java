@@ -43,7 +43,16 @@ public class UserController {
 
 	/* 로그인 페이지 이동 */
 	@RequestMapping(value = "/sign/signin.do", method = RequestMethod.GET)
-	public ModelAndView intercepterSignin(ModelAndView mv,@RequestParam(value = "sign", required=false, defaultValue="true") boolean sign) {
+	public ModelAndView intercepterSignin(ModelAndView mv,@RequestParam(value = "sign", required=false, defaultValue="true") boolean sign,HttpSession session) {
+		Object object = session.getAttribute("email");//email찾기시 저장해둔 세션
+		if(object!=null){
+			session.removeAttribute("email");
+		}
+		object = session.getAttribute("name");//이름 찾기시 저장해둔 세션
+		if(object!=null){
+			session.removeAttribute("name");
+		}
+		
 		mv.setViewName("user/sign/signin");
 		if(!sign){
 			mv.addObject("sign", sign);
@@ -314,8 +323,15 @@ public class UserController {
 	/** 이메일찾기 **/
 	@RequestMapping("/user/findemailpost.do")
 	@ResponseBody
-	public int findEmail(ModelAndView mv, @RequestParam("email") String email) {
+	public int findEmail(@RequestParam("email") String email,HttpSession session) {
 		int result = userService.checkEmail(email);
+		if(result>0){
+			Object object = session.getAttribute("email");
+			if(object!=null){
+				session.removeAttribute("email");
+			}
+			session.setAttribute("email", email);			
+		}
 		return result;
 	}
 	
@@ -327,13 +343,18 @@ public class UserController {
 	
 	/** 이름 확인 **/
 	@RequestMapping("/user/findnamepost.do")
-	public ModelAndView findName(ModelAndView mv/*,@RequestParam("name") String name*/) {
-		mv.setViewName("user/find/findphone");
-		/* 성공시 전화번호 확인 */
-
-		/* 실패시 오류페이지 */
-
-		return mv;
+	@ResponseBody
+	public int findName(@RequestParam("name") String name,HttpSession session) {
+		String email = (String) session.getAttribute("email");			
+		int result = userService.checkName(email,name);
+		if(result>0){
+			Object object = session.getAttribute("name");
+			if(object!=null){
+				session.removeAttribute("name");
+			}
+			session.setAttribute("name", name);			
+		}
+		return result;
 	}
 
 	/* 이름 찾기 페이지 이동 */
@@ -344,18 +365,39 @@ public class UserController {
 	
 	/** 전화번호 확인 **/
 	@RequestMapping("/user/findphonepost.do")
-	public ModelAndView findPhone(ModelAndView mv/*,@RequestParam("phone") String phone*/) {
-		mv.setViewName("user/find/findsuccess");
+	@ResponseBody
+	public int findPhone(@RequestParam("phone") String phone,HttpSession session) {
+		String email = (String) session.getAttribute("email");	
+		String name = (String) session.getAttribute("name");	
+		int result = userService.checkPhone(email,name,phone);
+		if(result>0){
+			session.removeAttribute("name");
+		}			
+		return result;
+
 		/* 성공시 비밀번호 임시 비밀번호 이메일 보내기 */
-		/** Service : 임시비밀번호 생성 및 DB update **/
+		/** Service : key 생성 및 DB insert **/
 
 		/** Service : 임시비밀번호를 포함한 이메일 보내기 **/
 
 		/* 실패시 오류페이지 */
-
-		return mv;
 	}
-
+	/*sendresetpwd*/
+	@RequestMapping("/user/sendresetpwd.do")
+	@ResponseBody
+	public int sendResetPwd(HttpSession session){
+		String email = (String) session.getAttribute("email");
+		boolean isSuccess = userService.sendResetPwd(email);//수정
+		return 0;		
+	}
+	
+	/* 비밀번호재설정성공 페이지 이동 */
+	@RequestMapping("/user/findsuccess.do")
+	public String moveToFindSuccess() {
+		return "user/find/findsuccess";
+	}
+	
+	
 	/* 사이트 관리자 */
 
 	/** 회원 목록 및 검색 **/
