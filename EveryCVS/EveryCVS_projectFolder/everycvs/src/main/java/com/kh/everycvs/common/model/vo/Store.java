@@ -30,6 +30,7 @@ public class Store implements Serializable {
 	private String brand_name; //상호명
 	private int salequantity; //판매량
 	private String del_check; // 삭제구분
+	private String enroll_no; // 가입번호
 	
 	public Store() {
 		super();
@@ -57,6 +58,32 @@ public class Store implements Serializable {
 		this.brand_name = brand_name;
 		this.salequantity = salequantity;
 		this.del_check = del_check;
+	}
+	
+
+	public Store(String store_no, String store_name, String loc_l_code, String loc_l_name, String loc_m_code,
+			String loc_m_name, String loc_s_code, String loc_s_name, String road_address, String num_address,
+			String lat, String lng, int brand_no, int join_count, String brand_name, int salequantity, String del_check,
+			String enroll_no) {
+		super();
+		this.store_no = store_no;
+		this.store_name = store_name;
+		this.loc_l_code = loc_l_code;
+		this.loc_l_name = loc_l_name;
+		this.loc_m_code = loc_m_code;
+		this.loc_m_name = loc_m_name;
+		this.loc_s_code = loc_s_code;
+		this.loc_s_name = loc_s_name;
+		this.road_address = road_address;
+		this.num_address = num_address;
+		this.lat = lat;
+		this.lng = lng;
+		this.brand_no = brand_no;
+		this.join_count = join_count;
+		this.brand_name = brand_name;
+		this.salequantity = salequantity;
+		this.del_check = del_check;
+		this.enroll_no = enroll_no;
 	}
 
 	public String getStore_no() {
@@ -194,6 +221,14 @@ public class Store implements Serializable {
 	public void setDel_check(String del_check) {
 		this.del_check = del_check;
 	}
+	
+	public String getEnroll_no() {
+		return enroll_no;
+	}
+
+	public void setEnroll_no(String enroll_no) {
+		this.enroll_no = enroll_no;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -206,6 +241,8 @@ public class Store implements Serializable {
 				+ ", loc_s_code=" + loc_s_code + ", loc_s_name=" + loc_s_name + ", road_address=" + road_address
 				+ ", num_address=" + num_address + ", lat=" + lat + ", lng=" + lng + ", brand_no=" + brand_no
 				+ ", join_count=" + join_count + ", brand_name=" + brand_name + ", salequantity=" + salequantity
-				+ ", del_check=" + del_check + "]";
+				+ ", del_check=" + del_check + ", enroll_no=" + enroll_no + "]";
 	}
+
+	
 }

@@ -966,4 +966,15 @@ INSERT INTO TB_BOARD VALUES (10,'편의점 택배 붙이면 얼마만에 배송�
 
 COMMIT;
 
+/*지점 번호 도용을 막기위해 지점 번호를 가짜로 하고 지점관리자 회원가입을 위한 특별한 지점번호 추가*/
+alter table tb_store
+add enroll_no varchar2(30)
+default null;
 
+update tb_store a set enroll_no = concat(
+(decode(brand_no,1,'G',2,'C',3,'S'))
+,(select store_no from tb_store b where a.store_no=b.store_no));
+
+COMMENT ON COLUMN tb_store.enroll_no IS '가입번호';
+
+commit;

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.EmailCertification;
+import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.User;
 import com.kh.everycvs.common.util.MailUtils;
 import com.kh.everycvs.user.model.dao.UserDao;
@@ -46,6 +47,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUser(int user_no) {
 		return userDao.getUser(user_no);
+	}
+	
+	@Override
+	public Store enrollCompare(String enrollNo) {
+		return userDao.enrollCompare(enrollNo);
 	}
 	
 	@Override
@@ -159,6 +165,8 @@ public class UserServiceImpl implements UserService {
 	public int increMoney(Map<String, Object> map) {
 		return userDao.userIncreMoney(map);
 	}
+
+	
 
 
 

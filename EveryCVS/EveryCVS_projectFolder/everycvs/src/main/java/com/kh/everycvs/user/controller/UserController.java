@@ -23,6 +23,7 @@ import org.springframework.web.util.WebUtils;
 import com.kh.everycvs.common.model.vo.EmailCertification;
 import com.kh.everycvs.common.model.vo.Favorite;
 import com.kh.everycvs.common.model.vo.Purchase;
+import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.User;
 import com.kh.everycvs.favorite.model.service.FavoriteService;
 import com.kh.everycvs.purchase.model.service.PurchaseService;
@@ -244,6 +245,13 @@ public class UserController {
 		int insertAdmin = userService.insertAdmin(user);
 		mv.addObject("signup",insertAdmin);
 		return mv;
+	}
+	/*지점 관리자 회원가입 시 가입번호 체크*/
+	@RequestMapping("/sign/enrollcompare.do")
+	@ResponseBody
+	public Store enrollCompare(@RequestParam("enrollNo") String enrollNo) {
+		Store store = userService.enrollCompare(enrollNo);
+		return store;
 	}
 
 	/** 이메일 중복 검사 **/

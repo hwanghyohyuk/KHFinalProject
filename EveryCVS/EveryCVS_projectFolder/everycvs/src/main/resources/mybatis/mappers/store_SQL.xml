@@ -21,7 +21,7 @@
 		<result property="brand_no" column="BRAND_NO" />
 		<result property="join_count" column="JOIN_COUNT" />
 		<result property="brand_name" column="BRAND_NAME" />
-		<result property="del_check" column="del_check" />
+		<result property="enroll_no" column="ENROLL_NO" />
 	</resultMap>
 		
 	<update id="increamentJoinCount"  parameterType="string" flushCache="true"
@@ -170,4 +170,11 @@
 		]]>
 	</delete>
 	
+	<!-- 지점 가입번호로 지점 조회 -->
+	<select id="enrollCompare" parameterType="string" resultType="store" resultMap="resultStore">
+		<![CDATA[
+			select * from store_view
+			where enroll_no = #{enroll_no}
+		]]>
+	</select>
 </mapper>

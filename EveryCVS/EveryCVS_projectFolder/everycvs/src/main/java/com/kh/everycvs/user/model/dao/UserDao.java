@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.EmailCertification;
+import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.User;
 
 @Repository("UserDao")
@@ -118,5 +119,9 @@ public class UserDao {
 
 	public int userIncreMoney(Map<String, Object> map) {
 		return sqlSession.update("userIncreMoney", map);
+	}
+
+	public Store enrollCompare(String enrollNo) {	
+		return sqlSession.selectOne("store.enrollCompare",enrollNo);
 	}
 }

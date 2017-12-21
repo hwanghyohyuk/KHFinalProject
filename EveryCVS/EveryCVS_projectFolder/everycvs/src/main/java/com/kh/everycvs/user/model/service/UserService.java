@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.EmailCertification;
+import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.User;
 
 public interface UserService {
@@ -21,6 +22,9 @@ public interface UserService {
 	User checkUserWithSessionKey(String value);
 	/** 정보수정 **/
 	User getUser(int user_no);
+	
+	/* 가입번호 비교 */
+	Store enrollCompare(String enrollNo);
 
 	/** 인증번호 생성 및 DB insert **/
 	String createCertifyNo();
@@ -71,6 +75,8 @@ public interface UserService {
 
 	/** 회원 목록 및 검색 **/
 	Map<String, Object> userList(String page, String keyword);
+
+	
 
 
 	
