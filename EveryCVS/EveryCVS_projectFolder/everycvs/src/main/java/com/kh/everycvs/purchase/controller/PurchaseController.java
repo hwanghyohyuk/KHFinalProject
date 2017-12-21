@@ -68,6 +68,7 @@ public class PurchaseController {
 									   @RequestParam ("purchase_quantity") int purchase_quantity,
 									   @RequestParam ("calculated_price") int calculated_price,
 									   @RequestParam ("using_point") int using_point
+									  
 									  ) {
 
 		//입력받은 금액만큼 잔고에서 차감후 리턴
@@ -82,8 +83,10 @@ public class PurchaseController {
 		int addPoint = (int) (cprice * 0.01);
 		
 		Gifticon gifticon = new Gifticon();
-		String name = "1000000";
 		
+		String result = gifticon.getBarcode_img_name() + 1;
+		//String result = String.valueOf(gname);
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("price", cprice);
 		map.put("cash", c);
@@ -95,7 +98,7 @@ public class PurchaseController {
 		map.put("calculated_price", cprice);
 		map.put("using_point", using_point);
 		map.put("accumulate_point", addPoint);
-		map.put("barcode_img_name", name);
+		map.put("barcode_img_name", result);
 		
 		//구매 시 작동하는 기능들을 service로 보냄
 		int resultCash = purchaseService.userDecreMoney(map); //잔고결제
@@ -113,7 +116,7 @@ public class PurchaseController {
 		mv.addObject("resultPoint", resultPoint);
 		mv.addObject("insertPurchaseList", insertPurchaseList);
 		mv.addObject("insertGifticon", insertGifticon);
-		mv.addObject("barcode_img_name", name);
+		mv.addObject("barcode_img_name", result);
 		
 		mv.setViewName("user/mypage/gifticonPage");
 		
@@ -121,7 +124,6 @@ public class PurchaseController {
 		System.out.println("결제 후 포인트 증가 : " + user.getPoint());
 		System.out.println(purchase);*/
 		System.out.println("gifticon : " + gifticon);
-		System.out.println(purchase.getPurchase_no());
 		return mv;
 	}
 	
@@ -154,6 +156,7 @@ public class PurchaseController {
 		
 		int result = purchaseService.userDecrePoint(map);
 		int insertPurchaseList = purchaseService.userInsertPurchaseList(map);
+		int insertGifticon = gifticonService.createGifticon(map); //기프티콘 생성
 		
 		 User user = (User) session.getAttribute("user");
 		 user.setPoint(dp - usingPoint);
@@ -161,8 +164,8 @@ public class PurchaseController {
 		 
 		mv.addObject("result", result);
 		mv.addObject("insertPurchaseList", insertPurchaseList);
+		mv.addObject("insertGifticon", insertGifticon);
 		mv.setViewName("user/mypage/gifticonPage");
-		
 		
 		System.out.println("포인트 결제 결과 : " + user.getPoint());
 		return mv;
