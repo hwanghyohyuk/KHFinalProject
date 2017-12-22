@@ -74,7 +74,7 @@ public class FavoriteController {
 		favorite.setUser_no(user_no);
 		favorite.setProduct_no(product_no);
 		favorite.setStore_no(store_no);
-		
+		System.out.println(user_no + ", " + product_no + ", " + store_no);
 		if(favoriteService.favoriteSelectOne(favorite) != null){	// 이미 있으면
 			System.out.println("이미 있넹");
 		}else{
