@@ -21,6 +21,7 @@ public class FavoriteDao {
 		return sqlSession.selectList("favorite.favoriteList", user_no);
 	}
 	
+	//관심상품 검색
 	public List favoriteSearch(Favorite favorite){
 		List list = null;
 		if(favorite.getBrand_name() != null)
@@ -32,9 +33,16 @@ public class FavoriteDao {
 		return list;
 	}
 	
+	//관심상품 1개 조회
+	public Favorite favoriteSelectOne(Favorite favorite){
+		Favorite fav = sqlSession.selectOne("favorite.favoriteSelectOne", favorite);
+		return fav;
+	}
+	
 	//관심상품 추가
-	public int favoriteInsert() {
-		return 0;
+	public void favoriteInsert(Favorite favorite) {
+		int result = sqlSession.insert("favorite.favoriteInsert", favorite);
+		System.out.println(result);
 	}
 	
 	//관심상품 삭제

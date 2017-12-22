@@ -14,7 +14,10 @@ public interface FavoriteService {
 	
 	public List favoriteSearch(Favorite favorite);
 	
-	public ModelAndView favoriteInsert(HttpServletRequest request);
+	public Favorite favoriteSelectOne(Favorite favorite);
+	
+	public void favoriteInsert(Favorite favorite);
 	
 	public void favoriteDelete(Favorite favorite);
+	
 }

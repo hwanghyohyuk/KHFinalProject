@@ -78,7 +78,7 @@
 											<span id="detail1"></span>
 											<span id="detail2"></span><br>
 											<span id="detail3" style="font-weight: bold;"></span><br>
-											<span id="detail4" class="col-xs-offset-10 jun40"></span>원<br>
+											<span id="detail4" class="col-xs-offset-9 jun40"></span>원<br>
 										</div>
 									</div>
 									<div class="modal-footer" style="clear: both; margin-top: 2px;">

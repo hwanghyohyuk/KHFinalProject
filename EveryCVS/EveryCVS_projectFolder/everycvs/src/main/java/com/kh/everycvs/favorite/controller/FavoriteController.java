@@ -63,8 +63,25 @@ public class FavoriteController {
 	}
 	
 	//관심상품 등록 : 해당상품을 클릭하면 관심상품등록이 실행
-	public ModelAndView favoriteInsert(HttpServletRequest request) {
-		return null;
+	@RequestMapping("favoriteInsert.do")
+	public ModelAndView favoriteInsert(
+			HttpSession session, HttpServletRequest request, ModelAndView mv) {
+		int user_no = ((User)session.getAttribute("user")).getUser_no();
+		int product_no = Integer.parseInt(request.getParameter("product_no"));
+		String store_no = request.getParameter("store_no");
+		
+		Favorite favorite = new Favorite();
+		favorite.setUser_no(user_no);
+		favorite.setProduct_no(product_no);
+		favorite.setStore_no(store_no);
+		
+		if(favoriteService.favoriteSelectOne(favorite) != null){	// 이미 있으면
+			System.out.println("이미 있넹");
+		}else{
+			favoriteService.favoriteInsert(favorite);
+		}
+		setFavoriteList(user_no, mv);
+		return mv;
 	}
 	
 	//관심상품 삭제 : 등록되어있는 관심상품을 해제하면 목록에서 삭제
