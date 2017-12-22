@@ -46,10 +46,5 @@
 <c:import url="../../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
 <!-- JS -->
-<c:if test="${result eq false }">
-	<script type="text/javascript">
-		alert("Sign in fail...\n check your email or password...");
-	</script>
-</c:if>
 <c:import url="../../include/user/common/end.jsp"></c:import>
 <!-- === END === -->

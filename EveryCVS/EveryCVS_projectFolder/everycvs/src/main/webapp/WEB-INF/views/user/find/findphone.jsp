@@ -106,7 +106,6 @@ function findPhone(){
 						timer: 1500,
 						type: 'success'
 					});
-					//setTimeout("next()",1000);
 					setTimeout("sendEmail()",1500);
 				}	
 			},
@@ -148,7 +147,7 @@ function sendEmail(){
 				})
 		},
 		success:function(data){
-			if(data===(-3)){//이메일 전송 오류
+			if(data===(-3)){
 				swal({
 					title: '오류',
 					text: '이메일 전송 오류',
@@ -175,6 +174,7 @@ function sendEmail(){
 					timer: 1500,
 					type: 'success'
 				});
+				setTimeout("next()",1500);
 			}else{
 				swal({
 					title: '이메일 중복',
@@ -193,7 +193,6 @@ function sendEmail(){
 			});
 		}});
 }
-
 </script>
 <c:import url="../../include/user/common/end.jsp"></c:import>
 <!-- === END === -->
