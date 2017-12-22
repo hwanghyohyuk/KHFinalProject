@@ -29,7 +29,6 @@
 	});
 	
 	function add_favorite(pno, sno){
-		alert(pno + ", " + sno);
 		location.href="/everycvs/favoriteInsert.do?product_no=" + pno + "&store_no=" + sno;
 	}
 </script>

@@ -22,7 +22,7 @@ public class StoreController {
 	@Autowired
 	private StoreService storeService;
 
-	/* 사용자 */	
+	/* 사용자 */
 	
 	/* 지점관리자 */
 
