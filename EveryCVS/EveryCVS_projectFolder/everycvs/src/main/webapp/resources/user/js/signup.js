@@ -129,6 +129,8 @@ function certifyConfirm(){
 						timer: 1500,
 						type: 'success'
 					});
+					$('#certifyform').modal('hide');
+					emailcheck=1;
 				}else{
 					swal({
 						title: 'Error!',
@@ -149,14 +151,12 @@ function certifyConfirm(){
 	}else if(certifyno.length!=8){
 		swal({
 			title: '인증번호 입력 오류',
-			text: '인증번호는 8자리 입니다<br>다시 입력해주세요',
+			text: '인증번호는 8자리 입니다\n다시 입력해주세요',
 			timer: 1500,
 			type: 'error'
 		});
+		emailcheck=0;
 	}
-	
-	$('#certifyform').modal('hide');
-	emailcheck=1;
 }
 function pwdCheck(){
 	var pwd = $("#pwd").val();

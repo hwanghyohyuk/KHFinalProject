@@ -1,6 +1,8 @@
 package com.kh.everycvs.user.model.service;
 
 import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -144,14 +146,23 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean sendResetPwd(String email, String resetKey) {
-		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-	    String contextPath = attr.getRequest().getContextPath();
+		InetAddress server = null;
+		try {
+			server = InetAddress.getLocalHost();
+		} catch (UnknownHostException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String ip=server.getHostAddress();
+		String port ="8888";
 		try {
 			MailUtils sendMail = new MailUtils(mailSender);
 			sendMail.setSubject("[모두의 편의점] 비밀번호 재설정");
-			sendMail.setText(new StringBuffer().append("<h1>[모두의 편의점] 비밀번호 재설정</h1><br>")
-					.append("<p style='font-size:18px'>이메일/비밀번호 찾기 작업이 완료되어 비밀번호를 재설정할 수 있는 링크를 보내드립니다.<br>"
-							+ "<a href='"+contextPath+"/user/resetpwd.do?key=" + resetKey + "'><b>여기</b></a>를 누르시면 해당 링크로 이동합니다.<br>").append("<p>해당 페이지에 입력 바랍니다.</p>").toString());
+			sendMail.setText(new StringBuffer()
+					.append("<h1>[모두의 편의점] 비밀번호 재설정</h1><br>"
+					+"<p style='font-size:18px'>이메일/비밀번호 찾기 작업이 완료되어 비밀번호를 재설정할 수 있는 링크를 보내드립니다.<br>"
+					+"<a href='http://"+ip+":"+port+"/everycvs/user/resetpwd.do?key=" + resetKey + "'><b>여기</b></a>를 누르시면 해당 링크로 이동합니다.<br>"
+					+"재설정 링크의 만료시간은 <b>6시간 후<b> 이며, 재설정 횟수는 <b>1회<b> 입니다.</p>").toString());
 			sendMail.setFrom("everycvs0105@gmail.com", "모두의편의점");
 			sendMail.setTo(email);
 			sendMail.send();
@@ -178,6 +189,11 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
+	public int deleteResetKey(String email) {
+		return userDao.deleteResetKey(email);
+	}
+	
+	@Override
 	public boolean deleteUser(int user_no) {
 		return userDao.deleteUser(user_no);
 	}
@@ -196,5 +212,7 @@ public class UserServiceImpl implements UserService {
 	public int increMoney(Map<String, Object> map) {
 		return userDao.userIncreMoney(map);
 	}
+
+
 
 }

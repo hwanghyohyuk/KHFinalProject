@@ -70,8 +70,11 @@ public interface UserService {
 	
 	int resetPwd(User user);
 	
-	/**재설정 데이터 조회**/
+	/** 재설정 데이터 조회 **/
 	PassLink selectPasslink(String key);
+	
+	/** 재설정 데이터 삭제 **/
+	int deleteResetKey(String email);
 	
 	
 	int increMoney(Map<String, Object> map);
@@ -80,6 +83,8 @@ public interface UserService {
 
 	/** 회원 목록 및 검색 **/
 	Map<String, Object> userList(String page, String keyword);
+
+
 
 
 

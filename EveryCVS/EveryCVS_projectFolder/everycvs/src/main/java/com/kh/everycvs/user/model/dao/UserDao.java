@@ -120,4 +120,8 @@ public class UserDao {
 		return sqlSession.selectOne("user.selectPasslink",key);
 	}
 
+	public int deleteResetKey(String email) {
+		return sqlSession.delete("user.deleteResetKey",email);
+	}
+
 }

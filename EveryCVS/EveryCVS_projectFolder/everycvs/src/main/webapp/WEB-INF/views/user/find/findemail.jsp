@@ -13,26 +13,26 @@
 <div id="content">
 	<div class="container background-white padding-vert-60">
 		<div class="row margin-vert-60 padding-vert-60 ">
-			<!-- Login Box -->
-			<div class="col-md-6 col-md-offset-3 col-sm-offset-3">
-				<form class="login-page">
+			<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+				<div class="login-page">
 					<div class="login-header margin-bottom-30">
 						<h2>Check your account</h2>
 					</div>
+					<hr>
 					<div class=" input-group-lg margin-bottom-20 has-feedback" id="emailstatus">
 						<input placeholder="Email" id="email" name="email" class="form-control " type="email" oninput="checkEmail();">
 						<span class="glyphicon form-control-feedback" id="emailfeedback" style="font-size:20px;line-height:0px" aria-hidden="true"></span>
 					</div>
 					<div class="row">
-						<div class="col-md-12">
-							<button class="btn btn-primary btn-lg btn-block" type="button" onclick="findEmail();">Submit</button>
+						<div class="col-md-12 margin-bottom-20">
+							<button class="btn btn-primary btn-lg btn-block" onclick="findEmail();">Submit</button>
 						</div>
 						<div class="col-md-12">
 							<a class="btn btn-default btn-lg btn-block"
 								href="/everycvs/sign/signin.do">Cancel</a>
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
 			<!-- End Sign In Box -->
 		</div>

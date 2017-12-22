@@ -13,25 +13,25 @@
 <div id="content">
 	<div class="container background-white padding-vert-60">
 		<div class="row margin-vert-60 padding-vert-60 ">
-			<!-- Login Box -->
-			<div class="col-md-6 col-md-offset-3 col-sm-offset-3">
-				<form class="login-page">
+			<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+				<div class="login-page">
 					<div class="login-header margin-bottom-30">
 						<h2>Check your name</h2>
 					</div>
+					<hr>
 					<div class="input-group-lg  margin-bottom-40 has-feedback" id="namestatus">
 						<input class="form-control" id="username" placeholder="Name" type="text" oninput="nameCheck();">
 						<span class="glyphicon form-control-feedback" id="namefeedback" style="font-size:20px;line-height:0px" aria-hidden="true"></span>
 					</div>
 					<div class="row">
-						<div class="col-md-12">
-							<button class="btn btn-primary btn-lg btn-block" type="button" onclick="findName();">Submit</button>
+						<div class="col-md-12 margin-bottom-20">
+							<button class="btn btn-primary btn-lg btn-block" onclick="findName();">Submit</button>
 						</div>
 						<div class="col-md-12">
 							<a class="btn btn-default btn-lg btn-block" href="/everycvs/sign/signin.do">Cancel</a>
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
 			<!-- End Sign In Box -->
 		</div>
@@ -72,11 +72,11 @@ function next(){
 	location.href="/everycvs/user/findphone.do";
 }
 function findName(){
-	var userName = $("#username").val();
+	var name = $("#username").val();
 	if (isGood) {			
 		$.ajax({
 			url:'/everycvs/user/findnamepost.do',
-			data:{'userName':userName},
+			data:{'name':name},
 			type:'post',
 			beforeSend:function(){
 				swal({

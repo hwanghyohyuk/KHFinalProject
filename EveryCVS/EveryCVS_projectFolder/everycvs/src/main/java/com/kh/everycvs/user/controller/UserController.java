@@ -358,7 +358,7 @@ public class UserController {
 		return result;
 	}
 
-	/* 이름 찾기 페이지 이동 */
+	/* 휴대폰 번호 찾기 페이지 이동 */
 	@RequestMapping("/user/findphone.do")
 	public String moveToFindPhone() {
 		return "user/find/findphone";
@@ -375,15 +375,8 @@ public class UserController {
 			session.removeAttribute("name");
 		}			
 		return result;
-
-		/* 성공시 비밀번호 임시 비밀번호 이메일 보내기 */
-		/** Service : key 생성 및 DB insert **/
-
-		/** Service : 임시비밀번호를 포함한 이메일 보내기 **/
-
-		/* 실패시 오류페이지 */
 	}
-	/*sendresetpwd*/
+	
 	@RequestMapping("/user/sendresetpwd.do")
 	@ResponseBody
 	public int sendResetPwd(HttpSession session){
@@ -397,9 +390,7 @@ public class UserController {
 				//데이터베이스에 저장
 				PassLink passlink = new PassLink(email, resetKey);
 				int insertKey = userService.insertKey(passlink);
-				if(insertKey>0){
-					return 1;
-				}else{
+				if(insertKey==0){
 					return -3;//DB insert error
 				}
 			}else{
@@ -407,7 +398,8 @@ public class UserController {
 			}
 		}else{
 			return -1;//key create error
-		}	
+		}
+		return 1;
 	}
 	
 	/* 비밀번호재설정 성공 페이지 이동 */
@@ -415,22 +407,36 @@ public class UserController {
 	public String moveToFindSuccess() {
 		return "user/find/findsuccess";
 	}
+	
 	/* 비밀번호 재설정 페이지 이동*/
 	@RequestMapping(value="/user/resetpwd.do", method = RequestMethod.GET)
 	public ModelAndView moveToResetPwd(ModelAndView mv,@RequestParam("key") String key) {
 		mv.setViewName("user/find/resetpwd");
 		PassLink passlink = userService.selectPasslink(key);
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("passlink", passlink);
+		if(passlink!=null){
+			mv.addObject("passlink",passlink);
+		}else{
+			mv.addObject("result",false);
+		}		
 		return mv;
 	}
 	
 	/* 비밀번호 재설정 제출 */
 	@RequestMapping("/user/resetpwdpost.do")
 	@ResponseBody
-	public int resetPwdPost(User user){//email,pwd
+	public int resetPwdPost(@RequestParam("email")String email, @RequestParam("pwd")String pwd){//email,pwd
+		User user = new User(email, pwd);
 		int resetPwd = userService.resetPwd(user);		
-	return resetPwd;
+		if(resetPwd>0){
+			int deleteResetKey = userService.deleteResetKey(user.getEmail());
+			if(deleteResetKey>0){
+				return 2; //성공, 오류없음
+			}else{
+				return 1; //성공, key 삭제 오류
+			}
+		}else{
+			return 0;//실패
+		}
 	}	
 	
 	/*** 사이트 관리자 ***/

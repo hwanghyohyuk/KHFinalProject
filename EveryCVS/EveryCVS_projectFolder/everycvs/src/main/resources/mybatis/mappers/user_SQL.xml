@@ -140,7 +140,14 @@
 	</update>
 	
 	<select id="selectPasslink" parameterType="string" resultType="passlink" resultMap="resultPassLink">
-	<![CDATA[	select * from tb_passlink where key=#{key}	]]>
+	<![CDATA[	select * from tb_passlink where key=#{key} and sysdate < end_time]]>
 	</select>
+	
+	<delete id="deleteResetKey" parameterType="string">
+	<![CDATA[
+	delete from tb_passlink where email=#{email}
+	]]>
+	</delete>
+	
 	
 </mapper>

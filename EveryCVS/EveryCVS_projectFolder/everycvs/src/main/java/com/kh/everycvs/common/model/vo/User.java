@@ -45,6 +45,12 @@ public class User implements Serializable {
 		super();
 	}
 
+	public User(String email, String user_pwd) {
+		super();
+		this.email = email;
+		this.user_pwd = user_pwd;
+	}
+	
 	public User(String email, String user_pwd, boolean useCookie) {
 		super();
 		this.email = email;

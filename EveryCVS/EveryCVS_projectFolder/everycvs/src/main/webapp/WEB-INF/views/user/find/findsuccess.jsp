@@ -13,13 +13,12 @@
 <div id="content">
 	<div class="container background-white padding-vert-60">
 		<div class="row margin-vert-60 padding-vert-60 ">
-			<!-- Login Box -->
-			<div class="col-md-6 col-md-offset-3 col-sm-offset-3">
-				<form class="login-page" name="form1" method="post"
-					action="/everycvs/user/findphonepost.do">
+			<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+				<div class="login-page">
 					<div class="login-header margin-bottom-30">
 						<h2>Succeed find your account</h2>
 					</div>
+					<hr>
 					<div class="row">
 						<div class="col-md-12">
 							<h3>Congraturation!</h3>
@@ -27,15 +26,16 @@
 								Now, please <b>check your email</b>.<br> We send to your
 								email for password setting link.
 							</h4>
+							<hr>
+						</div>
+						<div class="col-md-12 margin-bottom-20">
+							<a class="btn btn-primary btn-lg btn-block" href="/everycvs/sign/signin.do">go Sign in</a>
 						</div>
 						<div class="col-md-12">
-							<a class="btn btn-primary btn-lg btn-block"href="/everycvs/sign/signin.do">go Sign in</a>
-						</div>
-						<div class="col-md-12">
-							<a class="btn btn-primary btn-lg btn-block"href="/everycvs/main/main.do">go Home</a>
+							<a class="btn btn-green btn-lg btn-block"href="/everycvs/main/main.do">go Home</a>
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
 			<!-- End Sign In Box -->
 		</div>
