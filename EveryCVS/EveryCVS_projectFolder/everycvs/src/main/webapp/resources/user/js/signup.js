@@ -35,17 +35,17 @@ function certify(){
 						})
 				},
 				success:function(data){
-					if(data===(-3)){//이메일 전송 오류
-						swal({
-							title: '오류',
-							text: '이메일 전송 오류',
-							timer: 1500,
-							type: 'error'
-						});
-					}else if(data===(-2)){
+					if(data===(-3)){
 						swal({
 							title: '오류',
 							text: '서버 오류',
+							timer: 1500,
+							type: 'error'
+						});
+					}else if(data===(-2)){//이메일 전송 오류
+						swal({
+							title: '오류',							
+							text: '이메일 전송 오류',
 							timer: 1500,
 							type: 'error'
 						});

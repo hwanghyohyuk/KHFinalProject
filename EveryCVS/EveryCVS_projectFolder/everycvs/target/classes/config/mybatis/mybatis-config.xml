@@ -14,7 +14,8 @@
 		<typeAlias type="com.kh.everycvs.common.model.vo.Gifticon" alias="gifticon" />
 		<typeAlias type="com.kh.everycvs.common.model.vo.Product" alias="product" />
 		<typeAlias type="com.kh.everycvs.common.model.vo.ProductKind" alias="productkind" />
-		<typeAlias type="com.kh.everycvs.common.model.vo.Purchase" alias="purchase" />
+		<typeAlias type="com.kh.everycvs.common.model.vo.Purchase" alias="purchase" />		
+		<typeAlias type="com.kh.everycvs.common.model.vo.PassLink" alias="passlink" />
 		<typeAlias type="com.kh.everycvs.common.model.vo.Sale" alias="sale" />
 		<typeAlias type="com.kh.everycvs.common.model.vo.Sale" alias="saleproductkind" />
 		<typeAlias type="com.kh.everycvs.common.model.vo.ServiceCenter" alias="servicecenter" />

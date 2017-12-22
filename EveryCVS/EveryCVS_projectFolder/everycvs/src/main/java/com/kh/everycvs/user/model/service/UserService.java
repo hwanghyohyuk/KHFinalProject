@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.EmailCertification;
+import com.kh.everycvs.common.model.vo.PassLink;
 import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.User;
 
@@ -58,21 +59,32 @@ public interface UserService {
 	/** 전화번호 확인 **/
 	int checkPhone(String email, String name, String phone);
 
-	/** 임시비밀번호 생성 및 DB update **/
-	String createTempPwd();
+	/** 비밀번호 재설정 키 생성 **/
+	String createResetKey();
 
-	boolean updateTempPwd(User user);
+	/** 재설정 이메일 보내기 **/
+	boolean sendResetPwd(String email, String resetKey);
 
-	/** 임시비밀번호를 포함한 이메일 보내기 **/
-	boolean sendTempPwdMail(String tempPwd);
+	/** insert PassLink **/
+	int insertKey(PassLink passlink);
+	
+	int resetPwd(User user);
+	
+	/**재설정 데이터 조회**/
+	PassLink selectPasslink(String key);
+	
 	
 	int increMoney(Map<String, Object> map);
 	
-
 	/* 사이트 관리자 */
 
 	/** 회원 목록 및 검색 **/
 	Map<String, Object> userList(String page, String keyword);
+
+
+
+
+
 
 
 	

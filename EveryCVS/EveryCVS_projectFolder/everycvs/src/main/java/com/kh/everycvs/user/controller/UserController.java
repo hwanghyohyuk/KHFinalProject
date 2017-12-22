@@ -3,6 +3,7 @@ package com.kh.everycvs.user.controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -22,6 +23,7 @@ import org.springframework.web.util.WebUtils;
 
 import com.kh.everycvs.common.model.vo.EmailCertification;
 import com.kh.everycvs.common.model.vo.Favorite;
+import com.kh.everycvs.common.model.vo.PassLink;
 import com.kh.everycvs.common.model.vo.Purchase;
 import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.User;
@@ -269,7 +271,6 @@ public class UserController {
 	public int checkEmail(@RequestParam("email") String email,HttpSession session) {
 		//이메일 중복체크 - 같은 이메일의 수 반환
 		int result = userService.checkEmail(email);
-		
 		if(result>0){
 			//이메일 중복O
 			return result; //결과 : 중복
@@ -278,14 +279,14 @@ public class UserController {
 			String certifyNo = userService.createCertifyNo();
 			EmailCertification ec = new EmailCertification(email, session.getId(), certifyNo);
 			if(certifyNo!=null){
-			int insertCertify = userService.insertCertify(ec);
-			if(insertCertify>0){
 				boolean sendMail = userService.sendCertifyMail(email,certifyNo);
-				if(!sendMail){
-					return -3;//이메일 전송 오류
+			if(sendMail){
+				int insertCertify = userService.insertCertify(ec);
+				if(insertCertify==0){
+					return -3;//DB insert 오류
 				}
 			}else{
-				return -2;//DB insert 오류
+				return -2;//이메일 전송 오류
 			}
 			}else{
 				return -1;//인증번호 생성 오류
@@ -387,18 +388,52 @@ public class UserController {
 	@ResponseBody
 	public int sendResetPwd(HttpSession session){
 		String email = (String) session.getAttribute("email");
-		boolean isSuccess = userService.sendResetPwd(email);//수정
-		return 0;		
+		//비밀번호 재설정 키 만들고
+		String resetKey = userService.createResetKey();
+		if(resetKey!=null){
+			//이메일 보내고
+			boolean isSuccess = userService.sendResetPwd(email, resetKey);//수정
+			if (isSuccess){
+				//데이터베이스에 저장
+				PassLink passlink = new PassLink(email, resetKey);
+				int insertKey = userService.insertKey(passlink);
+				if(insertKey>0){
+					return 1;
+				}else{
+					return -3;//DB insert error
+				}
+			}else{
+				return -2;//email send error
+			}
+		}else{
+			return -1;//key create error
+		}	
 	}
 	
-	/* 비밀번호재설정성공 페이지 이동 */
+	/* 비밀번호재설정 성공 페이지 이동 */
 	@RequestMapping("/user/findsuccess.do")
 	public String moveToFindSuccess() {
 		return "user/find/findsuccess";
 	}
+	/* 비밀번호 재설정 페이지 이동*/
+	@RequestMapping(value="/user/resetpwd.do", method = RequestMethod.GET)
+	public ModelAndView moveToResetPwd(ModelAndView mv,@RequestParam("key") String key) {
+		mv.setViewName("user/find/resetpwd");
+		PassLink passlink = userService.selectPasslink(key);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("passlink", passlink);
+		return mv;
+	}
 	
+	/* 비밀번호 재설정 제출 */
+	@RequestMapping("/user/resetpwdpost.do")
+	@ResponseBody
+	public int resetPwdPost(User user){//email,pwd
+		int resetPwd = userService.resetPwd(user);		
+	return resetPwd;
+	}	
 	
-	/* 사이트 관리자 */
+	/*** 사이트 관리자 ***/
 
 	/** 회원 목록 및 검색 **/
 	@RequestMapping("/admin/manageUser.do")
@@ -410,7 +445,6 @@ public class UserController {
 
 	/** 사용자 등록 수 **/
 	public ModelAndView userEnrollCount(ModelAndView modelAndView) {
-
 		return modelAndView;
 	}
 

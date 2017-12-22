@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.EmailCertification;
+import com.kh.everycvs.common.model.vo.PassLink;
 import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.User;
 
@@ -26,12 +27,10 @@ public class UserDao {
 
 	// 자동로그인 체크한 경우에 사용자 테이블에 세션과 유효시간을 저장하기 위한 메서드
 	public void keepSignIn(String email, String sessionId, Date next) {
-
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("email", email);
 		map.put("sessionId", sessionId);
 		map.put("next", next);
-
 		// Mapper.xml로 데이터를 전달할 때 한 객체밖에 전달 못함으로 map으로 묶어서 보내줌 단... 주의할 점은
 		// Mapper.xml 안에서 #{} 이 안에 지정한 이름이랑 같아야함.. 자동으로 매핑될 수 있도록
 		// 아래가 수행되면서, 사용자 테이블에 세션id와 유효시간이 저장됨
@@ -46,7 +45,6 @@ public class UserDao {
 	}
 
 	public User getUser(int user_no) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -83,22 +81,18 @@ public class UserDao {
 	}
 
 	public Map<String, Object> userList(String page, String keyword) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public boolean updateTempPwd(User user) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	public boolean modifyUser(User user) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	public boolean deleteUser(int user_no) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -109,4 +103,21 @@ public class UserDao {
 	public Store enrollCompare(String enrollNo) {	
 		return sqlSession.selectOne("store.enrollCompare",enrollNo);
 	}
+
+	public int checkName(Map<String, Object> map) {
+		return sqlSession.selectOne("user.checkName",map);
+	}
+	public int checkPhone(Map<String, Object> map) {
+		return sqlSession.selectOne("user.checkPhone",map);
+	}
+	public int insertKey(PassLink passlink) {
+		return sqlSession.insert("user.insertKey",passlink);
+	}
+	public int resetPwd(User user) {
+		return sqlSession.update("user.resetPwd",user);
+	}
+	public PassLink selectPasslink(String key) {
+		return sqlSession.selectOne("user.selectPasslink",key);
+	}
+
 }

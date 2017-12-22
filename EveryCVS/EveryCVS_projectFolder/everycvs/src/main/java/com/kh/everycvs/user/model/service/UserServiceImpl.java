@@ -11,11 +11,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.EmailCertification;
+import com.kh.everycvs.common.model.vo.PassLink;
 import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.User;
+import com.kh.everycvs.common.util.CommonUtils;
 import com.kh.everycvs.common.util.MailUtils;
 import com.kh.everycvs.user.model.dao.UserDao;
 
@@ -115,6 +119,63 @@ public class UserServiceImpl implements UserService {
 	public int insertAdmin(User user) {
 		return userDao.insertAdmin(user);
 	}
+	@Override
+	public int checkName(String email, String name) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("email", email);
+		map.put("user_name", name);
+		return userDao.checkName(map);
+	}
+
+	@Override
+	public int checkPhone(String email, String name, String phone) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("email", email);
+		map.put("user_name", name);
+		map.put("phone", phone);
+		return userDao.checkPhone(map);
+	}
+
+	@Override
+	public String createResetKey() {
+		String key = CommonUtils.getRandomString();
+		return key;
+	}
+
+	@Override
+	public boolean sendResetPwd(String email, String resetKey) {
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+	    String contextPath = attr.getRequest().getContextPath();
+		try {
+			MailUtils sendMail = new MailUtils(mailSender);
+			sendMail.setSubject("[모두의 편의점] 비밀번호 재설정");
+			sendMail.setText(new StringBuffer().append("<h1>[모두의 편의점] 비밀번호 재설정</h1><br>")
+					.append("<p style='font-size:18px'>이메일/비밀번호 찾기 작업이 완료되어 비밀번호를 재설정할 수 있는 링크를 보내드립니다.<br>"
+							+ "<a href='"+contextPath+"/user/resetpwd.do?key=" + resetKey + "'><b>여기</b></a>를 누르시면 해당 링크로 이동합니다.<br>").append("<p>해당 페이지에 입력 바랍니다.</p>").toString());
+			sendMail.setFrom("everycvs0105@gmail.com", "모두의편의점");
+			sendMail.setTo(email);
+			sendMail.send();
+		} catch (MessagingException | UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public int insertKey(PassLink passlink) {
+		return userDao.insertKey(passlink);
+	}
+
+	@Override
+	public int resetPwd(User user) {
+		return userDao.resetPwd(user);
+	}
+
+	@Override
+	public PassLink selectPasslink(String key) {
+		return userDao.selectPasslink(key);
+	}
 	
 	@Override
 	public boolean deleteUser(int user_no) {
@@ -127,21 +188,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String createTempPwd() {
-		return null;
-	}
-
-	@Override
-	public boolean updateTempPwd(User user) {
-		return userDao.updateTempPwd(user);
-	}
-
-	@Override
-	public boolean sendTempPwdMail(String tempPwd) {
-		return false;
-	}
-
-	@Override
 	public Map<String, Object> userList(String page, String keyword) {
 		return userDao.userList(page, keyword);
 	}
@@ -150,9 +196,5 @@ public class UserServiceImpl implements UserService {
 	public int increMoney(Map<String, Object> map) {
 		return userDao.userIncreMoney(map);
 	}
-
-	
-
-
 
 }

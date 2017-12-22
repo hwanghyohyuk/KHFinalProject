@@ -147,6 +147,51 @@ function sendEmail(){
 				  onOpen: () => {swal.showLoading()}
 				})
 		},
+		success:function(data){
+			if(data===(-3)){//이메일 전송 오류
+				swal({
+					title: '오류',
+					text: '이메일 전송 오류',
+					timer: 1500,
+					type: 'error'
+				});
+			}else if(data===(-2)){
+				swal({
+					title: '오류',
+					text: '서버 오류',
+					timer: 1500,
+					type: 'error'
+				});
+			}else if(data===(-1)){
+				swal({
+					title: '오류',
+					text: '인증번호 생성 오류',
+					timer: 1500,
+					type: 'error'
+				});
+			}else if(data===0){
+				swal({
+					title: '비밀번호 재설정 메일 전송 성공',
+					timer: 1500,
+					type: 'success'
+				});
+			}else{
+				swal({
+					title: '이메일 중복',
+					text: '다른 이메일을 입력해주세요',
+					timer: 1500,
+					type: 'error'
+				});
+			}
+		},
+		error : function(request, status, error) {
+			swal({
+				title: '오류',
+				text: error,
+				timer: 1500,
+				type: 'error'
+			});
+		}});
 }
 
 </script>
