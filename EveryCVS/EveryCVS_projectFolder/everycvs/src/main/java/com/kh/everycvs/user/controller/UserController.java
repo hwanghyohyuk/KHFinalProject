@@ -172,7 +172,8 @@ public class UserController {
 	    session.setAttribute("user", user);
 	    
 	    mv.setViewName("jsonView");
-	    mv.addObject(result);
+	    mv.addObject("result", result);
+	    mv.addObject("increMoney", incre);
 	    
 	    System.out.println("결과 : " + user.getCash());
 

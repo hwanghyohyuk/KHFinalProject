@@ -132,7 +132,6 @@
 											<input type="number" name="purchase_quantity" 
 												   value="${purchase.purchase_quantity }"
 												   style="width:40px;">
-											
 											<input type="hidden" name="calculated_price" value="${sp.price }">
 											<input type="hidden" name="using_point" value=0>
 									

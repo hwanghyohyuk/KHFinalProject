@@ -45,17 +45,14 @@
 						
                         <div class="col-md-12 no-padding">
                             <!-- gifticon Item -->
-                            <c:forEach items="${glist }" var="glist">
+                            <c:forEach items="${glist}" var="glist">
                             <div class="col-md-4 portfolio-item margin-bottom-40 video">
                                 <div class="sy1">
                                 
                                     <a>
                                         <figure>
                                             <img src="/everycvs/resources/upload/${glist.stored_file_name}" 
-                                            alt="이미지가 존재하지 않습니다." id="image"
-                                            data-toggle="modal"
-                                            data-target="#gifticon${glist.product_no }">
-                                            
+                                            alt="이미지가 존재하지 않습니다." id="image" onclick="openModal(${glist.gifticon_no});">                                           
                                             <figcaption>
                                                 <h3 class="margin-top-20"></h3>
                                                 <span> 상품명 : ${glist.product_name }<br>
@@ -71,7 +68,7 @@
 							
 
 						<!-- Modal -->
-						<div class="modal fade" id="gifticon${glist.product_no }" role="dialog" align="center">
+						<div class="modal fade" id="gifticon_${glist.gifticon_no }" role="dialog" align="center">
 							<div class="modal-dialog modal-80size">
 								
 								<!-- Modal content-->
@@ -86,13 +83,13 @@
 												<br><br>
 												
 											<b>${glist.product_name }</b>
-										
-										<div id="bcTarget" align="center"></div>	
+										<input type="hidden" id="bno_${glist.gifticon_no}" value="${glist.barcode_img_name}" >
+										<div id="bcTarget_${glist.gifticon_no}" align="center"></div>	
 										
 										<br>		
 										<div align="right">						
 											<b>유효기간 : ${glist.extinction_date }</b><br>
-											<b>교환처 : ${glist.store_name}</b> <br>
+											<b>교환처 : ${glist.store_name}</b><br>
 											
 										</div>
 									
@@ -123,10 +120,11 @@
 	<!-- === END FOOTER === -->
 
 	<script>
- 		$(document).ready(function() {
- 			$("#bcTarget").barcode("${barcode_img_name}", "code128");
- 			
-		});
+		function openModal(gno){
+			var barcode = $("#bno_"+gno).val();
+			$("#bcTarget_"+gno).barcode(barcode, "code128");
+			$("#gifticon_"+gno).modal('show');
+		}
 	</script>
 
 	<!-- JS -->

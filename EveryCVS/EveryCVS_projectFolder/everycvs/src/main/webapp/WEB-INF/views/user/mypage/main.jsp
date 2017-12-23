@@ -64,7 +64,7 @@
 										<div class="modal-content" align="left">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h4 class="modal-title">충전하기</h4>
+												<h4 class="modal-title">충전하기</h 4>
 											</div>
 											<div class="modal-body">
 												<p>- 1000원 이하의 금액은 충전 할 수 없습니다.</p>
@@ -76,7 +76,8 @@
 												    <input type="hidden" name="cash">
 													<input type="text" name="increMoney">
 														
-													<button class="btn btn-primary" type="submit" id="btn">충 전</button>
+													<button class="btn btn-primary" type="submit" 
+															id="btn" onclick="purchaseBtn()">충 전</button>
 												</form>
 
 											</div>
@@ -272,8 +273,6 @@
 	<script>
 		$(document).ready(function() {
 			//자주구매하는 목록 ajax
-			
-			
 			//충전하기  ajax
 			$("#myBtn").click(function() {
 				var cash;
@@ -292,14 +291,15 @@
 				 	cache: false,
 					success: function(data){
 						cash = data.cash;	
-						//var result = confirm("충전금액 : " + incre + "원을 충전하시겠습니까?")
+						
 					},	
 					error: function(request, status, errorData){
 						alert("error code: " + request.status + "/n" 
 								+ "message : " + request.reponseText + "/n"
 								+ "error : " + request.errorData);
 					}
-				});
+					
+				}); 
 				return cash;
 				});
 			});
@@ -347,6 +347,7 @@
 									+'<td>'+p.purchase_date+'</td></tr>';	
 							}
 							$("#purchaseList").html(values);
+							
 						},
 						error:function(request, status, errorData){
 							alert("error code: " + request.status + "/n" 
@@ -360,7 +361,23 @@
 	});
 });
 	</script>
+	
+	<!-- swal 영역 -->
+	
+	<script type="text/javascript">
+	function purchaseBtn(){
+		swalAlert();
+	}
+		
 
-	<!-- JS -->
+	function swalAlert(){
+		swal("충전잼");
+	}
+	
+	
+	</script>
+	
+
+<!-- JS -->
 	<c:import url="../../include/user/common/end.jsp"></c:import>
 	<!-- === END === -->
