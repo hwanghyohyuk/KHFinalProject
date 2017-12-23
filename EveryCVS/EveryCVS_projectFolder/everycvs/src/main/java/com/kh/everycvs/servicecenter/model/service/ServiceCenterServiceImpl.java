@@ -7,9 +7,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.everycvs.common.model.vo.Event;
 import com.kh.everycvs.common.model.vo.Purchase;
 import com.kh.everycvs.common.model.vo.ServiceCenter;
 import com.kh.everycvs.servicecenter.model.dao.ServiceCenterDao;
@@ -22,6 +24,11 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 	private ServiceCenterDao servicecenterDao;
 	
 	@Override
+	public int serviceReadCount(int sno) {
+		//조회수 증가
+		return servicecenterDao.serviceReadCount(sno);
+	}
+	@Override
 	public ArrayList<ServiceCenter> serviceList() {
 		//고객센터 게시글 조회
 		ArrayList<ServiceCenter> list = new ArrayList<ServiceCenter>();
@@ -30,9 +37,11 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 	}
 
 	@Override
-	public ModelAndView selectServiceOne(HttpServletRequest request) {
-		// 고객센터 조회 : 선택한 고객센터 상세조회
-		return null;
+	public ServiceCenter selectServiceOne(int sno) {
+		// 고객센터 상세조회
+		System.out.println("Service : " + sno);
+		return servicecenterDao.selectServiceOne(sno);
+		
 	}
 
 	@Override
@@ -40,28 +49,45 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 		// 고객센터 검색 : 제목으로 검색
 		/*ArrayList<ServiceCenter> list = new ArrayList<ServiceCenter>();
 		System.out.println("ServiceCenterServiceImpl : " + list);*/
+		System.out.println("searchService : " + keyword);
 		return (ArrayList<ServiceCenter>) servicecenterDao.serviceSearch(keyword);
 	}
 	
 	// 고객센터 등록
 	@Override
-	public void serviceInsert(ServiceCenter vo) {
-		servicecenterDao.serviceWrite(vo);
-		System.out.println("ServiceCenterServiceImpl : " + vo);
+	public void serviceInsert(ServiceCenter servicecenter) {
+		servicecenterDao.serviceWrite(servicecenter);
+		System.out.println("ServiceCenterServiceImpl : " + servicecenter);
+		
+	}
+	
+	@Override
+	public int serviceDelete(int sno) {
+		// 고객센터 삭제
+		return servicecenterDao.serviceDelete(sno);
 		
 	}
 	@Override
-	public String updateService(HttpServletRequest request) {
-		// 고객센터 수정
-		return null;
+	public ServiceCenter serviceUpdateView(int no) {
+		// 고객센터 수정하기로 이동
+		return servicecenterDao.serviceUpdateView(no);
 	}
-
+	
 	@Override
-	public String deleteService(HttpServletRequest request) {
-		// 고객센터 삭제
-		return null;
+	public int serviceUpdate(ServiceCenter servicecenter) {
+		// 고객센터 수정
+		System.out.println("updateService : " + servicecenter);
+		return servicecenterDao.serviceUpdate(servicecenter);
 	}
-
+	
+	@Override
+	public ServiceCenter serviceMyWrite(int writer) {
+		//고객센터 내가쓴글
+		
+		System.out.println("MyWriteService: " + writer);
+		return servicecenterDao.serviceMyWrite(writer);
+	}
+	
 	
 
 	

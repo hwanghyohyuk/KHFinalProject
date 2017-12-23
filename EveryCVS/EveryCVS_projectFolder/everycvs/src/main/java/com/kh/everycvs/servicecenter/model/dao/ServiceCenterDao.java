@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.everycvs.common.model.vo.Event;
 import com.kh.everycvs.common.model.vo.Purchase;
 import com.kh.everycvs.common.model.vo.ServiceCenter;
 import com.kh.everycvs.common.model.vo.StoreProduct;
@@ -23,6 +24,10 @@ public class ServiceCenterDao {
 		
 		@Autowired
 		private SqlSession sqlSession;
+		//조회수 증가
+		public int serviceReadCount(int sno) {
+			return sqlSession.update("serviceCenter.serviceReadCount",sno);
+		}
 		
 		public List<ServiceCenter> serviceList() {
 			ArrayList<ServiceCenter> list = new ArrayList<ServiceCenter>();
@@ -34,8 +39,7 @@ public class ServiceCenterDao {
 			//ArrayList<ServiceCenter> list = new ArrayList<ServiceCenter>();
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("keyword", "%"+keyword+"%");
-			System.out.println("ServiceCenterDao : " + map);
-			System.out.println("keyword : "+"%"+keyword+"%");
+			System.out.println("searchDao : " + map);
 			return sqlSession.selectList("serviceCenter.serviceSearch", map);
 		}
 
@@ -45,17 +49,43 @@ public class ServiceCenterDao {
 			return sqlSession.selectList("serviceCenter.serviceList", list);
 		}*/
 
+		public ServiceCenter selectServiceOne(int sno) {
+			// 고객센터 상세보기
+			System.out.println("Dao : "+sno);
+					return sqlSession.selectOne("serviceCenter.serviceDetail", sno);		
+		}
+		
+		public int serviceDelete(int sno) {
+			//고객센터 삭제
+			
+			return sqlSession.delete("serviceCenter.serviceDelete", sno);
+		}
 		
 
-		public ArrayList<ServiceCenter> serviceInsert() {
-			// TODO Auto-generated method stub
-			return null;
+		public void serviceWrite(ServiceCenter servicecenter) {
+			
+			int result = sqlSession.insert("serviceCenter.serviceInsert", servicecenter); 
+			System.out.println("ServiceDao : " + servicecenter);
 		}
 
-		public void serviceWrite(ServiceCenter vo) {
-			
-			int result = sqlSession.insert("serviceCenter.serviceInsert", vo); 
-			System.out.println("ServiceDao : " + vo);
+		public ServiceCenter serviceUpdateView(int no) {
+			ServiceCenter servicecenter = sqlSession.selectOne("serviceCenter.serviceUpdateView", no);
+			return servicecenter;
 		}
+
+		public int serviceUpdate(ServiceCenter servicecenter) {
+			
+			int result = sqlSession.update("serviceCenter.serviceUpdate", servicecenter);
+			System.out.println("updateDao : " + servicecenter);
+			return result;
+		}
+
+		public ServiceCenter serviceMyWrite(int writer) {
+			
+			System.out.println("MyWriteDao : " + writer);
+			ServiceCenter result = sqlSession.selectOne("serviceCenter.serviceMyWrite", writer);
+			return  result;
+		}
+		
 
 }

@@ -18,6 +18,11 @@
 		location.href = "/everycvs/writeService.do";
 		}
 	}
+	
+	function serviceMyWrite(writer) {
+		location.href = '/everycvs/serviceMyWrite.do?writer='+writer;
+	}
+	console.log("${servicecenter}");
 </script>
 <!-- === BEGIN CONTENT === -->
 
@@ -31,7 +36,7 @@
                                  <h2>고객센터</h2>
                             </div>
                             <hr>
-
+								<input type="hidden" name="writer" value="${servicecenter.writer }">
 								<form action="serviceSearch.do" method="post">
 									<div  align="right" class="col-sm-3" style="margin-left: 190px;">
 										<br> <input class="form-control" type="search"
@@ -48,27 +53,26 @@
                                     <table class="table table-striped table-bordered">
                                             <tr>
                                                     <th width="10%" style="background-color: rgb(51,116,122); text-align: center; color: white;">글번호</th>
-                                                    <th width="60%" style="background-color: rgb(51,116,122); text-align: center; color: white;">제목</th>
-                                                    <th width="10%" style="background-color: rgb(51,116,122); text-align: center; color: white;">작성자</th>
+                                                    <th width="55%" style="background-color: rgb(51,116,122); text-align: center; color: white;">제목</th>
+                                                    <th width="15%" style="background-color: rgb(51,116,122); text-align: center; color: white;">작성자</th>
                                                     <th width="10%" style="background-color: rgb(51,116,122); text-align: center; color: white;">등록일</th>
                                                     <th width="10%" style="background-color: rgb(51,116,122); text-align: center; color: white;">조회수</th>
                                             </tr>
                                          <c:forEach var="sc" items="${requestScope.list }">
                                         <tr>
-                                                <td style="text-align: center;">${sc.service_no}</td> 
-                                                <a href="detailService.do">                                                                                                                                 
-                                                <td style="text-align: center;">${sc.title}</td>                 
-                                                </a>                                                                                                                       
-                                                <td style="text-align: center;">${sc.writer}</td>
+                                                <td style="text-align: center;">${sc.service_no}</td>                                                                                                                                                                        
+                                                <td style="text-align: center;"><a href="detailService.do?sno=${sc.service_no }"> ${sc.title}</a></td>                                                                                                                                                                           
+                                                <td style="text-align: center;">${sc.user_name}</td>
                                                 <td style="text-align: center;">${sc.write_date}</td>
                                                 <td style="text-align: center;">${sc.readcount}</td>
                                             </tr>
-                                            </c:forEach>
+                                            </c:forEach> 
                                     </table>                               
                                 <div align="right">
-                                    <input type="button" class="btn btn-primary" value="내가쓴글" >&nbsp&nbsp&nbsp                                 
-                                    <button class="btn btn-primary" onclick="writeService();"  >글쓰기</button>                                    
-                                </div>                                                               
+                                    <button class="btn btn-primary" onclick="serviceMyWrite(${servicecenter.writer});">내가쓴글</button>&nbsp&nbsp&nbsp                                 
+                                    <button class="btn btn-primary" onclick="writeService();" >글쓰기</button>                                    
+                                </div>         
+                                                                                     
                                 <!-- 페이지 -->
                                 <div class="text-center">
                                    <ul class="pagination">
