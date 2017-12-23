@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Event;
+import com.kh.everycvs.common.model.vo.EventJoin;
 import com.kh.everycvs.common.model.vo.EventResult;
 import com.kh.everycvs.event.model.dao.EventDao;
 
@@ -36,17 +37,17 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public int getListCount(String keyword) {
+	public int getListCount(String keyword, int user_no) {
 		// 관리자 게시글  조회
-		return eventDao.listCount(keyword);
+		return eventDao.listCount(keyword, user_no);
 	}
 	
 	@Override
-	public List<Event> selectEventList(String keyword,int currentPage, int limit){
+	public List<Event> selectEventList(String keyword,int currentPage, int limit, int user_no){
 		//관리자 페이징 및 검색
 	    int startRow = (currentPage - 1) * limit + 1;
 	    int endRow = startRow + limit - 1;        
-	    return eventDao.selectEventList(keyword,startRow,endRow);
+	    return eventDao.selectEventList(keyword,startRow,endRow,user_no);
 	}
 
 	@Override
@@ -58,7 +59,6 @@ public class EventServiceImpl implements EventService{
 	@Override
 	public void eventInsert(Event vo) {
 		//관리자 글 작성 폼으로 이동
-		System.out.println("service : "+vo);
 	        eventDao.cvseventwriteview(vo);
 	}
 	
@@ -87,7 +87,7 @@ public class EventServiceImpl implements EventService{
 	@Override
 	public int updateEventPage(Event event) {
 		// 수정하기 
-		System.out.println("수정service : "+event);
+		
 		return eventDao.updateEventPage(event);
 	}
 
@@ -117,6 +117,57 @@ public class EventServiceImpl implements EventService{
 		// 이벤트 결과 조회수 증가
 		return eventDao.eventResultReadCount(rno);
 	}
+	
+	
+	
+	//이벤트 참여 하기 시작
+	
+	//이벤트 참여 테이블 갯수 조회
+	@Override
+	public ArrayList<EventJoin> selectEventJoinList() {
+		
+		ArrayList<EventJoin> list = eventDao.selectEventJoinList();
+		return list;
+	}
+	//객체를 반환
+	@Override
+	public EventJoin selectEventJoin(EventJoin eventjoin) {
+		// TODO Auto-generated method stub
+		return eventDao.selectEventJoin(eventjoin);
+	}
+	
+	//이벤트 참여 테이블에 있는지 확인
+	@Override
+	public int eventJoincheck(EventJoin eventjoin) {
+		return eventDao.eventJoincheck(eventjoin);
+	}
+	//참여인원 카운트
+	@Override
+	public int eventJoinCount(int event_no) {
+		// TODO Auto-generated method stub
+		return eventDao.eventJoinCount(event_no);
+	}
+	
+	
+	@Override
+	public void eventJoin(EventJoin eventjoin) {
+		// TODO Auto-generated method stub
+		System.out.println("sevice"+eventjoin);
+		eventDao.insertEventJoin(eventjoin);
+		
+	}
+	
+	@Override
+	public void deleteJoin(EventJoin eventjoin) {
+		// TODO Auto-generated method stub
+		eventDao.deleteEventJoin(eventjoin);
+	}
+
+	@Override
+	public void eventResultInsert(EventResult eventResult) {
+		 eventDao.cvseventResultView(eventResult);
+	}
+
 	
 
 }

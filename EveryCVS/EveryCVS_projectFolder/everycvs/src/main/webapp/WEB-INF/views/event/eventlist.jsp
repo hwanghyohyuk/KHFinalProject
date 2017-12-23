@@ -80,7 +80,7 @@ function userpageload(page)
                   "<a href='#' aria-label='Next'>"+
                       "<span aria-hidden='true'>&raquo;</span></a></li>";
             } else {
-               valuesPaging += "<li><a href='javascript:userpageload(" + (data.currentPage + 1)+ "') aria-label='Next'>" +
+               valuesPaging += "<li><a href='javascript:userpageload(" + (data.currentPage + 1)+ ")' aria-label='Next'>" +
                 "<span aria-hidden='true'>&raquo;</span></a></li>";
             }
             
@@ -121,7 +121,6 @@ function userpageload(page)
 						<!-- End Filter Buttons -->
 					</div>
 				</div>
-			
 				<div class="row">
 					<div class="col-md-12 portfolio-group no-padding" style="float: left;">
 						<!-- Portfolio Item -->

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.everycvs.common.model.vo.Event;
+import com.kh.everycvs.common.model.vo.EventJoin;
 import com.kh.everycvs.common.model.vo.EventResult;
 
 
@@ -33,18 +34,32 @@ public class EventDao {
 		return sqlSession.selectList("event.eventTop3");
 	}
 	
-	public List<Event> selectEventList(String keyword, int startRow, int endRow) {
+	public List<Event> selectEventList(String keyword, int startRow, int endRow, int user_no) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("startRow", startRow); 
 		map.put("endRow", endRow);
-		if(keyword.equals("")) {
+		map.put("user_no", user_no);
+		if(user_no==2 && keyword.equals("")) {//gs관리자
+			return sqlSession.selectList("event.cvseventlist1",map);
+		}else if(user_no==3 && keyword.equals("")) {//cu
+			return sqlSession.selectList("event.cvseventlist2",map);
+		}else if(user_no==4 && keyword.equals("")) {//event
+			return sqlSession.selectList("event.cvseventlist3",map);
+		}else if(user_no >4 && keyword.equals("")) {
 			return sqlSession.selectList("event.cvseventlist",map);
-		}else{
-			map.put("mainkeyword", "%"+keyword+"%");
-			map.put("subkeyword", "%"+keyword+"%");
+		}
+		else{
+			//왜인진 모르겠지만 제목으로 만 검색됨 ...
+			map.put("mainkeyword","%"+keyword+"%");
+			map.put("subkeyword","%"+keyword+"%");
+			System.out.println("keyword"+ keyword);
 			return sqlSession.selectList("event.cvseventsearch",map);
 		}
-	}
+		
+		/*if(keyword.equals("")) {
+		return sqlSession.selectList("event.cvseventlist",map);
+	}*/
+}
 	//사용자 이벤트 결과 리스트 불러오기
 	public List<EventResult> resultEventList(String keyword, int startRow, int endRow) {
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -54,17 +69,25 @@ public class EventDao {
 		return sqlSession.selectList("event.resulteventlist",map);
 	}
 	//관리자 검색 후 게시글 갯수
-	public int listCount(String keyword) {
+	public int listCount(String keyword, int user_no) {
 		Map<String,Object> map = new HashMap<String,Object>();
+		
 		if(!keyword.equals("")){
 			map.put("mainkeyword", "%"+keyword+"%");
 			map.put("subkeyword", "%"+keyword+"%");
 			return sqlSession.selectOne("event.getSearchCount",map);
-		}else{
+		}else if(user_no==2) {
+			return sqlSession.selectOne("event.gsListCount");
+			
+		}else if(user_no==3) {
+			return sqlSession.selectOne("event.cuListCount");
+		}else if(user_no==4) {
+			return sqlSession.selectOne("event.sevenListCount");
+		}
+		else{
 			return sqlSession.selectOne("event.getListCount");
-		}	
+		}
 	}
-	
 	
 	public Event selectEventOne(int no) {
 		// 이벤트 조회 : 선택한 이벤트 상세조회
@@ -79,12 +102,11 @@ public class EventDao {
 	
 	public int eventDelete(int no) {
 		//이벤트 삭제
-		return sqlSession.delete("event.eventDelete", no);
+		return sqlSession.update("event.eventDelete", no);
 	}
 	
 	//글쓰기
 	public void cvseventwriteview(Event vo) {
-		System.out.println("dao : "+vo);
 		  sqlSession.insert("event.cvseventwrite", vo); 
 	}
 
@@ -101,8 +123,6 @@ public class EventDao {
 	//수정하기 완료
 	public int updateEventPage(Event event) {
 		int result = sqlSession.update("event.cvseventmodifywrite", event);
-		System.out.println("수정dao : "+event);
-		System.out.println("result : "+result);
 		return result;
 	}
 	
@@ -113,6 +133,8 @@ public class EventDao {
 		// 이벤트 검색 : 제목으로 검색
 		return null;
 	}
+	
+	
 	public int eventResultReadCount(int rno) {
 		// 결과페이지 조회수 증가
 		return sqlSession.update("event.eventResultReadCount",rno);
@@ -122,6 +144,49 @@ public class EventDao {
 		EventResult eventresult = sqlSession.selectOne("event.eventResultDetail",rno);
 		return eventresult;
 	}
+	
+	
+	//이벤트 참여 dao
+	public ArrayList<EventJoin> selectEventJoinList() {
+		// TODO Auto-generated method stub
+		  ArrayList<EventJoin> list = (ArrayList)sqlSession.selectList("event.selectEventJoinList");
+	      return list;
+	}
 
+	public EventJoin selectEventJoin(EventJoin eventjoin) {
+		// TODO Auto-generated method stub
+		 return sqlSession.selectOne("event.selectEventJoin",eventjoin);
+	}
 
+	public int eventJoinCount(int event_no) {
+		// TODO Auto-generated method stub
+		 return sqlSession.selectOne("event.eventJoinCount",event_no);
+	}
+	
+	
+
+	public void insertEventJoin(EventJoin eventjoin) {
+		System.out.println(eventjoin);
+		sqlSession.insert("event.insertEventJoin",eventjoin);
+		
+		
+	}
+
+	public void deleteEventJoin(EventJoin eventjoin) {
+		sqlSession.delete("event.deleteEventJoin",eventjoin);
+		
+	}
+	//이벤트 결과 글쓰기
+	public void cvseventResultView(EventResult eventResult) {
+		// TODO Auto-generated method stub
+		System.out.println("dao"+eventResult);
+		sqlSession.insert("event.cvseventResultwrite", eventResult); 
+		
+	}
+
+	public int eventJoincheck(EventJoin eventjoin) {
+		return sqlSession.selectOne("event.eventJoincheck", eventjoin);
+	}
+
+	
 }

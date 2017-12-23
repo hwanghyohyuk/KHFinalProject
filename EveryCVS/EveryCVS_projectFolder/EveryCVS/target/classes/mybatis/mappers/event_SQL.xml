@@ -34,6 +34,12 @@
 		<result property="del_check" column="DEL_CHECK" />		
 	</resultMap>
 	
+	<resultMap id="resultEventJoin" type="eventjoin">
+		<result property="event_no" column="EVENT_NO" />
+		<result property="user_no" column="USER_NO" />
+		<result property="user_name" column="USER_NAME" />
+	</resultMap>
+
 	<select id="eventList" resultType="list" resultMap="resultEvent">
 		<![CDATA[
 		 select * from(select rownum rnum, T.* 
@@ -49,10 +55,26 @@
 		on (a.start_date = b.newest and a.brand_no = b.brand_no) order by a.brand_no asc
 		]]>
 	</select>
+	
 	<!-- 게시글 갯수 조회 -->
 	<select id="getListCount" resultType="_int">
-		select count(*) from EVENT_VIEW
+		select count(*) from EVENT_VIEW where writer > 0
 	</select>
+	<!-- gs -->
+	<select id="gsListCount" resultType="_int">
+		select count(*) from EVENT_VIEW where writer = 2
+	</select>
+	<!-- cu -->
+	<select id="cuListCount" resultType="_int">
+		select count(*) from EVENT_VIEW where writer = 3
+	</select>
+	<!-- seven -->
+	<select id="sevenListCount" resultType="_int">
+		select count(*) from EVENT_VIEW where writer = 4
+	</select>
+	
+	
+	
 	<!-- 검색 후 게시글 조회 -->
 	<select id="getSearchCount" parameterType="hashmap" resultType="_int">
 		<![CDATA[
@@ -60,14 +82,42 @@
 		]]>
 	</select>
 	
-	<!-- 이벤트 리스트 조회 -->
+	<!-- 이벤트 전체 리스트 조회 -->
 	<select id="cvseventlist" resultType="list" parameterType="hashmap" resultMap="resultEvent">
 		<![CDATA[
             select * from(select rownum rnum, T.* 
-			from (select * from event_view
+			from (select * from event_view where del_check = 'N' and writer > 0
 			order by event_no desc ) T ) a where a.rnum >= #{startRow} and a.rnum <=#{endRow}
 		]]>
 	</select>
+	<!-- gs -->
+	<select id="cvseventlist1" resultType="list" parameterType="hashmap" resultMap="resultEvent">
+		<![CDATA[
+            select * from(select rownum rnum, T.* 
+			from (select * from event_view where del_check = 'N' and writer = 2
+			order by event_no desc ) T ) a where a.rnum >= #{startRow} and a.rnum <=#{endRow}
+		]]>
+	</select>
+	
+	<!-- cu -->
+	<select id="cvseventlist2" resultType="list" parameterType="hashmap" resultMap="resultEvent">
+		<![CDATA[
+            select * from(select rownum rnum, T.* 
+			from (select * from event_view where del_check = 'N' and writer = 3
+			order by event_no desc ) T ) a where a.rnum >= #{startRow} and a.rnum <=#{endRow}
+		]]>
+	</select>
+	<!-- sevent -->
+	<select id="cvseventlist3" resultType="list" parameterType="hashmap" resultMap="resultEvent">
+		<![CDATA[
+            select * from(select rownum rnum, T.* 
+			from (select * from event_view where del_check = 'N' and writer = 4
+			order by event_no desc ) T ) a where a.rnum >= #{startRow} and a.rnum <=#{endRow} 
+		]]>
+	</select>
+	
+	
+	
 	
 	<!-- 이벤트 결과 조회 -->
 	<select id="resulteventlist" resultType="list" parameterType="java.util.Map" resultMap="resultWin">
@@ -85,7 +135,7 @@
 		    select rownum rnum,event_no,title,start_date,end_date,contents,readcount
 		    from event_view)
 		    where rnum >= #{startRow} and rnum <= #{endRow}
-		    and title like #{mainkeyword} or contents like #{subkeyword}
+		    and contents like #{mainkeyword} or title like #{subkeyword}
 		    order by event_no desc
 		]]>
 	</select>
@@ -101,6 +151,16 @@
 					#{stored_file_name},default)
 		]]>
 	</insert>
+	
+	<!-- 이벤트 결과 글쓰기 -->
+	<insert id="cvseventResultwrite" parameterType="eventresult" flushCache="true" statementType="PREPARED">
+	<![CDATA[
+		insert into TB_EVENT_RESULT values (seq_event_result_no.nextval, 
+					#{event_no},#{title},#{writer},#{contents},
+					sysdate,default,default,default,default)
+		]]>
+	</insert>
+	
 	
 	<!-- 이벤트 사용자 상세보기 -->
 	<select id="eventDetail" resultType="Event" resultMap="resultEvent">
@@ -125,12 +185,19 @@
 		]]>
 	</update>
 	
-	<!-- 이벤트 게시글 삭제 -->
-	<delete id="eventDelete" parameterType="_int">
+	<!-- 혹시모르는 이벤트 게시글 삭제 -->
+<!-- 	<delete id="eventDelete" parameterType="_int">
 		<![CDATA[
 		delete from tb_event where event_no=#{event_no}
 		]]>
-	</delete>
+	</delete> -->
+	
+	<!-- 게시글 삭제 -->
+	<update id="eventDelete" parameterType="_int" flushCache="true">
+		<![CDATA[
+		update tb_event set del_check = 'Y' where event_no=#{event_no}
+		]]>
+	</update>
 	
 	<!-- 관리자 게시글 상세보기 -->
 	<select id="cvsEventDetail" parameterType="_int" resultType="event" resultMap="resultEvent">
@@ -169,4 +236,45 @@
 		]]>
 	</update>
 	
+	
+	
+	<!-- 이벤트 참여 -->
+	 <select id="selectEventJoinList" resultType="list" resultMap="resultEventJoin">
+      <![CDATA[
+         select * from EVENT_JOIN_USER_VIEW
+      ]]>
+   </select>
+   
+   <select id="selectEventJoin" resultType="eventjoin" resultMap="resultEventJoin" parameterType="_int">
+      <![CDATA[
+         select * from TB_EVENT_JOIN where event_no = #{event_no} and user_no=#{user_no}
+      ]]>
+   </select><!-- 좋아요 테이블 객체 select -->
+   
+     
+   <select id="eventJoinCount" parameterType="_int" resultType="int">
+      <![CDATA[
+         select count(*) from EVENT_JOIN_USER_VIEW where event_no=#{event_no}
+      ]]>   
+   </select>
+   
+   <select id="eventJoincheck" parameterType="eventjoin" resultType="_int">
+      <![CDATA[
+         select count(*) from tb_event_join where event_no=#{event_no} and user_no=#{user_no}
+      ]]>   
+   </select>
+       
+   <insert id="insertEventJoin" parameterType="eventjoin" flushCache="true" statementType="PREPARED">
+      <![CDATA[
+         insert into TB_EVENT_JOIN values (#{user_no},#{event_no})
+      ]]>   
+   </insert> <!-- 좋아요 증가 -->
+   
+   <delete id="deleteEventJoin" parameterType="eventjoin" flushCache="true" statementType="PREPARED">
+      <![CDATA[
+         delete from TB_EVENT_JOIN where event_no=#{event_no} and user_no=#{user_no}
+      ]]>
+   </delete>
+   
+
 </mapper>

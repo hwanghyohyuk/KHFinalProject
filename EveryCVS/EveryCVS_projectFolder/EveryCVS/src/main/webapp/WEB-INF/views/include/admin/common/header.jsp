@@ -130,6 +130,8 @@
 									<i class="fa fa-archive"></i> 종료된 이벤트 리스트</a></li>
 								<li><a href="/everycvs/cvseventwriteview.do">
 									<i class="fa fa-plus"></i> 이벤트 등록</a></li>
+								<li><a href="/everycvs/cvseventResultView.do">
+									<i class="fa fa-plus"></i> 이벤트 결과 등록</a></li>
 							</ul>
 						</li>
 					</c:when>

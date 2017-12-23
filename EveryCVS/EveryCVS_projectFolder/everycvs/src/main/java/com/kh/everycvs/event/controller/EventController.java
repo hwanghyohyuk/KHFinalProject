@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Event;
+import com.kh.everycvs.common.model.vo.EventJoin;
 import com.kh.everycvs.common.model.vo.EventResult;
 import com.kh.everycvs.common.model.vo.User;
 import com.kh.everycvs.common.util.FileUtils;
@@ -33,7 +34,6 @@ public class EventController {
 	@Autowired
 	private EventService eventService;
 	//--------------------------- 이벤트 사용자 글보고 이벤트참여하도록 확인해야함----------------------------------
-	
 	/*사용자 : 이벤트 메인*/
 	@RequestMapping(value="test/page/eventmain.do", method=RequestMethod.GET)
 	public ModelAndView eventList(ModelAndView mv) {
@@ -45,15 +45,16 @@ public class EventController {
 
 	// 이벤트 리스트 이건 유저 뷰인데 다시작업해야함
 	@RequestMapping(value="/page/eventmain.do", method=RequestMethod.GET)
-	public ModelAndView selectEventList(@RequestParam(value="keyword",required = false, defaultValue="") String keyword, String page) {
+	public ModelAndView selectEventList(@RequestParam(value="keyword",required = false, defaultValue="") String keyword, String page, HttpSession session) {
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("event/eventlist");
 		  int currentPage = 1;
           int limit = 6;
-          List<Event> list = eventService.selectEventList(keyword,currentPage, limit);       
+          int user_no = ((User)session.getAttribute("user")).getUser_no();
+          List<Event> list = eventService.selectEventList(keyword,currentPage, limit, user_no);       
           Map<String, Object> map = new HashMap<String, Object>();
-          int listCount = eventService.getListCount(keyword);
+          int listCount = eventService.getListCount(keyword,user_no);
           int maxPage = (int) ((double) listCount / limit + 0.94);
           int startPage = (((int) ((double) currentPage / limit + 0.94)) - 1) * limit + 1;
           int endPage = startPage + limit - 1;
@@ -75,15 +76,15 @@ public class EventController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="userpageload.do")
 	@ResponseBody
-    public ModelAndView userpageload(ModelAndView mv, @RequestParam("page") int page, @RequestParam(value="keyword",required = false, defaultValue="") String keyword) {
+    public ModelAndView userpageload(ModelAndView mv, @RequestParam("page") int page, @RequestParam(value="keyword",required = false, defaultValue="") String keyword, HttpSession session) {
 				
 		 int currentPage = page;
          int limit = 6;
-         
-         List<Event> list = eventService.selectEventList(keyword, currentPage, limit);
+         int user_no = ((User)session.getAttribute("user")).getUser_no();
+         List<Event> list = eventService.selectEventList(keyword,currentPage, limit, user_no); 
          
          Map<String, Object> map = new HashMap<String, Object>();
-         int listCount = eventService.getListCount(keyword);
+         int listCount = eventService.getListCount(keyword,user_no);
          int maxPage = (int) ((double) listCount / limit + 0.94);
          int startPage = (((int) ((double) currentPage / limit + 0.94)) - 1) * limit + 1;
          int endPage = startPage + limit - 1;
@@ -124,15 +125,16 @@ public class EventController {
 	
 	//사용자 이벤트 결과 리스트를 보여주는 화면
 	@RequestMapping(value = "eventresultlist.do", method = RequestMethod.GET)
-	public ModelAndView eventResultList(@RequestParam(value="keyword",required = false, defaultValue="") String keyword, String page) {
+	public ModelAndView eventResultList(@RequestParam(value="keyword",required = false, defaultValue="") String keyword, String page, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("event/result/eventresultlist");
+		int user_no = ((User)session.getAttribute("user")).getUser_no();
 		int currentPage = 1;
 	    int limit = 10;
 	       List<EventResult> list = eventService.resultEventList(keyword,currentPage, limit);
 	                System.out.println("이벤트결과list : " + list);
 	          Map<String, Object> map = new HashMap<String, Object>();
-	          int listCount = eventService.getListCount(keyword);
+	          int listCount = eventService.getListCount(keyword,user_no);
 	          int maxPage = (int) ((double) listCount / limit + 0.9);
 	          int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
 	          int endPage = startPage + limit - 1;
@@ -153,7 +155,6 @@ public class EventController {
 		}
 	
 	
-	
 	//사용자 이벤트 결과 상세조회
 	@RequestMapping(value="eventwin.do", method=RequestMethod.GET)
 	public ModelAndView eventResultWin(@RequestParam int rno) {
@@ -170,12 +171,16 @@ public class EventController {
 
 	// 사용자 이벤트 조회 : 선택한 이벤트 상세조회
 	@RequestMapping(value="eventDetail.do", method=RequestMethod.GET)
-	public ModelAndView selectEventOne(@RequestParam int no) {
+	public ModelAndView selectEventOne(@RequestParam int no,HttpSession session) {
+		int user_no = ((User)session.getAttribute("user")).getUser_no();
 		ModelAndView mv = new ModelAndView("event/eventDetail");
 		Event et = eventService.selectEventOne(no);
 		int ad = eventService.eventReadCount(no);
+		EventJoin eventJoin = new EventJoin(no,user_no);
+		int isJoin = eventService.eventJoincheck(eventJoin);
 		mv.addObject("ad",ad);
 		mv.addObject("et",et);
+		mv.addObject("isJoin",isJoin);
 		return mv;
 	
 	}
@@ -188,33 +193,30 @@ public class EventController {
 	
 	
 
-		
-	
-	
-	
 	
 	//--------------------------- 날짜 별로보는거랑 각 편의점관리자 마다 보이는 리스트 다르게----------------------------------
 	// 편의점 관리자 
 	// 이벤트 조회 : 모든 공식이벤트를 조회 및 제목 + 내용 검색
 	@RequestMapping(value = "cvseventlist.do", method = RequestMethod.GET)
-	public ModelAndView eventLis(@RequestParam(value="keyword",required = false, defaultValue="") String keyword, String page){
+	public ModelAndView eventLis(@RequestParam(value="keyword",required = false, defaultValue="") String keyword, String page, HttpSession session){
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("admin/cvsmanager/eventList");
 		  int currentPage = 1;
           int limit = 10;
-          List<Event> list = eventService.selectEventList(keyword,currentPage, limit);
+          
+          int user_no = ((User)session.getAttribute("user")).getUser_no();
+          List<Event> list = eventService.selectEventList(keyword,currentPage, limit, user_no);
                 System.out.println("관리자list : " + list);
-                
+                              
           Map<String, Object> map = new HashMap<String, Object>();
-          int listCount = eventService.getListCount(keyword);
+          int listCount = eventService.getListCount(keyword,user_no);
+          
           int maxPage = (int) ((double) listCount / limit + 0.9);
           int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
           int endPage = startPage + limit - 1;
            if (maxPage < endPage)
                    endPage = maxPage;
-           System.out.println("파일명 나오는지:" + list.get(1));
-           
            	map.put("currentPage", currentPage);
             map.put("listCount", listCount);
             map.put("maxPage", maxPage);
@@ -222,6 +224,7 @@ public class EventController {
             map.put("endPage", endPage);
             map.put("limit", limit);
             map.put("list", list);
+          mv.addObject("list",list);
           mv.addObject("event", map);      
           return mv;
 			
@@ -235,13 +238,16 @@ public class EventController {
 	}
 	@RequestMapping(value="pageload.do")
 	@ResponseBody
-    public ModelAndView pageload(ModelAndView mv, @RequestParam("page") int page, HttpServletRequest request,@RequestParam(value="keyword",required = false, defaultValue="") String keyword) {
+    public ModelAndView pageload(ModelAndView mv, @RequestParam("page") int page, HttpServletRequest request,@RequestParam(value="keyword",required = false, defaultValue="") String keyword, HttpSession session) {
 		 int currentPage = page;
          int limit = 10;
-         List<Event> list = eventService.selectEventList(keyword, currentPage, limit);
+         
+         int user_no = ((User)session.getAttribute("user")).getUser_no();
+         
+         List<Event> list = eventService.selectEventList(keyword, currentPage, limit, user_no);
          
          Map<String, Object> map = new HashMap<String, Object>();
-         int listCount = eventService.getListCount(keyword);
+         int listCount = eventService.getListCount(keyword,user_no);
          int maxPage = (int) ((double) listCount / limit + 0.9);
          int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
          int endPage = startPage + limit - 1;
@@ -299,9 +305,8 @@ public class EventController {
 		
 		
 		String file_name = new FileUtils().InsertFile(session, request);
-		String[] file = file_name.split("/");
 		
-		System.out.println("이건 insert"+file[0] + " , " + file[1]);
+		String[] file = file_name.split("/");
 		
 		Event event = new Event();		
 		event.setWriter(Integer.parseInt(request.getParameter("writer")));
@@ -318,6 +323,19 @@ public class EventController {
          return "redirect:/cvseventlist.do";
 	}
 	//글쓰기 끝 -------------------------------------------
+	
+	//이벤트 결과 글쓰기
+	// ResultwhriteForm 으로 이동
+	@RequestMapping(value="cvseventResultView.do", method = RequestMethod.GET)
+	public String cvseventResultView() {
+		return "admin/cvsmanager/eventResultWrite";
+	}
+	@RequestMapping(value="cvsevenResultWrite.do", method= RequestMethod.POST)
+	public String cvsEventResultWrite(EventResult eventResult) throws Exception {
+		  eventService.eventResultInsert(eventResult);
+         return "redirect:/eventresultlist.do";
+	}
+	//--------------------------------------------------
 	
 	
 	//이벤트 수정 페이지 이동
@@ -365,5 +383,43 @@ public class EventController {
 	}
 	//삭제 끝
 	
-
+	
+	//이벤트 참여하기
+	@RequestMapping(value="eventJoin.do", method = RequestMethod.POST)
+	public ModelAndView eventJoin(EventJoin eventjoin) {
+		System.out.println("들어가나?");
+		ModelAndView mv = new ModelAndView();
+		
+		int checkEventJoinTable = eventService.eventJoincheck(eventjoin);
+		
+		if (checkEventJoinTable == 0) {
+			 // 참여 처음 클릭
+	         // 참여 테이블에 넣음
+	         eventService.eventJoin(eventjoin);
+	         
+	      } else if (checkEventJoinTable == 1) {
+	         // 참여 두번 클릭
+	         // 참여 테이블에서 삭제
+	    	  eventService.deleteJoin(eventjoin);
+	      }
+		mv.addObject("checkEventJoinTable",checkEventJoinTable);
+		mv.setViewName("jsonView");
+	     return mv;
+	}
+	 //이벤트 참여 인원
+	   @RequestMapping(value="eventCount.do",method=RequestMethod.POST)
+	   public ModelAndView eventJoinListCount(EventJoin eventjoin){
+	      ModelAndView mv = new ModelAndView();
+	      
+	      // 테이블에서 특정 게시물 참여인원 수..
+	      int eventJoinCount= eventService.eventJoinCount(eventjoin.getEvent_no());
+	      int checkEventJoinTable = eventService.eventJoincheck(eventjoin);
+	      
+	      mv.addObject("eventJoincheck",checkEventJoinTable);
+	      mv.addObject("eventJoinCount",eventJoinCount);
+	      mv.setViewName("jsonView");
+	      
+	      return mv;
+	   }
+	
 }

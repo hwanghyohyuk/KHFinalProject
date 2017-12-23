@@ -28,6 +28,13 @@ public class EventJoin implements Serializable {
 		this.user_name = user_name;
 	}
 	
+	
+	public EventJoin(int event_no, int user_no) {
+		super();
+		this.event_no = event_no;
+		this.user_no = user_no;
+	}
+
 	/* Getter & Setter */
 	public int getEvent_no() {
 		return event_no;
