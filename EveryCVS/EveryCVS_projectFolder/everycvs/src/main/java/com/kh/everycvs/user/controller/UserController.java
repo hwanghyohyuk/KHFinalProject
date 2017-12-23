@@ -264,36 +264,55 @@ public class UserController {
 		Store store = userService.enrollCompare(enrollNo);
 		return store;
 	}
-
+	
+	/*인증기록 확인*/
+	@RequestMapping("/sign/checkcertify.do")
+	@ResponseBody
+	public int checkCertify(@RequestParam("email") String email) {
+		//사용자의 중복요청을 처리하기 위한 메소드
+		int checkCertify = userService.checkCertify(email);
+		if(checkCertify>0){
+			return 1;//이미 인증번호 요청이 있었음
+		}else{		
+			return 0;//최초 인증번호 요청
+		}
+	}
+	
 	/** 이메일 중복 검사 **/
 	@RequestMapping("/sign/checkemail.do")
 	@ResponseBody
-	public int checkEmail(@RequestParam("email") String email,HttpSession session) {
+	public int checkEmail(@RequestParam("email") String email,HttpSession session,@RequestParam("cValue")int checkCertify) {
 		//이메일 중복체크 - 같은 이메일의 수 반환
 		int result = userService.checkEmail(email);
 		if(result>0){
 			//이메일 중복O
 			return result; //결과 : 중복
 		}else{
-			//이메일 중복X
+			//이메일 중복X	
 			String certifyNo = userService.createCertifyNo();
 			EmailCertification ec = new EmailCertification(email, session.getId(), certifyNo);
 			if(certifyNo!=null){
-				boolean sendMail = userService.sendCertifyMail(email,certifyNo);
-			if(sendMail){
-				int insertCertify = userService.insertCertify(ec);
-				if(insertCertify==0){
-					return -3;//DB insert 오류
+				int insertCertify=0;
+				if(checkCertify>0){
+					insertCertify = userService.updateCertify(ec);
+				}else{
+					insertCertify = userService.insertCertify(ec);
+				}	
+				if(insertCertify>0){
+					boolean sendMail = userService.sendCertifyMail(email,certifyNo);
+					if(sendMail){//결과 : 오류없음,0
+						return result;
+					}else{//이메일 전송 오류
+						userService.deleteCertify(email);
+						return -3;
+					}
+				}else{//DB insert 오류
+					return -2;
 				}
-			}else{
-				return -2;//이메일 전송 오류
+			}else{//인증번호 생성 오류
+				return -1;
 			}
-			}else{
-				return -1;//인증번호 생성 오류
-			}
-			return result;//결과 : 오류없음
 		}
-		//return result;
 	}
 
 	/** 인증번호 확인 **/
@@ -301,6 +320,9 @@ public class UserController {
 	@ResponseBody
 	public int checkCertification(@RequestParam("email") String email,@RequestParam("certifyno") String certifyNo,HttpSession session) {
 		int result=userService.certificationCheck(new EmailCertification(email, session.getId(), certifyNo));
+		if(result>0){
+			userService.deleteCertify(email);
+		}		
 		return result;
 	}
 
@@ -310,9 +332,27 @@ public class UserController {
 		return null;
 	}
 
-	/** 정보수정 **/
-	public String modifyUser(HttpSession session, User user) {
-		return null;
+	/** 정보수정페이지 이동**/
+	@RequestMapping("/user/infointro.do")
+	public ModelAndView infoIntro(ModelAndView mv,HttpSession session) {
+		mv.setViewName("user/mypage/infointro");
+		return mv;
+	}
+	
+	@RequestMapping("/user/infoin.do")
+	@ResponseBody
+	public int infoIn(ModelAndView mv,HttpSession session,@RequestParam("pwd")String pwd) {
+		User user = (User)session.getAttribute("user");
+		user.setUser_pwd(pwd);
+		int checkUser = userService.checkUser(user);
+		return checkUser;
+	}
+		
+	
+	@RequestMapping("/user/userinfo.do")
+	public ModelAndView userInfo(ModelAndView mv,HttpSession session) {
+		mv.setViewName("user/mypage/userinfo");
+		return mv;
 	}
 
 	/* 이메일 찾기 페이지 이동 */
@@ -377,29 +417,48 @@ public class UserController {
 		return result;
 	}
 	
+	@RequestMapping("/user/checkpasslink.do")
+	@ResponseBody
+	public int checkPasslink(HttpSession session){
+		//사용자의 중복요청을 처리하기 위한 메소드
+		String email = (String) session.getAttribute("email");
+		int checkPasslink = userService.checkPasslink(email);
+		if(checkPasslink>0){
+			return 1;//이미 재설정 링크가 있음
+		}else{		
+			return 0;//최초 재설정
+		}
+	}
+	
 	@RequestMapping("/user/sendresetpwd.do")
 	@ResponseBody
-	public int sendResetPwd(HttpSession session){
+	public int sendResetPwd(HttpSession session,@RequestParam("pValue")int checkPasslink){
 		String email = (String) session.getAttribute("email");
 		//비밀번호 재설정 키 만들고
 		String resetKey = userService.createResetKey();
 		if(resetKey!=null){
-			//이메일 보내고
-			boolean isSuccess = userService.sendResetPwd(email, resetKey);//수정
-			if (isSuccess){
-				//데이터베이스에 저장
-				PassLink passlink = new PassLink(email, resetKey);
-				int insertKey = userService.insertKey(passlink);
-				if(insertKey==0){
-					return -3;//DB insert error
-				}
+			//데이터베이스에 저장하고
+			PassLink passlink = new PassLink(email, resetKey);
+			int insertKey=0;
+			if(checkPasslink>0){
+				insertKey = userService.updateKey(passlink);
 			}else{
-				return -2;//email send error
+				insertKey = userService.insertKey(passlink);
+			}			
+			if(insertKey>0){//이메일 보냄
+				boolean isSuccess = userService.sendResetPwd(email, resetKey);//수정
+				if (isSuccess){			
+					return 1;//성공, 오류없음
+				}else{//email send error
+					userService.deleteResetKey(email);
+					return -3;
+				}
+			}else{//DB insert error
+				return -2;
 			}
-		}else{
-			return -1;//key create error
-		}
-		return 1;
+		}else{//key create error
+			return -1;
+		}		
 	}
 	
 	/* 비밀번호재설정 성공 페이지 이동 */

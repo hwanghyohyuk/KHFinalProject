@@ -22,7 +22,9 @@ public class UserDao {
 
 	public User signIn(User user) {
 		// Mapper의 namespace명.id : 자신에게 맞게 작성해서 넣는다.
-		return sqlSession.selectOne("user.signIn", user);
+		User resultUser = sqlSession.selectOne("user.signIn", user);
+		resultUser.setUser_pwd(null);
+		return resultUser;
 	}
 
 	// 자동로그인 체크한 경우에 사용자 테이블에 세션과 유효시간을 저장하기 위한 메서드
@@ -44,40 +46,36 @@ public class UserDao {
 		return sqlSession.selectOne("user.checkUserWithSessionKey", sessionId);
 	}
 
-	public User getUser(int user_no) {
-		return null;
+	public int insertUser(User user) {
+		return sqlSession.insert("user.insertUser", user);
 	}
 
-	public int insertUser(User user) {
-		return sqlSession.insert("user.insertUser",user);
+	public int insertAdmin(User user) {
+		return sqlSession.insert("user.insertAdmin", user);
+	}
+
+	public int checkCertify(String email) {
+		return sqlSession.selectOne("user.checkCertify", email);
 	}
 	
-	public int insertAdmin(User user) {
-		return sqlSession.insert("user.insertAdmin",user);
-	}
-
 	public int checkEmail(String email) {
 		return sqlSession.selectOne("user.checkEmail", email);
-	}
-	
-	public int checkCertify(EmailCertification emailCertification) {
-		return sqlSession.selectOne("user.checkCertify", emailCertification);
 	}
 
 	public int insertCertify(EmailCertification emailCertification) {
 		return sqlSession.insert("user.insertCertify", emailCertification);
 	}
-	
+
 	public int updateCertify(EmailCertification emailCertification) {
 		return sqlSession.update("user.updateCertify", emailCertification);
 	}
-	
+
 	public void deleteCertify(String email) {
 		sqlSession.delete("user.deleteCertify", email);
 	}
-	
+
 	public int certificationCheck(EmailCertification emailCertification) {
-		return sqlSession.selectOne("user.certificationCheck",emailCertification);
+		return sqlSession.selectOne("user.certificationCheck", emailCertification);
 	}
 
 	public Map<String, Object> userList(String page, String keyword) {
@@ -86,6 +84,10 @@ public class UserDao {
 
 	public boolean updateTempPwd(User user) {
 		return false;
+	}
+	
+	public int checkUser(User user) {
+		return sqlSession.selectOne("user.checkUser",user);
 	}
 
 	public boolean modifyUser(User user) {
@@ -100,28 +102,42 @@ public class UserDao {
 		return sqlSession.update("userIncreMoney", map);
 	}
 
-	public Store enrollCompare(String enrollNo) {	
-		return sqlSession.selectOne("store.enrollCompare",enrollNo);
+	public Store enrollCompare(String enrollNo) {
+		return sqlSession.selectOne("store.enrollCompare", enrollNo);
 	}
 
 	public int checkName(Map<String, Object> map) {
-		return sqlSession.selectOne("user.checkName",map);
+		return sqlSession.selectOne("user.checkName", map);
 	}
+
 	public int checkPhone(Map<String, Object> map) {
-		return sqlSession.selectOne("user.checkPhone",map);
+		return sqlSession.selectOne("user.checkPhone", map);
 	}
+
+	public int checkPasslink(String email) {
+		return sqlSession.selectOne("user.checkPasslink", email);
+	}
+
 	public int insertKey(PassLink passlink) {
-		return sqlSession.insert("user.insertKey",passlink);
+		return sqlSession.insert("user.insertKey", passlink);
 	}
+
+	public int updateKey(PassLink passlink) {
+		return sqlSession.insert("user.updateKey", passlink);
+	}
+
 	public int resetPwd(User user) {
-		return sqlSession.update("user.resetPwd",user);
+		return sqlSession.update("user.resetPwd", user);
 	}
+
 	public PassLink selectPasslink(String key) {
-		return sqlSession.selectOne("user.selectPasslink",key);
+		return sqlSession.selectOne("user.selectPasslink", key);
 	}
 
 	public int deleteResetKey(String email) {
-		return sqlSession.delete("user.deleteResetKey",email);
+		return sqlSession.delete("user.deleteResetKey", email);
 	}
+
+
 
 }

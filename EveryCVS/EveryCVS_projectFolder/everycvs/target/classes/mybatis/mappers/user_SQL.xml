@@ -72,15 +72,13 @@
 		</selectKey>
 
 	</update>
-
-	<select id="checkEmail" parameterType="string" resultType="_int">
-	<![CDATA[select count(*) from user_view where email=#{email}]]>
+	
+	<select id="checkCertify" parameterType="string" resultType="_int">
+	<![CDATA[select count(*) from tb_email_certification where email=#{email}]]>
 	</select>
 	
-	<select id="checkCertify" parameterType="emailcertification" resultType="_int">
-	<![CDATA[
-	select count(*) from tb_email_certification where email=#{email} and session_key=#{session_key}
-	]]>
+	<select id="checkEmail" parameterType="string" resultType="_int">
+	<![CDATA[select count(*) from user_view where email=#{email}]]>
 	</select>
 
 	<insert id="insertCertify" parameterType="emailcertification">
@@ -129,9 +127,19 @@
 	<![CDATA[select count(*) from user_view where email=#{email} and user_name = #{user_name} and phone=#{phone}]]>
 	</select>
 	
+	<select id="checkPasslink" parameterType="string" resultType="_int">
+	<![CDATA[select count(*) from tb_passlink where email=#{email}]]>
+	</select>
+	
 	<insert id="insertKey" parameterType="passlink">
 	<![CDATA[insert into tb_passlink values(#{email},#{key},default)]]>
 	</insert>
+	
+	<update id="updateKey" parameterType="passlink">
+	<![CDATA[
+	update tb_passlink set key = #{key}, end_time = default where email=#{email}
+	]]>
+	</update>
 	
 	<update id="resetPwd" parameterType="user">
 	<![CDATA[
@@ -149,5 +157,8 @@
 	]]>
 	</delete>
 	
+	<select id="checkUser" parameterType="user" resultType="_int">
+	<![CDATA[select count(*) from user_view where email=#{email} and user_pwd = #{user_pwd}]]>
+	</select>
 	
 </mapper>

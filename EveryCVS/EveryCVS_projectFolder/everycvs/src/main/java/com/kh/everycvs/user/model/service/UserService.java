@@ -21,36 +21,39 @@ public interface UserService {
 	public void keepSignIn(String email, String sessionId, Date next) throws Exception;
 
 	User checkUserWithSessionKey(String value);
-	/** 정보수정 **/
-	User getUser(int user_no);
-	
+
+	/** 이메일찾기 **/	
 	/* 가입번호 비교 */
 	Store enrollCompare(String enrollNo);
 
-	/** 인증번호 생성 및 DB insert **/
-	String createCertifyNo();
-	
-	int insertCertify(EmailCertification emailCertification);
-
-	/** 이메일 보내기 **/
-	boolean sendCertifyMail(String email, String certifyNo);
-
-	/** 회원가입 **/
-	int insertUser(User user);
-	
-	int insertAdmin(User user);
-	
-	/** 이메일찾기 **/
+	/**인증번호 재요청 검사**/
+	int checkCertify(String email);
 	/** 이메일 중복 검사 **/
 	int checkEmail(String email);
-
+	/** 인증번호 생성 및 DB insert **/
+	String createCertifyNo();	
+	int insertCertify(EmailCertification emailCertification);
+	int updateCertify(EmailCertification emailCertification);
+	
+	/** 이메일 보내기 **/
+	boolean sendCertifyMail(String email, String certifyNo);
+	
+	/** 인증번호 삭제**/
+	void deleteCertify(String email);
+	
 	/** 인증번호 확인 **/
 	int certificationCheck(EmailCertification emailCertification);
-
+	
+	/** 회원가입 **/
+	int insertUser(User user);	
+	int insertAdmin(User user);
+	
+	
 	/** 회원탈퇴 **/
 	boolean deleteUser(int user_no);
 
 	/** 정보수정 **/
+	int checkUser(User user);
 	boolean modifyUser(User user);
 
 	/** 이름 확인 **/
@@ -59,14 +62,18 @@ public interface UserService {
 	/** 전화번호 확인 **/
 	int checkPhone(String email, String name, String phone);
 
+	/** 기존 비밀번호 재설정 유무 체크 **/
+	int checkPasslink(String email);
+	
 	/** 비밀번호 재설정 키 생성 **/
 	String createResetKey();
-
+	
+	/** insert or update PassLink **/
+	int insertKey(PassLink passlink);
+	int updateKey(PassLink passlink);
+	
 	/** 재설정 이메일 보내기 **/
 	boolean sendResetPwd(String email, String resetKey);
-
-	/** insert PassLink **/
-	int insertKey(PassLink passlink);
 	
 	int resetPwd(User user);
 	
@@ -83,6 +90,14 @@ public interface UserService {
 
 	/** 회원 목록 및 검색 **/
 	Map<String, Object> userList(String page, String keyword);
+
+
+
+
+
+
+
+
 
 
 

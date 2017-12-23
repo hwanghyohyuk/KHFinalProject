@@ -83,7 +83,7 @@ function findPhone(){
 					  title: '휴대폰 번호 확인 중...',
 					  allowOutsideClick: false,
 					  onOpen: () => {swal.showLoading()}
-					})
+					});
 			},
 			success:function(data){
 				if(data===0){
@@ -106,7 +106,7 @@ function findPhone(){
 						timer: 1500,
 						type: 'success'
 					});
-					setTimeout("sendEmail()",1500);
+					setTimeout("checkPasslink()",1500);
 				}	
 			},
 			error : function(request, status, error) {
@@ -134,10 +134,63 @@ function findPhone(){
 		});
 	}
 }
-
-function sendEmail(){
+function checkPasslink(){
+	$.ajax({
+		url:'/everycvs/user/checkpasslink.do',
+		type:'post',
+		beforeSend:function(){
+			swal({
+				  title: '확인 중...',
+				  html: '기존 비밀번호 재설정 링크 유무',
+				  allowOutsideClick: false,
+				  onOpen: () => {swal.showLoading()}
+				})
+		},
+		success:function(data){
+			if(data===1){
+				swal({
+					title: '기존 비밀번호 재설정 링크 존재',
+					text: "비밀번호 재설정 링크를 다시 보내시겠습니까?",
+					type: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: '예',
+					cancelButtonText: '아니요',
+					confirmButtonClass: 'btn btn-success btn-lg',
+					cancelButtonClass: 'btn btn-danger btn-lg',
+					buttonsStyling: false,
+					allowOutsideClick: false,
+					reverseButtons: true
+					}).then((result) => {
+					if (result.value) {
+						sendEmail(1);
+					} else if (result.dismiss === 'cancel') {
+						swal({
+							title: '취소됨',
+							text: "이메일을 다시 확인해주세요",
+							timer: 1500,
+							type: 'error'
+						});
+					}
+				});
+			}else if(data===0){
+				sendEmail(0);
+			}
+		},
+		error : function(request, status, error) {
+			swal({
+				title: '오류',
+				text: error,
+				timer: 1500,
+				type: 'error'
+			});
+		}});
+}
+function sendEmail(pValue){
 	$.ajax({
 		url:'/everycvs/user/sendresetpwd.do',
+		data:{'pValue':pValue},
 		type:'post',
 		beforeSend:function(){
 			swal({
@@ -171,10 +224,11 @@ function sendEmail(){
 			}else if(data===1){
 				swal({
 					title: '비밀번호 재설정 메일 전송 성공',
-					timer: 1500,
+					html: '입력하신 이메일로 비밀번호 재설정 링크를 보내드렸습니다',
+					timer: 2000,
 					type: 'success'
 				});
-				setTimeout("next()",1500);
+				setTimeout("next()",2000);
 			}else{
 				swal({
 					title: '알수없는 에러',
