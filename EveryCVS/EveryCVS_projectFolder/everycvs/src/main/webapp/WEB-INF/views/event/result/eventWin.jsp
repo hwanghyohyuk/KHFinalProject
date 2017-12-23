@@ -22,8 +22,7 @@
                                 <div class="blog-item-header">
                                     <!-- Title -->
                                     <h2>
-                                        <a href="#">
-                                            1+1 이벤트 당첨을 축하드립니다!</a>
+                                        <a href="#">이벤트 당첨을 축하드립니다!</a>
                                     </h2>
                                     <div class="clearfix"></div>
                                     <!-- End Title -->

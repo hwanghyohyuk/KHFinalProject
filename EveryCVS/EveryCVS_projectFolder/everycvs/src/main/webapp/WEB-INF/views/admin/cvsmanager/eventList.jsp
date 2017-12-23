@@ -73,7 +73,7 @@ function pageload(page)
                   "<a href='#' aria-label='Next'>"+
                       "<span aria-hidden='true'>&raquo;</span></a></li>";
             } else {
-               valuesPaging += "<li><a href='javascript:pageload(" + (data.currentPage + 1)+ "') aria-label='Next'>" +
+               valuesPaging += "<li><a href='javascript:pageload(" + (data.currentPage + 1)+ ")' aria-label='Next'>" +
                 "<span aria-hidden='true'>&raquo;</span></a></li>";
             }
             
@@ -88,7 +88,7 @@ function pageload(page)
 	<div id="content">
 		<div class="container background-white">
 			<h2 class="margin-bottom-30">
-				<b>GS25</b>&nbsp;&nbsp;Event management
+				<b>${sessionScope.user.brand_name}</b>&nbsp;&nbsp;Event management
 			</h2>
 
 			<!-- Branch select table -->
@@ -113,13 +113,15 @@ function pageload(page)
 										<th width="8%">Del</th>
 									</tr>
 									<tbody id="eventlist">
-									<c:forEach items="${event.list}" var="ead">
+									
+									<c:forEach items="${list}" var="ead">
+									
 									<tr class="text-center">
 										<td>${ead.event_no}</td>
 										<td><a href="javascript:ajaxDetail(${ead.event_no})">${ead.title}</a></td>
 										<td>${ead.start_date} ~ ${ead.end_date}</td>
 										<td>${ead.readcount}</td>
-										<td><i class="fa fa-trash-o jun21" onclick="del_event();"></i></td>
+										<td><i class="fa fa-trash-o jun21" onclick="del_event('${ead.event_no}');"></i></td>
 									</tr>
 									</c:forEach>
 									</tbody>
@@ -131,7 +133,7 @@ function pageload(page)
 								<!--start-->
 								<div class="col-sm-2 jun16">
 									<select class="form-control input jun15" >
-										<option value="both">제목+내용</option>
+										<option value="both">제목</option>
 									</select>
 								</div>
 								<form action="cvseventlist.do" method="GET">
@@ -159,7 +161,6 @@ function pageload(page)
 							<div id="paging">
 								<nav>
 									<ul class="pagination" id="eventpaging">
-
 										<c:if test="${event.currentPage <= 1}">
 											<li class="disabled"><a href="#" aria-label="Previous">
 													<span aria-hidden="true">&laquo;</span>

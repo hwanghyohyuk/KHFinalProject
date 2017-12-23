@@ -27,53 +27,39 @@
 			<!-- aqua panel -->
 			<div class="panel panel-blue">
 				<div class="panel-heading">
-					<h3 class="panel-title">Modify event</h3>
+					<h3 class="panel-title">Add event</h3>
 				</div>
 
 				<div class="panel-body">
 					<div class="col-sm-6" style="padding-left: 0px;">
-						<div class="jun5">No. ${event.event_no}</div>
-						<form class="form-inline" name="event" method="post" action="cvseventmodifywrite.do" enctype="multipart/form-data">
-						<input type="hidden" name="writer" value="${sessionScope.user.user_no}">
-						<input type="hidden" name="event_no" value="${event.event_no}">
-						<input type="hidden" name="prevfile" value="${event.stored_file_name}">
+						<div class="jun5"></div>
+						<form class="form-inline" name="eventresult" method="post" action="cvsevenResultWrite.do">
+						
+							<input type="hidden" name="writer" value="${sessionScope.user.user_no }">
 							<div class="form-group" id="jun_input1">
 								<label for="title" style="padding-right: 65px;">Event
-									Title</label> <input type="text" class="form-control" id="title" name="title"
-									style="width: 300px;" value="${event.title}">
+									Title</label> <input type="text" class="form-control" id="title"
+									style="width: 300px;" name="title" placeholder="제목을 입력하세요.">
 							</div>
 							<br>
-
+							<!-- <div class="form-group" id="jun_input1">
+								<label for="category" style="padding-right: 65px;">Type</label>
+									<select class="form-control input jun15" style="width: 300px;">
+										<option value="category">이벤트 종류</option>
+									</select>
+							</div> -->
 							<div class="form-group" id="jun_input1">
-								<label for="date1" style="padding-right: 70px;">Start
-									Date</label> <input type="date" class="form-control" id="date1" name="start_date"
-									style="width: 130px;" value="${event.start_date}">
-							</div>
-							<br>
-							<div class="form-group" id="jun_input1">
-								<label for="date2" style="padding-right: 77px;">End Date</label>
-								<input type="date" class="form-control" id="date2" name="end_date"
-									style="width: 130px;" value="${event.end_date}">
-							</div>
-							<br>
-							<div class="form-group" id="jun_input1">
-								<label for="limit"
-									style="padding-right: 22px; padding-top: 6px; float: left;">Participation
-									limit</label> <input type="number" class="form-control jun10" name="join_limit"
-									id="limit" placeholder="참여제한횟수" style="width: 120px;" value="${event.join_limit}">
-							</div>
-							<br>
-							<div class="form-group" id="jun_input1" style="margin-top: 10px;">
-								<label for="imgurl"
-									style="float: left; padding: 0px 59px 10px 0px;">Event
-									image</label> <input type="file" name="imgfile" id="imgurl" style="padding: 0px;">
+								<label for="title" style="padding-right: 65px;">Event
+									No</label> <input type="text" class="form-control" id="title"
+									style="width: 300px;" name="event_no" placeholder="이벤트 번호를 입력하세요">
 							</div>
 					</div>
 					<div class="col-sm-6 jun9">
 						<div class="form-group" id="jun_input1">
 							<label for="contents" style="padding-right: 61px;">Contents</label>
-							<textarea class="form-control" id="contents" name="contents"
-								style="height: 142px; padding: 2px 4px;" value="">${event.contents}</textarea>
+							<textarea class="form-control" name="contents" id="contents"
+								style="height: 142px; padding: 2px 4px;"
+								placeholder="내용을 입력하세요."></textarea>
 						</div>
 						<br>
 						<button type="submit" class="btn btn-danger btn-lg jun4 jun7"
@@ -84,6 +70,8 @@
 			</div>
 		</div>
 		<!-- End aqua panel -->
+
+
 	</div>
 </div>
 

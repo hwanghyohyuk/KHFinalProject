@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Event;
+import com.kh.everycvs.common.model.vo.EventJoin;
 import com.kh.everycvs.common.model.vo.EventResult;
 
 public interface EventService {
@@ -18,10 +19,10 @@ public interface EventService {
 	List<Event> eventTop3();
 	
 	//관리자 게시글 갯수 조회
-	int getListCount(String keyword);
+	int getListCount(String keyword, int user_no);
 
 	// 관리자 이벤트 조회 : 모든 공식이벤트를 조회 및 검색
-	public List<Event> selectEventList(String keyword, int currentPage, int limit);
+	public List<Event> selectEventList(String keyword, int currentPage, int limit, int user_no);
 	
 	//관리자 상세 조회
 	public Event cvsEventDetail(int eno);
@@ -55,5 +56,32 @@ public interface EventService {
 	EventResult selectEventResultOne(int rno);
 	//사용자 게시글 조회수 증가
 	int eventResultRead(int rno);
+	
+	
+	//이벤트 참여
+	ArrayList<EventJoin> selectEventJoinList();
+	EventJoin selectEventJoin(EventJoin eventjoin); 
+	int eventJoinCount(int event_no);
+	
+	int eventJoincheck(EventJoin eventjoin);
+	void eventJoin(EventJoin eventjoin);
+	
+	void deleteJoin(EventJoin eventjoin);
+	//아직 못끝냄
+	
+	
+	void eventResultInsert(EventResult eventResult);
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
 	
 }
