@@ -799,7 +799,7 @@ INSERT INTO TB_STORE_PRODUCT(STORE_PRODUCT_NO,STORE_NO,PRODUCT_NO,MANUFACTURE_DA
 INSERT INTO TB_STORE_PRODUCT(STORE_PRODUCT_NO,STORE_NO,PRODUCT_NO,MANUFACTURE_DATE,QUANTITY) VALUES(SEQ_STORE_PRODUCT_NO.NEXTVAL, '20862330', 19, SYSDATE, 2);
 
 /*GS25 대치학원점*/
-INSERT INTO TB_STORE_PRODUCT(STORE_PRODUCT_NO,STORE_NO,PRODUCT_NO,MANUFACTURE_DATE,QUANTITY) VALUES(SEQ_STORE_PRODUCT_NO.NEXTVAL, '22520776', 24, SYSDATE, 2);
+INSERT INTO TB_STORE_PRODUCT(STORE_PRODUCT_NO,STORE_NO,PRODUCT_NO,MANUFACTURE_DATE,QUANTITY) VALUES(SEQ_STORE_PRODUCT_NO.NEXTVAL, '22520776', 24, SYSDATE-1/4, 2);
 INSERT INTO TB_STORE_PRODUCT(STORE_PRODUCT_NO,STORE_NO,PRODUCT_NO,MANUFACTURE_DATE,QUANTITY) VALUES(SEQ_STORE_PRODUCT_NO.NEXTVAL, '22520776', 34, SYSDATE, 3);
 INSERT INTO TB_STORE_PRODUCT(STORE_PRODUCT_NO,STORE_NO,PRODUCT_NO,MANUFACTURE_DATE,QUANTITY) VALUES(SEQ_STORE_PRODUCT_NO.NEXTVAL, '22520776', 24, SYSDATE, 1);
 
@@ -836,16 +836,16 @@ INSERT INTO TB_STORE_PRODUCT(STORE_PRODUCT_NO,STORE_NO,PRODUCT_NO,MANUFACTURE_DA
 INSERT INTO TB_STORE_PRODUCT(STORE_PRODUCT_NO,STORE_NO,PRODUCT_NO,MANUFACTURE_DATE,QUANTITY) VALUES(SEQ_STORE_PRODUCT_NO.NEXTVAL, '21952693', 23, SYSDATE, 2);
 
 /*사용자*/
-INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'admin@iei.or.kr', 'adminadmin', '사이트관리자', '92/06/18', 'M', '01059136110', '경기도 부천시 길주로 300', default, null, null, default, 'sitemanager', default, default, null, null,default,null);
-INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user11@iei.or.kr', 'user1111', 'GS25관리자', '94/03/04', 'W', '01021226374', '경기도 안산시 상록구 안산천남1로 70', default, null, null, default, 'cvsmanager', default, default, null, 1,default,null);
-INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user22@iei.or.kr', 'user2222', 'CU관리자', '94/03/03', 'W', '01089060239', '인천광역시 연수구 송도동 컨벤시아대로', default, null, null, default, 'cvsmanager', default, default, null, 2,default,null);
-INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user33@iei.or.kr', 'user3333', '세븐일레븐관리자', '94/03/04', 'W', '01091901099', '경기도 이천시 모가면 사실로 988', default, null, null, default, 'cvsmanager', default, default, null, 3,default,null);
-INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user44@iei.or.kr', 'user4444', '황효혁', '89/12/25', 'M', '01012345678', '서울시 강남구 남부순환로 3032', default, null, null, default, 'storemanager', default, default, '25305326', 3,default,null);
-INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user55@iei.or.kr', 'user5555', '이시연', '86/11/02', 'M', '01023456789', '서울 강남구 역삼동 637-9', default, null, null, default, 'storemanager', default, default, '25471219', 2,default,null);
-INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user66@iei.or.kr', 'user6666', '이선주', '80/09/10', 'W', '01034567890', '서울 강남구 압구정로48길 15', default, null, null, default, 'storemanager', default, default, '22497502', 1,default,null);
-INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user77@iei.or.kr', 'user7777', '사용자1', '96/12/07', 'W', '01011112222', '서울 강남구 영동대로 513', default, null, null, default, 'customer', 10000, 745, null, null,default,null);
-INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user88@iei.or.kr', 'user8888', '사용자2', '75/05/24', 'M', '01022223333', '경기 고양시 일산서구로 217-60', default, null, null, default, 'customer', 20000, 800, null, null,default,null);
-INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user99@iei.or.kr', 'user9999', '사용자3', '00/04/01', 'M', '01033334444', '서울 영등포구 63로 50', default, null, null, default, 'customer', 150000, 600, null, null,default,null);
+INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'admin@iei.or.kr', 'admin', '사이트관리자', '92/06/18', 'M', '01059136110', '경기도 부천시 길주로 300', default, null, null, default, 'sitemanager', default, default, null, null,default,null);
+INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user11@iei.or.kr', 'user11', 'GS25관리자', '94/03/04', 'W', '01021226374', '경기도 안산시 상록구 안산천남1로 70', default, null, null, default, 'cvsmanager', default, default, null, 1,default,null);
+INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user22@iei.or.kr', 'user22', 'CU관리자', '94/03/03', 'W', '01089060239', '인천광역시 연수구 송도동 컨벤시아대로', default, null, null, default, 'cvsmanager', default, default, null, 2,default,null);
+INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user33@iei.or.kr', 'user33', '세븐일레븐관리자', '94/03/04', 'W', '01091901099', '경기도 이천시 모가면 사실로 988', default, null, null, default, 'cvsmanager', default, default, null, 3,default,null);
+INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user44@iei.or.kr', 'user44', '황효혁', '89/12/25', 'M', '01012345678', '서울시 강남구 남부순환로 3032', default, null, null, default, 'storemanager', default, default, '25305326', 3,default,null);
+INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user55@iei.or.kr', 'user55', '이시연', '86/11/02', 'M', '01023456789', '서울 강남구 역삼동 637-9', default, null, null, default, 'storemanager', default, default, '25471219', 2,default,null);
+INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user66@iei.or.kr', 'user66', '이선주', '80/09/10', 'W', '01034567890', '서울 강남구 압구정로48길 15', default, null, null, default, 'storemanager', default, default, '22497502', 1,default,null);
+INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user77@iei.or.kr', 'user77', '사용자1', '96/12/07', 'W', '01011112222', '서울 강남구 영동대로 513', default, null, null, default, 'customer', 10000, 745, null, null,default,null);
+INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user88@iei.or.kr', 'user88', '사용자2', '75/05/24', 'M', '01022223333', '경기 고양시 일산서구로 217-60', default, null, null, default, 'customer', 20000, 800, null, null,default,null);
+INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user99@iei.or.kr', 'user99', '사용자3', '00/04/01', 'M', '01033334444', '서울 영등포구 63로 50', default, null, null, default, 'customer', 150000, 600, null, null,default,null);
 
 
 /* SAMPLE DATA PURCHASE */
