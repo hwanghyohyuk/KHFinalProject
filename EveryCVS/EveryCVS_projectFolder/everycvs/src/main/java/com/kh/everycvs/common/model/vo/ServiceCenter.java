@@ -22,14 +22,33 @@ public class ServiceCenter implements Serializable {
 	private Date write_date; //작성일
 	private int readcount; //조회수
 	private String original_file_name; //첨부파일기존명
+	private String stored_file_name;//첨부파일
 	private String del_check; //삭제구분
 	
+	
+
 	public ServiceCenter() {
 		super();
 	}
 
+	
+	public ServiceCenter(int service_no, String title, int writer, String contents, Date write_date, int readcount,
+			String original_file_name, String stored_file_name, String del_check) {
+		super();
+		this.service_no = service_no;
+		this.title = title;
+		this.writer = writer;
+		this.contents = contents;
+		this.write_date = write_date;
+		this.readcount = readcount;
+		this.original_file_name = original_file_name;
+		this.stored_file_name = stored_file_name;
+		this.del_check = del_check;
+	}
+
+
 	public ServiceCenter(int service_no, String title, int writer, String user_name, String contents, Date write_date,
-			int readcount, String original_file_name, String del_check) {
+			int readcount, String original_file_name, String stored_file_name, String del_check) {
 		super();
 		this.service_no = service_no;
 		this.title = title;
@@ -39,6 +58,7 @@ public class ServiceCenter implements Serializable {
 		this.write_date = write_date;
 		this.readcount = readcount;
 		this.original_file_name = original_file_name;
+		this.stored_file_name = stored_file_name;
 		this.del_check = del_check;
 	}
 	
@@ -118,12 +138,20 @@ public class ServiceCenter implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	public String getStored_file_name() {
+		return stored_file_name;
+	}
+
+	public void setStored_file_name(String stored_file_name) {
+		this.stored_file_name = stored_file_name;
+	}
+
 	
 	/* ToString */
 	@Override
 	public String toString() {
 		return service_no + ", " + title + ", " + writer + ", " + user_name + ", " + contents + ", " + write_date + ", " + readcount + ", " + 
-			   original_file_name + ", " + del_check;
+			   original_file_name + ", " + stored_file_name + ", "+ del_check;
 	}
 
 }

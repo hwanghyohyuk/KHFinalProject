@@ -10,20 +10,10 @@
 <c:import url="../include/user/common/header.jsp"></c:import>
 <!-- === END HEADER === -->
 <script type="text/javascript">
-	
-	function deleteService(sno) {
-		var answer = false;
-		
-		answer = confirm("해당 게시물을 삭제하시겠습니까?");
-		if (answer){
-			location.href ='/everycvs/deleteService.do?sno='+sno;
-			alert("삭제되었습니다.");
-			}
+	function serviceUpdate(){
+		location.href ='/everycvs/serviceUpdate.do';
 	}
-	function modifyService(no) {
-		location.href = '/everycvs/serviceModifyPage.do?no='+no;
-		
-	}
+	console.log("${servicecenter}");
 	</script>
             <!-- === BEGIN CONTENT === -->
             <div id="content">
@@ -37,12 +27,15 @@
                             </div>
                             <hr>
                             <%-- <c:forEach items=" ${servicecenter }" var="sc">  --%>
+                            <form name="servicecenter" method="post" action="serviceUpdate.do">
+                            <input type="hidden" name="writer" value="${sessionScope.user.user_no }">
+                            <input type="hidden" name="service_no" value="${servicecenter.service_no }">
                                  <label>작성자
                                     <span class="color-red">*</span>
                                  </label>
                                 <div class="row margin-bottom-20">
                                     <div class="col-md-6 col-md-offset-0">
-                                        <input class="form-control" type="text" value="${servicecenter.user_name}" readonly>
+                                        <input name="user_name"class="form-control" type="text" value="${servicecenter.user_name}" readonly>
                                     </div>
                                 </div>
                                 <label>제목
@@ -50,26 +43,24 @@
                                  </label>
                                 <div class="row margin-bottom-20">
                                     <div class="col-md-6 col-md-offset-0">
-                                        <input class="form-control" type="text"  value="${servicecenter.title }" readonly>
+                                        <input id="title" name="title"class="form-control" type="text"  value="${servicecenter.title }" >
                                     </div>
                                 </div>
                                 <div>
                                 <label>내용</label>
                                 <div class="row margin-bottom-20">
                                     <div class="col-md-8 col-md-offset-0">
-                                        <textarea rows="8" class="form-control" placeholder="내용을 입력해주세요"   readonly>${servicecenter.contents }</textarea>
+                                        <textarea id="contents"name="contents" rows="8" class="form-control" placeholder="내용을 입력해주세요"   >${servicecenter.contents }</textarea>
                                     </div>
-                                </div>
+                                </div>                              
                                 <div align="center">
-                                	<c:if test="${sessionScope.user.user_name eq servicecenter.user_name }">
-                                    <button type="button" class="btn btn-primary" onclick="modifyService(${servicecenter.service_no});">수정</button>
+                                    <button type="submit" class="btn btn-primary" >Modify</button>
                                     &nbsp&nbsp&nbsp&nbsp&nbsp                                                                                                   
-                                    <button type="button" class="btn btn-primary"  onclick="deleteService(${servicecenter.service_no});">삭제</button>                                                                                               
-                                     &nbsp&nbsp&nbsp&nbsp&nbsp
-                                   </c:if>
-                                    <button type="submit" class="btn btn-primary"onclick='location.href="/everycvs/selectServiceList.do"'>목록으로</button>
-                                    
+                                    <a href="javascript:history.go(-1);">
+                                    <button type="button" class="btn btn-primary">Cencel</button>
+                                    </a>
                                 </div>
+                                </form>
                                 </div>
                              <%-- </c:forEach>  --%>
                              <hr>

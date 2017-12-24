@@ -35,13 +35,21 @@
 				</div>
 				<hr>
 				<form action="serviceInsert.do" name="servicecenter" method="post">
+<<<<<<< HEAD
+=======
+				<input type="hidden" name="writer" value="${sessionScope.user.user_no }">
+>>>>>>> MyungTaek
 					<label>작성자 <span class="color-red">*</span>
 					</label>
 					<c:if test="${sessionScope.user !=null }">
 						<!-- 로그인 상태이면 -->
 						<div class="row margin-bottom-20">
 							<div class="col-md-6 col-md-offset-0">
+<<<<<<< HEAD
 								<input name="writer" class="form-control" type="text"
+=======
+								<input name="user_name" class="form-control" type="text"
+>>>>>>> MyungTaek
 									value=" ${sessionScope.user.user_name}" readonly>
 					</c:if>
 					<c:if test="${sessionScop.user ==null }">
@@ -63,25 +71,42 @@
                                  </label>
                                 <div class="row margin-bottom-20">
                                     <div class="col-md-6 col-md-offset-0">
+<<<<<<< HEAD
                                         <input id="title" name="title" class="form-control" type="text" placeholder="제목을 입력해주세요">
+=======
+                                        <input id="title" name="title" class="form-control" type="text" placeholder="제목을 입력해주세요" >
+>>>>>>> MyungTaek
                                     </div>
                                 </div>
                                 <div>
                                 <label>내용</label>
                                 <div class="row margin-bottom-20">
                                     <div class="col-md-8 col-md-offset-0">
+<<<<<<< HEAD
                                         <textarea id="contents" name="contents" rows="8" class="form-control" placeholder="내용을 입력해주세요"></textarea>
+=======
+                                        <textarea id="contents" name="contents" rows="8" class="form-control" placeholder="내용을 입력해주세요" >
+                                        </textarea>
+>>>>>>> MyungTaek
                                     </div>
                                 </div>            
                                               
                                 <div align="center">                                	                                                 
+<<<<<<< HEAD
                                     <button type="submit" class="btn btn-primary" onclick="check();">등록</button>                                                                                          
                                     &nbsp&nbsp&nbsp&nbsp&nbsp
+=======
+                                    <button type="submit" class="btn btn-primary" >등록</button>                                                                                          
+									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+>>>>>>> MyungTaek
                                     <a href="javascript:history.go(-1);">
                                     <input type="button" class="btn btn-primary" value="취소">
                                     </a>
                                 </div>
+<<<<<<< HEAD
                               
+=======
+>>>>>>> MyungTaek
                                 </div>
                             </form>
                             <hr>
