@@ -55,7 +55,7 @@
 								<span class="input-group input-group-lg "> 
 								<input class="form-control" placeholder="Email" id="signupemail" name="email" type="email"> 
 								<span class="input-group-btn">
-								<button type="button" class="btn btn-primary" onclick="certify();">Certify</button>
+								<button type="button" class="btn btn-primary" onclick="checkCertify();">Certify</button>
 								</span>
 								</span>
 							</div>

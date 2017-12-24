@@ -17,13 +17,6 @@
                             <div class="error-404-page text-center">
                                 <h2>500!</h2>
                                 <h3>Server Error</h3>
-                                <p>please Server restart!</p>
-                                <form class="form-search search-404">
-                                    <div class="input-append">
-                                        <input type="text" class="span2 search-query">
-                                        <button type="submit" class="btn btn-primary">Search</button>
-                                    </div>
-                                </form>
                             </div>
                         </div>
                     </div>

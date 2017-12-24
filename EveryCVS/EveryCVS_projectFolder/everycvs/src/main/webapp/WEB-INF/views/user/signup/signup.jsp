@@ -14,10 +14,8 @@
 <div id="content">
 	<div class="container background-white">
 		<div class="row margin-vert-30">
-			<!-- Register Box -->
-			
-			<div class="col-lg-10 col-lg-offset-1col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">
-					
+			<!-- Register Box -->			
+			<div class="col-lg-10 col-lg-offset-1col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">					
 					<div class="signup-page">
 					<form id="signupform" action="/everycvs/sign/signuppost.do" method="post">
 					<div class="signup-header margin-bottom-40">
@@ -37,7 +35,7 @@
 								<span class="input-group input-group-lg "> 
 								<input class="form-control" placeholder="Email" id="signupemail" name="email" type="email"> 
 								<span class="input-group-btn">
-								<button type="button" class="btn btn-primary" onclick="certify();">Certify</button>
+								<button type="button" class="btn btn-primary" onclick="checkCertify();">Certify</button>
 								</span>
 								</span>
 							</div>

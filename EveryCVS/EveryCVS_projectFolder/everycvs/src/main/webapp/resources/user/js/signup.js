@@ -12,7 +12,93 @@ var emailcheck=0,
 	phonecheck=0,
 	addresscheck=0,
 	termsToggle=false;
-function certify(){
+
+function checkCertify(){
+	var isGood = "";
+	var email = $("#signupemail").val();
+	if(email != ''){
+		var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		if (email.match(regExp) != null) {
+			isGood = true;
+		}else{
+			isGood = false;
+		}
+		if (isGood) {	
+			$.ajax({
+				url:'/everycvs/sign/checkcertify.do',
+				data:{'email':email},
+				type:'post',
+				beforeSend:function(){
+					swal({
+						  title: '확인 중...',
+						  html: '기존 인증번호 요청 유무',
+						  allowOutsideClick: false,
+						  onOpen: () => {swal.showLoading()}
+						})
+				},
+				success:function(data){
+					if(data===1){
+						swal({
+							title: '기존 인증번호 요청 존재',
+							text: "인증번호를 다시 요청하시겠습니까?",
+							type: 'warning',
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							confirmButtonText: '예',
+							cancelButtonText: '아니요',
+							confirmButtonClass: 'btn btn-success btn-lg',
+							cancelButtonClass: 'btn btn-danger btn-lg',
+							buttonsStyling: false,
+							allowOutsideClick: false,
+							reverseButtons: true
+							}).then((result) => {
+							if (result.value) {
+								sendEmail(1);
+							} else if (result.dismiss === 'cancel') {
+								swal({
+									title: '취소됨',
+									text: "기존 인증번호를 입력해주세요",
+									timer: 1500,
+									type: 'error'
+								});
+								$('#certifyform').modal({backdrop:'static', keyboard: false}) ;
+							}
+						});
+					}else if(data===0){
+						sendCertify(0);
+					}
+				},
+				error : function(request, status, error) {
+					swal({
+						title: '오류',
+						text: error,
+						timer: 1500,
+						type: 'error'
+					});
+				}});
+		}else {
+			$("#emailstatus").removeClass("has-success");
+			$("#emailstatus").addClass("has-error");
+			swal({
+				title: '입력 오류',
+				text: '이메일을 확인해주세요',
+				timer: 1500,
+				type: 'error'
+			});
+		}
+	}else{
+		$("#emailstatus").removeClass("has-success");
+		$("#emailstatus").addClass("has-error");
+		swal({
+			title: '입력 오류',
+			text: '이메일을 입력해주세요',
+			timer: 1500,
+			type: 'error'
+		});
+	}
+}
+function sendCertify(cValue){
 	var isGood = "";
 	var email = $("#signupemail").val();
 	if(email != ''){
@@ -25,7 +111,8 @@ function certify(){
 		if (isGood) {			
 			$.ajax({
 				url:'/everycvs/sign/checkemail.do',
-				data:{'email':email},
+				data:{'email':email,
+					'cValue':cValue},
 				type:'post',
 				beforeSend:function(){
 					swal({
@@ -35,17 +122,17 @@ function certify(){
 						})
 				},
 				success:function(data){
-					if(data===(-3)){//이메일 전송 오류
-						swal({
-							title: '오류',
-							text: '이메일 전송 오류',
-							timer: 1500,
-							type: 'error'
-						});
-					}else if(data===(-2)){
+					if(data===(-3)){
 						swal({
 							title: '오류',
 							text: '서버 오류',
+							timer: 1500,
+							type: 'error'
+						});
+					}else if(data===(-2)){//이메일 전송 오류
+						swal({
+							title: '오류',							
+							text: '이메일 전송 오류',
 							timer: 1500,
 							type: 'error'
 						});
@@ -105,6 +192,7 @@ function certify(){
 		});
 	}
 }
+
 function certifyConfirm(){
 	var email = $("#signupemail").val();
 	var certifyno = $('#certifyno').val();
@@ -129,6 +217,8 @@ function certifyConfirm(){
 						timer: 1500,
 						type: 'success'
 					});
+					$('#certifyform').modal('hide');
+					emailcheck=1;
 				}else{
 					swal({
 						title: 'Error!',
@@ -149,14 +239,12 @@ function certifyConfirm(){
 	}else if(certifyno.length!=8){
 		swal({
 			title: '인증번호 입력 오류',
-			text: '인증번호는 8자리 입니다<br>다시 입력해주세요',
+			text: '인증번호는 8자리 입니다\n다시 입력해주세요',
 			timer: 1500,
 			type: 'error'
 		});
+		emailcheck=0;
 	}
-	
-	$('#certifyform').modal('hide');
-	emailcheck=1;
 }
 function pwdCheck(){
 	var pwd = $("#pwd").val();
