@@ -58,7 +58,7 @@
 										<td>${favorite.brand_name}</td>
 										<td>${favorite.store_name}</td>
 										<td><a id="productName" data-toggle="modal" data-target="#myModal" style="cursor: pointer;"
-										onclick="show_modal('${favorite.brand_name}', '${favorite.store_name}', '${favorite.product_name}', '${favorite.price}', '${favorite.stored_file_name}');">
+										onclick="show_modal('${favorite.brand_name}', '${favorite.store_name}', '${favorite.product_name}', '${favorite.price}', '${favorite.stored_file_name}', '${favorite.store_no}');">
 										${favorite.product_name}</a></td>
 										<td>${favorite.price}원</td>
 										<td><i class="fa fa-trash-o jun21"
@@ -75,10 +75,10 @@
 									<div class="modal-body">
 										<div class="jun_imgdiv3" id="detail5"></div>
 										<div class="jun_contentdiv" style="display: block;">
-											<span id="detail1"></span>
-											<span id="detail2"></span><br>
+											<span onclick="goStore();" style="cursor: pointer;">
+											<span id="detail1"></span><span id="detail2"></span></span><br>
 											<span id="detail3" style="font-weight: bold;"></span><br>
-											<span id="detail4" class="col-xs-offset-10 jun40"></span>원<br>
+											<span id="detail4" class="col-xs-offset-9 jun40"></span>원<br>
 										</div>
 									</div>
 									<div class="modal-footer" style="clear: both; margin-top: 2px;">
@@ -132,11 +132,7 @@
 <!-- === END FOOTER === -->
 
 <script type="text/javascript">
-	/* $(document).ready(function() {
-		$("#productName").click(function() {
-			$("#favorite").modal();
-		});
-	}); */
+	var sno;
 
 	/*	delete_fav() : 관심상품의 번호들을 받아서 삭제처리하는 함수 */
 	function delete_fav(product_no, store_no) {
@@ -158,7 +154,8 @@
 	}
 
 	/* 해당 상품의 정보를 받아서 모달 안의 내용을 상품 정보로 바꾸는 함수 */
-	function show_modal(brand_name, store_name, product_name, price, stored_file_name) {
+	function show_modal(brand_name, store_name, product_name, price, stored_file_name, store_no) {
+		sno = store_no;
 		$("#detail1").html(brand_name);
 		$("#detail2").html(store_name);
 		$("#detail3").html(product_name);
@@ -167,6 +164,10 @@
 			$("#detail5").html('<img src="" alt="상품 이미지가 없습니다." class="jun_img">');
 		else
 			$("#detail5").html('<img src="/everycvs/resources/upload/' + stored_file_name + '" alt="상품 이미지가 없습니다." class="jun_img">');
+	}
+	
+	function goStore(){
+		location.href="/everycvs/page/storemain.do?sno=" + sno;
 	}
 </script>
 

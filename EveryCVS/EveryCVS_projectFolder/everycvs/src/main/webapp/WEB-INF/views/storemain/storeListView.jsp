@@ -96,8 +96,8 @@
 											</div>
 										</div>
 										<div class="modal-footer">
-										<button type="button" class="btn btn-primary btn-sm"
-											data-dismiss="modal">관심상품</button>
+										<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
+										onclick="add_favorite('${sp.store_product_no}', '${sp.store_no}');">관심상품</button>
 										&nbsp;
 										<button type="button" class="btn btn-primary btn-sm"
 											data-toggle="modal" 
@@ -219,8 +219,9 @@
 	});
 });  
 
-
-
+  function add_favorite(pno, sno){
+		location.href="/everycvs/favoriteInsert.do?product_no=" + pno + "&store_no=" + sno;
+	}
 
 </script>
 

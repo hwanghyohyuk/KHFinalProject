@@ -22,7 +22,6 @@ public class Favorite implements Serializable {
 	private String product_name; //상품명
 	private String stored_file_name; //첨부파일변경명
 	private int store_product_no; //지점상품번호
-	private int min_expiration_hour; //최소유통기한
 	private int price;	//가격
 	
 	public Favorite() {
@@ -30,7 +29,7 @@ public class Favorite implements Serializable {
 	}
 
 	public Favorite(int user_no, int brand_no, String brand_name, String store_no, String store_name, int product_no,
-			String product_name, String stored_file_name, int store_product_no, int min_expiration_day, int price) {
+			String product_name, String stored_file_name, int store_product_no, int price) {
 		super();
 		this.user_no = user_no;
 		this.brand_no = brand_no;
@@ -41,7 +40,6 @@ public class Favorite implements Serializable {
 		this.product_name = product_name;
 		this.stored_file_name = stored_file_name;
 		this.store_product_no = store_product_no;
-		this.min_expiration_hour = min_expiration_day;
 		this.price = price;
 	}
 	
@@ -119,14 +117,6 @@ public class Favorite implements Serializable {
 		this.store_product_no = store_product_no;
 	}
 
-	public int getMin_expiration_hour() {
-		return min_expiration_hour;
-	}
-
-	public void setMin_expiration_hour(int min_expiration_hour) {
-		this.min_expiration_hour = min_expiration_hour;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -143,7 +133,7 @@ public class Favorite implements Serializable {
 	@Override
 	public String toString() {
 		return user_no + ", " + brand_no + ", " + brand_name + ", " + store_no + ", " + store_name + ", " + product_no + ", " + product_name + ", " + 
-			   stored_file_name + ", " + store_product_no + ", " + min_expiration_hour + ", " + price;
+			   stored_file_name + ", " + store_product_no + ", " + price;
 	}
 
 }

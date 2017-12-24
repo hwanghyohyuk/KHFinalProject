@@ -14,7 +14,6 @@
 		<result property="product_name" column="PRODUCT_NAME" />
 		<result property="stored_file_name" column="STORED_FILE_NAME" />
 		<result property="store_product_no" column="STORE_PRODUCT_NO" />
-		<result property="min_expiration_hour" column="MIN_EXPIRATION_HOUR" />
 		<result property="price" column="price" />
 	</resultMap>
 
@@ -53,6 +52,24 @@
 			AND PRODUCT_NAME LIKE #{product_name}
 		]]>
 	</select>
+	
+	<!-- 관심상품 조회 : 한 개 -->
+	<select id="favoriteSelectOne" parameterType="favorite" resultType="list" resultMap="resultFavorite">
+	<![CDATA[
+		SELECT * FROM TB_FAVORITE_LIST
+		WHERE USER_NO = #{user_no}
+		AND STORE_NO = #{store_no, jdbcType=VARCHAR}
+		AND PRODUCT_NO = #{product_no}
+	]]>
+	</select>
+	
+	<!-- 관심상품 추가 -->
+	<insert id="favoriteInsert" parameterType="favorite" flushCache="true">
+		<![CDATA[
+			INSERT INTO TB_FAVORITE_LIST
+			VALUES (#{user_no}, #{store_no}, #{product_no})
+		]]>
+	</insert>
 	
 	<!-- 관심상품 삭제 -->
 	<delete id="favoriteDelete" parameterType="favorite" flushCache="true">

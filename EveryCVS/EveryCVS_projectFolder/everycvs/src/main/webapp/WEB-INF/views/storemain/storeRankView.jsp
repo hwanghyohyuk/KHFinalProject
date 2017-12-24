@@ -27,6 +27,10 @@
 			}
 		});
 	});
+	
+	function add_favorite(pno, sno){
+		location.href="/everycvs/favoriteInsert.do?product_no=" + pno + "&store_no=" + sno;
+	}
 </script>
 <c:import url="../include/user/common/headend.jsp"></c:import>
 <!-- === END HEAD ===  -->
@@ -120,8 +124,8 @@
 																	</div>
 																</div>
 																<div class="modal-footer">
-																	<button type="button" class="btn btn-primary btn-sm"
-																		data-dismiss="modal">관심상품</button>
+																	<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
+																		onclick="add_favorite('${sp.store_product_no}', '${sp.store_no}');">관심상품</button>
 																	&nbsp;
 																	<button type="button" class="btn btn-primary btn-sm"
 																		data-dismiss="modal">구매하기</button>
@@ -158,7 +162,7 @@
 														<strong>${sp.product_name}</strong>
 													</h5>
 													<h6 align="center">
-														<fmt:formatNumber value="${sp.price}" pattern="#,###" />원
+														<fmt:formatNumber value="${sp.price}" pattern="#,###"/>원
 													</h6>
 													<!-- Modal -->
 													<div id="bmodal${sp.store_product_no}" class="modal fade"
@@ -202,8 +206,8 @@
 																	</div>
 																</div>
 																<div class="modal-footer">
-																	<button type="button" class="btn btn-primary btn-sm"
-																		data-dismiss="modal">관심상품</button>
+																	<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
+																	onclick="add_favorite('${sp.store_product_no}', '${sp.store_no}');">관심상품</button>
 																	&nbsp;
 																	<button type="button" class="btn btn-primary btn-sm"
 																		data-dismiss="modal">구매하기</button>
@@ -302,8 +306,8 @@
 																		</div>
 																	</div>
 																	<div class="modal-footer">
-																		<button type="button" class="btn btn-primary btn-sm"
-																			data-dismiss="modal">관심상품</button>
+																		<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
+																		onclick="add_favorite('${sp.store_product_no}', '${sp.store_no}');">관심상품</button>
 																		&nbsp;
 																		<button type="button" class="btn btn-primary btn-sm"
 																			data-dismiss="modal">구매하기</button>
@@ -401,8 +405,8 @@
 																		</div>
 																	</div>
 																	<div class="modal-footer">
-																		<button type="button" class="btn btn-primary btn-sm"
-																			data-dismiss="modal">관심상품</button>
+																		<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
+																		onclick="add_favorite('${sp.store_product_no}', '${sp.store_no}');">관심상품</button>
 																		&nbsp;
 																		<button type="button" class="btn btn-primary btn-sm"
 																			data-dismiss="modal">구매하기</button>
