@@ -23,7 +23,9 @@ public class UserDao {
 	public User signIn(User user) {
 		// Mapper의 namespace명.id : 자신에게 맞게 작성해서 넣는다.
 		User resultUser = sqlSession.selectOne("user.signIn", user);
-		resultUser.setUser_pwd(null);
+		if(resultUser!=null){
+			resultUser.setUser_pwd(null);
+		}	
 		return resultUser;
 	}
 

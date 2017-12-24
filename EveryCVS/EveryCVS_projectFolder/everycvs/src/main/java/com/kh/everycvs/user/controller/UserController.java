@@ -135,7 +135,7 @@ public class UserController {
 	}
 
 	/** 마이 페이지 **/
-	@RequestMapping(value="mypage.do")
+	@RequestMapping(value="/page/mypage.do")
 	public ModelAndView myPage(HttpSession session, ModelAndView mv) {
 		String month="0";
 		User user = (User) session.getAttribute("user");

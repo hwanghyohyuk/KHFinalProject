@@ -13,9 +13,9 @@
 <div id="content">
 	<div class="container background-white">
 		<div class="row margin-vert-60 padding-vert-60 ">
-			<div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+			<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
 				<div class="jumbotron">
-				<h2><b>사용자 정보 확인</b></h2>
+				<h3><b>사용자 정보 확인</b></h3>
 				<br>
 				<br>
 				<div class="row center-block">
@@ -30,7 +30,7 @@
 						<input class="form-control" id="pwd"  placeholder="Password" type="password" oninput="pwdCheck();">
 						<span class="glyphicon form-control-feedback" id="pwdfeedback" style="font-size:20px;line-height:50px" aria-hidden="true"></span>
 					</div>	
-					<div class="col-md-12">
+					<div class="input-group-lg">
 						<button class="btn btn-primary btn-lg btn-block" onclick="submit();">Submit</button>
 					</div>			
 				</div>	

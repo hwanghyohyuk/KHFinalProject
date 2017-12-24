@@ -44,7 +44,7 @@
 
 							<li><a href="#">${sessionScope.user.user_name}</a>
 								<ul>
-									<li><a href="/everycvs/mypage.do">My page</a></li>
+									<li><a href="/everycvs/page/mypage.do">My page</a></li>
 									<li><a href="/everycvs/user/infointro.do">내 정보수정</a></li>
 									<li><a href="#">Cash : ${sessionScope.user.cash}</a></li>
 									<c:if test="${sessionScope.user.job eq 'customer'}">

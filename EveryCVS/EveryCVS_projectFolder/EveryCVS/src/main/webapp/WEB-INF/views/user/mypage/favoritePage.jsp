@@ -23,21 +23,16 @@
 			<div class="col-md-3">
 				<ul class="list-group sidebar-nav" id="sidebar-nav">
 					<!-- 기프티콘 보관함 -->
-					<li class="list-group-item list-toggle"><a
-						href="/everycvs/gifticonPage.do">기프티콘 보관함</a></li>
+					<li class="list-group-item list-toggle"><a href="/everycvs/gifticonPage.do">기프티콘 보관함</a></li>
 
 					<!-- 관심목록 -->
-					<li class="list-group-item list-toggle"><a
-						href="/everycvs/favoriteList.do">관심목록</a></li>
+					<li class="list-group-item list-toggle"><a href="/everycvs/user/favoriteList.do">관심목록</a></li>
 
 					<!-- 회원탈퇴 -->
-					<li class="list-group-item list-toggle"><a
-						data-toggle="collapse" data-parent="#sidebar-nav"
-						href="#collapse-icons">회원탈퇴</a></li>
+					<li class="list-group-item list-toggle"><a href="#">회원탈퇴</a></li>
 				</ul>
 			</div>
 			<!-- End Sidebar Menu -->
-
 			<div class="col-md-9">
 				<!-- Branch select table -->
 				<!-- Tab v1 -->
@@ -47,20 +42,19 @@
 						<div class="col-md-12">
 							<table class="table">
 								<tr class="active text-center">
-									<th width="12%">브랜드명</th>
-									<th width="20%">지점명</th>
+									<th width="16%">브랜드명</th>
+									<th width="24%">지점명</th>
 									<th width="38%">상품명</th>
-									<th width="12%">가격</th>
-									<th width="6%">Del</th>
+									<th width="10%">Del</th>
 								</tr>
 								<c:forEach var="favorite" items="${flist}">
 									<tr class="text-center">
 										<td>${favorite.brand_name}</td>
 										<td>${favorite.store_name}</td>
 										<td><a id="productName" data-toggle="modal" data-target="#myModal" style="cursor: pointer;"
-										onclick="show_modal('${favorite.brand_name}', '${favorite.store_name}', '${favorite.product_name}', '${favorite.price}', '${favorite.stored_file_name}', '${favorite.store_no}');">
+										onclick="show_modal('${favorite.brand_name}', '${favorite.store_name}', '${favorite.product_name}',
+										 '${favorite.stored_file_name}', '${favorite.store_no}','${favorite.min_expiration_minute }');">
 										${favorite.product_name}</a></td>
-										<td>${favorite.price}원</td>
 										<td><i class="fa fa-trash-o jun21"
 											onclick="delete_fav('${favorite.product_no}', '${favorite.store_no}');"></i></td>
 									</tr>
@@ -78,7 +72,7 @@
 											<span onclick="goStore();" style="cursor: pointer;">
 											<span id="detail1"></span><span id="detail2"></span></span><br>
 											<span id="detail3" style="font-weight: bold;"></span><br>
-											<span id="detail4" class="col-xs-offset-9 jun40"></span>원<br>
+											<span id="detail4" style="font-weight: bold;color:red;"></span><br>
 										</div>
 									</div>
 									<div class="modal-footer" style="clear: both; margin-top: 2px;">
@@ -94,16 +88,16 @@
 					</div>
 					<!-- End tab content -->
 					<!-- Search & Add block -->
-					<form name="searchFavoriteFrm" action="/everycvs/favoriteSearch.do"
+					<form name="searchFavoriteFrm" action="/everycvs/user/favoriteList.do"
 						method="post">
 						<div class="col-sm-12" style="padding-left: 0px;">
 							<div class="col-sm-2" style="padding: 0px;"
 								id="paddingrmv3">
 								<select name="category" class="form-control input"
 									style="padding-left: 5px;">
-									<option>상호명</option>
-									<option>지점명</option>
-									<option selected>상품명</option>
+									<option value="0" selected>상품명</option>
+									<option value="1">지점명</option>
+									<option value="2">상호명</option>									
 								</select>
 							</div>
 							<div class="col-sm-4" style="padding: 0px" id="paddingrmv3">
@@ -154,12 +148,28 @@
 	}
 
 	/* 해당 상품의 정보를 받아서 모달 안의 내용을 상품 정보로 바꾸는 함수 */
-	function show_modal(brand_name, store_name, product_name, price, stored_file_name, store_no) {
+	function show_modal(brand_name, store_name, product_name, stored_file_name, store_no,minute) {
 		sno = store_no;
+		var day = Math.floor(minute/(60*24));
+		var hour = Math.floor(minute%24);
+		var minute = Math.floor(minute%60);
+		var sday='';
+		var shour='';
+		var sminute='';
+		if(day>0){
+			sday=day+" 일 ";
+		}		
+		if(hour>0){
+			shour=hour+" 시간 ";
+		}		
+		if(minute>0){
+			sminute=minute+" 분 ";
+		}
+		
 		$("#detail1").html(brand_name);
 		$("#detail2").html(store_name);
 		$("#detail3").html(product_name);
-		$("#detail4").html(price);
+		$("#detail3").html(sday+shour+sminute+'남았습니다');
 		if (stored_file_name == "")
 			$("#detail5").html('<img src="" alt="상품 이미지가 없습니다." class="jun_img">');
 		else

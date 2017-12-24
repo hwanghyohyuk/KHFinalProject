@@ -26,7 +26,7 @@
 							
 							<!-- 관심목록 -->
 							<li class="list-group-item list-toggle">
-							<a href="favoriteList.do">관심목록</a>
+							<a href="/everycvs/user/favoriteList.do">관심목록</a>
 								</li>
 								
 							<!-- 회원탈퇴 -->
