@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 	private JavaMailSender mailSender;
 
 	@Override
-	public User signIn(User login) {
+	public User encSignIn(User login) {
 		return userDao.signIn(login);
 	}
 
@@ -115,12 +115,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int insertUser(User user) {
+	public int encInsertUser(User user) {
 		return userDao.insertUser(user);
 	}
 
 	@Override
-	public int insertAdmin(User user) {
+	public int encInsertAdmin(User user) {
 		return userDao.insertAdmin(user);
 	}
 
@@ -207,7 +207,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int checkUser(User user) {
+	public int encCheckUser(User user) {
 		return userDao.checkUser(user);
 	}
 

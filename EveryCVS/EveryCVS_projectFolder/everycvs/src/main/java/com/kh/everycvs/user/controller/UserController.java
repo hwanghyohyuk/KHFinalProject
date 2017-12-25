@@ -77,7 +77,7 @@ public class UserController {
 		User signin = new User(email, pwd, useCookie);
 
 		// 로그인이 성공하면 UserVO 객체를 반환함.
-		User user = userService.signIn(signin);
+		User user = userService.encSignIn(signin);
 
 		if (user != null) { // 로그인 성공
 			session.setAttribute("user", user); // 세션에 user란 이름으로 User 객체를 저장한다.
@@ -246,7 +246,7 @@ public class UserController {
 	@RequestMapping("/sign/signuppost.do")
 	public ModelAndView signUp(ModelAndView mv,User user) {
 		mv.setViewName("user/sign/signin");
-		int insertUser = userService.insertUser(user);
+		int insertUser = userService.encInsertUser(user);
 		mv.addObject("signup",insertUser);
 		return mv;
 	}
@@ -254,7 +254,7 @@ public class UserController {
 	@RequestMapping("/sign/signupadminpost.do")
 	public ModelAndView signUpAdmin(ModelAndView mv,User user) {
 		mv.setViewName("user/sign/signin");
-		int insertAdmin = userService.insertAdmin(user);
+		int insertAdmin = userService.encInsertAdmin(user);
 		mv.addObject("signup",insertAdmin);
 		return mv;
 	}
@@ -345,7 +345,7 @@ public class UserController {
 	public int infoIn(ModelAndView mv,HttpSession session,@RequestParam("pwd")String pwd) {
 		User user = (User)session.getAttribute("user");
 		user.setUser_pwd(pwd);
-		int checkUser = userService.checkUser(user);
+		int checkUser = userService.encCheckUser(user);
 		return checkUser;
 	}
 		

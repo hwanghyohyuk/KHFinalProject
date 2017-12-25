@@ -16,7 +16,7 @@ import com.kh.everycvs.common.model.vo.User;
 public interface UserService {
 
 	/** 로그인 **/
-	User signIn(User login);
+	User encSignIn(User login);
 
 	public void keepSignIn(String email, String sessionId, Date next) throws Exception;
 
@@ -45,15 +45,15 @@ public interface UserService {
 	int certificationCheck(EmailCertification emailCertification);
 	
 	/** 회원가입 **/
-	int insertUser(User user);	
-	int insertAdmin(User user);
+	int encInsertUser(User user);	
+	int encInsertAdmin(User user);
 	
 	
 	/** 회원탈퇴 **/
 	boolean deleteUser(int user_no);
 
 	/** 정보수정 **/
-	int checkUser(User user);
+	int encCheckUser(User user);
 	boolean modifyUser(User user);
 
 	/** 이름 확인 **/
@@ -90,6 +90,8 @@ public interface UserService {
 
 	/** 회원 목록 및 검색 **/
 	Map<String, Object> userList(String page, String keyword);
+
+	
 
 
 

@@ -68,12 +68,21 @@ public class MainController {
 		if (store != null) {
 			session.setAttribute("store", null); // 정보를 삭제한다
 		}
+		
+		Map<String,Object> data = new HashMap<String,Object>();
+		
 		// 이벤트 top 3 편의점별 서비스 불러오기
 		List<Event> eveTop3 = eventService.eventTop3();
-		mv.addObject("evetop3",eveTop3);
+		data.put("evetop3",eveTop3);
 		// 인기상품 top 3 서비스 불러오기
-		List<Product> popTop3 = productService.popularTop3();
-		mv.addObject("poptop3",popTop3);
+		/* 0:전체, 1:GS25,2:CU, 3:7ELEVEN */
+		List<Product> gsTop3 = productService.popularTop3(1);
+		List<Product> cuTop3 = productService.popularTop3(2);
+		List<Product> svTop3 = productService.popularTop3(3);
+		data.put("gstop3",gsTop3);
+		data.put("cutop3",cuTop3);
+		data.put("svtop3",svTop3);		
+		mv.addObject("data",data);
 		
 		return mv;
 	}

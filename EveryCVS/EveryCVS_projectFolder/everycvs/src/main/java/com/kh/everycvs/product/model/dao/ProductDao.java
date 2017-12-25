@@ -19,8 +19,10 @@ public class ProductDao {
 
 	/*사용자*/
 	/*실시간 인기상품 top3*/
-	public List<Product> popularTop3() {
-		return sqlSession.selectList("product.popularTop3");
+	public List<Product> popularTop3(int brand_no) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("brand_no", brand_no);
+		return sqlSession.selectList("product.popularTop3",map);
 	}
 	
 	/**실시간 인기상품(전체) top 5**/

@@ -20,10 +20,22 @@
 	</resultMap>
 	
 	<!-- 사용자 : 실시간 인기상품 top 3 -->
-	<select id="popularTop3" resultType="list" resultMap="resultProduct">
-	<![CDATA[
-		select rownum, a.* from(select * from product_view order by purchase_count desc,price asc) a where rownum<=3
-	]]>
+	<select id="popularTop3" parameterType="hashmap" resultType="list" resultMap="resultProduct">
+		<![CDATA[select rownum, a.* from(select * from product_view]]> 
+		<choose>
+		    <when test="brand_no == 0">
+			</when>
+		    <when test="brand_no == 1">
+				<![CDATA[where brand_no = #{brand_no}]]> 
+			</when>
+		    <when test="brand_no == 2">
+				<![CDATA[where brand_no = #{brand_no}]]> 
+			</when>
+			<when test="brand_no == 3">
+				<![CDATA[where brand_no = #{brand_no}]]> 
+			</when>
+		</choose>		
+		<![CDATA[order by purchase_count desc,price asc) a where rownum<=3]]>
 	</select>
 	
 	<!-- 금주의 인기 상품 top5 조회 -->

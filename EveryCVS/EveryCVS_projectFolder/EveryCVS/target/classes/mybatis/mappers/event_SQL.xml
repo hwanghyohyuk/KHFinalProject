@@ -50,9 +50,9 @@
 	
 	<select id="eventTop3" resultType="list" resultMap="resultEvent">
 		<![CDATA[
-		select a.* from event_view a 
-		join (select brand_no,max(start_date) as newest from event_view a group by brand_no) b 
-		on (a.start_date = b.newest and a.brand_no = b.brand_no) order by a.brand_no asc
+		select a.*,b.* from event_view a 
+		join (select brand_no,max(event_no) keep (dense_rank last order by start_date) as event_no from event_view a group by brand_no) b 
+		on (a.event_no = b.event_no) order by a.brand_no asc
 		]]>
 	</select>
 	

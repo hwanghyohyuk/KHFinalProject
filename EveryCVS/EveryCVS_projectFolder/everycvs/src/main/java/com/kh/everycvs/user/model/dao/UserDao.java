@@ -9,19 +9,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.everycvs.common.common.CryptTemplate;
 import com.kh.everycvs.common.model.vo.EmailCertification;
 import com.kh.everycvs.common.model.vo.PassLink;
 import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.User;
+import com.kh.everycvs.common.util.AesUtil;
 
 @Repository("UserDao")
-public class UserDao {
+public class UserDao{
 
 	@Autowired
 	private SqlSession sqlSession;
-
+		
 	public User signIn(User user) {
-		// Mapper의 namespace명.id : 자신에게 맞게 작성해서 넣는다.
+		// Mapper의 namespace명.id : 자신에게 맞게 작성해서 넣는다.	
 		User resultUser = sqlSession.selectOne("user.signIn", user);
 		if(resultUser!=null){
 			resultUser.setUser_pwd(null);
@@ -82,10 +84,6 @@ public class UserDao {
 
 	public Map<String, Object> userList(String page, String keyword) {
 		return null;
-	}
-
-	public boolean updateTempPwd(User user) {
-		return false;
 	}
 	
 	public int checkUser(User user) {

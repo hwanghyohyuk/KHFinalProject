@@ -8,7 +8,7 @@ import com.kh.everycvs.common.model.vo.StoreProduct;
 public interface ProductService {
 	
 	/*사용자 메인 : 인기상품 top3*/
-	public List<Product> popularTop3();
+	public List<Product> popularTop3(int brand_no);
 	
 	/** 상품 조회 : 모든 상품 조회 */
 	public List selectProductList(int brand_no);
