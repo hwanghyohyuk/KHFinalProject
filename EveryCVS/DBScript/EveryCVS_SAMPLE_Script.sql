@@ -836,7 +836,7 @@ INSERT INTO TB_STORE_PRODUCT(STORE_PRODUCT_NO,STORE_NO,PRODUCT_NO,MANUFACTURE_DA
 INSERT INTO TB_STORE_PRODUCT(STORE_PRODUCT_NO,STORE_NO,PRODUCT_NO,MANUFACTURE_DATE,QUANTITY) VALUES(SEQ_STORE_PRODUCT_NO.NEXTVAL, '21952693', 23, SYSDATE, 2);
 
 /*사용자*/
-INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'admin@iei.or.kr', 'SfdEUQM2JIgd0nFKfYrscw==', '사이트관리자', '92/06/18', 'M', '01059136110', '경기도 부천시 길주로 300', default, null, null, default, 'sitemanager', default, default, null, null,default,null);
+INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'admin@iei.or.kr', 'cGAx9cZga5tFQxfuXJx5ag==', '사이트관리자', '92/06/18', 'M', '01059136110', '경기도 부천시 길주로 300', default, null, null, default, 'sitemanager', default, default, null, null,default,null);
 INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user11@iei.or.kr', '0iQ6fe6kQ/7mu6mWNg/Lfg==', 'GS25관리자', '94/03/04', 'W', '01021226374', '경기도 안산시 상록구 안산천남1로 70', default, null, null, default, 'cvsmanager', default, default, null, 1,default,null);
 INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user22@iei.or.kr', 'AD2xaqj6TAPf77MjiQI6Qg==', 'CU관리자', '94/03/03', 'W', '01089060239', '인천광역시 연수구 송도동 컨벤시아대로', default, null, null, default, 'cvsmanager', default, default, null, 2,default,null);
 INSERT INTO TB_USER VALUES(SEQ_USER_NO.NEXTVAL, 'user33@iei.or.kr', 'mDro7zyMTWTpw1z/STtR0w==', '세븐일레븐관리자', '94/03/04', 'W', '01091901099', '경기도 이천시 모가면 사실로 988', default, null, null, default, 'cvsmanager', default, default, null, 3,default,null);
