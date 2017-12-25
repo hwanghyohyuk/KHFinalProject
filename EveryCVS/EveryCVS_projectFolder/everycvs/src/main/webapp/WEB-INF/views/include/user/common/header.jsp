@@ -50,7 +50,7 @@
 									<c:if test="${sessionScope.user.job eq 'customer'}">
 										<li><a href="#">Point : ${sessionScope.user.point}</a></li>
 									</c:if>
-									<li><a href="/everycvs/user/signout.do">Sign out</a></li>
+									<li><a href="#" onclick="checkSignOut();">Sign out</a></li>
 								</ul></li>
 						</c:if>
 					</ul>
@@ -58,4 +58,64 @@
 			</div>
 		</div>
 	</div>
+<script type="text/javascript">
+function checkSignOut(){
+	swal({
+		title: 'Would you mind sign out?',
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonText: 'Yes',
+		cancelButtonText: 'No',
+		confirmButtonClass: 'btn btn-success btn-lg pull-right',
+		cancelButtonClass: 'btn btn-danger btn-lg pull-left',
+		buttonsStyling: false,
+		allowOutsideClick: false,
+		reverseButtons: true
+		}).then((result) => {
+		if (result.value) {
+			signOut();
+		}
+	});
+}
+function signOut(){
+	$.ajax({
+		url:'/everycvs/user/signout.do',
+		type:'post',
+		beforeSend:function(){
+			swal({
+				  title: 'SIGN OUT...',
+				  allowOutsideClick: false,
+				  onOpen: () => {swal.showLoading()}
+				})
+		},
+		success:function(data){
+			if(data>0){
+				swal({
+					  title: 'SIGN OUT Success',
+					  html: 'See you next time!',
+					  timer: 1500,
+					});
+				setTimeout(function(){
+					location.href="/everycvs/main/main.do";
+				},1500);
+			}else{
+				swal({
+					title: 'ERROR',
+					text: "I don't know what error occured",
+					timer: 1500,
+					type: 'error'
+				});
+			}			
+		},
+		error:function(request, error, status){
+			swal({
+				title: 'ERROR',
+				text: error,
+				timer: 1500,
+				type: 'error'
+			});
+		}
+	});
+}
+</script>
 	<!-- End Top Menu -->

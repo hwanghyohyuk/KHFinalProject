@@ -64,11 +64,11 @@ public class UserController {
 
 	/** 로그인 **/
 	@RequestMapping(value = "/user/signinpost.do", method = RequestMethod.POST)
-	public ModelAndView signIn(@RequestParam("email") String email, @RequestParam("pwd") String pwd,
+	@ResponseBody
+	public int signIn(@RequestParam("email") String email, @RequestParam("pwd") String pwd,
 			@RequestParam(value = "usecookie", defaultValue = "false", required = false) boolean useCookie,
 			HttpSession session, HttpServletResponse response) {
-		String returnURL = "";
-		ModelAndView mv = null;
+		int result = 0;
 		
 		if (session.getAttribute("user") != null) {
 			// 기존에 user이란 세션 값이 존재한다면
@@ -84,16 +84,16 @@ public class UserController {
 				
 			switch(user.getJob()){
 			case "customer":
-				returnURL = "redirect:/main/main.do"; // 로그인 성공시 사용자 메인페이지 이동
+				result = 1;
 				break;
 			case "storemanager":
-				returnURL = "redirect:/page/storemain.do";
+				result = 2;
 				break;
 			case "cvsmanager":
-				returnURL = "redirect:/main/cvsmain.do";
+				result = 3;
 				break;
 			case "sitemanager":
-				returnURL = "redirect:/main/sitemain.do";
+				result = 4;
 				break;
 			}			
 			/*
@@ -125,13 +125,11 @@ public class UserController {
 				}
 
 			}
-			mv = new ModelAndView(returnURL);
+
 		} else { // 로그인에 실패한 경우
-			returnURL = "user/sign/signin"; // 로그인 폼으로 다시 가도록 함
-			mv = new ModelAndView(returnURL);
-			mv.addObject("result",false);
-		}		
-		return mv; // 위에서 설정한 returnURL 을 반환해서 이동시킴
+			result=0;
+		}	
+		return result; 
 	}
 
 	/** 마이 페이지 **/
@@ -193,8 +191,9 @@ public class UserController {
 
 
 	/** 로그아웃 **/
-	@RequestMapping(value = "/user/signout.do", method = RequestMethod.GET)
-	public String signOut(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	@RequestMapping(value = "/user/signout.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int signOut(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		Object obj = session.getAttribute("user");
 		if (obj != null) {
 			User user = (User) obj;
@@ -221,7 +220,7 @@ public class UserController {
 				}
 			}
 		}
-		return "redirect:/main/main.do";
+		return 1;
 	}
 	
 	/* 회원가입 페이지 이동 */
