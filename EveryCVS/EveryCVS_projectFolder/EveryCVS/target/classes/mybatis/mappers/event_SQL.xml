@@ -249,7 +249,7 @@
       <![CDATA[
          select * from TB_EVENT_JOIN where event_no = #{event_no} and user_no=#{user_no}
       ]]>
-   </select><!-- 좋아요 테이블 객체 select -->
+   </select><!-- 이벤트 테이블 객체 select -->
    
      
    <select id="eventJoinCount" parameterType="_int" resultType="int">
@@ -268,13 +268,56 @@
       <![CDATA[
          insert into TB_EVENT_JOIN values (#{user_no},#{event_no})
       ]]>   
-   </insert> <!-- 좋아요 증가 -->
+   </insert> <!-- 이벤트 참여 증가 -->
    
    <delete id="deleteEventJoin" parameterType="eventjoin" flushCache="true" statementType="PREPARED">
       <![CDATA[
          delete from TB_EVENT_JOIN where event_no=#{event_no} and user_no=#{user_no}
       ]]>
    </delete>
+   
+   <select id="cvsEvent" parameterType="hashmap" resultType="list" resultMap="resultEvent">
+   	<![CDATA[
+   			select * from(select rownum rnum, T.* 
+			from (select * from event_view 
+			]]>
+	<choose>
+	    <when test="brand_no == 0">
+		</when>
+	    <when test="brand_no == 1">
+			<![CDATA[where brand_no = #{brand_no}]]>
+		</when>
+		
+	    <when test="brand_no == 2">
+			<![CDATA[where brand_no = #{brand_no}]]>
+		</when>
+		<when test="brand_no == 3">
+			<![CDATA[where brand_no = #{brand_no}]]>
+		</when>
+  	</choose>
+  	<![CDATA[
+  	order by event_no desc ) T ) a where a.rnum >= #{startRow} and a.rnum <=#{endRow}]]>
+   </select>
+   
+   <!-- 사용자 검색 후 다시 카운트 -->
+   <select id="cvsGetListCount" resultType="_int" parameterType="hashmap">
+		<![CDATA[
+		select count(*) from EVENT_VIEW]]>
+		<choose>
+	    <when test="brand_no == 0">
+		</when>
+	    <when test="brand_no == 1">
+			<![CDATA[where brand_no = #{brand_no}]]>
+		</when>
+	    <when test="brand_no == 2">
+			<![CDATA[where brand_no = #{brand_no}]]>
+		</when>
+		<when test="brand_no == 3">
+			<![CDATA[where brand_no = #{brand_no}]]>
+		</when>
+  	</choose>
+	</select>
+   
    
 
 </mapper>

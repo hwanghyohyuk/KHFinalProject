@@ -72,6 +72,11 @@ public interface EventService {
 	
 	void eventResultInsert(EventResult eventResult);
 	
+	//편의점 별 사용자 이벤트
+	List<Event> cvsEvent(int currentpage, int limit, int brand_no);
+	//이건 오늘 배운 오버로딩
+	int getListCount(int brand_no, int user_no);
+	
 	
 	
 	
