@@ -93,7 +93,7 @@ function submit(){
 						timer: 1500,
 						type: 'success'
 					});
-					setTimeout("next()",1500);
+					setTimeout("next()",1400);
 				}else{
 					swal({
 						title: '사용자 정보가 일치하지 않습니다',

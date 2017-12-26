@@ -14,10 +14,8 @@
 <div id="content">
 	<div class="container background-white">
 		<div class="row margin-vert-30">
-			<!-- Register Box -->
-			
+			<!-- Register Box -->			
 			<div class="col-lg-10 col-lg-offset-1col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">
-					
 					<div class="signup-page">
 					<form id="signupform" action="/everycvs/sign/signuppost.do" method="post">
 					<div class="signup-header margin-bottom-40">
@@ -121,7 +119,6 @@
 					</form>
 					</div>
 			</div>
-			
 			<!-- End Register Box -->
 		</div>
 	</div>
