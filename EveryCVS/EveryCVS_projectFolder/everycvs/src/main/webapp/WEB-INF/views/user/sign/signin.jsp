@@ -12,10 +12,8 @@
 <!-- === BEGIN CONTENT === -->
 <div id="content">
 	<div class="container background-white">
-		<div class="container">
 			<div class="row margin-vert-30">
-				<!-- Login Box -->
-				<div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+				<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
 					<div class="login-page">
 						<div class="login-header margin-bottom-30">
 							<h2>Sign In to your account</h2>
@@ -54,7 +52,6 @@
 			</div>
 		</div>
 	</div>
-</div>
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->
 <c:import url="../../include/user/common/footer.jsp"></c:import>
@@ -63,12 +60,25 @@
 <c:if test="${sign eq false }">
 <script type="text/javascript">
 swal("INFORMATION", "로그인이 필요한 서비스입니다.", "info");
+swal({
+	title: 'INFORMATION',
+	html: '로그인이 필요한 서비스입니다',
+	timer: 2000,
+	type: 'info'
+});
 </script>
 </c:if>
-<c:if test="${signup eq 1 }">
+<c:set var="tempSignup" value="${signup}" />
+<c:if test="${tempSignup eq 1 }">
 <script type="text/javascript">
-swal("회원가입을 축하합니다!", "이제 모두의 편의점을 마음껏 이용하실 수 있습니다.", "info");
+swal({
+	title: '회원가입을 축하합니다!',
+	html: '이제 모두의 편의점을 마음껏 이용하실 수 있습니다',
+	timer: 2000,
+	type: 'info'
+});
 </script>
+<c:remove var="tempSignup" />
 </c:if>
 
 <script type="text/javascript">

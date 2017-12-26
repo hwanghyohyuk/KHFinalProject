@@ -302,6 +302,7 @@ public class UserController {
 	public int checkCertify(@RequestParam("email") String email) {
 		//사용자의 중복요청을 처리하기 위한 메소드
 		int checkCertify = userService.checkCertify(email);
+		System.out.println("checkCertify : " + checkCertify);
 		if(checkCertify>0){
 			return 1;//이미 인증번호 요청이 있었음
 		}else{		

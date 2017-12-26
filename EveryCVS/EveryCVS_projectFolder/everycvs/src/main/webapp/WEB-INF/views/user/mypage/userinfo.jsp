@@ -13,7 +13,9 @@
 <div id="content">
     <div class="container background-white">
         <div class="row margin-vert-30">
+        	<div class="login-page">
            
+        	</div>
         </div>
     </div>
 </div>

@@ -89,11 +89,11 @@
 						<!-- 페이지 하단부분 -->
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<hr>
-							<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+							<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
 								<label class="checkbox"> <input type="checkbox" id="checkTerm" disabled>I read the <a href="#" data-toggle="modal" data-target="#tcmodal">Terms and Conditions</a>
 								</label>
 							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+							<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 								<button class="btn btn-primary btn-lg pull-right" type="button" onclick="userSubmit();">Registration</button>
 							</div>
 						</div>
@@ -101,7 +101,6 @@
 					</form>
 					</div>
 			</div>
-			
 			<!-- End Register Box -->
 		</div>
 	</div>

@@ -54,7 +54,7 @@ function checkCertify(){
 							reverseButtons: true
 							}).then((result) => {
 							if (result.value) {
-								sendEmail(1);
+								sendCertify(1);
 							} else if (result.dismiss === 'cancel') {
 								swal({
 									title: '취소됨',
@@ -62,7 +62,8 @@ function checkCertify(){
 									timer: 1500,
 									type: 'error'
 								});
-								$('#certifyform').modal({backdrop:'static', keyboard: false}) ;
+								$('#certifyform').modal({backdrop:'static', keyboard: false});
+								$('#certifyno').focus();
 							}
 						});
 					}else if(data===0){
@@ -76,6 +77,7 @@ function checkCertify(){
 						timer: 1500,
 						type: 'error'
 					});
+					$("#signupemail").focus();
 				}});
 		}else {
 			$("#emailstatus").removeClass("has-success");
@@ -86,6 +88,7 @@ function checkCertify(){
 				timer: 1500,
 				type: 'error'
 			});
+			$("#signupemail").focus();
 		}
 	}else{
 		$("#emailstatus").removeClass("has-success");
@@ -96,6 +99,7 @@ function checkCertify(){
 			timer: 1500,
 			type: 'error'
 		});
+		 $("#signupemail").focus();
 	}
 }
 function sendCertify(cValue){
@@ -152,6 +156,7 @@ function sendCertify(cValue){
 							type: 'success'
 						});
 						$('#certifyform').modal({backdrop:'static', keyboard: false}) ;
+						$("#certifyno").focus();
 					}else{
 						$("#emailstatus").removeClass("has-success");
 						$("#emailstatus").addClass("has-error");
@@ -161,6 +166,7 @@ function sendCertify(cValue){
 							timer: 1500,
 							type: 'error'
 						});
+						$("#signupemail").focus();
 					}	
 				},
 				error : function(request, status, error) {
@@ -180,6 +186,7 @@ function sendCertify(cValue){
 				timer: 1500,
 				type: 'error'
 			});
+			$("#signupemail").focus();
 		}
 	}else{
 		$("#emailstatus").removeClass("has-success");
@@ -190,6 +197,7 @@ function sendCertify(cValue){
 			timer: 1500,
 			type: 'error'
 		});
+		$("#signupemail").focus();
 	}
 }
 
@@ -219,6 +227,7 @@ function certifyConfirm(){
 					});
 					$('#certifyform').modal('hide');
 					emailcheck=1;
+					$("#pwd").focus();
 				}else{
 					swal({
 						title: 'Error!',
@@ -226,6 +235,7 @@ function certifyConfirm(){
 						timer: 1500,
 						type: 'error'
 					});
+					$('#certifyno').focus();
 				}
 			},
 			error : function(request, status, error) {
@@ -244,6 +254,7 @@ function certifyConfirm(){
 			type: 'error'
 		});
 		emailcheck=0;
+		$('#certifyno').focus();
 	}
 }
 function pwdCheck(){
@@ -279,6 +290,7 @@ function repwdCheck(){
 			type: 'success'
 		});
 		passcheck=1;
+		$('#username').focus();
 	}else if(repwd.length==0){
 		$("#repwdstatus").removeClass("has-error");
 		$("#repwdfeedback").removeClass("glyphicon-ok");
@@ -331,6 +343,7 @@ function birthCheck(){
 			type: 'success'
 		});
 		birthcheck=1;
+		$('#phone').focus();
 	}else{
 		swal({
 			title: '생일 입력 실패',
@@ -408,6 +421,7 @@ function userSubmit(){
 			text: '이메일 인증을 완료해주세요',
 			type: 'error'
 		});
+		$("#signupemail").focus();
 		return;
 	}else	if(passcheck==0){
 		swal({
@@ -416,6 +430,7 @@ function userSubmit(){
 			text: '비밀번호 유효성 검사를 완료해주세요',
 			type: 'error'
 		});
+		$("#repwd").focus();
 		return;
 	}else	if(namecheck==0){
 		swal({
@@ -424,6 +439,7 @@ function userSubmit(){
 			text: '이름 유효성 검사를 완료해주세요',
 			type: 'error'
 		});
+		$("#username").focus();
 		return;
 	}else	if(birthcheck==0){
 		swal({
@@ -432,6 +448,7 @@ function userSubmit(){
 			text: '생년월일 유효성 검사를 완료해주세요',
 			type: 'error'
 		});
+		$("#birthday").focus();
 		return;
 	}else	if(phonecheck==0){
 		swal({
@@ -440,6 +457,7 @@ function userSubmit(){
 			text: '전화번호 유효성 검사를 완료해주세요',
 			type: 'error'
 		});
+		$("#phone").focus();
 		return;
 	}else	if(addresscheck==0){
 		swal({
@@ -448,6 +466,7 @@ function userSubmit(){
 			text: '주소 유효성 검사를 완료해주세요',
 			type: 'error'
 		});
+		$("#address").focus();
 		return;
 	}else	if(!termsToggle){
 		swal({
@@ -456,6 +475,7 @@ function userSubmit(){
 			text: '개인정보 처리방침에 동의해주세요',
 			type: 'error'
 		});
+		$('#tcmodal').modal('show') ;		
 		return;
 	}
 	$('#signupform').submit();
@@ -544,6 +564,7 @@ function adminSubmit(){
 			text: '지점가입번호 인증을 완료해주세요',
 			type: 'error'
 		});
+		$('#enrollNo').focus();
 		return;
 	}else if(emailcheck==0){
 		swal({
@@ -552,6 +573,7 @@ function adminSubmit(){
 			text: '이메일 인증을 완료해주세요',
 			type: 'error'
 		});
+		$('#signupemail').focus();
 		return;
 	}else	if(passcheck==0){
 		swal({
@@ -560,6 +582,7 @@ function adminSubmit(){
 			text: '비밀번호 유효성 검사를 완료해주세요',
 			type: 'error'
 		});
+		$('#repwd').focus();
 		return;
 	}else	if(namecheck==0){
 		swal({
@@ -568,6 +591,7 @@ function adminSubmit(){
 			text: '이름 유효성 검사를 완료해주세요',
 			type: 'error'
 		});
+		$('#username').focus();
 		return;
 	}else	if(birthcheck==0){
 		swal({
@@ -576,6 +600,7 @@ function adminSubmit(){
 			text: '생년월일 유효성 검사를 완료해주세요',
 			type: 'error'
 		});
+		$('#birthday').focus();
 		return;
 	}else	if(phonecheck==0){
 		swal({
@@ -584,6 +609,7 @@ function adminSubmit(){
 			text: '전화번호 유효성 검사를 완료해주세요',
 			type: 'error'
 		});
+		$('#phone').focus();
 		return;
 	}else	if(addresscheck==0){
 		swal({
@@ -592,6 +618,7 @@ function adminSubmit(){
 			text: '주소 유효성 검사를 완료해주세요',
 			type: 'error'
 		});
+		$('#address').focus();
 		return;
 	}else	if(!termsToggle){
 		swal({
@@ -600,6 +627,7 @@ function adminSubmit(){
 			text: '개인정보 처리방침에 동의해주세요',
 			type: 'error'
 		});
+		$('#tcmodal').modal('show');	
 		return;
 	}
 	$('#signupform').submit();

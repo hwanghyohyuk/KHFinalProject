@@ -20,7 +20,12 @@
 				<br>
 				<div class="row center-block">
 					<p class="text-center">
+					<c:if test="${sessionScope.user.stored_file_name eq '' }">
 					<img src="/everycvs/resources/user/img/user.png"  style="background-color: white; width:120px;height:120px;" class="img-circle">
+					</c:if>
+					<c:if test="${sessionScope.user.stored_file_name ne '' }">
+					<img src="/everycvs/resources/user/img/user.png"  style="background-color: white; width:120px;height:120px;" class="img-circle">
+					</c:if>
 					</p>
 					<p class="text-center lead"><b>
 					${sessionScope.user.user_name}
