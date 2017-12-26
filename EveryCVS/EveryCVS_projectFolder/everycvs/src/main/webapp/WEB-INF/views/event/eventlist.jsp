@@ -11,87 +11,6 @@
 <c:import url="../include/user/common/header.jsp"></c:import>
 <!-- === END HEADER === -->
 <!-- === BEGIN CONTENT === -->
-<script type="text/javascript">
-
-function userpageload(page)
-{
-   $.ajax({
-      url:"/everycvs/userpageload.do",
-      type: "post",
-      dataType: "json",
-      data: {"page":page},
-      success: function(data)
-      {
-         console.log(data.currentPage);
-         console.log(data.maxPage);
-         console.log(data.list);
-         
-         var list = data.list;
-         var values = "";
-         for(var i in list)
-            {				//여기부분 수정 손을...못대고있습니다 ...	2ㅍㅔ이지 .후 ...		
-      			if((i%3)==0)
-      				 values +='<div class="row">';
-      				 
-               values += '<div class="col-md-4"><a href="/everycvs/eventDetail.do?no='+list[i].event_no+'"><figure>'+
-					'<img src="/everycvs/resources/upload/'+list[i].stored_file_name+'" alt="이벤트 이미지가 없습니다." class="jun_img">'+
-					'<figcaption>'+
-					'<input type="hidden" class="margin-top-20" value="'+list[i].event_no+'"/>'+
-					'<h3 class="margin-top-20">'+list[i].title+'</h3>'+
-					'<span>시작일:'+list[i].start_date+'</span> '+
-					'<br> '+
-					'<span>종료일:'+list[i].end_date+'</span>'+
-					'<br>'+
-					'<span>조회수:'+list[i].readcount+'</span>'+
-					'</figcaption>'+
-					'</figure></a></div>';        
-					
-               if((i%3)==2 || i==(list.length-1))
-    				 values +='</div>';
-            }
-       		console.log(values);
-            $("#usereventlist").html(values);
-         
-            var valuesPaging="";
-            
-            if(data.currentPage <= 1){
-               valuesPaging+="<li class='disabled'>" + 
-                 "<a href='#' aria-label='Previous'>" +
-                   "<span aria-hidden='true'>&laquo;</span></a></li>";
-            } else {
-               valuesPaging += "<li><a href='javascript:userpageload(" + (data.currentPage - 1) + ")'  aria-label='Previous'>"
-                + "<span aria-hidden='true'>&laquo;</span></a></li>";
-            }
-            
-           for(var i = data.startPage; i<=data.endPage; i++)
-           {
-              if(data.currentPage == i)
-              {
-                valuesPaging+="<li class='disabled'>"+"<a href='#'>"+ i + "</a></li>";
-              } else {
-                  valuesPaging+="<li><a href='javascript:userpageload(" + i + ")'>"+ i + "</a></li>";
-              }
-
-           }
-           
-            if(data.currentPage >= data.maxPage)
-            {
-               valuesPaging+= "<li class='disabled'>" + 
-                  "<a href='#' aria-label='Next'>"+
-                      "<span aria-hidden='true'>&raquo;</span></a></li>";
-            } else {
-               valuesPaging += "<li><a href='javascript:userpageload(" + (data.currentPage + 1)+ ")' aria-label='Next'>" +
-                "<span aria-hidden='true'>&raquo;</span></a></li>";
-            }
-            
-            $("#usereventpaging").html(valuesPaging);
-      },
-  	error : function(request, status, error) {
-		swal("오류",error,"error");
-	}	
-   });
-}
-</script>
 		<div id="content">
 			<div class="container background-white">
 				<div class="row margin-vert-30">
@@ -108,14 +27,11 @@ function userpageload(page)
 							<ul class="portfolio-filter">
 								<li class="portfolio-filter-label label label-primary">
 									filter by:</li>
-								<li><a href="#" class="portfolio-selected btn btn-default"
-									data-filter="*">All</a></li>
-								<li><a href="#" class="btn btn-default" data-filter=".GS25">GS25</a>
-								</li>
-								<li><a href="#" class="btn btn-default" data-filter=".CU">CU</a>
-								</li>
-								<li><a href="#" class="btn btn-default"
-									data-filter=".7ELEVEN">7ELEVEN</a></li>
+								<li><a href="#" class="portfolio-selected btn btn-default" onclick="cvsEventList(0);">All</a></li>
+								<li><a href="#" class="btn btn-default" onclick="cvsEventList(1);">GS25</a></li>
+								<li><a href="#" class="btn btn-default" onclick="cvsEventList(2);">CU</a></li>
+								<li><a href="#" class="btn btn-default" onclick="cvsEventList(3);">7ELEVEN</a></li>
+								
 							</ul>
 						</div>
 						<!-- End Filter Buttons -->
@@ -124,7 +40,7 @@ function userpageload(page)
 				<div class="row">
 					<div class="col-md-12 portfolio-group no-padding" style="float: left;">
 						<!-- Portfolio Item -->
-						<div class="col-md-12 portfolio-item margin-bottom-40 GS25">
+						<div class="col-md-12 portfolio-item margin-bottom-40">
 							<!-- 로그인시 상세보기 -->
 							<div id="usereventlist">
 								<c:forEach items="${event.list}" var="e" varStatus="status">
@@ -208,5 +124,177 @@ function userpageload(page)
 <c:import url="../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
 <!-- JS -->
+<script type="text/javascript">
+function userpageload(page){
+   $.ajax({
+      url:"/everycvs/userpageload.do",
+      type: "post",
+      dataType: "json",
+      data: {"page":page},
+      success: function(data)
+      {
+         console.log(data.currentPage);
+         console.log(data.maxPage);
+         console.log(data.list);
+         
+         var list = data.list;
+         var values = "";
+         for(var i in list)
+            {				
+      			if((i%3)==0)
+      				 values +='<div class="row">';
+      				 
+               values += '<div class="col-md-4"><a href="/everycvs/eventDetail.do?no='+list[i].event_no+'"><figure>'+
+					'<img src="/everycvs/resources/upload/'+list[i].stored_file_name+'" alt="이벤트 이미지가 없습니다." class="jun_img">'+
+					'<figcaption>'+
+					'<input type="hidden" class="margin-top-20" value="'+list[i].event_no+'"/>'+
+					'<h3 class="margin-top-20">'+list[i].title+'</h3>'+
+					'<span>시작일:'+list[i].start_date+'</span> '+
+					'<br> '+
+					'<span>종료일:'+list[i].end_date+'</span>'+
+					'<br>'+
+					'<span>조회수:'+list[i].readcount+'</span>'+
+					'</figcaption>'+
+					'</figure></a></div>';        
+					
+               if((i%3)==2 || i==(list.length-1))
+    				 values +='</div>';
+            }
+       		console.log(values);
+            $("#usereventlist").html(values);
+         
+            var valuesPaging="";
+            
+            if(data.currentPage <= 1){
+               valuesPaging+="<li class='disabled'>" + 
+                 "<a href='#' aria-label='Previous'>" +
+                   "<span aria-hidden='true'>&laquo;</span></a></li>";
+            } else {
+               valuesPaging += "<li><a href='javascript:userpageload(" + (data.currentPage - 1) + ")'  aria-label='Previous'>"
+                + "<span aria-hidden='true'>&laquo;</span></a></li>";
+            }
+            
+           for(var i = data.startPage; i<=data.endPage; i++)
+           {
+              if(data.currentPage == i)
+              {
+                valuesPaging+="<li class='disabled'>"+"<a href='#'>"+ i + "</a></li>";
+              } else {
+                  valuesPaging+="<li><a href='javascript:userpageload(" + i + ")'>"+ i + "</a></li>";
+              }
+
+           }
+           
+            if(data.currentPage >= data.maxPage)
+            {
+               valuesPaging+= "<li class='disabled'>" + 
+                  "<a href='#' aria-label='Next'>"+
+                      "<span aria-hidden='true'>&raquo;</span></a></li>";
+            } else {
+               valuesPaging += "<li><a href='javascript:userpageload(" + (data.currentPage + 1)+ ")' aria-label='Next'>" +
+                "<span aria-hidden='true'>&raquo;</span></a></li>";
+            }
+            
+            $("#usereventpaging").html(valuesPaging);
+      },
+  	error : function(request, status, error) {
+		swal("오류",error,"error");
+	}	
+   });}
+   
+function cvsEventList(brandNo){
+	if(brandNo>=0){
+		$.ajax({
+			url:'/everycvs/ajax/cvsevent.do',
+			type:'post',
+			data:{"brandNo":brandNo},
+			success:function(data){
+				
+				var index=0;
+				var values='';
+				var last = data.elist.length;
+				var elist = data.elist;
+				
+				console.log("elist "+data.elist);
+				console.log("currentPage "+data.currentPage);
+				console.log("listCount "+data.listCount);
+				console.log("maxPage "+data.maxPage);
+				console.log("startPage "+data.startPage);
+				console.log("endPage "+data.endPage);
+				console.log("limit "+data.limit);
+			
+				for(var i in elist){
+					if((index%3)==0){
+						values+='<div class="row">';
+					}
+					values+='<div class="col-md-4">'
+							+'<a href="/everycvs/eventDetail.do?no='+elist[i].event_no+'">'
+							+'<figure>'								
+							+'<img src="/everycvs/resources/upload/'+elist[i].stored_file_name+'" alt="이벤트 이미지가 없습니다." class="jun_img">'
+							+'<figcaption>'
+							+'<input type="hidden" class="margin-top-20" value="'+elist[i].event_no+'"/>'
+							+'<h3 class="margin-top-20">'+elist[i].title+'</h3>'
+							+'<span>시작일:'+elist[i].start_date+'</span>'
+							+'<br>'
+							+'<span>종료일:'+elist[i].end_date+'</span>'
+							+'<br>'
+							+'<span>조회수:'+elist[i].readcount+'</span>'
+							+'</figcaption>'				
+							+'</figure>'
+							+'</a>'
+							+'</div>';					
+					if((index%3)==2||index==(last-1)){
+						values+='</div>';
+					}
+					index++;
+				}	
+				$("#usereventlist").html(values);
+				
+				var valuesPaging="";
+	            
+	            if(data.currentPage <= 1){
+	               valuesPaging+="<li class='disabled'>" + 
+	                 "<a href='#' aria-label='Previous'>" +
+	                   "<span aria-hidden='true'>&laquo;</span></a></li>";
+	            } else {
+	               valuesPaging += "<li><a href='javascript:userpageload(" + (data.currentPage - 1) + ")'  aria-label='Previous'>"
+	                + "<span aria-hidden='true'>&laquo;</span></a></li>";
+	            }
+	            
+	           for(var i = data.startPage; i<=data.endPage; i++)
+	           {
+	              if(data.currentPage == i)
+	              {
+	                valuesPaging+="<li class='disabled'>"+"<a href='#'>"+ i + "</a></li>";
+	              } else {
+	                  valuesPaging+="<li><a href='javascript:userpageload(" + i + ")'>"+ i + "</a></li>";
+	              }
+
+	           }
+	           
+	            if(data.currentPage >= data.maxPage)
+	            {
+	               valuesPaging+= "<li class='disabled'>" + 
+	                  "<a href='#' aria-label='Next'>"+
+	                      "<span aria-hidden='true'>&raquo;</span></a></li>";
+	            } else {
+	               valuesPaging += "<li><a href='javascript:userpageload(" + (data.currentPage + 1)+ ")' aria-label='Next'>" +
+	                "<span aria-hidden='true'>&raquo;</span></a></li>";
+	            }
+	            
+	            $("#usereventpaging").html(valuesPaging);
+			},
+			error:function(error){
+				swal({
+					title: 'ERROR',
+					text:error,
+					timer: 1500,
+					type: 'error'
+				});
+			}
+		});
+	}
+}
+</script>
 <c:import url="../include/user/common/end.jsp"></c:import>
 <!-- === END === -->

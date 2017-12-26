@@ -43,7 +43,7 @@ public class EventController {
 		return mv;
 	}
 
-	// 이벤트 리스트 이건 유저 뷰인데 다시작업해야함
+	// 유저 이벤트 리스트
 	@RequestMapping(value="/page/eventmain.do", method=RequestMethod.GET)
 	public ModelAndView selectEventList(@RequestParam(value="keyword",required = false, defaultValue="") String keyword, String page, HttpSession session) {
 		
@@ -92,6 +92,8 @@ public class EventController {
                   endPage = maxPage;
           }
           
+        
+          
           map.put("currentPage", currentPage);
           map.put("listCount", listCount);
           map.put("maxPage", maxPage);
@@ -106,6 +108,7 @@ public class EventController {
                JSONObject jev = new JSONObject();
                jev.put("event_no", ev.getEvent_no());
                jev.put("title", ev.getTitle());
+               jev.put("writer", ev.getWriter());
                jev.put("start_date",ev.getStart_date().toString());
                jev.put("end_date", ev.getEnd_date().toString());
                jev.put("readcount", ev.getReadcount());
@@ -122,6 +125,37 @@ public class EventController {
          return mv;
 		
 	}	
+	
+	
+	//사용자 버튼으로 검색
+	@RequestMapping(value="/ajax/cvsevent.do", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> cvsEvent(@RequestParam("brandNo")int brand_no, HttpSession session){
+		Map<String,Object> map = new HashMap<String, Object>();
+		
+		int currentPage = 1;
+        int limit = 6;
+        int user_no = ((User)session.getAttribute("user")).getUser_no();
+        List<Event> cvsEventList = eventService.cvsEvent(currentPage, limit, brand_no);    
+        int listCount = eventService.getListCount(brand_no,user_no);
+        int maxPage = (int) ((double) listCount / limit + 0.94);
+        int startPage = (((int) ((double) currentPage / limit + 0.94)) - 1) * limit + 1;
+        int endPage = startPage + limit - 1;
+         if (maxPage < endPage)
+                 endPage = maxPage;
+         
+         map.put("elist", cvsEventList);		
+         map.put("currentPage", currentPage);
+         map.put("listCount", listCount);
+         map.put("maxPage", maxPage);
+         map.put("startPage", startPage);
+         map.put("endPage", endPage);
+         map.put("limit", limit);
+		
+		return map;
+	}
+	
+	
 	
 	//사용자 이벤트 결과 리스트를 보여주는 화면
 	@RequestMapping(value = "eventresultlist.do", method = RequestMethod.GET)

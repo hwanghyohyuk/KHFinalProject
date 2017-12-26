@@ -168,6 +168,20 @@ public class EventServiceImpl implements EventService{
 		 eventDao.cvseventResultView(eventResult);
 	}
 
+	@Override
+	public List<Event> cvsEvent(int currentPage, int limit, int brand_no) {
+		int startRow = (currentPage - 1) * limit + 1;
+	    int endRow = startRow + limit - 1;        
+	    return eventDao.cvsEvent(startRow,endRow,brand_no);
+	}
+
+	@Override
+	public int getListCount(int brand_no, int user_no) {
+		
+		return eventDao.cvsGetListCount(brand_no,user_no);
+	}
+
+
 	
 
 }
