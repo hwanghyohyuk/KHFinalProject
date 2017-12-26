@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Gifticon;
+import com.kh.everycvs.common.model.vo.User;
 import com.kh.everycvs.gifticon.model.service.GifticonService;
 
 
@@ -33,9 +35,11 @@ public class GifticonContoller {
 	
 	//기프티콘 페이지로 이동
 	@RequestMapping(value = "gifticonPage.do")
-	public ModelAndView gifticonPage(ModelAndView mv){
+	public ModelAndView gifticonPage(ModelAndView mv, HttpSession session){
 		//기프티콘 목록조회
-		ArrayList<Gifticon> glist = gifticonService.listGifticon();
+		User user = (User) session.getAttribute("user");
+		ArrayList<Gifticon> glist = gifticonService.listGifticon(user.getUser_no());
+		
 		mv.addObject("glist", glist);
 		
 		mv.setViewName("user/mypage/gifticonPage");

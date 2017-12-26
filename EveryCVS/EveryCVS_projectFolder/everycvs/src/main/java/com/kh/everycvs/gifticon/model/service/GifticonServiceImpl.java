@@ -25,9 +25,9 @@ public class GifticonServiceImpl implements GifticonService{
 	}
 
 	@Override
-	public ArrayList<Gifticon> listGifticon() {
+	public ArrayList<Gifticon> listGifticon(int user_no) {
 		//기프티콘 조회
-		return (ArrayList<Gifticon>) gifticonDao.listGifticon();
+		return (ArrayList<Gifticon>) gifticonDao.listGifticon(user_no);
 	}
 
 	@Override
