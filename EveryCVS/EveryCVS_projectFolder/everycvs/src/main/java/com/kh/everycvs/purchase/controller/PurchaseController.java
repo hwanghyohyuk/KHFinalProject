@@ -117,13 +117,14 @@ public class PurchaseController {
 		mv.addObject("insertPurchaseList", insertPurchaseList);
 		mv.addObject("insertGifticon", insertGifticon);
 		mv.addObject("barcode_img_name", result);
+		mv.addObject("price", cprice);
 		
-		mv.setViewName("user/mypage/gifticonPage");
+		mv.setViewName("redirect:/page/splist.do");
 		
 		/*System.out.println("결제 후 : " + user.getCash());
 		System.out.println("결제 후 포인트 증가 : " + user.getPoint());
 		System.out.println(purchase);*/
-		System.out.println("gifticon : " + gifticon);
+		System.out.println("cprice : " + cprice);
 		return mv;
 	}
 	
@@ -165,7 +166,7 @@ public class PurchaseController {
 		mv.addObject("result", result);
 		mv.addObject("insertPurchaseList", insertPurchaseList);
 		mv.addObject("insertGifticon", insertGifticon);
-		mv.setViewName("user/mypage/gifticonPage");
+		mv.setViewName("redirect:/page/splist.do");
 		
 		System.out.println("포인트 결제 결과 : " + user.getPoint());
 		return mv;

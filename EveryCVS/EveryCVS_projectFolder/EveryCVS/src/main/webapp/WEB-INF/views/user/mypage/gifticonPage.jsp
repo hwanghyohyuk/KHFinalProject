@@ -46,29 +46,26 @@
                         <div class="col-md-12 no-padding">
                             <!-- gifticon Item -->
                             <c:forEach items="${glist}" var="glist">
-                            <div class="col-md-4 portfolio-item margin-bottom-40 video">
+                            <input type="hidden" name="user_no" value="${user.user_no }">
+                            <div class="col-md-4 portfolio-item margin-bottom-40 video" align="center">
                                 <div class="sy1">
-                                
                                     <a>
                                         <figure>
                                             <img src="/everycvs/resources/upload/${glist.stored_file_name}" 
-                                            alt="이미지가 존재하지 않습니다." id="image" onclick="openModal(${glist.gifticon_no});">                                           
+                                            alt="이미지가 존재하지 않습니다." id="image" onclick="openModal(${glist.gifticon_no});">                 
                                             <figcaption>
                                                 <h3 class="margin-top-20"></h3>
-                                                <span> 상품명 : ${glist.product_name }<br>
-                                                	      지점명 : ${glist.store_name }<br>
-                                                	      유효기간 : ${glist.extinction_date}
-                                                </span>
                                             </figcaption>
-                                           
                                         </figure>
                                     </a>
-                                </div>	
+                                </div>
+                                <b>${glist.product_name }</b><br>
+                                <b>${glist.store_name }</b>
                             </div>
 							
 
 						<!-- Modal -->
-						<div class="modal fade" id="gifticon_${glist.gifticon_no }" role="dialog" align="center">
+						<div class="modal fade" id="gifticon_${glist.gifticon_no }" role="dialog">
 							<div class="modal-dialog modal-80size">
 								
 								<!-- Modal content-->
@@ -81,7 +78,7 @@
 												 src="/everycvs/resources/upload/${glist.stored_file_name}" 
 												 style="height:250px;">
 												<br><br>
-												
+											
 											<b>${glist.product_name }</b>
 										<input type="hidden" id="bno_${glist.gifticon_no}" value="${glist.barcode_img_name}" >
 										<div id="bcTarget_${glist.gifticon_no}" align="center"></div>	
@@ -90,7 +87,6 @@
 										<div align="right">						
 											<b>유효기간 : ${glist.extinction_date }</b><br>
 											<b>교환처 : ${glist.store_name}</b><br>
-											
 										</div>
 									
 									</div>
@@ -99,7 +95,6 @@
 											data-dismiss="modal">Close</button>
 									</div>
 								</div>
-
 							</div>
 						</div>
 						</c:forEach>

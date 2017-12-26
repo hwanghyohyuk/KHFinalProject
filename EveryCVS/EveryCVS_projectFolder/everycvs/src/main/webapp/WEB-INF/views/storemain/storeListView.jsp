@@ -137,12 +137,12 @@
 									
 											<button type="submit" class="btn btn-primary"
 												    name="price" value="${sp.price}"
-												    id="frm">잔고 결제</button>         
+												    onclick="return purchaseMoney();">잔고 결제</button>         
 											
 										</form>
 										&nbsp;										
 										<!-- 포인트 결제 버튼 -->
-										<form action="userDecrePoint.do">
+										<form action="userDecrePoint.do" id="form">
 											<input type="hidden" name="user_no" value="${user.user_no }">
 											<input type="hidden" name="point" value="${user.point }">
 											<input type="hidden" name="store_product_no" value="${sp.store_product_no}">
@@ -154,7 +154,7 @@
 
 											<button type="submit" class="btn btn-primary"
 												    name="price" value="${sp.price }"
-												     id="frm">포인트 결제</button>
+												     onclick="return purchasePoint();">포인트 결제</button>
 										</form>										
 										</div>
 										<div class="modal-footer">
@@ -222,7 +222,39 @@
   function add_favorite(pno, sno){
 		location.href="/everycvs/favoriteInsert.do?product_no=" + pno + "&store_no=" + sno;
 	}
+function purchaseMoney(){
+	<c:forEach var="sp" items="${requestScope.list}">
+	var price = ${sp.price};
+	var cash = ${user.cash};
+	var result = cash - price;
+	
+	console.log(result);
+	if(result < 0){
+		alert("잔고 부족");
+		return false;
+	}
+	if(result > 0){
+		alert("결제 완료");
+	}
+	</c:forEach>
+}
 
+function purchasePoint(){
+	<c:forEach var="sp" items="${requestScope.list}">
+	var price = ${sp.price};
+	var point = ${user.point};
+	var result = point - price;
+	
+	console.log(result);
+	if(result < 0){
+		alert("잔고 부족");
+		return false;
+	}
+	if(result > 0){
+		alert("결제 완료");
+	}
+	</c:forEach>
+}
 </script>
 
 <c:import url="../include/user/common/end.jsp"></c:import>

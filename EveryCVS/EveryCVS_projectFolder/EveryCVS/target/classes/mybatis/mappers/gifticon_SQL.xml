@@ -20,16 +20,16 @@
 	</resultMap>
 	
 	<!-- 기프티콘 목록 조회 -->
-	<select id="gifticonList" resultType="list" resultMap="resultGifticon">
+	<select id="gifticonList" parameterType="hashmap" resultType="list" resultMap="resultGifticon">
 		<![CDATA[
-			SELECT * FROM GIFTICON_VIEW ORDER BY GIFTICON_NO DESC
+			SELECT * FROM GIFTICON_VIEW where user_no = #{user_no} ORDER BY GIFTICON_NO DESC
 		]]>
 	</select>
 	
 	 <!-- 기프티콘 생성 -->
 	 <insert id="insertGifticon" parameterType="hashmap">
 	  <selectKey keyProperty="purchase_no" resultType="int" order="BEFORE">
-			select max(purchase_no) FROM tb_purchase
+			select max(purchase_no) FROM tb_purchase 
 	  </selectKey>
 	   
     	<![CDATA[

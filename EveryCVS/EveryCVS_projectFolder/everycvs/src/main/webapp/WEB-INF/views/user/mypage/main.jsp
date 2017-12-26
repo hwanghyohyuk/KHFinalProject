@@ -64,27 +64,26 @@
 										<div class="modal-content" align="left">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h4 class="modal-title">충전하기</h 4>
+												<h4 class="modal-title" 
+													style="color:#245256; font-weight: bold;">충전하기</h4>
 											</div>
+											
+											<form name="frm" id="frm" method="post"> 
 											<div class="modal-body">
 												<p>- 1000원 이하의 금액은 충전 할 수 없습니다.</p>
 												<p>- 충전된 금액은 환불이 불가합니다.</p>
-												<br>
 												
-												<form name="frm" id="frm" method="post"> 
 												    <input type="hidden" name="user_no">
 												    <input type="hidden" name="cash">
-													<input type="text" name="increMoney">
+													<input type="text" name="increMoney" placeholder="충전할 금액을 입력해주세요.">
 														
-													<button class="btn btn-primary" type="submit" 
-															id="btn" onclick="purchaseBtn()">충 전</button>
-												</form>
-
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">완료</button>
+												<button type="submit" class="btn btn-primary"
+													    id="increBtn">충전하기</button>
 											</div>
+											</form>
+											
 										</div>
 
 									</div>
@@ -101,7 +100,8 @@
 										<div class="modal-content" align="left">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h4 class="modal-title">거래내역</h4>
+												<h4 class="modal-title"
+													style="color:#245256; font-weight: bold;">거래내역</h4>
 											</div>
 											<div class="modal-body box-body no-padding" 
 												 style="overflow-x:hidden; width:890px; height:300px;" id="purchaseTable">
@@ -140,21 +140,21 @@
 											<!-- 거래내역 버튼 검색 -->
 											<div class="modal-footer" align="left">
 											
-												<button class="btn btn-default" style="float: left;" 
+												<button class="btn btn-primary" style="float: left;" 
 														data-toggle="modal"
 														data-target="#purchaseTable"
 														data-month="0"
 														type="button">
 														전체</button>
 														
-												<button class="btn btn-default" style="float: left;" 
+												<button class="btn btn-primary" style="float: left;" 
 														data-toggle="modal"
 														data-target="#purchaseTable"
 														data-month="1"
 														type="button"
 														>3개월</button>
 														
-												<button class="btn btn-default" style="float: left;"
+												<button class="btn btn-primary" style="float: left;"
 														data-toggle="modal"
 														data-target="#purchaseTable"
 														data-month="2"
@@ -162,7 +162,7 @@
 														
 														>1개월</button>
 														
-												<button class="btn btn-default" style="float: left;"
+												<button class="btn btn-primary" style="float: left;"
 														data-toggle="modal" 
 														data-target="#purchaseTable" 
 														data-month="3"
@@ -272,16 +272,26 @@
 
 	<script>
 		$(document).ready(function() {
-			//자주구매하는 목록 ajax
 			//충전하기  ajax
 			$("#myBtn").click(function() {
 				var cash;
 				$("#myModal").modal();
 				
 				//모달창의 충전 버튼을 클릭하면 ajax 통신이 시작
-				$("#btn").on("click", function(){
+				$("#increBtn").on("click", function(){
 					var incre = frm.increMoney.value;
 					var result;
+					
+					//1000원 이하 충전 불가
+					if( incre < 1000){
+						$("#myModal").modal('hide');
+						alert("1000원 이하는 충전이 불가능합니다.");
+						return false;
+					}
+					
+					//충전 확인, 취소에 따라 충전여부 결정
+					var con = confirm("정말로 충전하시겠습니까?");
+					if(con == true){
 				$.ajax({
 					url : "increMoney.do",
 					data : {increMoney:incre, user_no:"${sessionScope.user.user_no}", cash:"${sessionScope.user.cash}"},
@@ -300,8 +310,18 @@
 					}
 					
 				}); 
+				
 				return cash;
+					}
+				
+				if(con == false){
+					$("#myModal").modal('hide');
+					return false;
+					}
+					
 				});
+				
+				
 			});
 			
 			});
@@ -360,21 +380,6 @@
 		});  
 	});
 });
-	</script>
-	
-	<!-- swal 영역 -->
-	
-	<script type="text/javascript">
-	function purchaseBtn(){
-		swalAlert();
-	}
-		
-
-	function swalAlert(){
-		swal("충전잼");
-	}
-	
-	
 	</script>
 	
 

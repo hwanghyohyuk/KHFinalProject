@@ -1,6 +1,7 @@
 package com.kh.everycvs.gifticon.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,9 +26,14 @@ public class GifticonDao {
 	}
 	
 	//기프티콘 조회
-	public List<Gifticon> listGifticon() {
+	public List<Gifticon> listGifticon(int user_no) {
 		List<Gifticon> glist = new ArrayList<Gifticon>();
-		return sqlSession.selectList("gifticon.gifticonList", glist);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("user_no", user_no);
+		map.put("glist", glist);
+		
+		return sqlSession.selectList("gifticon.gifticonList", map);
 	}
 	
 	//기프티콘 삭제

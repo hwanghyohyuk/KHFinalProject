@@ -16,7 +16,7 @@ public interface GifticonService {
 	public int createGifticon(Map<String, Object> map);
 		
 	//기프티콘 목록 조회 : 기프티콘 보관함에 결제한 기프티콘 목록을 보여줌
-	public ArrayList<Gifticon> listGifticon();
+	public ArrayList<Gifticon> listGifticon(int user_no);
 	
 	//기프티콘 삭제 : 기프티콘 사용 후 리스트에서 삭제
 	public String deleteGifticon(HttpServletRequest request, HttpServletResponse response);
