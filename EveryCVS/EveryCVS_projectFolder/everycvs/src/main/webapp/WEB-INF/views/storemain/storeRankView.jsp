@@ -32,6 +32,14 @@
 		location.href="/everycvs/favoriteInsert.do?product_no=" + pno + "&store_no=" + sno;
 	}
 </script>
+<style type="text/css">
+	h5 {
+		overflow: hidden; 
+	    text-overflow: ellipsis;
+	    white-space: nowrap; 
+	    width: 120px;
+	}
+</style>
 <c:import url="../include/user/common/headend.jsp"></c:import>
 <!-- === END HEAD ===  -->
 <!-- === BEGIN HEADER ===  -->
@@ -74,7 +82,8 @@
 											<c:forEach var="sp" items="${requestScope.list}">
 												<div class="col-md-4 col-sm-4 col-xs-6">
 													<a href="#" data-toggle="modal" data-target="#amodal${sp.store_product_no}">
-														<img src="/everycvs/resources/upload/${sp.stored_file_name}" alt="No_Image">
+														<img src="/everycvs/resources/upload/${sp.stored_file_name}" alt="No_Image"
+														width="200px" height="130px">
 													</a>
 													<h5 align="center">
 														<strong>${sp.product_name}</strong>
@@ -156,7 +165,8 @@
 											<c:forEach var="sp" items="${requestScope.list2}">
 												<div class="col-md-4 col-sm-4 col-xs-6">
 													<a href="#" data-toggle="modal" data-target="#bmodal${sp.store_product_no}">
-														<img src="/everycvs/resources/upload/${sp.stored_file_name}" alt="No_Image">
+														<img src="/everycvs/resources/upload/${sp.stored_file_name}" alt="No_Image"
+														width="200px" height="130px">
 													</a>
 													<h5 align="center">
 														<strong>${sp.product_name}</strong>
@@ -234,14 +244,15 @@
 										<strong>할인상품</strong>
 									</h4>
 								</div>
-								<div style="overflow-x: hidden; width: 480px; height: 185px;">
+								<div style="overflow-x: hidden; width: 480px; height: 200px;">
 									<div id="collapse-One" class="accordion-body collapse in">
 										<div class="panel-body">
 											<div class="row">
 												<c:forEach var="sp" items="${requestScope.list3}">
 													<div class="col-md-4 col-sm-4 col-xs-6">
 														<a href="#" data-toggle="modal" data-target="#cmodal${sp.store_product_no}">
-															<img src="/everycvs/resources/upload/${sp.stored_file_name}" alt="No_Image">
+															<img src="/everycvs/resources/upload/${sp.stored_file_name}" alt="No_Image"
+															width="200px" height="130px">
 														</a>
 														<h5 align="center">
 															<strong>${sp.product_name}</strong>
@@ -333,14 +344,15 @@
 										<strong>유통기한 임박상품</strong>
 									</h4>
 								</div>
-								<div style="overflow-x: hidden; width: 480px; height: 185px;">
+								<div style="overflow-x: hidden; width: 480px; height: 200px;">
 									<div id="collapse-One" class="accordion-body collapse in">
 										<div class="panel-body">
 											<div class="row">
 												<c:forEach var="sp" items="${requestScope.list4}">
 													<div class="col-md-4 col-sm-4 col-xs-6">
 														<a href="#" data-toggle="modal" data-target="#dmodal${sp.store_product_no}">
-															<img src="/everycvs/resources/upload/${sp.stored_file_name}" alt="No_Image">
+															<img src="/everycvs/resources/upload/${sp.stored_file_name}" alt="No_Image"
+															width="200px" height="130px">
 														</a>
 														<h5 align="center">
 															<strong>${sp.product_name}</strong>
