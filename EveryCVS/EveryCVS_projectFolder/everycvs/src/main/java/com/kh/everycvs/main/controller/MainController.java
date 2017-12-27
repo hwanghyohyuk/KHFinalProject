@@ -24,6 +24,7 @@ import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.User;
 import com.kh.everycvs.event.model.service.EventService;
 import com.kh.everycvs.product.model.service.ProductService;
+import com.kh.everycvs.sale.model.service.SaleService;
 import com.kh.everycvs.store.model.service.StoreService;
 
 @Controller
@@ -37,6 +38,10 @@ public class MainController {
 	
 	@Autowired
 	private EventService eventService;
+	
+	@Autowired
+	private SaleService saleService;
+	
 
 	// 인터셉터를 거치는 페이지이동 메소드
 	@RequestMapping("main/main.do")
@@ -159,8 +164,8 @@ public class MainController {
 	}
 
 	/* 지점관리자가 지점메인에 접속 */
-	@RequestMapping("storemain.do")
-	public String StoreMain(HttpSession session) {
+	@RequestMapping("/storemain.do")
+	public ModelAndView storeMain(HttpSession session,ModelAndView mv) {
 		Object sessionStore = session.getAttribute("store");
 		// 현재 세션에 store정보가 있다면
 		if (sessionStore != null) {
@@ -168,24 +173,41 @@ public class MainController {
 		}
 		User user = (User) session.getAttribute("user");
 		if (user.getStore_no() == null) {// 지점관리자인지 아닌지 확인하는 조건문
-			return "redirect:/main.do";
-		} else {
+			mv.setViewName("redirect:/main.do");
+		} else {	
 			Store store = storeService.selectStore(user.getStore_no());
 			session.setAttribute("store", store);
-			return "admin/storemanager/main";
+			/** 상품 판매량 **/
+			int saleQuantity = saleService.saleQuantity(store.getStore_no());
+			/** 금일 등록된 상품수 **/
+			int registProducts = saleService.registProducts(store.getStore_no());
+			/** 금일 방문자수 **/
+			int joinCustomers = saleService.joinCustomers(store.getStore_no());
+			/** 금일 판매 수익**/
+			int saleBenefit = saleService.saleBenefit(store.getStore_no());
+			
+			mv.addObject("saleQuantity", saleQuantity);
+			mv.addObject("registProducts", registProducts);
+			mv.addObject("joinCustomers", joinCustomers);
+			mv.addObject("saleBenefit", saleBenefit);			
+			
+			mv.setViewName("admin/storemanager/main");
 		}
+		return mv;
 	}
 
 	/* 편의점 관리자가 편의점 관리 메인에 접속 */
-	@RequestMapping("cvsmain.do")
-	public String CvsMain() {
-		return "admin/cvsmanager/main";
+	@RequestMapping("/cvsmain.do")
+	public ModelAndView cvsMain(ModelAndView mv) {
+		mv.setViewName("admin/cvsmanager/main");
+		return mv;
 	}
 
 	/* 사이트 관리자가 사이트 관리 메인에 접속 */
-	@RequestMapping("sitemain.do")
-	public String SiteMain() {
-		return "admin/sitemanager/main";
+	@RequestMapping("/sitemain.do")
+	public ModelAndView siteMain(ModelAndView mv) {
+		mv.setViewName("admin/sitemanager/main");
+		return mv;
 	}
 
 	@RequestMapping("error404.do")

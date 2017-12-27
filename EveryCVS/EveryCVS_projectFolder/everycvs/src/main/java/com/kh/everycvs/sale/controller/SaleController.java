@@ -29,9 +29,9 @@ public class SaleController {
 		return modelAndView;		
 	}
 	/** 판매수익 차트 **/
-	public ModelAndView saleBenefit(ModelAndView modelAndView){
+	public ModelAndView saleBenefitChart(ModelAndView modelAndView){
 		String store_no = "";
-		Map map = saleService.saleBenefit(store_no);
+		Map map = saleService.saleBenefitChart(store_no);
 		return modelAndView;		
 	}
 	

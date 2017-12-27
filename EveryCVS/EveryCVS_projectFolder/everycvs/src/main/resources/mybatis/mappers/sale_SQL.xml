@@ -15,5 +15,38 @@
 		]]>
 	</select>
 	
+	<!-- 상품 판매량 -->
+	<select id="saleQuantity" parameterType="string" resultType="_int">
+	<![CDATA[
+		select case when sum(sale_quantity) is null then 0
+		else sum(sale_quantity) end as sale_quantitys
+		from sale_view where store_no = #{store_no} and sale_date >= to_date(to_char(sysdate,'yy/mm/dd'))
+		]]>
+	</select>
+	
+	<!-- 금일 등록된 상품수 -->
+	<select id="registProducts" parameterType="string" resultType="_int">
+	<![CDATA[
+		select count(*) from store_product_view where store_no = #{store_no} 
+		and manufacture_date >= to_date(to_char(sysdate,'yy/mm/dd'))
+		]]>
+	</select>
+	
+	<!-- 금일 방문자수 -->
+	<select id="joinCustomers" parameterType="string" resultType="_int">
+	<![CDATA[
+		select join_count from tb_store where store_no = #{store_no}
+		]]>
+	</select>
+	
+	<!-- 금일 판매 수익 -->
+	<select id="saleBenefit" parameterType="string" resultType="_int">
+	<![CDATA[
+		select case when sum(calculated_price) is null then 0
+		else sum(calculated_price) end as calculated_prices
+		from sale_view where store_no = #{store_no} and sale_date >= to_date(to_char(sysdate,'yy/mm/dd'))
+		]]>
+	</select>
+	
 </mapper>
 
