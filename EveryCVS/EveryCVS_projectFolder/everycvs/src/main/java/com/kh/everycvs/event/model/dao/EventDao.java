@@ -183,7 +183,7 @@ public class EventDao {
 		sqlSession.insert("event.cvseventResultwrite", eventResult); 
 		
 	}
-
+	//이벤트 참여----------------------------------------------------------
 	public int eventJoincheck(EventJoin eventjoin) {
 		return sqlSession.selectOne("event.eventJoincheck", eventjoin);
 	}
@@ -202,6 +202,22 @@ public class EventDao {
 		map.put("user_no",user_no);
 		return sqlSession.selectOne("event.cvsGetListCount",map);
 	}
+//-------------------------------------------------------------------
+	//진행중,종료된 이벤트 리스트 출력
+	public List<Event> selectEventList(int startRow, int endRow, int edno) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		map.put("edno", edno);
+		return sqlSession.selectList("event.cvsEventDate",map);
+	}
+
+	public int edlistCount(int edno) {
+		Map<String,Object>map = new HashMap<String, Object>();
+		map.put("endo", edno);
+		return sqlSession.selectOne("event.edlistCount",map);
+	}
+	
 
 	
 }

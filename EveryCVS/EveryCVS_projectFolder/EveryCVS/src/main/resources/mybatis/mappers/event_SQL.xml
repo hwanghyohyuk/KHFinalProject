@@ -317,7 +317,38 @@
 		</when>
   	</choose>
 	</select>
-   
-   
-
+	
+	<select id="cvsEventDate" parameterType="hashmap" resultType="list" resultMap="resultEvent">
+	<![CDATA[
+		select * from(select rownum rnum, T.* 
+			from (select * from event_view ]]>
+		<choose>
+		<when test="edno == 1">
+		<!-- 진행중 이벤트 -->
+			<![CDATA[where sysdate <= end_date]]>
+		</when>
+	    <when test="edno == 2">
+	    <!-- 종료된 이벤트 -->
+			<![CDATA[where sysdate > end_date]]>
+		</when>
+		</choose>
+		<![CDATA[
+  			order by event_no desc ) T ) a where a.rnum >= #{startRow} and a.rnum <=#{endRow}]]>
+	</select>
+	
+	<select id="edlistCount" resultType="_int" parameterType="hashmap">
+		<![CDATA[
+		select count(*) from EVENT_VIEW]]>
+		<choose>
+	    <when test="edno == 1">
+	    <!-- 진행중 이벤트 -->
+	    <![CDATA[where sysdate <= end_date]]>
+		</when>
+		 <!-- 종료된 이벤트 -->
+	    <otherwise>
+			<![CDATA[where sysdate > end_date]]>
+		</otherwise>
+  	</choose>
+	</select>
+	
 </mapper>

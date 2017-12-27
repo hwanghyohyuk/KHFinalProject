@@ -85,6 +85,11 @@ public class EventController {
          
          Map<String, Object> map = new HashMap<String, Object>();
          int listCount = eventService.getListCount(keyword,user_no);
+         
+         
+         
+         
+         
          int maxPage = (int) ((double) listCount / limit + 0.94);
          int startPage = (((int) ((double) currentPage / limit + 0.94)) - 1) * limit + 1;
          int endPage = startPage + limit - 1;
@@ -93,7 +98,6 @@ public class EventController {
           }
           
         
-          
           map.put("currentPage", currentPage);
           map.put("listCount", listCount);
           map.put("maxPage", maxPage);
@@ -154,7 +158,40 @@ public class EventController {
 		
 		return map;
 	}
-	
+	//종료된 이벤트 와 진행중인 이벤트 보여주기
+	//------------------------------------------ 하는중
+	  @RequestMapping(value="/ajax/cvsEventDate.do", method=RequestMethod.POST)
+	  @ResponseBody
+	  public Map<String,Object> cvsEventDate(@RequestParam("edno")int edno,HttpSession session){
+		  int currentPage = 1;
+	         int limit = 6;
+	        
+	         int user_no = ((User)session.getAttribute("user")).getUser_no();
+	       	 
+	         System.out.println("edno"+edno);
+
+	         List<Event> cvsEventDate = eventService.selectEndEventList(currentPage, limit,edno);
+
+	         Map<String, Object> map = new HashMap<String, Object>();
+	         int listCount = eventService.getedListCount(edno);
+	         int maxPage = (int) ((double) listCount / limit + 0.94);
+	         int startPage = (((int) ((double) currentPage / limit + 0.94)) - 1) * limit + 1;
+	         int endPage = startPage + limit - 1;
+	          if (maxPage < endPage) {
+	                  endPage = maxPage;
+	          }
+	          
+	          map.put("edlist", cvsEventDate);
+	          map.put("currentPage", currentPage);
+	          map.put("listCount", listCount);
+	          map.put("maxPage", maxPage);
+	          map.put("startPage", startPage);
+	          map.put("endPage", endPage);
+	          map.put("limit", limit);      
+	           
+	          return map;
+		}
+	  //-----------------------------------------------------------------------------------
 	
 	
 	//사용자 이벤트 결과 리스트를 보여주는 화면
@@ -198,7 +235,6 @@ public class EventController {
 		mv.addObject("ert",ert);
 		mv.addObject("rad",rad);
 		return mv;
-		
 		
 	}
 	
@@ -421,7 +457,7 @@ public class EventController {
 	//이벤트 참여하기
 	@RequestMapping(value="eventJoin.do", method = RequestMethod.POST)
 	public ModelAndView eventJoin(EventJoin eventjoin) {
-		System.out.println("들어가나?");
+
 		ModelAndView mv = new ModelAndView();
 		
 		int checkEventJoinTable = eventService.eventJoincheck(eventjoin);
@@ -455,5 +491,6 @@ public class EventController {
 	      
 	      return mv;
 	   }
+	   
 	
 }

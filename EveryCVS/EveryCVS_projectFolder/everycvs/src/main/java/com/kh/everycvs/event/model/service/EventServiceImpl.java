@@ -162,24 +162,45 @@ public class EventServiceImpl implements EventService{
 		// TODO Auto-generated method stub
 		eventDao.deleteEventJoin(eventjoin);
 	}
+	
 
 	@Override
 	public void eventResultInsert(EventResult eventResult) {
 		 eventDao.cvseventResultView(eventResult);
 	}
 
+	
+	//유저 이벤트 검색하기
 	@Override
 	public List<Event> cvsEvent(int currentPage, int limit, int brand_no) {
 		int startRow = (currentPage - 1) * limit + 1;
 	    int endRow = startRow + limit - 1;        
 	    return eventDao.cvsEvent(startRow,endRow,brand_no);
 	}
-
+	//유저 이벤트 검색해서 갯수 가져오기
 	@Override
 	public int getListCount(int brand_no, int user_no) {
-		
 		return eventDao.cvsGetListCount(brand_no,user_no);
 	}
+	//---------------------------------------------------------
+
+	
+	//종료된, 진행중 이벤트 목록 가져오기
+	@Override
+	public List<Event> selectEndEventList(int currentPage, int limit, int edno) {
+			int startRow = (currentPage - 1) * limit + 1;
+		   int endRow = startRow + limit - 1;        
+		    return eventDao.selectEventList(startRow,endRow,edno);
+	}
+	
+	//이벤트 종료,진행중 이벤트 갯수 ㄱㅏ져오기
+	@Override
+	public int getedListCount(int edno) {
+		return eventDao.edlistCount(edno);
+	}
+
+	
+	
 
 
 	

@@ -16,11 +16,9 @@
 				<div class="row margin-vert-30">
 					<div class="col-md-12">
 						<div id="category">
-							<input type="button" class="category" value="진행중 이벤트"
-								onClick="location.href='#"> <input type="button"
-								class="category" value="종료된 이벤트" onClick="location.href='#">
-							<input type="button" class="category" value="이벤트 당첨자"
-								onClick="location.href='/everycvs/eventresultlist.do'">
+							<input type="button" class="category" value="진행중 이벤트" onClick="cvsEventDate(1)"> 
+							<input type="button" class="category" value="종료된 이벤트" onClick="cvsEventDate(2)">
+							<input type="button" class="category" value="이벤트 당첨자" onClick="location.href='/everycvs/eventresultlist.do'">
 						</div>
 						<!-- Filter Buttons -->
 						<div class="portfolio-filter-container margin-top-20">
@@ -41,7 +39,7 @@
 					<div class="col-md-12 portfolio-group no-padding" style="float: left;">
 						<!-- Portfolio Item -->
 						<div class="col-md-12 portfolio-item margin-bottom-40">
-							<!-- 로그인시 상세보기 -->
+							
 							<div id="usereventlist">
 								<c:forEach items="${event.list}" var="e" varStatus="status">
 								<c:if test="${ (status.index % 3)eq 0}">
@@ -294,6 +292,100 @@ function cvsEventList(brandNo){
 			}
 		});
 	}
+}
+function cvsEventDate(edno){  
+	
+	$.ajax({
+		url:'/everycvs/ajax/cvsEventDate.do',
+		type:'post',
+		data:{"edno":edno},
+		success:function(data){
+			
+			var index=0;
+			var values='';
+			var edlast = data.edlist.length;
+			var edlist = data.edlist;
+			
+			console.log("edlist "+data.edlist);
+			console.log("currentPage "+data.currentPage);
+			console.log("listCount "+data.listCount);
+			console.log("maxPage "+data.maxPage);
+			console.log("startPage "+data.startPage);
+			console.log("endPage "+data.endPage);
+			console.log("limit "+data.limit);
+			console.log("edlast"+data.edlist.length);
+		
+			for(var i in edlist){
+				if((index%3)==0){
+					values+='<div class="row">';
+				}
+				values+='<div class="col-md-4">'
+						+'<a href="/everycvs/eventDetail.do?no='+edlist[i].event_no+'">'
+						+'<figure>'								
+						+'<img src="/everycvs/resources/upload/'+edlist[i].stored_file_name+'" alt="이벤트 이미지가 없습니다." class="jun_img">'
+						+'<figcaption>'
+						+'<input type="hidden" class="margin-top-20" value="'+edlist[i].event_no+'"/>'
+						+'<h3 class="margin-top-20">'+edlist[i].title+'</h3>'
+						+'<span>시작일:'+edlist[i].start_date+'</span>'
+						+'<br>'
+						+'<span>종료일:'+edlist[i].end_date+'</span>'
+						+'<br>'
+						+'<span>조회수:'+edlist[i].readcount+'</span>'
+						+'</figcaption>'				
+						+'</figure>'
+						+'</a>'
+						+'</div>';					
+				if((index%3)==2||index==(edlast-1)){
+					values+='</div>';
+				}
+				index++;
+			}	
+			$("#usereventlist").html(values);
+			
+			var valuesPaging="";
+            
+            if(data.currentPage <= 1){
+               valuesPaging+="<li class='disabled'>" + 
+                 "<a href='#' aria-label='Previous'>" +
+                   "<span aria-hidden='true'>&laquo;</span></a></li>";
+            } else {
+               valuesPaging += "<li><a href='javascript:userpageload(" + (data.currentPage - 1) + ")'  aria-label='Previous'>"
+                + "<span aria-hidden='true'>&laquo;</span></a></li>";
+            }
+            
+           for(var i = data.startPage; i<=data.endPage; i++)
+           {
+              if(data.currentPage == i)
+              {
+                valuesPaging+="<li class='disabled'>"+"<a href='#'>"+ i + "</a></li>";
+              } else {
+                  valuesPaging+="<li><a href='javascript:userpageload(" + i + ")'>"+ i + "</a></li>";
+              }
+
+           }
+           
+            if(data.currentPage >= data.maxPage)
+            {
+               valuesPaging+= "<li class='disabled'>" + 
+                  "<a href='#' aria-label='Next'>"+
+                      "<span aria-hidden='true'>&raquo;</span></a></li>";
+            } else {
+               valuesPaging += "<li><a href='javascript:userpageload(" + (data.currentPage + 1)+ ")' aria-label='Next'>" +
+                "<span aria-hidden='true'>&raquo;</span></a></li>";
+            }
+            
+            $("#usereventpaging").html(valuesPaging);
+		},
+		error:function(error){
+			swal({
+				
+				title: 'ERROR',
+				text:error,
+				timer: 1500,
+				type: 'error'
+			});
+		}
+	});
 }
 </script>
 <c:import url="../include/user/common/end.jsp"></c:import>
