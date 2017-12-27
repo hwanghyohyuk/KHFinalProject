@@ -14,7 +14,27 @@ public class SaleDao {
 	private SqlSession sqlSession;
 
 	/* 지점관리자 */
-	/* AJAX */
+
+	/** 상품 판매량 **/
+	public int saleQuantity(String store_no) {
+		return sqlSession.selectOne("sale.saleQuantity",store_no);
+	}
+	
+	/** 금일 등록된 상품수 **/
+	public int registProducts(String store_no) {
+		return sqlSession.selectOne("sale.registProducts",store_no);
+	}
+	
+	/** 금일 방문자수 **/
+	public int joinCustomers(String store_no) {
+		return sqlSession.selectOne("sale.joinCustomers",store_no);
+	}
+	
+	/** 금일 판매 수익**/	
+	public int saleBenefit(String store_no) {
+		return sqlSession.selectOne("sale.saleBenefit",store_no);
+	}	
+	
 	/** 지점 상품 종류별 판매량 **/
 	public Map kindStoreSale(String store_no) {
 		// TODO Auto-generated method stub
@@ -22,7 +42,7 @@ public class SaleDao {
 	}
 
 	/** 판매수익 차트 **/
-	public Map saleBenefit(String store_no) {
+	public Map saleBenefitChart(String store_no) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -50,5 +70,7 @@ public class SaleDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 }
