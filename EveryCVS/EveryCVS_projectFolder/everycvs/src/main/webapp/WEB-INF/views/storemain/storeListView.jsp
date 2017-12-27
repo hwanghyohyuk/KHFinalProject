@@ -5,6 +5,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- === BEGIN HEAD ===  -->
 <c:import url="../include/user/common/head.jsp"></c:import>
+<style type="text/css">
+	h5 {
+		overflow: hidden; 
+	    text-overflow: ellipsis;
+	    white-space: nowrap; 
+	    width: 190px;
+	}
+</style>
 <c:import url="../include/user/common/headend.jsp"></c:import>
 <!-- === END HEAD ===  -->
 <!-- === BEGIN HEADER ===  -->
@@ -46,7 +54,8 @@
 							<figure>
 								<figcaption>
 									<a href="#" data-toggle="modal" data-target="#spmodal${sp.store_product_no}">
-										<img src="/everycvs/resources/upload/${sp.stored_file_name}" alt="No_Image">
+										<img src="/everycvs/resources/upload/${sp.stored_file_name}" alt="No_Image"
+										width="300px" height="200px">
 									</a><br>
 									<h5 align="center">
 										<strong>${sp.product_name}</strong>
