@@ -36,6 +36,7 @@
 						<span class="glyphicon form-control-feedback" id="pwdfeedback" style="font-size:20px;line-height:50px" aria-hidden="true"></span>
 					</div>	
 					<div class="input-group-lg">
+						<form id="next" action="/everycvs/user/userinfo.do" method='post'></form>
 						<button class="btn btn-primary btn-lg btn-block" onclick="submit();">Submit</button>
 					</div>			
 				</div>	
@@ -49,6 +50,16 @@
 <c:import url="../../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
 <!-- JS -->
+<c:if test="${data eq 0}">
+<script type="text/javascript">
+	swal({
+		title : 'ERROR',
+		html : '올바르지 못한 접근방법입니다',
+		timer : 1500,
+		type : 'error'
+	});
+</script>
+</c:if>
 <script type="text/javascript">
 var pwdcheck=0;
 function pwdCheck(){
@@ -93,7 +104,9 @@ function submit(){
 						timer: 1500,
 						type: 'success'
 					});
-					setTimeout("next()",1400);
+					setTimeout(function(){
+						$('#next').submit();
+					},1300);
 				}else{
 					swal({
 						title: '사용자 정보가 일치하지 않습니다',
@@ -117,9 +130,6 @@ function submit(){
 			type: 'error'
 		});
 	}	
-}
-function next(){
-	location.href="/everycvs/user/userinfo.do";
 }
 </script>
 <c:import url="../../include/user/common/end.jsp"></c:import>

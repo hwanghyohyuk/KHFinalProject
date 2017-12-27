@@ -70,9 +70,9 @@
 									<input type="radio" name="gender"  value="N" checked>비공개
 									</label>									
 								</div>
-								<div class="input-group-lg  margin-bottom-40">
+								<div class="input-group-lg  margin-bottom-40" id="birthdaystatus">
 									<label>Birth day</label> 
-									<input class="form-control" id="birthday" name="birthday" type="date" min="1901-01-01" max="2009-12-31" onblur="birthCheck();">
+									<input class="form-control" id="birthday" name="birthday" type="date" min="1901-01-01" max="2009-12-31" onchange="birthCheck();">
 								</div>
 								<div class="input-group-lg  margin-bottom-40 has-feedback" id="phonestatus">
 									<label>Phone</label> 

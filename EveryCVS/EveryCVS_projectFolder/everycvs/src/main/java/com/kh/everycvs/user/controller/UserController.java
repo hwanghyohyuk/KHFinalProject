@@ -45,7 +45,8 @@ public class UserController {
 
 	/* 로그인 페이지 이동 */
 	@RequestMapping(value = "/sign/signin.do", method = RequestMethod.GET)
-	public ModelAndView intercepterSignin(ModelAndView mv,@RequestParam(value = "sign", required=false, defaultValue="true") boolean sign,HttpSession session) {
+	public ModelAndView intercepterSignin(ModelAndView mv,@RequestParam(value = "sign", required=false, defaultValue="true") boolean sign,
+			@RequestParam(value = "signup", required=false, defaultValue="false") boolean signup,HttpSession session) {
 		Object object = session.getAttribute("email");//email찾기시 저장해둔 세션
 		if(object!=null){
 			session.removeAttribute("email");
@@ -58,7 +59,11 @@ public class UserController {
 		mv.setViewName("user/sign/signin");
 		if(!sign){
 			mv.addObject("sign", sign);
-		}		
+		}
+		if(signup){
+			mv.addObject("signup", signup);
+		}
+		
 		return mv;
 	}
 
@@ -274,19 +279,37 @@ public class UserController {
 
 	/** 회원가입 **/
 	@RequestMapping("/sign/signuppost.do")
-	public ModelAndView signUp(ModelAndView mv,User user) {
-		mv.setViewName("user/sign/signin");
+	public void signUp(User user,HttpServletResponse response) {
 		int insertUser = userService.encInsertUser(user);
-		mv.addObject("signup",insertUser);
-		return mv;
+		boolean result=false;
+		try {
+			if(insertUser>0){
+				result=true;
+				response.sendRedirect("/everycvs/sign/signin.do?signup="+result);
+			}else{
+				response.sendRedirect("/everycvs/error500.do");
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@RequestMapping("/sign/signupadminpost.do")
-	public ModelAndView signUpAdmin(ModelAndView mv,User user) {
-		mv.setViewName("user/sign/signin");
-		int insertAdmin = userService.encInsertAdmin(user);
-		mv.addObject("signup",insertAdmin);
-		return mv;
+	public void signUpAdmin(User user,HttpServletResponse response) {
+		int insertAdmin = userService.encInsertAdmin(user);		
+		boolean result=false;
+		try {
+			if(insertAdmin>0){
+				result=true;
+				response.sendRedirect("/everycvs/sign/signin.do?signup="+result);				
+			}else{
+				response.sendRedirect("/everycvs/error500.do");
+			}			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	/*지점 관리자 회원가입 시 가입번호 체크*/
 	@RequestMapping("/sign/enrollcompare.do")
@@ -380,13 +403,30 @@ public class UserController {
 		return checkUser;
 	}
 		
-	
-	@RequestMapping("/user/userinfo.do")
+	/* 사용자 정보수정 get방식으로 접근하면 돌려보냄*/
+	@RequestMapping(value="/user/userinfo.do",method=RequestMethod.GET)
+	public ModelAndView infoReturn(ModelAndView mv,HttpSession session) {
+		mv.setViewName("user/mypage/infointro");
+		mv.addObject("data", 0);//뷰단에서 올바르지 못한 접근이라는것을 알려주기 위한 반환값
+		return mv;
+	}
+	/* 사용자 정보수정 post방식으로 접근하면 승인*/
+	@RequestMapping(value="/user/userinfo.do",method=RequestMethod.POST)
 	public ModelAndView userInfo(ModelAndView mv,HttpSession session) {
 		mv.setViewName("user/mypage/userinfo");
 		return mv;
 	}
 
+	/** 사용자 정보 수정 제출 **/
+	@RequestMapping(value="/user/modifypost.do",method=RequestMethod.POST)
+	public String modifyPost(User user){
+		int result = userService.encModifyUser(user);
+		if(result>0){
+			return "redirect:/user/signout.do";
+		}
+		return "redirect:/error500.do";	
+	}
+	
 	/* 이메일 찾기 페이지 이동 */
 	@RequestMapping("/user/findemail.do")
 	public String moveToFindEmail() {
@@ -517,7 +557,7 @@ public class UserController {
 	@ResponseBody
 	public int resetPwdPost(@RequestParam("email")String email, @RequestParam("pwd")String pwd){//email,pwd
 		User user = new User(email, pwd);
-		int resetPwd = userService.resetPwd(user);		
+		int resetPwd = userService.encResetPwd(user);		
 		if(resetPwd>0){
 			int deleteResetKey = userService.deleteResetKey(user.getEmail());
 			if(deleteResetKey>0){

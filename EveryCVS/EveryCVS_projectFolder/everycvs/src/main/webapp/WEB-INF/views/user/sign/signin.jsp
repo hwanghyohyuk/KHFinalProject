@@ -57,19 +57,19 @@
 <c:import url="../../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
 <!-- JS -->
+
 <c:if test="${sign eq false }">
 <script type="text/javascript">
-swal("INFORMATION", "로그인이 필요한 서비스입니다.", "info");
 swal({
 	title: 'INFORMATION',
 	html: '로그인이 필요한 서비스입니다',
-	timer: 2000,
+	timer: 1500,
 	type: 'info'
 });
 </script>
 </c:if>
-<c:set var="tempSignup" value="${signup}" />
-<c:if test="${tempSignup eq 1 }">
+
+<c:if test="${signup eq true}">
 <script type="text/javascript">
 swal({
 	title: '회원가입을 축하합니다!',
@@ -78,7 +78,6 @@ swal({
 	type: 'info'
 });
 </script>
-<c:remove var="tempSignup" />
 </c:if>
 
 <script type="text/javascript">
@@ -144,7 +143,7 @@ function signIn(){
 						setTimeout(function(){
 							switch (data) {
 							  case 1 : location.href="/everycvs/main/main.do"; break;
-							  case 2 : location.href="/everycvs/page/storemain.do"; break;
+							  case 2 : location.href="/everycvs/main/storemain.do"; break;
 							  case 3 : location.href="/everycvs/main/cvsmain.do"; break;
 							  case 4 : location.href="/everycvs/main/sitemain.do"; break;
 							}},1000);

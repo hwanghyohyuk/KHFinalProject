@@ -90,12 +90,13 @@ public class UserDao{
 		return sqlSession.selectOne("user.checkUser",user);
 	}
 
-	public boolean modifyUser(User user) {
-		return false;
+	public int modifyUser(User user) {
+		System.out.println(user);
+		return sqlSession.update("user.modifyUser",user);
 	}
 
-	public boolean deleteUser(int user_no) {
-		return false;
+	public int deleteUser(int user_no) {
+		return sqlSession.update("user.deleteUser",user_no);
 	}
 
 	public int userIncreMoney(Map<String, Object> map) {

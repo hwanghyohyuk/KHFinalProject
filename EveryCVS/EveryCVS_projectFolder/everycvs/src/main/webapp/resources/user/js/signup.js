@@ -336,21 +336,12 @@ function birthCheck(){
 	var endDate = new Date("2010-01-01");
 
 	if (birthday.getTime() > startDate.getTime() && birthday.getTime() < endDate.getTime()) {
-		swal({
-			title: '생년월일 입력 성공',
-			timer:1500,
-			text: '곧 닫힙니다.',
-			type: 'success'
-		});
+		$("#birthdaystatus").addClass("has-success");
+		$("#birthdaystatus").removeClass("has-error");	
 		birthcheck=1;
-		$('#phone').focus();
 	}else{
-		swal({
-			title: '생일 입력 실패',
-			timer:1500,
-			text: '다시 입력해주세요',
-			type: 'error'
-		});
+		$("#birthdaystatus").removeClass("has-success");
+		$("#birthdaystatus").addClass("has-error");	
 		birthcheck=0;
 	}
 }
@@ -511,7 +502,7 @@ function enrollNoCompare(){
 					})
 			},
 			success:function(store){
-			if(store!=null){
+			if(store!=''){
 				var values = '브랜드 : '+store.brand_name+
 				'\n지점명 : '+store.store_name+
 				'\n도로명 주소 : '+store.road_address;

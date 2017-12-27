@@ -34,12 +34,12 @@
 		<result property="session_key" column="SESSION_KEY" />
 		<result property="certification_no" column="CERTIFICATION_NO" />
 	</resultMap>
-	
+
 	<resultMap id="resultPassLink" type="passlink">
 		<id property="email" column="EMAIL" />
 		<result property="key" column="KEY" />
 		<result property="end_time" column="END_TIME" />
-	</resultMap>	
+	</resultMap>
 
 	<select id="signIn" parameterType="user" resultMap="resultUser">
 	<![CDATA[select * from user_view where email=#{email} and user_pwd=#{user_pwd}]]>
@@ -72,11 +72,11 @@
 		</selectKey>
 
 	</update>
-	
+
 	<select id="checkCertify" parameterType="string" resultType="_int">
 	<![CDATA[select count(*) from tb_email_certification where email=#{email}]]>
 	</select>
-	
+
 	<select id="checkEmail" parameterType="string" resultType="_int">
 	<![CDATA[select count(*) from user_view where email=#{email}]]>
 	</select>
@@ -86,79 +86,100 @@
 	insert into tb_email_certification values(#{email},#{session_key},#{certification_no})
 	]]>
 	</insert>
-	
+
 	<update id="updateCertify" parameterType="emailcertification">
 	<![CDATA[
 	update tb_email_certification set certification_no = #{certification_no} where email=#{email} and session_key=#{session_key}
 	]]>
 	</update>
-	
+
 	<delete id="deleteCertify" parameterType="string">
 	<![CDATA[
 	delete from tb_email_certification where email=#{email}
 	]]>
 	</delete>
-<!-- 인증번호 확인용 -->
-	<select id="certificationCheck" parameterType="emailcertification"	resultType="_int">
+	<!-- 인증번호 확인용 -->
+	<select id="certificationCheck" parameterType="emailcertification"
+		resultType="_int">
 	<![CDATA[
 	select count(*) from tb_email_certification where email=#{email} and session_key=#{session_key} and certification_no=#{certification_no}
 	]]>
 	</select>
-	
+
 	<insert id="insertUser" parameterType="user">
 	<![CDATA[
 	insert into tb_user(user_no,email,user_pwd,user_name,birthday,gender,phone,address,job) 
 	values(seq_user_no.nextval,#{email},#{user_pwd},#{user_name},#{birthday},#{gender},#{phone},#{address},#{job})
 	]]>
 	</insert>
-	
+
 	<insert id="insertAdmin" parameterType="user">
 	<![CDATA[
 	insert into tb_user(user_no,email,user_pwd,user_name,birthday,gender,phone,address,job,store_no,brand_no) 
 	values(seq_user_no.nextval,#{email},#{user_pwd},#{user_name},#{birthday},#{gender},#{phone},#{address},#{job},#{store_no},#{brand_no})
 	]]>
 	</insert>
-	
+
 	<select id="checkName" parameterType="hashmap" resultType="_int">
 	<![CDATA[select count(*) from user_view where email=#{email} and user_name = #{user_name}]]>
 	</select>
-	
+
 	<select id="checkPhone" parameterType="hashmap" resultType="_int">
 	<![CDATA[select count(*) from user_view where email=#{email} and user_name = #{user_name} and phone=#{phone}]]>
 	</select>
-	
+
 	<select id="checkPasslink" parameterType="string" resultType="_int">
 	<![CDATA[select count(*) from tb_passlink where email=#{email}]]>
 	</select>
-	
+
 	<insert id="insertKey" parameterType="passlink">
 	<![CDATA[insert into tb_passlink values(#{email},#{key},default)]]>
 	</insert>
-	
+
 	<update id="updateKey" parameterType="passlink">
 	<![CDATA[
 	update tb_passlink set key = #{key}, end_time = default where email=#{email}
 	]]>
 	</update>
-	
+
 	<update id="resetPwd" parameterType="user">
 	<![CDATA[
 	update tb_user set user_pwd = #{user_pwd} where email=#{email}
 	]]>
 	</update>
-	
-	<select id="selectPasslink" parameterType="string" resultType="passlink" resultMap="resultPassLink">
+
+	<select id="selectPasslink" parameterType="string" resultType="passlink"
+		resultMap="resultPassLink">
 	<![CDATA[	select * from tb_passlink where key=#{key} and sysdate < end_time]]>
 	</select>
-	
+
 	<delete id="deleteResetKey" parameterType="string">
 	<![CDATA[
 	delete from tb_passlink where email=#{email}
 	]]>
 	</delete>
-	
+
 	<select id="checkUser" parameterType="user" resultType="_int">
 	<![CDATA[select count(*) from user_view where email=#{email} and user_pwd = #{user_pwd}]]>
 	</select>
-	
+
+	<update id="modifyUser" parameterType="user">
+	<![CDATA[
+	update tb_user set 
+	user_name = #{user_name},
+	birthday = #{birthday},
+	phone = #{phone},
+	gender = #{gender},
+	address = #{address},	
+	user_pwd = #{user_pwd}	
+	where email=#{email}
+	]]>
+	</update>
+
+	<update id="deleteUser" parameterType="_int">
+	<![CDATA[
+	update tb_user set user_state = 1 where user_no=#{user_no}
+	]]>
+	</update>
+
 </mapper>

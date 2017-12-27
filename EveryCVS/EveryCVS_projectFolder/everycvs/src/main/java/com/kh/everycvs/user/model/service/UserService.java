@@ -50,11 +50,11 @@ public interface UserService {
 	
 	
 	/** 회원탈퇴 **/
-	boolean deleteUser(int user_no);
+	int deleteUser(int user_no);
 
 	/** 정보수정 **/
 	int encCheckUser(User user);
-	boolean modifyUser(User user);
+	int encModifyUser(User user);
 
 	/** 이름 확인 **/
 	int checkName(String email, String name);
@@ -75,7 +75,7 @@ public interface UserService {
 	/** 재설정 이메일 보내기 **/
 	boolean sendResetPwd(String email, String resetKey);
 	
-	int resetPwd(User user);
+	int encResetPwd(User user);
 	
 	/** 재설정 데이터 조회 **/
 	PassLink selectPasslink(String key);

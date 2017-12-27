@@ -44,9 +44,9 @@
 							<label>Your Name</label> <input class="form-control" id="username" name="user_name" placeholder="Name" type="text" oninput="nameCheck();" value="${user.user_name}">
 							<span class="glyphicon form-control-feedback" id="namefeedback" style="font-size:20px;line-height:50px" aria-hidden="true"></span>
 						</div>
-						<div class="input-group-lg  margin-bottom-40">
+						<div class="input-group-lg  margin-bottom-40" id="birthdaystatus">
 							<label>Birth day</label> 
-							<input class="form-control" id="birthday" name="birthday" type="date" min="1901-01-01" max="2009-12-31" onblur="birthCheck();" value="${user.birthday }">
+							<input class="form-control" id="birthday" name="birthday" type="date" min="1901-01-01" max="2009-12-31" onchange="birthCheck();" value="${user.birthday }">
 						</div>
 						<div class="input-group-lg  margin-bottom-40 has-feedback" id="phonestatus">
 							<label>Phone</label> 
@@ -94,7 +94,7 @@
 					<!-- 페이지 하단부분 -->
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<hr>
-						<button class="btn btn-primary btn-lg pull-right" type="button" onclick="submit();">Submit</button>
+						<button class="btn btn-primary btn-lg pull-right" type="button" onclick="checkSubmit();">MODIFY</button>
 					</div>
 				</div>
 				</form>
@@ -146,21 +146,12 @@ function birthCheck(){
 	var endDate = new Date("2010-01-01");
 
 	if (birthday.getTime() > startDate.getTime() && birthday.getTime() < endDate.getTime()) {
-		swal({
-			title: '생년월일 수정 성공',
-			timer:1500,
-			text: '곧 닫힙니다.',
-			type: 'success'
-		});
+		$("#birthdaystatus").addClass("has-success");
+		$("#birthdaystatus").removeClass("has-error");	
 		birthcheck=1;
-		$('#phone').focus();
 	}else{
-		swal({
-			title: '생일 입력 실패',
-			timer:1500,
-			text: '다시 입력해주세요',
-			type: 'error'
-		});
+		$("#birthdaystatus").removeClass("has-success");
+		$("#birthdaystatus").addClass("has-error");	
 		birthcheck=0;
 	}
 }
@@ -256,9 +247,13 @@ function repwdCheck(){
 		passcheck=0;
 	}
 }
-function submit(){
+function checkSubmit(){
 	var pwd=$('#pwd').val();
-	var repwd=$('#repwd').val();
+	var repwd=$('#repwd').val();	
+	nameCheck();
+	birthCheck();
+	phoneCheck();
+	addressCheck();	
 	if(namecheck==0){
 		swal({
 			title: '이름 유효성 오류',
@@ -315,6 +310,7 @@ function submit(){
 			type: 'error'
 		});
 		$("#repwd").focus();
+		return;
 	}else if(pwd.length==0 && repwd.length>0){
 		swal({
 			title: '비밀번호 유효성 오류',
@@ -325,7 +321,16 @@ function submit(){
 		$("#pwd").focus();
 		return;
 	}
-	$('#modifyform').submit();
+	swal({
+		title: '사용자 정보 수정 완료',
+		html:'안전한 정보 저장을 위해 로그아웃됩니다',
+		timer:2000,
+		type: 'success'
+	});
+	setTimeout(function(){
+		$('#modifyform').submit();
+	},1900);
+	
 }
 //여기서부터 다시 20171227
 </script>

@@ -97,7 +97,7 @@ function signOut(){
 					});
 				setTimeout(function(){
 					location.href="/everycvs/main/main.do";
-				},1500);
+				},1400);
 			}else{
 				swal({
 					title: 'ERROR',

@@ -192,7 +192,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int resetPwd(User user) {
+	public int encResetPwd(User user) {
 		return userDao.resetPwd(user);
 	}
 
@@ -212,13 +212,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean modifyUser(User user) {
-		return userDao.modifyUser(user);
-	}
-
-	@Override
-	public boolean deleteUser(int user_no) {
+	public int deleteUser(int user_no) {
 		return userDao.deleteUser(user_no);
+	}
+	
+	@Override
+	public int encModifyUser(User user) {
+		return userDao.modifyUser(user);
 	}
 
 	@Override
@@ -230,5 +230,6 @@ public class UserServiceImpl implements UserService {
 	public int increMoney(Map<String, Object> map) {
 		return userDao.userIncreMoney(map);
 	}
+
 
 }

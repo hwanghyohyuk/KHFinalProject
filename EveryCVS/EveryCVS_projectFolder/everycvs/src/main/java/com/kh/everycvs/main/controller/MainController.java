@@ -150,7 +150,7 @@ public class MainController {
 			session.setAttribute("store", null); // 정보를 삭제한다
 		}
 		if (sno.equals("")) {
-			return "redirect:/main/main.do";
+			return "redirect:/main.do";
 		}
 		storeService.increamentJoinCount(sno);
 		Store store = storeService.selectStore(sno);
@@ -168,7 +168,7 @@ public class MainController {
 		}
 		User user = (User) session.getAttribute("user");
 		if (user.getStore_no() == null) {// 지점관리자인지 아닌지 확인하는 조건문
-			return "redirect:/main/main.do";
+			return "redirect:/main.do";
 		} else {
 			Store store = storeService.selectStore(user.getStore_no());
 			session.setAttribute("store", store);
