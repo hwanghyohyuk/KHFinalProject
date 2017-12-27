@@ -147,7 +147,7 @@ public class UserController {
 	}
 	
 	/** 잔고 충전  **/
-	@RequestMapping(value="increMoney.do", method=RequestMethod.POST)
+	@RequestMapping(value="/page/increMoney.do", method=RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView userIncreMoney(
 			@RequestParam (value="increMoney", required=false) String increMoney,

@@ -29,8 +29,8 @@ public class PurchaseDao {
 	}
 	
 	// 잔고 금액 증가 : 사용자가 상품을 구매 시 결제되는 금액만큼 증가
-	public int increaseMoney(){
-		return 0;
+	public int increaseMoney(Map<String, Object> map){
+		return sqlSession.update("purchase.adminIncreMoney", map);
 	}
 	
 	// 잔고 금액 감소 : 사용자가 상품을 구매 시 사용한 포인트만큼 감소

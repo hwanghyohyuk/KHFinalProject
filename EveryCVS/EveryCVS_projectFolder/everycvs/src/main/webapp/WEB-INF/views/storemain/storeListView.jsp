@@ -134,6 +134,7 @@
 												   style="width:40px;">
 											<input type="hidden" name="calculated_price" value="${sp.price }">
 											<input type="hidden" name="using_point" value=0>
+											<input type="hidden" name="store_no" value="${sp.store_no }">
 									
 											<button type="submit" class="btn btn-primary"
 												    name="price" value="${sp.price}"
@@ -151,6 +152,7 @@
 													style="width:40px;">
 											
 											<input type="hidden" name="calculated_price" value="${sp.price }">
+											<input type="hidden" name="store_no" value="${sp.store_no }">
 
 											<button type="submit" class="btn btn-primary"
 												    name="price" value="${sp.price }"
@@ -219,7 +221,7 @@
 	});
 });  
 
-  function add_favorite(pno, sno){
+function add_favorite(pno, sno){
 		location.href="/everycvs/favoriteInsert.do?product_no=" + pno + "&store_no=" + sno;
 	}
 function purchaseMoney(){
@@ -227,8 +229,8 @@ function purchaseMoney(){
 	var price = ${sp.price};
 	var cash = ${user.cash};
 	var result = cash - price;
+	</c:forEach>
 	
-	console.log(result);
 	if(result < 0){
 		alert("잔고 부족");
 		return false;
@@ -236,7 +238,6 @@ function purchaseMoney(){
 	if(result > 0){
 		alert("결제 완료");
 	}
-	</c:forEach>
 }
 
 function purchasePoint(){
@@ -244,16 +245,16 @@ function purchasePoint(){
 	var price = ${sp.price};
 	var point = ${user.point};
 	var result = point - price;
-	
-	console.log(result);
+	</c:forEach>
+
 	if(result < 0){
 		alert("잔고 부족");
 		return false;
 	}
 	if(result > 0){
 		alert("결제 완료");
+		return true;
 	}
-	</c:forEach>
 }
 </script>
 

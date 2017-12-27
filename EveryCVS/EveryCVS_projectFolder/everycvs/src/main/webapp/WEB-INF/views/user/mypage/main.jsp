@@ -21,19 +21,19 @@
 						<ul class="list-group sidebar-nav" id="sidebar-nav">
 							<!-- 기프티콘 보관함 -->
 							<li class="list-group-item list-toggle">
-							<a href="gifticonPage.do">기프티콘 보관함</a>
+							<a href="/everycvs/gifticonPage.do">기프티콘 보관함</a>
 								</li>
 							
 							<!-- 관심목록 -->
 							<li class="list-group-item list-toggle">
 							<a href="/everycvs/user/favoriteList.do">관심목록</a>
-								</li>
+							</li>
 								
 							<!-- 회원탈퇴 -->
 							<li class="list-group-item list-toggle"><a
 								data-toggle="collapse" data-parent="#sidebar-nav"
 								href="#collapse-icons">회원탈퇴</a>
-								</li>
+							</li>
 						</ul>
 					</div>
 					<!-- End Sidebar Menu -->
@@ -191,11 +191,9 @@
 										<h3 class="panel-title">내가 쓴글 보기</h3>
 									</div>
 									<div class="panel-body">
-										<a href="#" style="margin-right: 50px; font-size: 15pt;">
-											QnA()</a> <a href="#"
-											style="margin-right: 50px; font-size: 15pt;"> 신고()</a> <a
-											href="#" style="margin-right: 50px; font-size: 15pt;">
-											자유()</a>
+										<a href="#" 
+										   style="margin-right: 50px; font-size: 15pt;">
+										   </a>	 개
 									</div>
 								</div>
 							</div>
@@ -293,7 +291,7 @@
 					var con = confirm("정말로 충전하시겠습니까?");
 					if(con == true){
 				$.ajax({
-					url : "increMoney.do",
+					url : "/everycvs/page/increMoney.do",
 					data : {increMoney:incre, user_no:"${sessionScope.user.user_no}", cash:"${sessionScope.user.cash}"},
 					type: "post", 
 					dataType: "json",
@@ -338,7 +336,7 @@
 			  console.log(params);
   				//1이면 3개월 조회
 				   $.ajax({
-						url:"purchaseList.do",
+						url:"/everycvs/purchaseList.do",
 						data: {month:params},
 						dataType: "json",
 						type:"post",							

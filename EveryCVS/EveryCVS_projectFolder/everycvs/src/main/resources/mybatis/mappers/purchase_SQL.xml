@@ -45,11 +45,6 @@
     		update tb_user set cash = cash - #{calculated_price}
 			where user_no = #{user_no}
     	]]>
-    
-       <!-- <selectKey keyProperty="gifticon_no" resultType="int" order="AFTER">
-			select cash FROM tb_gifticon WHERE user_no = #{user_no}
-	   </selectKey>  -->
-	   
     </update>
     
     <!-- 사용자 포인트 증가 -->
@@ -87,6 +82,13 @@
     	]]>   
     </insert>
 	
+	<!-- 지점관리자 잔고 증가 -->
+	 <update id="adminIncreMoney" parameterType="hashmap">
+    	<![CDATA[
+    		update tb_user set cash = cash + #{calculated_price}
+			where store_no = #{store_no}
+    	]]>
+    </update>
 	
 
 </mapper>

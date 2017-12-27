@@ -33,9 +33,9 @@ public class PurchaseServiceImpl implements PurchaseService{
 	}
 
 	@Override
-	public String increaseMoney(HttpServletRequest request) {
+	public int increaseMoney(Map<String, Object> map) {
 		// 잔고 금액 증가 : 사용자가 상품을 구매 시 결제되는 금액만큼 증가
-		return null;
+		return purchaseDao.increaseMoney(map);
 	}
 
 	@Override
