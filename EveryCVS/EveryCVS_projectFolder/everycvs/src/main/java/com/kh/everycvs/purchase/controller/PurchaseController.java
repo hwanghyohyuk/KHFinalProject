@@ -43,17 +43,6 @@ public class PurchaseController {
 		return null;
 	}
 	
-	// 잔고 금액 증가 : 사용자가 상품을 구매 시 결제되는 금액만큼 증가
-	public String increaseMoney(HttpServletRequest request) {
-		return null;
-	}
-	
-	// 잔고 금액 감소 : 사용자가 상품을 구매 시 사용한 포인트만큼 감소
-	public String decreaseMoney(HttpServletRequest request) {
-		return null;
-	}
-	
-	
 	//사용자 구매 영역
 	//사용자 잔고 금액 감소 : 사용자가 상품을 잔고로 결제 시 차감, 포인트 자동적립
 	@RequestMapping("/page/userDecreMoney.do")
@@ -67,13 +56,14 @@ public class PurchaseController {
 									   @RequestParam ("store_product_no") int store_product_no,
 									   @RequestParam ("purchase_quantity") int purchase_quantity,
 									   @RequestParam ("calculated_price") int calculated_price,
-									   @RequestParam ("using_point") int using_point
-									  
+									   @RequestParam ("using_point") int using_point,
+									   @RequestParam ("store_no") int store_no
 									  ) {
 
 		//입력받은 금액만큼 잔고에서 차감후 리턴
 		System.out.println("결제하기 전 cash : " + cash);
 		System.out.println("point : " + point);
+		System.out.println("store_no : " + store_no);
 		
 		int c = Integer.parseInt(cash);
 		int uno = Integer.parseInt(user_no);
@@ -99,12 +89,14 @@ public class PurchaseController {
 		map.put("using_point", using_point);
 		map.put("accumulate_point", addPoint);
 		map.put("barcode_img_name", result);
+		map.put("store_no", store_no);
 		
 		//구매 시 작동하는 기능들을 service로 보냄
 		int resultCash = purchaseService.userDecreMoney(map); //잔고결제
 		int resultPoint = purchaseService.userIncrePoint(map); //포인트결제
 		int insertPurchaseList = purchaseService.userInsertPurchaseList(map); //구매내역 생성
 		int insertGifticon = gifticonService.createGifticon(map); //기프티콘 생성
+		int adminResultCash = purchaseService.increaseMoney(map);
 		
 		 User user = (User) session.getAttribute("user");
 		 user.setCash(c - cprice);
@@ -117,6 +109,7 @@ public class PurchaseController {
 		mv.addObject("insertPurchaseList", insertPurchaseList);
 		mv.addObject("insertGifticon", insertGifticon);
 		mv.addObject("barcode_img_name", result);
+		mv.addObject("adminResultCash", adminResultCash);
 		mv.addObject("price", cprice);
 		
 		mv.setViewName("redirect:/page/splist.do");
@@ -136,7 +129,7 @@ public class PurchaseController {
 										@RequestParam ("store_product_no") int store_product_no,
 										@RequestParam ("purchase_quantity") int purchase_quantity,
 										@RequestParam ("calculated_price") int calculated_price,
-									
+										@RequestParam ("store_no") int store_no,
 										ModelAndView mv,
 										HttpSession session) {
 		int dp = Integer.parseInt(point);
@@ -153,11 +146,12 @@ public class PurchaseController {
 		map.put("calculated_price", usingPoint);
 		map.put("using_point", usingPoint);
 		map.put("accumulate_point", 0);
-		
+		map.put("store_no", store_no);
 		
 		int result = purchaseService.userDecrePoint(map);
 		int insertPurchaseList = purchaseService.userInsertPurchaseList(map);
 		int insertGifticon = gifticonService.createGifticon(map); //기프티콘 생성
+		int adminResultCash = purchaseService.increaseMoney(map);
 		
 		 User user = (User) session.getAttribute("user");
 		 user.setPoint(dp - usingPoint);
@@ -166,6 +160,8 @@ public class PurchaseController {
 		mv.addObject("result", result);
 		mv.addObject("insertPurchaseList", insertPurchaseList);
 		mv.addObject("insertGifticon", insertGifticon);
+		mv.addObject("adminResultCash", adminResultCash);
+		
 		mv.setViewName("redirect:/page/splist.do");
 		
 		System.out.println("포인트 결제 결과 : " + user.getPoint());

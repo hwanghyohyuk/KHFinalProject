@@ -19,7 +19,7 @@ public interface PurchaseService {
 	public ModelAndView selectPurchaseOne(HttpServletRequest request);
 	
 	// 잔고 금액 증가 : 사용자가 상품을 구매 시 결제되는 금액만큼 증가
-	public String increaseMoney(HttpServletRequest request);
+	public int increaseMoney(Map<String, Object> map);
 
 	// 잔고 금액 감소 : 사용자가 상품을 구매 시 사용한 포인트만큼 감소
 	public String decreaseMoney(HttpServletRequest request);
@@ -44,5 +44,7 @@ public interface PurchaseService {
 	int monthlyPurchaseCount();
 
 	public int userInsertPurchaseList(Map<String, Object> map);
+
+	public ArrayList<Purchase> top3List();
 	
 }

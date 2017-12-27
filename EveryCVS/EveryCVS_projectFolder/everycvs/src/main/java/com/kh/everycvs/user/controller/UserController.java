@@ -41,8 +41,6 @@ public class UserController {
 	@Autowired
 	private FavoriteService favoriteService;
 	
-	
-
 	/* 로그인 페이지 이동 */
 	@RequestMapping(value = "/sign/signin.do", method = RequestMethod.GET)
 	public ModelAndView intercepterSignin(ModelAndView mv,@RequestParam(value = "sign", required=false, defaultValue="true") boolean sign,
@@ -142,9 +140,12 @@ public class UserController {
 	public ModelAndView myPage(HttpSession session, ModelAndView mv) {
 		String month="0";
 		User user = (User) session.getAttribute("user");
+		
 		ArrayList<Purchase> list = purchaseService.purchaseList(user.getUser_no(),month);
+		ArrayList<Purchase> top3List = purchaseService.top3List();
 		
 		mv.addObject("list", list);		
+		mv.addObject("top3List", top3List);
 		System.out.println(list);
 				
 		mv.setViewName("user/mypage/main");
@@ -152,7 +153,7 @@ public class UserController {
 	}
 	
 	/** 잔고 충전  **/
-	@RequestMapping(value="increMoney.do", method=RequestMethod.POST)
+	@RequestMapping(value="/page/increMoney.do", method=RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView userIncreMoney(
 			@RequestParam (value="increMoney", required=false) String increMoney,
