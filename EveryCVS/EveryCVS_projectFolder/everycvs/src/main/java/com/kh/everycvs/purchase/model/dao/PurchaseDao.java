@@ -73,6 +73,11 @@ public class PurchaseDao {
 		return 0;
 	}
 
+	public List<Purchase> top3List() {
+		ArrayList<Purchase> list = new ArrayList<Purchase>();
+		return sqlSession.selectList("purchase.top3List", list);
+	}
+
 	
 
 	

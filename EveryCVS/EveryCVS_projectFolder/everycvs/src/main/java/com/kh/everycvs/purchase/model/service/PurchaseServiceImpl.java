@@ -88,5 +88,10 @@ public class PurchaseServiceImpl implements PurchaseService{
 		return purchaseDao.monthlyPurchaseCount();
 	}
 
+	@Override
+	public ArrayList<Purchase> top3List() {
+		return (ArrayList<Purchase>) purchaseDao.top3List();
+	}
+
 
 }

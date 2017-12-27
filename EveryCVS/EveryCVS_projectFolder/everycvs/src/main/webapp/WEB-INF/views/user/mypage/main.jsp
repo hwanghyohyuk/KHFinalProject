@@ -220,7 +220,8 @@
 								<div class="panel-heading">
 									<h3 class="panel-title">자주 구매한 목록</h3>
 								</div>
-								<div class="panel-body" align="right" style="font-size: 15pt;">
+								<div id="oftenPurchase" class="panel-body" align="left" style="font-size: 15pt;">
+									
 								</div>
 							</div>
 						</div>
@@ -234,25 +235,18 @@
 								</div>
 								<div class="panel-body box-body no-padding" align="right" 
 									 style="font-size: 15pt;" >
-									<table class="table table-condensed" style="text-align: center; font-size:10pt">
-											<tr style="font-size: 10pt;">
-											<th>상호명</th>
-											<th>지점명</th>
-											<th>상품명</th>
-											<th>첨부파일변경명</th>
-											<th>최소유통기한</th>
-											</tr>
-										
+											상호명
+											지점명
+											상품명
+											파일명
 									<c:forEach items="${flist }" var="flist">
-									    <tr>
 											<td>${flist.brand_name }</td>
 											<td>${flist.store_name }</td>
 											<td>${flist.product_name }</td>
 											<td>${flist.stored_file_name }</td>
-											<td>${flist.min_expiration_hour }</td>
-										</tr> 
+										
 									</c:forEach>
-									</table>
+									
 								</div>
 							</div>
 						</div>
@@ -306,9 +300,7 @@
 								+ "message : " + request.reponseText + "/n"
 								+ "error : " + request.errorData);
 					}
-					
 				}); 
-				
 				return cash;
 					}
 				
@@ -318,10 +310,7 @@
 					}
 					
 				});
-				
-				
 			});
-			
 			});
 	
 		//거래내역 모달창
@@ -378,6 +367,16 @@
 		});  
 	});
 });
+		$(function() {
+			$.ajax({
+				url : "/everycvs/page/mypage.do",
+				type : "get",
+				dataType : "json",
+				success : function(data) {
+					$('#oftenPurchase').html();
+				}
+			});
+		});
 	</script>
 	
 

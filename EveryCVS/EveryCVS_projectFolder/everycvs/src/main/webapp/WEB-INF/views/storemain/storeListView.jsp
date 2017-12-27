@@ -215,20 +215,21 @@
 <!-- JS -->
 <script>
 //결제하기에 대한 js
-  $(document).ready(function() {
+/*   $(document).ready(function() {
 	$("#frm").click(function() {
 		confirm("정말로 결제하시겠습니까?");
 	});
-});  
+});   */
 
 function add_favorite(pno, sno){
 		location.href="/everycvs/favoriteInsert.do?product_no=" + pno + "&store_no=" + sno;
 	}
 function purchaseMoney(){
+	var result;
 	<c:forEach var="sp" items="${requestScope.list}">
 	var price = ${sp.price};
 	var cash = ${user.cash};
-	var result = cash - price;
+	result = cash - price;
 	</c:forEach>
 	
 	if(result < 0){
