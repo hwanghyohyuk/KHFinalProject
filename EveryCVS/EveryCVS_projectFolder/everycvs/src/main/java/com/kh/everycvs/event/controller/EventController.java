@@ -45,103 +45,21 @@ public class EventController {
 
 	// 유저 이벤트 리스트
 	@RequestMapping(value="/page/eventmain.do", method=RequestMethod.GET)
-	public ModelAndView selectEventList(@RequestParam(value="keyword",required = false, defaultValue="") String keyword, String page, HttpSession session) {
-		
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("event/eventlist");
-		  int currentPage = 1;
-          int limit = 6;
-          int user_no = ((User)session.getAttribute("user")).getUser_no();
-          List<Event> list = eventService.selectEventList(keyword,currentPage, limit, user_no);       
-          Map<String, Object> map = new HashMap<String, Object>();
-          int listCount = eventService.getListCount(keyword,user_no);
-          int maxPage = (int) ((double) listCount / limit + 0.94);
-          int startPage = (((int) ((double) currentPage / limit + 0.94)) - 1) * limit + 1;
-          int endPage = startPage + limit - 1;
-           if (maxPage < endPage)
-                   endPage = maxPage;
-           
-           map.put("currentPage", currentPage);
-           map.put("listCount", listCount);
-           map.put("maxPage", maxPage);
-           map.put("startPage", startPage);
-           map.put("endPage", endPage);
-           map.put("limit", limit);
-           map.put("list", list);
-          mv.addObject("event", map);      
-          return mv;
-	}
-	
-	//유저 페이징
-	@SuppressWarnings("unchecked")
-	@RequestMapping(value="userpageload.do")
-	@ResponseBody
-    public ModelAndView userpageload(ModelAndView mv, @RequestParam("page") int page, @RequestParam(value="keyword",required = false, defaultValue="") String keyword, HttpSession session) {
-				
-		 int currentPage = page;
-         int limit = 6;
-         int user_no = ((User)session.getAttribute("user")).getUser_no();
-         List<Event> list = eventService.selectEventList(keyword,currentPage, limit, user_no); 
-         
-         Map<String, Object> map = new HashMap<String, Object>();
-         int listCount = eventService.getListCount(keyword,user_no);
-         
-         
-         
-         
-         
-         int maxPage = (int) ((double) listCount / limit + 0.94);
-         int startPage = (((int) ((double) currentPage / limit + 0.94)) - 1) * limit + 1;
-         int endPage = startPage + limit - 1;
-          if (maxPage < endPage) {
-                  endPage = maxPage;
-          }
-          
-        
-          map.put("currentPage", currentPage);
-          map.put("listCount", listCount);
-          map.put("maxPage", maxPage);
-          map.put("startPage", startPage);
-          map.put("endPage", endPage);
-          map.put("limit", limit);
-            
-          JSONArray jar = new JSONArray();
-            
-          for(Event ev : list)
-            {
-               JSONObject jev = new JSONObject();
-               jev.put("event_no", ev.getEvent_no());
-               jev.put("title", ev.getTitle());
-               jev.put("writer", ev.getWriter());
-               jev.put("start_date",ev.getStart_date().toString());
-               jev.put("end_date", ev.getEnd_date().toString());
-               jev.put("readcount", ev.getReadcount());
-               jev.put("original_file_name",ev.getOriginal_file_name());
-               jev.put("stored_file_name",ev.getStored_file_name());
-               jar.add(jev);
-            }
-            
-           map.put("list", jar);
-           mv.addAllObjects(map);
-           
-           mv.setViewName("jsonView");
-         
-         return mv;
-		
+	public String selectEventList() {		
+		return "event/eventlist";
 	}	
 	
-	
-	//사용자 버튼으로 검색
+	//사용자 메인
 	@RequestMapping(value="/ajax/cvsevent.do", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> cvsEvent(@RequestParam("brandNo")int brand_no, HttpSession session){
+	public Map<String,Object> cvsEvent(@RequestParam("brandNo")int brand_no,@RequestParam("edno")int edno,
+			@RequestParam("page") int page){
 		Map<String,Object> map = new HashMap<String, Object>();
 		
-		int currentPage = 1;
+		int currentPage = page;
         int limit = 6;
-        int user_no = ((User)session.getAttribute("user")).getUser_no();
-        List<Event> cvsEventList = eventService.cvsEvent(currentPage, limit, brand_no);    
-        int listCount = eventService.getListCount(brand_no,user_no);
+        List<Event> cvsEventList = eventService.cvsEvent(currentPage, limit, edno, brand_no);    
+        int listCount = eventService.getListCount(edno, brand_no);
         int maxPage = (int) ((double) listCount / limit + 0.94);
         int startPage = (((int) ((double) currentPage / limit + 0.94)) - 1) * limit + 1;
         int endPage = startPage + limit - 1;
@@ -158,41 +76,6 @@ public class EventController {
 		
 		return map;
 	}
-	//종료된 이벤트 와 진행중인 이벤트 보여주기
-	//------------------------------------------ 하는중
-	  @RequestMapping(value="/ajax/cvsEventDate.do", method=RequestMethod.POST)
-	  @ResponseBody
-	  public Map<String,Object> cvsEventDate(@RequestParam("edno")int edno,HttpSession session){
-		  int currentPage = 1;
-	         int limit = 6;
-	        
-	         int user_no = ((User)session.getAttribute("user")).getUser_no();
-	       	 
-	         System.out.println("edno"+edno);
-
-	         List<Event> cvsEventDate = eventService.selectEndEventList(currentPage, limit,edno);
-
-	         Map<String, Object> map = new HashMap<String, Object>();
-	         int listCount = eventService.getedListCount(edno);
-	         int maxPage = (int) ((double) listCount / limit + 0.94);
-	         int startPage = (((int) ((double) currentPage / limit + 0.94)) - 1) * limit + 1;
-	         int endPage = startPage + limit - 1;
-	          if (maxPage < endPage) {
-	                  endPage = maxPage;
-	          }
-	          
-	          map.put("edlist", cvsEventDate);
-	          map.put("currentPage", currentPage);
-	          map.put("listCount", listCount);
-	          map.put("maxPage", maxPage);
-	          map.put("startPage", startPage);
-	          map.put("endPage", endPage);
-	          map.put("limit", limit);      
-	           
-	          return map;
-		}
-	  //-----------------------------------------------------------------------------------
-	
 	
 	//사용자 이벤트 결과 리스트를 보여주는 화면
 	@RequestMapping(value = "eventresultlist.do", method = RequestMethod.GET)

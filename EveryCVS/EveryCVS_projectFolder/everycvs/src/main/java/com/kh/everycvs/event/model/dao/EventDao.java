@@ -188,18 +188,19 @@ public class EventDao {
 		return sqlSession.selectOne("event.eventJoincheck", eventjoin);
 	}
 
-	public List<Event> cvsEvent(int startRow, int endRow, int brand_no) {
+	public List<Event> cvsEvent(int startRow, int endRow,  int edno, int brand_no) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("startRow", startRow); 
 		map.put("endRow", endRow);
+		map.put("edno",edno);
 		map.put("brand_no",brand_no);
 		return sqlSession.selectList("event.cvsEvent", map);
 	}
 
-	public int cvsGetListCount(int brand_no, int user_no) {
+	public int cvsGetListCount(int edno, int brand_no) {
 		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("edno",edno);
 		map.put("brand_no",brand_no);
-		map.put("user_no",user_no);
 		return sqlSession.selectOne("event.cvsGetListCount",map);
 	}
 //-------------------------------------------------------------------

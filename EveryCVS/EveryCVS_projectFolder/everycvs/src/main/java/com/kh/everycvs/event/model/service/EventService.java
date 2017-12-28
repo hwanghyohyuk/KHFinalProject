@@ -73,16 +73,12 @@ public interface EventService {
 	void eventResultInsert(EventResult eventResult);
 	
 	//편의점 별 사용자 이벤트
-	List<Event> cvsEvent(int currentpage, int limit, int brand_no);
+	List<Event> cvsEvent(int currentpage, int limit, int edno, int brand_no);
 	//편의점별 리스트 카운트
-	int getListCount(int brand_no, int user_no);
+	int getListCount(int edno,int brand_no);
 	
 	//----------------------------
 
-	//진행중인 이벤트 종료된 이벤트 따져보기
-	List<Event> selectEndEventList(int currentPage, int limit, int edno);
-	//진행중,종료된 이벤트 리스트 가져오기
-	int getedListCount(int edno);
 	
 	
 	
