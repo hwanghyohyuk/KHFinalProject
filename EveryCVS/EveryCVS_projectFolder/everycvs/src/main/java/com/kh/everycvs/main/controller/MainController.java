@@ -219,5 +219,8 @@ public class MainController {
 	public String error500() {
 		return "error/500";
 	}
+	
+	@RequestMapping("/page/errorNull.do")
+	public void errorNull() {}
 
 }

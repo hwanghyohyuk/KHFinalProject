@@ -2,16 +2,7 @@ package com.kh.everycvs.servicecenter.model.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.http.HttpRequest;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.kh.everycvs.common.model.vo.Purchase;
 import com.kh.everycvs.common.model.vo.ServiceCenter;
-import com.kh.everycvs.common.model.vo.StoreProduct;
 
 public interface ServiceCenterService {
 

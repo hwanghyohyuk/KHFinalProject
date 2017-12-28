@@ -214,25 +214,14 @@ public class StoreProductController {
 	
 	/*지점관리자*/
 	/**storeProduct 수정하기**/
-	@RequestMapping(value="/spmupdate.do")
-	public ModelAndView updateSpmanager(ModelAndView mv, 
-			 @RequestParam("page") int currentPage,
-			 @RequestParam("spnum") int spnum,
+	@RequestMapping(value="/ajax/spmupdate.do")
+	@ResponseBody
+	public int updateSpmanager( @RequestParam("spno") int spno,
 			 @RequestParam("mdate") Date manufacturedate,
 			 @RequestParam("quantity") int quantity) {
+		int result =0;
 		
-		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("spnum", spnum);
-		map.put("manufacturedate", manufacturedate);
-		map.put("quantity", quantity);
-		
-		if(sproductService.updateSpmanager(map) > 0){
-			mv.setViewName("redirect:/spmlist.do?page="+currentPage);
-		}else{
-			mv.addObject("message", "수정 실패!");
-		}
-		
-		return mv;
+		return result;
 	}
 	
 	/*지점관리자*/

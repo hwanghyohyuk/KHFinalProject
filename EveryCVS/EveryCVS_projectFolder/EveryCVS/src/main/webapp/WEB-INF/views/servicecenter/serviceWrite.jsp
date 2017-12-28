@@ -12,12 +12,12 @@
 <c:import url="../include/user/common/header.jsp"></c:import>
 <!-- === END HEADER === -->
 <script type="text/javascript">
-	function check() {
-		if (servicecenter.title.value == "") {
+	function check(){
+		if(servicecenter.title.value == ""){
 			alert("제목을 입력해주세요");
-			return;
+			return ;
 		}
-		if (servicecenter.contents.value = "") {
+		if(servicecenter.contents.value=""){
 			alert("내용을 입력해주세요")
 			return;
 		}

@@ -64,6 +64,7 @@
 											<strong>${spm.product_name}</strong>
 										</a>
 									</td>
+									
 									<td>${spm.manufacturer}</td>
 									<td><fmt:formatNumber value="${spm.price}" pattern="#,###" />원</td>
 									<td>${spm.discount_name}</td>
@@ -87,7 +88,7 @@
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
 														<h4 class="modal-title" style="color: black;">
-															<strong>상품설정</strong>
+															<strong>상품 수정</strong>
 														</h4>
 													</div>
 													<div class="modal-body">
@@ -128,33 +129,10 @@
 																</table>
 																</div>
 														</div>
-														<div class="row" style="margin-left: 10px;">
-															<h3>
-																<br> <strong>진행중인 EVENT</strong>
-															</h3>
-															<br>
-															<div data-toggle="buttons">
-																<label class="btn btn-danger btn-lg"> 
-																	<input type="radio" name="discount" value="0">없음
-																</label>
-																<label class="btn btn-danger btn-lg"> 
-																	<input type="radio" name="discount" value="1">1+1행사
-																</label>
-																<label class="btn btn-danger btn-lg"> 
-																	<input type="radio" name="discount" value="2">2+1행사
-																</label>
-																<label class="btn btn-danger btn-lg"> 
-																	<input type="radio" name="discount" value="3">할인행사
-																</label>
-																<label class="btn btn-danger btn-lg"> 
-																	<input type="radio" name="discount" value="4">증정행사
-																</label>							
-															</div>
-														</div>
 													</div>
 													<div class="modal-footer">
 														<button type="button" class="btn btn-primary btn-sm"
-															data-dismiss="modal" onclick="updateSubmit();">수정</button>
+															data-dismiss="modal" onclick="updateSubmit(${spm.store_product_no});">수정</button>
 														&nbsp;
 														<button type="button" class="btn btn-primary btn-sm"
 															onclick="location.href='spmdelete.do?spnum=${spm.store_product_no}&toggle=${spm.del_check}'">
@@ -217,25 +195,21 @@
 <!-- === END FOOTER === -->
 <!-- JS -->
 <script type="text/javascript">
-	function updateSubmit(){
-		
-		var st = $(":input:radio[name=discount]:checked").val();
-		console.log(st);
-		/* 
-		$.ajax({
-			url:'/everycvs/ajax/dcmodify.do',
-			data:{"storeNo":storeNo,
-				"productNo":productNo,
-				"dcNo":dcNo},
-			type:'post',
-			success:function(data){
-				
-			},
-			error : function(request, status, error) {
-				swal("오류",error,"error");
-			}		
-		});	 */
-	}
+
+function updateSubmit(spno){
+	console.log(st);
+	$.ajax({
+		url:'/everycvs/ajax/spmupdate.do',
+		data:{"spno":spno},
+		type:'post',
+		success:function(data){
+			swal("성공",data,"success");
+		},
+		error : function(request, status, error) {
+			swal("오류",error,"error");
+		}		
+	});	 
+}
 </script>
 <c:import url="../../include/user/common/end.jsp"></c:import>
 <!-- === END FOOTER === -->
