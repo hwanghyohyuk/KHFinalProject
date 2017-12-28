@@ -9,16 +9,15 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.everycvs.common.model.vo.Event;
-import com.kh.everycvs.common.model.vo.Purchase;
 import com.kh.everycvs.common.model.vo.ServiceCenter;
-import com.kh.everycvs.common.model.vo.StoreProduct;
-import com.mysql.fabric.xmlrpc.base.Array;
 
 @Repository("ServiceCenterDao")
 public class ServiceCenterDao {
 
-	public ServiceCenterDao() {	}
+	private ServiceCenter servicecenter;
+
+	public ServiceCenterDao() {
+	}
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -49,18 +48,20 @@ public class ServiceCenterDao {
 	 * sqlSession.selectList("serviceCenter.serviceList", list); }
 	 */
 
-	// 고객센터 상세보기
 	public ServiceCenter selectServiceOne(int sno) {
+		// 고객센터 상세보기
 		System.out.println("Dao : " + sno);
 		return sqlSession.selectOne("serviceCenter.serviceDetail", sno);
 	}
 
-	// 고객센터 삭제
 	public int serviceDelete(int sno) {
+		// 고객센터 삭제
+
 		return sqlSession.delete("serviceCenter.serviceDelete", sno);
 	}
 
 	public void serviceWrite(ServiceCenter servicecenter) {
+
 		int result = sqlSession.insert("serviceCenter.serviceInsert", servicecenter);
 		System.out.println("ServiceDao : " + servicecenter);
 	}
@@ -71,15 +72,18 @@ public class ServiceCenterDao {
 	}
 
 	public int serviceUpdate(ServiceCenter servicecenter) {
+
 		int result = sqlSession.update("serviceCenter.serviceUpdate", servicecenter);
 		System.out.println("updateDao : " + servicecenter);
 		return result;
 	}
 
 	public ServiceCenter serviceMyWrite(int writer) {
+
 		System.out.println("MyWriteDao : " + writer);
-		ServiceCenter result = sqlSession.selectOne("serviceCenter.serviceMyWrite", writer);
-		return result;
+		ServiceCenter servicecenter = sqlSession.selectOne("serviceCenter.serviceMyWrite", writer);
+		return servicecenter;
+
 	}
 
 }

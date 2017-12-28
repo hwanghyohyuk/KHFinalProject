@@ -36,8 +36,9 @@
                                  <h2>고객센터</h2>
                             </div>
                             <hr>
-								<input type="hidden" name="writer" value="${servicecenter.writer }">
+								
 								<form action="serviceSearch.do" method="post">
+								<input type="hidden" name="writer" value="${servicecenter.writer }">
 									<div  align="right" class="col-sm-3" style="margin-left: 190px;">
 										<br> <input class="form-control" type="search"
 											placeholder="제목을 입력해 주세요" name="keyword" value="${keyword}">
@@ -46,7 +47,7 @@
 										<br>
 										<button type="submit" class="btn btn-primary btn-sm">검색</button>
 									</div>
-								</form>
+								 </form> 
 								<br><br>
                                 <div align="left" style="margin-left: 5%; margin-right: 5%">
                                     <div class="table-responsive">
@@ -68,10 +69,12 @@
                                             </tr>
                                             </c:forEach> 
                                     </table>                               
-                                <div align="right">
-                                    <button class="btn btn-primary" onclick="serviceMyWrite(${servicecenter.writer});">내가쓴글</button>&nbsp&nbsp&nbsp                                 
+                                <div align="right">             
+                                    <button type="button"class="btn btn-primary" onclick="serviceMyWrite(${servicecenter.writer});">내가쓴글</button>                                   
+                                    &nbsp&nbsp&nbsp                                 
                                     <button class="btn btn-primary" onclick="writeService();" >글쓰기</button>                                    
-                                </div>         
+                                </div>        
+                               
                                                                                      
                                 <!-- 페이지 -->
                                 <div class="text-center">
