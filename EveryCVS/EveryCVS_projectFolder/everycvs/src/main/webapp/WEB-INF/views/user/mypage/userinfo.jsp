@@ -63,16 +63,19 @@
 							<c:set var = "gender" value = "${user.gender }"></c:set>
 							<c:if test="${gender eq 'M' }">
 							<c:set var = "m" value = "active"></c:set>
+							<c:set var = "mc" value = "checked"></c:set>
 							</c:if>
 							<c:if test="${gender eq 'W' }">
 							<c:set var = "w" value = "active"></c:set>
+							<c:set var = "wc" value = "checked"></c:set>
 							</c:if>
 							<c:if test="${gender eq 'N' }">
 							<c:set var = "n" value = "active"></c:set>
+							<c:set var = "nc" value = "checked"></c:set>
 							</c:if>
-							<label class="btn btn-primary btn-lg ${m}"><input type="radio" name="gender"  value="M" >남</label> 							
-							<label class="btn btn-primary btn-lg ${w}"><input type="radio" name="gender"  value="W" >여</label> 							
-							<label class="btn btn-primary btn-lg ${n}"><input type="radio" name="gender"  value="N" >비공개</label>									
+							<label class="btn btn-primary btn-lg ${m}"><input type="radio" name="gender"  value="M" ${mc}>남</label> 							
+							<label class="btn btn-primary btn-lg ${w}"><input type="radio" name="gender"  value="W" ${wc}>여</label> 							
+							<label class="btn btn-primary btn-lg ${n}"><input type="radio" name="gender"  value="N" ${nc}>비공개</label>									
 							</div>
 							<div class="input-group-lg  margin-bottom-40 has-feedback" id="addressstatus">
 								<label>Address</label> 
