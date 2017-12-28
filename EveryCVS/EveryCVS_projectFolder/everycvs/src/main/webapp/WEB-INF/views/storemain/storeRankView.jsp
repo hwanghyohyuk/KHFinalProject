@@ -244,7 +244,7 @@
 										<strong>할인상품</strong>
 									</h4>
 								</div>
-								<div style="overflow-x: hidden; width: 480px; height: 200px;">
+								<div style="overflow-x: hidden; width: 480px; height: 235px;">
 									<div id="collapse-One" class="accordion-body collapse in">
 										<div class="panel-body">
 											<div class="row">
@@ -344,7 +344,7 @@
 										<strong>유통기한 임박상품</strong>
 									</h4>
 								</div>
-								<div style="overflow-x: hidden; width: 480px; height: 200px;">
+								<div style="overflow-x: hidden; width: 480px; height: 235px;">
 									<div id="collapse-One" class="accordion-body collapse in">
 										<div class="panel-body">
 											<div class="row">
