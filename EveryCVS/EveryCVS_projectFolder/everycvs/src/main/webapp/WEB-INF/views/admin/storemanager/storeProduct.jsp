@@ -60,7 +60,7 @@
 									<td>${spm.store_product_no}</td>
 									<td>${spm.product_kind_name}</td>
 									<td>
-										<a href="#" data-toggle="modal" data-target="#spmmodal${spm.store_product_no}"> 
+										<a href="#" data-toggle="modal" data-target="#spmmodal_${spm.store_product_no}"> 
 											<strong>${spm.product_name}</strong>
 										</a>
 									</td>
@@ -80,7 +80,7 @@
 									</td>
 									<!-- Modal -->
 									<td>
-										<div id="spmmodal${spm.store_product_no}" class="modal fade"
+										<div id="spmmodal_${spm.store_product_no}" class="modal fade"
 											role="dialog">
 											<div class="modal-dialog">
 												<!-- Modal content-->
@@ -195,18 +195,42 @@
 <!-- === END FOOTER === -->
 <!-- JS -->
 <script type="text/javascript">
-
 function updateSubmit(spno){
-	console.log(st);
+	var mdate = $('#mdate_'+spno).val();
+	var quantity = $('#quantity_'+spno).val();	
 	$.ajax({
 		url:'/everycvs/ajax/spmupdate.do',
-		data:{"spno":spno},
+		data:{"spno":spno,
+			"mdate":mdate,
+			"quantity":quantity},
 		type:'post',
 		success:function(data){
-			swal("성공",data,"success");
+			if(data>0){
+				swal({
+					title: '상품 수정 성공',
+					timer: 1500,
+					type: 'success'
+				});
+				setTimeout(function(){
+					$('#spmmodal_'+spno).modal('hide');
+					location.href="/everycvs/spmlist.do";
+				},1500);				
+			}else{
+				swal({
+					title: '상품 수정 실패',
+					text: 'Server Error',
+					timer: 1500,
+					type: 'error'
+				});
+			}
 		},
 		error : function(request, status, error) {
-			swal("오류",error,"error");
+			swal({
+				title: 'ERROR',
+				text: error,
+				timer: 1500,
+				type: 'error'
+			});
 		}		
 	});	 
 }
