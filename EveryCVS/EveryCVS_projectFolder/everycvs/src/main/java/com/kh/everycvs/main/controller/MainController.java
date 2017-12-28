@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.everycvs.common.model.vo.Event;
 import com.kh.everycvs.common.model.vo.NaverMap;
 import com.kh.everycvs.common.model.vo.Product;
+import com.kh.everycvs.common.model.vo.ProductKind;
 import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.User;
 import com.kh.everycvs.event.model.service.EventService;
@@ -185,6 +186,9 @@ public class MainController {
 			int joinCustomers = saleService.joinCustomers(store.getStore_no());
 			/** 금일 판매 수익**/
 			int saleBenefit = saleService.saleBenefit(store.getStore_no());
+			
+			/** 상품 종류 리스트 조회 **/
+			List<ProductKind> pkindList = productService.productKindList();
 			
 			mv.addObject("saleQuantity", saleQuantity);
 			mv.addObject("registProducts", registProducts);

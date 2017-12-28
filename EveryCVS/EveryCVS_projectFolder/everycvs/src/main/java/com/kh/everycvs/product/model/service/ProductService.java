@@ -3,6 +3,7 @@ package com.kh.everycvs.product.model.service;
 import java.util.List;
 import java.util.Map;
 import com.kh.everycvs.common.model.vo.Product;
+import com.kh.everycvs.common.model.vo.ProductKind;
 import com.kh.everycvs.common.model.vo.StoreProduct;
 
 public interface ProductService {
@@ -50,5 +51,9 @@ public interface ProductService {
 	public int getListCount(String keyword, int brand_no);
 	
 	public List<StoreProduct> listApmanager(int currentPage, int limit, String keyword, int brand_no);
+
+	/*지점관리자*/
+	/**상품 종류 리스트 조회**/
+	public List<ProductKind> productKindList();
 
 }

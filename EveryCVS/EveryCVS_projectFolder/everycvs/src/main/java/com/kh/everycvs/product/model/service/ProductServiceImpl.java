@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.everycvs.common.model.vo.Product;
+import com.kh.everycvs.common.model.vo.ProductKind;
 import com.kh.everycvs.common.model.vo.StoreProduct;
 import com.kh.everycvs.product.model.dao.ProductDao;
 
@@ -100,6 +101,11 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public List<StoreProduct> listApmanager(int currentPage, int limit, String keyword, int brand_no) {
 		return productDao.listApmanager(currentPage, limit, keyword, brand_no);
+	}
+
+	@Override
+	public List<ProductKind> productKindList() {
+		return productDao.productKindList();
 	}
 	
 }

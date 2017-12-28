@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.everycvs.common.model.vo.Product;
+import com.kh.everycvs.common.model.vo.ProductKind;
 import com.kh.everycvs.common.model.vo.StoreProduct;
 
 @Repository("ProductDao")
@@ -116,6 +117,10 @@ public class ProductDao {
 		}else{
 			return sqlSession.selectList("product.listApmanager", map);
 		}	
+	}
+
+	public List<ProductKind> productKindList() {
+			return sqlSession.selectList("product.productKindList");
 	}
 	
 }

@@ -19,6 +19,14 @@
 		<result property="purchase_count" column="purchase_count" />
 	</resultMap>
 	
+	<resultMap type="productkind" id="resultProductKind">
+		<result property="product_kind_no" column="PRODUCT_KIND_NO" />
+		<result property="product_kind_name" column="PRODUCT_KIND_NAME" />
+		<result property="brand_no" column="STORE_NO" />
+		<result property="store_no" column="STORE_NO" />
+		<result property="sale_quantity" column="SALE_QUANTITY" />
+	</resultMap>
+	
 	<!-- 사용자 : 실시간 인기상품 top 3 -->
 	<select id="popularTop3" parameterType="hashmap" resultType="list" resultMap="resultProduct">
 		<![CDATA[select rownum, a.* from(select * from product_view]]> 
@@ -167,7 +175,12 @@
            ]]>
    </select>
    
-   
+   <!-- 상품종류 조회 -->
+   <select id="productKindList" resultType="list" resultMap="resultProductKind">
+   <![CDATA[
+   		select * from tb_product_kind
+   ]]>
+   </select>
    
 </mapper>
 
