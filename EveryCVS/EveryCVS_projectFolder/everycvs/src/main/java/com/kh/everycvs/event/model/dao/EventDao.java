@@ -183,25 +183,42 @@ public class EventDao {
 		sqlSession.insert("event.cvseventResultwrite", eventResult); 
 		
 	}
-
+	//이벤트 참여----------------------------------------------------------
 	public int eventJoincheck(EventJoin eventjoin) {
 		return sqlSession.selectOne("event.eventJoincheck", eventjoin);
 	}
 
-	public List<Event> cvsEvent(int startRow, int endRow, int brand_no) {
+	public List<Event> cvsEvent(int startRow, int endRow,  int edno, int brand_no) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("startRow", startRow); 
 		map.put("endRow", endRow);
+		map.put("edno",edno);
 		map.put("brand_no",brand_no);
 		return sqlSession.selectList("event.cvsEvent", map);
 	}
 
-	public int cvsGetListCount(int brand_no, int user_no) {
+	public int cvsGetListCount(int edno, int brand_no) {
 		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("edno",edno);
 		map.put("brand_no",brand_no);
-		map.put("user_no",user_no);
 		return sqlSession.selectOne("event.cvsGetListCount",map);
 	}
+//-------------------------------------------------------------------
+	//진행중,종료된 이벤트 리스트 출력
+	public List<Event> selectEventList(int startRow, int endRow, int edno) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		map.put("edno", edno);
+		return sqlSession.selectList("event.cvsEventDate",map);
+	}
+
+	public int edlistCount(int edno) {
+		Map<String,Object>map = new HashMap<String, Object>();
+		map.put("endo", edno);
+		return sqlSession.selectOne("event.edlistCount",map);
+	}
+	
 
 	
 }
