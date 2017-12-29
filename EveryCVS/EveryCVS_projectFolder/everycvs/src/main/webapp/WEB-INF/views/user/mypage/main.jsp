@@ -221,7 +221,11 @@
 									<h3 class="panel-title">자주 구매한 목록</h3>
 								</div>
 								<div id="oftenPurchase" class="panel-body" align="left" style="font-size: 15pt;">
-									
+									<c:forEach items="${top3List }" var="top3">		
+									${top3.store_name }
+									${top3.product_name }
+									<br>
+									</c:forEach>
 								</div>
 							</div>
 						</div>

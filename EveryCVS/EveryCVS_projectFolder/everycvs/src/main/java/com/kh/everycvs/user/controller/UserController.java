@@ -142,12 +142,12 @@ public class UserController {
 		User user = (User) session.getAttribute("user");
 		
 		ArrayList<Purchase> list = purchaseService.purchaseList(user.getUser_no(),month);
-		ArrayList<Purchase> top3List = purchaseService.top3List();
+		ArrayList<Purchase> top3List = purchaseService.top3List(user.getUser_no());
 		
 		mv.addObject("list", list);		
 		mv.addObject("top3List", top3List);
 		System.out.println(list);
-				
+		System.out.println("top3List : " + top3List);
 		mv.setViewName("user/mypage/main");
 		return mv;
 	}
