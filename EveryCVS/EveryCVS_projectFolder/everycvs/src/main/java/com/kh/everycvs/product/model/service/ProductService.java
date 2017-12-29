@@ -1,5 +1,6 @@
 package com.kh.everycvs.product.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.kh.everycvs.common.model.vo.Product;
@@ -53,7 +54,9 @@ public interface ProductService {
 	public List<StoreProduct> listApmanager(int currentPage, int limit, String keyword, int brand_no);
 
 	/*지점관리자*/
-	/**상품 종류 리스트 조회**/
-	public List<ProductKind> productKindList();
+	/** 지점 상품 종류별 판매량 조회**/
+	public List<ProductKind> productKindValue(String store_no);
 
+	/** 지점 판매량 그래프 **/
+	public List<HashMap<String,Object>> salesGraph(String store_no);
 }

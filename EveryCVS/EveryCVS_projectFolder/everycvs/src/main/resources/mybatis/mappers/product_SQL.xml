@@ -27,6 +27,11 @@
 		<result property="sale_quantity" column="SALE_QUANTITY" />
 	</resultMap>
 	
+	<resultMap type="hashmap" id="resultGraph">
+		<result javaType="java.sql.Date" column="SALE_DATE" property="sale_date"></result>
+        <result javaType="java.lang.String" column="CALCULATED_PRICE" property="calculated_price"></result>
+	</resultMap>
+	
 	<!-- 사용자 : 실시간 인기상품 top 3 -->
 	<select id="popularTop3" parameterType="hashmap" resultType="list" resultMap="resultProduct">
 		<![CDATA[select rownum, a.* from(select * from product_view]]> 
@@ -175,10 +180,17 @@
            ]]>
    </select>
    
-   <!-- 상품종류 조회 -->
-   <select id="productKindList" resultType="list" resultMap="resultProductKind">
+    <!--지점 상품종류별 판매량 조회 -->
+   <select id="productKindValue" parameterType="string" resultType="list" resultMap="resultProductKind">
    <![CDATA[
-   		select * from tb_product_kind
+   		select * from sale_product_kind_view where store_no=#{store_no}
+   ]]>
+   </select>
+   
+   <select id="salesGraph" parameterType="string" resultType="list" resultMap="resultGraph">
+   <![CDATA[
+   select to_date(to_char(sale_date,'yy-mm-dd')) as sale_date, sum(CALCULATED_PRICE) as calculated_price
+   from sale_view where STORE_NO=#{store_no} group by sale_date
    ]]>
    </select>
    

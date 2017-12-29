@@ -46,24 +46,16 @@ public class MainController {
 
 	// 인터셉터를 거치는 페이지이동 메소드
 	@RequestMapping("main/main.do")
-	public String intercepterMain() {
-		return "main/main";
-	}
+	public void intercepterMain() {}
 
 	@RequestMapping("main/storemain.do")
-	public String intercepterStoreMain() {
-		return "admin/storemanager/main";
-	}
+	public void intercepterStoreMain() {}
 
 	@RequestMapping("main/cvsmain.do")
-	public String intercepterCvsMain() {
-		return "admin/cvsmanager/main";
-	}
+	public void intercepterCvsMain() {}
 
 	@RequestMapping("main/sitemain.do")
-	public String intercepterSiteMain() {
-		return "admin/sitemanager/main";
-	}
+	public void intercepterSiteMain() {}
 
 	// 페이지이동 및 서비스 로드 메소드
 	@RequestMapping("main.do")
@@ -187,13 +179,19 @@ public class MainController {
 			/** 금일 판매 수익**/
 			int saleBenefit = saleService.saleBenefit(store.getStore_no());
 			
-			/** 상품 종류 리스트 조회 **/
-			List<ProductKind> pkindList = productService.productKindList();
+			/** 지점 상품 종류별 판매량 **/
+			List<ProductKind> pkValues = productService.productKindValue(store.getStore_no());
+			
+			/** 지점 상품 판매량 그래프 **/
+			List<HashMap<String,Object>> salesGraph = productService.salesGraph(store.getStore_no());
 			
 			mv.addObject("saleQuantity", saleQuantity);
 			mv.addObject("registProducts", registProducts);
 			mv.addObject("joinCustomers", joinCustomers);
 			mv.addObject("saleBenefit", saleBenefit);			
+			
+			mv.addObject("pkValues", pkValues);
+			mv.addObject("salesGraph", salesGraph);
 			
 			mv.setViewName("admin/storemanager/main");
 		}

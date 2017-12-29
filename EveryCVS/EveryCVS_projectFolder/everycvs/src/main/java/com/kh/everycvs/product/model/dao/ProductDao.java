@@ -119,8 +119,12 @@ public class ProductDao {
 		}	
 	}
 
-	public List<ProductKind> productKindList() {
-			return sqlSession.selectList("product.productKindList");
+	public List<ProductKind> productKindValue(String store_no) {
+		return sqlSession.selectList("product.productKindValue",store_no);
+	}
+	
+	public List<HashMap<String,Object>> salesGraph(String store_no){
+		return sqlSession.selectList("product.salesGraph",store_no);		
 	}
 	
 }

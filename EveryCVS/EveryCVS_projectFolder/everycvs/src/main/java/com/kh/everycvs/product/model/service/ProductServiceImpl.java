@@ -1,5 +1,6 @@
 package com.kh.everycvs.product.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -104,8 +105,13 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<ProductKind> productKindList() {
-		return productDao.productKindList();
+	public List<ProductKind> productKindValue(String store_no) {
+		return productDao.productKindValue(store_no);
 	}
 	
+	@Override
+	public List<HashMap<String,Object>> salesGraph(String store_no){
+		return productDao.salesGraph(store_no);		
+	}
+
 }

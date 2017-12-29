@@ -72,9 +72,6 @@
 <script
 	src="/everycvs/resources/admin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"
 	type="text/javascript"></script>
-<!-- jQuery Knob Chart -->
-<script src="/everycvs/resources/admin/plugins/knob/jquery.knob.js"
-	type="text/javascript"></script>
 <!-- daterangepicker -->
 <script
 	src="/everycvs/resources/admin/plugins/daterangepicker/daterangepicker.js"
@@ -101,12 +98,18 @@
 <script src="/everycvs/resources/admin/dist/js/app.min.js"
 	type="text/javascript"></script>
 
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script type="text/javascript">  
-$(function () {
-$(".knob").knob();
-});
-</script>
+<!-- Styles -->
+<style>
+#chartdiv {
+  width: 100%;
+  height: 300px;
+}												
+</style>
+<!-- Resources -->
+<script src="/everycvs/resources/admin/plugins/amcharts/amcharts.js"></script>
+<script src="/everycvs/resources/admin/plugins/amcharts/pie.js"></script>
+<script src="/everycvs/resources/admin/plugins/amcharts/none.js"></script>
+
 
 <c:import url="../../include/user/common/headend.jsp"></c:import>
 <!-- === END HEAD ===  -->
@@ -212,49 +215,7 @@ $(".knob").knob();
 								</div>
 								<!-- /.box-header -->
 								<div class="box-body">
-									<div class="row">
-										<div class="col-md-3 col-sm-6 col-xs-6 text-center">
-											<input type="text" class="knob" value="30" data-width="90" data-readonly="true" readonly="readonly"
-												data-height="90" data-fgColor="#3c8dbc" />
-											<div class="knob-label">New Visitors</div>
-										</div>
-										<!-- ./col -->
-										<div class="col-md-3 col-sm-6 col-xs-6 text-center">
-											<input type="text" class="knob" value="70" data-width="90" data-readonly="true" readonly="readonly"
-												data-height="90" data-fgColor="#f56954" />
-											<div class="knob-label">Bounce Rate</div>
-										</div>
-										<!-- ./col -->
-										<div class="col-md-3 col-sm-6 col-xs-6 text-center">
-											<input type="text" class="knob" value="0" data-readonly="true" readonly="readonly"
-												data-min="0" data-max="100" data-width="90" data-height="90"
-												data-fgColor="#00a65a" />
-											<div class="knob-label">Server Load</div>
-										</div>
-										<!-- ./col -->
-										<div class="col-md-3 col-sm-6 col-xs-6 text-center">
-											<input type="text" class="knob" value="40" data-width="90" data-readonly="true" readonly="readonly"
-												data-height="90" data-fgColor="#00c0ef" />
-											<div class="knob-label">Disk Space</div>
-										</div>
-										<!-- ./col -->
-									</div>
-									<!-- /.row -->
-									<div class="row">
-										<div class="col-xs-6 text-center">
-											<input type="text" class="knob" value="90" data-width="90" data-readonly="true" readonly="readonly"
-												data-height="90" data-fgColor="#932ab6" />
-											<div class="knob-label">Bandwidth</div>
-										</div>
-										<!-- ./col -->
-										<div class="col-xs-6 text-center">
-											<input type="text" class="knob" value="50" data-width="90" data-readonly="true" readonly="readonly"
-												data-height="90" data-fgColor="#39CCCC" />
-											<div class="knob-label">CPU</div>
-										</div>
-										<!-- ./col -->
-									</div>
-									<!-- /.row -->
+								<div id="chartdiv"></div>
 								</div>
 								<!-- /.box-body -->
 							</div>
@@ -266,6 +227,7 @@ $(".knob").knob();
 
 					<!-- Main row -->
 					<div class="row">
+					
 						<!-- Left col -->
 						<section
 							class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -277,37 +239,7 @@ $(".knob").knob();
 								</div>
 								<div class="box-body border-radius-none">
 									<div class="chart" id="linechart" style="height: 250px;"></div>
-									<script type="text/javascript">
-									Morris.Line({
-									    element: 'linechart',
-									    resize: true,
-									    data: [
-									      {y: '2011 Q1', item1: 2666},
-									      {y: '2011 Q2', item1: 2778},
-									      {y: '2011 Q3', item1: 4912},
-									      {y: '2011 Q4', item1: 3767},
-									      {y: '2012 Q1', item1: 6810},
-									      {y: '2012 Q2', item1: 5670},
-									      {y: '2012 Q3', item1: 4820},
-									      {y: '2012 Q4', item1: 15073},
-									      {y: '2013 Q1', item1: 10687},
-									      {y: '2013 Q2', item1: 8432}
-									    ],
-									    xkey: 'y',
-									    ykeys: ['item1'],
-									    labels: ['Item 1'],
-									    lineColors: ['#efefef'],
-									    lineWidth: 2,
-									    hideHover: 'auto',
-									    gridTextColor: "#fff",
-									    gridStrokeWidth: 0.4,
-									    pointSize: 4,
-									    pointStrokeColors: ["#efefef"],
-									    gridLineColor: "#efefef",
-									    gridTextFamily: "Open Sans",
-									    gridTextSize: 10
-									  });
-									</script>
+									
 								</div>
 								<!-- /.box-body -->
 							</div>
@@ -326,6 +258,49 @@ $(".knob").knob();
 <!-- === BEGIN FOOTER === -->
 <c:import url="../../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
+<!-- JS -->
+<script type="text/javascript">
+var chart = AmCharts.makeChart( "chartdiv", {
+  "type": "pie",
+  "theme": "none",
+  "dataProvider": [ 
+<c:forEach items="${pkValues}" var="pv" varStatus="status">
+{"product": "${pv.product_kind_name}","value": ${pv.sale_quantity}}<c:if test="${!status.last}">,</c:if>
+</c:forEach>
+],
+  "valueField": "value",
+  "titleField": "product",
+  "outlineAlpha": 0.4,
+  "depth3D": 30,
+  "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+  "angle": 30
+} );
+</script>
+
+<script type="text/javascript">
+Morris.Line({
+    element: 'linechart',
+    resize: true,
+    data: [
+    	<c:forEach items="${salesGraph}" var="sg" varStatus="status">
+    	{saledate: "${sg.sale_date}",value: ${sg.calculated_price}}<c:if test="${!status.last}">,</c:if>
+    	</c:forEach>
+    ],
+    xkey: 'saledate',
+    ykeys: ['value'],
+    labels: 'Sales',
+    lineColors: ['#efefef'],
+    lineWidth: 2,
+    hideHover: 'auto',
+    gridTextColor: "#fff",
+    gridStrokeWidth: 0.4,
+    pointSize: 4,
+    pointStrokeColors: ["#efefef"],
+    gridLineColor: "#efefef",
+    gridTextFamily: "Open Sans",
+    gridTextSize: 10
+  });
+</script>
 <!-- JS -->
 <c:import url="../../include/user/common/end.jsp"></c:import>
 <!-- === END FOOTER === -->
