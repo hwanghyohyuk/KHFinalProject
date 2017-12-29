@@ -91,12 +91,17 @@
     </update>
     
     <!--  자주 구매한 목록-->
-     <select id="top3List" resultType="list" resultMap="resultPurchase">
+     <select id="top3List" parameterType="int" resultType="list" resultMap="resultPurchase">
 		<![CDATA[
-			select * from (select rownum rnum, a.*
-			from (select * from purchase_view order by product_name desc) a) 
-			where rnum >= 1 and rnum <= 3
+		select store_name, product_name, sum(purchase_quantity) from purchase_view
+		where user_no = #{user_no}
+		group by product_name, store_name, purchase_quantity
+		order by purchase_quantity desc
+			
 		]]>	
+		<!-- select * from (select rownum rnum, a.*
+			from (select * from purchase_view where user_no = #{user_no} order by product_name desc) a) 
+			where rnum >= 1 and rnum <= 3 -->
 	</select>
 	
 

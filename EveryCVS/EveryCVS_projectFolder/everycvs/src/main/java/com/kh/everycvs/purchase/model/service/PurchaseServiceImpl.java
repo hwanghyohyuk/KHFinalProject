@@ -89,8 +89,8 @@ public class PurchaseServiceImpl implements PurchaseService{
 	}
 
 	@Override
-	public ArrayList<Purchase> top3List() {
-		return (ArrayList<Purchase>) purchaseDao.top3List();
+	public ArrayList<Purchase> top3List(int user_no) {
+		return (ArrayList<Purchase>) purchaseDao.top3List(user_no);
 	}
 
 

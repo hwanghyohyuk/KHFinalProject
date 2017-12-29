@@ -45,6 +45,6 @@ public interface PurchaseService {
 
 	public int userInsertPurchaseList(Map<String, Object> map);
 
-	public ArrayList<Purchase> top3List();
+	public ArrayList<Purchase> top3List(int user_no);
 	
 }
