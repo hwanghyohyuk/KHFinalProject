@@ -288,7 +288,7 @@ Morris.Line({
     ],
     xkey: 'saledate',
     ykeys: ['value'],
-    labels: 'Sales',
+    labels: '₩',
     lineColors: ['#efefef'],
     lineWidth: 2,
     hideHover: 'auto',
