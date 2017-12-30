@@ -99,6 +99,13 @@
 		]]>	
 	</select>
 	
+	
+	<select id="purchaseCount" resultType="_int">
+		<![CDATA[
+			select count(*) from tb_purchase where to_char(sysdate,'yy-mm')=to_char(purchase_date,'yy-mm')
+		]]>	
+	</select>
+	
 
 </mapper>
 

@@ -26,13 +26,6 @@ public class StoreController {
 	
 	/* 지점관리자 */
 
-	/** 해당 지점의 방문자 수 조회 **/
-	public ModelAndView storeJoinCount(ModelAndView modelAndView) {
-
-		return null;
-	}
-	
-	
 	/* 편의점 관리자 */
 
 	/** 방문자 수 top5 지점 **/
@@ -116,10 +109,4 @@ public class StoreController {
 	
 	/* 사이트 관리자 */
 
-	/** 편의점별 방문자 수 통계 **/
-	public ModelAndView cvsJoinCount(ModelAndView modelAndView) {
-		int brand_no=0;
-		Map map = storeService.cvsJoinCount();
-		return null;
-	}
 }

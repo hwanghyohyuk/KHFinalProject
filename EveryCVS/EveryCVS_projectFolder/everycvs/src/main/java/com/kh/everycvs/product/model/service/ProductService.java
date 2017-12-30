@@ -54,9 +54,11 @@ public interface ProductService {
 	public List<StoreProduct> listApmanager(int currentPage, int limit, String keyword, int brand_no);
 
 	/*지점관리자*/
-	/** 지점 상품 종류별 판매량 조회**/
-	public List<ProductKind> productKindValue(String store_no);
+	/** 지점 상품 종류별 판매량 조회 **/
+	public List<ProductKind> productKindValue(String store_no, int dateNo);
+	
+	/*편의점 관리자*/
+	public List<Product> pTop5(int brand_no);
 
-	/** 지점 판매량 그래프 **/
-	public List<HashMap<String,Object>> salesGraph(String store_no);
+	public List<ProductKind> productKindValue(int brand_no, int dateNo);
 }

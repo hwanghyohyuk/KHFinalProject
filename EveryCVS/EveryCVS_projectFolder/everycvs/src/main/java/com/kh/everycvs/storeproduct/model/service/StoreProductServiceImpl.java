@@ -68,5 +68,24 @@ public class StoreProductServiceImpl implements StoreProductService {
 	public int insertApmanager(List<StoreProduct> spList) {
 		return sproductDao.insertProduct(spList);
 	}
+
+	/*지점관리자*/
+	/** 금일 등록된 상품수 **/
+	@Override
+	public int registProducts(String store_no) {
+		return sproductDao.registProducts(store_no);
+	}
+	/**지점인기상품 top5**/
+	@Override
+	public List<StoreProduct> spTop5(String store_no) {
+		return sproductDao.spTop5(store_no);
+	}
+	
+	/*편의점관리자*/
+	/** 금일 등록된 상품수 **/
+	@Override
+	public int registProducts(int brand_no) {
+		return sproductDao.registProducts(brand_no);
+	}
 	
 }

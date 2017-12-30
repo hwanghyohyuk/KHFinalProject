@@ -78,6 +78,10 @@ public class PurchaseDao {
 		return sqlSession.selectList("purchase.top3List", list);
 	}
 
+	public int purchaseCount() {
+		return sqlSession.selectOne("purchase.purchaseCount");
+	}
+
 	
 
 	

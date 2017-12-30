@@ -231,5 +231,10 @@ public class UserServiceImpl implements UserService {
 		return userDao.userIncreMoney(map);
 	}
 
+	@Override
+	public int registUserCount() {
+		return userDao.registUserCount();
+	}
+
 
 }

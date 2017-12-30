@@ -581,9 +581,4 @@ public class UserController {
 		return mv;
 	}
 
-	/** 사용자 등록 수 **/
-	public ModelAndView userEnrollCount(ModelAndView modelAndView) {
-		return modelAndView;
-	}
-
 }

@@ -24,6 +24,11 @@
 		<result property="enroll_no" column="ENROLL_NO" />
 	</resultMap>
 		
+	<resultMap type="hashmap" id="resultGraph">
+		<result javaType="java.lang.String" column="BRAND_NAME" property="brand_name"></result>
+        <result javaType="java.lang.Integer" column="JOIN_COUNT" property="join_count"></result>
+	</resultMap>
+		
 	<update id="increamentJoinCount"  parameterType="string" flushCache="true"
       statementType="PREPARED">
 		<![CDATA[update tb_store set join_count = (select join_count+1 from tb_store where store_no = #{store_no}) where store_no = #{store_no}]]>
@@ -177,4 +182,30 @@
 			where enroll_no = #{enroll_no}
 		]]>
 	</select>
+	
+	<!-- 방문자수 -->
+	<select id="storeJoinCustomers" parameterType="string" resultType="_int">
+	<![CDATA[
+		select join_count from tb_store where store_no = #{store_no}
+		]]>
+	</select>
+	<!-- 방문자수 -->
+	<select id="cvsJoinCustomers" parameterType="_int" resultType="_int">
+	<![CDATA[
+		select sum(join_count) as join_count from tb_store where brand_no = #{brand_no}
+		]]>
+	</select>
+	<!-- 방문자수 -->
+	<select id="joinCustomers" resultType="_int">
+	<![CDATA[
+		select sum(join_count) as join_count from tb_store
+		]]>
+	</select>
+	
+	<select id="visitcvsChart" resultType="list" resultMap="resultGraph">
+   <![CDATA[
+   select brand_name, sum(join_count) as join_count
+   from store_view group by brand_name
+   ]]>
+   </select>	
 </mapper>

@@ -105,13 +105,19 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<ProductKind> productKindValue(String store_no) {
-		return productDao.productKindValue(store_no);
+	public List<ProductKind> productKindValue(String store_no, int dateNo) {
+		return productDao.productKindValue(store_no,dateNo);
 	}
-	
+
+	/*편의점 관리자*/
 	@Override
-	public List<HashMap<String,Object>> salesGraph(String store_no){
-		return productDao.salesGraph(store_no);		
+	public List<Product> pTop5(int brand_no) {
+		return productDao.pTop5(brand_no);
+	}
+
+	@Override
+	public List<ProductKind> productKindValue(int brand_no, int dateNo) {
+		return productDao.productKindValue(brand_no,dateNo);
 	}
 
 }
