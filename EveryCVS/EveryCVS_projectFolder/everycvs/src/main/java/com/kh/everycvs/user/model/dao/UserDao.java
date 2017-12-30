@@ -139,6 +139,10 @@ public class UserDao{
 		return sqlSession.delete("user.deleteResetKey", email);
 	}
 
+	public int registUserCount() {
+		return sqlSession.selectOne("user.registUserCount");
+	}
+
 
 
 }

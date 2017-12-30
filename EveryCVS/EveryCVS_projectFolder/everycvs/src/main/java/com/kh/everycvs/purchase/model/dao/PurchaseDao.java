@@ -82,6 +82,10 @@ public class PurchaseDao {
 		
 	}
 
+	public int purchaseCount() {
+		return sqlSession.selectOne("purchase.purchaseCount");
+	}
+
 	
 
 	

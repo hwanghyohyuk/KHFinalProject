@@ -38,13 +38,12 @@ public interface PurchaseService {
 	
 	//거래내역 조회 : 3개월, 1개월, 1주일 단위로 조회(해당 리스트 목록조회)
 	public ArrayList<Purchase> purchaseList(int user_no, String month);
-	
-	/*사이트관리자*/
-	/**월간 구매 이용 횟수**/
-	int monthlyPurchaseCount();
 
 	public int userInsertPurchaseList(Map<String, Object> map);
 
 	public ArrayList<Purchase> top3List(int user_no);
+
+	/*사이트관리자*/
+	public int purchaseCount();
 	
 }

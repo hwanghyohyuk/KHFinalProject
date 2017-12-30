@@ -154,6 +154,8 @@ function signIn(){
 							timer: 1500,
 							type: 'error'
 						});
+						$("#email").val('');
+						$("#pwd").val('');
 						$("#pwd").focus();
 					}					
 				},
@@ -173,6 +175,7 @@ function signIn(){
 				timer: 1500,
 				type: 'error'
 			});
+			$("#pwd").val('');
 			$("#pwd").focus();
 		}
 	}else{

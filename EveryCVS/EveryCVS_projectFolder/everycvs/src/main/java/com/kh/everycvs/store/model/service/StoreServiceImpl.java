@@ -1,6 +1,7 @@
 package com.kh.everycvs.store.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,17 +40,21 @@ public class StoreServiceImpl implements StoreService {
 	public void increamentJoinCount(String store_no) {
 		storeDao.increamentJoinCount(store_no);
 	}
-
+	
+	/*지점관리자*/
+	/** 금일 방문자수 **/
+	@Override
+	public int joinCustomers(String store_no) {
+		return storeDao.joinCustomers(store_no);
+	}
+	
 	/* 편의점 관리자 */
-	/** 방문자 수 top5 지점 
-	 * @param brand_no **/
+	
 	@Override
 	public List joinCountTop5(int brand_no) {
 		return storeDao.joinCountTop5(brand_no);
 	}
-	
-	/** 판매량 top5 지점
-	 * @param brand_no */
+
 	@Override
 	public List saleQuantityTop5(int brand_no) {
 		return storeDao.saleQuantityTop5(brand_no);
@@ -75,16 +80,21 @@ public class StoreServiceImpl implements StoreService {
 	public void DeleteStore(Store store) {
 		storeDao.DeleteStore(store);
 	}
-	
-	
-	/* 사이트 관리자 */
-	/** 편의점별 방문자 수 통계 **/
+
 	@Override
-	public Map cvsJoinCount() {
-		Map map = storeDao.cvsJoinCount();
-		return null;
+	public int joinCustomers(int brand_no) {
+		return storeDao.joinCustomers(brand_no);
 	}
 
-	
+	@Override
+	public int joinCustomers() {
+		// TODO Auto-generated method stub
+		return storeDao.joinCustomers();
+	}
+
+	@Override
+	public List<HashMap<String, Object>> visitcvsChart() {
+		return storeDao.visitcvsChart();
+	}
 
 }

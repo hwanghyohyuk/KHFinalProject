@@ -137,6 +137,17 @@ function findEmail(){
 		});
 	}
 }
+function init(){
+	$('#email').on('keydown', function(e) {
+		var keyCode = e.which;
+		if (keyCode === 13) { // Enter Key
+			findEmail();
+		}
+	});
+}
+$(window).on("load", function() {
+	init();
+});
 </script>
 <c:import url="../../include/user/common/end.jsp"></c:import>
 <!-- === END === -->

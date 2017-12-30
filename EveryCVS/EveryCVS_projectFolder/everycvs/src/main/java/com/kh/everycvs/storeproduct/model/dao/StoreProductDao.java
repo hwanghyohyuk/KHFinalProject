@@ -106,5 +106,21 @@ public class StoreProductDao {
 		}		
 		return result;
 	}
+
+	/*지점관리자*/
+	/** 금일 등록된 상품수 **/
+	public int registProducts(String store_no) {
+		return sqlSession.selectOne("storeProduct.registProducts",store_no);
+	}
+	
+	public List<StoreProduct> spTop5(String store_no) {
+		return sqlSession.selectList("storeProduct.spTop5", store_no);
+	}
+	
+	/*편의점관리자*/
+	/** 금일 등록된 상품수 **/
+	public int registProducts(int brand_no) {
+		return 0;
+	}
 	
 }

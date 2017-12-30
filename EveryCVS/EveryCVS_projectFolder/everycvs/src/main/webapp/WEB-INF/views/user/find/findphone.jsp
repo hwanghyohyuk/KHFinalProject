@@ -246,6 +246,17 @@ function sendEmail(pValue){
 			});
 		}});
 }
+function init(){
+	$('#phone').on('keydown', function(e) {
+		var keyCode = e.which;
+		if (keyCode === 13) { // Enter Key
+			findPhone();
+		}
+	});
+}
+$(window).on("load", function() {
+	init();
+});
 </script>
 <c:import url="../../include/user/common/end.jsp"></c:import>
 <!-- === END === -->

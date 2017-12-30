@@ -81,16 +81,13 @@ public class PurchaseServiceImpl implements PurchaseService{
 		return purchaseDao.insertPurchaseList(map);
 	}
 
-	/*사이트관리자*/
-	/**월간 구매 이용 횟수**/
-	@Override
-	public int monthlyPurchaseCount() {
-		return purchaseDao.monthlyPurchaseCount();
-	}
-
 	@Override
 	public ArrayList<Purchase> top3List(int user_no) {
 		return (ArrayList<Purchase>) purchaseDao.top3List(user_no);
+		
+	}
+	public int purchaseCount() {
+		return purchaseDao.purchaseCount();
 	}
 
 

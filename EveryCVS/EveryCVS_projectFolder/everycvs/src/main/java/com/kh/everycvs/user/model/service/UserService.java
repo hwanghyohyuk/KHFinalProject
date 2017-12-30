@@ -87,9 +87,14 @@ public interface UserService {
 	int increMoney(Map<String, Object> map);
 	
 	/* 사이트 관리자 */
-
+	//회원 등록 수
+	int registUserCount();
 	/** 회원 목록 및 검색 **/
 	Map<String, Object> userList(String page, String keyword);
+
+	
+
+	
 
 	
 

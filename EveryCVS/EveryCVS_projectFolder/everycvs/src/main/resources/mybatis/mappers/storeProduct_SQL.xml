@@ -117,7 +117,7 @@
    
    <update id="updateSpmanager" parameterType="hashmap">
 		update tb_store_product 
-		set manufacture_date = #{manufacturedate}, quantity = #{quantity} where store_product_no = #{spnum}
+		set manufacture_date = #{mdate}, quantity = #{quantity} where store_product_no = #{spno}
    </update>
    
   
@@ -141,5 +141,22 @@
   		]]>
    </insert>
    <!-- /지점상품 등록관련 -->
+   
+   <!-- 지점관리자 메인 인기상품 top5 -->
+   <select id="spTop5" parameterType="string" resultType="list" resultMap="resultStoreProduct">
+		<![CDATA[
+			select * from (select rownum rnum, a.*
+			from (select * from store_popularity_product_view where store_no = #{store_no} order by purchase_count desc) a) 
+			where rnum >= 1 and rnum <= 5
+		]]>	
+	</select>
+	
+		<!-- 금일 등록된 상품수 -->
+	<select id="registProducts" parameterType="string" resultType="_int">
+	<![CDATA[
+		select count(*) from store_product_view where store_no = #{store_no} 
+		and manufacture_date >= to_date(to_char(sysdate,'yy/mm/dd'))
+		]]>
+	</select>
 
 </mapper>	

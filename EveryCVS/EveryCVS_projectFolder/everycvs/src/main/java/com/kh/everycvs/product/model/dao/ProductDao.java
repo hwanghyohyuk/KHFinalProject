@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.everycvs.common.model.vo.Product;
+import com.kh.everycvs.common.model.vo.ProductKind;
 import com.kh.everycvs.common.model.vo.StoreProduct;
 
 @Repository("ProductDao")
@@ -117,5 +118,24 @@ public class ProductDao {
 			return sqlSession.selectList("product.listApmanager", map);
 		}	
 	}
+
+	public List<ProductKind> productKindValue(String store_no, int dateNo) {
+		Map<String,Object>map = new HashMap<String,Object>();
+		map.put("store_no", store_no);
+		map.put("date_no", dateNo);		
+		return sqlSession.selectList("product.productKindValue",map);
+	}
+
+	public List<Product> pTop5(int brand_no) {
+		return sqlSession.selectList("product.pTop5", brand_no);
+	}
+
+	public List<ProductKind> productKindValue(int brand_no, int dateNo) {
+		Map<String,Object>map = new HashMap<String,Object>();
+		map.put("brand_no", brand_no);
+		map.put("date_no", dateNo);		
+		return sqlSession.selectList("product.cvsProductKindValue",map);
+	}
+
 	
 }

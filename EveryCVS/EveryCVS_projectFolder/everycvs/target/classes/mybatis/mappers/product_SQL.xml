@@ -18,28 +18,38 @@
 		<result property="del_check" column="del_check" />
 		<result property="purchase_count" column="purchase_count" />
 	</resultMap>
-	
+
+	<resultMap type="productkind" id="resultProductKind">
+		<result property="product_kind_no" column="PRODUCT_KIND_NO" />
+		<result property="product_kind_name" column="PRODUCT_KIND_NAME" />
+		<result property="brand_no" column="STORE_NO" />
+		<result property="store_no" column="STORE_NO" />
+		<result property="sale_quantity" column="SALE_QUANTITY" />
+	</resultMap>
+
 	<!-- 사용자 : 실시간 인기상품 top 3 -->
-	<select id="popularTop3" parameterType="hashmap" resultType="list" resultMap="resultProduct">
-		<![CDATA[select rownum, a.* from(select * from product_view]]> 
+	<select id="popularTop3" parameterType="hashmap" resultType="list"
+		resultMap="resultProduct">
+		<![CDATA[select rownum, a.* from(select * from product_view]]>
 		<choose>
-		    <when test="brand_no == 0">
+			<when test="brand_no == 0">
 			</when>
-		    <when test="brand_no == 1">
-				<![CDATA[where brand_no = #{brand_no}]]> 
+			<when test="brand_no == 1">
+				<![CDATA[where brand_no = #{brand_no}]]>
 			</when>
-		    <when test="brand_no == 2">
-				<![CDATA[where brand_no = #{brand_no}]]> 
+			<when test="brand_no == 2">
+				<![CDATA[where brand_no = #{brand_no}]]>
 			</when>
 			<when test="brand_no == 3">
-				<![CDATA[where brand_no = #{brand_no}]]> 
+				<![CDATA[where brand_no = #{brand_no}]]>
 			</when>
 		</choose>		
 		<![CDATA[order by purchase_count desc,price asc) a where rownum<=3]]>
 	</select>
-	
+
 	<!-- 금주의 인기 상품 top5 조회 -->
-	<select id="popularProductTop5" parameterType="_int" resultType="list" resultMap="resultProduct">
+	<select id="popularProductTop5" parameterType="_int" resultType="list"
+		resultMap="resultProduct">
 		<![CDATA[
 			SELECT A.PRODUCT_NO, A.PRODUCT_NAME, B.MANUFACTURER, B.PRICE, B.EXPIRATION_DATE, B.PRODUCT_KIND_NO,
 			B.PRODUCT_KIND_NAME, A.BRAND_NO, B.ORIGINAL_FILE_NAME, B.STORED_FILE_NAME, B.DEL_CHECK, A.SALE_QUANTITY purchase_count
@@ -49,9 +59,10 @@
 			ORDER BY SALE_QUANTITY DESC, PRODUCT_NO ASC
 		]]>
 	</select>
-	
+
 	<!-- 상품 조회 -->
-	<select id="selectProduct" parameterType="product" resultType="list" resultMap="resultProduct">
+	<select id="selectProduct" parameterType="product" resultType="list"
+		resultMap="resultProduct">
 		<![CDATA[
 			select * from product_view
 			where brand_no = #{brand_no}
@@ -59,9 +70,10 @@
 			and del_check = 'N'
 		]]>
 	</select>
-	
+
 	<!-- 상품 리스트 조회 -->
-	<select id="productList" parameterType="_int" resultType="list" resultMap="resultProduct">
+	<select id="productList" parameterType="_int" resultType="list"
+		resultMap="resultProduct">
 		<![CDATA[
 			select * from product_view
 			where brand_no = #{brand_no}
@@ -69,9 +81,10 @@
 			order by product_no asc
 		]]>
 	</select>
-		
+
 	<!-- 상품 검색 : 상품명 -->
-	<select id="productSearch1" parameterType="product" resultType="list" resultMap="resultProduct">
+	<select id="productSearch1" parameterType="product" resultType="list"
+		resultMap="resultProduct">
 		<![CDATA[
 			select * from product_view
 			where brand_no = #{brand_no}
@@ -80,9 +93,10 @@
 			order by product_no asc
 		]]>
 	</select>
-	
+
 	<!-- 상품 검색 : 제조사 -->
-	<select id="productSearch2" parameterType="product" resultType="list" resultMap="resultProduct">
+	<select id="productSearch2" parameterType="product" resultType="list"
+		resultMap="resultProduct">
 		<![CDATA[
 			select * from product_view
 			where brand_no = #{brand_no}
@@ -91,9 +105,10 @@
 			order by product_no asc
 		]]>
 	</select>
-	
+
 	<!-- 상품 검색 : 분류 -->
-	<select id="productSearch3" parameterType="product" resultType="list" resultMap="resultProduct">
+	<select id="productSearch3" parameterType="product" resultType="list"
+		resultMap="resultProduct">
 		<![CDATA[
 			select * from product_view
 			where brand_no = #{brand_no}
@@ -102,7 +117,7 @@
 			order by product_no asc
 		]]>
 	</select>
-	
+
 	<!-- 상품 등록 -->
 	<insert id="insertProduct" parameterType="product" flushCache="true">
 		<![CDATA[
@@ -112,7 +127,7 @@
 			#{stored_file_name, jdbcType=VARCHAR}, default)
 		]]>
 	</insert>
-	
+
 	<!-- 상품 수정 -->
 	<update id="updateProduct" parameterType="product" flushCache="true">
 		<![CDATA[
@@ -127,7 +142,7 @@
 			where product_no = #{product_no}
 		]]>
 	</update>
-	
+
 	<!-- 상품 삭제 -->
 	<update id="deleteProduct" parameterType="product" flushCache="true">
 		<![CDATA[
@@ -137,26 +152,30 @@
 		]]>
 	</update>
 
-   <!-- allProduct 개수 조회 -->
-   <select id="getListCount" parameterType="hashmap" resultType="int">
+	<!-- allProduct 개수 조회 -->
+	<select id="getListCount" parameterType="hashmap" resultType="int">
 		select count(*) from product_view where brand_no = #{brand_no}
-   </select>
-	
-   <!-- allProduct 검색 개수 조회 -->
-   <select id="getSearchListCount" parameterType="hashmap" resultType="int">
-		select count(*) from product_view where brand_no = #{brand_no} and product_name like #{keyword} 
-   </select>
-   
-   <select id="listApmanager" parameterType="hashmap" resultType="list" resultMap="resultProduct">
+	</select>
+
+	<!-- allProduct 검색 개수 조회 -->
+	<select id="getSearchListCount" parameterType="hashmap"
+		resultType="int">
+		select count(*) from product_view where brand_no =
+		#{brand_no} and product_name like #{keyword}
+	</select>
+
+	<select id="listApmanager" parameterType="hashmap" resultType="list"
+		resultMap="resultProduct">
 		   <![CDATA[
       		select * from (
             select rownum rnum, a.*
             from product_view a where brand_no = #{brand_no})
             where rnum >= #{startRow} and rnum <= #{endRow}
            ]]>
-   </select>
-   
-   <select id="searchApmanager" parameterType="hashmap" resultType="list" resultMap="resultProduct">
+	</select>
+
+	<select id="searchApmanager" parameterType="hashmap" resultType="list"
+		resultMap="resultProduct">
 		   <![CDATA[
 		    select * from (
 		    select rownum rnum, product_no, product_kind_name, product_name,
@@ -165,9 +184,58 @@
 		    where rnum >= #{startRow} and rnum <= #{endRow}
 		    and product_name like #{keyword}
            ]]>
-   </select>
-   
-   
-   
+	</select>
+
+	<!--지점 상품종류별 판매량 조회 -->
+	<select id="productKindValue" parameterType="string" resultType="list"
+		resultMap="resultProductKind">
+   <![CDATA[
+   		select product_kind_name, sum(sale_quantity) as sale_quantity from sale_product_kind_date_view where store_no=#{store_no}
+   ]]>
+		<choose>
+			<when test="date_no == 0"></when><!-- Alll -->
+			<when test="date_no == 1">
+   	<![CDATA[and to_char(sysdate,'yy-mm') = to_char(sale_date,'yy-mm')]]>
+			</when><!-- Month -->
+			<when test="date_no == 2">
+   	<![CDATA[and to_char(sysdate,'iw') = to_char(sale_date,'iw')]]>
+			</when><!-- Week -->
+			<when test="date_no == 3">
+   	<![CDATA[and to_char(sysdate,'yy-mm-dd') = to_char(sale_date,'yy-mm-dd')]]>
+			</when><!-- Day -->
+		</choose>
+    <![CDATA[group by product_kind_name]]>
+	</select>
+
+
+	 <select id="pTop5" parameterType="_int" resultType="list" resultMap="resultProduct">
+		<![CDATA[
+			select * from (select rownum rnum, a.*
+			from (select * from product_view where brand_no = #{brand_no} order by purchase_count desc) a) 
+			where rnum >= 1 and rnum <= 5
+		]]>	
+	</select>
+	
+	<!--편의점 상품종류별 판매량 조회 -->
+	<select id="cvsProductKindValue" parameterType="_int" resultType="list"
+		resultMap="resultProductKind">
+   <![CDATA[
+   		select product_kind_name, sum(sale_quantity) as sale_quantity from sale_product_kind_date_view where brand_no=#{brand_no}
+   ]]>
+		<choose>
+			<when test="date_no == 0"></when><!-- Alll -->
+			<when test="date_no == 1">
+   	<![CDATA[and to_char(sysdate,'yy-mm') = to_char(sale_date,'yy-mm')]]>
+			</when><!-- Month -->
+			<when test="date_no == 2">
+   	<![CDATA[and to_char(sysdate,'iw') = to_char(sale_date,'iw')]]>
+			</when><!-- Week -->
+			<when test="date_no == 3">
+   	<![CDATA[and to_char(sysdate,'yy-mm-dd') = to_char(sale_date,'yy-mm-dd')]]>
+			</when><!-- Day -->
+		</choose>
+    <![CDATA[group by product_kind_name]]>
+	</select>
+
 </mapper>
 

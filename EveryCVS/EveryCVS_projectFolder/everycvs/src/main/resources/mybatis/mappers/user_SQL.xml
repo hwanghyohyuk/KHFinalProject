@@ -181,5 +181,9 @@
 	update tb_user set user_state = 1 where user_no=#{user_no}
 	]]>
 	</update>
+	
+	<select id="registUserCount" resultType="_int">
+	<![CDATA[select count(*) from tb_user where to_char(sysdate,'yy-mm-dd')=to_char(enroll_date,'yy-mm-dd')]]>
+	</select>
 
 </mapper>
