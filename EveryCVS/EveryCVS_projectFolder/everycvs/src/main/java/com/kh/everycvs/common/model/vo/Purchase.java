@@ -26,6 +26,7 @@ public class Purchase implements Serializable {
 	private int using_point; // 사용포인트
 	private int accumulate_point; // 적립포인트
 	private Date purchase_date; // 구매날짜
+	private String stored_file_name; //상품이미지
 	
 	/* Constructer */
 	
@@ -47,7 +48,7 @@ public class Purchase implements Serializable {
 
 	public Purchase(int purchase_no, int user_no, int store_product_no, String store_no, String store_name,
 			int product_no, String product_name, int purchase_quantity, int calculated_price, int using_point,
-			int accumulate_point, Date purchase_date) {
+			int accumulate_point, Date purchase_date, String stored_file_name) {
 		super();
 		this.purchase_no = purchase_no;
 		this.user_no = user_no;
@@ -61,6 +62,7 @@ public class Purchase implements Serializable {
 		this.using_point = using_point;
 		this.accumulate_point = accumulate_point;
 		this.purchase_date = purchase_date;
+		this.stored_file_name = stored_file_name;
 	}	
 	
 	/* Getter & Setter */
@@ -161,19 +163,27 @@ public class Purchase implements Serializable {
 		this.purchase_date = purchase_date;
 	}
 
+	public String getStored_file_name() {
+		return stored_file_name;
+	}
+
+	public void setStored_file_name(String stored_file_name) {
+		this.stored_file_name = stored_file_name;
+	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}	
 	
 	/* ToString */
-
 	@Override
 	public String toString() {
 		return "Purchase [purchase_no=" + purchase_no + ", user_no=" + user_no + ", store_product_no="
 				+ store_product_no + ", store_no=" + store_no + ", store_name=" + store_name + ", product_no="
 				+ product_no + ", product_name=" + product_name + ", purchase_quantity=" + purchase_quantity
 				+ ", calculated_price=" + calculated_price + ", using_point=" + using_point + ", accumulate_point="
-				+ accumulate_point + ", purchase_date=" + purchase_date + "]";
+				+ accumulate_point + ", purchase_date=" + purchase_date 
+				+ "stored_file_name=" + stored_file_name + "]";
 	}
 
 

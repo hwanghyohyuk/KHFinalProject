@@ -50,7 +50,7 @@
 
 							<div class="panel-body" align="right" id="result">
 								
-								<b style="font-size: 20pt;">
+								<b style="font-size: 20pt; color:red;">
 								 <fmt:formatNumber value="${user.cash }" pattern="#,###"/>원	
 								</b>
 
@@ -221,11 +221,13 @@
 									<h3 class="panel-title">자주 구매한 목록</h3>
 								</div>
 								<div id="oftenPurchase" class="panel-body" align="left" style="font-size: 15pt;">
-									<c:forEach items="${top3List }" var="top3">		
-									${top3.store_name }
-									${top3.product_name }
-									<br>
+									<c:forEach items="${top3List }" var="top3" begin="0" end="2" step="1">	
+									<img src="/everycvs/resources/upload/${top3.stored_file_name}" 
+                                     style="height:100px; width:100px;">
+                                     <a href="/everycvs/page/splist.do" style="font-size: 11pt; margin-left: 10px;">${top3.product_name }</a>
+									 <b style="font-size: 10pt; margin-right: 10px;">${top3.store_name }</b><br>
 									</c:forEach>
+									
 								</div>
 							</div>
 						</div>
@@ -248,7 +250,6 @@
 											<td>${flist.store_name }</td>
 											<td>${flist.product_name }</td>
 											<td>${flist.stored_file_name }</td>
-										
 									</c:forEach>
 									
 								</div>
