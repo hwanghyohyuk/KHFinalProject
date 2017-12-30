@@ -25,16 +25,19 @@ public class FavoriteController {
 	public ModelAndView favoriteList(ModelAndView mv,HttpSession session,
 			@RequestParam(value="category",required=false,defaultValue="0")int category,
 			@RequestParam(value="keyword",required=false,defaultValue="")String keyword) {
+		
 		int user_no = ((User) session.getAttribute("user")).getUser_no();
-		List<Favorite> flist = favoriteService.favoriteList(user_no,category,keyword);
-		mv.addObject("flist", flist);
-		mv.setViewName("user/mypage/favoritePage");
+		setMV(mv, user_no, category, keyword);
+		
 		return mv;
 	}
 
 	// 관심상품 등록 : 해당상품을 클릭하면 관심상품등록이 실행
 	@RequestMapping("favoriteInsert.do")
-	public ModelAndView favoriteInsert(HttpSession session, HttpServletRequest request, ModelAndView mv) {
+	public ModelAndView favoriteInsert(
+			HttpSession session, HttpServletRequest request, ModelAndView mv,
+			@RequestParam(value="category",required=false,defaultValue="0")int category,
+			@RequestParam(value="keyword",required=false,defaultValue="")String keyword) {
 		int user_no = ((User) session.getAttribute("user")).getUser_no();
 		int product_no = Integer.parseInt(request.getParameter("product_no"));
 		String store_no = request.getParameter("store_no");
@@ -48,12 +51,17 @@ public class FavoriteController {
 		} else {
 			favoriteService.favoriteInsert(favorite);
 		}
+		
+		setMV(mv, user_no, category, keyword);
 		return mv;
 	}
 
 	// 관심상품 삭제 : 등록되어있는 관심상품을 해제하면 목록에서 삭제
 	@RequestMapping("favoriteDelete.do")
-	public ModelAndView favoriteDelete(HttpSession session, HttpServletRequest request, ModelAndView mv) {
+	public ModelAndView favoriteDelete(
+			HttpSession session, HttpServletRequest request, ModelAndView mv,
+			@RequestParam(value="category",required=false,defaultValue="0")int category,
+			@RequestParam(value="keyword",required=false,defaultValue="")String keyword) {
 		int user_no = ((User) session.getAttribute("user")).getUser_no();
 		int product_no = Integer.parseInt(request.getParameter("product_no"));
 		String store_no = request.getParameter("store_no");
@@ -65,7 +73,17 @@ public class FavoriteController {
 
 		favoriteService.favoriteDelete(favorite);
 
+		setMV(mv, user_no, category, keyword);
 		return mv;
 	}
 
+	// ModelAndView에 리스트, 뷰 네임 SET 해주는 메소드
+	private ModelAndView setMV(ModelAndView mv, int user_no, int category, String keyword) {
+		
+		List<Favorite> flist = favoriteService.favoriteList(user_no,category,keyword);
+		mv.addObject("flist", flist);
+		mv.setViewName("user/mypage/favoritePage");
+		
+		return mv;
+	}
 }
