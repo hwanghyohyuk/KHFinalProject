@@ -4,12 +4,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- === BEGIN HEAD ===  -->
 <c:import url="../../include/user/common/head.jsp"></c:import>
+<link rel="stylesheet" href="/everycvs/resources/user/css/userinfo.css" type="text/css">
 <c:import url="../../include/user/common/headend.jsp"></c:import>
 <!-- === END HEAD ===  -->
 <!-- === BEGIN HEADER ===  -->
 <c:import url="../../include/user/common/header.jsp"></c:import>
 <!-- === END HEADER === -->
 <!-- === BEGIN CONTENT === -->
+<c:set var="user" value="${sessionScope.user }"></c:set>
 <div id="content">
 	<div class="container background-white">
 		<div class="row margin-vert-60 padding-vert-60 ">
@@ -18,15 +20,23 @@
 				<h3><b>사용자 정보 확인</b></h3>
 				<br>
 				<br>
+				<div class="row">
+				<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+					<div class="thumbnail-wrapper"> 
+						<div class="thumbnail"> 
+							<div class="centered"> 
+							<c:if test="${user.stored_file_name eq null || user.stored_file_name eq ''}">
+							<img id="userimg" src="/everycvs/resources/user/img/user.png">
+							</c:if>
+							<c:if test="${user.stored_file_name ne null && user.stored_file_name ne ''}">
+							<img id="userimg" src="/everycvs/resources/upload/${user.stored_file_name }">
+							</c:if>
+							</div>
+						</div>
+					</div>
+				</div>	
+				</div>			
 				<div class="row center-block">
-					<p class="text-center">
-					<c:if test="${sessionScope.user.stored_file_name eq '' }">
-					<img src="/everycvs/resources/user/img/user.png"  style="background-color: white; width:120px;height:120px;" class="img-circle">
-					</c:if>
-					<c:if test="${sessionScope.user.stored_file_name ne '' }">
-					<img src="/everycvs/resources/user/img/user.png"  style="background-color: white; width:120px;height:120px;" class="img-circle">
-					</c:if>
-					</p>
 					<p class="text-center lead"><b>
 					${sessionScope.user.user_name}
 					</b></p>	
@@ -131,6 +141,19 @@ function submit(){
 		});
 	}	
 }
+
+function init(){
+	$('#pwd').on('keydown', function(e) {
+		var keyCode = e.which;
+		if (keyCode === 13) { // Enter Key
+			submit();
+		}
+	});
+}
+
+$(window).on("load", function() {
+	init();
+});
 </script>
 <c:import url="../../include/user/common/end.jsp"></c:import>
 <!-- === END === -->

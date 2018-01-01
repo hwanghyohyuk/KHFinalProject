@@ -98,7 +98,6 @@
 		where user_no = #{user_no}
 		group by product_name, store_name, purchase_quantity, stored_file_name
 		order by sum(purchase_quantity) desc
-			
 		]]>	
 		<!-- select * from (select rownum rnum, a.*
 			from (select * from purchase_view where user_no = #{user_no} order by product_name desc) a) 

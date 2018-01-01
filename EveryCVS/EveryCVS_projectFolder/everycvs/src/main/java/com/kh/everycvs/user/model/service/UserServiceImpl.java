@@ -158,7 +158,6 @@ public class UserServiceImpl implements UserService {
 		try {
 			server = InetAddress.getLocalHost();
 		} catch (UnknownHostException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		String ip = server.getHostAddress();
@@ -207,6 +206,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public int updateUserImg(User user) {
+		return userDao.updateUserImg(user);
+	}
+	
+	@Override
 	public int encCheckUser(User user) {
 		return userDao.checkUser(user);
 	}
@@ -217,8 +221,12 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public int encModifyUser(User user) {
+	public int ModifyUser(User user) {
 		return userDao.modifyUser(user);
+	}
+	@Override
+	public int encModifyUserpwd(User user) {
+		return userDao.modifyUserpwd(user);
 	}
 
 	@Override
@@ -235,6 +243,5 @@ public class UserServiceImpl implements UserService {
 	public int registUserCount() {
 		return userDao.registUserCount();
 	}
-
 
 }

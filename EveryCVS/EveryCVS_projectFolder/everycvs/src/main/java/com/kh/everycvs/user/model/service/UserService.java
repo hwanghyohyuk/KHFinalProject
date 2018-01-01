@@ -53,8 +53,10 @@ public interface UserService {
 	int deleteUser(int user_no);
 
 	/** 정보수정 **/
+	int updateUserImg(User user);
 	int encCheckUser(User user);
-	int encModifyUser(User user);
+	int ModifyUser(User user);
+	int encModifyUserpwd(User user);
 
 	/** 이름 확인 **/
 	int checkName(String email, String name);
@@ -91,6 +93,10 @@ public interface UserService {
 	int registUserCount();
 	/** 회원 목록 및 검색 **/
 	Map<String, Object> userList(String page, String keyword);
+
+	
+
+	
 
 	
 

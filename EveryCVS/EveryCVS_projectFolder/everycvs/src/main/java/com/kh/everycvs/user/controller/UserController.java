@@ -1,9 +1,11 @@
 package com.kh.everycvs.user.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
@@ -27,8 +31,10 @@ import com.kh.everycvs.common.model.vo.PassLink;
 import com.kh.everycvs.common.model.vo.Purchase;
 import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.User;
+import com.kh.everycvs.common.util.FileUtils;
 import com.kh.everycvs.favorite.model.service.FavoriteService;
 import com.kh.everycvs.purchase.model.service.PurchaseService;
+import com.kh.everycvs.store.model.service.StoreService;
 import com.kh.everycvs.user.model.service.UserService;
 
 @Controller
@@ -40,6 +46,8 @@ public class UserController {
 	private PurchaseService purchaseService;
 	@Autowired
 	private FavoriteService favoriteService;
+	@Autowired
+	private StoreService storeService;
 	
 	/* 로그인 페이지 이동 */
 	@RequestMapping(value = "/sign/signin.do", method = RequestMethod.GET)
@@ -397,7 +405,7 @@ public class UserController {
 	
 	@RequestMapping("/user/infoin.do")
 	@ResponseBody
-	public int infoIn(ModelAndView mv,HttpSession session,@RequestParam("pwd")String pwd) {
+	public int infoIn(HttpSession session,@RequestParam("pwd")String pwd) {
 		User user = (User)session.getAttribute("user");
 		user.setUser_pwd(pwd);
 		int checkUser = userService.encCheckUser(user);
@@ -417,11 +425,53 @@ public class UserController {
 		mv.setViewName("user/mypage/userinfo");
 		return mv;
 	}
+	
+	@RequestMapping("/ajax/storeinfo.do")
+	@ResponseBody
+	public Store infoIn(HttpSession session) {
+		User user = (User)session.getAttribute("user");
+		if(user.getJob().equals("storemanager")){
+			return storeService.storeInfo(user.getStore_no());
+		}
+		return null;
+	}
+	
+	@RequestMapping("/ajax/userimgupload.do")
+	@ResponseBody
+	public int userImgUpload(HttpSession session, HttpServletRequest request) throws Exception{
+		User user = (User)session.getAttribute("user");
+		// 파일을 저장하고, "원래 파일명 | 변환된 파일명" 리턴
+		String fileName = new FileUtils().InsertFile(session, request);
+		String[] fName = fileName.split("/");
+		user.setOriginal_file_name(fName[0]);
+		user.setStored_file_name(fName[1]);
+		
+		int result = userService.updateUserImg(user);
+
+		return result;
+	}
+	
+	@RequestMapping("/ajax/initimg.do")
+	@ResponseBody
+	public int initImg(HttpSession session, HttpServletRequest request) throws Exception{
+		User user = (User)session.getAttribute("user");
+		user.setOriginal_file_name("");
+		user.setStored_file_name("");
+		
+		int result = userService.updateUserImg(user);
+
+		return result;
+	}
 
 	/** 사용자 정보 수정 제출 **/
 	@RequestMapping(value="/user/modifypost.do",method=RequestMethod.POST)
 	public String modifyPost(User user){
-		int result = userService.encModifyUser(user);
+		int result = 0;
+		if(user.getUser_pwd().equals("")){
+			result = userService.ModifyUser(user);
+		}else{
+			result = userService.encModifyUserpwd(user);
+		}
 		if(result>0){
 			return "redirect:/user/signout.do";
 		}

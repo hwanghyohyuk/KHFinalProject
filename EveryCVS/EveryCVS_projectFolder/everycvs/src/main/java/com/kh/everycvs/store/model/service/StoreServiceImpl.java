@@ -96,5 +96,10 @@ public class StoreServiceImpl implements StoreService {
 	public List<HashMap<String, Object>> visitcvsChart() {
 		return storeDao.visitcvsChart();
 	}
+	
+	@Override
+	public Store storeInfo(String store_no) {
+		return storeDao.storeInfo(store_no);
+	}
 
 }

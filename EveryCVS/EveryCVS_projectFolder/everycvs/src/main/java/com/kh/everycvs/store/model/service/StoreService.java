@@ -70,4 +70,6 @@ public interface StoreService {
 	int joinCustomers();
 
 	List<HashMap<String, Object>> visitcvsChart();
+
+	Store storeInfo(String store_no);
 }

@@ -14,7 +14,7 @@
 		<result property="price" column="PRICE" />
 		<result property="manufacture_date" column="MANUFACTURE_DATE" />
 		<result property="expiration_date" column="EXPIRATION_DATE" />
-		<result property="expiration_hour" column="EXPIRATION_HOUR" />
+		<result property="expiration_minute" column="EXPIRATION_MINUTE" />
 		<result property="quantity" column="QUANTITY" />
 		<result property="product_kind_no" column="PRODUCT_KIND_NO" />
 		<result property="product_kind_name" column="PRODUCT_KIND_NAME" />
@@ -85,7 +85,7 @@
    
    <select id="expSproduct" parameterType="string" resultType="list" resultMap="resultStoreProduct">
 		   <![CDATA[
-      		select * from store_popularity_product_view where store_no = #{store_no} and expiration_hour <= 72 and expiration_hour > 0
+      		select * from store_popularity_product_view where store_no = #{store_no} and expiration_minute <= 72*60 and expiration_minute > 0
            ]]>
    </select>
 	

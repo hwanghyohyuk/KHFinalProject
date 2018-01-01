@@ -118,6 +118,10 @@ public class StoreDao {
 		return result;
 	}
 
+	public Store storeInfo(String store_no) {
+		return sqlSession.selectOne("store.storeInfo",store_no);
+	}
+
 	
 
 

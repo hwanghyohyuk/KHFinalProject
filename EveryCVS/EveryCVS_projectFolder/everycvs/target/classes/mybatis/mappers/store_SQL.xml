@@ -208,4 +208,11 @@
    from store_view group by brand_name
    ]]>
    </select>	
+   
+   <select id="storeInfo" parameterType="string" resultType='store'>
+   <![CDATA[
+   select brand_name,store_name,road_address from store_view where store_no = #{store_no}
+   ]]>
+   </select>	
+   
 </mapper>
