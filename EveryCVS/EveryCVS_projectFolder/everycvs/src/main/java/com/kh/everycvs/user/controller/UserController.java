@@ -27,8 +27,10 @@ import com.kh.everycvs.common.model.vo.PassLink;
 import com.kh.everycvs.common.model.vo.Purchase;
 import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.User;
+import com.kh.everycvs.common.util.FileUtils;
 import com.kh.everycvs.favorite.model.service.FavoriteService;
 import com.kh.everycvs.purchase.model.service.PurchaseService;
+import com.kh.everycvs.store.model.service.StoreService;
 import com.kh.everycvs.user.model.service.UserService;
 
 @Controller
@@ -39,29 +41,31 @@ public class UserController {
 	@Autowired
 	private PurchaseService purchaseService;
 	@Autowired
-	private FavoriteService favoriteService;
-	
+	private StoreService storeService;
+
 	/* 로그인 페이지 이동 */
 	@RequestMapping(value = "/sign/signin.do", method = RequestMethod.GET)
-	public ModelAndView intercepterSignin(ModelAndView mv,@RequestParam(value = "sign", required=false, defaultValue="true") boolean sign,
-			@RequestParam(value = "signup", required=false, defaultValue="false") boolean signup,HttpSession session) {
-		Object object = session.getAttribute("email");//email찾기시 저장해둔 세션
-		if(object!=null){
+	public ModelAndView intercepterSignin(ModelAndView mv,
+			@RequestParam(value = "sign", required = false, defaultValue = "true") boolean sign,
+			@RequestParam(value = "signup", required = false, defaultValue = "false") boolean signup,
+			HttpSession session) {
+		Object object = session.getAttribute("email");// email찾기시 저장해둔 세션
+		if (object != null) {
 			session.removeAttribute("email");
 		}
-		object = session.getAttribute("name");//이름 찾기시 저장해둔 세션
-		if(object!=null){
+		object = session.getAttribute("name");// 이름 찾기시 저장해둔 세션
+		if (object != null) {
 			session.removeAttribute("name");
 		}
-		
+
 		mv.setViewName("user/sign/signin");
-		if(!sign){
+		if (!sign) {
 			mv.addObject("sign", sign);
 		}
-		if(signup){
+		if (signup) {
 			mv.addObject("signup", signup);
 		}
-		
+
 		return mv;
 	}
 
@@ -72,7 +76,7 @@ public class UserController {
 			@RequestParam(value = "usecookie", defaultValue = "false", required = false) boolean useCookie,
 			HttpSession session, HttpServletResponse response) {
 		int result = 0;
-		
+
 		if (session.getAttribute("user") != null) {
 			// 기존에 user이란 세션 값이 존재한다면
 			session.removeAttribute("user"); // 기존값을 제거해 준다.
@@ -84,8 +88,8 @@ public class UserController {
 
 		if (user != null) { // 로그인 성공
 			session.setAttribute("user", user); // 세션에 user란 이름으로 User 객체를 저장한다.
-				
-			switch(user.getJob()){
+
+			switch (user.getJob()) {
 			case "customer":
 				result = 1;
 				break;
@@ -98,7 +102,7 @@ public class UserController {
 			case "sitemanager":
 				result = 4;
 				break;
-			}			
+			}
 			/*
 			 * [ 세션 추가되는 부분 ]
 			 */
@@ -130,74 +134,69 @@ public class UserController {
 			}
 
 		} else { // 로그인에 실패한 경우
-			result=0;
-		}	
-		return result; 
+			result = 0;
+		}
+		return result;
 	}
 
 	/** 마이 페이지 **/
-	@RequestMapping(value="/page/mypage.do")
+	@RequestMapping(value = "/page/mypage.do")
 	public ModelAndView myPage(HttpSession session, ModelAndView mv) {
-		String month="0";
+		String month = "0";
 		User user = (User) session.getAttribute("user");
-		
-		ArrayList<Purchase> list = purchaseService.purchaseList(user.getUser_no(),month);
+
+		ArrayList<Purchase> list = purchaseService.purchaseList(user.getUser_no(), month);
 		ArrayList<Purchase> top3List = purchaseService.top3List(user.getUser_no());
-		
-		mv.addObject("list", list);		
+
+		mv.addObject("list", list);
 		mv.addObject("top3List", top3List);
 		System.out.println(list);
 		System.out.println("top3List : " + top3List);
 		mv.setViewName("user/mypage/main");
 		return mv;
 	}
-	
-	/** 잔고 충전  **/
-	@RequestMapping(value="/page/increMoney.do", method=RequestMethod.POST)
+
+	/** 잔고 충전 **/
+	@RequestMapping(value = "/page/increMoney.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView userIncreMoney(
-			@RequestParam (value="increMoney", required=false) String increMoney,
-			@RequestParam(value="user_no", required=false) String user_no, 
-			@RequestParam(value="cash", required=false) String cash,
-			HttpSession session,
-			HttpServletRequest request, 
-			ModelAndView mv,
-		    Map<String, Object> map) throws IOException {
-				
-		//파라미터 값 넘어왔는지 확인
+	public ModelAndView userIncreMoney(@RequestParam(value = "increMoney", required = false) String increMoney,
+			@RequestParam(value = "user_no", required = false) String user_no,
+			@RequestParam(value = "cash", required = false) String cash, HttpSession session,
+			HttpServletRequest request, ModelAndView mv, Map<String, Object> map) throws IOException {
+
+		// 파라미터 값 넘어왔는지 확인
 		System.out.println("parameter값 controller로 넘어왔는지 확인 : " + increMoney + ", " + user_no + ", " + cash);
-		
-		//form input태그 값 int형으로 parsing 처리
+
+		// form input태그 값 int형으로 parsing 처리
 		int incre = Integer.parseInt(increMoney);
 		int uno = Integer.parseInt(user_no);
 		int c = Integer.parseInt(cash);
-		
-		//parsing후 넘어왔는지 확인
+
+		// parsing후 넘어왔는지 확인
 		System.out.println("parameter값 parse후 넘어왔는지 확인 : " + increMoney + ", " + user_no + ", " + cash);
 
-	    map.put("increMoney", incre);
-	    map.put("user_no", uno);
-	    map.put("cash", c);
-	    
-	    int result = userService.increMoney(map);
-	    
-	    User user = (User) session.getAttribute("user");
-	    user.setCash(c + incre);
-	    
-	    session.setAttribute("user", user);
-	    
-	    mv.setViewName("jsonView");
-	    mv.addObject("result", result);
-	    mv.addObject("increMoney", incre);
-	    
-	    System.out.println("결과 : " + user.getCash());
+		map.put("increMoney", incre);
+		map.put("user_no", uno);
+		map.put("cash", c);
 
-	    return mv;
+		int result = userService.increMoney(map);
+
+		User user = (User) session.getAttribute("user");
+		user.setCash(c + incre);
+
+		session.setAttribute("user", user);
+
+		mv.setViewName("jsonView");
+		mv.addObject("result", result);
+		mv.addObject("increMoney", incre);
+
+		System.out.println("결과 : " + user.getCash());
+
+		return mv;
 	}
 
-
 	/** 로그아웃 **/
-	@RequestMapping(value = "/user/signout.do", method=RequestMethod.POST)
+	@RequestMapping(value = "/user/signout.do", method = RequestMethod.POST)
 	@ResponseBody
 	public int signOut(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		Object obj = session.getAttribute("user");
@@ -228,8 +227,8 @@ public class UserController {
 		}
 		return 1;
 	}
-	
-	@RequestMapping(value = "/user/signout.do", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/user/signout.do", method = RequestMethod.GET)
 	public String signOutGET(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		Object obj = session.getAttribute("user");
 		if (obj != null) {
@@ -259,7 +258,7 @@ public class UserController {
 		}
 		return "redirect:/main/main.do";
 	}
-	
+
 	/* 회원가입 페이지 이동 */
 	@RequestMapping("/sign/signupintro.do")
 	public String moveToSignupIntro() {
@@ -271,7 +270,7 @@ public class UserController {
 	public String moveToSignup() {
 		return "user/signup/signup";
 	}
-	
+
 	/* 지점 관리자 회원가입 페이지 이동 */
 	@RequestMapping("/sign/signupadmin.do")
 	public String moveToSignupAdmin() {
@@ -280,14 +279,14 @@ public class UserController {
 
 	/** 회원가입 **/
 	@RequestMapping("/sign/signuppost.do")
-	public void signUp(User user,HttpServletResponse response) {
+	public void signUp(User user, HttpServletResponse response) {
 		int insertUser = userService.encInsertUser(user);
-		boolean result=false;
+		boolean result = false;
 		try {
-			if(insertUser>0){
-				result=true;
-				response.sendRedirect("/everycvs/sign/signin.do?signup="+result);
-			}else{
+			if (insertUser > 0) {
+				result = true;
+				response.sendRedirect("/everycvs/sign/signin.do?signup=" + result);
+			} else {
 				response.sendRedirect("/everycvs/error500.do");
 			}
 		} catch (IOException e) {
@@ -295,77 +294,79 @@ public class UserController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@RequestMapping("/sign/signupadminpost.do")
-	public void signUpAdmin(User user,HttpServletResponse response) {
-		int insertAdmin = userService.encInsertAdmin(user);		
-		boolean result=false;
+	public void signUpAdmin(User user, HttpServletResponse response) {
+		int insertAdmin = userService.encInsertAdmin(user);
+		boolean result = false;
 		try {
-			if(insertAdmin>0){
-				result=true;
-				response.sendRedirect("/everycvs/sign/signin.do?signup="+result);				
-			}else{
+			if (insertAdmin > 0) {
+				result = true;
+				response.sendRedirect("/everycvs/sign/signin.do?signup=" + result);
+			} else {
 				response.sendRedirect("/everycvs/error500.do");
-			}			
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	/*지점 관리자 회원가입 시 가입번호 체크*/
+
+	/* 지점 관리자 회원가입 시 가입번호 체크 */
 	@RequestMapping("/sign/enrollcompare.do")
 	@ResponseBody
 	public Store enrollCompare(@RequestParam("enrollNo") String enrollNo) {
 		Store store = userService.enrollCompare(enrollNo);
 		return store;
 	}
-	
-	/*인증기록 확인*/
+
+	/* 인증기록 확인 */
 	@RequestMapping("/sign/checkcertify.do")
 	@ResponseBody
 	public int checkCertify(@RequestParam("email") String email) {
-		//사용자의 중복요청을 처리하기 위한 메소드
+		// 사용자의 중복요청을 처리하기 위한 메소드
 		int checkCertify = userService.checkCertify(email);
 		System.out.println("checkCertify : " + checkCertify);
-		if(checkCertify>0){
-			return 1;//이미 인증번호 요청이 있었음
-		}else{		
-			return 0;//최초 인증번호 요청
+		if (checkCertify > 0) {
+			return 1;// 이미 인증번호 요청이 있었음
+		} else {
+			return 0;// 최초 인증번호 요청
 		}
 	}
-	
+
 	/** 이메일 중복 검사 **/
 	@RequestMapping("/sign/checkemail.do")
 	@ResponseBody
-	public int checkEmail(@RequestParam("email") String email,HttpSession session,@RequestParam("cValue")int checkCertify) {
-		//이메일 중복체크 - 같은 이메일의 수 반환
+	public int checkEmail(@RequestParam("email") String email, HttpSession session,
+			@RequestParam("cValue") int checkCertify) {
+		// 이메일 중복체크 - 같은 이메일의 수 반환
 		int result = userService.checkEmail(email);
-		if(result>0){
-			//이메일 중복O
-			return result; //결과 : 중복
-		}else{
-			//이메일 중복X	
+		if (result > 0) {
+			// 이메일 중복O
+			return result; // 결과 : 중복
+		} else {
+			// 이메일 중복X
 			String certifyNo = userService.createCertifyNo();
 			EmailCertification ec = new EmailCertification(email, session.getId(), certifyNo);
-			if(certifyNo!=null){
-				int insertCertify=0;
-				if(checkCertify>0){
+			if (certifyNo != null) {
+				int insertCertify = 0;
+				if (checkCertify > 0) {
 					insertCertify = userService.updateCertify(ec);
-				}else{
+				} else {
 					insertCertify = userService.insertCertify(ec);
-				}	
-				if(insertCertify>0){
-					boolean sendMail = userService.sendCertifyMail(email,certifyNo);
-					if(sendMail){//결과 : 오류없음,0
+				}
+				if (insertCertify > 0) {
+					boolean sendMail = userService.sendCertifyMail(email, certifyNo);
+					if (sendMail) {// 결과 : 오류없음,0
 						return result;
-					}else{//이메일 전송 오류
+					} else {// 이메일 전송 오류
 						userService.deleteCertify(email);
 						return -3;
 					}
-				}else{//DB insert 오류
+				} else {// DB insert 오류
 					return -2;
 				}
-			}else{//인증번호 생성 오류
+			} else {// 인증번호 생성 오류
 				return -1;
 			}
 		}
@@ -374,60 +375,106 @@ public class UserController {
 	/** 인증번호 확인 **/
 	@RequestMapping("/sign/checkcertification.do")
 	@ResponseBody
-	public int checkCertification(@RequestParam("email") String email,@RequestParam("certifyno") String certifyNo,HttpSession session) {
-		int result=userService.certificationCheck(new EmailCertification(email, session.getId(), certifyNo));
-		if(result>0){
+	public int checkCertification(@RequestParam("email") String email, @RequestParam("certifyno") String certifyNo,
+			HttpSession session) {
+		int result = userService.certificationCheck(new EmailCertification(email, session.getId(), certifyNo));
+		if (result > 0) {
 			userService.deleteCertify(email);
-		}		
+		}
 		return result;
 	}
 
 	/** 회원탈퇴 **/
-	public String deleteUser(HttpSession session) {
-
-		return null;
-	}
-
-	/** 정보수정페이지 이동**/
+	@RequestMapping("/user/deleteuser.do")
+	@ResponseBody
+	public int deleteUser(HttpSession session) {
+		return 0;
+  	}
+	
+	/** 정보수정페이지 이동 **/
 	@RequestMapping("/user/infointro.do")
-	public ModelAndView infoIntro(ModelAndView mv,HttpSession session) {
+	public ModelAndView infoIntro(ModelAndView mv, HttpSession session) {
 		mv.setViewName("user/mypage/infointro");
 		return mv;
 	}
-	
+
 	@RequestMapping("/user/infoin.do")
 	@ResponseBody
-	public int infoIn(ModelAndView mv,HttpSession session,@RequestParam("pwd")String pwd) {
-		User user = (User)session.getAttribute("user");
+	public int infoIn(HttpSession session, @RequestParam("pwd") String pwd) {
+		User user = (User) session.getAttribute("user");
 		user.setUser_pwd(pwd);
 		int checkUser = userService.encCheckUser(user);
 		return checkUser;
 	}
-		
-	/* 사용자 정보수정 get방식으로 접근하면 돌려보냄*/
-	@RequestMapping(value="/user/userinfo.do",method=RequestMethod.GET)
-	public ModelAndView infoReturn(ModelAndView mv,HttpSession session) {
+
+	/* 사용자 정보수정 get방식으로 접근하면 돌려보냄 */
+	@RequestMapping(value = "/user/userinfo.do", method = RequestMethod.GET)
+	public ModelAndView infoReturn(ModelAndView mv, HttpSession session) {
 		mv.setViewName("user/mypage/infointro");
-		mv.addObject("data", 0);//뷰단에서 올바르지 못한 접근이라는것을 알려주기 위한 반환값
+		mv.addObject("data", 0);// 뷰단에서 올바르지 못한 접근이라는것을 알려주기 위한 반환값
 		return mv;
 	}
-	/* 사용자 정보수정 post방식으로 접근하면 승인*/
-	@RequestMapping(value="/user/userinfo.do",method=RequestMethod.POST)
-	public ModelAndView userInfo(ModelAndView mv,HttpSession session) {
+
+	/* 사용자 정보수정 post방식으로 접근하면 승인 */
+	@RequestMapping(value = "/user/userinfo.do", method = RequestMethod.POST)
+	public ModelAndView userInfo(ModelAndView mv, HttpSession session) {
 		mv.setViewName("user/mypage/userinfo");
 		return mv;
 	}
 
+	@RequestMapping("/ajax/storeinfo.do")
+	@ResponseBody
+	public Store infoIn(HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		if (user.getJob().equals("storemanager")) {
+			return storeService.storeInfo(user.getStore_no());
+		}
+		return null;
+	}
+
+	@RequestMapping("/ajax/userimgupload.do")
+	@ResponseBody
+	public int userImgUpload(HttpSession session, HttpServletRequest request) throws Exception {
+		User user = (User) session.getAttribute("user");
+		// 파일을 저장하고, "원래 파일명 | 변환된 파일명" 리턴
+		String fileName = new FileUtils().InsertFile(session, request);
+		String[] fName = fileName.split("/");
+		user.setOriginal_file_name(fName[0]);
+		user.setStored_file_name(fName[1]);
+
+		int result = userService.updateUserImg(user);
+
+		return result;
+	}
+
+	@RequestMapping("/ajax/initimg.do")
+	@ResponseBody
+	public int initImg(HttpSession session, HttpServletRequest request) throws Exception {
+		User user = (User) session.getAttribute("user");
+		user.setOriginal_file_name("");
+		user.setStored_file_name("");
+
+		int result = userService.updateUserImg(user);
+
+		return result;
+	}
+
 	/** 사용자 정보 수정 제출 **/
-	@RequestMapping(value="/user/modifypost.do",method=RequestMethod.POST)
-	public String modifyPost(User user){
-		int result = userService.encModifyUser(user);
-		if(result>0){
+	@RequestMapping(value = "/user/modifypost.do", method = RequestMethod.POST)
+	public String modifyPost(User user) {
+		int result = 0;
+		if (user.getUser_pwd().equals("")) {
+			result = userService.ModifyUser(user);
+		} else {
+			result = userService.encModifyUserpwd(user);
+		}
+
+		if (result > 0) {
 			return "redirect:/user/signout.do";
 		}
-		return "redirect:/error500.do";	
+		return "redirect:/error500.do";
 	}
-	
+
 	/* 이메일 찾기 페이지 이동 */
 	@RequestMapping("/user/findemail.do")
 	public String moveToFindEmail() {
@@ -437,36 +484,36 @@ public class UserController {
 	/** 이메일찾기 **/
 	@RequestMapping("/user/findemailpost.do")
 	@ResponseBody
-	public int findEmail(@RequestParam("email") String email,HttpSession session) {
+	public int findEmail(@RequestParam("email") String email, HttpSession session) {
 		int result = userService.checkEmail(email);
-		if(result>0){
+		if (result > 0) {
 			Object object = session.getAttribute("email");
-			if(object!=null){
+			if (object != null) {
 				session.removeAttribute("email");
 			}
-			session.setAttribute("email", email);			
+			session.setAttribute("email", email);
 		}
 		return result;
 	}
-	
+
 	/* 이름 찾기 페이지 이동 */
 	@RequestMapping("/user/findname.do")
 	public String moveToFindName() {
 		return "user/find/findname";
 	}
-	
+
 	/** 이름 확인 **/
 	@RequestMapping("/user/findnamepost.do")
 	@ResponseBody
-	public int findName(@RequestParam("name") String name,HttpSession session) {
-		String email = (String) session.getAttribute("email");			
-		int result = userService.checkName(email,name);
-		if(result>0){
+	public int findName(@RequestParam("name") String name, HttpSession session) {
+		String email = (String) session.getAttribute("email");
+		int result = userService.checkName(email, name);
+		if (result > 0) {
 			Object object = session.getAttribute("name");
-			if(object!=null){
+			if (object != null) {
 				session.removeAttribute("name");
 			}
-			session.setAttribute("name", name);			
+			session.setAttribute("name", name);
 		}
 		return result;
 	}
@@ -476,108 +523,108 @@ public class UserController {
 	public String moveToFindPhone() {
 		return "user/find/findphone";
 	}
-	
+
 	/** 전화번호 확인 **/
 	@RequestMapping("/user/findphonepost.do")
 	@ResponseBody
-	public int findPhone(@RequestParam("phone") String phone,HttpSession session) {
-		String email = (String) session.getAttribute("email");	
-		String name = (String) session.getAttribute("name");	
-		int result = userService.checkPhone(email,name,phone);
-		if(result>0){
+	public int findPhone(@RequestParam("phone") String phone, HttpSession session) {
+		String email = (String) session.getAttribute("email");
+		String name = (String) session.getAttribute("name");
+		int result = userService.checkPhone(email, name, phone);
+		if (result > 0) {
 			session.removeAttribute("name");
-		}			
+		}
 		return result;
 	}
-	
+
 	@RequestMapping("/user/checkpasslink.do")
 	@ResponseBody
-	public int checkPasslink(HttpSession session){
-		//사용자의 중복요청을 처리하기 위한 메소드
+	public int checkPasslink(HttpSession session) {
+		// 사용자의 중복요청을 처리하기 위한 메소드
 		String email = (String) session.getAttribute("email");
 		int checkPasslink = userService.checkPasslink(email);
-		if(checkPasslink>0){
-			return 1;//이미 재설정 링크가 있음
-		}else{		
-			return 0;//최초 재설정
+		if (checkPasslink > 0) {
+			return 1;// 이미 재설정 링크가 있음
+		} else {
+			return 0;// 최초 재설정
 		}
 	}
-	
+
 	@RequestMapping("/user/sendresetpwd.do")
 	@ResponseBody
-	public int sendResetPwd(HttpSession session,@RequestParam("pValue")int checkPasslink){
+	public int sendResetPwd(HttpSession session, @RequestParam("pValue") int checkPasslink) {
 		String email = (String) session.getAttribute("email");
-		//비밀번호 재설정 키 만들고
+		// 비밀번호 재설정 키 만들고
 		String resetKey = userService.createResetKey();
-		if(resetKey!=null){
-			//데이터베이스에 저장하고
+		if (resetKey != null) {
+			// 데이터베이스에 저장하고
 			PassLink passlink = new PassLink(email, resetKey);
-			int insertKey=0;
-			if(checkPasslink>0){
+			int insertKey = 0;
+			if (checkPasslink > 0) {
 				insertKey = userService.updateKey(passlink);
-			}else{
+			} else {
 				insertKey = userService.insertKey(passlink);
-			}			
-			if(insertKey>0){//이메일 보냄
-				boolean isSuccess = userService.sendResetPwd(email, resetKey);//수정
-				if (isSuccess){			
-					return 1;//성공, 오류없음
-				}else{//email send error
+			}
+			if (insertKey > 0) {// 이메일 보냄
+				boolean isSuccess = userService.sendResetPwd(email, resetKey);// 수정
+				if (isSuccess) {
+					return 1;// 성공, 오류없음
+				} else {// email send error
 					userService.deleteResetKey(email);
 					return -3;
 				}
-			}else{//DB insert error
+			} else {// DB insert error
 				return -2;
 			}
-		}else{//key create error
+		} else {// key create error
 			return -1;
-		}		
+		}
 	}
-	
+
 	/* 비밀번호재설정 성공 페이지 이동 */
 	@RequestMapping("/user/findsuccess.do")
 	public String moveToFindSuccess() {
 		return "user/find/findsuccess";
 	}
-	
-	/* 비밀번호 재설정 페이지 이동*/
-	@RequestMapping(value="/user/resetpwd.do", method = RequestMethod.GET)
-	public ModelAndView moveToResetPwd(ModelAndView mv,@RequestParam("key") String key) {
+
+	/* 비밀번호 재설정 페이지 이동 */
+	@RequestMapping(value = "/user/resetpwd.do", method = RequestMethod.GET)
+	public ModelAndView moveToResetPwd(ModelAndView mv, @RequestParam("key") String key) {
 		mv.setViewName("user/find/resetpwd");
 		PassLink passlink = userService.selectPasslink(key);
-		if(passlink!=null){
-			mv.addObject("passlink",passlink);
-		}else{
-			mv.addObject("result",false);
-		}		
+		if (passlink != null) {
+			mv.addObject("passlink", passlink);
+		} else {
+			mv.addObject("result", false);
+		}
 		return mv;
 	}
-	
+
 	/* 비밀번호 재설정 제출 */
 	@RequestMapping("/user/resetpwdpost.do")
 	@ResponseBody
-	public int resetPwdPost(@RequestParam("email")String email, @RequestParam("pwd")String pwd){//email,pwd
+	public int resetPwdPost(@RequestParam("email") String email, @RequestParam("pwd") String pwd) {// email,pwd
 		User user = new User(email, pwd);
-		int resetPwd = userService.encResetPwd(user);		
-		if(resetPwd>0){
+		int resetPwd = userService.encResetPwd(user);
+		if (resetPwd > 0) {
 			int deleteResetKey = userService.deleteResetKey(user.getEmail());
-			if(deleteResetKey>0){
-				return 2; //성공, 오류없음
-			}else{
-				return 1; //성공, key 삭제 오류
+			if (deleteResetKey > 0) {
+				return 2; // 성공, 오류없음
+			} else {
+				return 1; // 성공, key 삭제 오류
 			}
-		}else{
-			return 0;//실패
+		} else {
+			return 0;// 실패
 		}
-	}	
-	
+	}
+
 	/*** 사이트 관리자 ***/
 
 	/** 회원 목록 및 검색 **/
 	@RequestMapping("/admin/manageUser.do")
 	public ModelAndView userList(@RequestParam(value = "p", required = false, defaultValue = "1") String page,
 			@RequestParam(value = "kwd", required = false, defaultValue = "") String keyword) {
-			ModelAndView mv = new ModelAndView("admin/sitemanager/usermanage");
+		ModelAndView mv = new ModelAndView("admin/sitemanager/usermanage");
 		return mv;
 	}
 

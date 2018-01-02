@@ -91,7 +91,6 @@ public class UserDao{
 	}
 
 	public int modifyUser(User user) {
-		System.out.println(user);
 		return sqlSession.update("user.modifyUser",user);
 	}
 
@@ -141,6 +140,14 @@ public class UserDao{
 
 	public int registUserCount() {
 		return sqlSession.selectOne("user.registUserCount");
+	}
+
+	public int modifyUserpwd(User user) {
+		return sqlSession.update("user.modifyUserpwd",user);
+	}
+
+	public int updateUserImg(User user) {
+		return sqlSession.update("user.updateUserImg", user);
 	}
 
 

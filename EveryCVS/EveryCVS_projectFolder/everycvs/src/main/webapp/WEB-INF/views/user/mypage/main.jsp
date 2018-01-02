@@ -11,30 +11,13 @@
 <!-- === BEGIN HEADER ===  -->
 <c:import url="../../include/user/common/header.jsp"></c:import>
 <!-- === END HEADER === -->
-		
 		<!-- === 본문내용 === -->
 		<div id="content">
 			<div class="container background-white">
 				<div class="row margin-vert-40">
 					<!-- Begin Sidebar Menu -->
 					<div class="col-md-3">
-						<ul class="list-group sidebar-nav" id="sidebar-nav">
-							<!-- 기프티콘 보관함 -->
-							<li class="list-group-item list-toggle">
-							<a href="/everycvs/gifticonPage.do">기프티콘 보관함</a>
-								</li>
-							
-							<!-- 관심목록 -->
-							<li class="list-group-item list-toggle">
-							<a href="/everycvs/user/favoriteList.do">관심목록</a>
-							</li>
-								
-							<!-- 회원탈퇴 -->
-							<li class="list-group-item list-toggle"><a
-								data-toggle="collapse" data-parent="#sidebar-nav"
-								href="#collapse-icons">회원탈퇴</a>
-							</li>
-						</ul>
+						<c:import url="../../include/user/common/mypageSidebarMenu.jsp"></c:import>
 					</div>
 					<!-- End Sidebar Menu -->
 					<div class="col-md-9">
@@ -43,16 +26,18 @@
 					<div class="col-md-6">
 
 						<!-- 나의 잔고 영역 -->
-						<div class="panel panel-default">
+						<div class="panel panel-default" style="height:220px;">
 							<div class="panel-heading">
-								<h3 class="panel-title">나의 잔고</h3>
+								<h3 class="panel-title"><strong>나의 잔고</strong></h3>
 							</div>
 
 							<div class="panel-body" align="right" id="result">
 								
-								<b style="font-size: 20pt; color:red;">
-								 <fmt:formatNumber value="${user.cash }" pattern="#,###"/>원	
-								</b>
+								<b style="font-size: 20pt;"><br>
+ 								<b style="color:red;">
+ 								 <fmt:formatNumber value="${user.cash }" pattern="#,###"/>
+ 								</b>원</b>
+ 								&nbsp;&nbsp;&nbsp;&nbsp;
 
 								<button class="btn btn-primary" id="myBtn">충전하기</button>
 
@@ -68,7 +53,7 @@
 													style="color:#245256; font-weight: bold;">충전하기</h4>
 											</div>
 											
-											<form name="frm" id="frm" method="post"> 
+											<form name="frm" id="frm"> 
 											<div class="modal-body">
 												<p>- 1000원 이하의 금액은 충전 할 수 없습니다.</p>
 												<p>- 충전된 금액은 환불이 불가합니다.</p>
@@ -79,7 +64,7 @@
 														
 											</div>
 											<div class="modal-footer">
-												<button type="submit" class="btn btn-primary"
+												<button type="button" class="btn btn-primary"
 													    id="increBtn">충전하기</button>
 											</div>
 											</form>
@@ -188,12 +173,10 @@
 								<!-- 내가 쓴글 보기 영역 -->
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<h3 class="panel-title">내가 쓴글 보기</h3>
+										<h3 class="panel-title"><strong>내가 쓴글 보기</strong></h3>
 									</div>
 									<div class="panel-body">
-										<a href="#" 
-										   style="margin-right: 50px; font-size: 15pt;">
-										   </a>	 개
+										<a href="" style="margin-right: 50px; font-size: 15pt; color:#245256;">12개</a>
 									</div>
 								</div>
 							</div>
@@ -202,10 +185,10 @@
 								<!-- 포인트 현황 -->
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<h3 class="panel-title">포인트 현황</h3>
+										<h3 class="panel-title"><strong>포인트 현황</strong></h3>
 									</div>
 									<div class="panel-body" align="right" style="font-size: 20pt;">
-											${sessionScope.user.point} point
+											<b style="color:red;">${sessionScope.user.point}</b> point
 									</div>
 								</div>
 							</div>
@@ -218,7 +201,7 @@
 						<div class="col-md-6">
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h3 class="panel-title">자주 구매한 목록</h3>
+									<h3 class="panel-title"><strong>자주 구매한 목록</strong></h3>
 								</div>
 								<div id="oftenPurchase" class="panel-body" align="left" style="font-size: 15pt;">
 									<c:forEach items="${top3List }" var="top3" begin="0" end="2" step="1">	
@@ -237,7 +220,7 @@
 						<div class="col-md-6">
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h3 class="panel-title">관심 목록</h3>
+									<h3 class="panel-title"><strong>관심 목록</strong></h3>
 								</div>
 								<div class="panel-body box-body no-padding" align="right" 
 									 style="font-size: 15pt;" >
@@ -297,8 +280,9 @@
 				 	async: false,
 				 	cache: false,
 					success: function(data){
-						cash = data.cash;	
-						
+						$("#myModal").modal('hide');
+  						cash = data.cash;	
+ +						return cash;						
 					},	
 					error: function(request, status, errorData){
 						alert("error code: " + request.status + "/n" 

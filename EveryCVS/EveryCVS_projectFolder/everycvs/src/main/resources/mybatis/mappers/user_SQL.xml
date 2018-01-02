@@ -170,10 +170,27 @@
 	birthday = #{birthday},
 	phone = #{phone},
 	gender = #{gender},
-	address = #{address},	
-	user_pwd = #{user_pwd}	
+	address = #{address}	
 	where email=#{email}
 	]]>
+	</update>
+	<update id="modifyUserpwd" parameterType="user">
+ 	<![CDATA[
+ 	update tb_user set 
+ 	user_name = #{user_name},
+ 	birthday = #{birthday},
+ 	phone = #{phone},
+ 	gender = #{gender},
+ 	address = #{address},
+	user_pwd = #{user_pwd}
+ 	where email=#{email}
+ 	]]>
+	</update>
+
+	<update id="updateUserImg" parameterType="user">
+ 	<![CDATA[
+ 	update tb_user set original_file_name = #{original_file_name}, stored_file_name = #{stored_file_name} where user_no=#{user_no}
+ 	]]>
 	</update>
 
 	<update id="deleteUser" parameterType="_int">
@@ -181,7 +198,7 @@
 	update tb_user set user_state = 1 where user_no=#{user_no}
 	]]>
 	</update>
-	
+
 	<select id="registUserCount" resultType="_int">
 	<![CDATA[select count(*) from tb_user where to_char(sysdate,'yy-mm-dd')=to_char(enroll_date,'yy-mm-dd')]]>
 	</select>

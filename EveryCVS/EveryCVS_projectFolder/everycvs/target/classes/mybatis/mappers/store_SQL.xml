@@ -3,7 +3,7 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="store"> 
+<mapper namespace="store">
 
 	<resultMap id="resultStore" type="store">
 		<result property="store_no" column="STORE_NO" />
@@ -23,62 +23,71 @@
 		<result property="brand_name" column="BRAND_NAME" />
 		<result property="enroll_no" column="ENROLL_NO" />
 	</resultMap>
-		
+
 	<resultMap type="hashmap" id="resultGraph">
-		<result javaType="java.lang.String" column="BRAND_NAME" property="brand_name"></result>
-        <result javaType="java.lang.Integer" column="JOIN_COUNT" property="join_count"></result>
+		<result javaType="java.lang.String" column="BRAND_NAME"
+			property="brand_name"></result>
+		<result javaType="java.lang.Integer" column="JOIN_COUNT"
+			property="join_count"></result>
 	</resultMap>
-		
-	<update id="increamentJoinCount"  parameterType="string" flushCache="true"
-      statementType="PREPARED">
+
+	<update id="increamentJoinCount" parameterType="string"
+		flushCache="true" statementType="PREPARED">
 		<![CDATA[update tb_store set join_count = (select join_count+1 from tb_store where store_no = #{store_no}) where store_no = #{store_no}]]>
 	</update>
-	
-	<select id="selectStore" parameterType="string" resultType="store" resultMap="resultStore">
+
+	<select id="selectStore" parameterType="string" resultType="store"
+		resultMap="resultStore">
 		   <![CDATA[
       		select * from store_view where store_no = #{store_no}
            ]]>
-   </select>
-   
-   <select id="cvsMapList" parameterType="navermap" resultType="list" resultMap="resultStore">
+	</select>
+
+	<select id="cvsMapList" parameterType="navermap" resultType="list"
+		resultMap="resultStore">
 		   <![CDATA[
       		select * from store_view where brand_no = #{brand_no} and (to_number(lat,'999.99999999') between #{minLat} and #{maxLat}) and (to_number(lng,'999.99999999') between #{minLng} and #{maxLng}) 
            ]]>
-   </select>
+	</select>
 
-   <select id="allCvsMapList" parameterType="hashmap" resultType="list" resultMap="resultStore">
+	<select id="allCvsMapList" parameterType="hashmap" resultType="list"
+		resultMap="resultStore">
 		   <![CDATA[
       		select * from store_view where (to_number(lat,'999.99999999') between #{minLat} and #{maxLat}) and (to_number(lng,'999.99999999') between #{minLng} and #{maxLng}) 
            ]]>
-   </select>
-   
-   <select id="nearestStore" parameterType="hashmap" resultType="store" resultMap="resultStore">
+	</select>
+
+	<select id="nearestStore" parameterType="hashmap" resultType="store"
+		resultMap="resultStore">
 		   <![CDATA[
       		select store_no,store_name,road_address,lat,lng,brand_no,brand_name from(
 			select store_no,store_name,road_address,lat,lng,brand_no,brand_name, DISTNACE_WGS84(#{lat}, #{lng}, to_number(lat,'999.99999999') , to_number(lng,'999.99999999')) as DISTANCE
 			from store_view
 			order by DISTANCE asc) where rownum = 1 and brand_no = #{brand_no}
            ]]>
-   </select>
-   <select id="allNearestStore" parameterType="hashmap" resultType="store" resultMap="resultStore">
+	</select>
+	<select id="allNearestStore" parameterType="hashmap" resultType="store"
+		resultMap="resultStore">
 		   <![CDATA[
       		select store_no,store_name,road_address,lat,lng,brand_no,brand_name from(
 			select store_no,store_name,road_address,lat,lng,brand_no,brand_name, DISTNACE_WGS84(#{lat}, #{lng}, to_number(lat,'999.99999999') , to_number(lng,'999.99999999')) as DISTANCE
 			from store_view
 			order by DISTANCE asc) where rownum = 1
            ]]>
-   </select>
+	</select>
 	<!-- 지점 리스트 조회 -->
-	<select id="storeList" parameterType="_int" resultType="list" resultMap="resultStore">
+	<select id="storeList" parameterType="_int" resultType="list"
+		resultMap="resultStore">
 		<![CDATA[
 			select * from store_view
 			where brand_no = #{brand_no}
 			order by store_no asc
 		]]>
 	</select>
-	
+
 	<!-- 방문자 수 top5 지점 조회 -->
-	<select id="joinCountTop5" parameterType="_int" resultType="list" resultMap="resultStore">
+	<select id="joinCountTop5" parameterType="_int" resultType="list"
+		resultMap="resultStore">
 		<![CDATA[
 			select * from
 			(select * from store_view
@@ -87,9 +96,10 @@
 			where rownum <= 5
 		]]>
 	</select>
-	
+
 	<!-- 판매량 top5 지점 조회 -->
-	<select id="saleQuantityTop5" parameterType="_int" resultType="list" resultMap="resultStore">
+	<select id="saleQuantityTop5" parameterType="_int" resultType="list"
+		resultMap="resultStore">
 		<![CDATA[
 			select * from
 			(select * from store_view
@@ -98,9 +108,10 @@
 			where rownum <= 5
 		]]>
 	</select>
-	
+
 	<!-- 지점 검색 : 지점번호 -->
-	<select id="storeSearch1" parameterType="store" resultType="list" resultMap="resultStore">
+	<select id="storeSearch1" parameterType="store" resultType="list"
+		resultMap="resultStore">
 		<![CDATA[
 			select * from store_view
 			where brand_no = #{brand_no}
@@ -108,9 +119,10 @@
 			order by store_no asc
 		]]>
 	</select>
-	
+
 	<!-- 지점 검색 : 지점명 -->
-	<select id="storeSearch2" parameterType="store" resultType="list" resultMap="resultStore">
+	<select id="storeSearch2" parameterType="store" resultType="list"
+		resultMap="resultStore">
 		<![CDATA[
 			select * from store_view
 			where brand_no = #{brand_no}
@@ -118,9 +130,10 @@
 			order by store_no asc
 		]]>
 	</select>
-	
+
 	<!-- 지점 검색 : 시도명 -->
-	<select id="storeSearch3" parameterType="store" resultType="list" resultMap="resultStore">
+	<select id="storeSearch3" parameterType="store" resultType="list"
+		resultMap="resultStore">
 		<![CDATA[
 			select * from store_view
 			where brand_no = #{brand_no}
@@ -128,9 +141,10 @@
 			order by store_no asc
 		]]>
 	</select>
-	
+
 	<!-- 지점 검색 : 구군명 -->
-	<select id="storeSearch4" parameterType="store" resultType="list" resultMap="resultStore">
+	<select id="storeSearch4" parameterType="store" resultType="list"
+		resultMap="resultStore">
 		<![CDATA[
 			select * from store_view
 			where brand_no = #{brand_no}
@@ -138,9 +152,10 @@
 			order by store_no asc
 		]]>
 	</select>
-	
+
 	<!-- 지점 검색 : 법정동명 -->
-	<select id="storeSearch5" parameterType="store" resultType="list" resultMap="resultStore">
+	<select id="storeSearch5" parameterType="store" resultType="list"
+		resultMap="resultStore">
 		<![CDATA[
 			select * from store_view
 			where brand_no = #{brand_no}
@@ -148,43 +163,48 @@
 			order by store_no asc
 		]]>
 	</select>
-	
+
 	<!-- 지점 삭제 -->
 	<!-- 연쇄 삭제 : 지점 테이블에서 삭제 -->
-	<delete id="deleteStore3" parameterType="store" flushCache="true" statementType="PREPARED">
+	<delete id="deleteStore3" parameterType="store" flushCache="true"
+		statementType="PREPARED">
 		<![CDATA[
 			delete from tb_store
 			where store_no = #{store_no}
 			and brand_no = #{brand_no}
 		]]>
 	</delete>
-	
+
 	<!-- 연쇄 삭제 : 지점상품 테이블에서 삭제 -->
-	<delete id="deleteStore1" parameterType="store" flushCache="true" statementType="PREPARED">
+	<delete id="deleteStore1" parameterType="store" flushCache="true"
+		statementType="PREPARED">
 		<![CDATA[
 			delete from tb_store_product
 			where store_no = #{store_no}
 		]]>
 	</delete>
-	
+
 	<!-- 연쇄 삭제 : 할인상품 테이블에서 삭제 -->
-	<delete id="deleteStore2" parameterType="store" flushCache="true" statementType="PREPARED">
+	<delete id="deleteStore2" parameterType="store" flushCache="true"
+		statementType="PREPARED">
 		<![CDATA[
 			delete from tb_dc_product
 			where store_no = #{store_no}
 		]]>
 	</delete>
-	
+
 	<!-- 지점 가입번호로 지점 조회 -->
-	<select id="enrollCompare" parameterType="string" resultType="store" resultMap="resultStore">
+	<select id="enrollCompare" parameterType="string" resultType="store"
+		resultMap="resultStore">
 		<![CDATA[
 			select * from store_view
 			where enroll_no = #{enroll_no}
 		]]>
 	</select>
-	
+
 	<!-- 방문자수 -->
-	<select id="storeJoinCustomers" parameterType="string" resultType="_int">
+	<select id="storeJoinCustomers" parameterType="string"
+		resultType="_int">
 	<![CDATA[
 		select join_count from tb_store where store_no = #{store_no}
 		]]>
@@ -201,11 +221,17 @@
 		select sum(join_count) as join_count from tb_store
 		]]>
 	</select>
-	
+
 	<select id="visitcvsChart" resultType="list" resultMap="resultGraph">
    <![CDATA[
    select brand_name, sum(join_count) as join_count
    from store_view group by brand_name
    ]]>
-   </select>	
+	</select>
+
+	<select id="storeInfo" parameterType="string" resultType='store'>
+    <![CDATA[
+    select brand_name,store_name,road_address from store_view where store_no = #{store_no}
+    ]]>
+	</select>
 </mapper>

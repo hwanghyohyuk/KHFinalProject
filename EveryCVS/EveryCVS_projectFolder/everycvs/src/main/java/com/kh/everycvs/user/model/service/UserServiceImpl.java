@@ -217,11 +217,6 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public int encModifyUser(User user) {
-		return userDao.modifyUser(user);
-	}
-
-	@Override
 	public Map<String, Object> userList(String page, String keyword) {
 		return userDao.userList(page, keyword);
 	}
@@ -234,6 +229,21 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int registUserCount() {
 		return userDao.registUserCount();
+	}
+
+	@Override
+	public int updateUserImg(User user) {
+		return userDao.updateUserImg(user);
+	}
+
+	@Override
+	public int ModifyUser(User user) {
+		return userDao.modifyUser(user);
+	}
+
+	@Override
+	public int encModifyUserpwd(User user) {
+		return userDao.modifyUserpwd(user);
 	}
 
 

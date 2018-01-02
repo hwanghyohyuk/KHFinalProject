@@ -97,4 +97,9 @@ public class StoreServiceImpl implements StoreService {
 		return storeDao.visitcvsChart();
 	}
 
+	@Override
+	public Store storeInfo(String store_no) {
+		return storeDao.storeInfo(store_no);
+	}
+
 }

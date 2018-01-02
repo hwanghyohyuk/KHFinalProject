@@ -3,7 +3,7 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="storeProduct"> 
+<mapper namespace="storeProduct">
 
 	<resultMap id="resultStoreProduct" type="storeproduct">
 		<result property="store_product_no" column="STORE_PRODUCT_NO" />
@@ -14,7 +14,7 @@
 		<result property="price" column="PRICE" />
 		<result property="manufacture_date" column="MANUFACTURE_DATE" />
 		<result property="expiration_date" column="EXPIRATION_DATE" />
-		<result property="expiration_hour" column="EXPIRATION_HOUR" />
+		<result property="expiration_minute" column="EXPIRATION_MINUTE" />
 		<result property="quantity" column="QUANTITY" />
 		<result property="product_kind_no" column="PRODUCT_KIND_NO" />
 		<result property="product_kind_name" column="PRODUCT_KIND_NAME" />
@@ -33,25 +33,30 @@
 		<result property="discount_rate" column="DISCOUNT_RATE" />
 		<result property="expiration_price" column="EXPIRATION_PRICE" />
 	</resultMap>
-	
+
 	<select id="getListCount" parameterType="hashmap" resultType="int">
-		select count(*) from store_popularity_product_view where store_no = #{store_no}
+		select count(*) from store_popularity_product_view where store_no =
+		#{store_no}
 	</select>
-	
-	<select id="getSearchListCount" parameterType="hashmap" resultType="int">
-		select count(*) from store_popularity_product_view where store_no = #{store_no} and product_name like #{keyword} 
+
+	<select id="getSearchListCount" parameterType="hashmap"
+		resultType="int">
+		select count(*) from store_popularity_product_view where
+		store_no = #{store_no} and product_name like #{keyword}
 	</select>
-	
-	<select id="selectList" parameterType="hashmap" resultType="list" resultMap="resultStoreProduct">
+
+	<select id="selectList" parameterType="hashmap" resultType="list"
+		resultMap="resultStoreProduct">
 		   <![CDATA[
       		select * from (
             select rownum rnum, a.*
             from store_popularity_product_view a where store_no = #{store_no} and del_check like 'N')
             where rnum >= #{startRow} and rnum <= #{endRow}
            ]]>
-   </select>
+	</select>
 
-   <select id="searchSproduct" parameterType="hashmap" resultType="list" resultMap="resultStoreProduct">
+	<select id="searchSproduct" parameterType="hashmap" resultType="list"
+		resultMap="resultStoreProduct">
 		   <![CDATA[
 		    select * from (
 		    select rownum rnum, store_product_no, stored_file_name, product_name, price, manufacturer, manufacture_date
@@ -59,50 +64,62 @@
 		    where rnum >= #{startRow} and rnum <= #{endRow}
 		    and product_name like #{keyword}
            ]]>
-   </select>
-   
-   <select id="top3Sproduct" parameterType="string" resultType="list" resultMap="resultStoreProduct">
+	</select>
+
+	<select id="top3Sproduct" parameterType="string" resultType="list"
+		resultMap="resultStoreProduct">
 		<![CDATA[
 			select * from (select rownum rnum, a.*
 			from (select * from store_popularity_product_view where store_no = #{store_no}
 			and del_check like 'N' order by purchase_count desc) a) 
 			where rnum >= 1 and rnum <= 3
-		]]>	
+		]]>
 	</select>
-	
-	<select id="new3Sproduct" parameterType="string" resultType="list" resultMap="resultStoreProduct">
+
+	<select id="new3Sproduct" parameterType="string" resultType="list"
+		resultMap="resultStoreProduct">
 		<![CDATA[
 			select * from (select rownum rnum, a.*
 			from (select * from store_popularity_product_view where store_no = #{store_no}
 			and del_check like 'N' order by manufacture_date desc) a) 
 			where rnum >= 1 and rnum <= 3
-		]]>	
+		]]>
 	</select>
-	
-	<select id="dcSproduct" parameterType="string" resultType="list" resultMap="resultStoreProduct">
+
+	<select id="getdcListCount" parameterType="hashmap" resultType="int">
+		select count(*) from store_popularity_product_view where store_no =
+		#{store_no} and discount_no is not null
+	</select>
+
+	<select id="dcSproduct" parameterType="string" resultType="list"
+		resultMap="resultStoreProduct">
+		   <![CDATA[
+      		select * from (
+             select rownum rnum, a.*
+             from store_popularity_product_view a where store_no = #{store_no} and del_check like 'N')
+             where rnum >= #{startRow} and rnum <= #{endRow}]]>
+	</select>
+
+	<select id="expSproduct" parameterType="string" resultType="list"
+		resultMap="resultStoreProduct">
 		   <![CDATA[
       		select * from store_popularity_product_view where store_no = #{store_no}
-      		and del_check like 'N' and discount_no is not null
+      		and del_check like 'N' and expiration_minute <= 72*60 and expiration_minute > 0
            ]]>
-   </select>
-   
-   <select id="expSproduct" parameterType="string" resultType="list" resultMap="resultStoreProduct">
-		   <![CDATA[
-      		select * from store_popularity_product_view where store_no = #{store_no}
-      		and del_check like 'N' and expiration_hour <= 72 and expiration_hour > 0
-           ]]>
-   </select>
-	
-	<select id="listSpmanager" parameterType="hashmap" resultType="list" resultMap="resultStoreProduct">
+	</select>
+
+	<select id="listSpmanager" parameterType="hashmap" resultType="list"
+		resultMap="resultStoreProduct">
 		   <![CDATA[
       		select * from (
             select rownum rnum, a.*
             from store_popularity_product_view a where store_no = #{store_no})
             where rnum >= #{startRow} and rnum <= #{endRow}
            ]]>
-   </select>
-   
-   <select id="searchSpmanager" parameterType="hashmap" resultType="list" resultMap="resultStoreProduct">
+	</select>
+
+	<select id="searchSpmanager" parameterType="hashmap" resultType="list"
+		resultMap="resultStoreProduct">
 		   <![CDATA[
 		    select * from (
 		    select rownum rnum, store_product_no, product_kind_name, product_name,
@@ -111,51 +128,63 @@
 		    where rnum >= #{startRow} and rnum <= #{endRow}
 		    and product_name like #{keyword}
            ]]>
-   </select>
-     
-   <update id="deleteSpmanager" parameterType="hashmap">
+	</select>
+
+	<update id="deleteSpmanager" parameterType="hashmap">
    		<![CDATA[
 			update tb_store_product set del_check = #{toggle} where store_product_no = #{spnum}
 		]]>
-   </update>
-   
-   <update id="updateSpmanager" parameterType="hashmap">
-		update tb_store_product 
-		set manufacture_date = #{mdate}, quantity = #{quantity} where store_product_no = #{spno}
-   </update>
-   
-  
-   <!-- 지점상품 등록관련 -->
-   <select id="selectCountSp" parameterType="storeproduct" resultType="_int">
+	</update>
+
+	<update id="updateSpmanager" parameterType="hashmap">
+		update
+		tb_store_product
+		set manufacture_date = #{mdate}, quantity =
+		#{quantity} where
+		store_product_no = #{spno}
+	</update>
+
+
+	<!-- 지점상품 등록관련 -->
+	<select id="selectCountSp" parameterType="storeproduct"
+		resultType="_int">
 		   <![CDATA[
       		select count(*) from tb_store_product where store_no=#{store_no} and product_no = #{product_no} and manufacture_date = #{manufacture_date}
            ]]>
-   </select>
-   
-   <update id="updateSp" parameterType="hashmap">
-		update tb_store_product 
-		set quantity = (select quantity+#{sp.quantity} from tb_store_product where store_no=#{store_no} and product_no = #{product_no} and manufacture_date = #{manufacture_date}) 
-		where store_no=#{sp.store_no} and product_no = #{sp.product_no} and manufacture_date = #{sp.manufacture_date}
-   </update>
-   
-   <insert id="insertSp" parameterType="storeproduct" >
+	</select>
+
+	<update id="updateSp" parameterType="hashmap">
+		update tb_store_product
+		set
+		quantity = (select quantity+#{sp.quantity} from tb_store_product
+		where
+		store_no=#{store_no} and product_no = #{product_no} and
+		manufacture_date = #{manufacture_date})
+		where store_no=#{sp.store_no}
+		and product_no = #{sp.product_no} and
+		manufacture_date =
+		#{sp.manufacture_date}
+	</update>
+
+	<insert id="insertSp" parameterType="storeproduct">
    		<![CDATA[
 			insert into tb_store_product
 			values (seq_store_product_no.nextval, #{store_no}, #{product_no}, #{manufacture_date}, #{quantity}, default)
   		]]>
-   </insert>
-   <!-- /지점상품 등록관련 -->
-   
-   <!-- 지점관리자 메인 인기상품 top5 -->
-   <select id="spTop5" parameterType="string" resultType="list" resultMap="resultStoreProduct">
+	</insert>
+	<!-- /지점상품 등록관련 -->
+
+	<!-- 지점관리자 메인 인기상품 top5 -->
+	<select id="spTop5" parameterType="string" resultType="list"
+		resultMap="resultStoreProduct">
 		<![CDATA[
 			select * from (select rownum rnum, a.*
 			from (select * from store_popularity_product_view where store_no = #{store_no} order by purchase_count desc) a) 
 			where rnum >= 1 and rnum <= 5
-		]]>	
+		]]>
 	</select>
-	
-		<!-- 금일 등록된 상품수 -->
+
+	<!-- 금일 등록된 상품수 -->
 	<select id="registProducts" parameterType="string" resultType="_int">
 	<![CDATA[
 		select count(*) from store_product_view where store_no = #{store_no} 

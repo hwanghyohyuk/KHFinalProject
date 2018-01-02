@@ -18,23 +18,7 @@
 				<div class="row margin-vert-40">
 					<!-- Begin Sidebar Menu -->
 					<div class="col-md-3">
-						<ul class="list-group sidebar-nav" id="sidebar-nav">
-							<!-- 기프티콘 보관함 -->
-							<li class="list-group-item list-toggle">
-							<a href="/everycvs/gifticonPage.do">기프티콘 보관함</a>
-							</li>
-							
-							<!-- 관심목록 -->
-							<li class="list-group-item list-toggle">
-							<a href="/everycvs/user/favoriteList.do">관심목록</a>
-							</li>
-								
-							<!-- 회원탈퇴 -->
-							<li class="list-group-item list-toggle"><a
-								data-toggle="collapse" data-parent="#sidebar-nav"
-								href="#collapse-icons">회원탈퇴</a>
-								</li>
-						</ul>
+						<c:import url="../../include/user/common/mypageSidebarMenu.jsp"></c:import>
 					</div>
 					<!-- End Sidebar Menu -->
 					
@@ -59,7 +43,7 @@
                                         </figure>
                                     </a>
                                 </div>
-                                <b>${glist.product_name }</b><br>
+                                <b style="color:#245256;">${glist.product_name }</b><br>
                                 <b>${glist.store_name }</b>
                             </div>
 							
@@ -79,8 +63,8 @@
 												 style="height:250px;">
 												<br><br>
 											
-											<b>${glist.product_name }</b>
-										<input type="hidden" id="bno_${glist.gifticon_no}" value="${glist.barcode_img_name}" >
+											<b style="color:#245256;">${glist.product_name }</b>
+											<input type="hidden" id="bno_${glist.gifticon_no}" value="${glist.barcode_img_name}">
 										<div id="bcTarget_${glist.gifticon_no}" align="center"></div>	
 										
 										<br>		

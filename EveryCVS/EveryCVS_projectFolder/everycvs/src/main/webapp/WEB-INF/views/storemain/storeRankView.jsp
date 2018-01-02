@@ -134,7 +134,7 @@
 																</div>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
-																		onclick="add_favorite('${sp.store_product_no}', '${sp.store_no}');">관심상품</button>
+																		onclick="add_favorite('${sp.product_no}', '${sp.store_no}');">관심상품</button>
 																	&nbsp;
 																	<button type="button" class="btn btn-primary btn-sm"
 																		data-dismiss="modal">구매하기</button>
@@ -217,7 +217,7 @@
 																</div>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
-																	onclick="add_favorite('${sp.store_product_no}', '${sp.store_no}');">관심상품</button>
+																	onclick="add_favorite('${sp.product_no}', '${sp.store_no}');">관심상품</button>
 																	&nbsp;
 																	<button type="button" class="btn btn-primary btn-sm"
 																		data-dismiss="modal">구매하기</button>
@@ -318,7 +318,7 @@
 																	</div>
 																	<div class="modal-footer">
 																		<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
-																		onclick="add_favorite('${sp.store_product_no}', '${sp.store_no}');">관심상품</button>
+																		onclick="add_favorite('${sp.product_no}', '${sp.store_no}');">관심상품</button>
 																		&nbsp;
 																		<button type="button" class="btn btn-primary btn-sm"
 																			data-dismiss="modal">구매하기</button>
@@ -358,17 +358,36 @@
 															<strong>${sp.product_name}</strong>
 														</h5>
 														<c:set var="day">
-															<fmt:formatNumber value="${sp.expiration_hour/24-1}" type="number" maxFractionDigits="0" />
+															<fmt:parseNumber value="${sp.expiration_minute/(24*60)}" type="number" integerOnly="true" />
 														</c:set>
-														<c:set var="hour" value="${sp.expiration_hour%24}" />
+														<c:set var="hour">
+															<fmt:parseNumber value="${(sp.expiration_minute/60)%24}" type="number" integerOnly="true" />
+														</c:set>
 														<c:choose>
-															<c:when test="${day<1}">
-																<h6 align="center" style="color: red; font-size: 10pt;">${hour}시간 남았습니다.</h6>
-															</c:when>
-															<c:otherwise>
-																<h6 align="center" style="color: red; font-size: 10pt;">${day}일 ${hour}시간<br>남았습니다.
-																</h6>
-															</c:otherwise>
+															<c:when test="${day==0 && hour==0 && minute==0}">
+ 																<h6 align="center" style="color: red; font-size: 10pt;">유통기한 만료</h6>
+ 															</c:when>
+ 															<c:when test="${day==0 && hour==0 && minute!=0}">
+ 																<h6 align="center" style="color: red; font-size: 10pt;">${minute}분 <br>남았습니다.</h6>
+ 															</c:when>
+ 															<c:when test="${day==0 && hour!=0 && minute==0}">
+ 																<h6 align="center" style="color: red; font-size: 10pt;">${hour}시간 <br>남았습니다.</h6>
+ 															</c:when>
+ 															<c:when test="${day==0 && hour!=0 && minute!=0}">
+ 																<h6 align="center" style="color: red; font-size: 10pt;">${hour}시간 ${minute}분 <br>남았습니다.</h6>
+ 															</c:when>
+ 															<c:when test="${day!=0 && hour==0 && minute==0}">
+ 																<h6 align="center" style="color: red; font-size: 10pt;">${day}일 <br>남았습니다.</h6>
+ 															</c:when>
+ 															<c:when test="${day!=0 && hour==0 && minute!=0}">
+ 																<h6 align="center" style="color: red; font-size: 10pt;">${day}일 ${minute}분 <br>남았습니다.</h6>
+ 															</c:when>
+ 															<c:when test="${day!=0 && hour!=0 && minute==0}">
+ 																<h6 align="center" style="color: red; font-size: 10pt;">${day}일 ${hour}시간 <br>남았습니다.</h6>
+ 															</c:when>
+ 															<c:when test="${day!=0 && hour!=0 && minute!=0}">
+  																<h6 align="center" style="color: red; font-size: 10pt;">${day}일 ${hour}시간 ${minute}분 <br>남았습니다.</h6>
+  															</c:when>
 														</c:choose><br>
 														<!-- Modal -->
 														<div id="dmodal${sp.store_product_no}" class="modal fade"
@@ -418,7 +437,7 @@
 																	</div>
 																	<div class="modal-footer">
 																		<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
-																		onclick="add_favorite('${sp.store_product_no}', '${sp.store_no}');">관심상품</button>
+																		onclick="add_favorite('${sp.product_no}', '${sp.store_no}');">관심상품</button>
 																		&nbsp;
 																		<button type="button" class="btn btn-primary btn-sm"
 																			data-dismiss="modal">구매하기</button>

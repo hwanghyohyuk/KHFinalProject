@@ -13,101 +13,122 @@ import com.kh.everycvs.common.model.vo.Event;
 import com.kh.everycvs.common.model.vo.EventJoin;
 import com.kh.everycvs.common.model.vo.EventResult;
 
-
-
 @Repository("eventDao")
 public class EventDao {
-	
+
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
-	public EventDao(){}
-	//관리자 검색 및 페이징
 
-	/*사용자 : 이벤트 목록*/
+	public EventDao() {
+	}
+	// 관리자 검색 및 페이징
+
+	/* 사용자 : 이벤트 목록 */
 	public List<Event> eventList() {
 		return sqlSession.selectList("event.eventList");
 	}
 
-	/*사용자 : 메인화면 이벤트 top3*/
+	/* 사용자 : 메인화면 이벤트 top3 */
 	public List<Event> eventTop3() {
 		return sqlSession.selectList("event.eventTop3");
 	}
-	
-	public List<Event> selectEventList(String keyword, int startRow, int endRow, int user_no) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("startRow", startRow); 
+
+	public List<Event> selectEventList(String keyword, int startRow, int endRow, int user_no, int edno) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("startRow", startRow);
 		map.put("endRow", endRow);
 		map.put("user_no", user_no);
-		if(user_no==2 && keyword.equals("")) {//gs관리자
-			return sqlSession.selectList("event.cvseventlist1",map);
-		}else if(user_no==3 && keyword.equals("")) {//cu
-			return sqlSession.selectList("event.cvseventlist2",map);
-		}else if(user_no==4 && keyword.equals("")) {//event
-			return sqlSession.selectList("event.cvseventlist3",map);
-		}else if(user_no >4 && keyword.equals("")) {
-			return sqlSession.selectList("event.cvseventlist",map);
+		map.put("edno", edno);
+		if (user_no == 2 && keyword.equals("") && edno == 1) {// gs관리자
+			return sqlSession.selectList("event.cvseventlist1", map);
+		} else if (user_no == 3 && keyword.equals("") && edno == 1) {// cu
+			return sqlSession.selectList("event.cvseventlist2", map);
+		} else if (user_no == 4 && keyword.equals("") && edno == 1) {// event
+			return sqlSession.selectList("event.cvseventlist3", map);
+		} else if (user_no > 4 && keyword.equals("") && edno == 1) {
+			return sqlSession.selectList("event.cvseventlist", map);
+		} // 여기까지가 진행중
+		else if (user_no == 2 && keyword.equals("") && edno == 2) {// gs관리자
+			return sqlSession.selectList("event.cvseventlist1", map);
+		} else if (user_no == 3 && keyword.equals("") && edno == 2) {// cu
+			return sqlSession.selectList("event.cvseventlist2", map);
+		} else if (user_no == 4 && keyword.equals("") && edno == 2) {// event
+			return sqlSession.selectList("event.cvseventlist3", map);
+		} else if (user_no > 4 && keyword.equals("") && edno == 2) {
+			return sqlSession.selectList("event.cvseventlist", map);
+		} else {
+			// 왜인진 모르겠지만 제목으로 만 검색됨 ...
+			map.put("mainkeyword", "%" + keyword + "%");
+			map.put("subkeyword", "%" + keyword + "%");
+			System.out.println("keyword" + keyword);
+			return sqlSession.selectList("event.cvseventsearch", map);
 		}
-		else{
-			//왜인진 모르겠지만 제목으로 만 검색됨 ...
-			map.put("mainkeyword","%"+keyword+"%");
-			map.put("subkeyword","%"+keyword+"%");
-			System.out.println("keyword"+ keyword);
-			return sqlSession.selectList("event.cvseventsearch",map);
-		}
-		
-		/*if(keyword.equals("")) {
-		return sqlSession.selectList("event.cvseventlist",map);
-	}*/
-}
-	//사용자 이벤트 결과 리스트 불러오기
-	public List<EventResult> resultEventList(String keyword, int startRow, int endRow) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("startRow", startRow); 
-		map.put("endRow", endRow);
-		
-		return sqlSession.selectList("event.resulteventlist",map);
+
+		/*
+		 * if(keyword.equals("")) { return
+		 * sqlSession.selectList("event.cvseventlist",map); }
+		 */
 	}
-	//관리자 검색 후 게시글 갯수
-	public int listCount(String keyword, int user_no) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		
-		if(!keyword.equals("")){
-			map.put("mainkeyword", "%"+keyword+"%");
-			map.put("subkeyword", "%"+keyword+"%");
-			return sqlSession.selectOne("event.getSearchCount",map);
-		}else if(user_no==2) {
+
+	// 사용자 이벤트 결과 리스트 불러오기
+	public List<EventResult> resultEventList(String keyword, int startRow, int endRow) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+
+		return sqlSession.selectList("event.resulteventlist", map);
+	}
+
+	// 관리자 검색 후 게시글 갯수
+	public int listCount(String keyword, int user_no, int edno) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		if (!keyword.equals("") && edno == 1) {
+			map.put("mainkeyword", "%" + keyword + "%");
+			map.put("subkeyword", "%" + keyword + "%");
+			return sqlSession.selectOne("event.getSearchCount", map);
+		} else if (!keyword.equals("") && edno == 2) {
+			map.put("mainkeyword", "%" + keyword + "%");
+			map.put("subkeyword", "%" + keyword + "%");
+			return sqlSession.selectOne("event.getSearchCount", map);
+		} else if (user_no == 2 && edno == 1) {
 			return sqlSession.selectOne("event.gsListCount");
-			
-		}else if(user_no==3) {
+		} else if (user_no == 3 && edno == 1) {
 			return sqlSession.selectOne("event.cuListCount");
-		}else if(user_no==4) {
+		} else if (user_no == 4 && edno == 1) {
 			return sqlSession.selectOne("event.sevenListCount");
-		}
-		else{
+		} // 여기까지가 진행중
+		else if (user_no == 2 && edno == 2) {
+			return sqlSession.selectOne("event.gsListCount");
+
+		}else if(user_no==3 && edno == 2) {
+			return sqlSession.selectOne("event.cuListCount");
+		}else if(user_no==4 && edno == 2) {
+			return sqlSession.selectOne("event.sevenListCount");
+		} else {
 			return sqlSession.selectOne("event.getListCount");
 		}
 	}
-	
+
 	public Event selectEventOne(int no) {
 		// 이벤트 조회 : 선택한 이벤트 상세조회
-		Event event = sqlSession.selectOne("event.eventDetail",no);
+		Event event = sqlSession.selectOne("event.eventDetail", no);
 		return event;
 	}
-	
-	//조회수 증가
+
+	// 조회수 증가
 	public int eventReadCount(int no) {
-		return sqlSession.update("event.eventReadCount",no);
+		return sqlSession.update("event.eventReadCount", no);
 	}
-	
+
 	public int eventDelete(int no) {
-		//이벤트 삭제
+		// 이벤트 삭제
 		return sqlSession.update("event.eventDelete", no);
 	}
-	
-	//글쓰기
+
+	// 글쓰기
 	public void cvseventwriteview(Event vo) {
-		  sqlSession.insert("event.cvseventwrite", vo); 
+		sqlSession.insert("event.cvseventwrite", vo);
 	}
 
 	public Event cvsEventDetail(int eno) {
@@ -115,110 +136,106 @@ public class EventDao {
 		return sqlSession.selectOne("event.cvsEventDetail", eno);
 	}
 
-	//수정하기 페이지로 이동
+	// 수정하기 페이지로 이동
 	public Event updateEvent(int no) {
 		Event event = sqlSession.selectOne("event.cvseventmodifyview", no);
 		return event;
 	}
-	//수정하기 완료
+
+	// 수정하기 완료
 	public int updateEventPage(Event event) {
 		int result = sqlSession.update("event.cvseventmodifywrite", event);
 		return result;
 	}
-	
-	
-	
-	//이거는 사용자에 써야하나?
+
+	// 이거는 사용자에 써야하나?
 	public List searchEventList() {
 		// 이벤트 검색 : 제목으로 검색
 		return null;
 	}
-	
-	
+
 	public int eventResultReadCount(int rno) {
 		// 결과페이지 조회수 증가
-		return sqlSession.update("event.eventResultReadCount",rno);
+		return sqlSession.update("event.eventResultReadCount", rno);
 	}
+
 	public EventResult eventResultDetail(int rno) {
 		// 이벤트 조회 : 선택한 이벤트 상세조회
-		EventResult eventresult = sqlSession.selectOne("event.eventResultDetail",rno);
+		EventResult eventresult = sqlSession.selectOne("event.eventResultDetail", rno);
 		return eventresult;
 	}
-	
-	
-	//이벤트 참여 dao
+
+	// 이벤트 참여 dao
 	public ArrayList<EventJoin> selectEventJoinList() {
 		// TODO Auto-generated method stub
-		  ArrayList<EventJoin> list = (ArrayList)sqlSession.selectList("event.selectEventJoinList");
-	      return list;
+		ArrayList<EventJoin> list = (ArrayList) sqlSession.selectList("event.selectEventJoinList");
+		return list;
 	}
 
 	public EventJoin selectEventJoin(EventJoin eventjoin) {
 		// TODO Auto-generated method stub
-		 return sqlSession.selectOne("event.selectEventJoin",eventjoin);
+		return sqlSession.selectOne("event.selectEventJoin", eventjoin);
 	}
 
 	public int eventJoinCount(int event_no) {
 		// TODO Auto-generated method stub
-		 return sqlSession.selectOne("event.eventJoinCount",event_no);
+		return sqlSession.selectOne("event.eventJoinCount", event_no);
 	}
-	
-	
 
 	public void insertEventJoin(EventJoin eventjoin) {
 		System.out.println(eventjoin);
-		sqlSession.insert("event.insertEventJoin",eventjoin);
-		
-		
+		sqlSession.insert("event.insertEventJoin", eventjoin);
+
 	}
 
 	public void deleteEventJoin(EventJoin eventjoin) {
-		sqlSession.delete("event.deleteEventJoin",eventjoin);
-		
+		sqlSession.delete("event.deleteEventJoin", eventjoin);
+
 	}
-	//이벤트 결과 글쓰기
+
+	// 이벤트 결과 글쓰기
 	public void cvseventResultView(EventResult eventResult) {
 		// TODO Auto-generated method stub
-		System.out.println("dao"+eventResult);
-		sqlSession.insert("event.cvseventResultwrite", eventResult); 
-		
+		System.out.println("dao" + eventResult);
+		sqlSession.insert("event.cvseventResultwrite", eventResult);
+
 	}
-	//이벤트 참여----------------------------------------------------------
+
+	// 이벤트 참여----------------------------------------------------------
 	public int eventJoincheck(EventJoin eventjoin) {
 		return sqlSession.selectOne("event.eventJoincheck", eventjoin);
 	}
 
-	public List<Event> cvsEvent(int startRow, int endRow,  int edno, int brand_no) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("startRow", startRow); 
+	public List<Event> cvsEvent(int startRow, int endRow, int edno, int brand_no) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("startRow", startRow);
 		map.put("endRow", endRow);
-		map.put("edno",edno);
-		map.put("brand_no",brand_no);
+		map.put("edno", edno);
+		map.put("brand_no", brand_no);
 		return sqlSession.selectList("event.cvsEvent", map);
 	}
 
 	public int cvsGetListCount(int edno, int brand_no) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("edno",edno);
-		map.put("brand_no",brand_no);
-		return sqlSession.selectOne("event.cvsGetListCount",map);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("edno", edno);
+		map.put("brand_no", brand_no);
+		return sqlSession.selectOne("event.cvsGetListCount", map);
 	}
-//-------------------------------------------------------------------
-	//진행중,종료된 이벤트 리스트 출력
+
+	// -------------------------------------------------------------------
+	// 진행중,종료된 이벤트 리스트 출력
 	public List<Event> selectEventList(int startRow, int endRow, int edno) {
-		Map<String,Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
 		map.put("edno", edno);
-		return sqlSession.selectList("event.cvsEventDate",map);
+		return sqlSession.selectList("event.cvsEventDate", map);
 	}
 
 	public int edlistCount(int edno) {
-		Map<String,Object>map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("endo", edno);
-		return sqlSession.selectOne("event.edlistCount",map);
+		return sqlSession.selectOne("event.edlistCount", map);
 	}
-	
 
-	
 }

@@ -253,7 +253,7 @@
 <c:import url="../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
 <!-- JS -->
-<script type="text/javascript" src="/everycvs/resources/user/js/map2.js"></script>
+<script type="text/javascript" src="/everycvs/resources/user/js/map.js"></script>
 <!-- JS -->
 <c:import url="../include/user/common/end.jsp"></c:import>
 <!-- === END FOOTER === -->

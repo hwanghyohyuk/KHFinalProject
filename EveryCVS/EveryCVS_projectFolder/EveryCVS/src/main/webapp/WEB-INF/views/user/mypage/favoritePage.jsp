@@ -21,16 +21,7 @@
 		<div class="row margin-vert-40">
 			<!-- Begin Sidebar Menu -->
 			<div class="col-md-3">
-				<ul class="list-group sidebar-nav" id="sidebar-nav">
-					<!-- 기프티콘 보관함 -->
-					<li class="list-group-item list-toggle"><a href="/everycvs/gifticonPage.do">기프티콘 보관함</a></li>
-
-					<!-- 관심목록 -->
-					<li class="list-group-item list-toggle"><a href="/everycvs/user/favoriteList.do">관심목록</a></li>
-
-					<!-- 회원탈퇴 -->
-					<li class="list-group-item list-toggle"><a href="#">회원탈퇴</a></li>
-				</ul>
+				<c:import url="../../include/user/common/mypageSidebarMenu.jsp"></c:import>
 			</div>
 			<!-- End Sidebar Menu -->
 			<div class="col-md-9">
@@ -50,7 +41,7 @@
 								<c:forEach var="favorite" items="${flist}">
 									<tr class="text-center">
 										<td>${favorite.brand_name}</td>
-										<td>${favorite.store_name}</td>
+										<td><a href="/everycvs/page/storemain.do?sno=${favorite.store_no}">${favorite.store_name}</a></td>
 										<td><a id="productName" data-toggle="modal" data-target="#myModal" style="cursor: pointer;"
 										onclick="show_modal('${favorite.brand_name}', '${favorite.store_name}', '${favorite.product_name}',
 										 '${favorite.stored_file_name}', '${favorite.store_no}','${favorite.min_expiration_minute }');">
@@ -151,7 +142,7 @@
 	function show_modal(brand_name, store_name, product_name, stored_file_name, store_no,minute) {
 		sno = store_no;
 		var day = Math.floor(minute/(60*24));
-		var hour = Math.floor(minute%24);
+		var hour = Math.floor((minute/60)%24);
 		var minute = Math.floor(minute%60);
 		var sday='';
 		var shour='';
