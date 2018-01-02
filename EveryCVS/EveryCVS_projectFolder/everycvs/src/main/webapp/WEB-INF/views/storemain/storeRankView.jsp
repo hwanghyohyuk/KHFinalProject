@@ -134,7 +134,7 @@
 																</div>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
-																		onclick="add_favorite('${sp.store_product_no}', '${sp.store_no}');">관심상품</button>
+																		onclick="add_favorite('${sp.product_no}', '${sp.store_no}');">관심상품</button>
 																	&nbsp;
 																	<button type="button" class="btn btn-primary btn-sm"
 																		data-dismiss="modal">구매하기</button>
@@ -217,7 +217,7 @@
 																</div>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
-																	onclick="add_favorite('${sp.store_product_no}', '${sp.store_no}');">관심상품</button>
+																	onclick="add_favorite('${sp.product_no}', '${sp.store_no}');">관심상품</button>
 																	&nbsp;
 																	<button type="button" class="btn btn-primary btn-sm"
 																		data-dismiss="modal">구매하기</button>
@@ -318,7 +318,7 @@
 																	</div>
 																	<div class="modal-footer">
 																		<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
-																		onclick="add_favorite('${sp.store_product_no}', '${sp.store_no}');">관심상품</button>
+																		onclick="add_favorite('${sp.product_no}', '${sp.store_no}');">관심상품</button>
 																		&nbsp;
 																		<button type="button" class="btn btn-primary btn-sm"
 																			data-dismiss="modal">구매하기</button>
