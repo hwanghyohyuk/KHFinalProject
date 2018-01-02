@@ -64,7 +64,8 @@
    <select id="top3Sproduct" parameterType="string" resultType="list" resultMap="resultStoreProduct">
 		<![CDATA[
 			select * from (select rownum rnum, a.*
-			from (select * from store_popularity_product_view where store_no = #{store_no} order by purchase_count desc) a) 
+			from (select * from store_popularity_product_view where store_no = #{store_no}
+			and del_check like 'N' order by purchase_count desc) a) 
 			where rnum >= 1 and rnum <= 3
 		]]>	
 	</select>
@@ -72,27 +73,23 @@
 	<select id="new3Sproduct" parameterType="string" resultType="list" resultMap="resultStoreProduct">
 		<![CDATA[
 			select * from (select rownum rnum, a.*
-			from (select * from store_popularity_product_view where store_no = #{store_no} order by manufacture_date desc) a) 
+			from (select * from store_popularity_product_view where store_no = #{store_no}
+			and del_check like 'N' order by manufacture_date desc) a) 
 			where rnum >= 1 and rnum <= 3
 		]]>	
 	</select>
 	
-	<select id="getdcListCount" parameterType="hashmap" resultType="int">
-		select count(*) from store_popularity_product_view where store_no = #{store_no} and discount_no is not null 
-	</select>
-	
 	<select id="dcSproduct" parameterType="string" resultType="list" resultMap="resultStoreProduct">
 		   <![CDATA[
-      		select * from (
-            select rownum rnum, a.*
-            from store_popularity_product_view a where store_no = #{store_no} and del_check like 'N')
-            where rnum >= #{startRow} and rnum <= #{endRow}
+      		select * from store_popularity_product_view where store_no = #{store_no}
+      		and del_check like 'N' and discount_no is not null
            ]]>
    </select>
    
    <select id="expSproduct" parameterType="string" resultType="list" resultMap="resultStoreProduct">
 		   <![CDATA[
-      		select * from store_popularity_product_view where store_no = #{store_no} and expiration_hour <= 72 and expiration_hour > 0
+      		select * from store_popularity_product_view where store_no = #{store_no}
+      		and del_check like 'N' and expiration_hour <= 72 and expiration_hour > 0
            ]]>
    </select>
 	
