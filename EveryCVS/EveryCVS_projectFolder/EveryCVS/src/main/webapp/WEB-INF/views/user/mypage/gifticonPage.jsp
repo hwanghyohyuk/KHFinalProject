@@ -59,7 +59,7 @@
                                         </figure>
                                     </a>
                                 </div>
-                                <b>${glist.product_name }</b><br>
+                                <b style="color:#245256;">${glist.product_name }</b><br>
                                 <b>${glist.store_name }</b>
                             </div>
 							
@@ -79,8 +79,8 @@
 												 style="height:250px;">
 												<br><br>
 											
-											<b>${glist.product_name }</b>
-										<input type="hidden" id="bno_${glist.gifticon_no}" value="${glist.barcode_img_name}" >
+											<b style="color:#245256;">${glist.product_name }</b>
+										<input type="hidden" id="bno_${glist.gifticon_no}" value="${glist.barcode_img_name}">
 										<div id="bcTarget_${glist.gifticon_no}" align="center"></div>	
 										
 										<br>		
@@ -95,7 +95,7 @@
 											data-dismiss="modal">Close</button>
 									</div>
 								</div>
-							</div>
+						</div>
 						</div>
 						</c:forEach>
 
