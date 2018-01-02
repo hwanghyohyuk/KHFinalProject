@@ -41,7 +41,30 @@
 						<div class="col-md-12 portfolio-item margin-bottom-40">
 							
 							<div id="usereventlist">
-										
+								<c:forEach items="${event.list}" var="e" varStatus="status">
+								<c:if test="${ (status.index % 3)eq 0}">
+								<div class="row">
+								</c:if>
+								<div class="col-md-4">
+								<a href="/everycvs/eventDetail.do?no=${e.event_no}">
+									<figure>										
+										<img src="/everycvs/resources/upload/${e.stored_file_name}" alt="이벤트 이미지가 없습니다." class="jun_img">
+										<figcaption>
+											<input type="hidden" class="margin-top-20" value="${e.event_no}"/>
+											<h3 class="margin-top-20">${e.title}</h3>
+											<span>시작일:${e.start_date}</span> 
+											<br> 
+											<span>종료일:${e.end_date}</span>
+											<br>
+											<span>조회수:${e.readcount}</span>
+										</figcaption>						
+									</figure>
+									</a>	
+								</div>
+								<c:if test="${ ((status.index % 3)eq 2) || status.last}">
+								</div>
+								</c:if>
+								</c:forEach>		
 								</div>		
 							</div>
 						</div>
@@ -51,6 +74,43 @@
 								<nav>
 									<ul class="pagination" id="usereventpaging">
 
+										<c:if test="${event.currentPage <= 1}">
+											<li class="disabled"><a href="#" aria-label="Previous">
+													<span aria-hidden="true">&laquo;</span>
+											</a></li>
+										</c:if>
+
+										<c:if test="${event.currentPage > 1}">
+											<li><a
+												href="javascript:setPageNo(${event.currentPage - 1})"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+											</a></li>
+										</c:if>
+
+										<c:forEach var="i" begin="${event.startPage}"
+											end="${event.endPage}" step="1">
+											<c:if test="${event.currentPage eq i}">
+												<li class="disabled"><a href="#">${i}</a></li>
+											</c:if>
+
+											<c:if test="${event.currentPage ne i}">
+												<li><a href='javascript:setPageNo(${i})'>${i}</a></li>
+											</c:if>
+
+										</c:forEach>
+
+										<c:if test="${event.currentPage >= event.maxPage}">
+											<li class="disabled"><a href="#" aria-label="Next">
+													<span aria-hidden="true">&raquo;</span>
+											</a></li>
+										</c:if>
+
+										<c:if test="${event.currentPage < event.maxPage}">
+											<li><a
+												href='javascript:setPageNo(${event.currentPage + 1})'
+												aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+											</a></li>
+										</c:if>
 									</ul>
 								</nav>
 							</div>

@@ -29,10 +29,9 @@ public class GifticonContoller {
 	}
 	
 	//기프티콘 삭제 : 기프티콘 사용 후 리스트에서 삭제
-	/*@RequestMapping(value="deleteGifticon.do")
-	public ModelAndView deleteGifticon(Gifticon gifticon, ModelAndView mv) {
-	
-	}*/
+	public String deleteGifticon(HttpServletRequest request, HttpServletResponse response) {
+		return null;
+	}
 	
 	//기프티콘 페이지로 이동
 	@RequestMapping(value = "gifticonPage.do")

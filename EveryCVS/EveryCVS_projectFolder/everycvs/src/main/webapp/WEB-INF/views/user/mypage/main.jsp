@@ -43,18 +43,17 @@
 					<div class="col-md-6">
 
 						<!-- 나의 잔고 영역 -->
-						<div class="panel panel-default" style="height:220px;">
+						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title"><strong>나의 잔고</strong></h3>
+								<h3 class="panel-title">나의 잔고</h3>
 							</div>
 
 							<div class="panel-body" align="right" id="result">
 								
-								<b style="font-size: 20pt;"><br>
-								<b style="color:red;">
-								 <fmt:formatNumber value="${user.cash }" pattern="#,###"/>
-								</b>원</b>
-								&nbsp;&nbsp;&nbsp;&nbsp;
+								<b style="font-size: 20pt; color:red;">
+								 <fmt:formatNumber value="${user.cash }" pattern="#,###"/>원	
+								</b>
+
 								<button class="btn btn-primary" id="myBtn">충전하기</button>
 
 								<!-- Modal -->
@@ -69,7 +68,7 @@
 													style="color:#245256; font-weight: bold;">충전하기</h4>
 											</div>
 											
-											<form name="frm" id="frm"> 
+											<form name="frm" id="frm" method="post"> 
 											<div class="modal-body">
 												<p>- 1000원 이하의 금액은 충전 할 수 없습니다.</p>
 												<p>- 충전된 금액은 환불이 불가합니다.</p>
@@ -80,7 +79,7 @@
 														
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-primary"
+												<button type="submit" class="btn btn-primary"
 													    id="increBtn">충전하기</button>
 											</div>
 											</form>
@@ -189,13 +188,12 @@
 								<!-- 내가 쓴글 보기 영역 -->
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<h3 class="panel-title"><strong>내가 쓴글 보기</strong></h3>
+										<h3 class="panel-title">내가 쓴글 보기</h3>
 									</div>
 									<div class="panel-body">
-										<a href="" 
-										   style="margin-right: 50px; 
-										   font-size: 15pt; color:#245256;">
-										12개</a>
+										<a href="#" 
+										   style="margin-right: 50px; font-size: 15pt;">
+										   </a>	 개
 									</div>
 								</div>
 							</div>
@@ -204,10 +202,10 @@
 								<!-- 포인트 현황 -->
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<h3 class="panel-title"><strong>포인트 현황</strong></h3>
+										<h3 class="panel-title">포인트 현황</h3>
 									</div>
 									<div class="panel-body" align="right" style="font-size: 20pt;">
-											<b style="color:red;">${sessionScope.user.point}</b> point
+											${sessionScope.user.point} point
 									</div>
 								</div>
 							</div>
@@ -220,7 +218,7 @@
 						<div class="col-md-6">
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h3 class="panel-title"><strong>자주 구매한 목록</strong></h3>
+									<h3 class="panel-title">자주 구매한 목록</h3>
 								</div>
 								<div id="oftenPurchase" class="panel-body" align="left" style="font-size: 15pt;">
 									<c:forEach items="${top3List }" var="top3" begin="0" end="2" step="1">	
@@ -239,7 +237,7 @@
 						<div class="col-md-6">
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h3 class="panel-title"><strong>관심 목록</strong></h3>
+									<h3 class="panel-title">관심 목록</h3>
 								</div>
 								<div class="panel-body box-body no-padding" align="right" 
 									 style="font-size: 15pt;" >
@@ -299,9 +297,7 @@
 				 	async: false,
 				 	cache: false,
 					success: function(data){
-						$("#myModal").modal('hide');
 						cash = data.cash;	
-						return cash;
 						
 					},	
 					error: function(request, status, errorData){

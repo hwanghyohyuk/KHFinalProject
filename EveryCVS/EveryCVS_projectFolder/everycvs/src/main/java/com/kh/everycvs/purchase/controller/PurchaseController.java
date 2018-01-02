@@ -137,11 +137,6 @@ public class PurchaseController {
 		
 		int usingPoint = (price * purchase_quantity);
 		
-		Gifticon gifticon = new Gifticon();
-		
-		int intNum = (int)(Math.random() * 9999999) + 1000000;
-		String barcode = String.valueOf(intNum);
-		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("point", dp);
 		map.put("user_no", uno);
@@ -152,7 +147,6 @@ public class PurchaseController {
 		map.put("using_point", usingPoint);
 		map.put("accumulate_point", 0);
 		map.put("store_no", store_no);
-		map.put("barcode_img_name", barcode);
 		
 		int result = purchaseService.userDecrePoint(map);
 		int insertPurchaseList = purchaseService.userInsertPurchaseList(map);
@@ -167,7 +161,6 @@ public class PurchaseController {
 		mv.addObject("insertPurchaseList", insertPurchaseList);
 		mv.addObject("insertGifticon", insertGifticon);
 		mv.addObject("adminResultCash", adminResultCash);
-		mv.addObject("barcode_img_name", barcode);
 		
 		mv.setViewName("redirect:/page/splist.do");
 		

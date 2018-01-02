@@ -19,10 +19,10 @@ public interface EventService {
 	List<Event> eventTop3();
 	
 	//관리자 게시글 갯수 조회
-	int getListCount(int edno,String keyword,int user_no);
+	int getListCount(String keyword, int user_no);
 
 	// 관리자 이벤트 조회 : 모든 공식이벤트를 조회 및 검색
-	public List<Event> selectEventList(String keyword, int currentPage, int limit, int user_no, int edno);
+	public List<Event> selectEventList(String keyword, int currentPage, int limit, int user_no);
 	
 	//관리자 상세 조회
 	public Event cvsEventDetail(int eno);

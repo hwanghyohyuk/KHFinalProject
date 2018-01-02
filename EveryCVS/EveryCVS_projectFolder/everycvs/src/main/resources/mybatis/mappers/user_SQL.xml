@@ -67,7 +67,8 @@
     	]]>
 
 		<selectKey keyProperty="cash" resultType="int" order="AFTER">
-			select cash FROM tb_user WHERE user_no = #{user_no}
+			select
+			cash FROM tb_user WHERE user_no = #{user_no}
 		</selectKey>
 
 	</update>

@@ -37,17 +37,17 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public int getListCount(int edno,String keyword, int user_no) {
+	public int getListCount(String keyword, int user_no) {
 		// 관리자 게시글  조회
-		return eventDao.listCount(keyword, user_no, edno);
+		return eventDao.listCount(keyword, user_no);
 	}
 	
 	@Override
-	public List<Event> selectEventList(String keyword,int currentPage, int limit, int user_no, int edno){
+	public List<Event> selectEventList(String keyword,int currentPage, int limit, int user_no){
 		//관리자 페이징 및 검색
 	    int startRow = (currentPage - 1) * limit + 1;
-	    int endRow = startRow + limit - 1;
-	    return eventDao.selectEventList(keyword,startRow,endRow,user_no,edno);
+	    int endRow = startRow + limit - 1;        
+	    return eventDao.selectEventList(keyword,startRow,endRow,user_no);
 	}
 
 	@Override
