@@ -358,10 +358,10 @@
 															<strong>${sp.product_name}</strong>
 														</h5>
 														<c:set var="day">
-															<fmt:formatNumber value="${sp.expiration_minute/(24*60)-1}" type="number" maxFractionDigits="0" />
+															<fmt:parseNumber value="${sp.expiration_minute/(24*60)}" type="number" integerOnly="true" />
 														</c:set>
 														<c:set var="hour">
-															<fmt:formatNumber value="${(sp.expiration_minute/60)%24-1}" type="number" maxFractionDigits="0" />
+															<fmt:parseNumber value="${(sp.expiration_minute/60)%24}" type="number" integerOnly="true" />
 														</c:set>
 														<c:set var="minute" value ="${sp.expiration_minute%60}"></c:set>
 														<c:choose>
@@ -438,7 +438,7 @@
 																	</div>
 																	<div class="modal-footer">
 																		<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
-																		onclick="add_favorite('${sp.store_product_no}', '${sp.store_no}');">관심상품</button>
+																		onclick="add_favorite('${sp.product_no}', '${sp.store_no}');">관심상품</button>
 																		&nbsp;
 																		<button type="button" class="btn btn-primary btn-sm"
 																			data-dismiss="modal">구매하기</button>

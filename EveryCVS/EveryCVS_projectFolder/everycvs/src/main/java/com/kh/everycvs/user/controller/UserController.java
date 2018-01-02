@@ -45,8 +45,6 @@ public class UserController {
 	@Autowired
 	private PurchaseService purchaseService;
 	@Autowired
-	private FavoriteService favoriteService;
-	@Autowired
 	private StoreService storeService;
 	
 	/* 로그인 페이지 이동 */
