@@ -244,7 +244,7 @@
 										<strong>할인상품</strong>
 									</h4>
 								</div>
-								<div style="overflow-x: hidden; width: 480px; height: 235px;">
+								<div style="overflow-x: hidden; width: 480px; height: 260px;">
 									<div id="collapse-One" class="accordion-body collapse in">
 										<div class="panel-body">
 											<div class="row">
@@ -257,7 +257,7 @@
 														<h5 align="center">
 															<strong>${sp.product_name}</strong>
 														</h5>
-														<h6 align="center" style="color: red;">${sp.discount_name}</h6>
+														<h6 align="center" style="color: red;">${sp.discount_name}</h6><br>
 														<!-- Modal -->
 														<div id="cmodal${sp.store_product_no}" class="modal fade"
 															role="dialog">
@@ -344,7 +344,7 @@
 										<strong>유통기한 임박상품</strong>
 									</h4>
 								</div>
-								<div style="overflow-x: hidden; width: 480px; height: 235px;">
+								<div style="overflow-x: hidden; width: 480px; height: 260px;">
 									<div id="collapse-One" class="accordion-body collapse in">
 										<div class="panel-body">
 											<div class="row">
@@ -369,7 +369,7 @@
 																<h6 align="center" style="color: red; font-size: 10pt;">${day}일 ${hour}시간<br>남았습니다.
 																</h6>
 															</c:otherwise>
-														</c:choose>
+														</c:choose><br>
 														<!-- Modal -->
 														<div id="dmodal${sp.store_product_no}" class="modal fade"
 															role="dialog">
