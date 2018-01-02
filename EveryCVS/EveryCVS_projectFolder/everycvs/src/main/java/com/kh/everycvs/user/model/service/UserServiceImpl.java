@@ -252,5 +252,4 @@ public class UserServiceImpl implements UserService {
 		return userDao.userList(startRow,endRow);
 	}
 
-
 }
