@@ -389,9 +389,11 @@ public class UserController {
 	}
 
 	/** 회원탈퇴 **/
-	public String deleteUser(HttpSession session) {
+	@RequestMapping("/user/deleteuser.do")
+	@ResponseBody
+	public int deleteUser(HttpSession session) {
 
-		return null;
+		return 0;
 	}
 
 	/** 정보수정페이지 이동**/

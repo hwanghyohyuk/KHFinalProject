@@ -21,16 +21,7 @@
 		<div class="row margin-vert-40">
 			<!-- Begin Sidebar Menu -->
 			<div class="col-md-3">
-				<ul class="list-group sidebar-nav" id="sidebar-nav">
-					<!-- 기프티콘 보관함 -->
-					<li class="list-group-item list-toggle"><a href="/everycvs/gifticonPage.do">기프티콘 보관함</a></li>
-
-					<!-- 관심목록 -->
-					<li class="list-group-item list-toggle"><a href="/everycvs/user/favoriteList.do">관심목록</a></li>
-
-					<!-- 회원탈퇴 -->
-					<li class="list-group-item list-toggle"><a href="#">회원탈퇴</a></li>
-				</ul>
+				<c:import url="../../include/user/common/mypageSidebarMenu.jsp"></c:import>
 			</div>
 			<!-- End Sidebar Menu -->
 			<div class="col-md-9">
