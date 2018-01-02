@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -212,14 +213,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int deleteUser(int user_no) {
-		return userDao.deleteUser(user_no);
+	public int deleteUser(String email) {
+		return userDao.deleteUser(email);
 	}
 	
-	@Override
-	public Map<String, Object> userList(String page, String keyword) {
-		return userDao.userList(page, keyword);
-	}
+
 
 	@Override
 	public int increMoney(Map<String, Object> map) {
@@ -244,6 +242,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int encModifyUserpwd(User user) {
 		return userDao.modifyUserpwd(user);
+	}
+
+	@Override
+	public List<User> userList(int page) {
+		int limit = 10;
+		int startRow = (limit*(page-1))+1;
+		int endRow = startRow+limit-1;
+		return userDao.userList(startRow,endRow);
 	}
 
 

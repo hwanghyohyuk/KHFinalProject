@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -87,6 +88,10 @@ public class UserController {
 		User user = userService.encSignIn(signin);
 
 		if (user != null) { // 로그인 성공
+			if(user.getUser_state()==1){//사용자의 계정의 상태가 1이면, 즉 비활성화된상태면
+				result=-1;
+				return result;
+			}
 			session.setAttribute("user", user); // 세션에 user란 이름으로 User 객체를 저장한다.
 
 			switch (user.getJob()) {
@@ -130,9 +135,7 @@ public class UserController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
 			}
-
 		} else { // 로그인에 실패한 경우
 			result = 0;
 		}
@@ -385,10 +388,10 @@ public class UserController {
 	}
 
 	/** 회원탈퇴 **/
-	@RequestMapping("/user/deleteuser.do")
+	@RequestMapping("/ajax/deleteuser.do")
 	@ResponseBody
-	public int deleteUser(HttpSession session) {
-		return 0;
+	public int deleteUser(@RequestParam("userEmail")String email) {
+		return userService.deleteUser(email);
   	}
 	
 	/** 정보수정페이지 이동 **/
@@ -620,11 +623,19 @@ public class UserController {
 
 	/*** 사이트 관리자 ***/
 
-	/** 회원 목록 및 검색 **/
+	/** 회원 목록**/
 	@RequestMapping("/admin/manageUser.do")
-	public ModelAndView userList(@RequestParam(value = "p", required = false, defaultValue = "1") String page,
-			@RequestParam(value = "kwd", required = false, defaultValue = "") String keyword) {
-		ModelAndView mv = new ModelAndView("admin/sitemanager/usermanage");
+	public ModelAndView manageUser(ModelAndView mv) {
+		mv.setViewName("admin/sitemanager/usermanage");
+		return mv;
+	}
+	
+	@RequestMapping("/ajax/userlist.do")
+	@ResponseBody
+	public ModelAndView userList(ModelAndView mv,@RequestParam(value = "page", required = false, defaultValue = "1") int page) {
+		mv.setViewName("jsonView");
+		List<User>userlist = userService.userList(page);
+		mv.addObject("userlist", userlist);
 		return mv;
 	}
 

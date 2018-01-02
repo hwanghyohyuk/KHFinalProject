@@ -193,14 +193,20 @@
  	]]>
 	</update>
 
-	<update id="deleteUser" parameterType="_int">
+	<update id="deleteUser" parameterType="string">
 	<![CDATA[
-	update tb_user set user_state = 1 where user_no=#{user_no}
+	update tb_user set user_state = 1 where email=#{email}
 	]]>
 	</update>
 
 	<select id="registUserCount" resultType="_int">
 	<![CDATA[select count(*) from tb_user where to_char(sysdate,'yy-mm-dd')=to_char(enroll_date,'yy-mm-dd')]]>
+	</select>
+	
+	<select id="userList">
+	<![CDATA[
+	select * from(select rownum as rnum,a.* from user_view a where job='customer' order by user_name asc) where rnum>=#{startRow} and rnum<=#{endRow}
+	]]>
 	</select>
 
 </mapper>
