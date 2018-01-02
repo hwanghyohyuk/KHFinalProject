@@ -77,16 +77,9 @@
 		]]>	
 	</select>
 	
-	<select id="getdcListCount" parameterType="hashmap" resultType="int">
-		select count(*) from store_popularity_product_view where store_no = #{store_no} and discount_no is not null 
-	</select>
-	
 	<select id="dcSproduct" parameterType="string" resultType="list" resultMap="resultStoreProduct">
 		   <![CDATA[
-      		select * from (
-            select rownum rnum, a.*
-            from store_popularity_product_view a where store_no = #{store_no} and del_check like 'N')
-            where rnum >= #{startRow} and rnum <= #{endRow}
+      		select * from store_popularity_product_view where store_no = #{store_no} and discount_no is not null
            ]]>
    </select>
    
