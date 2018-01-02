@@ -33,7 +33,7 @@ public class EventController {
 	
 	@Autowired
 	private EventService eventService;
-	//--------------------------- 이벤트 사용자 글보고 이벤트참여하도록 확인해야함----------------------------------
+	//---------------------------사용자----------------------------------
 	/*사용자 : 이벤트 메인*/
 	@RequestMapping(value="test/page/eventmain.do", method=RequestMethod.GET)
 	public ModelAndView eventList(ModelAndView mv) {
@@ -79,7 +79,8 @@ public class EventController {
 	
 	//사용자 이벤트 결과 리스트를 보여주는 화면
 	@RequestMapping(value = "eventresultlist.do", method = RequestMethod.GET)
-	public ModelAndView eventResultList(@RequestParam(value="keyword",required = false, defaultValue="") String keyword, String page, HttpSession session) {
+	public ModelAndView eventResultList(@RequestParam(value="keyword",required = false, defaultValue="") String keyword, String page, HttpSession session,
+			@RequestParam(value="edno")int edno) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("event/result/eventresultlist");
 		int user_no = ((User)session.getAttribute("user")).getUser_no();
@@ -88,7 +89,7 @@ public class EventController {
 	       List<EventResult> list = eventService.resultEventList(keyword,currentPage, limit);
 	                System.out.println("이벤트결과list : " + list);
 	          Map<String, Object> map = new HashMap<String, Object>();
-	          int listCount = eventService.getListCount(keyword,user_no);
+	          int listCount = eventService.getListCount(edno,keyword,user_no);
 	          int maxPage = (int) ((double) listCount / limit + 0.9);
 	          int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
 	          int endPage = startPage + limit - 1;
@@ -108,7 +109,6 @@ public class EventController {
 	          
 		}
 	
-	
 	//사용자 이벤트 결과 상세조회
 	@RequestMapping(value="eventwin.do", method=RequestMethod.GET)
 	public ModelAndView eventResultWin(@RequestParam int rno) {
@@ -121,7 +121,6 @@ public class EventController {
 		
 	}
 	
-
 	// 사용자 이벤트 조회 : 선택한 이벤트 상세조회
 	@RequestMapping(value="eventDetail.do", method=RequestMethod.GET)
 	public ModelAndView selectEventOne(@RequestParam int no,HttpSession session) {
@@ -145,31 +144,35 @@ public class EventController {
 	}
 	
 	
-
 	
-	//--------------------------- 날짜 별로보는거랑 각 편의점관리자 마다 보이는 리스트 다르게----------------------------------
+	//--------------------------- 검색 및 이벤트 결과 글쓰기 해야함----------------------------------
 	// 편의점 관리자 
-	// 이벤트 조회 : 모든 공식이벤트를 조회 및 제목 + 내용 검색
-	@RequestMapping(value = "cvseventlist.do", method = RequestMethod.GET)
-	public ModelAndView eventLis(@RequestParam(value="keyword",required = false, defaultValue="") String keyword, String page, HttpSession session){
+	// 이벤트 조회 : 모든 공식이벤트를 조회 및 제목 + 내용 검색 edno가 안넘어와서 검색 에러 ...
+	@RequestMapping(value = "cvseventlist.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> eventLis(@RequestParam("edno")int edno,
+			@RequestParam("page") int page, @RequestParam(value="keyword",required = false, defaultValue="") String keyword, 
+			HttpSession session){
+		Map<String,Object> map = new HashMap<String, Object>();
 		
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("admin/cvsmanager/eventList");
-		  int currentPage = 1;
+		  int currentPage = page;
           int limit = 10;
           
+          System.out.println("edno:"+edno);
+          System.out.println("keyword"+keyword);
+          
           int user_no = ((User)session.getAttribute("user")).getUser_no();
-          List<Event> list = eventService.selectEventList(keyword,currentPage, limit, user_no);
+          List<Event> list = eventService.selectEventList(keyword,currentPage, limit, user_no, edno);
                 System.out.println("관리자list : " + list);
-                              
-          Map<String, Object> map = new HashMap<String, Object>();
-          int listCount = eventService.getListCount(keyword,user_no);
+         
+          int listCount = eventService.getListCount(edno,keyword,user_no);
           
           int maxPage = (int) ((double) listCount / limit + 0.9);
           int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
           int endPage = startPage + limit - 1;
            if (maxPage < endPage)
                    endPage = maxPage;
+           
            	map.put("currentPage", currentPage);
             map.put("listCount", listCount);
             map.put("maxPage", maxPage);
@@ -177,63 +180,16 @@ public class EventController {
             map.put("endPage", endPage);
             map.put("limit", limit);
             map.put("list", list);
-          mv.addObject("list",list);
-          mv.addObject("event", map);      
-          return mv;
-			
-	/*	날짜별로 바꾸는것 해야함
-	 * int code = Integer.parseInt(request.getParameter("code"));
-		if(code == 1) {
-			// 진행 중인 이벤트 리스트 조회
-		}else if (code == 2) {
-			// 종료된 이벤트 리스트 조회
-		}*/
-	}
-	@RequestMapping(value="pageload.do")
-	@ResponseBody
-    public ModelAndView pageload(ModelAndView mv, @RequestParam("page") int page, HttpServletRequest request,@RequestParam(value="keyword",required = false, defaultValue="") String keyword, HttpSession session) {
-		 int currentPage = page;
-         int limit = 10;
-         
-         int user_no = ((User)session.getAttribute("user")).getUser_no();
-         
-         List<Event> list = eventService.selectEventList(keyword, currentPage, limit, user_no);
-         
-         Map<String, Object> map = new HashMap<String, Object>();
-         int listCount = eventService.getListCount(keyword,user_no);
-         int maxPage = (int) ((double) listCount / limit + 0.9);
-         int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
-         int endPage = startPage + limit - 1;
-          if (maxPage < endPage) {
-                  endPage = maxPage;
-          }
-          
-          map.put("currentPage", currentPage);
-          map.put("listCount", listCount);
-          map.put("maxPage", maxPage);
-          map.put("startPage", startPage);
-          map.put("endPage", endPage);
-          map.put("limit", limit);
             
-          JSONArray jar = new JSONArray();
-            
-          for(Event ev : list)
-            {
-               JSONObject jev = new JSONObject();
-               jev.put("event_no", ev.getEvent_no());
-               jev.put("title", ev.getTitle());
-               jev.put("start_date",ev.getStart_date().toString());
-               jev.put("end_date", ev.getEnd_date().toString());
-               jev.put("readcount", ev.getReadcount());
-               jar.add(jev);
-            }
-            
-           map.put("list", jar);
-           mv.addAllObjects(map);
-           mv.setViewName("jsonView");
-         
-         return mv;
-		
+          return map;   
+    }
+	//관리자 이벤트 리스트 이동
+	@RequestMapping(value = "cvseventlist.do", method = RequestMethod.GET)
+	public ModelAndView eventLis(ModelAndView mv,@RequestParam("code")int code,HttpSession session){
+		mv.setViewName("admin/cvsmanager/eventList");
+		mv.addObject("code", code);
+		System.out.println("code:"+code);
+		return mv;
 	}
 	
 	//관리자 디테일
@@ -337,7 +293,7 @@ public class EventController {
 	//삭제 끝
 	
 	
-	//이벤트 참여하기
+	//이벤트 참여하기-----------------------------------------------------------
 	@RequestMapping(value="eventJoin.do", method = RequestMethod.POST)
 	public ModelAndView eventJoin(EventJoin eventjoin) {
 

@@ -34,18 +34,28 @@ public class EventDao {
 		return sqlSession.selectList("event.eventTop3");
 	}
 	
-	public List<Event> selectEventList(String keyword, int startRow, int endRow, int user_no) {
+	public List<Event> selectEventList(String keyword, int startRow, int endRow, int user_no,int edno) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("startRow", startRow); 
 		map.put("endRow", endRow);
 		map.put("user_no", user_no);
-		if(user_no==2 && keyword.equals("")) {//gs관리자
+		map.put("edno", edno);
+		if(user_no==2 && keyword.equals("") && edno==1) {//gs관리자
 			return sqlSession.selectList("event.cvseventlist1",map);
-		}else if(user_no==3 && keyword.equals("")) {//cu
+		}else if(user_no==3 && keyword.equals("") && edno==1) {//cu
 			return sqlSession.selectList("event.cvseventlist2",map);
-		}else if(user_no==4 && keyword.equals("")) {//event
+		}else if(user_no==4 && keyword.equals("") && edno==1) {//event
 			return sqlSession.selectList("event.cvseventlist3",map);
-		}else if(user_no >4 && keyword.equals("")) {
+		}else if(user_no >4 && keyword.equals("") && edno==1) {
+			return sqlSession.selectList("event.cvseventlist",map);
+		} //여기까지가 진행중
+		else if(user_no==2 && keyword.equals("") && edno==2) {//gs관리자
+			return sqlSession.selectList("event.cvseventlist1",map);
+		}else if(user_no==3 && keyword.equals("") && edno==2) {//cu
+			return sqlSession.selectList("event.cvseventlist2",map);
+		}else if(user_no==4 && keyword.equals("") && edno==2) {//event
+			return sqlSession.selectList("event.cvseventlist3",map);
+		}else if(user_no >4 && keyword.equals("") && edno==2) {
 			return sqlSession.selectList("event.cvseventlist",map);
 		}
 		else{
@@ -55,7 +65,6 @@ public class EventDao {
 			System.out.println("keyword"+ keyword);
 			return sqlSession.selectList("event.cvseventsearch",map);
 		}
-		
 		/*if(keyword.equals("")) {
 		return sqlSession.selectList("event.cvseventlist",map);
 	}*/
@@ -69,19 +78,30 @@ public class EventDao {
 		return sqlSession.selectList("event.resulteventlist",map);
 	}
 	//관리자 검색 후 게시글 갯수
-	public int listCount(String keyword, int user_no) {
+	public int listCount(String keyword, int user_no, int edno) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		if(!keyword.equals("")){
+		if(!keyword.equals("") && edno == 1){
 			map.put("mainkeyword", "%"+keyword+"%");
 			map.put("subkeyword", "%"+keyword+"%");
 			return sqlSession.selectOne("event.getSearchCount",map);
-		}else if(user_no==2) {
+		}else if(!keyword.equals("") && edno == 2){
+			map.put("mainkeyword", "%"+keyword+"%");
+			map.put("subkeyword", "%"+keyword+"%");
+			return sqlSession.selectOne("event.getSearchCount",map);
+		}
+		else if(user_no==2 && edno == 1) {
 			return sqlSession.selectOne("event.gsListCount");
-			
-		}else if(user_no==3) {
+		}else if(user_no==3 && edno == 1) {
 			return sqlSession.selectOne("event.cuListCount");
-		}else if(user_no==4) {
+		}else if(user_no==4 && edno == 1) {
+			return sqlSession.selectOne("event.sevenListCount");
+		}//여기까지가 진행중
+		else if(user_no==2 && edno == 2) {
+			return sqlSession.selectOne("event.gsListCount");
+		}else if(user_no==3 && edno == 2) {
+			return sqlSession.selectOne("event.cuListCount");
+		}else if(user_no==4 && edno == 2) {
 			return sqlSession.selectOne("event.sevenListCount");
 		}
 		else{
