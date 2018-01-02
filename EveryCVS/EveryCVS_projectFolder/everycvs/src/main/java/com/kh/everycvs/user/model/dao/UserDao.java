@@ -147,11 +147,22 @@ public class UserDao{
 		return sqlSession.update("user.updateUserImg", user);
 	}
 
-	public List<User> userList(int startRow, int endRow) {
+	public List<User> userList(int startRow, int endRow, int jobno, int orderby, String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
+		map.put("jobno", jobno);
+		map.put("orderby", orderby);
+		if(!keyword.equalsIgnoreCase("")){
+			map.put("keyword", "%"+keyword+"%");
+		}		
 		return sqlSession.selectList("user.userList", map);
+	}
+
+	public int userCount(int jobno) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("jobno", jobno);
+		return sqlSession.selectOne("user.userCount",map);
 	}
 
 

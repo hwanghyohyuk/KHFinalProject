@@ -92,8 +92,14 @@ public interface UserService {
 	/* 사이트 관리자 */
 	//회원 등록 수
 	int registUserCount();
-	/** 회원 목록 및 검색 **/
-	List<User> userList(int page);
+	/** 회원 목록 및 검색 
+	 * @param keyword 
+	 * @param orderby 
+	 * @param jobno 
+	 * @param limit **/
+	List<User> userList(int page, int limit, int jobno, int orderby, String keyword);
+
+	int userCount(int jobno);
 
 
 

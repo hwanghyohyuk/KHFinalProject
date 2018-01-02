@@ -21,21 +21,21 @@
 				<br>
 				<br>
 				<div class="row">
- +				<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
- +					<div class="thumbnail-wrapper"> 
- +						<div class="thumbnail"> 
- +							<div class="centered"> 
- +							<c:if test="${user.stored_file_name eq null || user.stored_file_name eq ''}">
- +							<img id="userimg" src="/everycvs/resources/user/img/user.png">
- +							</c:if>
- +							<c:if test="${user.stored_file_name ne null && user.stored_file_name ne ''}">
- +							<img id="userimg" src="/everycvs/resources/upload/${user.stored_file_name }">
- +							</c:if>
- +							</div>
- +						</div>
- +					</div>
- +				</div>	
- +				</div>
+ 				<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+ 					<div class="thumbnail-wrapper"> 
+ 						<div class="thumbnail"> 
+ 							<div class="centered"> 
+ 							<c:if test="${user.stored_file_name eq null || user.stored_file_name eq ''}">
+ 							<img id="userimg" src="/everycvs/resources/user/img/user.png">
+ 							</c:if>
+ 							<c:if test="${user.stored_file_name ne null && user.stored_file_name ne ''}">
+ 							<img id="userimg" src="/everycvs/resources/upload/${user.stored_file_name }">
+ 							</c:if>
+ 							</div>
+ 						</div>
+ 					</div>
+ 				</div>	
+ 				</div>
 				<div class="row center-block">
 					<p class="text-center lead"><b>
 					${user.user_name}

@@ -245,11 +245,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> userList(int page) {
-		int limit = 10;
-		int startRow = (limit*(page-1))+1;
-		int endRow = startRow+limit-1;
-		return userDao.userList(startRow,endRow);
+	public List<User> userList(int currentPage, int limit, int jobno, int orderby, String keyword) {
+		int startRow = (currentPage - 1) * limit + 1;
+	    int endRow = startRow + limit - 1;        
+	    return userDao.userList(startRow,endRow,jobno, orderby,keyword);
+	}
+
+	@Override
+	public int userCount(int jobno) {
+		return userDao.userCount(jobno);
 	}
 
 }

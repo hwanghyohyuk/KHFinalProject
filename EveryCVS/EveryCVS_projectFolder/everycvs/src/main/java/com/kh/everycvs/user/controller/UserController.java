@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
 import com.kh.everycvs.common.model.vo.EmailCertification;
+import com.kh.everycvs.common.model.vo.Event;
 import com.kh.everycvs.common.model.vo.Favorite;
 import com.kh.everycvs.common.model.vo.PassLink;
 import com.kh.everycvs.common.model.vo.Purchase;
@@ -632,11 +633,30 @@ public class UserController {
 	
 	@RequestMapping("/ajax/userlist.do")
 	@ResponseBody
-	public ModelAndView userList(ModelAndView mv,@RequestParam(value = "page", required = false, defaultValue = "1") int page) {
-		mv.setViewName("jsonView");
-		List<User>userlist = userService.userList(page);
-		mv.addObject("userlist", userlist);
-		return mv;
+	public Map<String, Object> userList(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+			@RequestParam(value = "jobno", required = false, defaultValue = "1") int jobno,
+			@RequestParam(value = "orderby", required = false, defaultValue = "0") int orderby,
+			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		int currentPage = page;
+		int limit = 10;
+		int userCount = userService.userCount(jobno);
+		List<User>userlist = userService.userList(currentPage,limit,jobno,orderby,keyword);
+		int maxPage = (int) ((double) userCount / limit + 0.9);
+		int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
+		int endPage = startPage + limit - 1;
+		if (maxPage < endPage)
+			endPage = maxPage;
+		
+		map.put("userlist", userlist);
+		map.put("currentPage", currentPage);
+		map.put("listCount", userCount);
+		map.put("maxPage", maxPage);
+		map.put("startPage", startPage);
+		map.put("endPage", endPage);
+		map.put("limit", limit);		
+		
+		return map;
 	}
-
 }
