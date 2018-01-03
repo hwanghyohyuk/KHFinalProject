@@ -71,7 +71,7 @@ public class EventDao {
 	}
 
 	// 사용자 이벤트 결과 리스트 불러오기
-	public List<EventResult> resultEventList(String keyword, int startRow, int endRow) {
+	public List<EventResult> resultEventList(int startRow, int endRow) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
@@ -261,5 +261,10 @@ public class EventDao {
 		} else {
 			return sqlSession.selectOne("event.getListCount");
 		}
+	}
+
+	public int eventResultDelete(int rno) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("event.eventResultDelete", rno);
 	}
 }

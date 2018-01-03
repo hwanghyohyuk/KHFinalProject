@@ -72,16 +72,18 @@ public class EventController {
 
 	// 사용자 이벤트 결과 리스트를 보여주는 화면
 	@RequestMapping(value = "eventresultlist.do", method = RequestMethod.GET)
-	public ModelAndView eventResultList(
-			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword, String page,
-			HttpSession session) {
+	public ModelAndView eventResultList(String page, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("event/result/eventresultlist");
+		
 		int user_no = ((User) session.getAttribute("user")).getUser_no();
 		int currentPage = 1;
 		int limit = 10;
-		List<EventResult> list = eventService.resultEventList(keyword, currentPage, limit);
-		System.out.println("이벤트결과list : " + list);
+		
+		if (page != null)
+			currentPage = Integer.parseInt(page);
+		
+		List<EventResult> list = eventService.resultEventList(currentPage, limit);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		int listCount = eventService.getListCount(user_no);
 		int maxPage = (int) ((double) listCount / limit + 0.9);
@@ -97,6 +99,7 @@ public class EventController {
 		map.put("endPage", endPage);
 		map.put("limit", limit);
 		map.put("list", list);
+		mv.setViewName("event/result/eventresultlist");
 		mv.addObject("ewlevent", map);
 
 		return mv;
@@ -137,8 +140,7 @@ public class EventController {
 		return null;
 	}
 
-	// --------------------------- 검색 및 이벤트 결과 글쓰기
-	// 해야함----------------------------------
+	
 	// 편의점 관리자
 	// 이벤트 조회 : 모든 공식이벤트를 조회 및 제목 + 내용 검색 edno가 안넘어와서 검색 에러 ...
 	@RequestMapping(value = "cvseventlist.do", method = RequestMethod.POST)
@@ -291,6 +293,12 @@ public class EventController {
 	public String deleteEvent(@RequestParam int no) {
 		eventService.eventDelete(no);
 		return "redirect:/cvseventlist.do";
+	}
+	//이벤트 결과 삭제
+	@RequestMapping(value = "eventResultDelete.do")
+	public String deleteEventResult(@RequestParam int rno) {
+		eventService.eventResultDelete(rno);
+		return "redirect:/eventresultlist.do";
 	}
 	// 삭제 끝
 

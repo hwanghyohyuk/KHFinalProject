@@ -51,7 +51,13 @@
 								<br><hr><br>
 							</div>
 							<div align="center">
+							<c:if test="${sessionScope.user.user_no eq ert.writer }">
+							 <a href="/everycvs/eventResultDelete.do?rno=${ert.event_result_no }" class="btn btn-primary">삭제</a>
 								<a href="/everycvs/eventresultlist.do" class="btn btn-primary">목록</a>
+								</c:if>
+								<c:if test="${sessionScope.user.user_no ne ert.writer }">
+								<a href="/everycvs/eventresultlist.do" class="btn btn-primary">목록</a>
+								</c:if>
 							</div>
 							<br>
 						</div>

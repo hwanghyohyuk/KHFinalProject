@@ -191,14 +191,12 @@
 	</select>
 
 
-
-
 	<!-- 이벤트 결과 조회 -->
 	<select id="resulteventlist" resultType="list" parameterType="java.util.Map"
 		resultMap="resultWin">
 		<![CDATA[
 			select * from(select rownum rnum, T.* 
-			from (select * from event_result_view
+			from (select * from event_result_view where del_check = 'N'
 			order by event_result_no desc ) T ) a where a.rnum >=#{startRow} and a.rnum <=#{endRow}
 
 		]]>
@@ -280,6 +278,12 @@
 	<update id="eventDelete" parameterType="_int" flushCache="true">
 		<![CDATA[
 		update tb_event set del_check = 'Y' where event_no=#{event_no}
+		]]>
+	</update>
+	
+	<update id="eventResultDelete" parameterType="_int" flushCache="true">
+		<![CDATA[
+		update tb_event_result set del_check = 'Y' where event_result_no=#{event_result_no}
 		]]>
 	</update>
 
