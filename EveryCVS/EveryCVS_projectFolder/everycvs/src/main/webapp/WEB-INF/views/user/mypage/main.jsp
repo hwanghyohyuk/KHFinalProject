@@ -7,17 +7,53 @@
 <!-- === BEGIN HEAD ===  -->
 <c:import url="../../include/user/common/head.jsp"></c:import>
 <c:import url="../../include/user/common/headend.jsp"></c:import>
+<link rel="stylesheet" href="/everycvs/resources/user/css/userinfo.css" type="text/css">
 <!-- === END HEAD ===  -->
 <!-- === BEGIN HEADER ===  -->
 <c:import url="../../include/user/common/header.jsp"></c:import>
 <!-- === END HEADER === -->
+		
 		<!-- === 본문내용 === -->
 		<div id="content">
 			<div class="container background-white">
 				<div class="row margin-vert-40">
 					<!-- Begin Sidebar Menu -->
-					<div class="col-md-3">
-						<c:import url="../../include/user/common/mypageSidebarMenu.jsp"></c:import>
+					<div class="col-md-3" align="center">
+					<div>
+					<img alt="이미지를 준비중입니다." 
+						 src="/everycvs/resources/upload/${user.stored_file_name }" 
+						 style="height:200px; text-align: center; border-radius: 150px; margin-bottom: 15px;"
+						 class="centered"
+						 >
+					</div>
+						<span style="font-size: 14pt;">${user.user_name}님</span><br>
+						<a href="/everycvs/user/infointro.do">내 정보 수정</a> 
+						<hr style="margin-top: 5px; margin-bottom: 2px;">
+						<ul class="list-group sidebar-nav" id="sidebar-nav">
+						
+							<!-- 마이페이지 -->
+							<li class="list-group-item list-toggle">
+							<a href="/everycvs/page/mypage.do">마이페이지</a>
+							</li>
+						
+							<!-- 기프티콘 보관함 -->
+							<li class="list-group-item list-toggle">
+							<a href="/everycvs/gifticonPage.do">기프티콘</a>
+								</li>
+							
+							<!-- 관심목록 -->
+							<li class="list-group-item list-toggle">
+							<a href="/everycvs/user/favoriteList.do">관심상품</a>
+							</li>
+								
+							<!-- 회원탈퇴 -->
+							<li class="list-group-item list-toggle"><a
+								data-toggle="collapse" data-parent="#sidebar-nav"
+								href="#collapse-icons">회원탈퇴</a>
+							</li>
+							
+							
+						</ul>
 					</div>
 					<!-- End Sidebar Menu -->
 					<div class="col-md-9">
@@ -31,16 +67,20 @@
 								<h3 class="panel-title"><strong>나의 잔고</strong></h3>
 							</div>
 
-							<div class="panel-body" align="right" id="result">
+							<div class="panel-body" align="right">
 								
-								<b style="font-size: 20pt;"><br>
- 								<b style="color:red;">
- 								 <fmt:formatNumber value="${user.cash }" pattern="#,###"/>
- 								</b>원</b>
- 								&nbsp;&nbsp;&nbsp;&nbsp;
-
+								<div id="divv" align="center">
+									<b style="font-size: 23pt;"><br>
+									<b style="color:rgb(255,22,133);">
+								
+									<fmt:formatNumber value="${user.cash }" pattern="#,###"/>
+								 
+								</b>원</b>
+								</div>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<br><br>
 								<button class="btn btn-primary" id="myBtn">충전하기</button>
-
+								&nbsp;&nbsp;	
 								<!-- Modal -->
 								<div class="modal fade" id="myModal" role="dialog">
 									<div class="modal-dialog">
@@ -74,7 +114,7 @@
 									</div>
 								</div>
 
-								<br><br>
+								
 								<button class="btn btn-primary" id="myBtn2">거래내역</button>
 
 								<!-- Modal -->
@@ -175,8 +215,10 @@
 									<div class="panel-heading">
 										<h3 class="panel-title"><strong>내가 쓴글 보기</strong></h3>
 									</div>
-									<div class="panel-body">
-										<a href="" style="margin-right: 50px; font-size: 15pt; color:#245256;">12개</a>
+									<div class="panel-body" align="right">
+										<strong><a href="" 
+										   style="font-size: 15pt; color:black;">
+										12</a></strong> 개
 									</div>
 								</div>
 							</div>
@@ -188,7 +230,7 @@
 										<h3 class="panel-title"><strong>포인트 현황</strong></h3>
 									</div>
 									<div class="panel-body" align="right" style="font-size: 20pt;">
-											<b style="color:red;">${sessionScope.user.point}</b> point
+											<b style="color:black;">${sessionScope.user.point}</b> point
 									</div>
 								</div>
 							</div>
@@ -205,10 +247,12 @@
 								</div>
 								<div id="oftenPurchase" class="panel-body" align="left" style="font-size: 15pt;">
 									<c:forEach items="${top3List }" var="top3" begin="0" end="2" step="1">	
-									<img src="/everycvs/resources/upload/${top3.stored_file_name}" 
-                                     style="height:100px; width:100px;">
-                                     <a href="/everycvs/page/splist.do" style="font-size: 11pt; margin-left: 10px;">${top3.product_name }</a>
-									 <b style="font-size: 10pt; margin-right: 10px;">${top3.store_name }</b><br>
+										<img src="/everycvs/resources/upload/${top3.stored_file_name}" 
+                                    		 style="height:100px; width:100px;">
+                                    		 <div style="display: inline-block; line-height: 16pt;">
+                                    	<a href="/everycvs/page/splist.do" style="font-size: 11pt;">
+                                    	${top3.store_name}<br>${top3.product_name}</a></div>
+                                    	 
 									</c:forEach>
 									
 								</div>
@@ -257,6 +301,8 @@
 				var cash;
 				$("#myModal").modal();
 				
+			});
+		});
 				//모달창의 충전 버튼을 클릭하면 ajax 통신이 시작
 				$("#increBtn").on("click", function(){
 					var incre = frm.increMoney.value;
@@ -281,8 +327,14 @@
 				 	cache: false,
 					success: function(data){
 						$("#myModal").modal('hide');
-  						cash = data.cash;	
- +						return cash;						
+						cash = data.cash;
+						var values ='<b style="font-size: 23pt;"><br>'
+						+'<b style="color:rgb(255,22,133);">'
+						+cash.toLocaleString()
+						+'</b>원</b>';
+
+						$("#divv").html(values);
+						
 					},	
 					error: function(request, status, errorData){
 						alert("error code: " + request.status + "/n" 
@@ -291,6 +343,7 @@
 					}
 				}); 
 				return cash;
+				
 					}
 				
 				if(con == false){
@@ -299,8 +352,7 @@
 					}
 					
 				});
-			});
-			});
+		
 	
 		//거래내역 모달창
 		$(document).ready(function() {
