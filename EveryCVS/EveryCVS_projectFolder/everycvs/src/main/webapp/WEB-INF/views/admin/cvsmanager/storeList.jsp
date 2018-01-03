@@ -22,7 +22,7 @@
 	<div id="content">
 		<div class="container background-white">
 			<h2 class="margin-bottom-30">
-				<b>GS25</b>&nbsp;&nbsp;Store management
+				<b>${sessionScope.user.brand_name}</b>&nbsp;&nbsp;Store management
 			</h2>
 
 			<!-- Accordion -->

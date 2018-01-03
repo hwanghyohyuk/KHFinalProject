@@ -20,7 +20,7 @@
 	<div class="container background-white">
 		<div class="row margin-vert-40">
 			<!-- Begin Sidebar Menu -->
-			<div class="col-md-3">
+			<div class="col-md-3" align="center">
 				<c:import url="../../include/user/common/mypageSidebarMenu.jsp"></c:import>
 			</div>
 			<!-- End Sidebar Menu -->
