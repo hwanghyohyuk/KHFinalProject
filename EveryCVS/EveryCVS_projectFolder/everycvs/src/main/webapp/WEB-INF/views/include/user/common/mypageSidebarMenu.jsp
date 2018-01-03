@@ -1,6 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<ul class="list-group sidebar-nav" id="sidebar-nav">
+					<div align="center">
+					<img alt="이미지를 준비중입니다." 
+						 src="/everycvs/resources/upload/${user.stored_file_name }" 
+						 style="height:200px; text-align: center; border-radius: 150px; margin-bottom: 15px;"
+						 
+						 >
+					</div>
+					
+					<div align="center">
+						<span style="font-size: 14pt;">${user.user_name}님</span><br>
+						<a href="/everycvs/user/infointro.do">내 정보 수정</a> 
+						<hr style="margin-top: 5px; margin-bottom: 2px;">
+						<ul class="list-group sidebar-nav" id="sidebar-nav">
+						
+							<!-- 마이페이지 -->
+							<li class="list-group-item list-toggle">
+							<a href="/everycvs/page/mypage.do">마이페이지</a>
+							</li>
+						
+							<!-- 기프티콘 보관함 -->
+							<li class="list-group-item list-toggle">
+							<a href="/everycvs/gifticonPage.do">기프티콘</a>
+								</li>
+							
+							<!-- 관심목록 -->
+							<li class="list-group-item list-toggle">
+							<a href="/everycvs/user/favoriteList.do">관심상품</a>
+							</li>
+								
+							<!-- 회원탈퇴 -->
+							<li class="list-group-item list-toggle">
+							<a href="#" onclick="deleteUser('${sessionScope.user.email}');">회원탈퇴</a>
+							</li>
+						</ul>
+						</div>
+					
+<%-- <ul class="list-group sidebar-nav" id="sidebar-nav">
 	<!-- 마이페이지 -->
 	<li class="list-group-item list-toggle"><a href="/everycvs/page/mypage.do">My Page</a></li>
 
@@ -12,7 +48,7 @@
 
 	<!-- 회원탈퇴 -->
 	<li class="list-group-item list-toggle"><a href="#" onclick="deleteUser('${sessionScope.user.email}');">회원탈퇴</a></li>
-</ul>
+</ul> --%>
 <script type="text/javascript">
 function deleteUser(userEmail){
 	swal({
