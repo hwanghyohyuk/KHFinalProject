@@ -314,19 +314,6 @@ public class EventController {
 				return eventService.deleteJoin(eventjoin);
 			}	
 		}
-/*
-	int checkEventJoinTable = eventService.eventJoincheck(eventjoin);
-
-	if (checkEventJoinTable == 0) {
-		// 참여 처음 클릭
-		// 참여 테이블에 넣음
-		eventService.eventJoin(eventjoin);
-
-	} else if (checkEventJoinTable == 1) {
-		// 참여 두번 클릭
-		// 참여 테이블에서 삭제
-		eventService.deleteJoin(eventjoin);
-	}*/
 	
 	// 이벤트 참여 인원
 	@RequestMapping(value = "eventCount.do", method = RequestMethod.POST)

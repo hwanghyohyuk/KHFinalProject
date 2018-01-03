@@ -150,17 +150,17 @@ public class EventServiceImpl implements EventService{
 	
 	
 	@Override
-	public void eventJoin(EventJoin eventjoin) {
+	public int eventJoin(EventJoin eventjoin) {
 		// TODO Auto-generated method stub
 		System.out.println("sevice"+eventjoin);
-		eventDao.insertEventJoin(eventjoin);
+		return eventDao.insertEventJoin(eventjoin);
 		
 	}
 	
 	@Override
-	public void deleteJoin(EventJoin eventjoin) {
+	public int deleteJoin(EventJoin eventjoin) {
 		// TODO Auto-generated method stub
-		eventDao.deleteEventJoin(eventjoin);
+		return eventDao.deleteEventJoin(eventjoin);
 	}
 	
 
@@ -183,6 +183,12 @@ public class EventServiceImpl implements EventService{
 		return eventDao.cvsGetListCount(edno,brand_no);
 	}
 	//---------------------------------------------------------
+
+	@Override
+	public int selectJoinLimit(int event_no) {
+		// TODO Auto-generated method stub
+		return eventDao.selectJoinLimit(event_no);
+	}
 
 
 	
