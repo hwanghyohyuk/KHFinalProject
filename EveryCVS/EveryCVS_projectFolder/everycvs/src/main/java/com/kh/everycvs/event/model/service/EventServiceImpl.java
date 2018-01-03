@@ -37,17 +37,17 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public int getListCount(String keyword, int user_no) {
+	public int getListCount(int edno,String keyword, int user_no) {
 		// 관리자 게시글  조회
-		return eventDao.listCount(keyword, user_no);
+		return eventDao.listCount(keyword, user_no, edno);
 	}
 	
 	@Override
-	public List<Event> selectEventList(String keyword,int currentPage, int limit, int user_no){
+	public List<Event> selectEventList(String keyword,int currentPage, int limit, int user_no, int edno){
 		//관리자 페이징 및 검색
 	    int startRow = (currentPage - 1) * limit + 1;
 	    int endRow = startRow + limit - 1;        
-	    return eventDao.selectEventList(keyword,startRow,endRow,user_no);
+	    return eventDao.selectEventList(keyword,startRow,endRow,user_no, edno);
 	}
 
 	@Override
@@ -150,36 +150,50 @@ public class EventServiceImpl implements EventService{
 	
 	
 	@Override
-	public void eventJoin(EventJoin eventjoin) {
+	public int eventJoin(EventJoin eventjoin) {
 		// TODO Auto-generated method stub
 		System.out.println("sevice"+eventjoin);
-		eventDao.insertEventJoin(eventjoin);
+		return eventDao.insertEventJoin(eventjoin);
 		
 	}
 	
 	@Override
-	public void deleteJoin(EventJoin eventjoin) {
-		// TODO Auto-generated method stub
-		eventDao.deleteEventJoin(eventjoin);
+	public int deleteJoin(EventJoin eventjoin) {
+		return eventDao.deleteEventJoin(eventjoin);
 	}
+	
 
 	@Override
 	public void eventResultInsert(EventResult eventResult) {
 		 eventDao.cvseventResultView(eventResult);
 	}
 
+	
+	//유저 이벤트 검색하기
 	@Override
-	public List<Event> cvsEvent(int currentPage, int limit, int brand_no) {
-		int startRow = (currentPage - 1) * limit + 1;
+	public List<Event> cvsEvent(int currentpage, int limit, int edno, int brand_no) {
+		int startRow = (currentpage - 1) * limit + 1;
 	    int endRow = startRow + limit - 1;        
-	    return eventDao.cvsEvent(startRow,endRow,brand_no);
+	    return eventDao.cvsEvent(startRow,endRow,edno,brand_no);
 	}
+	//유저 이벤트 검색해서 갯수 가져오기
+	@Override
+	public int getListCount(int edno, int brand_no) {
+		return eventDao.cvsGetListCount(edno,brand_no);
+	}
+	//---------------------------------------------------------
 
 	@Override
-	public int getListCount(int brand_no, int user_no) {
-		
-		return eventDao.cvsGetListCount(brand_no,user_no);
+	public int selectJoinLimit(int event_no) {
+		System.out.println(event_no);
+		return eventDao.selectJoinLimit(event_no);
 	}
+
+
+	
+
+	
+	
 
 
 	

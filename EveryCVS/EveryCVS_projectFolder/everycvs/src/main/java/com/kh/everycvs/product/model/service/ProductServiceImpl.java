@@ -1,5 +1,6 @@
 package com.kh.everycvs.product.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.everycvs.common.model.vo.Product;
+import com.kh.everycvs.common.model.vo.ProductKind;
 import com.kh.everycvs.common.model.vo.StoreProduct;
 import com.kh.everycvs.product.model.dao.ProductDao;
 
@@ -101,5 +103,21 @@ public class ProductServiceImpl implements ProductService{
 	public List<StoreProduct> listApmanager(int currentPage, int limit, String keyword, int brand_no) {
 		return productDao.listApmanager(currentPage, limit, keyword, brand_no);
 	}
-	
+
+	@Override
+	public List<ProductKind> productKindValue(String store_no, int dateNo) {
+		return productDao.productKindValue(store_no,dateNo);
+	}
+
+	/*편의점 관리자*/
+	@Override
+	public List<Product> pTop5(int brand_no) {
+		return productDao.pTop5(brand_no);
+	}
+
+	@Override
+	public List<ProductKind> productKindValue(int brand_no, int dateNo) {
+		return productDao.productKindValue(brand_no,dateNo);
+	}
+
 }

@@ -39,6 +39,10 @@ public class StoreDao {
 		
 	}
 	
+	/**지점 방문횟수증가 update**/
+	public void increamentJoinCount(String store_no) {
+		sqlSession.update("store.increamentJoinCount", store_no);
+	}
 	
 	/* 편의점 관리자 */
 
@@ -87,27 +91,35 @@ public class StoreDao {
 		sqlSession.delete("store.deleteStore2", store);
 		sqlSession.delete("store.deleteStore3", store);
 	}
-	
-		/* 사이트 관리자 */
-	/** 편의점별 방문자 수 통계 **/
-	public Map cvsJoinCount() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**지점 방문횟수증가 update**/
-	public void increamentJoinCount(String store_no) {
-//		Map<String,Object> store =  new HashMap<String, Object>();
-//		store.put("main_sno", store_no);
-//		store.put("sub_sno", store_no);
-//		sqlSession.update("store.increamentJoinCount", store);
-		sqlSession.update("store.increamentJoinCount", store_no);
-	}
-
 
 	/* 지점 조회 */
 	public Store selectStore(String store_no) {
 		return sqlSession.selectOne("store.selectStore", store_no);
+	}
+	
+	/** 금일 방문자수 **/
+	public int joinCustomers(String store_no) {
+		return sqlSession.selectOne("store.storeJoinCustomers",store_no);
+	}
+	
+	public int joinCustomers(int brand_no) {
+		return sqlSession.selectOne("store.cvsJoinCustomers",brand_no);
+	}
+	
+		/* 사이트 관리자 */
+	/** 편의점별 방문자 수 통계 **/
+	public int joinCustomers() {
+		return sqlSession.selectOne("store.joinCustomers");
+	}
+
+	public List<HashMap<String, Object>> visitcvsChart() {
+		List<HashMap<String, Object>> result = sqlSession.selectList("store.visitcvsChart");
+		System.out.println(result);
+		return result;
+	}
+
+	public Store storeInfo(String store_no) {
+		return sqlSession.selectOne("store.storeInfo",store_no);
 	}
 
 

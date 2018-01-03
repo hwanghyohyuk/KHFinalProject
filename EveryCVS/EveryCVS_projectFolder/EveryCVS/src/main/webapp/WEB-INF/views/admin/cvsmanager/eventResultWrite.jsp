@@ -5,8 +5,6 @@
 <!-- === BEGIN HEAD ===  -->
 <c:import url="../../include/admin/common/head.jsp"></c:import>
 <link rel="stylesheet"
-	href="/everycvs/resources/admin/cvscss/custom.css" rel="stylesheet">
-<link rel="stylesheet"
 	href="/everycvs/resources/admin/cvscss/responsive.css" rel="stylesheet">
 <c:import url="../../include/admin/common/headend.jsp"></c:import>
 <!-- === END HEAD ===  -->
@@ -24,54 +22,53 @@
 			<h2 class="margin-bottom-30">
 				<b>${sessionScope.user.brand_name}</b>&nbsp;&nbsp;Event management
 			</h2>
-			<!-- aqua panel -->
-			<div class="panel panel-blue">
-				<div class="panel-heading">
-					<h3 class="panel-title">Add event</h3>
+			<form action="">
+			<div class="box box-solid box-primary">
+				<div class="box-header">
+					<h3 class="box-title">Add Event Result</h3>
 				</div>
-
-				<div class="panel-body">
-					<div class="col-sm-6" style="padding-left: 0px;">
-						<div class="jun5"></div>
-						<form class="form-inline" name="eventresult" method="post" action="cvsevenResultWrite.do">
-						
-							<input type="hidden" name="writer" value="${sessionScope.user.user_no }">
-							<div class="form-group" id="jun_input1">
-								<label for="title" style="padding-right: 65px;">Event
-									Title</label> <input type="text" class="form-control" id="title"
-									style="width: 300px;" name="title" placeholder="제목을 입력하세요.">
-							</div>
-							<br>
-							<!-- <div class="form-group" id="jun_input1">
-								<label for="category" style="padding-right: 65px;">Type</label>
-									<select class="form-control input jun15" style="width: 300px;">
-										<option value="category">이벤트 종류</option>
+				<div class="box-body">
+					<div class="row">
+						<!-- 왼쪽부분 -->
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<div class="input-group-lg  margin-bottom-40"
+									id="addressstatus">
+									<label>Title</label> <input class="form-control"
+										placeholder="Title" id="title" name="title" type="text">
+								</div>
+								<div class="input-group-lg">
+									<br>
+									<label>Original Event</label>
+									<select class="form-control" >
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
 									</select>
-							</div> -->
-							<div class="form-group" id="jun_input1">
-								<label for="title" style="padding-right: 65px;">Event
-									No</label> <input type="text" class="form-control" id="title"
-									style="width: 300px;" name="event_no" placeholder="이벤트 번호를 입력하세요">
+								</div>
 							</div>
-					</div>
-					<div class="col-sm-6 jun9">
-						<div class="form-group" id="jun_input1">
-							<label for="contents" style="padding-right: 61px;">Contents</label>
-							<textarea class="form-control" name="contents" id="contents"
-								style="height: 142px; padding: 2px 4px;"
-								placeholder="내용을 입력하세요."></textarea>
 						</div>
-						<br>
-						<button type="submit" class="btn btn-danger btn-lg jun4 jun7"
-							id="width100">SUBMIT</button>
+						<!-- 오른쪽부분 -->
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<div>
+									<label>Contents Area</label>
+									<textarea class="form-control"
+										style="resize: none; font-size: 18px; line-height: 1.33;"
+										placeholder="text" rows="8" id="contents" name="contents"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
+              			<button type="submit" class="btn btn-danger btn-lg pull-right" >SUBMIT</button>
+              			</div> 
 					</div>
-					</form>
 				</div>
 			</div>
+			</form>
 		</div>
-		<!-- End aqua panel -->
-
-
 	</div>
 </div>
 
@@ -83,8 +80,29 @@
 <c:import url="../../include/admin/common/end.jsp"></c:import>
 <!-- JS Custom Function -->
 <script type="text/javascript">
-	function check() {
-		// input 이 비었으면 alert
+	function eventResultInsert() {
+		$.ajax({
+			url : "",
+			data : {},
+			type : "post",
+			success : function(data) {
+
+				var index = 0;
+				var values = '';
+				var last = data.list.length;
+				var list = data.list;
+
+				if (list.length > 0) {
+					for ( var i in list) {
+						values += "<option value='"+list[i].event_no+"' >"
+								+ (list[i].event_no) + "</option>";
+					}
+				} else {
+					values += "<option value='0' >등록할 이벤트 없음</option>";
+				}
+				$("#eventResultlist").html(values);
+			}
+		});
 	}
 </script>
 <!-- End JS Custom Function -->

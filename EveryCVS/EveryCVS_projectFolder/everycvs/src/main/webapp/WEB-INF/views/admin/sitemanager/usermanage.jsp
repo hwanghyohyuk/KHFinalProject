@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- === BEGIN HEAD ===  -->
 <c:import url="../../include/admin/common/head.jsp"></c:import>
+<link rel="stylesheet" href="/everycvs/resources/user/css/userinfo.css" type="text/css">
 <c:import url="../../include/admin/common/headend.jsp"></c:import>
 <!-- === END HEAD ===  -->
 <!-- === BEGIN HEADER ===  -->
@@ -16,7 +17,7 @@
  <!-- Right side column. Contains the navbar and content of the page -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
+        <div class="content-header">
           <h1>
           모두의 편의점
             <small>회원관리</small>
@@ -25,226 +26,74 @@
             <li><a href="/everycvs/main/main.do"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Dashboard</li>
           </ol>
-        </section>
+        </div>
 
         <!-- Main content -->
         <section class="content">
-          <!-- Small boxes (Stat box) -->
-          <div class="row">
-            <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-aqua">
-                <div class="inner">
-                  <h3>150</h3>
-                  <p>New Orders</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-bag"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-            </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-green">
-                <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
-                  <p>Bounce Rate</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-            </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-yellow">
-                <div class="inner">
-                  <h3>44</h3>
-                  <p>User Registrations</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-person-add"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-            </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-red">
-                <div class="inner">
-                  <h3>65</h3>
-                  <p>Unique Visitors</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-              </div>
-            </div><!-- ./col -->
-          </div><!-- /.row -->
-          <!-- Main row -->
-          <div class="row">
-            <!-- Left col -->
-            <section class="col-lg-7 connectedSortable">
-              <!-- Custom tabs (Charts with tabs)-->
-              <div class="nav-tabs-custom">
-                <!-- Tabs within a box -->
-                <ul class="nav nav-tabs pull-right">
-                  <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-                  <li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
-                  <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
-                </ul>
-                <div class="tab-content no-padding">
-                  <!-- Morris chart - Sales -->
-                  <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
-                  <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
-                </div>
-              </div><!-- /.nav-tabs-custom -->
-
-           
-
-            </section><!-- /.Left col -->
-            <!-- right col (We are only adding the ID to make the widgets sortable)-->
-            <section class="col-lg-5 connectedSortable">
-
-              <!-- Map box -->
-              <div class="box box-solid bg-light-blue-gradient">
-                <div class="box-header">
-                  <!-- tools box -->
-                  <div class="pull-right box-tools">
-                    <button class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="Date range"><i class="fa fa-calendar"></i></button>
-                    <button class="btn btn-primary btn-sm pull-right" data-widget='collapse' data-toggle="tooltip" title="Collapse" style="margin-right: 5px;"><i class="fa fa-minus"></i></button>
-                  </div><!-- /. tools -->
-
-                  <i class="fa fa-map-marker"></i>
-                  <h3 class="box-title">
-                    Visitors
-                  </h3>
-                </div>
-                <div class="box-body">
-                  <div id="world-map" style="height: 250px; width: 100%;"></div>
-                </div><!-- /.box-body-->
-                <div class="box-footer no-border">
-                  <div class="row">
-                    <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                      <div id="sparkline-1"></div>
-                      <div class="knob-label">Visitors</div>
-                    </div><!-- ./col -->
-                    <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                      <div id="sparkline-2"></div>
-                      <div class="knob-label">Online</div>
-                    </div><!-- ./col -->
-                    <div class="col-xs-4 text-center">
-                      <div id="sparkline-3"></div>
-                      <div class="knob-label">Exists</div>
-                    </div><!-- ./col -->
-                  </div><!-- /.row -->
-                </div>
-              </div>
-              <!-- /.box -->
-
-              <!-- solid sales graph -->
-              <div class="box box-solid bg-teal-gradient">
-                <div class="box-header">
-                  <i class="fa fa-th"></i>
-                  <h3 class="box-title">Sales Graph</h3>
-                  <div class="box-tools pull-right">
-                    <button class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div>
-                </div>
-                <div class="box-body border-radius-none">
-                  <div class="chart" id="line-chart" style="height: 250px;"></div>
-                </div><!-- /.box-body -->
-                <div class="box-footer no-border">
-                  <div class="row">
-                    <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                      <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60" data-fgColor="#39CCCC"/>
-                      <div class="knob-label">Mail-Orders</div>
-                    </div><!-- ./col -->
-                    <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                      <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC"/>
-                      <div class="knob-label">Online</div>
-                    </div><!-- ./col -->
-                    <div class="col-xs-4 text-center">
-                      <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgColor="#39CCCC"/>
-                      <div class="knob-label">In-Store</div>
-                    </div><!-- ./col -->
-                  </div><!-- /.row -->
-                </div><!-- /.box-footer -->
-              </div><!-- /.box -->
-
-              <!-- Calendar -->
-              <div class="box box-solid bg-green-gradient">
-                <div class="box-header">
-                  <i class="fa fa-calendar"></i>
-                  <h3 class="box-title">Calendar</h3>
-                  <!-- tools box -->
-                  <div class="pull-right box-tools">
-                    <!-- button with a dropdown -->
-                    <div class="btn-group">
-                      <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></button>
-                      <ul class="dropdown-menu pull-right" role="menu">
-                        <li><a href="#">Add new event</a></li>
-                        <li><a href="#">Clear events</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">View calendar</a></li>
-                      </ul>
-                    </div>
-                    <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div><!-- /. tools -->
-                </div><!-- /.box-header -->
-                <div class="box-body no-padding">
-                  <!--The calendar -->
-                  <div id="calendar" style="width: 100%"></div>
-                </div><!-- /.box-body -->
-                <div class="box-footer text-black">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <!-- Progress bars -->
-                      <div class="clearfix">
-                        <span class="pull-left">Task #1</span>
-                        <small class="pull-right">90%</small>
-                      </div>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-green" style="width: 90%;"></div>
-                      </div>
-
-                      <div class="clearfix">
-                        <span class="pull-left">Task #2</span>
-                        <small class="pull-right">70%</small>
-                      </div>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-green" style="width: 70%;"></div>
-                      </div>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                      <div class="clearfix">
-                        <span class="pull-left">Task #3</span>
-                        <small class="pull-right">60%</small>
-                      </div>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
-                      </div>
-
-                      <div class="clearfix">
-                        <span class="pull-left">Task #4</span>
-                        <small class="pull-right">40%</small>
-                      </div>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
-                      </div>
-                    </div><!-- /.col -->
-                  </div><!-- /.row -->
-                </div>
-              </div><!-- /.box -->
-
-            </section><!-- right col -->
-          </div><!-- /.row (main row) -->
-
+        	<div class="row">
+        	<div class="col-lg-6 col-lg-offset-6 col-md-8 col-md-offset-4 col-sm-10 col-sm-offset-2 col-xs-12 ">
+	        	<div class="input-group input-group-lg">
+			      <input type="text" class="form-control" id="keyword" placeholder="Search for...">
+			      <span class="input-group-btn">
+			        <button class="btn btn-primary" type="button" onclick="setKeyword();">Go!</button>
+			      </span>
+			    </div>
+			    <div class="btn-group pull-right">
+				<button class="btn btn-info btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+				정렬<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+				<li><a href="#" onclick="setOrderby(0);">기본</a></li>
+				<li class="divider"></li>
+				<li><a href="#" onclick="setOrderby(0);">사용자번호<span class="glyphicon glyphicon-sort-by-order"></span></a></li>
+			    <li><a href="#" onclick="setOrderby(1);">사용자번호<span class="glyphicon glyphicon-sort-by-order-alt"></span></a></li>
+			    <li><a href="#" onclick="setOrderby(2);">사용자이름<span class="glyphicon glyphicon-sort-by-order"></span></a></li>
+			    <li><a href="#" onclick="setOrderby(3);">사용자이름<span class="glyphicon glyphicon-sort-by-order-alt"></span></a></li>
+			    <li><a href="#" onclick="setOrderby(4);">이메일<span class="glyphicon glyphicon-sort-by-order"></span></a></li>
+			    <li><a href="#" onclick="setOrderby(5);">이메일<span class="glyphicon glyphicon-sort-by-order-alt"></span></a></li>
+			    <li><a href="#" onclick="setOrderby(6);">생년월일<span class="glyphicon glyphicon-sort-by-order"></span></a></li>
+			    <li><a href="#" onclick="setOrderby(7);">생년월일<span class="glyphicon glyphicon-sort-by-order-alt"></span></a></li>
+			    <li><a href="#" onclick="setOrderby(8);">가입일<span class="glyphicon glyphicon-sort-by-order"></span></a></li>
+			    <li><a href="#" onclick="setOrderby(9);">가입일<span class="glyphicon glyphicon-sort-by-order-alt"></span></a></li>
+				</ul>
+				</div>
+				<div class="btn-group pull-right">
+				<button class="btn btn-success btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+				사용자<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+				<li><a href="#" onclick="setJobno(1);">기본</a></li>
+				<li class="divider"></li>
+				<li><a href="#" onclick="setJobno(1);">Customer</a></li>
+			    <li><a href="#" onclick="setJobno(2);">Store Manager</a></li>
+			    <li><a href="#" onclick="setJobno(3);">CVS Manager</a></li>
+				</ul>
+				</div>
+        	</div>
+        	</div>
+        	<div class="row">
+        	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 ">
+			<br>
+        	<table class="table table-striped text-center" style="background-color:white;font-size:14pt;valign:middle">
+			<thead>
+				<tr style="font-size:16pt">
+					<th style="width:20%">사용자 번호</th>
+					<th style="width:20%">이미지</th>
+					<th style="width:40%">정보</th>
+					<th style="width:20%">추가정보</th>
+				</tr>				
+			</thead>
+			<tbody id = "userlist">
+			</tbody>
+			</table>
+			<div id="paging">
+				<nav>
+					<ul class="pagination" id="userlistpaging">
+					</ul>
+				</nav>
+			</div>
+			</div>
+			</div>			
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
 
@@ -254,5 +103,124 @@
 <c:import url="../../include/admin/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
 <!-- JS -->
+<script>
+var pageBuffer=1;
+var jobnoBuffer=1;
+var orderbyBuffer=0;
+var keywordBuffer='';
+
+$(function(){
+	init();
+});
+$(userList(pageBuffer,jobnoBuffer,orderbyBuffer,keywordBuffer));
+
+function setPage(page){
+	if(pagebuffer!=page){
+		pagebuffer=page;
+	}
+	userList(pageBuffer,jobnoBuffer,orderbyBuffer,keywordBuffer);
+}
+function setJobno(jobno){
+	if(jobnoBuffer!=jobno){
+		jobnoBuffer=jobno;
+	}
+	userList(pageBuffer,jobnoBuffer,orderbyBuffer,keywordBuffer);
+}   
+function setOrderby(orderby){
+	if(orderbyBuffer!=orderby){
+		orderbyBuffer=orderby;
+	}
+	userList(pageBuffer,jobnoBuffer,orderbyBuffer,keywordBuffer);
+}
+function setKeyword(){
+	var keyword = $("#keyword").val();
+	if(keywordBuffer!=keyword){
+		keywordBuffer=keyword;
+	}
+	userList(pageBuffer,jobnoBuffer,orderbyBuffer,keywordBuffer);
+	keywordBuffer='';
+}
+
+function userList(page,jobno,orderby,keyword){
+	var data={"page":page,"jobno":jobno,"orderby":orderby,"keyword":keyword};
+	$.ajax({
+		url : '/everycvs/ajax/userlist.do',
+		data : data,
+		type : 'get',
+		success : function(data){
+			var values='';
+			var userlist = data.userlist;
+		
+			for(var i in userlist){
+					values+='<tr>'
+						+'<td style="vertical-align:middle"><b >'+userlist[i].user_no+'</b></td>'
+						+'<td style="vertical-align:middle"><div class="thumbnail-wrapper">'
+						+'<div class="thumbnail">'
+						+'<div class="centered">';
+						if(userlist[i].stored_file_name == '' || userlist[i].stored_file_name == null){
+							values+='<img id="userimg" src="/everycvs/resources/user/img/user.png">';
+						}else{
+							values+='<img id="userimg" src="/everycvs/resources/upload/'+userlist[i].stored_file_name+'">';
+						}						
+						values+='</div></div></div></td>'
+						+'<td style="vertical-align:middle"><p>이메일 : '+userlist[i].email+'</p>'
+						+'<p>이름 : '+userlist[i].user_name+'</p>'
+						+'<p>생년월일 : '+userlist[i].birthday+'</p>'
+						+'<p>전화번호 : '+userlist[i].phone+'</p>'
+						+'<p>가입일 : '+userlist[i].enroll_date+'</p>'
+						+'</td>'
+						+'<td style="vertical-align:middle">추가정보</td>'
+						+'</tr>';
+			}	
+			$("#userlist").html(values);
+			
+			var valuesPaging="";
+            
+            if(data.currentPage <= 1){
+               valuesPaging+="<li class='disabled'>" + 
+                 "<a href='#' aria-label='Previous'>" +
+                   "<span aria-hidden='true'>&laquo;</span></a></li>";
+            } else {
+               valuesPaging += "<li><a href='javascript:setPage("+(data.currentPage - 1) + ")'  aria-label='Previous'>"
+                + "<span aria-hidden='true'>&laquo;</span></a></li>";
+            }
+            
+           for(var i = data.startPage; i<=data.endPage; i++)
+           {
+              if(data.currentPage == i)
+              {
+                valuesPaging+="<li class='disabled'>"+"<a href='#'>"+ i + "</a></li>";
+              } else {
+                  valuesPaging+="<li><a href='javascript:setPage("+ i + ")'>"+ i + "</a></li>";
+              }
+
+           }
+           
+            if(data.currentPage >= data.maxPage)
+            {
+               valuesPaging+= "<li class='disabled'>" + 
+                  "<a href='#' aria-label='Next'>"+
+                      "<span aria-hidden='true'>&raquo;</span></a></li>";
+            } else {
+               valuesPaging += "<li><a href='javascript:setPage("+(data.currentPage + 1)+ ")' aria-label='Next'>" +
+                "<span aria-hidden='true'>&raquo;</span></a></li>";
+            }
+            
+            $("#userlistpaging").html(valuesPaging);
+		},
+		error:function(error){
+			console.log(error);
+		}
+	});
+}
+function init(){
+	$('#keyword').on('keydown', function(e) {
+		var keyCode = e.which;
+		if (keyCode === 13) { // Enter Key
+			setKeyword();
+		}
+	});
+}
+</script>
 <c:import url="../../include/admin/common/end.jsp"></c:import>
 <!-- === END === -->

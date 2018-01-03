@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -212,24 +213,47 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int deleteUser(int user_no) {
-		return userDao.deleteUser(user_no);
+	public int deleteUser(String email) {
+		return userDao.deleteUser(email);
 	}
 	
-	@Override
-	public int encModifyUser(User user) {
-		return userDao.modifyUser(user);
-	}
 
-	@Override
-	public Map<String, Object> userList(String page, String keyword) {
-		return userDao.userList(page, keyword);
-	}
 
 	@Override
 	public int increMoney(Map<String, Object> map) {
 		return userDao.userIncreMoney(map);
 	}
 
+	@Override
+	public int registUserCount() {
+		return userDao.registUserCount();
+	}
+
+	@Override
+	public int updateUserImg(User user) {
+		return userDao.updateUserImg(user);
+	}
+
+	@Override
+	public int ModifyUser(User user) {
+		return userDao.modifyUser(user);
+	}
+
+	@Override
+	public int encModifyUserpwd(User user) {
+		return userDao.modifyUserpwd(user);
+	}
+
+	@Override
+	public List<User> userList(int currentPage, int limit, int jobno, int orderby, String keyword) {
+		int startRow = (currentPage - 1) * limit + 1;
+	    int endRow = startRow + limit - 1;        
+	    return userDao.userList(startRow,endRow,jobno, orderby,keyword);
+	}
+
+	@Override
+	public int userCount(int jobno) {
+		return userDao.userCount(jobno);
+	}
 
 }

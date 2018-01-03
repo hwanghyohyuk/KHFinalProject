@@ -134,15 +134,87 @@
 																</div>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
-																		onclick="add_favorite('${sp.store_product_no}', '${sp.store_no}');">관심상품</button>
+																		onclick="add_favorite('${sp.product_no}', '${sp.store_no}');">관심상품</button>
 																	&nbsp;
 																	<button type="button" class="btn btn-primary btn-sm"
-																		data-dismiss="modal">구매하기</button>
+																		data-dismiss="modal"
+																		data-toggle="modal" 
+																		data-target="#s${sp.store_product_no}">구매하기</button>
 																</div>
 															</div>
 														</div>
 													</div>
 													<!-- Modal End -->
+
+													<!-- 구매하는 새 모달 띄우기 -->
+													<!-- Modal -->
+													<div class="modal fade" id="s${sp.store_product_no}"
+														role="dialog" tabindex="-1">
+														<div class="modal-dialog">
+															<!-- Modal content-->
+															<div class="modal-content">
+																<div class="modal-header">
+																	<button type="button" class="close"
+																		data-dismiss="modal">&times;</button>
+																	<h4 class="modal-title">구매하기</h4>
+																</div>
+																<div class="modal-body">
+																	<p>나의 잔고 : ${user.cash }</p>
+																	<p>결제할 금액 : ${sp.price }</p>
+																	-결제금액보다 잔고가 적으면 결제가 되지않습니다.<br> -결제 후에는 환불이
+																	불가능합니다. <br>
+																	<br>
+																	<!-- 결제 선택 버튼(잔고) -->
+																	<form action="userDecreMoney.do" id="frm">
+																		<input type="hidden" name="cash" value="${user.cash }">
+																		<input type="hidden" name="user_no"
+																			value="${user.user_no }"> <input
+																			type="hidden" name="point" value="${user.point }">
+																		<input type="hidden" name="store_product_no"
+																			value="${sp.store_product_no}"> <input
+																			type="number" name="purchase_quantity"
+																			value="${purchase.purchase_quantity }"
+																			style="width: 40px;"> <input type="hidden"
+																			name="calculated_price" value="${sp.price }">
+																		<input type="hidden" name="using_point" value=0>
+																		<input type="hidden" name="store_no"
+																			value="${sp.store_no }">
+
+																		<button type="submit" class="btn btn-primary"
+																			name="price" value="${sp.price}"
+																			onclick="return purchaseMoney();">잔고 결제</button>
+
+																	</form>
+																	&nbsp;
+																	<!-- 포인트 결제 버튼 -->
+																	<form action="userDecrePoint.do" id="form">
+																		<input type="hidden" name="user_no"
+																			value="${user.user_no }"> <input
+																			type="hidden" name="point" value="${user.point }">
+																		<input type="hidden" name="store_product_no"
+																			value="${sp.store_product_no}"> <input
+																			type="number" name="purchase_quantity"
+																			value="${purchase.purchase_quantity }"
+																			style="width: 40px;"> <input type="hidden"
+																			name="calculated_price" value="${sp.price }">
+																		<input type="hidden" name="store_no"
+																			value="${sp.store_no }">
+
+																		<button type="submit" class="btn btn-primary"
+																			name="price" value="${sp.price }"
+																			onclick="return purchasePoint();">포인트 결제</button>
+																	</form>
+																</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-default"
+																		data-toggle="modal" 
+																		data-target="#s${sp.store_product_no}">close</button>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!-- 구매 모달창 끝 -->
+
 												</div>
 											</c:forEach>
 										</div>
@@ -217,15 +289,86 @@
 																</div>
 																<div class="modal-footer">
 																	<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
-																	onclick="add_favorite('${sp.store_product_no}', '${sp.store_no}');">관심상품</button>
+																	onclick="add_favorite('${sp.product_no}', '${sp.store_no}');">관심상품</button>
 																	&nbsp;
 																	<button type="button" class="btn btn-primary btn-sm"
-																		data-dismiss="modal">구매하기</button>
+																		data-dismiss="modal"
+																		data-toggle="modal" 
+																		data-target="#s${sp.store_product_no}"
+																		>구매하기</button>
 																</div>
 															</div>
 														</div>
 													</div>
 													<!-- Modal End -->
+
+													<!-- 구매하는 새 모달 띄우기 -->
+													<!-- Modal -->
+													<div class="modal fade" id="s${sp.store_product_no}"
+														role="dialog" tabindex="-1">
+														<div class="modal-dialog">
+															<!-- Modal content-->
+															<div class="modal-content">
+																<div class="modal-header">
+																	<button type="button" class="close"
+																		data-dismiss="modal">&times;</button>
+																	<h4 class="modal-title">구매하기</h4>
+																</div>
+																<div class="modal-body">
+																	<p>나의 잔고 : ${user.cash }</p>
+																	<p>결제할 금액 : ${sp.price }</p>
+																	-결제금액보다 잔고가 적으면 결제가 되지않습니다.<br> -결제 후에는 환불이
+																	불가능합니다. <br>
+																	<br>
+																	<!-- 결제 선택 버튼(잔고) -->
+																	<form action="userDecreMoney.do" id="frm">
+																		<input type="hidden" name="cash" value="${user.cash }">
+																		<input type="hidden" name="user_no"
+																			value="${user.user_no }"> <input
+																			type="hidden" name="point" value="${user.point }">
+																		<input type="hidden" name="store_product_no"
+																			value="${sp.store_product_no}"> <input
+																			type="number" name="purchase_quantity"
+																			value="${purchase.purchase_quantity }"
+																			style="width: 40px;"> <input type="hidden"
+																			name="calculated_price" value="${sp.price }">
+																		<input type="hidden" name="using_point" value=0>
+																		<input type="hidden" name="store_no"
+																			value="${sp.store_no }">
+
+																		<button type="submit" class="btn btn-primary"
+																			name="price" value="${sp.price}"
+																			onclick="return purchaseMoney();">잔고 결제</button>
+
+																	</form>
+																	&nbsp;
+																	<!-- 포인트 결제 버튼 -->
+																	<form action="userDecrePoint.do" id="form">
+																		<input type="hidden" name="user_no"
+																			value="${user.user_no }"> <input
+																			type="hidden" name="point" value="${user.point }">
+																		<input type="hidden" name="store_product_no"
+																			value="${sp.store_product_no}"> <input
+																			type="number" name="purchase_quantity"
+																			value="${purchase.purchase_quantity }"
+																			style="width: 40px;"> <input type="hidden"
+																			name="calculated_price" value="${sp.price }">
+																		<input type="hidden" name="store_no"
+																			value="${sp.store_no }">
+
+																		<button type="submit" class="btn btn-primary"
+																			name="price" value="${sp.price }"
+																			onclick="return purchasePoint();">포인트 결제</button>
+																	</form>
+																</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-default"
+																		data-dismiss="modal">close</button>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!-- 구매 모달창 끝 -->
 												</div>
 											</c:forEach>
 										</div>
@@ -244,7 +387,7 @@
 										<strong>할인상품</strong>
 									</h4>
 								</div>
-								<div style="overflow-x: hidden; width: 480px; height: 200px;">
+								<div style="overflow-x: hidden; width: 480px; height: 235px;">
 									<div id="collapse-One" class="accordion-body collapse in">
 										<div class="panel-body">
 											<div class="row">
@@ -318,15 +461,84 @@
 																	</div>
 																	<div class="modal-footer">
 																		<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
-																		onclick="add_favorite('${sp.store_product_no}', '${sp.store_no}');">관심상품</button>
+																		onclick="add_favorite('${sp.product_no}', '${sp.store_no}');">관심상품</button>
 																		&nbsp;
 																		<button type="button" class="btn btn-primary btn-sm"
-																			data-dismiss="modal">구매하기</button>
+																			data-dismiss="modal"
+																			data-toggle="modal" 
+																			data-target="#s${sp.store_product_no}">구매하기</button>
 																	</div>
 																</div>
 															</div>
 														</div>
 														<!-- Modal End -->
+
+														<!-- 구매하는 새 모달 띄우기 -->
+														<!-- Modal -->
+														<div class="modal fade" id="s${sp.store_product_no}" role="dialog" tabindex="-1">
+															<div class="modal-dialog">
+																<!-- Modal content-->
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<button type="button" class="close"
+																			data-dismiss="modal">&times;</button>
+																		<h4 class="modal-title">구매하기</h4>
+																	</div>
+																	<div class="modal-body">
+																		<p>나의 잔고 : ${user.cash }</p>
+																		<p>결제할 금액 : ${sp.price }</p>
+																		-결제금액보다 잔고가 적으면 결제가 되지않습니다.<br> -결제 후에는 환불이
+																		불가능합니다. <br>
+																		<br>
+																		<!-- 결제 선택 버튼(잔고) -->
+																		<form action="userDecreMoney.do" id="frm">
+																			<input type="hidden" name="cash"
+																				value="${user.cash }"> <input type="hidden"
+																				name="user_no" value="${user.user_no }"> <input
+																				type="hidden" name="point" value="${user.point }">
+																			<input type="hidden" name="store_product_no"
+																				value="${sp.store_product_no}"> <input
+																				type="number" name="purchase_quantity"
+																				value="${purchase.purchase_quantity }"
+																				style="width: 40px;"> <input type="hidden"
+																				name="calculated_price" value="${sp.price }">
+																			<input type="hidden" name="using_point" value=0>
+																			<input type="hidden" name="store_no"
+																				value="${sp.store_no }">
+
+																			<button type="submit" class="btn btn-primary"
+																				name="price" value="${sp.price}"
+																				onclick="return purchaseMoney();">잔고 결제</button>
+
+																		</form>
+																		&nbsp;
+																		<!-- 포인트 결제 버튼 -->
+																		<form action="userDecrePoint.do" id="form">
+																			<input type="hidden" name="user_no"
+																				value="${user.user_no }"> <input
+																				type="hidden" name="point" value="${user.point }">
+																			<input type="hidden" name="store_product_no"
+																				value="${sp.store_product_no}"> <input
+																				type="number" name="purchase_quantity"
+																				value="${purchase.purchase_quantity }"
+																				style="width: 40px;"> <input type="hidden"
+																				name="calculated_price" value="${sp.price }">
+																			<input type="hidden" name="store_no"
+																				value="${sp.store_no }">
+
+																			<button type="submit" class="btn btn-primary"
+																				name="price" value="${sp.price }"
+																				onclick="return purchasePoint();">포인트 결제</button>
+																		</form>
+																	</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-default"
+																			data-dismiss="modal">close</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- 구매 모달 끝 -->
 													</div>
 												</c:forEach>
 											</div>
@@ -344,7 +556,7 @@
 										<strong>유통기한 임박상품</strong>
 									</h4>
 								</div>
-								<div style="overflow-x: hidden; width: 480px; height: 200px;">
+								<div style="overflow-x: hidden; width: 480px; height: 235px;">
 									<div id="collapse-One" class="accordion-body collapse in">
 										<div class="panel-body">
 											<div class="row">
@@ -358,17 +570,37 @@
 															<strong>${sp.product_name}</strong>
 														</h5>
 														<c:set var="day">
-															<fmt:formatNumber value="${sp.expiration_hour/24-1}" type="number" maxFractionDigits="0" />
+															<fmt:formatNumber value="${sp.expiration_minute/(24*60)-1}" type="number" maxFractionDigits="0" />
 														</c:set>
-														<c:set var="hour" value="${sp.expiration_hour%24}" />
+														<c:set var="hour">
+															<fmt:formatNumber value="${(sp.expiration_minute/60)%24-1}" type="number" maxFractionDigits="0" />
+														</c:set>
+														<c:set var="minute" value ="${sp.expiration_minute%60}"></c:set>
 														<c:choose>
-															<c:when test="${day<1}">
-																<h6 align="center" style="color: red; font-size: 10pt;">${hour}시간 남았습니다.</h6>
+															<c:when test="${day==0 && hour==0 && minute==0}">
+																<h6 align="center" style="color: red; font-size: 10pt;">유통기한 만료</h6>
 															</c:when>
-															<c:otherwise>
-																<h6 align="center" style="color: red; font-size: 10pt;">${day}일 ${hour}시간<br>남았습니다.
-																</h6>
-															</c:otherwise>
+															<c:when test="${day==0 && hour==0 && minute!=0}">
+																<h6 align="center" style="color: red; font-size: 10pt;">${minute}분 <br>남았습니다.</h6>
+															</c:when>
+															<c:when test="${day==0 && hour!=0 && minute==0}">
+																<h6 align="center" style="color: red; font-size: 10pt;">${hour}시간 <br>남았습니다.</h6>
+															</c:when>
+															<c:when test="${day==0 && hour!=0 && minute!=0}">
+																<h6 align="center" style="color: red; font-size: 10pt;">${hour}시간 ${minute}분 <br>남았습니다.</h6>
+															</c:when>
+															<c:when test="${day!=0 && hour==0 && minute==0}">
+																<h6 align="center" style="color: red; font-size: 10pt;">${day}일 <br>남았습니다.</h6>
+															</c:when>
+															<c:when test="${day!=0 && hour==0 && minute!=0}">
+																<h6 align="center" style="color: red; font-size: 10pt;">${day}일 ${minute}분 <br>남았습니다.</h6>
+															</c:when>
+															<c:when test="${day!=0 && hour!=0 && minute==0}">
+																<h6 align="center" style="color: red; font-size: 10pt;">${day}일 ${hour}시간 <br>남았습니다.</h6>
+															</c:when>
+															<c:when test="${day!=0 && hour!=0 && minute!=0}">
+																<h6 align="center" style="color: red; font-size: 10pt;">${day}일 ${hour}시간 ${minute}분 <br>남았습니다.</h6>
+															</c:when>
 														</c:choose>
 														<!-- Modal -->
 														<div id="dmodal${sp.store_product_no}" class="modal fade"
@@ -418,15 +650,85 @@
 																	</div>
 																	<div class="modal-footer">
 																		<button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
-																		onclick="add_favorite('${sp.store_product_no}', '${sp.store_no}');">관심상품</button>
+																		onclick="add_favorite('${sp.product_no}', '${sp.store_no}');">관심상품</button>
 																		&nbsp;
 																		<button type="button" class="btn btn-primary btn-sm"
-																			data-dismiss="modal">구매하기</button>
+																			data-dismiss="modal"
+																			data-toggle="modal" 
+																			data-target="#s${sp.store_product_no}">구매하기</button>
 																	</div>
 																</div>
 															</div>
 														</div>
 														<!-- Modal End -->
+
+														<!-- 구매하는 새 모달 띄우기 -->
+														<!-- Modal -->
+														<div class="modal fade" id="s${sp.store_product_no}"
+															role="dialog" tabindex="-1">
+															<div class="modal-dialog">
+																<!-- Modal content-->
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<button type="button" class="close"
+																			data-dismiss="modal">&times;</button>
+																		<h4 class="modal-title">구매하기</h4>
+																	</div>
+																	<div class="modal-body">
+																		<p>나의 잔고 : ${user.cash }</p>
+																		<p>결제할 금액 : ${sp.price }</p>
+																		-결제금액보다 잔고가 적으면 결제가 되지않습니다.<br> -결제 후에는 환불이
+																		불가능합니다. <br>
+																		<br>
+																		<!-- 결제 선택 버튼(잔고) -->
+																		<form action="userDecreMoney.do" id="frm">
+																			<input type="hidden" name="cash"
+																				value="${user.cash }"> <input type="hidden"
+																				name="user_no" value="${user.user_no }"> <input
+																				type="hidden" name="point" value="${user.point }">
+																			<input type="hidden" name="store_product_no"
+																				value="${sp.store_product_no}"> <input
+																				type="number" name="purchase_quantity"
+																				value="${purchase.purchase_quantity }"
+																				style="width: 40px;"> <input type="hidden"
+																				name="calculated_price" value="${sp.price }">
+																			<input type="hidden" name="using_point" value=0>
+																			<input type="hidden" name="store_no"
+																				value="${sp.store_no }">
+
+																			<button type="submit" class="btn btn-primary"
+																				name="price" value="${sp.price}"
+																				onclick="return purchaseMoney();">잔고 결제</button>
+
+																		</form>
+																		&nbsp;
+																		<!-- 포인트 결제 버튼 -->
+																		<form action="userDecrePoint.do" id="form">
+																			<input type="hidden" name="user_no"
+																				value="${user.user_no }"> <input
+																				type="hidden" name="point" value="${user.point }">
+																			<input type="hidden" name="store_product_no"
+																				value="${sp.store_product_no}"> <input
+																				type="number" name="purchase_quantity"
+																				value="${purchase.purchase_quantity }"
+																				style="width: 40px;"> <input type="hidden"
+																				name="calculated_price" value="${sp.price }">
+																			<input type="hidden" name="store_no"
+																				value="${sp.store_no }">
+
+																			<button type="submit" class="btn btn-primary"
+																				name="price" value="${sp.price }"
+																				onclick="return purchasePoint();">포인트 결제</button>
+																		</form>
+																	</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-default"
+																			data-dismiss="modal">close</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+
 													</div>
 												</c:forEach>
 											</div>
@@ -451,5 +753,41 @@
 <c:import url="../include/user/common/footer.jsp"></c:import>
 <!-- === END FOOTER === -->
 <!-- JS -->
+<script>
+function purchaseMoney(){
+	var result;
+	<c:forEach var="sp" items="${requestScope.list}">
+	var price = ${sp.price};
+	var cash = ${user.cash};
+	result = cash - price;
+	</c:forEach>
+	
+	if(result < 0){
+		alert("잔고 부족");
+		return false;
+	}
+	if(result > 0){
+		alert("결제 완료");
+	}
+}
+
+function purchasePoint(){
+	var result;
+	<c:forEach var="sp" items="${requestScope.list}">
+	var price = ${sp.price};
+	var point = ${user.point};
+	result = point - price;
+	</c:forEach>
+
+	if(result < 0){
+		alert("잔고 부족");
+		return false;
+	}
+	if(result > 0){
+		alert("결제 완료");
+		
+	}
+}
+</script>
 <c:import url="../include/user/common/end.jsp"></c:import>
 <!-- === END FOOTER === -->

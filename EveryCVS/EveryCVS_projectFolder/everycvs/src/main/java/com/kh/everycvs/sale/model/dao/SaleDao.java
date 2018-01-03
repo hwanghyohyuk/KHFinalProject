@@ -1,5 +1,6 @@
 package com.kh.everycvs.sale.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository("saleDao")
 public class SaleDao {
-	
+
 	@Autowired
 	private SqlSession sqlSession;
 
@@ -17,46 +18,16 @@ public class SaleDao {
 
 	/** 상품 판매량 **/
 	public int saleQuantity(String store_no) {
-		return sqlSession.selectOne("sale.saleQuantity",store_no);
+		return sqlSession.selectOne("sale.storeSaleQuantity", store_no);
 	}
-	
-	/** 금일 등록된 상품수 **/
-	public int registProducts(String store_no) {
-		return sqlSession.selectOne("sale.registProducts",store_no);
-	}
-	
-	/** 금일 방문자수 **/
-	public int joinCustomers(String store_no) {
-		return sqlSession.selectOne("sale.joinCustomers",store_no);
-	}
-	
-	/** 금일 판매 수익**/	
+
+	/** 금일 판매 수익 **/
 	public int saleBenefit(String store_no) {
-		return sqlSession.selectOne("sale.saleBenefit",store_no);
-	}	
-	
-	/** 지점 상품 종류별 판매량 **/
-	public Map kindStoreSale(String store_no) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("sale.storeSaleBenefit", store_no);
 	}
 
-	/** 판매수익 차트 **/
-	public Map saleBenefitChart(String store_no) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** 시간대 별 판매량 **/
-	public Map timeSale(String store_no) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** 판매내역 **/
-	public Map saleRecode(String store_no) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<HashMap<String, Object>> salesGraph(String store_no) {
+		return sqlSession.selectList("sale.storeSalesGraph", store_no);
 	}
 
 	/* 편의점관리자 */
@@ -65,12 +36,16 @@ public class SaleDao {
 		return sqlSession.selectList("sale.selectSaleProductKind", brand_no);
 	}
 
-	/** 판매량 Top5 지점 **/
-	public Map saleTop5Store(int brand_no) {
-		// TODO Auto-generated method stub
-		return null;
+	public int saleQuantity(int brand_no) {
+		return sqlSession.selectOne("sale.cvsSaleQuantity", brand_no);
 	}
 
+	public int saleBenefit(int brand_no) {
+		return sqlSession.selectOne("sale.cvsSaleBenefit", brand_no);
+	}
 
+	public List<HashMap<String, Object>> salesGraph(int brand_no) {
+		return sqlSession.selectList("sale.cvsSalesGraph", brand_no);
+	}
 
 }

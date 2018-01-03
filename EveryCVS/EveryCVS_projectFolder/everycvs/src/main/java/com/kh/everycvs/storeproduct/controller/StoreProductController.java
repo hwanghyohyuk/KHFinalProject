@@ -217,9 +217,13 @@ public class StoreProductController {
 	@RequestMapping(value="/ajax/spmupdate.do")
 	@ResponseBody
 	public int updateSpmanager( @RequestParam("spno") int spno,
-			 @RequestParam("mdate") Date manufacturedate,
+			 @RequestParam("mdate") Date mdate,
 			 @RequestParam("quantity") int quantity) {
-		int result =0;
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("spno", spno);
+		map.put("mdate", mdate);
+		map.put("quantity", quantity);
+		int result = sproductService.updateSpmanager(map);
 		
 		return result;
 	}

@@ -19,10 +19,10 @@ public interface EventService {
 	List<Event> eventTop3();
 	
 	//관리자 게시글 갯수 조회
-	int getListCount(String keyword, int user_no);
+	int getListCount(int edno,String keyword, int user_no);
 
 	// 관리자 이벤트 조회 : 모든 공식이벤트를 조회 및 검색
-	public List<Event> selectEventList(String keyword, int currentPage, int limit, int user_no);
+	public List<Event> selectEventList(String keyword, int currentPage, int limit, int user_no, int edno);
 	
 	//관리자 상세 조회
 	public Event cvsEventDetail(int eno);
@@ -64,18 +64,22 @@ public interface EventService {
 	int eventJoinCount(int event_no);
 	
 	int eventJoincheck(EventJoin eventjoin);
-	void eventJoin(EventJoin eventjoin);
+	int eventJoin(EventJoin eventjoin);
 	
-	void deleteJoin(EventJoin eventjoin);
+	int deleteJoin(EventJoin eventjoin);
 	//아직 못끝냄
 	
 	
 	void eventResultInsert(EventResult eventResult);
 	
 	//편의점 별 사용자 이벤트
-	List<Event> cvsEvent(int currentpage, int limit, int brand_no);
-	//이건 오늘 배운 오버로딩
-	int getListCount(int brand_no, int user_no);
+	List<Event> cvsEvent(int currentpage, int limit, int edno, int brand_no);
+	//편의점별 리스트 카운트
+	int getListCount(int edno,int brand_no);
+	int selectJoinLimit(int event_no);
+	
+	//----------------------------
+
 	
 	
 	

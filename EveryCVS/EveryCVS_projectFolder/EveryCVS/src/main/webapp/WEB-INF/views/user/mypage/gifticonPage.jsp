@@ -17,24 +17,8 @@
 			<div class="container background-white">
 				<div class="row margin-vert-40">
 					<!-- Begin Sidebar Menu -->
-					<div class="col-md-3">
-						<ul class="list-group sidebar-nav" id="sidebar-nav">
-							<!-- 기프티콘 보관함 -->
-							<li class="list-group-item list-toggle">
-							<a href="/everycvs/gifticonPage.do">기프티콘 보관함</a>
-							</li>
-							
-							<!-- 관심목록 -->
-							<li class="list-group-item list-toggle">
-							<a href="/everycvs/user/favoriteList.do">관심목록</a>
-							</li>
-								
-							<!-- 회원탈퇴 -->
-							<li class="list-group-item list-toggle"><a
-								data-toggle="collapse" data-parent="#sidebar-nav"
-								href="#collapse-icons">회원탈퇴</a>
-								</li>
-						</ul>
+					<div class="col-md-3" align="center">
+					<c:import url="../../include/user/common/mypageSidebarMenu.jsp"></c:import>
 					</div>
 					<!-- End Sidebar Menu -->
 					
@@ -59,17 +43,17 @@
                                         </figure>
                                     </a>
                                 </div>
-                                <b>${glist.product_name }</b><br>
+                                <b style="color:#245256;">${glist.product_name }</b><br>
                                 <b>${glist.store_name }</b>
                             </div>
 							
 
 						<!-- Modal -->
-						<div class="modal fade" id="gifticon_${glist.gifticon_no }" role="dialog">
-							<div class="modal-dialog modal-80size">
+						<div class="modal fade" id="gifticon_${glist.gifticon_no }" role="dialog" align="center">
+							<div class="modal-dialog" style="height:50px; width:350px;">
 								
 								<!-- Modal content-->
-								<div class="modal-content modal-80size">
+								<div class="modal-content">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
 									<div class="modal-body" align="center">
 									
@@ -77,10 +61,10 @@
 											<img alt="이미지를 준비중입니다." 
 												 src="/everycvs/resources/upload/${glist.stored_file_name}" 
 												 style="height:250px;">
-												<br><br>
+												<br><br><br>
 											
-											<b>${glist.product_name }</b>
-										<input type="hidden" id="bno_${glist.gifticon_no}" value="${glist.barcode_img_name}" >
+											<b style="color:#245256;">${glist.product_name }</b>
+										<input type="hidden" id="bno_${glist.gifticon_no}" value="${glist.barcode_img_name}">
 										<div id="bcTarget_${glist.gifticon_no}" align="center"></div>	
 										
 										<br>		
@@ -95,7 +79,7 @@
 											data-dismiss="modal">Close</button>
 									</div>
 								</div>
-							</div>
+						</div>
 						</div>
 						</c:forEach>
 

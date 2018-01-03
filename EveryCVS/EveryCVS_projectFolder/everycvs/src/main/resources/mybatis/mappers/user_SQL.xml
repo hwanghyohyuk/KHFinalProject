@@ -170,16 +170,81 @@
 	birthday = #{birthday},
 	phone = #{phone},
 	gender = #{gender},
-	address = #{address},	
-	user_pwd = #{user_pwd}	
+	address = #{address}	
 	where email=#{email}
 	]]>
 	</update>
+	<update id="modifyUserpwd" parameterType="user">
+ 	<![CDATA[
+ 	update tb_user set 
+ 	user_name = #{user_name},
+ 	birthday = #{birthday},
+ 	phone = #{phone},
+ 	gender = #{gender},
+ 	address = #{address},
+	user_pwd = #{user_pwd}
+ 	where email=#{email}
+ 	]]>
+	</update>
 
-	<update id="deleteUser" parameterType="_int">
+	<update id="updateUserImg" parameterType="user">
+ 	<![CDATA[
+ 	update tb_user set original_file_name = #{original_file_name}, stored_file_name = #{stored_file_name} where user_no=#{user_no}
+ 	]]>
+	</update>
+
+	<update id="deleteUser" parameterType="string">
 	<![CDATA[
-	update tb_user set user_state = 1 where user_no=#{user_no}
+	update tb_user set user_state = 1 where email=#{email}
 	]]>
 	</update>
 
+	<select id="registUserCount" resultType="_int">
+	<![CDATA[select count(*) from tb_user where to_char(sysdate,'yy-mm-dd')=to_char(enroll_date,'yy-mm-dd')]]>
+	</select>
+	
+	<select id="userList" resultType="list" resultMap="resultUser">
+	<![CDATA[
+	select * from user_view where user_no in 
+	(select distinct user_no from 
+	(select user_no, decode(filter,1,email,2,user_name,3,address,4,to_char(enroll_date,'yy/mm/dd')) as data
+	from user_view,(select level as filter from dual connect by level<=4)) 
+	]]>
+	<choose>
+		<when test="jobno == 0"></when>
+		<when test="jobno == 1"><![CDATA[where job='customer']]></when>
+		<when test="jobno == 2"><![CDATA[where job='storemanager']]></when>
+		<when test="jobno == 3"><![CDATA[where job='cvsmanager']]></when>
+		<when test="jobno == 4"><![CDATA[where job='sitemanager']]></when>
+	</choose>
+	<choose>
+		<when test="keyword == null"></when>
+		<when test="keyword != null"><![CDATA[and LOWER(data) like LOWER(#{keyword})]]></when>
+	</choose>
+	<![CDATA[ ) and rownum >= #{startRow} and rownum <= #{endRow} ]]>
+	<choose>
+		<when test="orderby == 0"><![CDATA[order by user_no asc]]></when>
+		<when test="orderby == 1"><![CDATA[order by user_no desc]]></when>
+		<when test="orderby == 2"><![CDATA[order by user_name asc]]></when>
+		<when test="orderby == 3"><![CDATA[order by user_name desc]]></when>
+		<when test="orderby == 4"><![CDATA[order by email asc]]></when>
+		<when test="orderby == 5"><![CDATA[order by email desc]]></when>
+		<when test="orderby == 6"><![CDATA[order by birthday asc]]></when>
+		<when test="orderby == 7"><![CDATA[order by birthday desc]]></when>
+		<when test="orderby == 8"><![CDATA[order by enroll_date asc]]></when>
+		<when test="orderby == 9"><![CDATA[order by enroll_date desc]]></when>
+	</choose>
+	</select>
+	
+	<select id="userCount" parameterType="int" resultType="_int">
+	<![CDATA[	select count(*) from user_view	]]>
+	<choose>
+		<when test="jobno == 0"></when>
+		<when test="jobno == 1"><![CDATA[where job='customer']]></when>
+		<when test="jobno == 2"><![CDATA[where job='storemanager']]></when>
+		<when test="jobno == 3"><![CDATA[where job='cvsmanager']]></when>
+		<when test="jobno == 4"><![CDATA[where job='sitemanager']]></when>
+	</choose>
+	</select>
+	
 </mapper>

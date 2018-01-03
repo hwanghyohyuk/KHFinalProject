@@ -135,27 +135,38 @@ function signIn(){
 				},
 				success:function(data){
 					if(data>0){
-						swal({
-							title: 'SIGN IN SUCCESS',
-							timer: 1500,
-							type: 'success'
-						});
-						setTimeout(function(){
-							switch (data) {
-							  case 1 : location.href="/everycvs/main/main.do"; break;
-							  case 2 : location.href="/everycvs/main/storemain.do"; break;
-							  case 3 : location.href="/everycvs/main/cvsmain.do"; break;
-							  case 4 : location.href="/everycvs/main/sitemain.do"; break;
-							}},1000);
-					}else{
-						swal({
-							title: 'SIGN IN FAIL',
-							text: 'check your email or password...',
-							timer: 1500,
-							type: 'error'
-						});
-						$("#pwd").focus();
-					}					
+							swal({
+								title: 'SIGN IN SUCCESS',
+								timer: 1500,
+								type: 'success'
+							});
+							setTimeout(function(){
+								switch (data) {
+								  case 1 : location.href="/everycvs/main/main.do"; break;
+								  case 2 : location.href="/everycvs/main/storemain.do"; break;
+								  case 3 : location.href="/everycvs/main/cvsmain.do"; break;
+								  case 4 : location.href="/everycvs/main/sitemain.do"; break;
+								}},1000);
+						}else if(data==0){
+							swal({
+								title: 'SIGN IN FAIL',
+								text: 'check your email or password...',
+								timer: 1500,
+								type: 'error'
+							});
+							$("#email").val('');
+							$("#pwd").val('');
+							$("#pwd").focus();
+						}else if(data==-1){			
+							swal({
+								title: '회원 탈퇴 계정',
+								text: '해당 계정은 회원 탈퇴된 계정입니다',
+								timer: 1500,
+								type: 'error'
+							});
+							$("#email").val('');
+							$("#pwd").val('');
+						}							
 				},
 				error:function(request, status, error){
 					swal({
@@ -173,6 +184,7 @@ function signIn(){
 				timer: 1500,
 				type: 'error'
 			});
+			$("#pwd").val('');
 			$("#pwd").focus();
 		}
 	}else{

@@ -2,6 +2,7 @@ package com.kh.everycvs.user.model.dao;
 
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -81,22 +82,17 @@ public class UserDao{
 	public int certificationCheck(EmailCertification emailCertification) {
 		return sqlSession.selectOne("user.certificationCheck", emailCertification);
 	}
-
-	public Map<String, Object> userList(String page, String keyword) {
-		return null;
-	}
 	
 	public int checkUser(User user) {
 		return sqlSession.selectOne("user.checkUser",user);
 	}
 
 	public int modifyUser(User user) {
-		System.out.println(user);
 		return sqlSession.update("user.modifyUser",user);
 	}
 
-	public int deleteUser(int user_no) {
-		return sqlSession.update("user.deleteUser",user_no);
+	public int deleteUser(String email) {
+		return sqlSession.update("user.deleteUser",email);
 	}
 
 	public int userIncreMoney(Map<String, Object> map) {
@@ -137,6 +133,36 @@ public class UserDao{
 
 	public int deleteResetKey(String email) {
 		return sqlSession.delete("user.deleteResetKey", email);
+	}
+
+	public int registUserCount() {
+		return sqlSession.selectOne("user.registUserCount");
+	}
+
+	public int modifyUserpwd(User user) {
+		return sqlSession.update("user.modifyUserpwd",user);
+	}
+
+	public int updateUserImg(User user) {
+		return sqlSession.update("user.updateUserImg", user);
+	}
+
+	public List<User> userList(int startRow, int endRow, int jobno, int orderby, String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		map.put("jobno", jobno);
+		map.put("orderby", orderby);
+		if(!keyword.equalsIgnoreCase("")){
+			map.put("keyword", "%"+keyword+"%");
+		}		
+		return sqlSession.selectList("user.userList", map);
+	}
+
+	public int userCount(int jobno) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("jobno", jobno);
+		return sqlSession.selectOne("user.userCount",map);
 	}
 
 

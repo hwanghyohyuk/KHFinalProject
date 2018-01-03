@@ -22,7 +22,7 @@ public class StoreProduct implements Serializable {
 	private int price; // 가격
 	private Date manufacture_date; // 제조일
 	private int expiration_date; // 유통기한
-	private int expiration_hour; // 유통시간
+	private int expiration_minute; // 유통시간
 	private int quantity; // 수량
 	private int product_kind_no; // 상품종류번호
 	private String product_kind_name; // 상품종류명
@@ -54,7 +54,7 @@ public class StoreProduct implements Serializable {
 	}
 
 	public StoreProduct(int store_product_no, String store_no, int product_no, String product_name, String manufacturer,
-			int price, Date manufacture_date, int expiration_date, int expiration_hour, int quantity,
+			int price, Date manufacture_date, int expiration_date, int expiration_minute, int quantity,
 			int product_kind_no, String product_kind_name, int brand_no, String brand_name, String original_file_name,
 			String stored_file_name, String del_check, int purchase_count) {
 		super();
@@ -66,7 +66,7 @@ public class StoreProduct implements Serializable {
 		this.price = price;
 		this.manufacture_date = manufacture_date;
 		this.expiration_date = expiration_date;
-		this.expiration_hour = expiration_hour;
+		this.expiration_minute = expiration_minute;
 		this.quantity = quantity;
 		this.product_kind_no = product_kind_no;
 		this.product_kind_name = product_kind_name;
@@ -79,7 +79,7 @@ public class StoreProduct implements Serializable {
 	}
 
 	public StoreProduct(int store_product_no, String store_no, int product_no, String product_name, String manufacturer,
-			int price, Date manufacture_date, int expiration_date, int expiration_hour, int quantity,
+			int price, Date manufacture_date, int expiration_date, int expiration_minute, int quantity,
 			int product_kind_no, String product_kind_name, int brand_no, String brand_name, String original_file_name,
 			String stored_file_name, String del_check, int purchase_count, int discount_no, String discount_info,
 			String discount_name) {
@@ -92,7 +92,7 @@ public class StoreProduct implements Serializable {
 		this.price = price;
 		this.manufacture_date = manufacture_date;
 		this.expiration_date = expiration_date;
-		this.expiration_hour = expiration_hour;
+		this.expiration_minute = expiration_minute;
 		this.quantity = quantity;
 		this.product_kind_no = product_kind_no;
 		this.product_kind_name = product_kind_name;
@@ -108,7 +108,7 @@ public class StoreProduct implements Serializable {
 	}
 	
 	public StoreProduct(int store_product_no, String store_no, int product_no, String product_name, String manufacturer,
-			int price, Date manufacture_date, int expiration_date, int expiration_hour, int quantity,
+			int price, Date manufacture_date, int expiration_date, int expiration_minute, int quantity,
 			int product_kind_no, String product_kind_name, int brand_no, String brand_name, String original_file_name,
 			String stored_file_name, String del_check, int purchase_count, int discount_no, String discount_info,
 			String discount_name, Date start_date, Date end_date, String expiration_rate, String discount_rate,
@@ -122,7 +122,7 @@ public class StoreProduct implements Serializable {
 		this.price = price;
 		this.manufacture_date = manufacture_date;
 		this.expiration_date = expiration_date;
-		this.expiration_hour = expiration_hour;
+		this.expiration_minute = expiration_minute;
 		this.quantity = quantity;
 		this.product_kind_no = product_kind_no;
 		this.product_kind_name = product_kind_name;
@@ -207,12 +207,12 @@ public class StoreProduct implements Serializable {
 		this.expiration_date = expiration_date;
 	}
 
-	public int getExpiration_hour() {
-		return expiration_hour;
+	public int getExpiration_minute() {
+		return expiration_minute;
 	}
 
-	public void setExpiration_hour(int expiration_hour) {
-		this.expiration_hour = expiration_hour;
+	public void setExpiration_minute(int expiration_minute) {
+		this.expiration_minute = expiration_minute;
 	}
 
 	public int getQuantity() {
@@ -361,7 +361,7 @@ public class StoreProduct implements Serializable {
 		return "StoreProduct [store_product_no=" + store_product_no + ", store_no=" + store_no + ", product_no="
 				+ product_no + ", product_name=" + product_name + ", manufacturer=" + manufacturer + ", price=" + price
 				+ ", manufacture_date=" + manufacture_date + ", expiration_date=" + expiration_date
-				+ ", expiration_hour=" + expiration_hour + ", quantity=" + quantity + ", product_kind_no="
+				+ ", expiration_hour=" + expiration_minute + ", quantity=" + quantity + ", product_kind_no="
 				+ product_kind_no + ", product_kind_name=" + product_kind_name + ", brand_no=" + brand_no
 				+ ", brand_name=" + brand_name + ", original_file_name=" + original_file_name + ", stored_file_name="
 				+ stored_file_name + ", del_check=" + del_check + ", purchase_count=" + purchase_count

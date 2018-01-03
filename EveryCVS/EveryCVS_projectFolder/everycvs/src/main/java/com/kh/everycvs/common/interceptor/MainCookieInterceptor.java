@@ -46,20 +46,7 @@ public class MainCookieInterceptor extends HandlerInterceptorAdapter {
 				if (user != null) { // 그런 사용자가 있다면
 					// 세션을 생성시켜 준다.
 					session.setAttribute("user", user);
-					switch(user.getJob()){
-					case "customer":
-						returnURL = "main.do"; // 로그인 성공시 사용자 메인페이지 이동
-						break;
-					case "storemanager":
-						returnURL = "storemain.do";
-						break;
-					case "cvsmanager":
-						returnURL = "cvsmain.do";
-						break;
-					case "sitemanager":
-						returnURL = "sitemain.do";
-						break;
-					}		
+					returnURL = urlSelector(user);
 					response.sendRedirect("/everycvs/"+returnURL);
 					return false;
 				}
@@ -71,6 +58,13 @@ public class MainCookieInterceptor extends HandlerInterceptorAdapter {
 		// preHandle의 return은 컨트롤러 요청 uri로 가도 되냐 안되냐를 허가하는 의미임
 		// 따라서 true로하면 컨트롤러 uri로 가게 됨.
 		User user = (User)obj;
+		returnURL = urlSelector(user);	
+		response.sendRedirect("/everycvs/"+returnURL);
+		return false;
+	}
+
+	private String urlSelector(User user) {
+		String returnURL = "";
 		switch(user.getJob()){
 		case "customer":
 			returnURL = "main.do"; // 로그인 성공시 사용자 메인페이지 이동
@@ -84,9 +78,8 @@ public class MainCookieInterceptor extends HandlerInterceptorAdapter {
 		case "sitemanager":
 			returnURL = "sitemain.do";
 			break;
-		}		
-		response.sendRedirect("/everycvs/"+returnURL);
-		return false;
+		}
+		return returnURL;
 	}
 
 	// 컨트롤러가 수행되고 화면이 보여지기 직전에 수행되는 메서드

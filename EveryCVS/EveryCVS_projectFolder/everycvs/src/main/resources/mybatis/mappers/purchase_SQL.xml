@@ -17,6 +17,7 @@
 		<result property="using_point" column="USING_POINT" />
 		<result property="accumulate_point" column="ACCUMULATE_POINT" />
 		<result property="purchase_date" column="PURCHASE_DATE" />
+		<result property="stored_file_name" column="STORED_FILE_NAME" />
 
 	</resultMap>
 	<!-- 구매내역 리스트 조회 -->
@@ -91,11 +92,23 @@
     </update>
     
     <!--  자주 구매한 목록-->
-     <select id="top3List" resultType="list" resultMap="resultPurchase">
+     <select id="top3List" parameterType="int" resultType="list" resultMap="resultPurchase">
 		<![CDATA[
-			select * from (select rownum rnum, a.*
-			from (select * from purchase_view order by product_name desc) a) 
-			where rnum >= 1 and rnum <= 3
+		select store_name, product_name, sum(purchase_quantity), stored_file_name from purchase_view
+		where user_no = #{user_no}
+		group by product_name, store_name, purchase_quantity, stored_file_name
+		order by sum(purchase_quantity) desc
+			
+		]]>	
+		<!-- select * from (select rownum rnum, a.*
+			from (select * from purchase_view where user_no = #{user_no} order by product_name desc) a) 
+			where rnum >= 1 and rnum <= 3 -->
+	</select>
+	
+	
+	<select id="purchaseCount" resultType="_int">
+		<![CDATA[
+			select count(*) from tb_purchase where to_char(sysdate,'yy-mm')=to_char(purchase_date,'yy-mm')
 		]]>	
 	</select>
 	

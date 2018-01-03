@@ -2,6 +2,7 @@ package com.kh.everycvs.user.model.service;
 
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -50,11 +51,13 @@ public interface UserService {
 	
 	
 	/** 회원탈퇴 **/
-	int deleteUser(int user_no);
+	int deleteUser(String email);
 
 	/** 정보수정 **/
 	int encCheckUser(User user);
-	int encModifyUser(User user);
+	int updateUserImg(User user);
+	int ModifyUser(User user);
+	int encModifyUserpwd(User user);
 
 	/** 이름 확인 **/
 	int checkName(String email, String name);
@@ -87,9 +90,22 @@ public interface UserService {
 	int increMoney(Map<String, Object> map);
 	
 	/* 사이트 관리자 */
+	//회원 등록 수
+	int registUserCount();
+	/** 회원 목록 및 검색 
+	 * @param keyword 
+	 * @param orderby 
+	 * @param jobno 
+	 * @param limit **/
+	List<User> userList(int page, int limit, int jobno, int orderby, String keyword);
 
-	/** 회원 목록 및 검색 **/
-	Map<String, Object> userList(String page, String keyword);
+	int userCount(int jobno);
+
+
+
+	
+
+	
 
 	
 

@@ -73,9 +73,17 @@ public class PurchaseDao {
 		return 0;
 	}
 
-	public List<Purchase> top3List() {
-		ArrayList<Purchase> list = new ArrayList<Purchase>();
-		return sqlSession.selectList("purchase.top3List", list);
+	public List<Purchase> top3List(int user_no) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("user_no", user_no);
+		
+		List<Purchase> list = sqlSession.selectList("purchase.top3List", map);
+		return new ArrayList<Purchase>(list);
+		
+	}
+
+	public int purchaseCount() {
+		return sqlSession.selectOne("purchase.purchaseCount");
 	}
 
 	
