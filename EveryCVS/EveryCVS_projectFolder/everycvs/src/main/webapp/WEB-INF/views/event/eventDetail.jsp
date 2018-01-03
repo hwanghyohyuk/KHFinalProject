@@ -12,44 +12,6 @@
 <!-- === BEGIN HEADER ===  -->
 <c:import url="../include/user/common/header.jsp"></c:import>
 <!-- === END HEADER === -->
-<<script type="text/javascript">
-<!-- 자바 스크립트-->
-//이벤트 참여처리
-
-
-/* function eventCount(event_no){
-   var user_no = $("#user_no").val();
-   $.ajax({
-      url:"eventCount.do",
-      dataType:"json",
-      type:"post",
-      data:{"event_no":event_no,"user_no":user_no},
-      success:function(data){
-         var eventJoinCount = data.eventJoinCount;   
-         var checkEventJoinTable = data.checkEventJoinTable;
-         
-         if(user_no){ //로그인 한경우 
-            if(eventJoinCount==1 && checkEventJoinTable == 1){   //나 혼자 좋아요 눌럿을 때
-               $("#eventJoinCount").html("회원님이 이 이벤트에참여하였습니다.");   
-            }else if(eventJoinCount==0 && checkEventJoinTable == 0){   //아무도 좋아요 안눌렀을 때
-               $("#eventJoinCount").html(eventJoinCount + " 명이 이 이벤트에 참여하였습니다")
-            }else if(eventJoinCount!=0 && checkEventJoinTable ==1){ //이미 좋아요를 클릭한 상황
-               $("#eventJoinCount").html("회원 님 외 " + (eventJoinCount-1) + "명이 이 이벤트 참여하였습니다.");
-            }else if(eventJoinCount !=0 && checkEventJoinTable ==0){
-               $("#eventJoinCount").html(eventJoinCount + " 명이 이 이벤트 참여하였습니다.")
-            }
-         }else{
-            $("#eventJoinCount").html(eventJoinCount + " 명이 이벤트 참여하였습니다.");
-         }
-      },
-      error: function(request, status, errorData){
-         alert("error code : " + request.status + "\n"
-               + "message : " + request.responseText + "\n"
-               + "error : " + errorData);
-      }
-   }); 
-}*/
-</script>
 <!-- === BEGIN CONTENT === -->
 <div id="content">
 	<div class="container background-white">
@@ -78,12 +40,19 @@
 									<textarea rows="5" class="form-control"
 										style="margin-bottom: 4px; width: 100%;" readonly>${et.contents}
                                     </textarea>
+                                    <jsp:useBean id="now" class="java.util.Date" />
+                                    <fmt:formatDate value="${now}" pattern="yyyy-MM-dd a hh:mm" var="sysdate" /> 
+                                    <c:if test="${et.end_date > sysdate }">
                                     	<c:if test="${isJoin eq 1 }">
-                                    	<input id="joinBtn" type="button" class="btn btn-red btn-lg" onclick="eventJoin('${et.event_no}', '${user.user_no}', '${user.user_name}')" style=float:left; value="참여완료">
+                                    	<input id="joinBtn" type="button" class="btn btn-red btn-lg" onclick="selectFunction(${et.event_no},${user.user_no},0)" style=float:left; value="참여완료">
                                     	</c:if>
                                     	<c:if test="${isJoin eq 0 }">
-                                    	<input id="joinBtn" type="button" class="btn btn-primary btn-lg" onclick="eventJoin('${et.event_no}', '${user.user_no}', '${user.user_name}')" style=float:left; value="참여하기">
+                                    	<input id="joinBtn" type="button" class="btn btn-primary btn-lg" onclick="selectFunction(${et.event_no},${user.user_no},1)" style=float:left; value="참여하기">
                                     	</c:if>
+                                    </c:if>
+                                    <c:if test="${et.end_date <= sysdate }">
+									   	<input id="joinBtn" type="button" class="btn btn-red btn-lg" style=float:left; value="이벤트종료" readonly>
+                                    </c:if>
 										<button type="button" class="btn btn-primary btn-lg" onclick='location.href="/everycvs/page/eventmain.do"' style=float:right;>CANCEL</button>
 									</p>
 								</div>
@@ -93,28 +62,87 @@
 				</div>
 				<hr>
 				<script>
+				function selectFunction(event_no,user_no,no){
+					if(no==1){
+						eventJoin(event_no,user_no)
+					}else{
+						eventJoinCancel(event_no,user_no)
+					}
+				}
 				function eventJoin(event_no,user_no){   
-					
-					   var checkEventJoinTable = 0;
-				   
 					   $.ajax({
-					      url:"eventJoin.do",
-					      dataType:"json",
+					      url:"/everycvs/eventJoin.do",
 					      type:"post",
 					      data:{"event_no":event_no,"user_no":user_no},
 					      success:function(data){
-					         checkEventJoinTable = data.checkEventJoinTable;
-					         console.log("checkEventJoinTable"+checkEventJoinTable);
-					       	 if(checkEventJoinTable==0 ){
+					       	 if(data==1){
 					       		$("#joinBtn").val("참여완료");
 					        	 $("#joinBtn").addClass("btn-green");
 					        	 $("#joinBtn").removeClass("btn-red");
-					            swal("이벤트에 참여하였습니다","다시한번 참여하면 취소됩니다.","success");
-					         }else if(checkEventJoinTable==1){
+					            swal({
+					        		title:"이벤트에 참여하였습니다",
+					        		text:'다시한번 참여하면 취소됩니다',
+					        		timer:1500,
+					        		type:'success'
+					        	});
+					            setTimeout(function(){
+					        		location.href="/everycvs/eventDetail.do?no="+event_no;
+					        	},1400);
+					         }else if(data==0){
+					        	swal({
+					        		title:"ERROR",
+					        		text:'Internal Server Error',
+					        		timer:1500,
+					        		type:'error'
+					        	});
+					         }else{
+					        	 swal({
+						        		title:"이벤트 참여 정원 초과",
+						        		timer:1500,
+						        		type:'warning'
+						        	});
+					         }
+					      },
+					      error: function(xhr,status,error){
+					         alert(xhr+status+error);
+					      }
+					      
+					   });
+					}
+				function eventJoinCancel(event_no,user_no){   
+					
+					   var checkEventJoinTable = 0;
+					   $.ajax({
+					      url:"/everycvs/eventJoinCancel.do",
+					      type:"post",
+					      data:{"event_no":event_no,"user_no":user_no},
+					      success:function(data){
+					       	 if(data==0){
+					       		swal({
+					        		title:"ERROR",
+					        		text:'Internal Server Error',
+					        		timer:1500,
+					        		type:'error'
+					        	});
+					         }else if(data==1){
 					        	 $("#joinBtn").val("참여하기");
-					        	 $("#joinBtn").addClass("btn-red");
-					        	 $("#joinBtn").removeClass("btn-green");
-					        	swal("이벤트를 취소하였습니다","다시한번 누르면 참여됩니다.","success");
+					        	 $("#joinBtn").addClass("btn-green");
+					        	 $("#joinBtn").removeClass("btn-red");
+					        	swal({
+					        		title:"이벤트를 취소하였습니다",
+					        		text:"다시한번 누르면 참여됩니다",
+					        		timer:1500,
+					        		type:'success'
+					        	});
+					        	setTimeout(function(){
+					        		location.href="/everycvs/eventDetail.do?no="+event_no;
+					        	},1400);
+					         }else{
+					        	 swal({
+						        		title:"이벤트 미참여 고객",
+						        		timer:1500,
+						        		type:'warning'
+						        	});
 					         }
 					      },
 					      error: function(xhr,status,error){
