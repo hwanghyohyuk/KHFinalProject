@@ -42,11 +42,6 @@ public interface ProductService {
 	/**주간 인기상품 top 5**/	
 	public Map popularStoreProductTop5(String store_no);
 	
-	
-	/*지점관리자*/
-	/**allProduct 개수 조회**/
-	public List popularCvsProductTop5(int brand_no);
-	
 	/*지점관리자*/
 	/**allProduct 전체보기, 검색하기**/
 	public int getListCount(String keyword, int brand_no);
@@ -61,4 +56,7 @@ public interface ProductService {
 	public List<Product> pTop5(int brand_no);
 
 	public List<ProductKind> productKindValue(int brand_no, int dateNo);
+	
+	/** 금주 인기상품 top5 */
+	public List popularCvsProductTop5(int brand_no);
 }
