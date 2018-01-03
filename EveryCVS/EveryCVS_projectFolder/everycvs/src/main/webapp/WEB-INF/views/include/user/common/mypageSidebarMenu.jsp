@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+	<!-- 추가한 부분 2018.01.03. PM 10:11 여기서 부터 *********************************** -->
 	<div>
 	<img alt="이미지를 준비중입니다." 
 	 src="/everycvs/resources/upload/${user.stored_file_name }" 
@@ -25,6 +27,8 @@
 	<li class="list-group-item list-toggle">
 	<a href="/everycvs/user/favoriteList.do">관심상품</a>
 	</li>
+	<!-- 여기까지 ************************************************************************* -->
+
 
 	<!-- 회원탈퇴 -->
 	<li class="list-group-item list-toggle"><a href="#" onclick="deleteUser('${sessionScope.user.email}');">회원탈퇴</a></li>
