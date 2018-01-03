@@ -3,12 +3,8 @@ package com.kh.everycvs.event.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.kh.everycvs.common.model.vo.Event;
 import com.kh.everycvs.common.model.vo.EventJoin;
 import com.kh.everycvs.common.model.vo.EventResult;
@@ -24,7 +19,6 @@ import com.kh.everycvs.common.model.vo.User;
 import com.kh.everycvs.common.util.FileUtils;
 import com.kh.everycvs.event.model.service.EventService;
 
-import net.sf.json.JSONObject;
 
 @Controller
 public class EventController {
@@ -80,7 +74,7 @@ public class EventController {
 	@RequestMapping(value = "eventresultlist.do", method = RequestMethod.GET)
 	public ModelAndView eventResultList(
 			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword, String page,
-			HttpSession session, @RequestParam(value = "edno") int edno) {
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("event/result/eventresultlist");
 		int user_no = ((User) session.getAttribute("user")).getUser_no();
@@ -89,7 +83,7 @@ public class EventController {
 		List<EventResult> list = eventService.resultEventList(keyword, currentPage, limit);
 		System.out.println("이벤트결과list : " + list);
 		Map<String, Object> map = new HashMap<String, Object>();
-		int listCount = eventService.getListCount(edno, keyword, user_no);
+		int listCount = eventService.getListCount(user_no);
 		int maxPage = (int) ((double) listCount / limit + 0.9);
 		int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
 		int endPage = startPage + limit - 1;
@@ -229,8 +223,12 @@ public class EventController {
 	// 이벤트 결과 글쓰기
 	// ResultwhriteForm 으로 이동
 	@RequestMapping(value = "cvseventResultView.do", method = RequestMethod.GET)
-	public String cvseventResultView() {
-		return "admin/cvsmanager/eventResultWrite";
+	public ModelAndView cvseventResultView(ModelAndView mv,HttpSession session) {
+		mv.setViewName("admin/cvsmanager/eventResultWrite");
+		int user_no = ((User)session.getAttribute("user")).getUser_no();
+		List<Event> elist = eventService.allocationEvent(user_no);
+		mv.addObject("elist",elist);
+		return mv;
 	}
 
 	@RequestMapping(value = "/cvsevenResultWrite.do", method = RequestMethod.POST)
@@ -238,6 +236,13 @@ public class EventController {
 		eventService.eventResultInsert(eventResult);
 		return "redirect:/eventresultlist.do";
 	}
+	
+	@RequestMapping(value = "/ajax/joinuserlist.do",method=RequestMethod.GET)
+	@ResponseBody
+	public List<EventResult> joinUserList(@RequestParam("eventNo")int eventNo){
+		return eventService.joinUserList(eventNo);
+	}
+	
 	// --------------------------------------------------
 
 	// 이벤트 수정 페이지 이동

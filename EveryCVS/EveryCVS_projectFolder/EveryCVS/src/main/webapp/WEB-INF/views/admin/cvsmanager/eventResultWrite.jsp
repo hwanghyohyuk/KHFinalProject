@@ -22,7 +22,7 @@
 			<h2 class="margin-bottom-30">
 				<b>${sessionScope.user.brand_name}</b>&nbsp;&nbsp;Event management
 			</h2>
-			<form action="">
+			<form action="/everycvs/cvsevenResultWrite.do" method="post">
 			<div class="box box-solid box-primary">
 				<div class="box-header">
 					<h3 class="box-title">Add Event Result</h3>
@@ -37,15 +37,14 @@
 									<label>Title</label> <input class="form-control"
 										placeholder="Title" id="title" name="title" type="text">
 								</div>
+								<input type="hidden" name="writer" value="${sessionScope.user.user_no }">
 								<div class="input-group-lg">
 									<br>
 									<label>Original Event</label>
-									<select class="form-control" >
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
+									<select class="form-control" id="selectEvent" name="event_no">
+									<c:forEach var="e" items="${elist}">
+										<option value="${e.event_no }">${e.title }</option>
+									</c:forEach>
 									</select>
 								</div>
 							</div>
@@ -68,10 +67,18 @@
 				</div>
 			</div>
 			</form>
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">Join User Table</h3>
+				</div>
+				<div class="box-body">
+					<div class="row" id="userlist">
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
-
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->
 <c:import url="../../include/admin/common/footer.jsp"></c:import>
@@ -80,30 +87,43 @@
 <c:import url="../../include/admin/common/end.jsp"></c:import>
 <!-- JS Custom Function -->
 <script type="text/javascript">
-	function eventResultInsert() {
-		$.ajax({
-			url : "",
-			data : {},
-			type : "post",
-			success : function(data) {
-
-				var index = 0;
-				var values = '';
-				var last = data.list.length;
-				var list = data.list;
-
-				if (list.length > 0) {
-					for ( var i in list) {
-						values += "<option value='"+list[i].event_no+"' >"
-								+ (list[i].event_no) + "</option>";
-					}
-				} else {
-					values += "<option value='0' >등록할 이벤트 없음</option>";
-				}
-				$("#eventResultlist").html(values);
+$(function(){
+	var eventNo=$("#selectEvent option:selected").val();
+	ajaxJoinUserList(eventNo);
+	init();
+});
+function init(){
+	$( "#selectEvent" ).change(function() {
+		var eventNo=$("#selectEvent option:selected").val();
+		ajaxJoinUserList(eventNo);
+	});
+}
+function ajaxJoinUserList(eventNo){
+	$.ajax({
+		url:'/everycvs/ajax/joinuserlist.do',
+		data:{"eventNo":eventNo},
+		type:"GET",
+		beforeSend:function(){
+			swal({
+				  title: '참여 테이블 불러오는 중...',
+				  allowOutsideClick: false,
+				  timer:500,
+				  onOpen: () => {swal.showLoading()}
+				})
+		},
+		success:function(data){
+			console.log(data);
+			var values = '';
+			for(var i in data){
+				values +='<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">'+data[i].user_name+'</div>';
 			}
-		});
-	}
+			$("#userlist").html(values);
+		},
+		error:function(error){
+			console.log(error);
+		}
+	});	
+}
 </script>
 <!-- End JS Custom Function -->
 <!-- === END === -->

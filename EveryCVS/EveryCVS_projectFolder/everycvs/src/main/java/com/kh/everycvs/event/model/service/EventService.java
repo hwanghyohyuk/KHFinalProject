@@ -77,6 +77,9 @@ public interface EventService {
 	//편의점별 리스트 카운트
 	int getListCount(int edno,int brand_no);
 	int selectJoinLimit(int event_no);
+	List<Event> allocationEvent(int user_no);
+	List<EventResult> joinUserList(int eventNo);
+	int getListCount(int user_no);
 	
 	//----------------------------
 

@@ -189,6 +189,21 @@ public class EventServiceImpl implements EventService{
 		return eventDao.selectJoinLimit(event_no);
 	}
 
+	@Override
+	public List<Event> allocationEvent(int user_no) {
+		return eventDao.allocationEvent(user_no);
+	}
+
+	@Override
+	public List<EventResult> joinUserList(int eventNo) {
+		return eventDao.joinUserList(eventNo);
+	}
+
+	@Override
+	public int getListCount(int user_no) {
+		return eventDao.getListCount(user_no);
+	}
+
 
 	
 

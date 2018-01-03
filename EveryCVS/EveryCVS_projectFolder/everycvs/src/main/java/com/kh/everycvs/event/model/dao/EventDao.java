@@ -101,9 +101,9 @@ public class EventDao {
 		else if (user_no == 2 && edno == 2) {
 			return sqlSession.selectOne("event.gsListCount");
 
-		}else if(user_no==3 && edno == 2) {
+		} else if (user_no == 3 && edno == 2) {
 			return sqlSession.selectOne("event.cuListCount");
-		}else if(user_no==4 && edno == 2) {
+		} else if (user_no == 4 && edno == 2) {
 			return sqlSession.selectOne("event.sevenListCount");
 		} else {
 			return sqlSession.selectOne("event.getListCount");
@@ -243,4 +243,23 @@ public class EventDao {
 		return sqlSession.selectOne("event.selectJoinLimit", event_no);
 	}
 
+	public List<Event> allocationEvent(int user_no) {
+		return sqlSession.selectList("event.allocationEvent", user_no);
+	}
+
+	public List<EventResult> joinUserList(int eventNo) {
+		return sqlSession.selectList("event.joinUserList", eventNo);
+	}
+
+	public int getListCount(int user_no) {
+		if (user_no == 2) {
+			return sqlSession.selectOne("event.gsListCount");
+		} else if (user_no == 3) {
+			return sqlSession.selectOne("event.cuListCount");
+		} else if (user_no == 4) {
+			return sqlSession.selectOne("event.sevenListCount");
+		} else {
+			return sqlSession.selectOne("event.getListCount");
+		}
+	}
 }

@@ -65,46 +65,46 @@
 	<select id="gsListCount" resultType="_int">
 		<![CDATA[select count(*) from
  		EVENT_VIEW where writer = 2]]>
- 		<choose>
- 			<when test="edno == 1">
- 				<!-- 진행중 이벤트 -->
+		<choose>
+			<when test="edno == 1">
+				<!-- 진행중 이벤트 -->
  			<![CDATA[and sysdate <= end_date]]>
- 			</when>
- 			<when test="edno == 2">
- 				<!-- 종료된 이벤트 -->
+			</when>
+			<when test="edno == 2">
+				<!-- 종료된 이벤트 -->
  			<![CDATA[and sysdate > end_date]]>
- 			</when>
- 		</choose>
+			</when>
+		</choose>
 	</select>
 	<!-- cu -->
 	<select id="cuListCount" resultType="_int">
 		<![CDATA[select count(*) from
  		EVENT_VIEW where writer = 3]]>
- 		<choose>
- 			<when test="edno == 1">
- 				<!-- 진행중 이벤트 -->
+		<choose>
+			<when test="edno == 1">
+				<!-- 진행중 이벤트 -->
  			<![CDATA[and sysdate <= end_date]]>
- 			</when>
- 			<when test="edno == 2">
- 				<!-- 종료된 이벤트 -->
+			</when>
+			<when test="edno == 2">
+				<!-- 종료된 이벤트 -->
  			<![CDATA[and sysdate > end_date]]>
- 			</when>
- 		</choose>
+			</when>
+		</choose>
 	</select>
 	<!-- seven -->
 	<select id="sevenListCount" resultType="_int">
 		<![CDATA[select count(*) from
  		EVENT_VIEW where writer = 4]]>
- 		<choose>
- 			<when test="edno == 1">
- 				<!-- 진행중 이벤트 -->
+		<choose>
+			<when test="edno == 1">
+				<!-- 진행중 이벤트 -->
  			<![CDATA[and sysdate <= end_date]]>
- 			</when>
- 			<when test="edno == 2">
- 				<!-- 종료된 이벤트 -->
+			</when>
+			<when test="edno == 2">
+				<!-- 종료된 이벤트 -->
  			<![CDATA[and sysdate > end_date]]>
- 			</when>
- 		</choose>
+			</when>
+		</choose>
 	</select>
 
 
@@ -133,15 +133,15 @@
 			from (select * from event_view where del_check = 'N' and writer = 2
 		]]>
 		<choose>
- 			<when test="edno == 1">
- 				<!-- 진행중 이벤트 -->
+			<when test="edno == 1">
+				<!-- 진행중 이벤트 -->
  			<![CDATA[and sysdate <= end_date]]>
- 			</when>
- 			<when test="edno == 2">
- 				<!-- 종료된 이벤트 -->
+			</when>
+			<when test="edno == 2">
+				<!-- 종료된 이벤트 -->
  			<![CDATA[and sysdate > end_date]]>
- 			</when>
- 		</choose>
+			</when>
+		</choose>
  		<![CDATA[
    			order by event_no desc ) T ) a where a.rnum >= #{startRow} and a.rnum <=#{endRow}
    		]]>
@@ -155,15 +155,15 @@
 			from (select * from event_view where del_check = 'N' and writer = 3
 		]]>
 		<choose>
- 			<when test="edno == 1">
- 				<!-- 진행중 이벤트 -->
+			<when test="edno == 1">
+				<!-- 진행중 이벤트 -->
  			<![CDATA[and sysdate <= end_date]]>
- 			</when>
- 			<when test="edno == 2">
- 				<!-- 종료된 이벤트 -->
+			</when>
+			<when test="edno == 2">
+				<!-- 종료된 이벤트 -->
  			<![CDATA[and sysdate > end_date]]>
- 			</when>
- 		</choose>
+			</when>
+		</choose>
  		<![CDATA[
    			order by event_no desc ) T ) a where a.rnum >= #{startRow} and a.rnum <=#{endRow}
    		]]>
@@ -176,15 +176,15 @@
 			from (select * from event_view where del_check = 'N' and writer = 4 
 		]]>
 		<choose>
- 			<when test="edno == 1">
- 				<!-- 진행중 이벤트 -->
+			<when test="edno == 1">
+				<!-- 진행중 이벤트 -->
  			<![CDATA[and sysdate <= end_date]]>
- 			</when>
- 			<when test="edno == 2">
- 				<!-- 종료된 이벤트 -->
+			</when>
+			<when test="edno == 2">
+				<!-- 종료된 이벤트 -->
  			<![CDATA[and sysdate > end_date]]>
- 			</when>
- 		</choose>
+			</when>
+		</choose>
  		<![CDATA[
    			order by event_no desc ) T ) a where a.rnum >= #{startRow} and a.rnum <=#{endRow}
    		]]>
@@ -210,16 +210,16 @@
 			select * from (
 		    select rownum rnum,a.*
 		    from event_view a]]>
- 		<choose>
- 			<when test="edno == 1">
- 				<!-- 진행중 이벤트 -->
+		<choose>
+			<when test="edno == 1">
+				<!-- 진행중 이벤트 -->
  			<![CDATA[where contents like #{mainkeyword} or title like #{subkeyword} and sysdate <= end_date]]>
- 			</when>
- 			<when test="edno == 2">
- 				<!-- 종료된 이벤트 -->
+			</when>
+			<when test="edno == 2">
+				<!-- 종료된 이벤트 -->
  			<![CDATA[where contents like #{mainkeyword} or title like #{subkeyword} and sysdate > end_date]]>
- 			</when>
- 		</choose>
+			</when>
+		</choose>
  		<![CDATA[
  			order by event_no desc ) b where b.rnum >=#{startRow} and b.rnum <=#{endRow}
   		]]>
@@ -338,7 +338,7 @@
          select * from TB_EVENT_JOIN where event_no = #{event_no} and user_no=#{user_no}
       ]]>
 	</select>
-  
+
 	<!-- 참여 인원 카운트 -->
 	<select id="eventJoinCount" parameterType="_int" resultType="int">
       <![CDATA[
@@ -369,7 +369,7 @@
          delete from TB_EVENT_JOIN where event_no=#{event_no} and user_no=#{user_no}
       ]]>
 	</delete>
-	
+
 	<!-- 이벤트 검색 -->
 	<select id="cvsEvent" parameterType="hashmap" resultType="list"
 		resultMap="resultEvent">
@@ -463,6 +463,21 @@
 	<select id="selectJoinLimit" parameterType="_int" resultType="_int">
       <![CDATA[
          select DECODE(JOIN_LIMIT,null,0,JOIN_LIMIT) from EVENT_VIEW where event_no=#{event_no}
+      ]]>
+	</select>
+
+	<select id="allocationEvent" parameterType="_int" resultType="list" resultMap="resultEvent">
+      <![CDATA[
+         select * from event_view where event_no in
+         (select event_no from tb_event_result right outer join tb_event using(event_no)
+         minus
+         select event_no from tb_event_result join tb_event using(event_no)) and writer = #{user_no} and sysdate>=end_date
+      ]]>
+	</select>
+	
+	<select id="joinUserList" parameterType="_int" resultType="list" resultMap="resultEventJoin">
+      <![CDATA[
+        select * from event_join_user_view where event_no = #{event_no}
       ]]>
 	</select>
 </mapper>
