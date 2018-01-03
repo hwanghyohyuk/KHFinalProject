@@ -109,6 +109,7 @@
 										onclick="add_favorite('${sp.store_product_no}', '${sp.store_no}');">관심상품</button>
 										&nbsp;
 										<button type="button" class="btn btn-primary btn-sm"
+											data-dismiss="modal"
 											data-toggle="modal" 
 											data-target="#s${sp.store_product_no}">구매하기</button>
 										</div>
@@ -161,7 +162,7 @@
 													style="width:40px;">
 											
 											<input type="hidden" name="calculated_price" value="${sp.price }">
-											<input type="hidden" name="store_no" value="${sp.store_no }">
+											<input type="hidden" name="store_no" value="${sp.store_no }"> 
 
 											<button type="submit" class="btn btn-primary"
 												    name="price" value="${sp.price }"
@@ -175,6 +176,7 @@
 									</div>
 								</div>
 							</div>
+						
 					</c:forEach>
 				</div>
 			</div>
@@ -223,12 +225,6 @@
 
 <!-- JS -->
 <script>
-//결제하기에 대한 js
-/*   $(document).ready(function() {
-	$("#frm").click(function() {
-		confirm("정말로 결제하시겠습니까?");
-	});
-});   */
 
 function add_favorite(pno, sno){
 		location.href="/everycvs/favoriteInsert.do?product_no=" + pno + "&store_no=" + sno;
@@ -251,10 +247,11 @@ function purchaseMoney(){
 }
 
 function purchasePoint(){
+	var result;
 	<c:forEach var="sp" items="${requestScope.list}">
 	var price = ${sp.price};
 	var point = ${user.point};
-	var result = point - price;
+	result = point - price;
 	</c:forEach>
 
 	if(result < 0){
@@ -263,7 +260,7 @@ function purchasePoint(){
 	}
 	if(result > 0){
 		alert("결제 완료");
-		return true;
+		
 	}
 }
 </script>
