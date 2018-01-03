@@ -19,41 +19,7 @@
 				<div class="row margin-vert-40">
 					<!-- Begin Sidebar Menu -->
 					<div class="col-md-3" align="center">
-					<div>
-					<img alt="이미지를 준비중입니다." 
-						 src="/everycvs/resources/upload/${user.stored_file_name }" 
-						 style="height:200px; text-align: center; border-radius: 150px; margin-bottom: 15px;"
-						 class="centered"
-						 >
-					</div>
-						<span style="font-size: 14pt;">${user.user_name}님</span><br>
-						<a href="/everycvs/user/infointro.do">내 정보 수정</a> 
-						<hr style="margin-top: 5px; margin-bottom: 2px;">
-						<ul class="list-group sidebar-nav" id="sidebar-nav">
-						
-							<!-- 마이페이지 -->
-							<li class="list-group-item list-toggle">
-							<a href="/everycvs/page/mypage.do">마이페이지</a>
-							</li>
-						
-							<!-- 기프티콘 보관함 -->
-							<li class="list-group-item list-toggle">
-							<a href="/everycvs/gifticonPage.do">기프티콘</a>
-								</li>
-							
-							<!-- 관심목록 -->
-							<li class="list-group-item list-toggle">
-							<a href="/everycvs/user/favoriteList.do">관심상품</a>
-							</li>
-								
-							<!-- 회원탈퇴 -->
-							<li class="list-group-item list-toggle"><a
-								data-toggle="collapse" data-parent="#sidebar-nav"
-								href="#collapse-icons">회원탈퇴</a>
-							</li>
-							
-							
-						</ul>
+					<c:import url="../../include/user/common/mypageSidebarMenu.jsp"></c:import>
 					</div>
 					<!-- End Sidebar Menu -->
 					<div class="col-md-9">
@@ -71,7 +37,7 @@
 								
 								<div id="divv" align="center">
 									<b style="font-size: 23pt;"><br>
-									<b style="color:rgb(255,22,133);">
+									<b style="color:red;">
 								
 									<fmt:formatNumber value="${user.cash }" pattern="#,###"/>
 								 
