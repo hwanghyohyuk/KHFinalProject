@@ -15,26 +15,35 @@
 				<ul class="nav navbar-nav">
 					<!-- User Account: style can be found in dropdown.less -->
 					<li class="dropdown user user-menu"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"> <img
-							src="/everycvs/resources/admin/dist/img/user2-160x160.jpg"
-							class="user-image" alt="User Image" /> <span class="hidden-xs">${sessionScope.user.user_name}</span>
+						class="dropdown-toggle" data-toggle="dropdown">
+							<c:if test="${user.stored_file_name eq null || user.stored_file_name eq ''}">
+ 							<img id="userimg" src="/everycvs/resources/user/img/user.png" class="user-image" style="background-color:white">
+ 							</c:if>
+ 							<c:if test="${user.stored_file_name ne null && user.stored_file_name ne ''}">
+ 							<img id="userimg" src="/everycvs/resources/upload/${user.stored_file_name }" class="user-image" style="background-color:white">
+ 							</c:if>
+						  	<span class="hidden-xs">${sessionScope.user.user_name}</span>
 					</a>
 						<ul class="dropdown-menu">
 							<!-- User image -->
-							<li class="user-header"><img
-								src="/everycvs/resources/admin/dist/img/user2-160x160.jpg"
-								class="img-circle" alt="User Image" />
+							<li class="user-header" style="height: 110px;">
+							<c:if test="${user.stored_file_name eq null || user.stored_file_name eq ''}">
+ 							<img id="userimg" src="/everycvs/resources/user/img/user.png"  class="user-image" style="background-color:white">
+ 							</c:if>
+ 							<c:if test="${user.stored_file_name ne null && user.stored_file_name ne ''}">
+ 							<img id="userimg" src="/everycvs/resources/upload/${user.stored_file_name }" class="user-image" style="background-color:white">
+ 							</c:if>
 								<p>
-									${sessionScope.user.user_name}&nbsp;
+									${sessionScope.user.user_name}&nbsp;<br>
 									<c:choose>
 										<c:when test="${sessionScope.user.job eq 'storemanager'}">
-										- Store Manager
+										Store Manager
 										</c:when>
 										<c:when test="${sessionScope.user.job eq 'cvsmanager'}">
-										- CVS Manager
+										CVS Manager
 										</c:when>
 										<c:otherwise>
-										- Site Manager
+										Site Manager
 										</c:otherwise>
 									</c:choose>
 									<small>Member since
@@ -53,7 +62,7 @@
 							<!-- Menu Footer-->
 							<li class="user-footer">
 								<div class="pull-left">
-									<a href="#" class="btn btn-default btn-flat">Profile</a>
+									<a href="/everycvs/user/infointro.do" class="btn btn-default btn-flat">Profile</a>
 								</div>
 								<div class="pull-right">
 									<a href="/everycvs/user/signout.do" class="btn btn-default btn-flat">Sign
@@ -72,8 +81,12 @@
 			<!-- Sidebar user panel -->
 			<div class="user-panel">
 				<div class="pull-left image">
-					<img src="/everycvs/resources/admin/dist/img/user2-160x160.jpg"
-						class="img-circle" alt="User Image" />
+					<c:if test="${user.stored_file_name eq null || user.stored_file_name eq ''}">
+					<img id="userimg" src="/everycvs/resources/user/img/user.png" class="img-circle" style="background-color:white">
+					</c:if>
+					<c:if test="${user.stored_file_name ne null && user.stored_file_name ne ''}">
+					<img id="userimg" src="/everycvs/resources/upload/${user.stored_file_name }" class="img-circle" style="background-color:white">
+					</c:if>
 				</div>
 				<div class="pull-left info">
 					<p>${sessionScope.user.user_name}</p>
