@@ -182,14 +182,14 @@ public class EventDao {
 		return sqlSession.selectOne("event.eventJoinCount", event_no);
 	}
 
-	public void insertEventJoin(EventJoin eventjoin) {
+	public int insertEventJoin(EventJoin eventjoin) {
 		System.out.println(eventjoin);
-		sqlSession.insert("event.insertEventJoin", eventjoin);
+		return sqlSession.insert("event.insertEventJoin", eventjoin);
 
 	}
 
-	public void deleteEventJoin(EventJoin eventjoin) {
-		sqlSession.delete("event.deleteEventJoin", eventjoin);
+	public int deleteEventJoin(EventJoin eventjoin) {
+		return sqlSession.delete("event.deleteEventJoin", eventjoin);
 
 	}
 
@@ -236,6 +236,10 @@ public class EventDao {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("endo", edno);
 		return sqlSession.selectOne("event.edlistCount", map);
+	}
+
+	public int selectJoinLimit(int event_no) {
+		return sqlSession.selectOne("event.selectJoinLimit", event_no);
 	}
 
 }

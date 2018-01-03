@@ -208,8 +208,8 @@
 		resultMap="resultEvent">
 		<![CDATA[
 			select * from (
-		    select rownum rnum,event_no,title,start_date,end_date,contents,readcount
-		    from event_view]]>
+		    select rownum rnum,a.*
+		    from event_view a]]>
  		<choose>
  			<when test="edno == 1">
  				<!-- 진행중 이벤트 -->
@@ -221,7 +221,7 @@
  			</when>
  		</choose>
  		<![CDATA[
- 			order by event_result_no desc ) T ) a where a.rnum >=#{startRow} and a.rnum <=#{endRow}
+ 			order by event_no desc ) b where b.rnum >=#{startRow} and b.rnum <=#{endRow}
   		]]>
 	</select>
 
