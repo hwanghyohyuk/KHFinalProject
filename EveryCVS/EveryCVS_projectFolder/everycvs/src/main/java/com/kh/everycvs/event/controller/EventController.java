@@ -222,7 +222,7 @@ public class EventController {
 		event.setStored_file_name(file[1]);
 
 		eventService.eventInsert(event);
-		return "redirect:/cvseventlist.do";
+		return "redirect:/cvseventlist.do?code=1";
 	}
 	// 글쓰기 끝 -------------------------------------------
 
@@ -291,27 +291,43 @@ public class EventController {
 
 	//이벤트 참여하기-----------------------------------------------------------
 	@RequestMapping(value = "eventJoin.do", method = RequestMethod.POST)
-	public ModelAndView eventJoin(EventJoin eventjoin) {
+	@ResponseBody
+	public int eventJoin(EventJoin eventjoin) {
 
-		ModelAndView mv = new ModelAndView();
-
-		int checkEventJoinTable = eventService.eventJoincheck(eventjoin);
-
-		if (checkEventJoinTable == 0) {
-			// 참여 처음 클릭
-			// 참여 테이블에 넣음
-			eventService.eventJoin(eventjoin);
-
-		} else if (checkEventJoinTable == 1) {
-			// 참여 두번 클릭
-			// 참여 테이블에서 삭제
-			eventService.deleteJoin(eventjoin);
-		}
-		mv.addObject("checkEventJoinTable", checkEventJoinTable);
-		mv.setViewName("jsonView");
-		return mv;
+		int joinlimit = eventService.selectJoinLimit(eventjoin.getEvent_no());
+		int eventJoinCount = eventService.eventJoinCount(eventjoin.getEvent_no());
+		
+		if(joinlimit>=eventJoinCount) {
+			return eventService.eventJoin(eventjoin);
+		}else {
+			return -1;//이벤트 참여 정원 초과
+		}		
 	}
+	//이벤트 참여하기 취소-----------------------------------------------------------
+		@RequestMapping(value = "eventJoinCancel.do", method = RequestMethod.POST)
+		@ResponseBody
+		public int eventJoinCancel(EventJoin eventjoin) {
+			int checkEventJoinTable = eventService.eventJoincheck(eventjoin);
+			if (checkEventJoinTable == 0) {
+				return -1;//참여할수없음				
+			} else{
+				return eventService.deleteJoin(eventjoin);
+			}	
+		}
+/*
+	int checkEventJoinTable = eventService.eventJoincheck(eventjoin);
 
+	if (checkEventJoinTable == 0) {
+		// 참여 처음 클릭
+		// 참여 테이블에 넣음
+		eventService.eventJoin(eventjoin);
+
+	} else if (checkEventJoinTable == 1) {
+		// 참여 두번 클릭
+		// 참여 테이블에서 삭제
+		eventService.deleteJoin(eventjoin);
+	}*/
+	
 	// 이벤트 참여 인원
 	@RequestMapping(value = "eventCount.do", method = RequestMethod.POST)
 	public ModelAndView eventJoinListCount(EventJoin eventjoin) {

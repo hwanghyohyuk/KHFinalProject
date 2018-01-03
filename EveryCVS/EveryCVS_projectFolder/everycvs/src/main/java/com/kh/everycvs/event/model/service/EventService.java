@@ -64,9 +64,9 @@ public interface EventService {
 	int eventJoinCount(int event_no);
 	
 	int eventJoincheck(EventJoin eventjoin);
-	void eventJoin(EventJoin eventjoin);
+	int eventJoin(EventJoin eventjoin);
 	
-	void deleteJoin(EventJoin eventjoin);
+	int deleteJoin(EventJoin eventjoin);
 	//아직 못끝냄
 	
 	
@@ -76,6 +76,7 @@ public interface EventService {
 	List<Event> cvsEvent(int currentpage, int limit, int edno, int brand_no);
 	//편의점별 리스트 카운트
 	int getListCount(int edno,int brand_no);
+	int selectJoinLimit(int event_no);
 	
 	//----------------------------
 

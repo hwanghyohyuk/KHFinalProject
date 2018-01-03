@@ -59,18 +59,18 @@
 										<option value="both">제목</option>
 									</select>
 								</div>
-								<form action="cvseventlist.do" method="POST">
+								
 									<div class="col-sm-4 jun12">
-										<input class="form-control jun11" type="text" name="keyword" 
+										<input class="form-control jun11" type="text" name="keyword" id="keyword"
 											placeholder="검색 키워드를 입력하세요.">
 									</div>
 									<div class="col-sm-1 jun13">
-										<button type="submit" onclick="search_event();"
+										<button type="button" onclick="setKeyword();"
 											class="btn btn-default btn jun14">
 											<i class="fa fa-search"></i>
 										</button>
 									</div>
-								</form>
+							
 								<div class="col-sm-5 jun17">
 									<button type="button" onclick="add_event();"
 										class="btn btn-success btn jun4" id="width100">
@@ -200,11 +200,13 @@
  	}
  	admeventList(ednobuffer,pagebuffer,keywordbuffer);
  }
- function setKeyword(keyword){
+ function setKeyword(){
+	var keyword = $("#keyword").val();
  	if(keywordbuffer!=keyword){
  		keywordbuffer=keyword;
  	}
  	admeventList(ednobuffer,pagebuffer,keywordbuffer);
+ 	keywordbuffer="";
  }
  
  

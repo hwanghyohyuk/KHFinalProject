@@ -93,7 +93,7 @@
 				</div>
 				<hr>
 				<script>
-				function eventJoin(event_no,user_no,user_name){   
+				function eventJoin(event_no,user_no){   
 					
 					   var checkEventJoinTable = 0;
 				   
@@ -101,7 +101,7 @@
 					      url:"eventJoin.do",
 					      dataType:"json",
 					      type:"post",
-					      data:{"event_no":event_no,"user_no":user_no,"user_name":user_name},
+					      data:{"event_no":event_no,"user_no":user_no},
 					      success:function(data){
 					         checkEventJoinTable = data.checkEventJoinTable;
 					         console.log("checkEventJoinTable"+checkEventJoinTable);
