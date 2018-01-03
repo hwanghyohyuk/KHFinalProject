@@ -44,8 +44,12 @@
 
 							<li><a href="#">${sessionScope.user.user_name}</a>
 								<ul>
-									<li><a href="/everycvs/page/mypage.do">My page</a></li>
-									<li><a href="/everycvs/user/infointro.do">내 정보수정</a></li>
+									<li><a href="/everycvs/page/mypage.do">
+									<img alt="이미지를 준비중입니다." 
+										src="/everycvs/resources/upload/${user.stored_file_name }" 
+										style="margin-left: 20px; height:120px; width: 120px; border-radius: 100px;"
+												 >
+									</a></li>
 									<li><a href="#">Cash : ${sessionScope.user.cash}</a></li>
 									<c:if test="${sessionScope.user.job eq 'customer'}">
 										<li><a href="#">Point : ${sessionScope.user.point}</a></li>
