@@ -5,7 +5,6 @@
 <!-- === BEGIN HEAD ===  -->
 <c:import url="../../include/admin/common/head.jsp"></c:import>
 <link rel="stylesheet" href="/everycvs/resources/user/css/userinfo.css" type="text/css">
-<script src="/everycvs/resources/admin/plugins/rg-InfiniteScroll/RGInfiniteScroll.min.js"></script>
 <c:import url="../../include/admin/common/headend.jsp"></c:import>
 <!-- === END HEAD ===  -->
 <!-- === BEGIN HEADER ===  -->
@@ -32,7 +31,7 @@
         <!-- Main content -->
         <section class="content">
         	<div class="row">
-        	<div class="col-lg-6 col-lg-offset-6 col-md-4 col-md-offset-8 col-sm-2 col-sm-offset-10 col-xs-12 ">
+        	<div class="col-lg-6 col-lg-offset-6 col-md-8 col-md-offset-4 col-sm-10 col-sm-offset-2 col-xs-12 ">
 	        	<div class="input-group input-group-lg">
 			      <input type="text" class="form-control" id="keyword" placeholder="Search for...">
 			      <span class="input-group-btn">
@@ -73,7 +72,7 @@
         	</div>
         	</div>
         	<div class="row">
-        	<div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 ">
+        	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 ">
 			<br>
         	<table class="table table-striped text-center" style="background-color:white;font-size:14pt;valign:middle">
 			<thead>
@@ -110,6 +109,9 @@ var jobnoBuffer=1;
 var orderbyBuffer=0;
 var keywordBuffer='';
 
+$(function(){
+	init();
+});
 $(userList(pageBuffer,jobnoBuffer,orderbyBuffer,keywordBuffer));
 
 function setPage(page){
@@ -208,6 +210,14 @@ function userList(page,jobno,orderby,keyword){
 		},
 		error:function(error){
 			console.log(error);
+		}
+	});
+}
+function init(){
+	$('#keyword').on('keydown', function(e) {
+		var keyCode = e.which;
+		if (keyCode === 13) { // Enter Key
+			setKeyword();
 		}
 	});
 }
