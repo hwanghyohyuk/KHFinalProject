@@ -46,7 +46,11 @@
 .margin-horiz-10 {
   margin-left: 10px;
   margin-right: 10px;
-}</style>
+}
+.margin-top-20 {
+  margin-top: 20px;
+}
+</style>
 
 <!-- jQuery 2.1.3 -->
 <script src="/everycvs/resources/admin/plugins/jQuery/jQuery-2.1.3.min.js"></script>

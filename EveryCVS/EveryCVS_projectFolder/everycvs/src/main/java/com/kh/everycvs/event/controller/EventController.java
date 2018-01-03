@@ -233,7 +233,7 @@ public class EventController {
 		return "admin/cvsmanager/eventResultWrite";
 	}
 
-	@RequestMapping(value = "cvsevenResultWrite.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/cvsevenResultWrite.do", method = RequestMethod.POST)
 	public String cvsEventResultWrite(EventResult eventResult) throws Exception {
 		eventService.eventResultInsert(eventResult);
 		return "redirect:/eventresultlist.do";
