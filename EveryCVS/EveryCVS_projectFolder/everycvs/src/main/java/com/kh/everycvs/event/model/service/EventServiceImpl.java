@@ -159,7 +159,6 @@ public class EventServiceImpl implements EventService{
 	
 	@Override
 	public int deleteJoin(EventJoin eventjoin) {
-		// TODO Auto-generated method stub
 		return eventDao.deleteEventJoin(eventjoin);
 	}
 	
@@ -186,7 +185,7 @@ public class EventServiceImpl implements EventService{
 
 	@Override
 	public int selectJoinLimit(int event_no) {
-		// TODO Auto-generated method stub
+		System.out.println(event_no);
 		return eventDao.selectJoinLimit(event_no);
 	}
 

@@ -459,4 +459,10 @@
 		</choose>
 	</select>
 
+	<!-- 이벤트 참여 최대인원 조회 -->
+	<select id="selectJoinLimit" parameterType="_int" resultType="_int">
+      <![CDATA[
+         select DECODE(JOIN_LIMIT,null,0,JOIN_LIMIT) from EVENT_VIEW where event_no=#{event_no}
+      ]]>
+	</select>
 </mapper>
