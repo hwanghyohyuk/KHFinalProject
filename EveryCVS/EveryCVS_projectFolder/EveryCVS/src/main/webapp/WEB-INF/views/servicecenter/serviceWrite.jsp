@@ -50,16 +50,6 @@
 					</c:if>
 			</div>
 		</div>
-
-		<!-- <label>비밀번호
-                                    <span class="color-red">*</span>
-                                </label>
-                                <div class="row margin-bottom-20">
-                                    <div class="col-md-6 col-md-offset-0">
-                                        <input class="form-control" type="password" placeholder="비밀번호를 입력해주세요">
-                                    </div>
-                                </div>  -->
-
 		<label>제목 <span class="color-red">*</span>
 		</label>
 		<div class="row margin-bottom-20">
@@ -77,7 +67,6 @@
                                         </textarea>
 				</div>
 			</div>
-
 			<div align="center">
 				<button type="submit" class="btn btn-primary">등록</button>
 				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <a href="javascript:history.go(-1);">
@@ -94,8 +83,7 @@
 
 	<!-- End Side Column -->
 </div>
-</div>
-</div>
+
 
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->

@@ -31,6 +31,6 @@ public interface ServiceCenterService {
 	int serviceDelete(int sno);
 
 	// 고객센터 내가쓴글
-	ServiceCenter serviceMyWrite(int writer);
+	List<ServiceCenter> serviceMyWrite(int writer);
 
 }

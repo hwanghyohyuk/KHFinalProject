@@ -34,14 +34,10 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 		return servicecenterDao.selectServiceOne(sno);
 
 	}
-
+	//고객센터 : 검색
 	@Override
 	public List<ServiceCenter> serviceSearch(String keyword) {
-		// 고객센터 검색 : 제목으로 검색
-		/*
-		 * ArrayList<ServiceCenter> list = new ArrayList<ServiceCenter>();
-		 * System.out.println("ServiceCenterServiceImpl : " + list);
-		 */
+		
 		System.out.println("searchService : " + keyword);
 		return (ArrayList<ServiceCenter>) servicecenterDao.serviceSearch(keyword);
 	}
@@ -75,7 +71,7 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 	}
 
 	@Override
-	public ServiceCenter serviceMyWrite(int writer) {
+	public List<ServiceCenter> serviceMyWrite(int writer) {
 		// 고객센터 내가쓴글
 
 		System.out.println("MyWriteService: " + writer);

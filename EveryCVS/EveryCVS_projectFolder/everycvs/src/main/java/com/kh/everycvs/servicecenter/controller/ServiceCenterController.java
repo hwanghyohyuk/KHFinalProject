@@ -1,6 +1,8 @@
 package com.kh.everycvs.servicecenter.controller;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,13 +20,13 @@ public class ServiceCenterController {
 	private ServiceCenterService serviceCenterService;
 
 	// 고객센터 조회 : 고객센터 리스트조회
-	@RequestMapping(value = "/page/servicemain.do")
+/*	@RequestMapping(value = "/page/servicemain.do")
 	public ModelAndView servicemain(ModelAndView mv, HttpServletRequest request) {
 		mv.setViewName("servicecenter/servicelist");
 		ArrayList<ServiceCenter> list = (ArrayList<ServiceCenter>) serviceCenterService.serviceList();
 		mv.addObject("list", list);
 		return mv;
-	}
+	}*/
 
 	// 고객센터 조회 : 고객센터 리스트조회
 	@RequestMapping(value = "selectServiceList.do")
@@ -32,7 +34,7 @@ public class ServiceCenterController {
 		mv.setViewName("servicecenter/servicelist");
 		ArrayList<ServiceCenter> list = (ArrayList<ServiceCenter>) serviceCenterService.serviceList();
 		mv.addObject("list", list);
-		System.out.println("ServiceCenterController : " + list);
+		System.out.println("리스트전체조회 : " + list);
 		return mv;
 
 	}
@@ -79,10 +81,11 @@ public class ServiceCenterController {
 
 	// 고객센터 : 고객센터 내가쓴글
 	@RequestMapping(value = "serviceMyWrite.do")
-	public ModelAndView serviceMyWrite(@RequestParam("writer") int writer) {
-		ModelAndView mv = new ModelAndView("servicecenter/servicelist");
-		ServiceCenter servicecenter = serviceCenterService.serviceMyWrite(writer);
-		mv.addObject("servicecenter", servicecenter);
+	public ModelAndView serviceMyWrite(ModelAndView mv,@RequestParam("writer") int writer) {
+		
+		ArrayList<ServiceCenter> list = (ArrayList<ServiceCenter>)serviceCenterService.serviceMyWrite(writer);
+		mv.addObject("list", list);
+		mv.setViewName("servicecenter/servicelist");
 		return mv;
 	}
 

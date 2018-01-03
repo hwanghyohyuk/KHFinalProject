@@ -70,7 +70,7 @@
                                             </c:forEach> 
                                     </table>                               
                                 <div align="right">             
-                                    <button type="button"class="btn btn-primary" onclick="serviceMyWrite(${servicecenter.writer});">내가쓴글</button>                                   
+                                    <button type="button"class="btn btn-primary" onclick="serviceMyWrite(${sessionScope.user.user_no});">내가쓴글</button>                                   
                                     &nbsp&nbsp&nbsp                                 
                                     <button class="btn btn-primary" onclick="writeService();" >글쓰기</button>                                    
                                 </div>        

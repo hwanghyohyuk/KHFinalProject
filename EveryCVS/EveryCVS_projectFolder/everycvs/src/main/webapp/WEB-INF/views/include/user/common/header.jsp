@@ -29,7 +29,7 @@
 								</c:if>
 									<li><a href="/everycvs/main.do#cvssearch" class="fa-search">CVS SEARCH</a></li>
 									<li><a href="/everycvs/page/eventmain.do" class="fa-gift">EVENT</a></li>
-									<li><a href="/everycvs/page/servicemain.do" class="fa-question-circle">HELP</a></li>
+									<li><a href="/everycvs/selectServiceList.do" class="fa-question-circle">HELP</a></li>
 							</c:if>
 						</ul>
 					</div>
