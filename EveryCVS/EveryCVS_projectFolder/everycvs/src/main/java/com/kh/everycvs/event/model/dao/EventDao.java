@@ -239,6 +239,7 @@ public class EventDao {
 	}
 
 	public int selectJoinLimit(int event_no) {
+		System.out.println(event_no);
 		return sqlSession.selectOne("event.selectJoinLimit", event_no);
 	}
 

@@ -293,11 +293,11 @@ public class EventController {
 	@RequestMapping(value = "eventJoin.do", method = RequestMethod.POST)
 	@ResponseBody
 	public int eventJoin(EventJoin eventjoin) {
-
+		System.out.println(eventjoin);
 		int joinlimit = eventService.selectJoinLimit(eventjoin.getEvent_no());
 		int eventJoinCount = eventService.eventJoinCount(eventjoin.getEvent_no());
 		
-		if(joinlimit>=eventJoinCount) {
+		if(joinlimit>=eventJoinCount && joinlimit>0) {
 			return eventService.eventJoin(eventjoin);
 		}else {
 			return -1;//이벤트 참여 정원 초과
@@ -308,10 +308,10 @@ public class EventController {
 		@ResponseBody
 		public int eventJoinCancel(EventJoin eventjoin) {
 			int checkEventJoinTable = eventService.eventJoincheck(eventjoin);
-			if (checkEventJoinTable == 0) {
-				return -1;//참여할수없음				
-			} else{
+			if (checkEventJoinTable > 0) {
 				return eventService.deleteJoin(eventjoin);
+			} else{
+				return -1;//참여하지 않음	
 			}	
 		}
 	
