@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.everycvs.common.model.vo.Event;
+import com.kh.everycvs.common.model.vo.Favorite;
 import com.kh.everycvs.common.model.vo.NaverMap;
 import com.kh.everycvs.common.model.vo.Product;
 import com.kh.everycvs.common.model.vo.ProductKind;
@@ -25,6 +26,7 @@ import com.kh.everycvs.common.model.vo.Store;
 import com.kh.everycvs.common.model.vo.StoreProduct;
 import com.kh.everycvs.common.model.vo.User;
 import com.kh.everycvs.event.model.service.EventService;
+import com.kh.everycvs.favorite.model.service.FavoriteService;
 import com.kh.everycvs.product.model.service.ProductService;
 import com.kh.everycvs.purchase.model.service.PurchaseService;
 import com.kh.everycvs.sale.model.service.SaleService;
@@ -55,6 +57,9 @@ public class MainController {
 
 	@Autowired
 	private PurchaseService purchaseService;
+	
+	@Autowired
+	private FavoriteService favoriteService;
 	
 
 	// 인터셉터를 거치는 페이지이동 메소드
@@ -152,7 +157,19 @@ public class MainController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
-
+	/*ajax 지점상품 간략정보*/
+	@RequestMapping("/ajax/storeproductinfo.do")
+	@ResponseBody
+	public List<StoreProduct> storeProductInfo(@RequestParam("storeNo")String storeNo, @RequestParam(value="tabNo",required=false,defaultValue="0")int tabNo){
+		return sproductService.storeProductInfo(storeNo,tabNo);
+	}
+	/*ajax 관심상품 간략정보*/
+	@RequestMapping("/ajax/userfavoritelist.do")
+	@ResponseBody
+	public List<Favorite> userFavoriteList(@RequestParam("storeNo")String storeNo,HttpSession session){
+			User user = (User)session.getAttribute("user");
+			return favoriteService.userFavoriteList(user.getUser_no(),storeNo);
+	}	
 	/* 사용자가 지점메인에 접속 */
 	@RequestMapping("/page/storemain.do")
 	public String userStoreMain(HttpSession session,

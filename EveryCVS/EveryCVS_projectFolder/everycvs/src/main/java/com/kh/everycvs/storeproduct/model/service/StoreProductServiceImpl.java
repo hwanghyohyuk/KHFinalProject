@@ -87,5 +87,10 @@ public class StoreProductServiceImpl implements StoreProductService {
 	public int registProducts(int brand_no) {
 		return sproductDao.registProducts(brand_no);
 	}
+
+	@Override
+	public List<StoreProduct> storeProductInfo(String storeNo, int tabNo) {
+		return sproductDao.storeProductInfo(storeNo,tabNo);
+	}
 	
 }

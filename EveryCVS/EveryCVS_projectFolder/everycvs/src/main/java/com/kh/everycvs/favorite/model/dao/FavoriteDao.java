@@ -41,4 +41,11 @@ public class FavoriteDao {
 	public void favoriteDelete(Favorite favorite) {
 		sqlSession.delete("favorite.favoriteDelete", favorite);
 	}
+
+	public List<Favorite> userFavoriteList(int user_no, String storeNo) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("user_no", user_no);
+		map.put("store_no", storeNo);
+		return sqlSession.selectList("favorite.userFavoriteList", map);
+	}
 }

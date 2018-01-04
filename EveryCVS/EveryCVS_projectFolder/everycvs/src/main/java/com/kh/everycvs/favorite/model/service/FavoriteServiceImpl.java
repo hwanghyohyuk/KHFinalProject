@@ -35,4 +35,9 @@ public class FavoriteServiceImpl implements FavoriteService {
 		favoriteDao.favoriteDelete(favorite);
 	}
 
+	@Override
+	public List<Favorite> userFavoriteList(int user_no, String storeNo) {
+		return favoriteDao.userFavoriteList(user_no,storeNo);
+	}
+
 }

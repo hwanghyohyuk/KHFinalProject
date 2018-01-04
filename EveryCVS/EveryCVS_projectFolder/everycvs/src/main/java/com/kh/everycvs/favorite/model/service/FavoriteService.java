@@ -12,5 +12,7 @@ public interface FavoriteService {
 	public void favoriteInsert(Favorite favorite);
 	
 	public void favoriteDelete(Favorite favorite);
+
+	public List<Favorite> userFavoriteList(int user_no, String storeNo);
 	
 }

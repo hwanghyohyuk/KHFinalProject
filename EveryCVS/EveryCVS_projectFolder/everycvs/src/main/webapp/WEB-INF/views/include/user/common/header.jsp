@@ -47,8 +47,7 @@
 									<li><a href="/everycvs/page/mypage.do">
 									<img alt="이미지를 준비중입니다." 
 										src="/everycvs/resources/upload/${user.stored_file_name }" 
-										style="margin-left: 20px; height:120px; width: 120px; border-radius: 100px;"
-												 >
+										style="margin-left: 20px; height:120px; width: 120px; border-radius: 100px;">
 									</a></li>
 									<li><a href="#">Cash : ${sessionScope.user.cash}</a></li>
 									<c:if test="${sessionScope.user.job eq 'customer'}">
