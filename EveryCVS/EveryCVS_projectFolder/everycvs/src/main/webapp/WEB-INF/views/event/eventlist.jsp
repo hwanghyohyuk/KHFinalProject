@@ -39,13 +39,13 @@
 					<div class="col-md-12 portfolio-group no-padding" style="float: left;">
 						<!-- Portfolio Item -->
 						<div class="col-md-12 portfolio-item margin-bottom-40">
-							<div id="usereventlist">
+							<div id="usereventlist" style="min-height:150px">
 								</div>		
 							</div>
 						</div>
 						<!-- End Portfolio Item -->	
 				<!-- 페이지 시작 -->
-							<div id="paging">
+							<div id="paging" >
 								<nav>
 									<ul class="pagination" id="usereventpaging">
 									</ul>
@@ -93,6 +93,7 @@ function cvsEventList(edno,brandNo,page){
 			"page":page,
 			"edno":edno,
 			"brandNo":brandNo},
+			async:false,
 			success:function(data){
 				
 				var index=0;
@@ -133,7 +134,7 @@ function cvsEventList(edno,brandNo,page){
 					}
 					index++;
 				}	
-				$("#usereventlist").html(values);
+				
 				
 				var valuesPaging="";
 	            
@@ -166,7 +167,7 @@ function cvsEventList(edno,brandNo,page){
 	               valuesPaging += "<li><a href='javascript:setPageNo("+(data.currentPage + 1)+ ")' aria-label='Next'>" +
 	                "<span aria-hidden='true'>&raquo;</span></a></li>";
 	            }
-	            
+	            $("#usereventlist").html(values);
 	            $("#usereventpaging").html(valuesPaging);
 			},
 			error:function(error){

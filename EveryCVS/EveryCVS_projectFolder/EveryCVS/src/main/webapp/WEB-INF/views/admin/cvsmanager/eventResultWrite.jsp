@@ -43,7 +43,7 @@
 									<label>Original Event</label>
 									<select class="form-control" id="selectEvent" name="event_no">
 									<c:forEach var="e" items="${elist}">
-										<option value="${e.event_no }">${e.title }</option>
+										<option value="${e.event_no}">${e.title }</option>
 									</c:forEach>
 									</select>
 								</div>
@@ -93,7 +93,7 @@ $(function(){
 	init();
 });
 function init(){
-	$( "#selectEvent" ).change(function() {
+	$("#selectEvent").change(function() {
 		var eventNo=$("#selectEvent option:selected").val();
 		ajaxJoinUserList(eventNo);
 	});
@@ -124,6 +124,7 @@ function ajaxJoinUserList(eventNo){
 		}
 	});	
 }
+
 </script>
 <!-- End JS Custom Function -->
 <!-- === END === -->

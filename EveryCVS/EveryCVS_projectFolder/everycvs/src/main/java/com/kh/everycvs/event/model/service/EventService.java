@@ -79,10 +79,12 @@ public interface EventService {
 	int selectJoinLimit(int event_no);
 	List<Event> allocationEvent(int user_no);
 	List<EventResult> joinUserList(int eventNo);
+	
 	int getListCount(int user_no);
 	
 	
 	int eventResultDelete(int rno);
+
 	
 	//----------------------------
 

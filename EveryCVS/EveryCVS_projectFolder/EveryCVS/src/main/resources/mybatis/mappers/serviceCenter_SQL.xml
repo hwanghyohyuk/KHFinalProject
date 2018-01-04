@@ -32,7 +32,8 @@
 	</select>
 
 	<!-- 글등록 -->
-	<insert id="serviceInsert"  parameterType="servicecenter"  flushCache="true" statementType="PREPARED">
+	<insert id="serviceInsert"  parameterType="servicecenter" flushCache="true" statementType="PREPARED">
+	
 	<![CDATA[
 		INSERT INTO TB_SERVICE_CENTER VALUES(seq_service_no.nextval, #{title}, #{writer}, #{contents}, sysdate, default, default, default,default)
 	  	]]>

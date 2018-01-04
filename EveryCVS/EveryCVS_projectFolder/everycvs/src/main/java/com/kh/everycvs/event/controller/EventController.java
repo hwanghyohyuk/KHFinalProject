@@ -86,6 +86,7 @@ public class EventController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		int listCount = eventService.getListCount(user_no);
+
 		int maxPage = (int) ((double) listCount / limit + 0.9);
 		int startPage = (((int) ((double) currentPage / limit + 0.9)) - 1) * limit + 1;
 		int endPage = startPage + limit - 1;
@@ -284,7 +285,7 @@ public class EventController {
 
 		eventService.updateEventPage(event);
 
-		return "redirect:/cvseventlist.do";
+		return "redirect:/cvseventlist.do?code=1";
 	}
 	// 수정 끝
 
@@ -292,7 +293,7 @@ public class EventController {
 	@RequestMapping(value = "eventDelete.do")
 	public String deleteEvent(@RequestParam int no) {
 		eventService.eventDelete(no);
-		return "redirect:/cvseventlist.do";
+		return "redirect:/cvseventlist.do?code=1";
 	}
 	//이벤트 결과 삭제
 	@RequestMapping(value = "eventResultDelete.do")

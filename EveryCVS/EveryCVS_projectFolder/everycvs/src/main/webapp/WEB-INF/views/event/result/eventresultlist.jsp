@@ -62,15 +62,14 @@
 										<td style="text-align: center;">${ewl.readcount}</td>
 									</tr>
 								</c:forEach>
-
 							</table>
 							<!-- 글작성버튼 -->
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+
+
 	<!-- 페이지인 척 하는 새끼 -->
 	<div class="text-center">
 				<ul class="pagination">
@@ -80,7 +79,7 @@
 						</c:when>
 						<c:otherwise>
 							<c:url var="list" value="eventresultlist.do" />
-							<li><a href="${list}?page=${currentPage - 1}">&laquo;</a></li>
+							<li><a href="eventresultlist.do?page=1">&laquo;</a></li>
 						</c:otherwise>
 					</c:choose>
 
@@ -90,7 +89,7 @@
 								<li class="active"><a href="#">${re}</a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="${list}?page=${re}">${re}</a></li>
+								<li><a href="eventresultlist.do?page=${re+1}">${re+1}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -101,11 +100,15 @@
 						</c:when>
 						<c:otherwise>
 							<c:url var="list" value="eventresultlist.do" />
-							<li><a href="${list}?page=${currentPage + 1}">&raquo;</a></li>
+							<li><a href="eventresultlist.do?page=${currentPage + 1}">&raquo;</a>&raquo;</li>
 						</c:otherwise>
 					</c:choose>
-				</ul>
+						<li><a href="eventresultlist.do?page=2">2</a></li>
+						<li><a href="eventresultlist.do?page=2">&raquo;</a></li>
+					</ul>
 			</div>
+	</div>
+	</div>
 	<!-- 페이지 끝 -->
 </div>
 <!-- === BEGIN FOOTER === -->

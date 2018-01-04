@@ -54,7 +54,7 @@
 									   	<input id="joinBtn" type="button" class="btn btn-red btn-lg" style=float:left; value="이벤트종료" readonly>
                                     </c:if>
 										<button type="button" class="btn btn-primary btn-lg" onclick='location.href="/everycvs/page/eventmain.do"' style=float:right;>CANCEL</button>
-									</p>
+									
 								</div>
 							</div>
 						</form>

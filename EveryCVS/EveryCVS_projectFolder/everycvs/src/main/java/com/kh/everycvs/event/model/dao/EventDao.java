@@ -267,4 +267,6 @@ public class EventDao {
 		// TODO Auto-generated method stub
 		return sqlSession.update("event.eventResultDelete", rno);
 	}
+
+	
 }
