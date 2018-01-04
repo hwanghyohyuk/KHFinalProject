@@ -1,5 +1,7 @@
 /*메인화면 지도 자바스크립트*/
-	var map = new naver.maps.Map("map");
+	var map = new naver.maps.Map("map",{minZoom : 12,
+		maxZoom : 12,
+		zoom : 12});
 	var brand_no = 0;
 	var markers = [];
 	var infoWindows = [];
@@ -24,13 +26,13 @@
 
 	function initGeocoder() {//이벤트등록
 		map.setOptions({
-			center : new naver.maps.LatLng(37.4990056, 127.0328696),
+			center : new naver.maps.LatLng(37.4990055, 127.0328696),
 			scaleControl : true,
 			logoControl : false,
 			mapDataControl : false,
 			zoomControl : false,
 			minZoom : 12,
-			maxZoom : 13,
+			maxZoom : 12,
 			zoom : 12,
 			mapTypeControl : false
 		});
@@ -51,16 +53,9 @@
 		$('#init').on('click', function(e) {
 			onLoadGeolocation();
 			setStoreList(brand_no);
-			selectAjax(getTabNo())
 		});
-		naver.maps.Event.addListener(map, 'zoom_changed', function() {
-			setStoreList(brand_no);
-			selectAjax(getTabNo())
-		});
-
 		naver.maps.Event.addListener(map, 'dragend', function() {
 			setStoreList(brand_no);
-			selectAjax(getTabNo())
 		});
 	}
 	//지점번호
@@ -145,6 +140,7 @@
 			url:'/everycvs/ajax/userfavoritelist.do',
 			data:{"storeNo":storeNo},
 			type:'post',
+			async:false,
 			beforeSend:function(){
 				$('#viewLoading3').fadeIn(500);
 			},
@@ -199,10 +195,11 @@
 		$.ajax({
 					url : 'ajax/neareststore.do',
 					data : queryString,
-					dataType : "json",
 					type : 'post',
+					async:false,
 					success : function(data) {
 						var store = data.store;
+						setStoreNo(store.store_no);
 						if (store.brand_no == 1) {
 							markerCurrent = new naver.maps.Marker(
 									{
@@ -265,6 +262,7 @@
 							anchorSkew : true,
 							content : contentString
 						});
+						infoWindow.open(map, markerCurrent);
 						naver.maps.Event.addListener(markerCurrent, 'click',
 								function() {
 									if (infoWindow.getMap()) {
@@ -273,11 +271,11 @@
 										infoWindow.open(map, markerCurrent);
 									}
 								});
-						infoWindow.open(map, markerCurrent);
+						
 						if (markerBuffer != null) {
 							markerBuffer.setMap(null);
 						}
-						setStoreNo(store.store_no);
+						
 					},
 					error : function(request, status, error) {
 						alert("code:" + request.status + "\n" + "message:"
@@ -288,6 +286,7 @@
 		if (uMarkerBuffer != null) {
 			uMarkerBuffer.setMap(null);
 		}
+		
 	}
 
 	function onLoadStore(map, brand_no) {
@@ -303,12 +302,11 @@
 			"minLng" : minLng,
 			"maxLng" : maxLng
 		};
-		$
-				.ajax({
+		$.ajax({
 					url : 'ajax/brandmap.do',
 					data : queryString,
+					async:false,
 					type : 'post',
-					dataType : "json",
 					success : function(data) {
 						var jsonStr = JSON.stringify(data);
 						var json = JSON.parse(jsonStr);
@@ -402,7 +400,6 @@
 								+ error);
 					}
 				});
-		onNearestStore(map, brand_no);
 	}
 	function getClickHandler(seq,store_no) {
 		return function(e) {
@@ -433,6 +430,8 @@
 		this.markers = [];
 		this.infoWindows = [];
 		onLoadStore(map, bno);
+		onNearestStore(map, bno);
+		selectAjax(getTabNo());
 	}
 
 	function onSuccessGeolocation(position) {
@@ -476,5 +475,5 @@
 	}
 	$(window).on("load", function() {
 		initGeocoder();
-		onLoadStore(map, 0);
+		setStoreList(brand_no);
 	});
