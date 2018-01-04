@@ -34,7 +34,7 @@
 			zoom : 12,
 			mapTypeControl : false
 		});
-
+		setTabNo(1);
 		$('#address').on('keydown', function(e) {
 			var keyCode = e.which;
 
@@ -106,7 +106,7 @@
 				}
 			},
 			success:function(data){
-				if(data!=null){
+				if(data.length>0){
 				var values='';
 				for(var i in data){
 					values+='<div class="col-lg-2 col-md-2 col-sm-4 col-lg-6 text-center">'
@@ -119,7 +119,7 @@
 					$('#expiration').html(values);
 				}
 				}else{
-					values='<b>등록된 상품이 없습니다.</b>';
+					var values='<b>등록된 상품이 없습니다.</b>';
 					if(tabNo==1){
 						$('#todays').html(values);
 					}else if(tabNo==2){
@@ -149,7 +149,7 @@
 				$('#viewLoading3').fadeIn(500);
 			},
 			success:function(data){
-				if(data!=null){
+				if(data.length>0){
 				var values='';
 				for(var i in data){
 					values+='<div class="col-lg-2 col-md-2 col-sm-4 col-lg-6 text-center">'
@@ -158,7 +158,7 @@
 				}
 				$('#favorite').html(values);
 				}else{
-					values='<b>관심목록 등록된 상품이 현재 없습니다.</b>';
+					var values='<b>관심목록 등록된 상품이 현재 없습니다.</b>';
 					$('#favorite').html(values);
 				}
 			},
@@ -413,6 +413,7 @@
 			} else {
 				infoWindow.open(map, marker);
 				setStoreNo(store_no);
+				selectAjax(getTabNo());
 			}
 		}
 	}
