@@ -3,86 +3,105 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="serviceCenter">
 
-<resultMap id="resultServiceCenter" type="servicecenter">
-		<id property="service_no" column="SERVICE_NO"  />
-		<result property="title" column="TITLE"/>
+	<resultMap id="resultServiceCenter" type="servicecenter">
+		<id property="service_no" column="SERVICE_NO" />
+		<result property="title" column="TITLE" />
 		<result property="writer" column="WRITER" />
 		<result property="user_name" column="USER_NAME" />
-		<result property="contents" column="CONTENTS" /> 
+		<result property="contents" column="CONTENTS" />
 		<result property="write_date" column="WRITE_DATE" />
 		<result property="readcount" column="READCOUNT" />
 		<result property="original_file_name" column="ORIGINAL_FILE_NAME" />
 		<result property="stored_file_name" column="STORED_FILE_NAME" />
 		<result property="del_check" column="DEL_CHECK" />
 	</resultMap>
-	
-	<!-- 고객센터 전체조회 -->
-	<select id="serviceList" resultType="list" resultMap="resultServiceCenter">
+
+	<select id="getListCount" parameterType="hashmap" resultType="_int" >
 	<![CDATA[
-	SELECT *
-	FROM SERVICE_CENTER_VIEW
-	order by service_no desc]]>
+	select count(*) from SERVICE_CENTER_VIEW
+	]]>
+		<if test="isKeyword == 1">
+		<![CDATA[where title like #{keyword}]]>
+		</if>
 	</select>
-	
+
+	<!-- 고객센터 전체조회 +검색 -->
+	<select id="serviceList" parameterType="hashmap" resultType="list"
+		resultMap="resultServiceCenter">
+	<![CDATA[
+	select * from (SELECT rownum rnum,a.* 
+	FROM SERVICE_CENTER_VIEW a 
+	]]>
+		<if test="isKeyword == 1">
+		<![CDATA[where title like #{keyword}]]>
+		</if>
+		<![CDATA[
+		order by service_no desc) where rnum>= #{startRow} and rnum<=#{endRow}
+		]]>
+	</select>
+
 	<!-- 고객센터 검색 -->
 	<select id="serviceSearch" resultType="list" resultMap="resultServiceCenter">
 	<![CDATA[
-	SELECT rownum service_no,title,writer,write_date,readcount FROM TB_SERVICE_CENTER
+	SELECT rownum service_no,title,writer,write_date,readcount FROM SERVICE_CENTER_VIEW
 	WHERE TITLE LIKE #{keyword}]]>
 	</select>
 
 	<!-- 글등록 -->
-	<insert id="serviceInsert"  parameterType="servicecenter" flushCache="true" statementType="PREPARED">
+	<insert id="serviceInsert" parameterType="servicecenter"
+		flushCache="true" statementType="PREPARED">
 	
 	<![CDATA[
 		INSERT INTO TB_SERVICE_CENTER VALUES(seq_service_no.nextval, #{title}, #{writer}, #{contents}, sysdate, default, default, default,default)
 	  	]]>
 	</insert>
-	
-	<!-- 조회수 증가 시키기  -->
+
+	<!-- 조회수 증가 시키기 -->
 	<update id="serviceReadCount" parameterType="_int" flushCache="true">
 		<![CDATA[
 		update tb_service_center set readcount = readcount + 1 where service_no=#{service_no}
 		]]>
 	</update>
-	
+
 	<!-- 고객센터 게시글 상세보기 -->
-	<select id="serviceDetail"  parameterType="_int" resultType="servicecenter" resultMap="resultServiceCenter">
+	<select id="serviceDetail" parameterType="_int" resultType="servicecenter"
+		resultMap="resultServiceCenter">
 	<![CDATA[
 		SELECT * FROM SERVICE_CENTER_VIEW where service_no = #{sno} 
 	]]>
 	</select>
-	
+
 	<!-- 고객센터 게시글 삭제 -->
-	<delete id="serviceDelete" parameterType="_int"  >
+	<delete id="serviceDelete" parameterType="_int">
 		<![CDATA[
 		delete from tb_service_center where service_no=#{sno}
 		]]>
 	</delete>
-	
+
 	<!-- 고객센터 수정페이지 이동 -->
-	<select id="serviceUpdateView" parameterType="_int" resultMap="resultServiceCenter">
+	<select id="serviceUpdateView" parameterType="_int"
+		resultMap="resultServiceCenter">
 	<![CDATA[
 		select * from SERVICE_CENTER_VIEW where service_no=#{service_no}
 		]]>
 	</select>
-	
-		<!-- 고객센터 게시글 수정-->
-	<update id="serviceUpdate" parameterType="servicecenter" >
+
+	<!-- 고객센터 게시글 수정 -->
+	<update id="serviceUpdate" parameterType="servicecenter">
 	<![CDATA[
 		update tb_service_center
-		set 			
-			title = #{title},			
+		set title = #{title},			
 			contents = #{contents}
 		where service_no=#{service_no}
 		]]>
 	</update>
 	<!-- 고객센터 내가쓴글 -->
-	<select id="serviceMyWrite"  parameterType="servicecenter" resultMap="resultServiceCenter">
+	<select id="serviceMyWrite" parameterType="_int" resultType="list"
+		resultMap="resultServiceCenter">
 	<![CDATA[
 	SELECT *
 	FROM SERVICE_CENTER_VIEW
 	where writer = #{writer}]]>
 	</select>
-	
-	</mapper>
+
+</mapper>

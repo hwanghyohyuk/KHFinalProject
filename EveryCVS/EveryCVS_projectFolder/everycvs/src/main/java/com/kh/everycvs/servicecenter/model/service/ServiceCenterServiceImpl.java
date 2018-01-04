@@ -20,11 +20,10 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 	}
 
 	@Override
-	public ArrayList<ServiceCenter> serviceList() {
-		// 고객센터 게시글 조회
-		ArrayList<ServiceCenter> list = new ArrayList<ServiceCenter>();
-		System.out.println("ServiceCenterServiceImpl : " + list);
-		return (ArrayList<ServiceCenter>) servicecenterDao.serviceList();
+	public List<ServiceCenter> serviceList(int currentPage, int limit, String keyword) {
+		int startRow = (currentPage - 1) * limit + 1;
+	    int endRow = startRow + limit - 1;        
+		return servicecenterDao.serviceList(startRow,endRow,keyword);
 	}
 
 	@Override
@@ -33,17 +32,6 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 		System.out.println("Service : " + sno);
 		return servicecenterDao.selectServiceOne(sno);
 
-	}
-
-	@Override
-	public List<ServiceCenter> serviceSearch(String keyword) {
-		// 고객센터 검색 : 제목으로 검색
-		/*
-		 * ArrayList<ServiceCenter> list = new ArrayList<ServiceCenter>();
-		 * System.out.println("ServiceCenterServiceImpl : " + list);
-		 */
-		System.out.println("searchService : " + keyword);
-		return (ArrayList<ServiceCenter>) servicecenterDao.serviceSearch(keyword);
 	}
 
 	// 고객센터 등록
@@ -75,11 +63,14 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 	}
 
 	@Override
-	public ServiceCenter serviceMyWrite(int writer) {
-		// 고객센터 내가쓴글
-
+	public List<ServiceCenter> serviceMyWrite(int writer) {
 		System.out.println("MyWriteService: " + writer);
 		return servicecenterDao.serviceMyWrite(writer);
+	}
+
+	@Override
+	public int getListCount(String keyword) {
+		return servicecenterDao.getListCount(keyword);
 	}
 
 }

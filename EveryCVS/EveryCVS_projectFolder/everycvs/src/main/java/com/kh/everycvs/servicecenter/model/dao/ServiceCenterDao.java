@@ -27,26 +27,16 @@ public class ServiceCenterDao {
 		return sqlSession.update("serviceCenter.serviceReadCount", sno);
 	}
 
-	public List<ServiceCenter> serviceList() {
-		ArrayList<ServiceCenter> list = new ArrayList<ServiceCenter>();
-		System.out.println("ServiceCenterDao : " + list);
-		return sqlSession.selectList("serviceCenter.serviceList", list);
-	}
-
-	public List<ServiceCenter> serviceSearch(String keyword) {
-		// ArrayList<ServiceCenter> list = new ArrayList<ServiceCenter>();
+	public List<ServiceCenter> serviceList(int startRow, int endRow, String keyword) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("keyword", "%" + keyword + "%");
-		System.out.println("searchDao : " + map);
-		return sqlSession.selectList("serviceCenter.serviceSearch", map);
+		map.put("startRow",startRow);
+		map.put("endRow",endRow);
+		if(!keyword.equals("")){
+			map.put("keyword","%"+keyword+"%");
+			map.put("isKeyword",1);
+		}
+		return sqlSession.selectList("serviceCenter.serviceList", map);
 	}
-
-	/*
-	 * public List<ServiceCenter> serviceInsert() { ArrayList<ServiceCenter>
-	 * list = new ArrayList<ServiceCenter>();
-	 * System.out.println("ServiceCenterDao : " + list); return
-	 * sqlSession.selectList("serviceCenter.serviceList", list); }
-	 */
 
 	public ServiceCenter selectServiceOne(int sno) {
 		// 고객센터 상세보기
@@ -56,12 +46,10 @@ public class ServiceCenterDao {
 
 	public int serviceDelete(int sno) {
 		// 고객센터 삭제
-
 		return sqlSession.delete("serviceCenter.serviceDelete", sno);
 	}
 
 	public void serviceWrite(ServiceCenter servicecenter) {
-
 		int result = sqlSession.insert("serviceCenter.serviceInsert", servicecenter);
 		System.out.println("ServiceDao : " + servicecenter);
 	}
@@ -72,18 +60,25 @@ public class ServiceCenterDao {
 	}
 
 	public int serviceUpdate(ServiceCenter servicecenter) {
-
 		int result = sqlSession.update("serviceCenter.serviceUpdate", servicecenter);
 		System.out.println("updateDao : " + servicecenter);
 		return result;
 	}
 
-	public ServiceCenter serviceMyWrite(int writer) {
-
+	public List<ServiceCenter> serviceMyWrite(int writer) {
 		System.out.println("MyWriteDao : " + writer);
-		ServiceCenter servicecenter = sqlSession.selectOne("serviceCenter.serviceMyWrite", writer);
+		List<ServiceCenter> servicecenter = sqlSession.selectList("serviceCenter.serviceMyWrite", writer);
 		return servicecenter;
 
+	}
+
+	public int getListCount(String keyword) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(!keyword.equals("")){
+			map.put("isKeyword", 1);
+			map.put("keyword", "%"+keyword+"%");
+		}		
+		return sqlSession.selectOne("serviceCenter.getListCount", map);
 	}
 
 }
