@@ -98,11 +98,11 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public List<EventResult> resultEventList(String keyword, int currentPage, int limit) {
+	public List<EventResult> resultEventList(int currentPage, int limit) {
 		//관리자 페이징 및 검색
 	    int startRow = (currentPage - 1) * limit + 1;
 	    int endRow = startRow + limit - 1;        
-	    return eventDao.resultEventList(keyword, startRow, endRow);
+	    return eventDao.resultEventList(startRow, endRow);
 	}
 
 	
@@ -203,6 +203,13 @@ public class EventServiceImpl implements EventService{
 	public int getListCount(int user_no) {
 		return eventDao.getListCount(user_no);
 	}
+
+	@Override
+	public int eventResultDelete(int rno) {
+		// TODO Auto-generated method stub
+		return eventDao.eventResultDelete(rno);
+	}
+
 
 
 	

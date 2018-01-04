@@ -141,6 +141,8 @@
 									<i class="fa fa-search"></i> 진행 중인 이벤트 리스트</a></li>
 								<li><a href="/everycvs/cvseventlist.do?code=2">
 									<i class="fa fa-archive"></i> 종료된 이벤트 리스트</a></li>
+								<li><a href="/everycvs/eventresultlist.do">
+									<i class="fa fa-archive"></i> 이벤트 결과 리스트</a></li>
 								<li><a href="/everycvs/cvseventwriteview.do">
 									<i class="fa fa-plus"></i> 이벤트 등록</a></li>
 								<li><a href="/everycvs/cvseventResultView.do">

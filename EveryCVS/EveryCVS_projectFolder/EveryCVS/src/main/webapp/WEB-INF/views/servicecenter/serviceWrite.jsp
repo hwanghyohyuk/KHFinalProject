@@ -43,7 +43,7 @@
 						<!-- 로그인 상태이면 -->
 						<div class="row margin-bottom-20">
 							<div class="col-md-6 col-md-offset-0">
-								<input name="user_name" class="form-control" type="text"
+								<input class="form-control" type="text"
 									value=" ${sessionScope.user.user_name}" readonly>
 					</c:if>
 					<c:if test="${sessionScop.user ==null }">
@@ -52,7 +52,7 @@
 		</div>
 
 		<!-- <label>비밀번호
-                                    <span class="color-red">*</span>
+   <span class="color-red">*</span>
                                 </label>
                                 <div class="row margin-bottom-20">
                                     <div class="col-md-6 col-md-offset-0">
@@ -74,7 +74,7 @@
 				<div class="col-md-8 col-md-offset-0">
 					<textarea id="contents" name="contents" rows="8"
 						class="form-control" placeholder="내용을 입력해주세요">
-                                        </textarea>
+                    </textarea>
 				</div>
 			</div>
 
