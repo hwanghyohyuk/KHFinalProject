@@ -44,7 +44,9 @@ public class UserController {
 	private PurchaseService purchaseService;
 	@Autowired
 	private StoreService storeService;
-
+	@Autowired
+	private FavoriteService favoriteService;
+	
 	/* 로그인 페이지 이동 */
 	@RequestMapping(value = "/sign/signin.do", method = RequestMethod.GET)
 	public ModelAndView intercepterSignin(ModelAndView mv,
@@ -151,9 +153,11 @@ public class UserController {
 
 		ArrayList<Purchase> list = purchaseService.purchaseList(user.getUser_no(), month);
 		ArrayList<Purchase> top3List = purchaseService.top3List(user.getUser_no());
+		ArrayList<Favorite> favoriteList = (ArrayList<Favorite>) favoriteService.favoriteSelectThree(user.getUser_no());
 
 		mv.addObject("list", list);
 		mv.addObject("top3List", top3List);
+		mv.addObject("flist", favoriteList);
 		System.out.println(list);
 		System.out.println("top3List : " + top3List);
 		mv.setViewName("user/mypage/main");

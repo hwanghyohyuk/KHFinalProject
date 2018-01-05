@@ -292,7 +292,8 @@
 						<div id="viewLoading2"class="margin-vert-50 margin-horiz-50"><img src="/everycvs/resources/user/img/loading/350.gif" /></div>
 						</div>
 						<div role="tabpanel" class="tab-pane" id="favorite">
-						<div id="viewLoading3"class="margin-vert-50 margin-horiz-50"><img src="/everycvs/resources/user/img/loading/350.gif" /></div>
+						<div id="viewLoading3"class="margin-vert-50 margin-horiz-50"><img src="/everycvs/resources/user/img/loading/350.gif" />
+						</div>
 						</div>
 					</div>
 					<script>
@@ -308,6 +309,7 @@
 								timer:2000,
 								type:'info'
 							})
+							$("#favorite").html('<a href="/everycvs/sign/signin.do">로그인 화면으로 이동</a>');
 						}
 					</script>
 				</div>

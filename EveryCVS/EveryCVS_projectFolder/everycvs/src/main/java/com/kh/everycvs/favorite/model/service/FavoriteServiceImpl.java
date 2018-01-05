@@ -14,7 +14,7 @@ public class FavoriteServiceImpl implements FavoriteService {
 
 	@Override
 	public List<Favorite> favoriteList(int user_no, int category, String keyword) {
-		return favoriteDao.favoriteList(user_no,category,keyword);
+		return favoriteDao.favoriteList(user_no, category, keyword);
 	}
 
 	@Override
@@ -37,7 +37,13 @@ public class FavoriteServiceImpl implements FavoriteService {
 
 	@Override
 	public List<Favorite> userFavoriteList(int user_no, String storeNo) {
-		return favoriteDao.userFavoriteList(user_no,storeNo);
+		return favoriteDao.userFavoriteList(user_no, storeNo);
+	}
+
+	@Override
+	public List<Favorite> favoriteSelectThree(int user_no) {
+		// 관심상품 3개 조회 : 마이페이지메인
+		return favoriteDao.favoriteSelectThree(user_no);
 	}
 
 }

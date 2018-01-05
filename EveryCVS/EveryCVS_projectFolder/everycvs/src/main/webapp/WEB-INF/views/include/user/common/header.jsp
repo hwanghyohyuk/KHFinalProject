@@ -45,9 +45,16 @@
 							<li><a href="#">${sessionScope.user.user_name}</a>
 								<ul>
 									<li><a href="/everycvs/page/mypage.do">
+									<c:if test="${user.stored_file_name eq null || user.stored_file_name eq ''}">
+									<img alt="이미지를 준비중입니다." 
+										src="/everycvs/resources/user/img/user.png" 
+										style="margin-left: 20px; height:120px; width: 120px; border-radius: 100px;">
+									</c:if>
+									<c:if test="${user.stored_file_name ne null && user.stored_file_name ne ''}">
 									<img alt="이미지를 준비중입니다." 
 										src="/everycvs/resources/upload/${user.stored_file_name }" 
 										style="margin-left: 20px; height:120px; width: 120px; border-radius: 100px;">
+									</c:if>
 									</a></li>
 									<li><a href="#">Cash : ${sessionScope.user.cash}</a></li>
 									<c:if test="${sessionScope.user.job eq 'customer'}">
