@@ -101,18 +101,6 @@
 						<li><a href="/everycvs/main/main.do"><i class="fa fa-home"></i>${sessionScope.user.store_name}</a></li>
 						<li class="treeview"><a href="#"> <i class="fa fa-share"></i>
 								<span>지점 상품 관리</span> <i class="fa fa-angle-left pull-right"></i></a>
-							<ul class="treeview-menu">
-								<li><a href="#"><i class="fa fa-circle-o"></i> LevelOne</a></li>
-								<li><a href="#"><i class="fa fa-circle-o"></i> LevelOne	<i class="fa fa-angle-left pull-right"></i></a>
-									<ul class="treeview-menu">
-										<li><a href="#"><i class="fa fa-circle-o"></i>LevelTwo</a></li>
-										<li><a href="#"><i class="fa fa-circle-o"></i>LevelTwo <i class="fa fa-angle-left pull-right"></i></a>
-											<ul class="treeview-menu">
-												<li><a href="#"><i class="fa fa-circle-o"></i>LevelThree</a></li>
-												<li><a href="#"><i class="fa fa-circle-o"></i>LevelThree</a></li>
-											</ul></li>
-									</ul></li>
-							</ul>
 						</li>
 						<li><a href="#"><i class="fa fa-question-circle"></i>	고객센터</a></li>
 					</c:when>
@@ -153,8 +141,8 @@
 					<c:otherwise>
 					<li><a href="/everycvs/main/main.do"><i class="fa fa-dashboard"></i> Dash Board</a></li>
 						<li><a href="/everycvs/admin/manageUser.do"><i class="fa fa-users"></i>회원 관리</a></li>
-						<li><a href="/everycvs/admin/manageCmnt.do"><i class="fa fa-list-alt"></i>커뮤니티 관리</a></li>
-						<li><a href="/everycvs/admin/manageSrvc.do"><i class="fa fa-question-circle"></i>고객센터 관리</a></li>
+						<!-- <li><a href="/everycvs/admin/manageCmnt.do"><i class="fa fa-list-alt"></i>커뮤니티 관리</a></li>
+						<li><a href="/everycvs/admin/manageSrvc.do"><i class="fa fa-question-circle"></i>고객센터 관리</a></li> -->
 					</c:otherwise>
 				</c:choose>
 			</ul>

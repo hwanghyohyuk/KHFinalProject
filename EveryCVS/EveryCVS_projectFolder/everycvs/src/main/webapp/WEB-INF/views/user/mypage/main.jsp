@@ -197,7 +197,7 @@
 							<div class="panel-heading">
 								<h3 class="panel-title">
 									<a href="/everycvs/page/serviceMyWrite.do?writer=${sessionScope.user.user_no}"
-										style="font-size: 15pt; color: black;"> 나의 문의내역으로 이동</a
+										style="font-size: 15pt; color: black;"> 나의 문의내역으로 이동</a>
 								</h3>
 							</div>
 						</div>
