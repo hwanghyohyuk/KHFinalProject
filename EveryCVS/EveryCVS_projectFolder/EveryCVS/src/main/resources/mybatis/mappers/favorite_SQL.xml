@@ -68,5 +68,10 @@
 		]]>
 	</delete>
 
-
+	<select id="userFavoriteList" parameterType="hashmap" resultType="list" resultMap="resultFavorite">
+		<![CDATA[
+		select * from(select rownum rnum, a.* from favorite_list_view a where user_no = #{user_no} and store_no = #{store_no}
+		 order by min_expiration_minute asc) where rnum<=5
+		]]>
+	</select>
 </mapper>

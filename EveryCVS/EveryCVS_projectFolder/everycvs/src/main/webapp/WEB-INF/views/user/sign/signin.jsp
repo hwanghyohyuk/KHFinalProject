@@ -210,6 +210,7 @@ function init(){
 			signIn();
 		}
 	});
+	$('#email').focus();
 }
 $(window).on("load", function() {
 	init();

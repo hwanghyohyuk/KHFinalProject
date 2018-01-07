@@ -36,6 +36,9 @@ public interface StoreProductService {
 	/*편의점 관리자*/
 	/** 금일 등록된 상품수 **/
 	public int registProducts(int brand_no);
+
+	/*ajax 지점상품 간략히 보여주는 리스트*/
+	public List<StoreProduct> storeProductInfo(String storeNo, int tabNo);
 	
 	
 	

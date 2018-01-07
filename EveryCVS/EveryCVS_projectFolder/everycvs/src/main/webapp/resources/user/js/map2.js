@@ -1,7 +1,5 @@
 /*메인화면 지도 자바스크립트*/
-	var map = new naver.maps.Map("map",{minZoom : 12,
-		maxZoom : 12,
-		zoom : 12});
+	var map = new naver.maps.Map("map");
 	var brand_no = 0;
 	var markers = [];
 	var infoWindows = [];
@@ -26,17 +24,17 @@
 
 	function initGeocoder() {//이벤트등록
 		map.setOptions({
-			center : new naver.maps.LatLng(37.4990055, 127.0328696),
+			center : new naver.maps.LatLng(37.4990056, 127.0328696),
 			scaleControl : true,
 			logoControl : false,
 			mapDataControl : false,
 			zoomControl : false,
 			minZoom : 12,
-			maxZoom : 12,
+			maxZoom : 13,
 			zoom : 12,
 			mapTypeControl : false
 		});
-		setTabNo(1);
+
 		$('#address').on('keydown', function(e) {
 			var keyCode = e.which;
 
@@ -52,122 +50,18 @@
 		});
 		$('#init').on('click', function(e) {
 			onLoadGeolocation();
+			//map.setCenter(new naver.maps.LatLng(37.4990056, 127.0328696));
 			setStoreList(brand_no);
 		});
+		naver.maps.Event.addListener(map, 'zoom_changed', function() {
+			setStoreList(brand_no);
+		});
+
 		naver.maps.Event.addListener(map, 'dragend', function() {
 			setStoreList(brand_no);
 		});
 	}
-	//지점번호
-	var storeNo;
-	//지점번호 setter
-	function setStoreNo(storeNo){
-		this.storeNo = storeNo;
-	}
-	//지점번호 getter
-	function getStoreNo(){
-		return this.storeNo;
-	}
-	//탭 번호
-	var tabNo=1;
-	//탭 번호 setter
-	function setTabNo(tabNo){
-		this.tabNo = tabNo;
-	}
-	//탭 번호 getter
-	function getTabNo(){
-		return this.tabNo;
-	}
-	function selectAjax(tabNo){
-		setTabNo(tabNo);
-		var storeNo=getStoreNo();
-		if(tabNo==1||tabNo==2){
-			storeProductInfo(storeNo,tabNo);
-		}else if(tabNo==3){
-			userFavoriteList(storeNo);
-		}
-	}
-	//편의점 상품정보가져오기
-	function storeProductInfo(storeNo,tabNo){
-		$.ajax({
-			url:'/everycvs/ajax/storeproductinfo.do',
-			data:{"storeNo":storeNo,"tabNo":tabNo},
-			type:'post',
-			beforeSend:function(){
-				if(tabNo==1){
-					$('#viewLoading1').fadeOut(500);
-				}else if(tabNo==2){
-					$('#viewLoading2').fadeOut(500);
-				}
-			},
-			success:function(data){
-				if(data.length>0){
-				var values='';
-				for(var i in data){
-					values+='<div class="col-lg-2 col-md-2 col-sm-4 col-lg-6 text-center">'
-						+'<p><img src="/everycvs/resources/upload/'+data[i].stored_file_name+'" alt="No_Image" align="left"	style="margin-left: 5px;"><br>'
-						+data[i].product_name+'</p></div>';
-				}
-				if(tabNo==1){
-					$('#todays').html(values);
-				}else if(tabNo==2){
-					$('#expiration').html(values);
-				}
-				}else{
-					var values='<b>등록된 상품이 없습니다.</b>';
-					if(tabNo==1){
-						$('#todays').html(values);
-					}else if(tabNo==2){
-						$('#expiration').html(values);
-					}
-				}
-			},
-			complete:function(){
-				if(tabNo==1){
-					$('#viewLoading1').fadeOut(500);
-				}else if(tabNo==2){
-					$('#viewLoading2').fadeOut(500);
-				}
-			},
-			error:function(error){
-				console.log(error)
-			}
-		});
-	}
-	//관심상품가져오기
-	function userFavoriteList(storeNo){
-		$.ajax({
-			url:'/everycvs/ajax/userfavoritelist.do',
-			data:{"storeNo":storeNo},
-			type:'post',
-			async:false,
-			beforeSend:function(){
-				$('#viewLoading3').fadeIn(500);
-			},
-			success:function(data){
-				if(data.length>0){
-				var values='';
-				for(var i in data){
-					values+='<div class="col-lg-2 col-md-2 col-sm-4 col-lg-6 text-center">'
-						+'<p><img src="/everycvs/resources/upload/'+data[i].stored_file_name+'" alt="No_Image" align="left"	style="margin-left: 5px;"><br>'
-						+data[i].product_name+'</p></div>';
-				}
-				$('#favorite').html(values);
-				}else{
-					var values='<b>관심목록 등록된 상품이 현재 없습니다.</b>';
-					$('#favorite').html(values);
-				}
-			},
-			complete:function(){
-				$('#viewLoading3').fadeOut(500);
-			},
-			error:function(error){
-				console.log(error)
-			}
-		});
-	}
-	
-	//가장 가까운 편의점 찾기
+
 	function onNearestStore(map, brand_no) {
 		this.markerBuffer = this.markerCurrent;
 		this.uMarkerBuffer = this.uMarkerCurrent;
@@ -192,14 +86,14 @@
 				anchor : new naver.maps.Point(22, 44)
 			}
 		});
-		$.ajax({
+		$
+				.ajax({
 					url : 'ajax/neareststore.do',
 					data : queryString,
+					dataType : "json",
 					type : 'post',
-					async:false,
 					success : function(data) {
 						var store = data.store;
-						setStoreNo(store.store_no);
 						if (store.brand_no == 1) {
 							markerCurrent = new naver.maps.Marker(
 									{
@@ -262,7 +156,6 @@
 							anchorSkew : true,
 							content : contentString
 						});
-						infoWindow.open(map, markerCurrent);
 						naver.maps.Event.addListener(markerCurrent, 'click',
 								function() {
 									if (infoWindow.getMap()) {
@@ -271,11 +164,10 @@
 										infoWindow.open(map, markerCurrent);
 									}
 								});
-						
+						infoWindow.open(map, markerCurrent);
 						if (markerBuffer != null) {
 							markerBuffer.setMap(null);
 						}
-						
 					},
 					error : function(request, status, error) {
 						alert("code:" + request.status + "\n" + "message:"
@@ -286,7 +178,6 @@
 		if (uMarkerBuffer != null) {
 			uMarkerBuffer.setMap(null);
 		}
-		
 	}
 
 	function onLoadStore(map, brand_no) {
@@ -302,11 +193,12 @@
 			"minLng" : minLng,
 			"maxLng" : maxLng
 		};
-		$.ajax({
+		$
+				.ajax({
 					url : 'ajax/brandmap.do',
 					data : queryString,
-					async:false,
 					type : 'post',
+					dataType : "json",
 					success : function(data) {
 						var jsonStr = JSON.stringify(data);
 						var json = JSON.parse(jsonStr);
@@ -391,7 +283,7 @@
 						}
 						for (var i = 0, ii = markers.length; i < ii; i++) {
 							naver.maps.Event.addListener(markers[i], 'click',
-									getClickHandler(i,storelist.store_no));
+									getClickHandler(i));
 						}
 					},
 					error : function(request, status, error) {
@@ -400,8 +292,9 @@
 								+ error);
 					}
 				});
+		onNearestStore(map, brand_no);
 	}
-	function getClickHandler(seq,store_no) {
+	function getClickHandler(seq) {
 		return function(e) {
 			var marker = markers[seq], infoWindow = infoWindows[seq];
 
@@ -409,8 +302,6 @@
 				infoWindow.close();
 			} else {
 				infoWindow.open(map, marker);
-				setStoreNo(store_no);
-				selectAjax(getTabNo());
 			}
 		}
 	}
@@ -430,8 +321,6 @@
 		this.markers = [];
 		this.infoWindows = [];
 		onLoadStore(map, bno);
-		onNearestStore(map, bno);
-		selectAjax(getTabNo());
 	}
 
 	function onSuccessGeolocation(position) {
@@ -475,5 +364,5 @@
 	}
 	$(window).on("load", function() {
 		initGeocoder();
-		setStoreList(brand_no);
+		onLoadStore(map, 0);
 	});
