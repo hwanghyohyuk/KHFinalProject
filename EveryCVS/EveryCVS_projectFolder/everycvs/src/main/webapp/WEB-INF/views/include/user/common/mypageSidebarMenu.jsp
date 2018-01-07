@@ -1,38 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-	<!-- 추가한 부분 2018.01.03. PM 10:11 여기서 부터 *********************************** -->
-	<div>
-	<img alt="이미지를 준비중입니다." 
-	 src="/everycvs/resources/upload/${user.stored_file_name }" 
-	 style="height:200px; text-align: center; border-radius: 150px; margin-bottom: 15px;"
-	 class="centered">
-	</div>
-	<span style="font-size: 14pt;">${user.user_name}님</span><br>
-	<a href="/everycvs/user/infointro.do">내 정보 수정</a> 
-	<hr style="margin-top: 5px; margin-bottom: 2px;">
-	<ul class="list-group sidebar-nav" id="sidebar-nav">
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 추가한 부분 2018.01.03. PM 10:11 여기서 부터 *********************************** -->
+
+<span style="font-size: 14pt;">${user.user_name}님</span>
+<br>
+<a href="/everycvs/user/infointro.do">내 정보 수정</a>
+<hr style="margin-top: 5px; margin-bottom: 2px;">
+<ul class="list-group sidebar-nav" id="sidebar-nav">
+
 	<!-- 마이페이지 -->
-	<li class="list-group-item list-toggle">
-	<a href="/everycvs/page/mypage.do">마이페이지</a>
-	</li>
+	<li class="list-group-item list-toggle"><a
+		href="/everycvs/page/mypage.do">마이페이지</a></li>
 
 	<!-- 기프티콘 보관함 -->
-	<li class="list-group-item list-toggle">
-	<a href="/everycvs/gifticonPage.do">기프티콘</a>
-		</li>
-	
-	<!-- 관심목록 -->
-	<li class="list-group-item list-toggle">
-	<a href="/everycvs/user/favoriteList.do">관심상품</a>
-	</li>
-	<!-- 여기까지 ************************************************************************* -->
+	<li class="list-group-item list-toggle"><a
+		href="/everycvs/gifticonPage.do">기프티콘</a></li>
 
+	<!-- 관심목록 -->
+	<li class="list-group-item list-toggle"><a
+		href="/everycvs/user/favoriteList.do">관심상품</a></li>
 
 	<!-- 회원탈퇴 -->
-	<li class="list-group-item list-toggle"><a href="#" onclick="deleteUser('${sessionScope.user.email}');">회원탈퇴</a></li>
+	<li class="list-group-item list-toggle"><a href="#"
+		onclick="deleteUser('${sessionScope.user.email}');">회원탈퇴</a></li>
 </ul>
+<!-- 여기까지 ************************************************************************* -->
+
+
+<!-- 회원탈퇴 -->
+
 <script type="text/javascript">
 function deleteUser(userEmail){
 	swal({
