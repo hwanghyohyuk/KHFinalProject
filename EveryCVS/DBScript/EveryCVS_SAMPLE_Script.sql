@@ -1149,13 +1149,13 @@ INSERT INTO TB_EVENT_RESULT VALUES(SEQ_EVENT_RESULT_NO.NEXTVAL,SEQ_EVENT_NO.CURR
 
 
 --TB_SERVICE_CENTER
-INSERT INTO TB_SERVICE_CENTER VALUES(1,'이벤트는 언제하나요', 1,'이벤트는 언제하나요', SYSDATE,1 , NULL, NULL,'N' );
-INSERT INTO TB_SERVICE_CENTER VALUES(2,'회원가입오류', 1,'회원가입이 안됩니다.', SYSDATE, 2 , NULL, NULL,'N' );
-INSERT INTO TB_SERVICE_CENTER VALUES(3,'이벤트 어디서 볼수 있나요.', 1,'이벤트 어디서 볼수 있나요.', SYSDATE,3 , NULL, NULL,'N' );
-INSERT INTO TB_SERVICE_CENTER VALUES(4,'아이디/패스워드를 찾을수 없습니다', 1,'아이디/패스워드를 찾을수 없습니다', SYSDATE,3 , NULL, NULL,'N' );
-INSERT INTO TB_SERVICE_CENTER VALUES(5,'이벤트당첨발표 언제인가요??', 1,'이벤트당첨발표 언제인가요??.', SYSDATE,3 , NULL, NULL,'N' );
-INSERT INTO TB_SERVICE_CENTER VALUES(6,'내 정보변경은 어디서 할 수 있나요', 1,'로그인후 마이페이지에서 변경할 수 있습니다', SYSDATE,3 , NULL, NULL,'N' );
-INSERT INTO TB_SERVICE_CENTER VALUES(7,'고객의 아이디가 휴면상태로뜹니다', 1,'6개월이상 미이용시 휴면상태가 됩니다.', SYSDATE,3 , NULL, NULL,'N' );
+INSERT INTO TB_SERVICE_CENTER VALUES(seq_service_no.nextval,'이벤트는 언제하나요', 1,'이벤트는 언제하나요', SYSDATE,1 , NULL, NULL,'N' );
+INSERT INTO TB_SERVICE_CENTER VALUES(seq_service_no.nextval,'회원가입오류', 1,'회원가입이 안됩니다.', SYSDATE, 2 , NULL, NULL,'N' );
+INSERT INTO TB_SERVICE_CENTER VALUES(seq_service_no.nextval,'이벤트 어디서 볼수 있나요.', 1,'이벤트 어디서 볼수 있나요.', SYSDATE,3 , NULL, NULL,'N' );
+INSERT INTO TB_SERVICE_CENTER VALUES(seq_service_no.nextval,'아이디/패스워드를 찾을수 없습니다', 1,'아이디/패스워드를 찾을수 없습니다', SYSDATE,3 , NULL, NULL,'N' );
+INSERT INTO TB_SERVICE_CENTER VALUES(seq_service_no.nextval,'이벤트당첨발표 언제인가요??', 1,'이벤트당첨발표 언제인가요??.', SYSDATE,3 , NULL, NULL,'N' );
+INSERT INTO TB_SERVICE_CENTER VALUES(seq_service_no.nextval,'내 정보변경은 어디서 할 수 있나요', 1,'로그인후 마이페이지에서 변경할 수 있습니다', SYSDATE,3 , NULL, NULL,'N' );
+INSERT INTO TB_SERVICE_CENTER VALUES(seq_service_no.nextval,'고객의 아이디가 휴면상태로뜹니다', 1,'6개월이상 미이용시 휴면상태가 됩니다.', SYSDATE,3 , NULL, NULL,'N' );
 
 
 --TB_SERVICE_CENTER_COMMENT

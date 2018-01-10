@@ -54,10 +54,10 @@
                                     </div>
                                 </div>                              
                                 <div align="center">
-                                    <button type="submit" class="btn btn-primary" >Modify</button>
+                                    <button type="submit" class="btn btn-primary" >수정완료</button>
                                     &nbsp&nbsp&nbsp&nbsp&nbsp                                                                                                   
                                     <a href="javascript:history.go(-1);">
-                                    <button type="button" class="btn btn-primary">Cencel</button>
+                                    <button type="button" class="btn btn-primary">취소</button>
                                     </a>
                                 </div>
                                 </form>

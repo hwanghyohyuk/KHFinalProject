@@ -31,12 +31,11 @@
 			<div class="col-md-12">
 				<!-- Main Content -->
 				<div class="headline">
-					<h2>고객센터 / 글쓰기</h2>
+					<h2>고객센터</h2>
 				</div>
 				<hr>
 				<form action="serviceInsert.do" name="servicecenter" method="post">
-					<input type="hidden" name="writer"
-						value="${sessionScope.user.user_no }"> <label>작성자
+					<input type="hidden" name="writer" value="${sessionScope.user.user_no }"> <label>작성자
 						<span class="color-red">*</span>
 					</label>
 					<c:if test="${sessionScope.user !=null }">
@@ -61,10 +60,8 @@
 		<div>
 			<label>내용</label>
 			<div class="row margin-bottom-20">
-				<div class="col-md-8 col-md-offset-0">
-					<textarea id="contents" name="contents" rows="8"
-						class="form-control" placeholder="내용을 입력해주세요">
-                                        </textarea>
+				<div class="col-md-8 col-md-offset-0"><textarea id="contents" name="contents" rows="8"
+						class="form-control" placeholder="내용을 입력해주세요"></textarea>
 				</div>
 			</div>
 			<div align="center">

@@ -39,7 +39,7 @@
 								
 								<form action="serviceSearch.do" method="post">
 								<input type="hidden" name="writer" value="${servicecenter.writer }">
-									<div  align="right" class="col-sm-3" style="margin-left: 190px;">
+									<div  class="col-sm-3" style="margin-left: 650px;">
 										<br> <input class="form-control" type="search"
 											placeholder="제목을 입력해 주세요" name="keyword" value="${keyword}">
 									</div>
@@ -70,12 +70,11 @@
                                             </c:forEach> 
                                     </table>                               
                                 <div align="right">             
-                                    <button type="button"class="btn btn-primary" onclick="serviceMyWrite(${sessionScope.user.user_no});">내가쓴글</button>                                   
+                                    <button type="button"class="btn btn-primary" onclick="serviceMyWrite(${sessionScope.user.user_no});">작성한 글</button>                                   
                                     &nbsp&nbsp&nbsp                                 
                                     <button class="btn btn-primary" onclick="writeService();" >글쓰기</button>                                    
                                 </div>        
-                               
-                                                                                     
+                                                                                                                    
                                 <!-- 페이지 -->
                                 <div class="text-center">
                                    <ul class="pagination">

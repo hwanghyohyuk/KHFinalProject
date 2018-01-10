@@ -27,7 +27,8 @@
 	<!-- 고객센터 검색 -->
 	<select id="serviceSearch" resultType="list" resultMap="resultServiceCenter">
 	<![CDATA[
-	SELECT rownum service_no,title,writer,write_date,readcount FROM TB_SERVICE_CENTER
+	SELECT rownum service_no,title,writer,write_date,readcount 
+	FROM TB_SERVICE_CENTER
 	WHERE TITLE LIKE #{keyword}]]>
 	</select>
 
@@ -76,7 +77,7 @@
 		where service_no=#{service_no}
 		]]>
 	</update>
-	<!-- 고객센터 내가쓴글 -->
+	<!-- 고객센터 작성한 글 -->
 	<select id="serviceMyWrite"  parameterType="servicecenter" resultMap="resultServiceCenter">
 	<![CDATA[
 	SELECT *
