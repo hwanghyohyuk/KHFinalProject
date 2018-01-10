@@ -12,12 +12,12 @@
 <c:import url="../include/user/common/header.jsp"></c:import>
 <!-- === END HEADER === -->
 <script type="text/javascript">
-	function check(){
-		if(servicecenter.title.value == ""){
+	function check() {
+		if (servicecenter.title.value == "") {
 			alert("제목을 입력해주세요");
-			return ;
+			return;
 		}
-		if(servicecenter.contents.value=""){
+		if (servicecenter.contents.value = "") {
 			alert("내용을 입력해주세요")
 			return;
 		}
@@ -34,6 +34,7 @@
 					<h2>고객센터</h2>
 				</div>
 				<hr>
+<<<<<<< HEAD
 				<form action="serviceInsert.do" name="servicecenter" method="post">
 					<input type="hidden" name="writer" value="${sessionScope.user.user_no }"> <label>작성자
 						<span class="color-red">*</span>
@@ -69,18 +70,54 @@
 				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <a href="javascript:history.go(-1);">
 					<input type="button" class="btn btn-primary" value="취소">
 				</a>
+=======
+				<form action="/everycvs/page/serviceInsert.do" name="servicecenter"
+					method="post">
+					<input type="hidden" name="writer"	value="${sessionScope.user.user_no }"> 
+					<label>작성자<span class="color-red">*</span></label> 
+					<div class="row margin-bottom-20">
+						<div class="col-md-6 col-md-offset-0">
+						<input class="form-control" type="text" value=" ${sessionScope.user.user_name}" readonly> 
+						</div>
+					</div>
+					<label>제목<span class="color-red">*</span></label>
+					<div class="row margin-bottom-20">
+						<div class="col-md-6 col-md-offset-0">
+							<input id="title" name="title" class="form-control" type="text"
+								placeholder="제목을 입력해주세요">
+						</div>
+					</div>
+					<div>
+						<label>내용</label>
+						<div class="row margin-bottom-20">
+							<div class="col-md-8 col-md-offset-0">
+								<textarea id="contents" name="contents" rows="8"
+									class="form-control" placeholder="내용을 입력해주세요"></textarea>
+							</div>
+						</div>
+
+						<div align="center">
+							<button type="submit" class="btn btn-primary">등록</button>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+								href="javascript:history.go(-1);"> <input type="button"
+								class="btn btn-primary" value="취소">
+							</a>
+						</div>
+					</div>
+				</form>
+				<hr>
+				<!-- End Contact Form -->
+				<!-- End Main Content -->
+>>>>>>> master
 			</div>
 		</div>
-		</form>
-		<hr>
-		<!-- End Contact Form -->
-		<!-- End Main Content -->
 	</div>
-
-
 	<!-- End Side Column -->
 </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 
 <!-- === END CONTENT === -->
 <!-- === BEGIN FOOTER === -->

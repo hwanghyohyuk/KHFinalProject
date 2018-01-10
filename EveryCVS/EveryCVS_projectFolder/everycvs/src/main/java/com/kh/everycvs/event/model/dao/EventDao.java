@@ -71,7 +71,7 @@ public class EventDao {
 	}
 
 	// 사용자 이벤트 결과 리스트 불러오기
-	public List<EventResult> resultEventList(String keyword, int startRow, int endRow) {
+	public List<EventResult> resultEventList(int startRow, int endRow) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
@@ -101,9 +101,9 @@ public class EventDao {
 		else if (user_no == 2 && edno == 2) {
 			return sqlSession.selectOne("event.gsListCount");
 
-		}else if(user_no==3 && edno == 2) {
+		} else if (user_no == 3 && edno == 2) {
 			return sqlSession.selectOne("event.cuListCount");
-		}else if(user_no==4 && edno == 2) {
+		} else if (user_no == 4 && edno == 2) {
 			return sqlSession.selectOne("event.sevenListCount");
 		} else {
 			return sqlSession.selectOne("event.getListCount");
@@ -243,4 +243,30 @@ public class EventDao {
 		return sqlSession.selectOne("event.selectJoinLimit", event_no);
 	}
 
+	public List<Event> allocationEvent(int user_no) {
+		return sqlSession.selectList("event.allocationEvent", user_no);
+	}
+
+	public List<EventResult> joinUserList(int eventNo) {
+		return sqlSession.selectList("event.joinUserList", eventNo);
+	}
+
+	public int getListCount(int user_no) {
+		if (user_no == 2) {
+			return sqlSession.selectOne("event.gsListCount");
+		} else if (user_no == 3) {
+			return sqlSession.selectOne("event.cuListCount");
+		} else if (user_no == 4) {
+			return sqlSession.selectOne("event.sevenListCount");
+		} else {
+			return sqlSession.selectOne("event.getListCount");
+		}
+	}
+
+	public int eventResultDelete(int rno) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("event.eventResultDelete", rno);
+	}
+
+	
 }

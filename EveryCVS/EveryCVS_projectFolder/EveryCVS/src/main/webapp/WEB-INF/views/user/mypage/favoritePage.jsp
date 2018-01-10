@@ -20,7 +20,23 @@
 	<div class="container background-white">
 		<div class="row margin-vert-40">
 			<!-- Begin Sidebar Menu -->
-			<div class="col-md-3">
+			<div class="col-md-3" align="center">
+				<div>
+					<c:if
+						test="${user.stored_file_name eq null || user.stored_file_name eq ''}">
+						<img alt="이미지를 준비중입니다."
+							src="/everycvs/resources/user/img/user.png"
+							style="height: 200px; text-align: center; border-radius: 150px; margin-bottom: 15px;"
+							class="centered">
+					</c:if>
+					<c:if
+						test="${user.stored_file_name ne null && user.stored_file_name ne ''}">
+						<img alt="이미지를 준비중입니다."
+							src="/everycvs/resources/upload/${user.stored_file_name }"
+							style="height: 200px; text-align: center; border-radius: 150px; margin-bottom: 15px;"
+							class="centered">
+					</c:if>
+				</div>
 				<c:import url="../../include/user/common/mypageSidebarMenu.jsp"></c:import>
 			</div>
 			<!-- End Sidebar Menu -->
@@ -41,11 +57,13 @@
 								<c:forEach var="favorite" items="${flist}">
 									<tr class="text-center">
 										<td>${favorite.brand_name}</td>
-										<td><a href="/everycvs/page/storemain.do?sno=${favorite.store_no}">${favorite.store_name}</a></td>
-										<td><a id="productName" data-toggle="modal" data-target="#myModal" style="cursor: pointer;"
-										onclick="show_modal('${favorite.brand_name}', '${favorite.store_name}', '${favorite.product_name}',
+										<td><a
+											href="/everycvs/page/storemain.do?sno=${favorite.store_no}">${favorite.store_name}</a></td>
+										<td><a id="productName" data-toggle="modal"
+											data-target="#myModal" style="cursor: pointer;"
+											onclick="show_modal('${favorite.brand_name}', '${favorite.store_name}', '${favorite.product_name}',
 										 '${favorite.stored_file_name}', '${favorite.store_no}','${favorite.min_expiration_minute }');">
-										${favorite.product_name}</a></td>
+												${favorite.product_name}</a></td>
 										<td><i class="fa fa-trash-o jun21"
 											onclick="delete_fav('${favorite.product_no}', '${favorite.store_no}');"></i></td>
 									</tr>
@@ -60,10 +78,10 @@
 									<div class="modal-body">
 										<div class="jun_imgdiv3" id="detail5"></div>
 										<div class="jun_contentdiv" style="display: block;">
-											<span onclick="goStore();" style="cursor: pointer;">
-											<span id="detail1"></span><span id="detail2"></span></span><br>
-											<span id="detail3" style="font-weight: bold;"></span><br>
-											<span id="detail4" style="font-weight: bold;color:red;"></span><br>
+											<span onclick="goStore();" style="cursor: pointer;"> <span
+												id="detail1"></span><span id="detail2"></span></span><br> <span
+												id="detail3" style="font-weight: bold;"></span><br> <span
+												id="detail4" style="font-weight: bold; color: red;"></span><br>
 										</div>
 									</div>
 									<div class="modal-footer" style="clear: both; margin-top: 2px;">
@@ -79,16 +97,15 @@
 					</div>
 					<!-- End tab content -->
 					<!-- Search & Add block -->
-					<form name="searchFavoriteFrm" action="/everycvs/user/favoriteList.do"
-						method="post">
+					<form name="searchFavoriteFrm"
+						action="/everycvs/user/favoriteList.do" method="post">
 						<div class="col-sm-12" style="padding-left: 0px;">
-							<div class="col-sm-2" style="padding: 0px;"
-								id="paddingrmv3">
+							<div class="col-sm-2" style="padding: 0px;" id="paddingrmv3">
 								<select name="category" class="form-control input"
 									style="padding-left: 5px;">
 									<option value="0" selected>상품명</option>
 									<option value="1">지점명</option>
-									<option value="2">상호명</option>									
+									<option value="2">상호명</option>
 								</select>
 							</div>
 							<div class="col-sm-4" style="padding: 0px" id="paddingrmv3">
@@ -124,8 +141,8 @@
 		var answer = false;
 		answer = confirm("해당 상품을 삭제하시겠습니까?");
 		if (answer)
-			location.href = "/everycvs/favoriteDelete.do?product_no=" + product_no
-					+ "&store_no=" + store_no;
+			location.href = "/everycvs/favoriteDelete.do?product_no="
+					+ product_no + "&store_no=" + store_no;
 	}
 
 	function search_favorite() {
@@ -139,36 +156,40 @@
 	}
 
 	/* 해당 상품의 정보를 받아서 모달 안의 내용을 상품 정보로 바꾸는 함수 */
-	function show_modal(brand_name, store_name, product_name, stored_file_name, store_no,minute) {
+	function show_modal(brand_name, store_name, product_name, stored_file_name,
+			store_no, minute) {
 		sno = store_no;
-		var day = Math.floor(minute/(60*24));
-		var hour = Math.floor((minute/60)%24);
-		var minute = Math.floor(minute%60);
-		var sday='';
-		var shour='';
-		var sminute='';
-		if(day>0){
-			sday=day+" 일 ";
-		}		
-		if(hour>0){
-			shour=hour+" 시간 ";
-		}		
-		if(minute>0){
-			sminute=minute+" 분 ";
+		var day = Math.floor(minute / (60 * 24));
+		var hour = Math.floor((minute / 60) % 24);
+		var minute = Math.floor(minute % 60);
+		var sday = '';
+		var shour = '';
+		var sminute = '';
+		if (day > 0) {
+			sday = day + " 일 ";
 		}
-		
+		if (hour > 0) {
+			shour = hour + " 시간 ";
+		}
+		if (minute > 0) {
+			sminute = minute + " 분 ";
+		}
+
 		$("#detail1").html(brand_name);
 		$("#detail2").html(store_name);
 		$("#detail3").html(product_name);
-		$("#detail3").html(sday+shour+sminute+'남았습니다');
+		$("#detail3").html(sday + shour + sminute + '남았습니다');
 		if (stored_file_name == "")
-			$("#detail5").html('<img src="" alt="상품 이미지가 없습니다." class="jun_img">');
+			$("#detail5").html(
+					'<img src="" alt="상품 이미지가 없습니다." class="jun_img">');
 		else
-			$("#detail5").html('<img src="/everycvs/resources/upload/' + stored_file_name + '" alt="상품 이미지가 없습니다." class="jun_img">');
+			$("#detail5")
+					.html(
+							'<img src="/everycvs/resources/upload/' + stored_file_name + '" alt="상품 이미지가 없습니다." class="jun_img">');
 	}
-	
-	function goStore(){
-		location.href="/everycvs/page/storemain.do?sno=" + sno;
+
+	function goStore() {
+		location.href = "/everycvs/page/storemain.do?sno=" + sno;
 	}
 </script>
 

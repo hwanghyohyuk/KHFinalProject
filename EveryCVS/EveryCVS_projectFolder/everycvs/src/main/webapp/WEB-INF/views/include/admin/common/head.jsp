@@ -96,3 +96,5 @@
 <script src='/everycvs/resources/admin/plugins/fastclick/fastclick.min.js'></script>
 <!-- AdminLTE App -->
 <script src="/everycvs/resources/admin/dist/js/app.min.js" type="text/javascript"></script>
+<!-- sweetalert2 -->
+<script src="/everycvs/resources/user/js/sweetalert2.all.js"></script> 

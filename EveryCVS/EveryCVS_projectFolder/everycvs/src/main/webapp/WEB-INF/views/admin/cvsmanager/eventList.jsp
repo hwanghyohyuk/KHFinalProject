@@ -35,8 +35,13 @@
 							<div class="col-sm-12"
 								style="padding-left: 8px; padding-right: 8px;">
 								<div class="panel-heading" style="padding: 15px 5px;">
-									<h4 class="panel-title" style="font-size: 17px; color: #777;">진행
-										중인 이벤트</h4>
+								<%-- <fmt:formatDate value="${now}" pattern="yyyy-MM-dd a hh:mm" var="sysdate" /> 
+								<c:if test="${end_date >= sysdate }">
+									<h4 class="panel-title" style="font-size: 17px; color: #777;">진행중인 이벤트</h4>
+									</c:if>
+									<c:if test="${list.event.end_date < sysdate }">
+									<h4 class="panel-title" style="font-size: 17px; color: #777;">종료된 이벤트</h4>
+									</c:if> --%>
 								</div>
 								<table class="table">
 									<tr class="active text-center">

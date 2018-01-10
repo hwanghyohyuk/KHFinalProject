@@ -120,7 +120,19 @@ public class StoreProductDao {
 	/*편의점관리자*/
 	/** 금일 등록된 상품수 **/
 	public int registProducts(int brand_no) {
-		return 0;
+		return sqlSession.selectOne("storeProduct.cvsRegistProducts",brand_no);
+	}
+
+	public List<StoreProduct> storeProductInfo(String storeNo, int tabNo) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("store_no", storeNo);
+		if(tabNo==1){
+			return sqlSession.selectList("storeProduct.newSplist5",map);
+		}else if(tabNo==2){
+			return sqlSession.selectList("storeProduct.expSplist5",map);
+		}else{
+			return null;
+		}
 	}
 	
 }

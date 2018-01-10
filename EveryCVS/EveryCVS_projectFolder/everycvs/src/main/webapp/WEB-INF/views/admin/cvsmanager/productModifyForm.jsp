@@ -22,7 +22,7 @@
 	<div id="content">
 		<div class="container background-white">
 			<h2 class="margin-bottom-30">
-				<b>GS25</b>&nbsp;&nbsp;Product management
+				<b>${sessionScope.user.brand_name}</b>&nbsp;&nbsp;Product management
 			</h2>
 			<!-- aqua panel -->
 			<div class="panel panel-blue">

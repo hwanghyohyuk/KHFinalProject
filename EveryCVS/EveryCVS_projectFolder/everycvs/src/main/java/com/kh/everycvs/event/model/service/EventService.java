@@ -51,7 +51,7 @@ public interface EventService {
 
 	
 	//사용자 이벤트 결과 리스트 
-	List<EventResult> resultEventList(String keyword, int currentPage, int limit);
+	List<EventResult> resultEventList(int currentPage, int limit);
 	//사용자 이벤트 디테일
 	EventResult selectEventResultOne(int rno);
 	//사용자 게시글 조회수 증가
@@ -77,6 +77,14 @@ public interface EventService {
 	//편의점별 리스트 카운트
 	int getListCount(int edno,int brand_no);
 	int selectJoinLimit(int event_no);
+	List<Event> allocationEvent(int user_no);
+	List<EventResult> joinUserList(int eventNo);
+	
+	int getListCount(int user_no);
+	
+	
+	int eventResultDelete(int rno);
+
 	
 	//----------------------------
 

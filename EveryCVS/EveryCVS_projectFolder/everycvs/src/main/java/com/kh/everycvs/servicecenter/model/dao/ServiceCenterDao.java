@@ -26,6 +26,7 @@ public class ServiceCenterDao {
 	public int serviceReadCount(int sno) {
 		return sqlSession.update("serviceCenter.serviceReadCount", sno);
 	}
+
 	//고객센터 : 전체조회
 	public List<ServiceCenter> serviceList() {
 		ArrayList<ServiceCenter> list = new ArrayList<ServiceCenter>();
@@ -33,28 +34,34 @@ public class ServiceCenterDao {
 		return sqlSession.selectList("serviceCenter.serviceList", list);
 	}
 	//고객센터 : 검색
-	public List<ServiceCenter> serviceSearch(String keyword) {
-		
+	
+
+	public List<ServiceCenter> serviceList(int startRow, int endRow, String keyword) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("keyword", "%" + keyword + "%");
-		System.out.println("searchDao : " + map);
-		return sqlSession.selectList("serviceCenter.serviceSearch", map);
+		map.put("startRow",startRow);
+		map.put("endRow",endRow);
+		if(!keyword.equals("")){
+			map.put("keyword","%"+keyword+"%");
+			map.put("isKeyword",1);
+		}
+		return sqlSession.selectList("serviceCenter.serviceList", map);
 	}
+
 
 	// 고객센터 상세보기
 	public ServiceCenter selectServiceOne(int sno) {		
+
 		System.out.println("Dao : " + sno);
 		return sqlSession.selectOne("serviceCenter.serviceDetail", sno);
 	}
 	
 	// 고객센터 삭제
 	public int serviceDelete(int sno) {
-	
+
 		return sqlSession.delete("serviceCenter.serviceDelete", sno);
 	}
 
 	public void serviceWrite(ServiceCenter servicecenter) {
-
 		int result = sqlSession.insert("serviceCenter.serviceInsert", servicecenter);
 		System.out.println("ServiceDao : " + servicecenter);
 	}
@@ -65,17 +72,26 @@ public class ServiceCenterDao {
 	}
 	//고객센터 : 수정
 	public int serviceUpdate(ServiceCenter servicecenter) {
-
 		int result = sqlSession.update("serviceCenter.serviceUpdate", servicecenter);
 		System.out.println("updateDao : " + servicecenter);
 		return result;
 	}
 
 	//고객센터 : 내가쓴글
+
 	public List<ServiceCenter> serviceMyWrite(int writer) {
 		System.out.println("MyWriteDao : " + writer);
 		List<ServiceCenter> servicecenter = sqlSession.selectList("serviceCenter.serviceMyWrite", writer);
 		return servicecenter;
+	}
+
+	public int getListCount(String keyword) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(!keyword.equals("")){
+			map.put("isKeyword", 1);
+			map.put("keyword", "%"+keyword+"%");
+		}		
+		return sqlSession.selectOne("serviceCenter.getListCount", map);
 	}
 
 }
